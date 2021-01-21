@@ -47,7 +47,7 @@
                 </a>
               </li>
               <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                <a href="<?= site_url('recruitment/uji_kompetensi'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -57,7 +57,7 @@
                 </a>
               </li>
               <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                <a href="<?= site_url('recruitment/interview_user_1'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -67,7 +67,7 @@
                 </a>
               </li>
               <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                <a href="<?= site_url('recruitment/interview_user_2'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -77,7 +77,7 @@
                 </a>
               </li>
               <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                <a href="<?= site_url('recruitment/interview_hrga'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>

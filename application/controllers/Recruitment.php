@@ -119,40 +119,76 @@ class Recruitment extends CI_Controller
 		echo $content;
 	}
 
-	public function interview_user_1($Aksi = "", $Id = "")
-	{
-		$data['action'] 	= $Aksi;
-		$data['menu']   	= 'Recruitment';
-		$data['file']   	= 'Interview User 1';
-		$data['row']		= $this->model->View('wawancara', 'kode_wawancara');
-
-		$url 				= 'http://127.0.0.1/career/administrator/rest_api/';
-		$content 			= file_get_contents($url); // put the contents of the file into a variable
-		$data2 				= json_decode($content, true);
-		$data['registrant']	= $data2['data'];
-
-		if ($Aksi == 'edit') {
-			$data['field'] 	= $this->model->ViewWhere('wawancara', 'kode_wawancara', $Id);
-		}
-
-		$this->load->view('admin/container/header', $data);
-		$this->load->view('admin/recruitment/interview_user_1', $data);
-		$this->load->view('admin/container/footer');
-	}
-
 	public function psiko_test($Aksi = "", $Id = "")
 	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'Recruitment';
 		$data['file']   = 'Psiko Test';
-		$data['row']	= $this->model->View('v_tes_praktik', 'kode_wawancara');
+		$data['row']	= $this->model->View('v_psiko_test', 'created_date');
 		if ($Aksi == 'edit') {
-			$data['field'] = $this->model->ViewWhere('tes_praktik', 'id_tes_praktik', $Id);
+			$data['field'] = $this->model->ViewWhere('psiko_test', 'id_psiko_test', $Id);
 		}
 		$this->load->view('admin/container/header', $data);
-		$this->load->view('admin/recruitment/tes_praktik', $data);
+		$this->load->view('admin/recruitment/psiko_test', $data);
 		$this->load->view('admin/container/footer');
 	}
+	public function uji_kompetensi($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Uji Kompetensi';
+		$data['controller_name']   = 'uji_kompetensi';
+		$data['row']	= $this->model->View('v_uji_kompetensi', 'created_date');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('uji_kompetensi', 'id_test', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
+	public function interview_user_1($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Interview User 1';
+		$data['controller_name']   = 'interview_user_1';
+		$data['row']	= $this->model->View('v_interview_user_1', 'created_date');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('interview_user_1', 'id_test', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
+	public function interview_user_2($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Interview User 2';
+		$data['controller_name']   = 'interview_user_2';
+		$data['row']	= $this->model->View('v_interview_user_2', 'created_date');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('interview_user_2', 'id_test', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
+	public function interview_hrga($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Interview HRGA';
+		$data['controller_name']   = 'interview_hrga';
+		$data['row']	= $this->model->View('v_interview_hrga', 'created_date');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('interview_hrga', 'id_test', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
+
 	public function tes_praktik($Aksi = "", $Id = "")
 	{
 		$data['action'] = $Aksi;
