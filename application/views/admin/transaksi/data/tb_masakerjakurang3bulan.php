@@ -1,0 +1,84 @@
+<!-- DATA TABLES -->
+    <link href="<?=base_url()?>assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+      <table class="table table-striped table-bordered DataTablePegawaiMasaKerja" >
+          <thead>
+            <tr>
+              <td>No</td>
+              <td>Nama</td>
+              <td>Nik</td>
+              <td>Tanggal Masuk Kerja</td>
+              <td>Masa Kerja</td>
+              <td>Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <?php $no = 0 ; foreach ($masakerja as $key => $vaPegawai) { ?>
+            <?php //include 'detail.pegawai.php'; ?>
+              <td><?=++$no?></td>
+              <td><?=$vaPegawai['nama']?></td>
+              <td><?=$vaPegawai['nik']?></td>
+              <td><font color="red"><?=$vaPegawai['tanggal_masuk_kerja']?></font></td>
+              <td><?=$vaPegawai['MasaKerja']?></td>
+              <td>
+              <a class="btn btn-danger btn-flat" title="View Data" href="<?=site_url('transaksi/view_pegawai/'.$vaPegawai['id_pegawai'].'')?>">
+                <i class="fa fa-eye"></i>
+              </a>
+              <a href="#" class="btn btn-success btn-flat edit-record" onclick="GetDataModalMasaKerja(<?=$vaPegawai['id_pegawai']?>);"  data-id="<?=$vaPegawai['id_pegawai']?>">
+                <i class="fa fa-pencil"></i>
+              </a>
+              </td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+
+        <div class="modal fade bs-example-modal-lg" id="MasaKerja" tabindex="-1" role="dialog" aria-hidden="true">
+             <div class="modal-dialog" style="border-radius:0px;width:90%;">
+                <div class="modal-content">
+                    <div class="modal-header bg-red">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">View Data Pegawai</h4>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!-- DATA TABES SCRIPT -->
+    <script src="<?=base_url()?>assets/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="<?=base_url()?>assets/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    $(".DataTablePegawaiMasaKerja").dataTable({
+      "oLanguage": {
+      "sLengthMenu": "Tampilkan _MENU_ data per halaman",
+      "sSearch": "Pencarian: ", 
+      "sZeroRecords": "Maaf, tidak ada data yang ditemukan",
+      "sInfo": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
+      "sInfoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
+      "sInfoFiltered": "(di filter dari _MAX_ total data)",
+      "oPaginate": {
+      "sFirst": "Awal",
+      "sLast": "Akhir", 
+      "sPrevious": "Sebelumnya", 
+      "sNext": "Selanjutnya"
+      }
+      }
+      });
+    </script>
+    <script>
+         function GetDataModalMasaKerja(id){
+          $("#MasaKerja").modal('show');
+          $.ajax({
+            type: "GET",
+            url: "<?=base_url()?>transaksi/tb_detail_pegawai/"+id,
+            cache: false,
+            success:function(msg){
+              $(".modal-body").html(msg);
+            }
+           });
+         }
+      </script>
