@@ -402,6 +402,51 @@ class Transaksi extends CI_Controller
 
 	}
 
+	public function sp1($Aksi = "", $Id = ""){
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Pegawai';
+		$data['file']   = 'Operator';
+		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
+		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
+		$this->load->view('admin/container/footer');
+	}
+
+	public function sp2($Aksi = "", $Id = ""){
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Pegawai';
+		$data['file']   = 'Operator';
+		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
+		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
+		$this->load->view('admin/container/footer');
+	}
+
+	public function sp3($Aksi = "", $Id = ""){
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Pegawai';
+		$data['file']   = 'Operator';
+		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
+		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
+		$this->load->view('admin/container/footer');
+	}
+
 	public function update_import()
 	{
 		$id = $this->input->post('id');

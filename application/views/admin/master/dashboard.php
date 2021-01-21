@@ -116,7 +116,7 @@
             </thead>
             <tbody>
             <?php $no = 0;
-              foreach ($ultah as $key => $vaArea) { ?>
+              foreach ($kontrak as $key => $vaArea) { ?>
                 <tr>
                   <td><?= ++$no; ?></td>
                   <td><?= $vaArea['nik'] ?></td>

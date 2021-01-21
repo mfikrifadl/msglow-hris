@@ -1,36 +1,36 @@
  <?php 
     //SetKode
-    if(date("m") == 01){
+    if(date("m") == '01'){
       $cRomawai = 'I';
-    }elseif(date("m") == 02){
+    }elseif(date("m") == '02'){
       $cRomawai = 'II';
-    }elseif(date("m") == 03){
+    }elseif(date("m") == '03'){
       $cRomawai = 'III';
-    }elseif(date("m") == 04){
+    }elseif(date("m") == '04'){
       $cRomawai = 'IV';
-    }elseif(date("m") == 05){
+    }elseif(date("m") == '05'){
       $cRomawai = 'V';
-    }elseif(date("m") == 06){
+    }elseif(date("m") == '06'){
       $cRomawai = 'VI';
-    }elseif(date("m") == 07){
+    }elseif(date("m") == '07'){
       $cRomawai = 'VII';
-    }elseif(date("m") == 08){
+    }elseif(date("m") == '08'){
       $cRomawai = 'VIII';
-    }elseif(date("m") == 09){
+    }elseif(date("m") == '09'){
       $cRomawai = 'IX';
-    }elseif(date("m") == 10){
+    }elseif(date("m") == '10'){
       $cRomawai = 'X';
-    }elseif(date("m") == 11){
+    }elseif(date("m") == '11'){
       $cRomawai = 'XI';
-    }elseif(date("m") == 12){
+    }elseif(date("m") == '12'){
       $cRomawai = 'XII';
     }
 
-   foreach ($NoLast->result_array() as $key => $vaDataLast) {
+   foreach ($Nolast->result_array() as $key => $vaDataLast) {
       $cLastNoSurat = $vaDataLast['nomor_surat'];
     }
-  
-    if($NoLast->num_rows() > 0){
+
+    if($Nolast->num_rows() > 0){
       $NoSuratTerakhir = $cLastNoSurat;
     } else{
       $NoSuratTerakhir = "No.0001/GN/P-SP 1/".$cRomawai."/".date("Y")."";
