@@ -133,6 +133,13 @@ class Recruitment_act extends CI_Controller
 			'email'	=> $this->input->post('cEmail'),
 		);
 
+		$wawancara = $this->model->viewWhere('wawancara', 'kode_wawancara', $this->input->post('cKodeWawancara'));
+		$data_create_psiko = array(
+			'id_wawancara' => $wawancara[0]['id_wawancara'],
+			'kode_wawancara' => $this->input->post('cKodeWawancara'),
+			'created_by'	=> $this->input->post('whois'),
+		);
+
 		$data_update = array(
 			'kode_wawancara' => $this->input->post('cKodeWawancara'),
 			'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
@@ -163,11 +170,14 @@ class Recruitment_act extends CI_Controller
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
 		);
-		// $this->model->Insert("log", $vaLog);
+		$this->model->Insert("log", $vaLog);
 
 		if ($Type == "Insert") {
 			$this->model->Insert('wawancara', $data_create);
 			$this->model->Insert("log", $vaLog);
+			if ($data_create['status'] == 'lolos') {
+				$this->model->Insert('psiko_test', $data_create_psiko);
+			}
 		} elseif ($Type == "Update") {
 			$this->model->Update('wawancara', 'id_wawancara', $id, $data_update);
 			$this->model->Insert("log", $vaLog);
@@ -235,7 +245,7 @@ class Recruitment_act extends CI_Controller
 		$data_update_delete = array(
 			'is_delete' => 1,
 			'delete_by'	=> $whois,
-			'delete_date'	=>$whois_date,
+			'delete_date'	=> $whois_date,
 
 		);
 
@@ -284,7 +294,7 @@ class Recruitment_act extends CI_Controller
 			$cEmail 	    = $vaKode['email'];
 		}
 
-		$data = array(			
+		$data = array(
 			'created_by' => $whois,
 			'created_date'	=> $whois_date,
 			// 'id_status'	=> $this->input->post('nNilaiTes'),

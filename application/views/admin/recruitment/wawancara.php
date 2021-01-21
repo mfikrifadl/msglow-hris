@@ -54,7 +54,7 @@
           <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
               <h3 class="kt-portlet__head-title">
-                Input Data Wawancara
+                Input Data Calon Pegawai
               </h3>
             </div>
           </div>
@@ -66,6 +66,7 @@
                 <label>Kode Wawancara</label>
                 <input type="text" name="cKodeWawancara" id="cKodeWawancara" placeholder="Kode Wawancara" class="form-control" value="<?= $cKodeWawancara ?>" required>
                 <input type="hidden" value="<?= $cIdWawancara ?>" name="cIdWawancara" id="cIdWawancara">
+                <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">
               </div>
               <div class="form-group">
                 <label>Nama</label>
@@ -344,6 +345,7 @@
       var cNomorTelepon = $('#cNomorTelepon').val();
       var cEmail = $('#cEmail').val();
       var cStatus = $('#cStatus').val();
+      var whois = $('#whois').val();
       // alert(dTglWawancara);
       if (cKodeWawancara == "") {
         new PNotify({
@@ -368,6 +370,7 @@
           type: "POST",
           data: "cKodeWawancara=" + cKodeWawancara +
             "&dTglWawancara=" + dTglWawancara +
+            "&whois=" + whois +
             "&cNama=" + cNama +
             "&cNomorTelepon=" + cNomorTelepon +
             "&cStatus=" + cStatus +

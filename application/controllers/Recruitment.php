@@ -21,7 +21,7 @@ class Recruitment extends CI_Controller
 		$this->load->helper('form');
 		$this->load->helper('download');
 	}
-	
+
 	public  function Date2String($dTgl)
 	{
 		//return 2012-11-22
@@ -76,8 +76,8 @@ class Recruitment extends CI_Controller
 		$data['action'] 	= $Aksi;
 		$data['menu']   	= 'Recruitment';
 		$data['file']   	= 'Wawancara';
-		$data['row']		= $this->model->ViewWhereNot('wawancara', 'status','tidaklolos');
-		$data['tdklolos']		= $this->model->ViewWhere('wawancara', 'status', 'tidaklolos');
+		$data['row']		= $this->model->ViewWhereNot('wawancara', 'status', 'tidaklolos');
+		$data['tdklolos']	= $this->model->ViewWhere('wawancara', 'status', 'tidaklolos');
 
 		$url 				= 'http://127.0.0.1/career/administrator/rest_api/';
 		$content 			= file_get_contents($url); // put the contents of the file into a variable
@@ -93,7 +93,8 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function view_wawancara($Id = ""){
+	public function view_wawancara($Id = "")
+	{
 		$Aksi = "";
 		$data['action'] 	= $Aksi;
 		$data['menu']   	= 'Recruitment';
@@ -110,11 +111,11 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function wawancara_id($Id="")
+	public function wawancara_id($Id = "")
 	{
 		$url 		= 'http://127.0.0.1/career/administrator/rest_api?reg_id=' . $Id;
 		$content 	= file_get_contents($url); // put the contents of the file into a variable
-		
+
 		echo $content;
 	}
 
@@ -139,6 +140,19 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
+	public function psiko_test($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Psiko Test';
+		$data['row']	= $this->model->View('v_tes_praktik', 'kode_wawancara');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('tes_praktik', 'id_tes_praktik', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/tes_praktik', $data);
+		$this->load->view('admin/container/footer');
+	}
 	public function tes_praktik($Aksi = "", $Id = "")
 	{
 		$data['action'] = $Aksi;

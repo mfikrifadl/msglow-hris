@@ -115,6 +115,11 @@ class Master extends CI_Controller
 		$data['menu']   = 'Master';
 		$data['file']   = 'Home';
 
+		$query 			= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tanggal_lahir) = MONTH(NOW()) AND DAY(tanggal_lahir) = DAY(NOW())');
+		$query2 		= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tanggal_lahir) = MONTH(NOW()) AND DAY(tanggal_lahir) = DAY(NOW())');
+		$data['ultah']	= $query->result_array();
+		$data['kontrak']= $query2->result_array();
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/master/dashboard', $data);
 		$this->load->view('admin/container/footer');

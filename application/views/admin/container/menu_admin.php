@@ -37,6 +37,56 @@
               </li>
 
               <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Psiko Test
+                  </span>
+                </a>
+              </li>
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Uji Kompetensi
+                  </span>
+                </a>
+              </li>
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Interview User 1
+                  </span>
+                </a>
+              </li>
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Interview User 2
+                  </span>
+                </a>
+              </li>
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Interview HRGA
+                  </span>
+                </a>
+              </li>
+              <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('recruitment/tes_praktik'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
