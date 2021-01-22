@@ -42,6 +42,7 @@ if ($action == "edit") {
     $nTlpReferensi  =   $column['tlp_referensi'];
     // $dTglMasukKerja =   String2Date($column['tanggal_masuk_kerja']);
     $dTglMasukKerja =   $column['tanggal_masuk_kerja'];
+    $dTglKontrakBerakhir =   $column['tgl_kontrak_berakhir'];
     $cFoto          =   $column['foto'];
     $nBobotNilai    =   $column['bobot_nilai'];
     $cIdPendidikan  =   $column['pendidikan'];
@@ -101,6 +102,7 @@ if ($action == "edit") {
   $cReferensi     =   "";
   $nTlpReferensi  =   "";
   $dTglMasukKerja =   $tanggal;
+  $dTglKontrakBerakhir =   $tanggal;
   $cFoto          =   "";
   $nBobotNilai    =   "";
   $cIdPendidikan  =   "";
@@ -135,7 +137,10 @@ if ($action == "edit") {
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 28d8af7690723714a715146edfa06e15e54439aa
   <!-- begin:: Content -->
   <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 
@@ -227,7 +232,10 @@ if ($action == "edit") {
             <!--begin::Portlet Data Kerja-->
             <div class="kt-portlet">
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 28d8af7690723714a715146edfa06e15e54439aa
               <!--begin::Accordion-->
 
               <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
@@ -304,6 +312,15 @@ if ($action == "edit") {
                               <label>Tanggal Masuk Kerja</label>
                               <div class="input-group">
                                 <input type="date" name="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy" value="<?= $dTglMasukKerja ?>" id="tglDT">
+                                <div class="input-group-addon">
+                                  <i class="fa fa-calendar-o"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label>Tanggal Kontrak Berakhir</label>
+                              <div class="input-group">
+                                <input type="date" name="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy" value="<?= $dTglKontrakBerakhir ?>">
                                 <div class="input-group-addon">
                                   <i class="fa fa-calendar-o"></i>
                                 </div>

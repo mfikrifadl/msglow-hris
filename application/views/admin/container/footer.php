@@ -150,7 +150,8 @@
 
  <script src="<?php echo base_url(); ?>assets2/js/pages/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
 
- <script src="assets/js/pages/crud/datatables/search-options/advanced-search.js" type="text/javascript"></script>
+ <script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/advanced-search.js" type="text/javascript"></script>
+ <script src="<?= base_url() ?>assets2/js/pages/crud/forms/widgets/summernote.js" type="text/javascript"></script>
 
  <!-- ================================= CSS BAWAAN =================================================== -->
  <!-- jQuery 2.1.3 -->

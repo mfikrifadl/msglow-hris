@@ -21,7 +21,6 @@ class Recruitment extends CI_Controller
 		$this->load->helper('form');
 		$this->load->helper('download');
 	}
-
 	public  function Date2String($dTgl)
 	{
 		//return 2012-11-22
