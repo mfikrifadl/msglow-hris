@@ -152,7 +152,7 @@
            <div class="kt-portlet__head">
              <div class="kt-portlet__head-label">
                <h3 class="kt-portlet__head-title">
-                 Form Surat Peringatan 1
+                 Form Surat Peringatan I
                </h3>
              </div>
            </div>

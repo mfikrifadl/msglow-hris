@@ -152,7 +152,7 @@
            <div class="kt-portlet__head">
              <div class="kt-portlet__head-label">
                <h3 class="kt-portlet__head-title">
-                 Form Surat Peringatan @
+                 Form Surat Peringatan 2
                </h3>
              </div>
            </div>
@@ -170,7 +170,7 @@
              </div>
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">Perihal: </label>
-               <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan I</label>
+               <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan II</label>
              </div>
              <div style="text-align: center;">
                <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>
