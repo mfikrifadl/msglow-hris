@@ -459,6 +459,9 @@ class Recruitment_act extends CI_Controller
 			$this->model->Update_Delete('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update_delete);
 			redirect(site_url('recruitment/interview_hrga'));
 		} else {
+			if ($data_update['interview_hrga'] == 'lolos') {
+				$data_update['status'] == 'lolos';
+			}
 			$this->model->Update('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update);
 			redirect(site_url('recruitment/interview_hrga'));
 		}
