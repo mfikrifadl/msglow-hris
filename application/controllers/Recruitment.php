@@ -21,7 +21,6 @@ class Recruitment extends CI_Controller
 		$this->load->helper('form');
 		$this->load->helper('download');
 	}
-	
 	public  function Date2String($dTgl)
 	{
 		//return 2012-11-22
@@ -76,8 +75,8 @@ class Recruitment extends CI_Controller
 		$data['action'] 	= $Aksi;
 		$data['menu']   	= 'Recruitment';
 		$data['file']   	= 'Wawancara';
-		$data['row']		= $this->model->ViewWhereNot('wawancara', 'status','tidaklolos');
-		$data['tdklolos']	= $this->model->ViewWhere('wawancara', 'status', 'tidaklolos');
+		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
+		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
 
 		$url 				= 'http://127.0.0.1/career/administrator/rest_api/';
 		$content 			= file_get_contents($url); // put the contents of the file into a variable
@@ -85,7 +84,7 @@ class Recruitment extends CI_Controller
 		$data['registrant']	= $data2['data'];
 
 		if ($Aksi == 'edit') {
-			$data['field'] 	= $this->model->ViewWhere('wawancara', 'kode_wawancara', $Id);
+			$data['field'] 	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
 		}
 
 		$this->load->view('admin/container/header', $data);
@@ -93,12 +92,13 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function view_wawancara($Id = ""){
+	public function view_wawancara($Id = "")
+	{
 		$Aksi = "";
 		$data['action'] 	= $Aksi;
 		$data['menu']   	= 'Recruitment';
 		$data['file']   	= 'View Wawancara';
-		$data['wawancara']	= $this->model->ViewWhere('wawancara', 'kode_wawancara', $Id);
+		$data['wawancara']	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
 
 		$url 				= 'http://127.0.0.1/career/administrator/rest_api?reg_id=' . $Id;
 		$content 			= file_get_contents($url); // put the contents of the file into a variable
@@ -110,32 +110,87 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function wawancara_id($Id="")
+	public function wawancara_id($Id = "")
 	{
 		$url 		= 'http://127.0.0.1/career/administrator/rest_api?reg_id=' . $Id;
 		$content 	= file_get_contents($url); // put the contents of the file into a variable
-		
+
 		echo $content;
 	}
 
+	public function psiko_test($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Psiko Test';
+		$data['controller_name']   = 'psiko_test';
+		$data['nilai_test'] = 'nilai_psiko_test';
+		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos'])->result_array();
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
+	public function uji_kompetensi($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Uji Kompetensi';
+		$data['controller_name']   = 'uji_kompetensi';
+		$data['nilai_test'] = 'nilai_uji_kompetensi';
+		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos'])->result_array();
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
 	public function interview_user_1($Aksi = "", $Id = "")
 	{
-		$data['action'] 	= $Aksi;
-		$data['menu']   	= 'Recruitment';
-		$data['file']   	= 'Interview User 1';
-		$data['row']		= $this->model->View('wawancara', 'kode_wawancara');
-
-		$url 				= 'http://127.0.0.1/career/administrator/rest_api/';
-		$content 			= file_get_contents($url); // put the contents of the file into a variable
-		$data2 				= json_decode($content, true);
-		$data['registrant']	= $data2['data'];
-
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Interview User 1';
+		$data['nilai_test'] = 'nilai_interview_user_1';
+		$data['controller_name']   = 'interview_user_1';
+		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {
-			$data['field'] 	= $this->model->ViewWhere('wawancara', 'kode_wawancara', $Id);
+			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
-
 		$this->load->view('admin/container/header', $data);
-		$this->load->view('admin/recruitment/interview_user_1', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
+	public function interview_user_2($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Interview User 2';
+		$data['controller_name']   = 'interview_user_2';
+		$data['nilai_test']   = 'nilai_interview_user_2';
+		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
+	public function interview_hrga($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Interview HRGA';
+		$data['controller_name']   = 'interview_hrga';
+		$data['nilai_test']   = 'nilai_interview_hrga';
+		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos'])->result_array();
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
 	}
 
@@ -158,8 +213,8 @@ class Recruitment extends CI_Controller
 		$data['action'] = $Aksi;
 		$data['menu']   = 'Recruitment';
 		$data['file']   = 'Monitoring Status';
-		$data['row']	= $this->model->View('wawancara', 'kode_wawancara');
-		$data['praktik']	= $this->model->View('v_tes_praktik', 'kode_wawancara');
+		$data['row']	= $this->model->View('recruitment', 'kode_wawancara');
+		$data['nilai'] = $this->db->query("SELECT *, sum(nilai_psiko_test + nilai_uji_kompetensi + nilai_interview_user_1 + nilai_interview_user_2 + nilai_interview_hrga) AS total_nilai FROM recruitment ORDER BY kode_wawancara DESC ")->result_array();
 
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/monitoring_status', $data);
@@ -171,6 +226,7 @@ class Recruitment extends CI_Controller
 		$data['action'] = $Aksi;
 		$data['menu']   = 'Recruitment';
 		$data['file']   = 'Peserta Diterima';
+		$data['row'] = $this->db->query("SELECT *, sum(nilai_psiko_test + nilai_uji_kompetensi + nilai_interview_user_1 + nilai_interview_user_2 + nilai_interview_hrga) AS total_nilai FROM recruitment WHERE `status` = 'lolos' OR `status` = 'Menjadi Pegawai' ORDER BY kode_wawancara DESC ")->result_array();
 
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/peserta_diterima', $data);

@@ -54,7 +54,7 @@
           <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
               <h3 class="kt-portlet__head-title">
-                Input Data Wawancara
+                Input Data Calon Pegawai
               </h3>
             </div>
           </div>
@@ -66,6 +66,7 @@
                 <label>Kode Wawancara</label>
                 <input type="text" name="cKodeWawancara" id="cKodeWawancara" placeholder="Kode Wawancara" class="form-control" value="<?= $cKodeWawancara ?>" required>
                 <input type="hidden" value="<?= $cIdWawancara ?>" name="cIdWawancara" id="cIdWawancara">
+                <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">
               </div>
               <div class="form-group">
                 <label>Nama</label>
@@ -219,22 +220,22 @@
                     </td>
                     <td>
                       <?php
-                      if ($vaArea['status'] == 'pemanggilan') {
+                      if ($vaArea['recruitment'] == 'pemanggilan') {
                         $cLabel = 'info';
-                      } else if ($vaArea['status'] == 'lolos') {
+                      } else if ($vaArea['recruitment'] == 'lolos') {
                         $cLabel = 'success';
-                      } else if ($vaArea['status'] == 'tidaklolos') {
+                      } else if ($vaArea['recruitment'] == 'tidaklolos') {
                         $cLabel = 'danger';
                       }
                       ?>
-                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['status']) ?></span>
+                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['recruitment']) ?></span>
                     </td>
                     <td>
                       <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                         <i class="flaticon-edit"></i>
                       </a>
                       <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_wawancara'] . '') ?>'}">
+                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                         <i class="flaticon-delete"></i>
                       </a>
                     </td>
@@ -294,7 +295,7 @@
                         <i class="flaticon-edit"></i>
                       </a>
                       <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_wawancara'] . '') ?>'}">
+                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                         <i class="flaticon-delete"></i>
                       </a>
                     </td>
@@ -344,6 +345,7 @@
       var cNomorTelepon = $('#cNomorTelepon').val();
       var cEmail = $('#cEmail').val();
       var cStatus = $('#cStatus').val();
+      var whois = $('#whois').val();
       // alert(dTglWawancara);
       if (cKodeWawancara == "") {
         new PNotify({
@@ -368,6 +370,7 @@
           type: "POST",
           data: "cKodeWawancara=" + cKodeWawancara +
             "&dTglWawancara=" + dTglWawancara +
+            "&whois=" + whois +
             "&cNama=" + cNama +
             "&cNomorTelepon=" + cNomorTelepon +
             "&cStatus=" + cStatus +

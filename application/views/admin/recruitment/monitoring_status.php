@@ -91,7 +91,7 @@
                 <i class="kt-font-brand flaticon2-line-chart"></i>
               </span>
               <h3 class="kt-portlet__head-title">
-                Data Semua Tes Praktik
+                Data Semua Tes
               </h3>
             </div>
             <div class="kt-portlet__head-toolbar">
@@ -113,40 +113,40 @@
               </thead>
               <tbody>
                 <?php $no = 0;
-                foreach ($praktik as $key => $vaArea2) { 
+                foreach ($nilai as $key => $vaArea2) {
                   if ($vaArea2['is_delete'] == 1) {
                   } else {
                 ?>
 
-                  <tr>
-                    <td><?= ++$no; ?></td>
-                    <td>
-                      <?= $vaArea2['kode_wawancara'] ?>
-                    </td>
-                    <td>
-                      <?= $vaArea2['nama'] ?>
-                    </td>
-                    <td>
-                      <?= $vaArea2['nomor_telepon'] ?>
-                    </td>
-                    <td>
-                      <?= $vaArea2['email'] ?>
-                    </td>
-                    <td><?= ($vaArea2['nilai_tes_praktik']) ?> <br />
-                    </td>
-                    <td>
-                      <?php
-                      if ($vaArea2['status'] == 'pemanggilan') {
-                        $cLabel = 'info';
-                      } else if ($vaArea2['status'] == 'lolos') {
-                        $cLabel = 'success';
-                      } else if ($vaArea2['status'] == 'tidaklolos') {
-                        $cLabel = 'danger';
-                      }
-                      ?>
-                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea2['status']) ?></span>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td><?= ++$no; ?></td>
+                      <td>
+                        <?= $vaArea2['kode_wawancara'] ?>
+                      </td>
+                      <td>
+                        <?= $vaArea2['nama'] ?>
+                      </td>
+                      <td>
+                        <?= $vaArea2['nomor_telepon'] ?>
+                      </td>
+                      <td>
+                        <?= $vaArea2['email'] ?>
+                      </td>
+                      <td><?= ($vaArea2['total_nilai']) ?> <br />
+                      </td>
+                      <td>
+                        <?php
+                        if ($vaArea2['status'] == 'pemanggilan') {
+                          $cLabel = 'info';
+                        } else if ($vaArea2['status'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea2['status'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        }
+                        ?>
+                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea2['status']) ?></span>
+                      </td>
+                    </tr>
 
                   <?php
                   }

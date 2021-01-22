@@ -32,7 +32,7 @@
                 <td>No</td>
                 <td>Kode Wawancara</td>
                 <td>Tanggal Wawancara</td>
-                <td>Nilai Praktik</td>
+                <td>Total Nilai</td>
                 <td>Nama</td>
                 <td>Nomor Telepon</td>
                 <td>Email</td>
@@ -42,8 +42,7 @@
             </thead>
             <tbody>
               <?php $no = 0;
-              $dbRow = $this->db->query("SELECT * FROM v_tes_praktik WHERE `status` = 'lolos' OR `status` = 'Menjadi Pegawai' ORDER BY kode_wawancara DESC ");
-              foreach ($dbRow->result_array() as $key => $vaArea) {
+              foreach ($row as $key => $vaArea) {
                 if ($vaArea['is_delete'] == 1) {
                 } else { ?>
 
@@ -56,7 +55,7 @@
                       <?= $vaArea['tanggal_wawancara'] ?>
                     </td>
                     <td>
-                      <?= $vaArea['nilai_tes_praktik'] ?>
+                      <?= $vaArea['total_nilai'] ?>
                     </td>
                     <td>
                       <?= $vaArea['nama'] ?>
@@ -93,14 +92,14 @@
                       <?php
                       } elseif ($vaArea['status'] == "lolos") {
                       ?>
-                        <a href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_wawancara'] . '') ?>">
+                        <a href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
                           <button class="btn btn-info btn-sm" style="font-size: 10px;"> <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai </button>
                         </a>
                       <?php
                       } else {
                       }
                       ?>
-                      <!-- <a href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_wawancara'] . '') ?>">
+                      <!-- <a href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
                       <button class="btn btn-success btn-sm"> <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai </button>
                     </a> -->
                     </td>

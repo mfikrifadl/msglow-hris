@@ -129,7 +129,7 @@ class Recruitment_act extends CI_Controller
 			'nama'	=> $this->input->post('cNama'),
 			'created_by'	=> $this->input->post('whois'),
 			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
-			'status'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'email'	=> $this->input->post('cEmail'),
 		);
 
@@ -139,7 +139,7 @@ class Recruitment_act extends CI_Controller
 			'nama'	=> $this->input->post('cNama'),
 			'update_by'	=> $this->input->post('whois'),
 			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
-			'status'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'email'	=> $this->input->post('cEmail'),
 		);
 
@@ -150,7 +150,7 @@ class Recruitment_act extends CI_Controller
 			'created_by'	=> $this->input->post('whois'),
 			'update_by'	=> $this->input->post('whois'),
 			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
-			'status'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'email'	=> $this->input->post('cEmail'),
 		);
 
@@ -158,21 +158,21 @@ class Recruitment_act extends CI_Controller
 		$vaLog = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
 			'waktu' => $this->TimeStamp(),
-			'nama_table' => 'wawancara',
+			'nama_table' => 'recruitment',
 			'action' => $Type,
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
 		);
-		// $this->model->Insert("log", $vaLog);
+		$this->model->Insert("log", $vaLog);
 
 		if ($Type == "Insert") {
-			$this->model->Insert('wawancara', $data_create);
+			$this->model->Insert('recruitment', $data_create);
 			$this->model->Insert("log", $vaLog);
 		} elseif ($Type == "Update") {
-			$this->model->Update('wawancara', 'id_wawancara', $id, $data_update);
+			$this->model->Update('recruitment', 'id_recruitment', $id, $data_update);
 			$this->model->Insert("log", $vaLog);
 		} elseif ($Type == "Delete") {
-			$this->model->Delete('wawancara', 'id_wawancara', $id);
+			$this->model->Delete('recruitment', 'id_recruitment', $id);
 			redirect(site_url('recruitment/wawancara/'));
 		}
 	}
@@ -180,7 +180,7 @@ class Recruitment_act extends CI_Controller
 	public function edit_wawancara($id)
 	{
 		$data = array(
-			'id_wawancara' => $this->input->post('cIdWawancara'),
+			'id_recruitment' => $this->input->post('cIdTest'),
 			'nama'	=> $this->input->post('cNama'),
 			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
 			'status'	=> $this->input->post('cStatus'),
@@ -192,7 +192,7 @@ class Recruitment_act extends CI_Controller
 		$vaLog = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
 			'waktu' => $this->TimeStamp(),
-			'nama_table' => 'wawancara',
+			'nama_table' => 'recruitment',
 			'action' => 'Update',
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
@@ -202,80 +202,277 @@ class Recruitment_act extends CI_Controller
 		$this->model->Update('wawancara', 'kode_wawancara', $id, $data);
 	}
 
-	public function tes_praktik($Type = "", $id = "")
+	public function psiko_test($Type = "", $id = "")
 	{
 		$whois = $this->session->userdata('nama');
 		date_default_timezone_set('Asia/Jakarta');
 		$whois_date = date('d-m-Y H:i:s');
 
-		$dbKode = $this->db->query("SELECT * FROM wawancara WHERE id_wawancara = '" . $this->input->post('cIdWawancara') . "' ");
+		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $this->input->post('cIdTest') . "' ");
 
 		foreach ($dbKode->result_array() as $key => $vaKode) {
 			$cKodeWawancara = $vaKode['kode_wawancara'];
 		}
 
-		$data_create = array(
-			'id_wawancara' => $this->input->post('cIdWawancara'),
-			'created_by'	=> $this->input->post('whois'),
-			'created_date'	=> $this->input->post('whois_date'),
-			'kode_wawancara'	=> $cKodeWawancara,
-			'nilai_tes_praktik'	=> $this->input->post('nNilaiTes'),
-			'status'	=> $this->input->post('cStatus'),
-		);
-
 		$data_update = array(
-			'id_wawancara' => $this->input->post('cIdWawancara'),
 			'update_by'	=> $this->input->post('whois'),
 			'update_date'	=> $this->input->post('whois_date'),
-			'kode_wawancara'	=> $cKodeWawancara,
-			'nilai_tes_praktik'	=> $this->input->post('nNilaiTes'),
-			'status'	=> $this->input->post('cStatus'),
+			'nilai_psiko_test'	=> $this->input->post('nNilaiTes'),
+			'psiko_test'	=> $this->input->post('cStatus'),
 		);
 
 		$data_update_delete = array(
 			'is_delete' => 1,
 			'delete_by'	=> $whois,
-			'delete_date'	=>$whois_date,
+			'delete_date'	=> $whois_date,
 
 		);
 
 		$data = array(
-			'id_wawancara' => $this->input->post('cIdWawancara'),
+			'id_wawancara' => $this->input->post('cIdTest'),
 			'kode_wawancara'	=> $cKodeWawancara,
-			'nilai_tes_praktik'	=> $this->input->post('nNilaiTes'),
-			'status'	=> $this->input->post('cStatus'),
+			'nilai_psiko_test'	=> $this->input->post('nNilaiTes'),
+			'psiko_test'	=> $this->input->post('cStatus'),
 		);
 
 		$seralizedArray = serialize($data);
 		$vaLog = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
 			'waktu' => $this->TimeStamp(),
-			'nama_table' => 'tes_praktik',
+			'nama_table' => 'recruitment',
 			'action' => $Type,
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
 		);
 		$this->model->Insert("log", $vaLog);
 
-		if ($Type == "Insert") {
-			$this->model->Insert('tes_praktik', $data_create);
-			redirect(site_url('recruitment/tes_praktik/I'));
-		} elseif ($Type == "Update") {
-			$this->model->Update('tes_praktik', 'id_tes_praktik', $id, $data_update);
-			redirect(site_url('recruitment/tes_praktik/U'));
-		} elseif ($Type == "Delete") {
-			$this->model->Update_Delete('tes_praktik', 'id_tes_praktik', $id, $data_update_delete);
-			redirect(site_url('recruitment/tes_praktik/U'));
+		if ($Type == "Delete") {
+			$this->model->Update_Delete('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update_delete);
+			redirect(site_url('recruitment/psiko_test'));
+		} else {
+			$this->model->Update('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update);
+			redirect(site_url('recruitment/psiko_test'));
 		}
 	}
 
+	public function uji_kompetensi($Type = "", $id = "")
+	{
+		$whois = $this->session->userdata('nama');
+		date_default_timezone_set('Asia/Jakarta');
+		$whois_date = date('d-m-Y H:i:s');
+
+		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $this->input->post('cIdTest') . "' ");
+
+		foreach ($dbKode->result_array() as $key => $vaKode) {
+			$cKodeWawancara = $vaKode['kode_wawancara'];
+		}
+
+		$data_update = array(
+			'update_by'	=> $this->input->post('whois'),
+			'update_date'	=> $this->input->post('whois_date'),
+			'nilai_uji_kompetensi'	=> $this->input->post('nNilaiTes'),
+			'uji_kompetensi'	=> $this->input->post('cStatus'),
+		);
+
+		$data_update_delete = array(
+			'is_delete' => 1,
+			'delete_by'	=> $whois,
+			'delete_date'	=> $whois_date,
+
+		);
+
+		$data = array(
+			'id_wawancara' => $this->input->post('cIdTest'),
+			'kode_wawancara'	=> $cKodeWawancara,
+			'nilai_uji_kompetensi'	=> $this->input->post('nNilaiTes'),
+			'uji_kompetensi'	=> $this->input->post('cStatus'),
+		);
+
+		$seralizedArray = serialize($data);
+		$vaLog = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'recruitment',
+			'action' => $Type,
+			'query' => $seralizedArray,
+			'nama' => $this->session->userdata('nama')
+		);
+		$this->model->Insert("log", $vaLog);
+
+		if ($Type == "Delete") {
+			$this->model->Update_Delete('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update_delete);
+			redirect(site_url('recruitment/uji_kompetensi'));
+		} else {
+			$this->model->Update('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update);
+			redirect(site_url('recruitment/uji_kompetensi'));
+		}
+	}
+	public function interview_user_1($Type = "", $id = "")
+	{
+		$whois = $this->session->userdata('nama');
+		date_default_timezone_set('Asia/Jakarta');
+		$whois_date = date('d-m-Y H:i:s');
+
+		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $this->input->post('cIdTest') . "' ");
+
+		foreach ($dbKode->result_array() as $key => $vaKode) {
+			$cKodeWawancara = $vaKode['kode_wawancara'];
+		}
+
+		$data_update = array(
+			'update_by'	=> $this->input->post('whois'),
+			'update_date'	=> $this->input->post('whois_date'),
+			'nilai_interview_user_1'	=> $this->input->post('nNilaiTes'),
+			'interview_user_1'	=> $this->input->post('cStatus'),
+		);
+
+		$data_update_delete = array(
+			'is_delete' => 1,
+			'delete_by'	=> $whois,
+			'delete_date'	=> $whois_date,
+
+		);
+
+		$data = array(
+			'id_wawancara' => $this->input->post('cIdTest'),
+			'kode_wawancara'	=> $cKodeWawancara,
+			'nilai_interview_user_1'	=> $this->input->post('nNilaiTes'),
+			'interview_user_1'	=> $this->input->post('cStatus'),
+		);
+
+		$seralizedArray = serialize($data);
+		$vaLog = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'recruitment',
+			'action' => $Type,
+			'query' => $seralizedArray,
+			'nama' => $this->session->userdata('nama')
+		);
+		$this->model->Insert("log", $vaLog);
+
+		if ($Type == "Delete") {
+			$this->model->Update_Delete('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update_delete);
+			redirect(site_url('recruitment/interview_user_1'));
+		} else {
+			$this->model->Update('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update);
+			redirect(site_url('recruitment/interview_user_1'));
+		}
+	}
+	public function interview_user_2($Type = "", $id = "")
+	{
+		$whois = $this->session->userdata('nama');
+		date_default_timezone_set('Asia/Jakarta');
+		$whois_date = date('d-m-Y H:i:s');
+
+		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $this->input->post('cIdTest') . "' ");
+
+		foreach ($dbKode->result_array() as $key => $vaKode) {
+			$cKodeWawancara = $vaKode['kode_wawancara'];
+		}
+
+		$data_update = array(
+			'update_by'	=> $this->input->post('whois'),
+			'update_date'	=> $this->input->post('whois_date'),
+			'nilai_interview_user_2'	=> $this->input->post('nNilaiTes'),
+			'interview_user_2'	=> $this->input->post('cStatus'),
+		);
+
+		$data_update_delete = array(
+			'is_delete' => 1,
+			'delete_by'	=> $whois,
+			'delete_date'	=> $whois_date,
+
+		);
+
+		$data = array(
+			'id_wawancara' => $this->input->post('cIdTest'),
+			'kode_wawancara'	=> $cKodeWawancara,
+			'nilai_interview_user_2'	=> $this->input->post('nNilaiTes'),
+			'interview_user_2'	=> $this->input->post('cStatus'),
+		);
+
+		$seralizedArray = serialize($data);
+		$vaLog = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'recruitment',
+			'action' => $Type,
+			'query' => $seralizedArray,
+			'nama' => $this->session->userdata('nama')
+		);
+		$this->model->Insert("log", $vaLog);
+
+		if ($Type == "Delete") {
+			$this->model->Update_Delete('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update_delete);
+			redirect(site_url('recruitment/interview_user_2'));
+		} else {
+			$this->model->Update('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update);
+			redirect(site_url('recruitment/interview_user_2'));
+		}
+	}
+	public function interview_hrga($Type = "", $id = "")
+	{
+		$whois = $this->session->userdata('nama');
+		date_default_timezone_set('Asia/Jakarta');
+		$whois_date = date('d-m-Y H:i:s');
+
+		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $this->input->post('cIdTest') . "' ");
+
+		foreach ($dbKode->result_array() as $key => $vaKode) {
+			$cKodeWawancara = $vaKode['kode_wawancara'];
+		}
+
+		$data_update = array(
+			'update_by'	=> $this->input->post('whois'),
+			'update_date'	=> $this->input->post('whois_date'),
+			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
+			'interview_hrga'	=> $this->input->post('cStatus'),
+		);
+
+		$data_update_delete = array(
+			'is_delete' => 1,
+			'delete_by'	=> $whois,
+			'delete_date'	=> $whois_date,
+
+		);
+
+		$data = array(
+			'id_wawancara' => $this->input->post('cIdTest'),
+			'kode_wawancara'	=> $cKodeWawancara,
+			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
+			'interview_hrga'	=> $this->input->post('cStatus'),
+		);
+
+		$seralizedArray = serialize($data);
+		$vaLog = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'recruitment',
+			'action' => $Type,
+			'query' => $seralizedArray,
+			'nama' => $this->session->userdata('nama')
+		);
+		$this->model->Insert("log", $vaLog);
+
+		if ($Type == "Delete") {
+			$this->model->Update_Delete('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update_delete);
+			redirect(site_url('recruitment/interview_hrga'));
+		} else {
+			if ($data_update['interview_hrga'] == 'lolos') {
+				$data_update['status'] == 'lolos';
+			}
+			$this->model->Update('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update);
+			redirect(site_url('recruitment/interview_hrga'));
+		}
+	}
 	public function to_pegawai($id = "")
 	{
 		$whois = $this->session->userdata('nama');
 		date_default_timezone_set('Asia/Jakarta');
 		$whois_date = date('d-m-Y H:i:s');
 
-		$dbKode = $this->db->query("SELECT * FROM wawancara WHERE id_wawancara = '" . $id . "' ");
+		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $id . "' ");
 
 		foreach ($dbKode->result_array() as $key => $vaKode) {
 			$cKodeWawancara = $vaKode['kode_wawancara'];
@@ -284,7 +481,7 @@ class Recruitment_act extends CI_Controller
 			$cEmail 	    = $vaKode['email'];
 		}
 
-		$data = array(			
+		$data = array(
 			'created_by' => $whois,
 			'created_date'	=> $whois_date,
 			// 'id_status'	=> $this->input->post('nNilaiTes'),
@@ -313,7 +510,7 @@ class Recruitment_act extends CI_Controller
 		$vaLog = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
 			'waktu' => $this->TimeStamp(),
-			'nama_table' => 'tes_praktik',
+			'nama_table' => 'recruitment',
 			'action' => 'Update',
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
