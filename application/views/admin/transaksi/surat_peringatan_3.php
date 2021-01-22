@@ -33,10 +33,10 @@
   if ($Nolast->num_rows() > 0) {
     $NoSuratTerakhir = $cLastNoSurat;
   } else {
-    $NoSuratTerakhir = "No.0001/SP-II/HRD/" . $cRomawai . "/" . date("Y") . "";
+    $NoSuratTerakhir = "No.0001/SP-III/HRD/" . $cRomawai . "/" . date("Y") . "";
   }
 
-  $cNomorSuratFix = "No." . "####" . "/SP-II/HRD/" . $cRomawai . "/" . date("Y") . " ";
+  $cNomorSuratFix = "No." . "####" . "/SP-III/HRD/" . $cRomawai . "/" . date("Y") . " ";
   ?>
  <?php
   if ($action == "edit") {
@@ -91,7 +91,7 @@
          <div class="kt-portlet__head">
            <div class="kt-portlet__head-label">
              <h3 class="kt-portlet__head-title">
-               Data Table Surat Peringatan Pegawai (SP2)
+               Data Table Surat Peringatan Pegawai (SP3)
              </h3>
            </div>
          </div>
@@ -146,7 +146,7 @@
 
    <div class="row">
      <div class="col-12">
-       <form method="post" enctype="multipart/form-data" action="<?= site_url('surat_act/sp2/' . $cAction . '') ?>">
+       <form method="post" enctype="multipart/form-data" action="<?= site_url('surat_act/sp3/' . $cAction . '') ?>">
          <!--begin::Portlet-->
          <div class="kt-portlet kt-portlet--height-fluid">
            <div class="kt-portlet__head">
@@ -170,7 +170,7 @@
              </div>
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">Perihal: </label>
-               <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan I</label>
+               <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan III</label>
              </div>
              <div style="text-align: center;">
                <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>
@@ -218,7 +218,7 @@
              </div>
              <div class="col-12" align="left">
                <p>
-               <h4>Maka dengan ini, Diberikan Surat Peringatan II terkait dengan tindak pelanggaran yang saudara lakukan, yakni </h4>
+               <h4>Maka dengan ini, Diberikan Surat Peringatan III terkait dengan tindak pelanggaran yang saudara lakukan, yakni </h4>
                </p>
              </div>
              <div class="form-group">
@@ -234,9 +234,9 @@
              </div>
              <div class="col-12" align="left">
                <p>
-               Selama masih dalam status Peringatan I, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.
+               Selama masih dalam status Peringatan III, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.
                 Harapan kami agar yang bersangkutan untuk lebih mentaati peraturan dan lebih disiplin serta tanggung jawab sebagai karyawan yang baik. Semoga dengan diterbitkan surat ini ybs bisa menerima hal ini.
-                Demikian Surat Peringatan II ini dibuat agar dapat ditaati sebagaimana mestinya. Diharapkan yang bersangkutan berkenan merubah sikap dan mampu menunjukkan sikap profesinoalisme dalam bekerja.
+                Demikian Surat Peringatan III ini dibuat agar dapat ditaati sebagaimana mestinya. Diharapkan yang bersangkutan berkenan merubah sikap dan mampu menunjukkan sikap profesinoalisme dalam bekerja.
               
                </p>
              </div>

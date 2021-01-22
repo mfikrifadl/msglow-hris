@@ -429,7 +429,7 @@ class Transaksi extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
 		}
 		$this->load->view('admin/container/header', $data);
-		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
+		$this->load->view('admin/transaksi/surat_peringatan_2', $data);
 		$this->load->view('admin/container/footer');
 	}
 
@@ -444,7 +444,7 @@ class Transaksi extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
 		}
 		$this->load->view('admin/container/header', $data);
-		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
+		$this->load->view('admin/transaksi/surat_peringatan_3', $data);
 		$this->load->view('admin/container/footer');
 	}
 

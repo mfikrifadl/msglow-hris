@@ -40,4 +40,46 @@ class Surat_act extends CI_Controller
             redirect(site_url('transaksi/sp1'));
         }
     }
+
+    public function sp2($Type = "", $Id = "")
+    {
+
+        if ($Type == 'Insert' or $Type == 'Update') {
+
+            $dataInsert = array(
+                'tanggal'           =>  $this->input->post('dTgl'),
+                'nomor_surat'       =>  $this->input->post('nNomorSurat'),
+                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+                'uraian'            =>  $this->input->post('cUraian'),
+                'create'            =>  $this->input->post('cCreate'),
+                'general_manager'   =>  $this->input->post('cGeneral_manager'),
+                'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
+                'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
+            );
+            // print_r($dataInsert);
+            $this->model->Insert('tb_surat_peringatan', $dataInsert);
+            redirect(site_url('transaksi/sp2'));
+        }
+    }
+
+    public function sp13($Type = "", $Id = "")
+    {
+
+        if ($Type == 'Insert' or $Type == 'Update') {
+
+            $dataInsert = array(
+                'tanggal'           =>  $this->input->post('dTgl'),
+                'nomor_surat'       =>  $this->input->post('nNomorSurat'),
+                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+                'uraian'            =>  $this->input->post('cUraian'),
+                'create'            =>  $this->input->post('cCreate'),
+                'general_manager'   =>  $this->input->post('cGeneral_manager'),
+                'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
+                'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
+            );
+            // print_r($dataInsert);
+            $this->model->Insert('tb_surat_peringatan', $dataInsert);
+            redirect(site_url('transaksi/sp3'));
+        }
+    }
 }
