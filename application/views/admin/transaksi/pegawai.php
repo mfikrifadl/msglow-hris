@@ -137,10 +137,6 @@ if ($action == "edit") {
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 28d8af7690723714a715146edfa06e15e54439aa
   <!-- begin:: Content -->
   <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 
@@ -232,10 +228,6 @@ if ($action == "edit") {
             <!--begin::Portlet Data Kerja-->
             <div class="kt-portlet">
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 28d8af7690723714a715146edfa06e15e54439aa
               <!--begin::Accordion-->
 
               <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
