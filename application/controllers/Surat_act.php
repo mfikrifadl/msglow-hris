@@ -20,6 +20,29 @@ class Surat_act extends CI_Controller
         $this->load->helper('download');
     }
 
+    public function teguran_lisan($Type = "", $Id = "")
+    {
+
+        if ($Type == 'Insert' or $Type == 'Update') {
+
+            $dataInsert = array(
+                'tanggal'           =>  $this->input->post('dTgl'),
+                'jum_teguran_lisan' =>  $this->input->post('tl'),
+                'id_kategori_surat' =>  $this->input->post('idSurat'),
+                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+                'keterangan'        =>  $this->input->post('cKet'),
+                // 'uraian'            =>  $this->input->post('cUraian'),
+                // 'create'            =>  $this->input->post('cCreate'),
+                // 'general_manager'   =>  $this->input->post('cGeneral_manager'),
+                // 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
+                // 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
+            );
+            // print_r($dataInsert);
+            $this->model->Insert('tb_surat_peringatan', $dataInsert);
+            redirect(site_url('transaksi/teguran_lisan'));
+        }
+    }
+
     public function sp1($Type = "", $Id = "")
     {
 

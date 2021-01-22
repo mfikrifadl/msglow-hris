@@ -403,6 +403,25 @@ class Transaksi extends CI_Controller
 
 	}
 
+	public function teguran_lisan($Aksi = "", $Id = ""){
+		$data['action'] = $Aksi;
+		$data['menu']   = 'HRD';
+		$data['file']   = 'Teguran Lisan';
+		$data['row']	= $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2');
+		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		
+		if ($Aksi == 'view') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+		}
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+		}
+		
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/transaksi/teguran_lisan', $data);
+		$this->load->view('admin/container/footer');
+	}
+
 	public function sp1($Aksi = "", $Id = ""){
 		$data['action'] = $Aksi;
 		$data['menu']   = 'Pegawai';
