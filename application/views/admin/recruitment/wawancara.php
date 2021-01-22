@@ -220,22 +220,22 @@
                     </td>
                     <td>
                       <?php
-                      if ($vaArea['reqruitment'] == 'pemanggilan') {
+                      if ($vaArea['recruitment'] == 'pemanggilan') {
                         $cLabel = 'info';
-                      } else if ($vaArea['reqruitment'] == 'lolos') {
+                      } else if ($vaArea['recruitment'] == 'lolos') {
                         $cLabel = 'success';
-                      } else if ($vaArea['reqruitment'] == 'tidaklolos') {
+                      } else if ($vaArea['recruitment'] == 'tidaklolos') {
                         $cLabel = 'danger';
                       }
                       ?>
-                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['reqruitment']) ?></span>
+                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['recruitment']) ?></span>
                     </td>
                     <td>
                       <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                         <i class="flaticon-edit"></i>
                       </a>
                       <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_reqruitment'] . '') ?>'}">
+                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                         <i class="flaticon-delete"></i>
                       </a>
                     </td>
@@ -295,7 +295,7 @@
                         <i class="flaticon-edit"></i>
                       </a>
                       <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_reqruitment'] . '') ?>'}">
+                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                         <i class="flaticon-delete"></i>
                       </a>
                     </td>
