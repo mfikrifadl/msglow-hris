@@ -1,20 +1,18 @@
 <?php
 if ($action == "edit") {
     foreach ($field as $column) {
-        $cIdTest  =   $column['id_test'];
+        $cIdTest  =   $column['id_recruitment'];
         $createBy       =   $this->session->userdata('nama');
         $updateBy       =   $this->session->userdata('nama');
         $deleteBy       =   $this->session->userdata('nama');
-        $cIdWawancara   =   $column['id_wawancara'];
-        $nNilaiTes      =   $column['nilai_test'];
-        $cStatus        =   $column['status'];
+        $nNilaiTes      =   $column[$nilai_test];
+        $cStatus        =   $column[$controller_name];
         $cIconButton   =   "refresh";
         $cValueButton  =   "Update Data";
     }
     $cAction = "Update/" . $cIdTest . "";
 } else {
     $cIdTest  =   "";
-    $cIdWawancara   =   "";
     $nNilaiTes     =   "";
     $cStatus        =   "";
     $cIconButton  = "save";
@@ -62,14 +60,13 @@ $whois_date = date('d-m-Y H:i:s');
                                 foreach ($row as $key => $value) {
                                     # code...
                                 ?>
-                                    <option value="<?= $value['id_test'] ?>" <?php if ($cIdTest == $value['id_test']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option>
+                                    <option value="<?= $value['id_recruitment'] ?>" <?php if ($cIdTest == $value['id_recruitment']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Nilai <?= $file ?></label>
                             <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
-                            <input type="hidden" name="cIdWawancara" value="<?= $cIdWawancara ?>">
                             <input type="hidden" name="whois" value="<?= $whois ?>">
                             <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
                         </div>
@@ -131,29 +128,29 @@ $whois_date = date('d-m-Y H:i:s');
                                                 Email : <?= $vaArea['email'] ?> <br />
                                             </strong>
                                         </td>
-                                        <td><?= ($vaArea['nilai_test']) ?> <br />
+                                        <td><?= ($vaArea[$nilai_test]) ?> <br />
                                         </td>
                                         <td>
                                             <?php
-                                            if ($vaArea['status'] == 'pemanggilan') {
+                                            if ($vaArea[$controller_name] == 'pemanggilan') {
                                                 $cLabel = 'info';
-                                            } else if ($vaArea['status'] == 'lolos') {
+                                            } else if ($vaArea[$controller_name] == 'lolos') {
                                                 $cLabel = 'success';
-                                            } else if ($vaArea['status'] == 'tidaklolos') {
+                                            } else if ($vaArea[$controller_name] == 'tidaklolos') {
                                                 $cLabel = 'danger';
                                             } else {
                                                 $cLabel = 'warning';
                                             }
                                             ?>
-                                            <span class="btn btn-sm btn-<?= $cLabel ?>"><?= ($vaArea['status']) ?></span>
+                                            <span class="btn btn-sm btn-<?= $cLabel ?>"><?= ($vaArea[$controller_name]) ?></span>
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group" aria-label="First group">
-                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_test'] . '') ?>">
+                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
                                                 </a>
                                                 <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_test'] . '') ?>'}">
+                                { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                                                     <i class="flaticon-delete"></i>
                                                 </a>
                                             </div>
