@@ -64,7 +64,7 @@
     $cOutlet            =   "";
     $cUraian            =   "";
     $cKeterangan        =   "";
-    $cCreate            =   "Venna Rosia Marheta ";
+    $cCreate            =   "Venna Rosia Marheta";
     $cCC                =   "";
     $cIconButton    =   "save";
     $cValueButton   =   "Save Data";
@@ -146,7 +146,7 @@
 
    <div class="row">
      <div class="col-12">
-       <form method="post" enctype="multipart/form-data" action="<?= site_url('surat_act/surat_peringatan_1/' . $cAction . '') ?>">
+       <form method="post" enctype="multipart/form-data" action="<?= site_url('surat_act/sp1/' . $cAction . '') ?>">
          <!--begin::Portlet-->
          <div class="kt-portlet kt-portlet--height-fluid">
            <div class="kt-portlet__head">
@@ -159,7 +159,21 @@
 
            <div class="kt-portlet__body">
              <div style="text-align: center;">
-               <h3 style="text-decoration: underline;">HUMAN RESOURCE DEVELOPMENT</h3>
+               <h3>HUMAN RESOURCES DEVELOPMENT</h3>
+               <hr />
+             </div>
+             <div class="form-group row">
+               <label for="example-text-input" class="col-1 col-form-label">Tertanggal: </label>
+               <div class="col-3">
+                 <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="example-text-input" class="col-1 col-form-label">Perihal: </label>
+               <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan I</label>
+             </div>
+             <div style="text-align: center;">
+               <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>
                <?php if ($action != 'edit') { ?>
                  Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
                  <div style="justify-content: center;display: flex;"><input type="text" name="nNomorSurat" class="form-control" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>"></div>
@@ -170,57 +184,77 @@
                <h4>&emsp;&emsp;Dalam rangka menegakkan kedisiplinan dan tanggung jawab serta menjalankan peraturan perusahaan maka atas nama perusahaan, dengan ini menerangkan bahwa:</h4>
                </p>
              </div>
-             <div class="form-group">
-               <label>Nama :</label>
-               <select class="comboBox form-control" onchange="changeValue(this.value)" name="cIdPegawai">
-                 <option></option>
-                 <?php
-                  $jsArray = "var jason = new Array();\n";
-                  foreach ($pegawai as $dbRow) {
-                  ?>
-                   <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
-                     <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
-                   </option>';
-                 <?php
-                    $jsArray .= "jason['" . $dbRow['id_pegawai'] . "'] = 
+             <div class="form-group row">
+               <label for="example-text-input" class="col-1 col-form-label">Nama :</label>
+               <div class="col-3">
+                 <select class="comboBox form-control" onchange="changeValue(this.value)" name="cIdPegawai">
+                   <option></option>
+                   <?php
+                    $jsArray = "var jason = new Array();\n";
+                    foreach ($pegawai as $dbRow) {
+                    ?>
+                     <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
+                       <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
+                     </option>';
+                   <?php
+                      $jsArray .= "jason['" . $dbRow['id_pegawai'] . "'] = 
                           {nik:'" . addslashes(($dbRow['nik'])) . "'};\n";
-                  }
-                  ?>
-               </select>
+                    }
+                    ?>
+                 </select>
+               </div>
              </div>
-             <div class="form-group">
-               <label>NIK :</label>
-               <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
+             <div class="form-group row">
+               <label for="example-text-input" class="col-1 col-form-label">NIK :</label>
+               <div class="col-3">
+                 <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
+               </div>
              </div>
-             <div class="form-group">
-               <label>Jabatan :</label>
+             <div class="form-group row">
+               <label for="example-text-input" class="col-1 col-form-label">Jabatan :</label>
+               <div class="col-3">
                <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
+               </div>
              </div>
              <div class="col-12" align="left">
                <p>
-               <h4>Telah melakukan tindakan/perbuatan yang melanggar Tata Tertib Kerja/SOP/Job Desk dan Kepegawaian yang dilakukan pada :</h4>
+               <h4>Maka dengan ini, Diberikan Surat Peringatan I terkait dengan tindak pelanggaran yang saudara lakukan, yakni </h4>
                </p>
              </div>
              <div class="form-group">
-               <label>Tanggal</label>
-               <input type="text" name="dTgl" class="datetimepicker form-control" data-date-format="DD-MM-YYYY" placeholder="Tanggal" value="<?= $dTgl ?>">
-             </div>
-             <div class="form-group">
-               <label>Uraian Singkat Pelanggaran</label>
-               <textarea class="form-control" name="cUraian" placeholder="Uraian" rows="10"><?= $cUraian ?></textarea>
+               <div class="col-12">
+                 <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"><?= $cUraian ?></textarea>
+               </div>
+               <!-- <textarea class="form-control" name="cUraian" placeholder="Uraian" rows="10"><?php // $cUraian ?></textarea> -->
              </div>
              <div class="col-12" align="left">
                <p>
-               <h4>Demikian Surat Peringatan Pertama ini dikeluarkan untuk menjadi perhatian.</h4>
+               <h4>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai"></h4>
                </p>
              </div>
              <div class="col-12" align="left">
                <p>
-               <h4>PT.Kosmetika Cantik Indonesia</h4>
+               Selama masih dalam status Peringatan I, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.
+                Harapan kami agar yang bersangkutan untuk lebih mentaati peraturan dan lebih disiplin serta tanggung jawab sebagai karyawan yang baik. Semoga dengan diterbitkan surat ini ybs bisa menerima hal ini.
+                Demikian Surat Peringatan I ini dibuat agar dapat ditaati sebagaimana mestinya. Diharapkan yang bersangkutan berkenan merubah sikap dan mampu menunjukkan sikap profesinoalisme dalam bekerja.
+              
                </p>
              </div>
-             <div class="form-group">
-               <input type="text" name="cCreate" class="form-control" value="<?= $cCreate ?>" style"width:30%">
+             <div class="col-12" align="left">
+               <p>Atas perhatian dan kerjasamanya kami selaku manajemen mengucapkan terima kasih. Dan bisa sebagai koreksi dan intropeksi diri selanjutnya.
+               </p>
+             </div>
+             <div class="form-group row">
+               <label for="example-text-input" class="col-2 col-form-label">Manager HRD :</label>
+               <div class="col-3">
+                 <input type="text" name="cCreate" id="cCreate" class="form-control" value="<?= $cCreate ?>">
+               </div>
+             </div>
+             <div class="form-group row">
+               <label for="example-text-input" class="col-2 col-form-label">General Manager :</label>
+               <div class="col-3">
+                 <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control">
+               </div>
              </div>
              <div class="form-group">
                <button type="submit" class="btn btn-flat btn-danger">
