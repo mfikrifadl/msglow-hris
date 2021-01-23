@@ -1,7 +1,7 @@
   <?php
   if ($action == "edit") {
     foreach ($field as $column) {
-      $cIdWawancara   =   $column['id_wawancara'];
+      $cIdWawancara   =   $column['id_recruitment'];
       $createBy       =   $this->session->userdata('nama');
       $updateBy       =   $this->session->userdata('nama');
       $deleteBy       =   $this->session->userdata('nama');
@@ -12,7 +12,8 @@
       $cNomorTelepon  =   $column['nomor_telepon'];
       $cEmail         =   $column['email'];
       $cStatus        =   $column['status'];
-      $cTahap         =   $column['tahap'];
+      $cLevel        =   $column['level_id'];
+      // $cTahap         =   $column['tahap'];
       $cIconButton   =   "refresh";
       $cValueButton  =   "Update Data";
     }
@@ -27,6 +28,7 @@
     $cNomorTelepon  =   "";
     $cEmail         =   "";
     $cStatus        =   "";
+    $cLevel        =   "";
     $cTahap         =   "";
     $cIconButton  = "save";
     $cValueButton = "Save Data";
@@ -80,6 +82,18 @@
                 <label>Email</label>
                 <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
                 <input type="hidden" name="whois" value="<?= $whois ?>">
+              </div>
+              <div class="form-group">
+                <label>Interviewer</label>
+                <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel" name="cLevel">
+                  <option></option>
+                  <?php foreach ($levels as $key => $level) { ?>
+                    <option value="<?= $level['id_level'] ?>" <?php if ($cLevel == $level['id_level']) echo "selected"; ?>>
+                      <?= $level['level'] ?>
+                    </option>
+                  <?php } ?>
+                </select>
+                <input type="hidden" value="Wawancara" name="cTahap" id="cTahap">
               </div>
               <div class="form-group">
                 <label>Tanggal Wawancara</label>
@@ -345,6 +359,7 @@
       var cNomorTelepon = $('#cNomorTelepon').val();
       var cEmail = $('#cEmail').val();
       var cStatus = $('#cStatus').val();
+      var cLevel = $('#cLevel').val();
       var whois = $('#whois').val();
       // alert(dTglWawancara);
       if (cKodeWawancara == "") {
@@ -374,6 +389,7 @@
             "&cNama=" + cNama +
             "&cNomorTelepon=" + cNomorTelepon +
             "&cStatus=" + cStatus +
+            "&cLevel=" + cLevel +
             "&cEmail=" + cEmail,
           url: "<?= site_url('recruitment_act/wawancara/Insert') ?>",
           cache: false,
@@ -387,6 +403,7 @@
             $('#cNomorTelepon').val("");
             $('#cEmail').val("");
             $('#cStatus').val("")
+            $('#cLevel').val("")
             $('#cNama').focus()
           }
         });
@@ -400,6 +417,7 @@
       var cNomorTelepon = $('#cNomorTelepon').val();
       var cEmail = $('#cEmail').val();
       var cStatus = $('#cStatus').val();
+      var cLevel = $('#cLevel').val();
       var cTahap = $('#cTahap').val();
       $.ajax({
         type: "POST",
@@ -409,6 +427,7 @@
           "&cNomorTelepon=" + cNomorTelepon +
           "&cStatus=" + cStatus +
           "&cTahap=" + cTahap +
+          "&cLevel=" + cLevel +
           "&cEmail=" + cEmail,
         url: "<?= site_url('recruitment_act/edit_wawancara') ?>/" + id,
         cache: false,

@@ -131,6 +131,8 @@ class Recruitment_act extends CI_Controller
 			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
 			'recruitment'	=> $this->input->post('cStatus'),
 			'email'	=> $this->input->post('cEmail'),
+			'level_id'	=> $this->input->post('cLevel'),
+			'status'	=> 'pending',
 		);
 
 		$data_update = array(
@@ -140,6 +142,7 @@ class Recruitment_act extends CI_Controller
 			'update_by'	=> $this->input->post('whois'),
 			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
 			'recruitment'	=> $this->input->post('cStatus'),
+			'level_id'	=> $this->input->post('cLevel'),
 			'email'	=> $this->input->post('cEmail'),
 		);
 
@@ -151,6 +154,7 @@ class Recruitment_act extends CI_Controller
 			'update_by'	=> $this->input->post('whois'),
 			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
 			'recruitment'	=> $this->input->post('cStatus'),
+			'level_id'	=> $this->input->post('cLevel'),
 			'email'	=> $this->input->post('cEmail'),
 		);
 

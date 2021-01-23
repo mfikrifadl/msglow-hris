@@ -246,14 +246,14 @@ if ($this->session->userdata('id') == '') {
 
           <!-- end:: Aside -->
           <?php
-          
+
           $cMenu = "";
-          
+
           if ($this->session->userdata('level') == 1) {
             $cMenu  = 'menu_admin.php';
           } elseif ($this->session->userdata('level') == 2) {
             $cMenu  = 'menu_recruitment.php';
-          } elseif ($this->session->userdata('level') == 3) {
+          } elseif ($this->session->userdata('level') >= 3) {
             $cMenu  = 'menu_kepegawaian.php';
           } else {
             $cMenu  = 'login.php';

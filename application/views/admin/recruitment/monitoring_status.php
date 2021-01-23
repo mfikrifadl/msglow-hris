@@ -61,7 +61,7 @@
                     <td>
 
                       <?php
-                      if ($vaArea['status'] == 'pemanggilan') {
+                      if ($vaArea['status'] == 'pending') {
                         $cLabel = 'info';
                       } else if ($vaArea['status'] == 'lolos') {
                         $cLabel = 'success';

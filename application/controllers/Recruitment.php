@@ -82,6 +82,7 @@ class Recruitment extends CI_Controller
 		$content 			= file_get_contents($url); // put the contents of the file into a variable
 		$data2 				= json_decode($content, true);
 		$data['registrant']	= $data2['data'];
+		$data['levels']	= $this->model->view('level', 'id_level');
 
 		if ($Aksi == 'edit') {
 			$data['field'] 	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
@@ -155,7 +156,11 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview User 1';
 		$data['nilai_test'] = 'nilai_interview_user_1';
 		$data['controller_name']   = 'interview_user_1';
-		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos'])->result_array();
+		if ($this->session->userdata('level') == 1) {
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos'])->result_array();
+		} else {
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
+		}
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
@@ -170,7 +175,11 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview User 2';
 		$data['controller_name']   = 'interview_user_2';
 		$data['nilai_test']   = 'nilai_interview_user_2';
-		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
+		if ($this->session->userdata('level') == 1) {
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
+		} else {
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
+		}
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}

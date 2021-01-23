@@ -149,10 +149,10 @@ $whois_date = date('d-m-Y H:i:s');
                                                 <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
                                                 </a>
-                                                <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                                <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                                                     <i class="flaticon-delete"></i>
-                                                </a>
+                                                </a> -->
                                             </div>
                                         </td>
                                     </tr>
