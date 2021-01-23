@@ -429,8 +429,8 @@ class Transaksi extends CI_Controller
 
 	public function sp1($Aksi = "", $Id = ""){
 		$data['action'] = $Aksi;
-		$data['menu']   = 'Pegawai';
-		$data['file']   = 'Operator';
+		$data['menu']   = 'HRD';
+		$data['file']   = 'Surat Peringatan I';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -444,8 +444,8 @@ class Transaksi extends CI_Controller
 
 	public function sp2($Aksi = "", $Id = ""){
 		$data['action'] = $Aksi;
-		$data['menu']   = 'Pegawai';
-		$data['file']   = 'Operator';
+		$data['menu']   = 'HRD';
+		$data['file']   = 'Surat Peringatan II';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -459,8 +459,8 @@ class Transaksi extends CI_Controller
 
 	public function sp3($Aksi = "", $Id = ""){
 		$data['action'] = $Aksi;
-		$data['menu']   = 'Pegawai';
-		$data['file']   = 'Operator';
+		$data['menu']   = 'HRD';
+		$data['file']   = 'Surat Peringatan III';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
