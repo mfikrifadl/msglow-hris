@@ -1,0 +1,468 @@
+<?php
+if ($action == "edit") {
+    foreach ($field as $column) {
+        $cIdWawancara   =   $column['id_recruitment_phl'];
+        $createBy       =   $this->session->userdata('nama');
+        $updateBy       =   $this->session->userdata('nama');
+        $deleteBy       =   $this->session->userdata('nama');
+        $cKodeWawancara =   $column['kode_wawancara'];
+        $dTglWawancara  =   $column['tanggal_wawancara'];
+        $cNama          =   $column['nama'];
+        $cNomorTelepon  =   $column['nomor_telepon'];
+        $cEmail         =   $column['email'];
+        $cStatus        =   $column['administrasi'];
+        $cLevel        =   $column['level_id'];
+        $cDivisi         =   $column['divisi'];
+        $cKategori        =   $column['kategori_phl_id'];
+        $cIconButton   =   "refresh";
+        $cValueButton  =   "Update Data";
+    }
+    $cAction = "Update/" . $cKodeWawancara . "";
+} else {
+    $cIdWawancara   =   "";
+    $cKodeWawancara   =   "";
+    $cDivisi   =   "";
+    $cKategori =   "";
+    $dTglWawancara  =   "";
+    $cNama          =   "";
+    $cNomorTelepon  =   "";
+    $cEmail         =   "";
+    $cStatus        =   "";
+    $cLevel        =   "";
+    $cIconButton  = "save";
+    $cValueButton = "Save Data";
+    $cAction      = "Insert";
+}
+?>
+<?php $whois = $this->session->userdata('nama'); ?>
+<!-- begin:: Content -->
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= base_url() ?>">Home</a></li>
+                <li class="breadcrumb-item"><?= $menu ?></li>
+                <li class="breadcrumb-item active"><?= $file ?></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <!--begin::Portlet-->
+            <div class="kt-portlet kt-portlet--height-fluid">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Input Data Calon Pegawai PHL
+                        </h3>
+                    </div>
+                </div>
+
+                <!--begin::Form-->
+                <form class="kt-form kt-form--label-right" method="post" enctype="multipart/form-data" action="<?= site_url('recruitment_act/wawancara/' . $cAction . '') ?>">
+                    <div class="kt-portlet__body">
+                        <div class="form-group">
+                            <label>Kode Wawancara</label>
+                            <input type="text" name="cKodeWawancara" id="cKodeWawancara" placeholder="Kode Wawancara" class="form-control" value="<?= $cKodeWawancara ?>" required>
+                            <input type="hidden" value="<?= $cIdWawancara ?>" name="cIdWawancara" id="cIdWawancara">
+                            <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" name="cNama" id="cNama" class="form-control" placeholder="Nama Peserta" value="<?= $cNama ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Nomor Telepon</label>
+                            <input type="text" name="cNomorTelepon" id="cNomorTelepon" class="form-control" placeholder="Nomor Telepon" value="<?= $cNomorTelepon ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
+                            <input type="hidden" name="whois" value="<?= $whois ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Interviewer</label>
+                            <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel" name="cLevel">
+                                <option></option>
+                                <?php foreach ($levels as $key => $level) { ?>
+                                    <option value="<?= $level['id_level'] ?>" <?php if ($cLevel == $level['id_level']) echo "selected"; ?>>
+                                        <?= $level['level'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Penempatan</label>
+                            <select class="form-control kt-selectpicker" data-live-search="true" id="cKategori" name="cKategori">
+                                <option></option>
+                                <?php foreach ($lokasis as $key => $lokasi) { ?>
+                                    <option value="<?= $lokasi['id_kategori_phl'] ?>" <?php if ($cKategori == $lokasi['id_kategori_phl']) echo "selected"; ?>>
+                                        <?= $lokasi['lokasi'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Divisi</label>
+                            <input name="cDivisi" id="cDivisi" class="form-control" placeholder="Divisi" value="<?= $cDivisi ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Wawancara</label>
+                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Wawancara" value="<?= $dTglWawancara ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus">
+                                <option></option>
+                                <option value="pemanggilan" <?php if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
+                                <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
+                                <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <?php
+                            if ($action == 'edit') {
+                            ?>
+                                <button type="button" onclick="return update('<?= $cIdWawancara ?>');" class="btn btn-flat btn-primary">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                </button>
+                            <?php } else { ?>
+                                <button type="button" onclick="return save();" class="btn btn-flat btn-primary">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                </button>
+                            <?php } ?>
+                            <button type="button" onclick="return selesai();" class="btn btn-flat btn-success">
+                                <i class="fa fa-arrow-right"></i> Selesai
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end::Portlet-->
+
+        </div>
+        <div class="col-md-8">
+
+            <!--begin::Portlet-->
+            <div class="kt-portlet kt-portlet--height-fluid">
+
+                <!--begin::Form-->
+
+                <div class="kt-portlet__body">
+                    <table class="table table-striped table-bordered" id="DataTableWawancara">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Action</td>
+                                <td>ID Registrant</td>
+                                <td>Lowongan</td>
+                                <td>Nama</td>
+                                <td>Pendidikan</td>
+                                <td>Email</td>
+                                <td>Telp</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 0;
+                            foreach ($registrant as $vaAreaa) { ?>
+                                <tr>
+                                    <td><?= ++$no; ?></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
+                                            <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-success">
+                                                <i class="flaticon2-edit"></i>
+                                            </button>
+                                            <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['reg_id'] . '') ?>">
+                                                <i class="la la-search"></i>
+                                            </a>
+                                            <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-danger">
+                                                <i class="flaticon2-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td><?= ($vaAreaa['reg_id']) ?></td>
+                                    <td><?= ($vaAreaa['job_name']) ?></td>
+                                    <td><?= ($vaAreaa['reg_name']) ?></td>
+                                    <td><?= ($vaAreaa['graduate']) ?></td>
+                                    <td><?= ($vaAreaa['reg_email']) ?></td>
+                                    <td><?= ($vaAreaa['reg_tlp']) ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end::Portlet-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <!--begin::Portlet-->
+            <div class="kt-portlet">
+
+                <!--begin::Form-->
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Peserta Pemanggilan dan Lolos
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="kt-portlet__body">
+                    <table class="table table-striped table-bordered" id="DataTable">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Kode Wawancara</td>
+                                <td>Peserta</td>
+                                <td>Status</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 0;
+                            foreach ($row as $key => $vaArea) { ?>
+                                <tr>
+                                    <td><?= ++$no; ?></td>
+                                    <td>
+                                        <strong><?= $vaArea['kode_wawancara'] ?></strong> <br />
+                                        <?= $vaArea['tanggal_wawancara'] ?>
+                                    </td>
+                                    <td><?= ($vaArea['nama']) ?> <br />
+                                        <?= ($vaArea['nomor_telepon']) ?> <br />
+                                        <?= ($vaArea['email']) ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if ($vaArea['administrasi'] == 'pemanggilan') {
+                                            $cLabel = 'info';
+                                        } else if ($vaArea['administrasi'] == 'lolos') {
+                                            $cLabel = 'success';
+                                        } else if ($vaArea['administrasi'] == 'tidaklolos') {
+                                            $cLabel = 'danger';
+                                        }
+                                        ?>
+                                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['administrasi']) ?></span>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                            <i class="flaticon-edit"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
+                                            <i class="flaticon-delete"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end::Portlet-->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <!--begin::Portlet-->
+            <div class="kt-portlet">
+
+                <!--begin::Form-->
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Peserta Tidak Lolos
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="kt-portlet__body">
+                    <table class="table table-striped table-bordered" id="DataTable">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Kode Wawancara</td>
+                                <td>Peserta</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 0;
+                            foreach ($tdklolos as $key => $vaArea) { ?>
+                                <tr>
+                                    <td><?= ++$no; ?></td>
+                                    <td>
+                                        <strong><?= $vaArea['kode_wawancara'] ?></strong> <br />
+                                        <?= $vaArea['tanggal_wawancara'] ?>
+                                    </td>
+                                    <td><?= ($vaArea['nama']) ?> <br />
+                                        <?= ($vaArea['nomor_telepon']) ?> <br />
+                                        <?= ($vaArea['email']) ?>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                            <i class="flaticon-edit"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
+                                            <i class="flaticon-delete"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end::Portlet-->
+        </div>
+    </div>
+</div>
+
+<!-- end:: Content -->
+
+<script src="<?php echo base_url(); ?>assets2/js/pages/crud/datatables/basic/scrollable.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function setinput(id) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var hasil = JSON.parse(this.responseText);
+                var id = hasil.data[0].reg_id;
+                var nama = hasil.data[0].reg_name;
+                var tlp = hasil.data[0].reg_tlp;
+                var email = hasil.data[0].reg_email;
+
+                document.getElementById('cKodeWawancara').value = id;
+                document.getElementById('cNama').value = nama;
+                document.getElementById('cNomorTelepon').value = tlp;
+                document.getElementById('cEmail').value = email;
+            }
+        };
+        xmlhttp.open("GET", "<?= site_url('recruitment/wawancara_id') ?>/" + id, true);
+        xmlhttp.send();
+    }
+
+    function save() {
+        var cKodeWawancara = $('#cKodeWawancara').val();
+        var dTglWawancara = $('#tglW').val();
+        var cNama = $('#cNama').val();
+        var cNomorTelepon = $('#cNomorTelepon').val();
+        var cEmail = $('#cEmail').val();
+        var cStatus = $('#cStatus').val();
+        var cDivisi = $('#cDivisi').val();
+        var cKategori = $('#cKategori').val();
+        var cLevel = $('#cLevel').val();
+        var whois = $('#whois').val();
+        // alert(dTglWawancara);
+        if (cKodeWawancara == "") {
+            new PNotify({
+                text: 'Pilih data pendaftar terlebih dahulu!',
+                animation: 'slide',
+                type: 'warning'
+            });
+        } else if (dTglWawancara == "") {
+            new PNotify({
+                text: 'Tanggal belum diisi!',
+                animation: 'slide',
+                type: 'warning'
+            });
+        } else if (cStatus == "") {
+            new PNotify({
+                text: 'Status belum diisi!',
+                animation: 'slide',
+                type: 'warning'
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                data: "cKodeWawancara=" + cKodeWawancara +
+                    "&dTglWawancara=" + dTglWawancara +
+                    "&whois=" + whois +
+                    "&cNama=" + cNama +
+                    "&cNomorTelepon=" + cNomorTelepon +
+                    "&cStatus=" + cStatus +
+                    "&cDivisi=" + cDivisi +
+                    "&cKategori=" + cKategori +
+                    "&cLevel=" + cLevel +
+                    "&cEmail=" + cEmail,
+                url: "<?= site_url('recruitment_phl_act/administrasi/Insert') ?>",
+                cache: false,
+                success: function(msg) {
+                    new PNotify({
+                        // title: 'Success!',
+                        text: 'Berhasil Simpan Data Administrasi. Input Data Berikutnya',
+                        type: 'success'
+                    });
+                    $('#cNama').val("");
+                    $('#cNomorTelepon').val("");
+                    $('#cEmail').val("");
+                    $('#cStatus').val("")
+                    $('#cLevel').val("")
+                    $('#cDivisi').val("")
+                    $('#cKategori').val("")
+                    $('#cNama').focus()
+                }
+            });
+        }
+    }
+
+    function update(id) {
+        var cKodeWawancara = $('#cKodeWawancara').val();
+        var dTglWawancara = $('#dTglWawancara').val();
+        var cNama = $('#cNama').val();
+        var cNomorTelepon = $('#cNomorTelepon').val();
+        var cEmail = $('#cEmail').val();
+        var cStatus = $('#cStatus').val();
+        var cDivisi = $('#cDivisi').val();
+        var cKategori = $('#cKategori').val();
+        var cLevel = $('#cLevel').val();
+        $.ajax({
+            type: "POST",
+            data: "cKodeWawancara=" + cKodeWawancara +
+                "&dTglWawancara=" + dTglWawancara +
+                "&cNama=" + cNama +
+                "&cNomorTelepon=" + cNomorTelepon +
+                "&cStatus=" + cStatus +
+                "&cDivisi=" + cDivisi +
+                "&cKategori=" + cKategori +
+                "&cLevel=" + cLevel +
+                "&cEmail=" + cEmail,
+            url: "<?= site_url('recruitment_phl_act/administrasi/Update') ?>/" + id,
+            cache: false,
+            success: function(msg) {
+                new PNotify({
+                    title: 'Success!',
+                    text: 'Berhasil Update Data',
+                    type: 'success'
+                });
+                window.location.href = "<?= site_url('recruitment_phl/administrasi') ?>";
+            }
+        });
+    }
+
+    function selesai() {
+        window.location.href = "<?= site_url('recruitment_phl/administrasi') ?>";
+    }
+</script>

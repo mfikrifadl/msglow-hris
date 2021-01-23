@@ -18,6 +18,74 @@
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon-users-1"></i>
             <span class="kt-menu__link-text">
+              Recruitment PHL
+            </span>
+            <i class="kt-menu__ver-arrow la la-angle-right"></i>
+          </a>
+          <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+            <ul class="kt-menu__subnav">
+
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment_phl/administrasi'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Administrasi
+                  </span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment_phl/wawancara_hr'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Wawancara HR
+                  </span>
+                </a>
+              </li>
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment_phl/interview_user_1'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Interview User 1
+                  </span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment_phl/peserta_diterima'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Peserta Diterima
+                  </span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('recruitment_phl/monitoring_status'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Monitoring Status
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+          <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+            <i class="kt-menu__link-icon flaticon-users-1"></i>
+            <span class="kt-menu__link-text">
               Recruitment
             </span>
             <i class="kt-menu__ver-arrow la la-angle-right"></i>
