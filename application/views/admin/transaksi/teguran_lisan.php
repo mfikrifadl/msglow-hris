@@ -4,32 +4,35 @@
 <?php
 if ($action == "edit") {
     foreach ($field as $column) {
-        $cIdSuratPeringatan =   $column['id'];
-        $cIdPegawai =   $column['id_pegawai'];
-        $cIdKategoriSurat   =   $column['id_kategori_surat'];
-        $dTgl               =   $column['tanggal'];
-        $cNikPegawai         =   $column['nik'];
-        $cNama         =   $column['nama'];
-        $cKeterangan        =   $column['keterangan_teguran'];
-        $cIconButton        =   "refresh";
-        $cValueButton       =   "Update Data";
+        $cIdSuratPeringatan     =   $column['id'];
+        $cIdPegawai             =   $column['id_pegawai'];
+        $cIdKategoriSurat       =   $column['id_kategori_surat'];
+        $cJum_teguran_lisan     =   $column['jum_teguran_lisan'];
+        $dTgl                   =   $column['tanggal'];
+        $cNikPegawai            =   $column['nik'];
+        $cNama                  =   $column['nama'];
+        $cKeterangan            =   $column['keterangan_teguran'];
+        $cIconButton            =   "refresh";
+        $cValueButton           =   "Update Data";
     }
     $cAction = "Update/" . $cIdSuratPeringatan . "";
-} elseif ($action == "view") {
-    foreach ($field as $column) {
-        $cIdSuratPeringatan =   $column['id'];
-        $cIdPegawai =   $column['id_pegawai'];
-        $cIdKategoriSurat   =   $column['id_kategori_surat'];
-        $cJum_teguran_lisan   =   $column['jum_teguran_lisan'];
-        $dTgl               =   $column['tanggal'];
-        $cNikPegawai         =   $column['nik'];
-        $cNama         =   $column['nama'];
-        $cKeterangan        =   $column['keterangan_teguran'];
-        $cIconButton        =   "refresh";
-        $cValueButton       =   "Update Data";
-    }
-    $cAction = "Update/" . $cIdSuratPeringatan . "";
-} else {
+}
+// elseif ($action == "view") {
+//     foreach ($field as $column) {
+//         $cIdSuratPeringatan     =   $column['id'];
+//         $cIdPegawai             =   $column['id_pegawai'];
+//         $cIdKategoriSurat       =   $column['id_kategori_surat'];
+//         $cJum_teguran_lisan     =   $column['jum_teguran_lisan'];
+//         $dTgl                   =   $column['tanggal'];
+//         $cNikPegawai            =   $column['nik'];
+//         $cNama                  =   $column['nama'];
+//         $cKeterangan            =   $column['keterangan_teguran'];
+//         $cIconButton            =   "refresh";
+//         $cValueButton           =   "Kembali";
+//     }
+//     $cAction = "Update/" . $cIdSuratPeringatan . "";
+// } 
+else {
     $cIdSuratPeringatan =   "";
     $cIdPegawai =   "";
     $cIdKategoriSurat   =   "";
@@ -39,7 +42,7 @@ if ($action == "edit") {
     $cNama         =   "";
     $cKeterangan        =   "";
     $cIconButton    =   "save";
-    $cValueButton   =   "Update Data";
+    $cValueButton   =   "Insert Data";
     $cAction        =   "Insert";
 }
 
@@ -74,23 +77,23 @@ if ($action == "edit") {
                             <h5 style="color:black">HUMAN RESOURCES DEVELOPMENT</h5>
                             <hr />
                         </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-4 col-form-label">Tertanggal: </label>
-                            <div class="col-8">
-                                <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input" class="col-4 col-form-label">Perihal: </label>
-                            <label for="example-text-input" class="col-5 col-form-label"> Teguran Lisan ke - </label>
-                            <div class="col-3">
-                                <input type="number" name="tl" class="form-control" value="<?= $cJum_teguran_lisan ?>">
-                            </div>
-                        </div>
-
 
                         <?php
                         if ($action == "view") { ?>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-4 col-form-label">Tertanggal: </label>
+                                <div class="col-8">
+                                    <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-4 col-form-label">Perihal: </label>
+                                <label for="example-text-input" class="col-5 col-form-label"> Teguran Lisan ke - </label>
+                                <div class="col-3">
+                                    <input type="number" name="tl" class="form-control" value="<?= $cJum_teguran_lisan ?>">
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Nama :</label>
@@ -117,9 +120,28 @@ if ($action == "edit") {
                                     <textarea class="form-control" name="cKet" placeholder="Keterangan"> <?= $cKeterangan ?> </textarea>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <a href="<?= site_url('transaksi/teguran_lisan') ?>" class="btn btn-primary">
+                                    <i class="fa fa-hand-point-left" aria-hidden="true"></i> Kembali
+                                </a>
+                            </div>
 
                         <?php
-                        } elseif ($action == "edit") { ?>
+                        } else { ?>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-4 col-form-label">Tertanggal: </label>
+                                <div class="col-8">
+                                    <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-4 col-form-label">Perihal: </label>
+                                <label for="example-text-input" class="col-5 col-form-label"> Teguran Lisan ke - </label>
+                                <div class="col-3">
+                                    <input type="number" name="tl" class="form-control" value="<?= $cJum_teguran_lisan ?>">
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Nama :</label>
@@ -160,18 +182,20 @@ if ($action == "edit") {
                                 </div>
                             </div>
 
+                            <input type="hidden" name="idSurat" value="2">
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-flat btn-danger">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                </button>
+                            </div>
+
                         <?php
                         }
                         ?>
 
 
-                        <input type="hidden" name="idSurat" value="2">
 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-flat btn-danger">
-                                <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -220,12 +244,12 @@ if ($action == "edit") {
                                             <i class="fa fa-eye text-success"></i>
                                         </a>
                                         |
-                                        <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/jabatan_pegawai/edit/' . $vaPeringatan['id'] . '') ?>">
+                                        <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/teguran_lisan/edit/' . $vaPeringatan['id'] . '') ?>">
                                             <i class="fa fa-edit text-info"></i>
                                         </a>
                                         |
                                         <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('transaksi_act/jabatan_pegawai/Delete/' . $vaPeringatan['id'] . '') ?>'}">
+                                { window.location.href='<?= site_url('surat_act/teguran_lisan/Delete/' . $vaPeringatan['id'] . '') ?>'}">
                                             <i class="fa fa-trash text-danger"></i>
                                         </a>
                                     </td>

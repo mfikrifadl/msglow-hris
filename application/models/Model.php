@@ -100,6 +100,13 @@ class Model extends CI_Model
 	public function ViewWhereAktor($Table, $WhereField, $WhereValue)
 	{
 		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $WhereField . " = '" . $WhereValue . "' ORDER BY id DESC");
+		
+		return $Query->result_array();
+	}
+
+	public function ViewWhereAnd($Table, $WhereField, $WhereValue,  $WhereField2, $WhereValue2)
+	{
+		$Query = $this->db->query("SELECT * FROM ".$Table." WHERE " .$WhereField. " = '" . $WhereValue . "' AND  ".$WhereField2." = '".$WhereValue2."' ");
 		return $Query->result_array();
 	}
 
