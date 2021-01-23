@@ -197,8 +197,8 @@
                        <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
                      </option>';
                    <?php
-                      $jsArray .= "jason['" . $dbRow['id_pegawai'] . "'] = 
-                          {nik:'" . addslashes(($dbRow['nik'])) . "'};\n";
+                      $jsArray .= "jason['" . $dbRow['id_pegawai'] . "'] ={ nik:'" . addslashes(($dbRow['nik'])) . "',
+                                                                            nama_jabatan:'" . addslashes(($dbRow['nama_jabatan'])) . "'};\n";
                     }
                     ?>
                  </select>
