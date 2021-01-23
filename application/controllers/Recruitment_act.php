@@ -537,4 +537,9 @@ class Recruitment_act extends CI_Controller
 		$this->model->Update('tes_praktik', 'id_wawancara', $id, $dataStatus);
 		redirect(site_url('recruitment/peserta_diterima/I'));
 	}
+	public function send_email($id = "")
+	{
+		$recruitment = $this->db->get_where('recruitment', ['id_recruitment' => $id])->row_array();
+		var_dump($recruitment);
+	}
 }

@@ -126,7 +126,7 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Psiko Test';
 		$data['controller_name']   = 'psiko_test';
 		$data['nilai_test'] = 'nilai_psiko_test';
-		$data['date'] = 'nilai_psiko_test';
+		$data['date'] = 'tgl_psiko_test';
 		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
@@ -142,7 +142,7 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Uji Kompetensi';
 		$data['controller_name']   = 'uji_kompetensi';
 		$data['nilai_test'] = 'nilai_uji_kompetensi';
-		$data['date'] = 'nilai_uji_kompetensi';
+		$data['date'] = 'tgl_uji_kompetensi';
 		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
@@ -158,7 +158,7 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview User 1';
 		$data['nilai_test'] = 'nilai_interview_user_1';
 		$data['controller_name']   = 'interview_user_1';
-		$data['date'] = 'nilai_interview_user_1';
+		$data['date'] = 'tgl_interview_user_1';
 		if ($this->session->userdata('level') == 1) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos'])->result_array();
 		} else {
@@ -178,7 +178,7 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview User 2';
 		$data['controller_name']   = 'interview_user_2';
 		$data['nilai_test']   = 'nilai_interview_user_2';
-		$data['date'] = 'nilai_interview_user_2';
+		$data['date'] = 'tgl_interview_user_2';
 		if ($this->session->userdata('level') == 1) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
 		} else {
@@ -198,7 +198,7 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview HRGA';
 		$data['controller_name']   = 'interview_hrga';
 		$data['nilai_test']   = 'nilai_interview_hrga';
-		$data['date'] = 'nilai_interview_hrga';
+		$data['date'] = 'tgl_interview_hrga';
 		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);

@@ -152,8 +152,11 @@ $whois_date = date('d-m-Y H:i:s');
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group" aria-label="First group">
-                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_recruitment'] . '') ?>">
+                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
+                                                </a>
+                                                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('recruitment_act/send_email/' . $vaArea['id_recruitment'] . '') ?>">
+                                                    <i class="flaticon-mail"></i>
                                                 </a>
                                                 <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
