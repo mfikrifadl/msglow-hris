@@ -31,7 +31,7 @@
                     <span></span>
                   </i>
                   <span class="kt-menu__link-text">
-                    Wawancara
+                    Administrasi
                   </span>
                 </a>
               </li>

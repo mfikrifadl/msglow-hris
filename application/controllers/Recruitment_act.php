@@ -222,6 +222,7 @@ class Recruitment_act extends CI_Controller
 			'update_by'	=> $this->input->post('whois'),
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_psiko_test'	=> $this->input->post('nNilaiTes'),
+			'tgl_psiko_test'	=> $this->input->post('dTglWawancara'),
 			'psiko_test'	=> $this->input->post('cStatus'),
 		);
 
@@ -236,6 +237,7 @@ class Recruitment_act extends CI_Controller
 			'id_wawancara' => $this->input->post('cIdTest'),
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_psiko_test'	=> $this->input->post('nNilaiTes'),
+			'tgl_psiko_test'	=> $this->input->post('dTglWawancara'),
 			'psiko_test'	=> $this->input->post('cStatus'),
 		);
 
@@ -276,6 +278,7 @@ class Recruitment_act extends CI_Controller
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_uji_kompetensi'	=> $this->input->post('nNilaiTes'),
 			'uji_kompetensi'	=> $this->input->post('cStatus'),
+			'tgl_uji_kompetensi'	=> $this->input->post('dTglWawancara'),
 		);
 
 		$data_update_delete = array(
@@ -290,6 +293,7 @@ class Recruitment_act extends CI_Controller
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_uji_kompetensi'	=> $this->input->post('nNilaiTes'),
 			'uji_kompetensi'	=> $this->input->post('cStatus'),
+			'tgl_uji_kompetensi'	=> $this->input->post('dTglWawancara'),
 		);
 
 		$seralizedArray = serialize($data);
@@ -328,6 +332,7 @@ class Recruitment_act extends CI_Controller
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_interview_user_1'	=> $this->input->post('nNilaiTes'),
 			'interview_user_1'	=> $this->input->post('cStatus'),
+			'tgl_interview_user_1'	=> $this->input->post('dTglWawancara'),
 		);
 
 		$data_update_delete = array(
@@ -342,6 +347,7 @@ class Recruitment_act extends CI_Controller
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_interview_user_1'	=> $this->input->post('nNilaiTes'),
 			'interview_user_1'	=> $this->input->post('cStatus'),
+			'tgl_interview_user_1'	=> $this->input->post('dTglWawancara'),
 		);
 
 		$seralizedArray = serialize($data);
@@ -380,6 +386,7 @@ class Recruitment_act extends CI_Controller
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_interview_user_2'	=> $this->input->post('nNilaiTes'),
 			'interview_user_2'	=> $this->input->post('cStatus'),
+			'tgl_interview_user_2'	=> $this->input->post('dTglWawancara'),
 		);
 
 		$data_update_delete = array(
@@ -394,6 +401,7 @@ class Recruitment_act extends CI_Controller
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_interview_user_2'	=> $this->input->post('nNilaiTes'),
 			'interview_user_2'	=> $this->input->post('cStatus'),
+			'tgl_interview_user_2'	=> $this->input->post('dTglWawancara'),
 		);
 
 		$seralizedArray = serialize($data);
@@ -432,6 +440,8 @@ class Recruitment_act extends CI_Controller
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 			'interview_hrga'	=> $this->input->post('cStatus'),
+			'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
+			'status'	=> 'lolos',
 		);
 
 		$data_update_delete = array(
@@ -446,6 +456,8 @@ class Recruitment_act extends CI_Controller
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 			'interview_hrga'	=> $this->input->post('cStatus'),
+			'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
+			'status'	=> 'lolos',
 		);
 
 		$seralizedArray = serialize($data);

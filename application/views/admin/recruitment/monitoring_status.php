@@ -61,15 +61,21 @@
                     <td>
 
                       <?php
-                      if ($vaArea['status'] == 'pending') {
-                        $cLabel = 'info';
-                      } else if ($vaArea['status'] == 'lolos') {
+                      if ($vaArea['status'] == 'lolos') {
                         $cLabel = 'success';
                       } else if ($vaArea['status'] == 'tidaklolos') {
                         $cLabel = 'danger';
-                      }
+                      } else  $cLabel = 'info';
                       ?>
-                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['status']) ?></span>
+                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?php if ($vaArea['status'] == 'lolos') echo 'Lolos';
+                                                                                                      elseif ($vaArea['status'] == 'tidaklolos') echo 'tidak lolos';
+                                                                                                      elseif ($vaArea['interview_hrga'] != null) echo 'Interview HRGA';
+                                                                                                      elseif ($vaArea['interview_user_2'] != null) echo 'Interview User 2';
+                                                                                                      elseif ($vaArea['interview_user_1'] != null) echo 'Interview User 1';
+                                                                                                      elseif ($vaArea['uji_kompetensi'] != null) echo 'Uji Kompetensi';
+                                                                                                      elseif ($vaArea['psiko_test'] != null) echo 'Psiko Test';
+                                                                                                      elseif ($vaArea['recruitment'] != null) echo 'Administrasi';
+                                                                                                      else echo $vaArea['status'] ?></span>
                       <!-- <label class="label label-<?= $cLabel ?>"><?= ($vaArea['status']) ?></label> -->
 
                     </td>
@@ -136,15 +142,23 @@
                       </td>
                       <td>
                         <?php
-                        if ($vaArea2['status'] == 'pemanggilan') {
-                          $cLabel = 'info';
-                        } else if ($vaArea2['status'] == 'lolos') {
+                        if ($vaArea2['status'] == 'lolos') {
                           $cLabel = 'success';
                         } else if ($vaArea2['status'] == 'tidaklolos') {
                           $cLabel = 'danger';
+                        } else {
+                          $cLabel = 'info';
                         }
                         ?>
-                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea2['status']) ?></span>
+                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?php if ($vaArea2['status'] == 'lolos') echo 'Lolos';
+                                                                                                        elseif ($vaArea['status'] == 'tidaklolos') echo 'tidak lolos';
+                                                                                                        elseif ($vaArea2['interview_hrga'] != null) echo 'Interview HRGA';
+                                                                                                        elseif ($vaArea2['interview_user_2'] != null) echo 'Interview User 2';
+                                                                                                        elseif ($vaArea2['interview_user_1'] != null) echo 'Interview User 1';
+                                                                                                        elseif ($vaArea2['uji_kompetensi'] != null) echo 'Uji Kompetensi';
+                                                                                                        elseif ($vaArea2['psiko_test'] != null) echo 'Psiko Test';
+                                                                                                        elseif ($vaArea2['recruitment'] != null) echo 'Administrasi';
+                                                                                                        else echo $vaArea2['status'] ?></span>
                       </td>
                     </tr>
 

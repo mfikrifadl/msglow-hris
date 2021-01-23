@@ -126,6 +126,7 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Psiko Test';
 		$data['controller_name']   = 'psiko_test';
 		$data['nilai_test'] = 'nilai_psiko_test';
+		$data['date'] = 'nilai_psiko_test';
 		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
@@ -141,6 +142,7 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Uji Kompetensi';
 		$data['controller_name']   = 'uji_kompetensi';
 		$data['nilai_test'] = 'nilai_uji_kompetensi';
+		$data['date'] = 'nilai_uji_kompetensi';
 		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
@@ -156,10 +158,11 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview User 1';
 		$data['nilai_test'] = 'nilai_interview_user_1';
 		$data['controller_name']   = 'interview_user_1';
+		$data['date'] = 'nilai_interview_user_1';
 		if ($this->session->userdata('level') == 1) {
-			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos'])->result_array();
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos'])->result_array();
 		} else {
-			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
 		}
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
@@ -175,10 +178,11 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview User 2';
 		$data['controller_name']   = 'interview_user_2';
 		$data['nilai_test']   = 'nilai_interview_user_2';
+		$data['date'] = 'nilai_interview_user_2';
 		if ($this->session->userdata('level') == 1) {
-			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
 		} else {
-			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
+			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'interview_user_1' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
 		}
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
@@ -194,26 +198,13 @@ class Recruitment extends CI_Controller
 		$data['file']   = 'Interview HRGA';
 		$data['controller_name']   = 'interview_hrga';
 		$data['nilai_test']   = 'nilai_interview_hrga';
-		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos'])->result_array();
+		$data['date'] = 'nilai_interview_hrga';
+		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
-		$this->load->view('admin/container/footer');
-	}
-
-	public function tes_praktik($Aksi = "", $Id = "")
-	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'Recruitment';
-		$data['file']   = 'Tes Ketrampilan';
-		$data['row']	= $this->model->View('v_tes_praktik', 'kode_wawancara');
-		if ($Aksi == 'edit') {
-			$data['field'] = $this->model->ViewWhere('tes_praktik', 'id_tes_praktik', $Id);
-		}
-		$this->load->view('admin/container/header', $data);
-		$this->load->view('admin/recruitment/tes_praktik', $data);
 		$this->load->view('admin/container/footer');
 	}
 

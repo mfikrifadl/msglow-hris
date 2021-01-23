@@ -7,6 +7,7 @@ if ($action == "edit") {
         $deleteBy       =   $this->session->userdata('nama');
         $nNilaiTes      =   $column[$nilai_test];
         $cStatus        =   $column[$controller_name];
+        $dTglWawancara  =   $column[$date];
         $cIconButton   =   "refresh";
         $cValueButton  =   "Update Data";
     }
@@ -15,6 +16,7 @@ if ($action == "edit") {
     $cIdTest  =   "";
     $nNilaiTes     =   "";
     $cStatus        =   "";
+    $dTglWawancara = "";
     $cIconButton  = "save";
     $cValueButton = "Save Data";
     $cAction      = "Insert";
@@ -69,6 +71,10 @@ $whois_date = date('d-m-Y H:i:s');
                             <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
                             <input type="hidden" name="whois" value="<?= $whois ?>">
                             <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Test</label>
+                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>">
                         </div>
                         <div class="form-group form-group-last">
                             <label>Status</label>
