@@ -15,6 +15,85 @@
       <!--konten halaman ini bisa isi disini mulai dari <div class="row"> pada setiap widgetnya-->
 
       <div class="kt-portlet">
+
+        <div class="kt-portlet__head btn btn-danger">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title text-light">
+              Kontrak Akan Habis
+            </h3>
+          </div>
+        </div>
+
+        <div class="kt-portlet__body">
+          <table class="table table-striped table-bordered" id="DataTable">
+            <thead>
+              <tr>
+                <td>No</td>
+                <td>NIK</td>
+                <td>Nama</td>
+                <td>Tgl Masuk Kerja</td>
+                <td>Telp</td>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $no = 0;
+              foreach ($kontrak as $key => $vaArea) { ?>
+                <tr>
+                  <td><?= ++$no; ?></td>
+                  <td><?= $vaArea['nik'] ?></td>
+                  <td><?= $vaArea['nama'] ?></td>
+                  <td><?= $vaArea['tanggal_masuk_kerja'] ?></td>
+                  <?php $age = date_diff(date_create($vaArea['tanggal_masuk_kerja']), date_create('now'))->y; ?>
+                  <td><?= $vaArea['handphone'] ?></td>
+                </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="kt-portlet">
+
+        <div class="kt-portlet__head btn btn-danger">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title text-light">
+              Pegawai Ulang Tahun Hari Ini
+            </h3>
+          </div>
+        </div>
+
+        <div class="kt-portlet__body">
+          <table class="table table-striped table-bordered" id="DataTable">
+            <thead>
+              <tr>
+                <td>No</td>
+                <td>NIK</td>
+                <td>Nama</td>
+                <td>Tgl Lahir</td>
+                <td>Umur</td>
+                <td>Telp</td>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $no = 0;
+              foreach ($ultah as $key => $vaArea) {
+                $age = date_diff(date_create($vaArea['tanggal_lahir']), date_create('now'))->y; ?>
+                <tr>
+                  <td><?= ++$no; ?></td>
+                  <td><?= $vaArea['nik'] ?></td>
+                  <td><?= $vaArea['nama'] ?></td>
+                  <td><?= $vaArea['tanggal_lahir'] ?></td>
+                  <td><?= $age ?></td>
+                  <td><?= $vaArea['handphone'] ?></td>
+                </tr>
+              <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div class="kt-portlet">
         <div class="kt-portlet__body  kt-portlet__body--fit">
           <div class="row row-no-padding row-col-separator-lg">
             <div class="col-md-12 col-lg-6 col-xl-3">
@@ -90,84 +169,6 @@
               <!--end::New Users-->
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="kt-portlet">
-
-        <div class="kt-portlet__head btn btn-danger">
-          <div class="kt-portlet__head-label">
-            <h3 class="kt-portlet__head-title text-light">
-              Kontrak Akan Habis
-            </h3>
-          </div>
-        </div>
-
-        <div class="kt-portlet__body">
-          <table class="table table-striped table-bordered" id="DataTable">
-            <thead>
-              <tr>
-                <td>No</td>
-                <td>NIK</td>
-                <td>Nama</td>
-                <td>Tgl Masuk Kerja</td>
-                <td>Telp</td>
-              </tr>
-            </thead>
-            <tbody>
-            <?php $no = 0;
-              foreach ($kontrak as $key => $vaArea) { ?>
-                <tr>
-                  <td><?= ++$no; ?></td>
-                  <td><?= $vaArea['nik'] ?></td>
-                  <td><?= $vaArea['nama'] ?></td>
-                  <td><?= $vaArea['tanggal_masuk_kerja'] ?></td>
-                  <?php $age = date_diff(date_create($vaArea['tanggal_masuk_kerja']), date_create('now'))->y; ?>
-                  <td><?= $vaArea['handphone'] ?></td>
-                </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="kt-portlet">
-
-        <div class="kt-portlet__head btn btn-danger">
-          <div class="kt-portlet__head-label">
-            <h3 class="kt-portlet__head-title text-light">
-              Pegawai Ulang Tahun Hari Ini
-            </h3>
-          </div>
-        </div>
-
-        <div class="kt-portlet__body">
-          <table class="table table-striped table-bordered" id="DataTable">
-            <thead>
-              <tr>
-                <td>No</td>
-                <td>NIK</td>
-                <td>Nama</td>
-                <td>Tgl Lahir</td>
-                <td>Umur</td>
-                <td>Telp</td>
-              </tr>
-            </thead>
-            <tbody>
-            <?php $no = 0;
-              foreach ($ultah as $key => $vaArea) { ?>
-                <tr>
-                  <td><?= ++$no; ?></td>
-                  <td><?= $vaArea['nik'] ?></td>
-                  <td><?= $vaArea['nama'] ?></td>
-                  <td><?= $vaArea['tanggal_lahir'] ?></td>
-                  <?php $age = date_diff(date_create($vaArea['tanggal_lahir']), date_create('now'))->y; ?>
-                  <td><?= $age ?></td>
-                  <td><?= $vaArea['handphone'] ?></td>
-                </tr>
-              <?php } ?>
-            </tbody>
-          </table>
         </div>
       </div>
 
