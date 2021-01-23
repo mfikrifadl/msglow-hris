@@ -215,7 +215,9 @@ class Transaksi extends CI_Controller
 		$dataHeader['menu'] = 'Manajemen Pegawai';
 		$dataHeader['file'] = 'JABATAN PEGAWAI';
 		$dataHeader['action'] = $Aksi;
-		$data['pegawai']	= $this->model->ViewASC('tb_pegawai', 'nama');
+		$query 				= $this->db->query('select t1.nama, t1.nik, t3.nama_jabatan from tb_pegawai t1 JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan');
+		$data['pegawai']	= $query->result_array();
+		// $data['pegawai']	= $this->model->ViewASC('tb_pegawai', 'nama');
 		$data['sub_unit']	= $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
 		$data['jabatan']	= $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
 		$data['row']		= $this->relasi->GetDataJabatanPegawai();
@@ -407,14 +409,17 @@ class Transaksi extends CI_Controller
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Teguran Lisan';
-		$data['row']	= $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2');
+		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2', 'is_delete', '0');
 		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
 		
 		if ($Aksi == 'view') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
 		}
-		if ($Aksi == 'edit') {
+		elseif ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+		}
+		else {
+			
 		}
 		
 		$this->load->view('admin/container/header', $data);

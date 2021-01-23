@@ -20,10 +20,50 @@ class Surat_act extends CI_Controller
         $this->load->helper('download');
     }
 
-    public function teguran_lisan($Type = "", $Id = "")
-    {
+    public  function Date2String($dTgl)
+	{
+		//return 2012-11-22
+		list($cDate, $cMount, $cYear)	= explode("-", $dTgl);
+		if (strlen($cDate) == 2) {
+			$dTgl	= $cYear . "-" . $cMount . "-" . $cDate;
+		}
+		return $dTgl;
+	}
 
-        if ($Type == 'Insert' or $Type == 'Update') {
+	public  function String2Date($dTgl)
+	{
+		//return 22-11-2012  
+		list($cYear, $cMount, $cDate)	= explode("-", $dTgl);
+		if (strlen($cYear) == 4) {
+			$dTgl	= $cDate . "-" . $cMount . "-" . $cYear;
+		}
+		return $dTgl;
+	}
+
+	public function TimeStamp()
+	{
+		date_default_timezone_set("Asia/Jakarta");
+		$Data = date("H:i:s");
+		return $Data;
+	}
+
+	public function DateStamp()
+	{
+		date_default_timezone_set("Asia/Jakarta");
+		$Data = date("d-m-Y");
+		return $Data;
+	}
+
+	public function DateTimeStamp()
+	{
+		date_default_timezone_set("Asia/Jakarta");
+		$Data = date("d-m-Y h:i:s");
+		return $Data;
+	}
+
+    public function teguran_lisan($Type = "", $Id = "")
+    {        
+        if ($Type == 'Insert') {
 
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
@@ -31,15 +71,65 @@ class Surat_act extends CI_Controller
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'keterangan'        =>  $this->input->post('cKet'),
-                // 'uraian'            =>  $this->input->post('cUraian'),
-                // 'create'            =>  $this->input->post('cCreate'),
-                // 'general_manager'   =>  $this->input->post('cGeneral_manager'),
-                // 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
-                // 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
+
             );
-            // print_r($dataInsert);
+            
+            $seralizedArrayInsert = serialize($dataInsert);
+            $vaLog = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayInsert,
+                'nama' => $this->session->userdata('nama')
+            );
+
+            $this->model->Insert("log", $vaLog);
             $this->model->Insert('tb_surat_peringatan', $dataInsert);
-            redirect(site_url('transaksi/teguran_lisan'));
+            redirect(site_url('transaksi/teguran_lisan/I'));
+        } elseif ($Type == 'Update') {
+
+            $dataUpdate = array(
+                'tanggal'           =>  $this->input->post('dTgl'),
+                'jum_teguran_lisan' =>  $this->input->post('tl'),
+                'id_kategori_surat' =>  $this->input->post('idSurat'),
+                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+                'keterangan'        =>  $this->input->post('cKet'),
+
+            );
+
+            $seralizedArrayUpdate = serialize($dataUpdate);
+            $vaLog2 = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayUpdate,
+                'nama' => $this->session->userdata('nama')
+            );
+            $this->model->Insert("log", $vaLog2);
+            $this->model->update('tb_surat_peringatan', 'id', $Id, $dataUpdate);
+            redirect(site_url('transaksi/teguran_lisan/U'));
+        } elseif ($Type == 'Delete') {
+
+            $dataDelete = array(			
+                'is_delete'		=> 1
+            );
+
+            $seralizedArrayDelete = serialize($dataDelete);
+            $vaLog2 = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayDelete,
+                'nama' => $this->session->userdata('nama')
+            );
+
+            $this->model->Insert("log", $vaLog2);
+			$this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
+            redirect(site_url('transaksi/teguran_lisan/D'));
+            
         }
     }
 
