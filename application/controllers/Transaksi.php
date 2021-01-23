@@ -409,14 +409,17 @@ class Transaksi extends CI_Controller
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Teguran Lisan';
-		$data['row']	= $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2');
+		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2', 'is_delete', '0');
 		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
 		
 		if ($Aksi == 'view') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
 		}
-		if ($Aksi == 'edit') {
+		elseif ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+		}
+		else {
+			
 		}
 		
 		$this->load->view('admin/container/header', $data);
