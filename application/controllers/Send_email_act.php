@@ -60,8 +60,8 @@ class Send_email_act extends CI_Controller {
                 'charset'   => 'utf-8',
                 'protocol'  => 'smtp',
                 'smtp_host' => 'ssl://smtp.gmail.com',
-                'smtp_user' => 'vickyagassi996@gmail.com',    // Ganti dengan email gmail anda
-                'smtp_pass' => 'nikenvicky1928',      // Ganti dengan Password gmail anda
+                'smtp_user' => 'emailtester965@gmail.com',    // Ganti dengan email gmail anda
+                'smtp_pass' => 'qwerty@123',      // Ganti dengan Password gmail anda
                 'smtp_port' => 465,
                 'crlf'      => "\r\n",
                 'newline'   => "\r\n"
@@ -149,7 +149,7 @@ class Send_email_act extends CI_Controller {
             $this->load->library('email', $config);
 
             // Email dan nama pengirim
-            $this->email->from('vickyagassi996@gmail.com', 'vickyagassi996@gmail.com');
+            $this->email->from('emailtester965@gmail.com', 'emailtester965@gmail.com');
 
             // Email penerima
             $this->email->to("$email_R"); // Ganti dengan email tujuan anda
