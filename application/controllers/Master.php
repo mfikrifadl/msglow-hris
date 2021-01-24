@@ -83,11 +83,13 @@ class Master extends CI_Controller
 				$Level 		= $Row['level'];
 				$User		= $Row['user'];
 				$Id			= $Row['id'];
+				$is_interview = $Row['is_interview'];
 			}
 			$this->load->library('session');
 			$this->session->set_userdata('nama', $Nama);
 			$this->session->set_userdata('user', $User);
 			$this->session->set_userdata('level', $Level);
+			$this->session->set_userdata('is_interview', $is_interview);
 			$this->session->set_userdata('id', $Id);
 			$data = array(
 				'LastLogin' => $this->DateTimeStamp(),
@@ -118,7 +120,7 @@ class Master extends CI_Controller
 		$query 			= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tanggal_lahir) = MONTH(NOW()) AND DAY(tanggal_lahir) = DAY(NOW())');
 		$query2 		= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tgl_kontrak_berakhir) = MONTH(NOW()) AND DAY(tgl_kontrak_berakhir) = DAY(NOW())');
 		$data['ultah']	= $query->result_array();
-		$data['kontrak']= $query2->result_array();
+		$data['kontrak'] = $query2->result_array();
 
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/master/dashboard', $data);

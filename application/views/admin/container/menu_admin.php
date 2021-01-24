@@ -13,10 +13,15 @@
             <span class="kt-menu__link-text">Dashboard </span>
           </a>
         </li>
-
+        <li class="kt-menu__item" aria-haspopup="true">
+          <a href="<?= site_url('hak_akses_interview'); ?>" class="kt-menu__link ">
+            <i class="kt-menu__link-icon flaticon2-document"></i>
+            <span class="kt-menu__link-text">Pengajuan Hak Interview </span>
+          </a>
+        </li>
         <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
-            <i class="kt-menu__link-icon flaticon-users-1"></i>
+            <i class="kt-menu__link-icon flaticon-user-settings"></i>
             <span class="kt-menu__link-text">
               Recruitment PHL
             </span>

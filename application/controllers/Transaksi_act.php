@@ -192,10 +192,10 @@ class Transaksi_act extends CI_Controller
 		}
 		$this->load->view('admin/login', $data);
 	}
-	
+
 	public function LoginAdmin()
 	{
-		$cPassword = md5($this->input->post('password'));		
+		$cPassword = md5($this->input->post('password'));
 		$doubleHash = sha1($cPassword);
 		// $pass = $this->input->post('password');
 		// echo "$pass <br />";
@@ -210,12 +210,14 @@ class Transaksi_act extends CI_Controller
 				$Level 		= $Row['status'];
 				$User		= $Row['username'];
 				$Id			= $Row['id'];
+				$is_interview			= $Row['is_interview'];
 			}
 			// $this->load->library('session');
 			$this->session->set_userdata('nama', $Nama);
 			$this->session->set_userdata('user', $User);
 			$this->session->set_userdata('level', $Level);
 			$this->session->set_userdata('id', $Id);
+			$this->session->set_userdata('is_interview', $is_interview);
 			// echo $Nama.' '.$User.' '. $Level.' '.$Id;
 			redirect(site_url('master/index'));
 		} else {
