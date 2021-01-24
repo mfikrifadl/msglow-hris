@@ -231,6 +231,21 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
+	public function kontrak($Aksi = "", $Id = ""){
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Manajemen Pegawai';
+		$data['file']   = 'Form Kontrak Pegawai';
+		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['row']	= $this->model->View('kontrak', 'id');
+		$data['Nolast']	= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/transaksi/kontrak', $data);
+		$this->load->view('admin/container/footer');
+	}
+
 	public function ketidakhadiran_pegawai($Aksi = "", $Id = "")
 	{
 		$dataHeader['menu'] = 'Manajemen Pegawai';

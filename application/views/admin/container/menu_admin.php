@@ -203,6 +203,15 @@
               </li>
 
               <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('transaksi/kontrak'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">Form Kontrak Pegawai</span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('transaksi/jabatan_pegawai'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>

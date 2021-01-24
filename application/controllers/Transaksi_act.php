@@ -414,6 +414,23 @@ class Transaksi_act extends CI_Controller
 		}
 	}
 
+	public function kontrak($Type = "", $Id = "")
+    {
+
+        if ($Type == 'Insert' or $Type == 'Update') {
+
+            $dataInsert = array(
+                'tanggal'       	=>  date("Y-m-d"),
+                'no'       			=>  $this->input->post('nNomorSurat'),
+                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+                'cCreate'           =>  $this->input->post('cCreate'),
+            );
+            // print_r($dataInsert);
+            $this->model->Insert('kontak', $dataInsert);
+            redirect(site_url('transaksi/kontrak'));
+        }
+    }
+
 	public function jabatan_pegawai($Type = "", $id = "")
 	{
 		$data = array(
