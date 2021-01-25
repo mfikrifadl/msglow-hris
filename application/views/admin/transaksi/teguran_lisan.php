@@ -10,6 +10,7 @@ if ($action == "edit") {
         $cJum_teguran_lisan     =   $column['jum_teguran_lisan'];
         $dTgl                   =   $column['tanggal'];
         $cNikPegawai            =   $column['nik'];
+        $cNamaJabatan           =   $column['nama_jabatan'];
         $cNama                  =   $column['nama'];
         $cKeterangan            =   $column['keterangan_teguran'];
         $cIconButton            =   "refresh";
@@ -39,6 +40,7 @@ else {
     $cJum_teguran_lisan =   "";
     $dTgl               =   "";
     $cNikPegawai         =   "";
+    $cNamaJabatan           =   "";
     $cNama         =   "";
     $cKeterangan        =   "";
     $cIconButton    =   "save";
@@ -172,7 +174,7 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Jabatan :</label>
                                 <div class="col-8">
-                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="">
+                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
