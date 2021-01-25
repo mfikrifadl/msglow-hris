@@ -72,20 +72,25 @@ if ($action == "edit") {
     $cIconButton    =   "refresh";
     $cValueButton   =   "Update Data";
   }
-
-
-
   $cAction = "Update/" . $cIdPegawai . "";
 } else {
+  foreach ($lastno->result_array() as $key => $vaDataLast) {
+    (int)$last = $vaDataLast['nik'];
+  }
+  $last2 = $last+1;
+  $tahun = date('y');
+  $bulan = date('m');
+  $no_urut = '99' . $tahun . $bulan . $last2;
+
   $cIdPegawai     =   "";
   $cIdKerja       =   "";
   $cIdArea        =   "";
   $cIdStatus      =   "";
   $cIdTimLapangan =   "";
-  $cNik           =   "";
+  $cNik           =   $no_urut;
   $cNama          =   "";
   $cAgama         =   "";
-  $cPin          =    "";
+  $cPin           =   "";
   $cAlamat        =   "";
   $cAlamatAsal    =   "";
   $cJk            =   "";
@@ -958,7 +963,7 @@ if ($action == "edit") {
 
 <script type="text/javascript">
   function validateForm() {
-    
+
   }
 
   function ageCalculator() {
