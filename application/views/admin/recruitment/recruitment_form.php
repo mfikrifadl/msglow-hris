@@ -112,11 +112,13 @@ $whois_date = date('d-m-Y H:i:s');
                                 <td>Calon Pegawai</td>
                                 <td>Nilai Tes</td>
                                 <td>Status</td>
+                                <td>Status Email</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $no = 0;
+                            $cEmail = "";
                             foreach ($row as $key => $vaArea) {
                                 if ($vaArea['is_delete'] == 1) {
                                 } else {
@@ -133,6 +135,7 @@ $whois_date = date('d-m-Y H:i:s');
                                                 No : Telepon <?= $vaArea['nomor_telepon'] ?> <br />
                                                 Email : <?= $vaArea['email'] ?> <br />
                                             </strong>
+                                            
                                         </td>
                                         <td><?= ($vaArea[$nilai_test]) ?> <br />
                                         </td>
@@ -150,12 +153,47 @@ $whois_date = date('d-m-Y H:i:s');
                                             ?>
                                             <span class="btn btn-sm btn-<?= $cLabel ?>"><?= ($vaArea[$controller_name]) ?></span>
                                         </td>
+                                        <td>
+                                            <?php
+                                            if ($controller_name == "psiko_test") {
+                                                if($vaArea['status_email_p'] == NULL){
+                                                    echo "Belum Kirim Email";
+                                                }else{
+                                                    echo "$vaArea[status_email_p]";
+                                                }
+                                            } elseif($controller_name == "uji_kompetensi") {
+                                                if($vaArea['status_email_uk'] == NULL){
+                                                    echo "Belum Kirim Email";
+                                                }else{
+                                                    echo "$vaArea[status_email_uk]";
+                                                }
+                                            } elseif($controller_name == "interview_user_1") {
+                                                if($vaArea['status_email_u1'] == NULL){
+                                                    echo "Belum Kirim Email";
+                                                }else{
+                                                    echo "$vaArea[status_email_u1]";
+                                                }
+                                            } elseif($controller_name == "interview_user_2") {
+                                                if($vaArea['status_email_u2'] == NULL){
+                                                    echo "Belum Kirim Email";
+                                                }else{
+                                                    echo "$vaArea[status_email_u2]";
+                                                }
+                                            } elseif($controller_name == "interview_hrga") {
+                                                if($vaArea['status_email_hrga'] == NULL){
+                                                    echo "Belum Kirim Email";
+                                                }else{
+                                                    echo "$vaArea[status_email_hrga]";
+                                                }
+                                            }
+                                            ?>
+                                        </td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group" aria-label="First group">
                                                 <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
                                                 </a>
-                                                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('recruitment_act/send_email/' . $vaArea['id_recruitment'] . '') ?>">
+                                                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-mail"></i>
                                                 </a>
                                                 <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))

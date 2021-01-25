@@ -213,7 +213,7 @@
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">Jabatan :</label>
                <div class="col-3">
-               <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
+                 <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
                </div>
              </div>
              <div class="col-12" align="left">
@@ -225,7 +225,8 @@
                <div class="col-12">
                  <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"><?= $cUraian ?></textarea>
                </div>
-               <!-- <textarea class="form-control" name="cUraian" placeholder="Uraian" rows="10"><?php // $cUraian ?></textarea> -->
+               <!-- <textarea class="form-control" name="cUraian" placeholder="Uraian" rows="10"><?php // $cUraian 
+                                                                                                  ?></textarea> -->
              </div>
              <div class="col-12" align="left">
                <p>
@@ -234,10 +235,10 @@
              </div>
              <div class="col-12" align="left">
                <p>
-               Selama masih dalam status Peringatan I, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.
-                Harapan kami agar yang bersangkutan untuk lebih mentaati peraturan dan lebih disiplin serta tanggung jawab sebagai karyawan yang baik. Semoga dengan diterbitkan surat ini ybs bisa menerima hal ini.
-                Demikian Surat Peringatan I ini dibuat agar dapat ditaati sebagaimana mestinya. Diharapkan yang bersangkutan berkenan merubah sikap dan mampu menunjukkan sikap profesinoalisme dalam bekerja.
-              
+                 Selama masih dalam status Peringatan I, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.
+                 Harapan kami agar yang bersangkutan untuk lebih mentaati peraturan dan lebih disiplin serta tanggung jawab sebagai karyawan yang baik. Semoga dengan diterbitkan surat ini ybs bisa menerima hal ini.
+                 Demikian Surat Peringatan I ini dibuat agar dapat ditaati sebagaimana mestinya. Diharapkan yang bersangkutan berkenan merubah sikap dan mampu menunjukkan sikap profesinoalisme dalam bekerja.
+
                </p>
              </div>
              <div class="col-12" align="left">
