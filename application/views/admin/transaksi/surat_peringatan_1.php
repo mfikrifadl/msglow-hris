@@ -118,6 +118,7 @@
                    <td><?= ($vaPeringatan['nomor_surat']) ?></td>
                    <td><?= ($vaPeringatan['nama']) ?></td>
                    <td><?= ($vaPeringatan['Keterangan']) ?></td>
+                   <td></td>
                    <!-- <td align="center">
                      <a class="btn-link" title="View Data" target="_blank" href="<?php //site_url('laporan/lp_sp/' . $vaPeringatan['id'] . '/1') 
                                                                                   ?>">
