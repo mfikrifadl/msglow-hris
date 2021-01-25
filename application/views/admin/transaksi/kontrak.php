@@ -111,26 +111,22 @@ if ($action == "edit") {
                             </div>
                             <div class="form-group">
                                 <label>Nama :</label>
-                                <select class="comboBox form-control" onchange="changeValue(this.value)" name="cIdPegawai">
+                                <select class="comboBox form-control" onchange="cek_pegawai(this.value)" name="cIdPegawai">
                                     <option></option>
                                     <?php
                                     $jsArray = "var jason = new Array();\n";
                                     foreach ($pegawai as $dbRow) {
                                     ?>
-                                        <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
+                                        <option value="<?= $dbRow['id_pegawai'] ?>">
                                             <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
                                         </option>';
-                                    <?php
-                                        $jsArray .= "jason['" . $dbRow['id_pegawai'] . "'] ={ nik:'" . $dbRow['nik'] . "',
-                                                                            nama_jabatan:'" . addslashes(($dbRow['nama_jabatan'])) . "'};\n";
-                                    }
-                                    ?>
+                                    <?php } ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>NIK</label>
                                 <div class="input-group">
-                                    <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
+                                    <input type="text" name="cNik" id="cNik" class="form-control">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -139,7 +135,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Tempat Tanggal Lahir</label>
                                 <div class="input-group">
-                                    <input type="date" name="ttl" class="form-control" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="ttl" id="ttl" class="form-control" data-date-format="dd/mm/yyyy">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -148,7 +144,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Nomor KTP</label>
                                 <div class="input-group">
-                                    <input type="text" name="ktp" class="form-control" placeholder="Nomor KTP" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="ktp" id="ktp" class="form-control" placeholder="Nomor KTP" data-date-format="dd/mm/yyyy">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -157,7 +153,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Alamat Sesuai KTP</label>
                                 <div class="input-group">
-                                    <textarea type="text" name="alamatktp" class="form-control" placeholder="Alamat Sesuai KTP" data-date-format="dd/mm/yyyy"></textarea>
+                                    <textarea type="text" name="alamatktp" id="alamatktp" class="form-control" placeholder="Alamat Sesuai KTP" data-date-format="dd/mm/yyyy"></textarea>
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -166,7 +162,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Jabatan</label>
                                 <div class="input-group">
-                                    <input type="text" name="cJabatan" class="form-control" placeholder="jabatan" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" placeholder="jabatan" data-date-format="dd/mm/yyyy">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -184,7 +180,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Tanggal Masuk Kerja</label>
                                 <div class="input-group">
-                                    <input type="date" name="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy">
+                                    <input type="date" name="dTglMasukKerja" id="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -193,7 +189,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Tanggal Kontrak Berakhir</label>
                                 <div class="input-group">
-                                    <input type="date" name="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy">
+                                    <input type="date" name="dTglKontrakBerakhir" id="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -248,10 +244,25 @@ if ($action == "edit") {
     </div>
 </div>
 <script type="text/javascript">
-    <?php echo $jsArray; ?>
-
-    function changeValue(id) {
-        document.getElementById('cNik').value = jason[id].nik;
-        // document.getElementById('cJabatan').value = jason[id].nama_jabatan;
-    };
+    function cek_pegawai(data) {
+        // alert(data);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                hasil = (this.responseText).split('~');
+                
+                // alert (hasil);
+                document.getElementById('cNik').value = hasil[0];
+                document.getElementById('cJabatan').value = hasil[1];
+                document.getElementById('ttl').value = hasil[2]+', '+hasil[3];
+                document.getElementById('ktp').value = hasil[4];
+                document.getElementById('alamatktp').value = hasil[5];
+                document.getElementById('cJabatan').value = hasil[6];
+                document.getElementById('dTglMasukKerja').value = hasil[7];
+                document.getElementById('dTglKontrakBerakhir').value = hasil[8];
+            }
+        };
+        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
+        xmlhttp.send();
+    }
 </script>
