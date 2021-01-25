@@ -307,6 +307,15 @@
               </li>
 
               <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('transaksi/surat_teguran'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">Surat Teguran</span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('transaksi/sp1'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>

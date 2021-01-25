@@ -442,6 +442,28 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
+	public function surat_teguran($Aksi = "", $Id = ""){
+		
+		$data['action'] = $Aksi;
+		$data['menu']   = 'HRD';
+		$data['file']   = 'Surat Teguran';
+		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2', 'is_delete', '0');
+		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
+		if ($Aksi == 'view') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+		}
+		elseif ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+		}
+		else {
+			
+		}		
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/transaksi/surat_teguran', $data);
+		$this->load->view('admin/container/footer');
+	}
+
 	public function sp1($Aksi = "", $Id = ""){
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
