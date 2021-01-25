@@ -441,7 +441,7 @@ class Recruitment_act extends CI_Controller
 			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 			'interview_hrga'	=> $this->input->post('cStatus'),
 			'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
-			'status'	=> 'lolos',
+			'status'	=> 'validasi',
 		);
 
 		$data_update_delete = array(
@@ -457,7 +457,7 @@ class Recruitment_act extends CI_Controller
 			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 			'interview_hrga'	=> $this->input->post('cStatus'),
 			'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
-			'status'	=> 'lolos',
+			'status'	=> 'validasi',
 		);
 
 		$seralizedArray = serialize($data);
@@ -541,5 +541,22 @@ class Recruitment_act extends CI_Controller
 	{
 		$recruitment = $this->db->get_where('recruitment', ['id_recruitment' => $id])->row_array();
 		var_dump($recruitment);
+	}
+
+	public function aksi($Aksi = '', $Id = '')
+	{
+		$data_lolos = array(
+			'status' => 'lolos'
+		);
+		$data_tidak_lolos = array(
+			'status' => 'tidaklolos',
+			'alasan_tidak_lolos' => $this->input->post('alasanTidakLolos')
+		);
+		if ($Aksi == 'lolos') {
+			$this->model->Update('recruitment', 'id_recruitment', $Id, $data_lolos);
+		} elseif ($Aksi == 'tidaklolos') {
+			$this->model->Update('recruitment', 'id_recruitment', $Id, $data_tidak_lolos);
+		}
+		redirect(site_url('recruitment/peserta_diterima'));
 	}
 }

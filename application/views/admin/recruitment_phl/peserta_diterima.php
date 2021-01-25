@@ -97,11 +97,35 @@
                                                 </a>
                                             <?php
                                             } else {
-                                            }
                                             ?>
-                                            <!-- <a href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment_phl'] . '') ?>">
-                      <button class="btn btn-success btn-sm"> <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai </button>
-                    </a> -->
+                                                <a href="<?= site_url('recruitment_phl_act/aksi/lolos/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                                    <button class="btn btn-success btn-sm"> <i class="fa fa-sign-in-alt"></i>Lolos </button>
+                                                </a>
+                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment_phl'] ?>"> <i class="fa fa-sign-in-alt"></i>Tidak Lolos </button>
+                                                <!-- Modal edit category -->
+                                                <div id="id-<?= $vaArea['id_recruitment_phl'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alasanTidakLolos" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="alasanTidakLolos">Edit Kategori</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi-close"></i></button>
+                                                            </div>
+                                                            <form action="<?= site_url('recruitment_phl_act/aksi/tidaklolos/' . $vaArea['id_recruitment_phl'] . '') ?>" method="POST" class="d-inline-block" enctype="multipart/form-data">
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label for="alasanTidakLolos" class="control-label col-form-label">Alasan Tidak diterima</label>
+                                                                        <input type="text" class="form-control" name="alasanTidakLolos" id="alasanTidakLolos" value="" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="submit" class="btn btn-primary waves-effect">Simpan</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End modal add category -->
+                                            <?php } ?>
                                         </td>
                                     </tr>
 

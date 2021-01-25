@@ -200,7 +200,7 @@ class Recruitment_phl_act extends CI_Controller
             'nilai_interview_user_1'    => $this->input->post('nNilaiTes'),
             'tgl_interview_user_1'    => $this->input->post('dTglWawancara'),
             'interview_user_1'    => $this->input->post('cStatus'),
-            'status'    => 'lolos',
+            'status'    => 'validasi',
         );
 
         $data_update_delete = array(
@@ -216,7 +216,7 @@ class Recruitment_phl_act extends CI_Controller
             'nilai_interview_user_1'    => $this->input->post('nNilaiTes'),
             'tgl_interview_user_1'    => $this->input->post('dTglWawancara'),
             'interview_user_1'    => $this->input->post('cStatus'),
-            'status'    => 'lolos',
+            'status'    => 'validasi',
         );
 
         $seralizedArray = serialize($data);
@@ -237,5 +237,22 @@ class Recruitment_phl_act extends CI_Controller
             $this->model->Update('recruitment_phl', 'id_recruitment_phl', $this->input->post('cIdTest'), $data_update);
             redirect(site_url('recruitment_phl/interview_user_1'));
         }
+    }
+
+    public function aksi($Aksi = '', $Id = '')
+    {
+        $data_lolos = array(
+            'status' => 'lolos'
+        );
+        $data_tidak_lolos = array(
+            'status' => 'tidaklolos',
+            'alasan_tidak_lolos' => $this->input->post('alasanTidakLolos')
+        );
+        if ($Aksi == 'lolos') {
+            $this->model->Update('recruitment_phl', 'id_recruitment_phl', $Id, $data_lolos);
+        } elseif ($Aksi == 'tidaklolos') {
+            $this->model->Update('recruitment_phl', 'id_recruitment_phl', $Id, $data_tidak_lolos);
+        }
+        redirect(site_url('recruitment_phl/peserta_diterima'));
     }
 }

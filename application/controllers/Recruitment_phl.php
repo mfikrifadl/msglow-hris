@@ -84,7 +84,7 @@ class Recruitment_phl extends CI_Controller
         $data['action'] = $Aksi;
         $data['menu']   = 'Recruitment PHL';
         $data['file']   = 'Peserta Diterima';
-        $data['row'] = $this->db->query("SELECT *, sum(nilai_wawancara_hr + nilai_interview_user_1 ) AS total_nilai FROM recruitment_phl WHERE `status` = 'lolos' OR `status` = 'Menjadi Pegawai' GROUP BY `id_recruitment_phl` ORDER BY kode_wawancara DESC ")->result_array();
+        $data['row'] = $this->db->query("SELECT *, sum(nilai_wawancara_hr + nilai_interview_user_1 ) AS total_nilai FROM recruitment_phl WHERE `status` = 'lolos' OR `status` = 'Menjadi Pegawai'  OR `status` = 'validasi' GROUP BY `id_recruitment_phl` ORDER BY kode_wawancara DESC ")->result_array();
 
         $this->load->view('admin/container/header', $data);
         $this->load->view('admin/recruitment_phl/peserta_diterima', $data);
