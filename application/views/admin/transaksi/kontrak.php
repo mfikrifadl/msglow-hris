@@ -85,170 +85,184 @@ if ($action == "edit") {
         </div>
 
         <!--konten halaman ini bisa isi disini mulai dari <div class="row"> pada setiap widgetnya-->
-        <div class="row">
         <form method="post" enctype="multipart/form-data" action="<?= site_url('transaksi_act/kontrak/' . $cAction . '') ?>">
-            <div class="col-6">
-                <div class="kt-portlet">
-                    <div class="kt-portlet__head btn btn-success">
-                        <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title text-light">
-                                Form Kontrak Pegawai
-                            </h3>
-                        </div>
-                    </div>
-
-                    <div class="kt-portlet__body">
-                        Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
-                        <div class="form-group">
-                            <label>Nomor Surat</label>
-                            <div class="input-group">
-                                <input type="text" name="nNomorSurat" class="form-control" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
-                                </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head btn btn-success">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title text-light">
+                                    Form Kontrak Pegawai
+                                </h3>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Nama :</label>
-                            <select class="comboBox form-control" onchange="changeValue(this.value)" name="cIdPegawai">
-                                <option></option>
-                                <?php
-                                $jsArray = "var jason = new Array();\n";
-                                foreach ($pegawai as $dbRow) {
-                                ?>
-                                    <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
-                                        <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
-                                    </option>';
-                                <?php
-                                    $jsArray .= "jason['" . $dbRow['id_pegawai'] . "'] ={ nik:'" . $dbRow['nik'] . "',
-                                                                            nama_jabatan:'" . addslashes(($dbRow['nama_jabatan'])) . "'};\n";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>NIK</label>
-                            <div class="input-group">
-                                <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                        <div class="kt-portlet__body">
+                            <div class="form-group">
+                                Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
+                            </div>
+                            <div class="form-group">
+                                <label>Nomor Surat :</label>
+                                <div class="input-group">
+                                    <input type="text" name="nNomorSurat" class="form-control" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Tempat Tanggal Lahir</label>
-                            <div class="input-group">
-                                <input type="date" name="ttl" class="form-control" data-date-format="dd/mm/yyyy">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                            <div class="form-group">
+                                <label>Nama :</label>
+                                <select class="comboBox form-control" onchange="cek_pegawai(this.value)" name="cIdPegawai">
+                                    <option></option>
+                                    <?php
+                                    $jsArray = "var jason = new Array();\n";
+                                    foreach ($pegawai as $dbRow) {
+                                    ?>
+                                        <option value="<?= $dbRow['id_pegawai'] ?>">
+                                            <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
+                                        </option>';
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>NIK</label>
+                                <div class="input-group">
+                                    <input type="text" name="cNik" id="cNik" class="form-control">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Nomor KTP</label>
-                            <div class="input-group">
-                                <input type="text" name="ktp" class="form-control" placeholder="Nomor KTP" data-date-format="dd/mm/yyyy">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                            <div class="form-group">
+                                <label>Tempat Tanggal Lahir</label>
+                                <div class="input-group">
+                                    <input type="text" name="ttl" id="ttl" class="form-control" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Alamat Sesuai KTP</label>
-                            <div class="input-group">
-                                <textarea type="text" name="alamatktp" class="form-control" placeholder="Alamat Sesuai KTP" data-date-format="dd/mm/yyyy"></textarea>
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                            <div class="form-group">
+                                <label>Nomor KTP</label>
+                                <div class="input-group">
+                                    <input type="text" name="ktp" id="ktp" class="form-control" placeholder="Nomor KTP" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Jabatan</label>
-                            <div class="input-group">
-                                <input type="text" name="cJabatan" class="form-control" placeholder="jabatan" data-date-format="dd/mm/yyyy">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                            <div class="form-group">
+                                <label>Alamat Sesuai KTP</label>
+                                <div class="input-group">
+                                    <textarea type="text" name="alamatktp" id="alamatktp" class="form-control" placeholder="Alamat Sesuai KTP" data-date-format="dd/mm/yyyy"></textarea>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Masa Kontrak</label>
-                            <div class="input-group">
-                                <input type="number" name="masa_kontrak" class="form-control" placeholder="Masa Kontrak(Bulan)" data-date-format="dd/mm/yyyy">(bulan)
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                            <div class="form-group">
+                                <label>Jabatan</label>
+                                <div class="input-group">
+                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" placeholder="jabatan" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Masuk Kerja</label>
-                            <div class="input-group">
-                                <input type="date" name="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                            <div class="form-group">
+                                <label>Masa Kontrak</label>
+                                <div class="input-group">
+                                    <input type="number" name="masa_kontrak" class="form-control" placeholder="Masa Kontrak(Bulan)" data-date-format="dd/mm/yyyy">(bulan)
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Kontrak Berakhir</label>
-                            <div class="input-group">
-                                <input type="date" name="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                            <div class="form-group">
+                                <label>Tanggal Masuk Kerja</label>
+                                <div class="input-group">
+                                    <input type="date" name="dTglMasukKerja" id="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Kontrak Berakhir</label>
+                                <div class="input-group">
+                                    <input type="date" name="dTglKontrakBerakhir" id="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar-o"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="kt-portlet">
-                    <div class="kt-portlet__head btn btn-success">
-                        <div class="kt-portlet__head-label">
-                            <h3 class="kt-portlet__head-title text-light">
-                                Tabel Kontrak Pegawai
-                            </h3>
+                <div class="col-6">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head btn btn-success">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title text-light">
+                                    Tabel Kontrak Pegawai
+                                </h3>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="kt-portlet__body">
-                        <table class="table table-striped table-bordered" id="DataTable">
-                            <thead>
-                                <tr>
-                                    <td>No</td>
-                                    <td>Tanggal</td>
-                                    <td>Nomor Surat</td>
-                                    <td>Pegawai</td>
-                                    <td>Tipe Surat</td>
-                                    <td>Action</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $no = 0;
-                                foreach ($row as $key => $vaPeringatan) {
-                                ?>
+                        <div class="kt-portlet__body">
+                            <table class="table table-striped table-bordered" id="DataTable">
+                                <thead>
                                     <tr>
-                                        <td><?= ++$no; ?></td>
-                                        <td><?= $vaPeringatan['tanggal'] ?></td>
-                                        <td><?= $vaPeringatan['nomor_surat'] ?></td>
-                                        <td><?= $vaPeringatan['nama'] ?></td>
-                                        <td><?= $vaPeringatan['Keterangan'] ?></td>
-                                        <td></td>
+                                        <td>No</td>
+                                        <td>Tanggal</td>
+                                        <td>Nomor Surat</td>
+                                        <td>Pegawai</td>
+                                        <td>Tipe Surat</td>
+                                        <td>Action</td>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 0;
+                                    foreach ($row as $key => $vaPeringatan) {
+                                    ?>
+                                        <tr>
+                                            <td><?= ++$no; ?></td>
+                                            <td><?= $vaPeringatan['tanggal'] ?></td>
+                                            <td><?= $vaPeringatan['nomor_surat'] ?></td>
+                                            <td><?= $vaPeringatan['nama'] ?></td>
+                                            <td><?= $vaPeringatan['Keterangan'] ?></td>
+                                            <td></td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
-    <?php echo $jsArray; ?>
-
-    function changeValue(id) {
-        document.getElementById('cNik').value = jason[id].nik;
-        // document.getElementById('cJabatan').value = jason[id].nama_jabatan;
-    };
+    function cek_pegawai(data) {
+        // alert(data);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                hasil = (this.responseText).split('~');
+                
+                // alert (hasil);
+                document.getElementById('cNik').value = hasil[0];
+                document.getElementById('cJabatan').value = hasil[1];
+                document.getElementById('ttl').value = hasil[2]+', '+hasil[3];
+                document.getElementById('ktp').value = hasil[4];
+                document.getElementById('alamatktp').value = hasil[5];
+                document.getElementById('cJabatan').value = hasil[6];
+                document.getElementById('dTglMasukKerja').value = hasil[7];
+                document.getElementById('dTglKontrakBerakhir').value = hasil[8];
+            }
+        };
+        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
+        xmlhttp.send();
+    }
 </script>

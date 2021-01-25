@@ -175,7 +175,7 @@ class Surat_act extends CI_Controller
         }
     }
 
-    public function sp13($Type = "", $Id = "")
+    public function sp3($Type = "", $Id = "")
     {
 
         if ($Type == 'Insert' or $Type == 'Update') {

@@ -13,6 +13,7 @@
       $cEmail         =   $column['email'];
       $cStatus        =   $column['status'];
       $cLevel        =   $column['level_id'];
+      $cJob       =   $column['job'];
       // $cTahap         =   $column['tahap'];
       $cIconButton   =   "refresh";
       $cValueButton  =   "Update Data";
@@ -30,6 +31,7 @@
     $cStatus        =   "";
     $cLevel        =   "";
     $cTahap         =   "";
+    $cJob         =   "";
     $cIconButton  = "save";
     $cValueButton = "Save Data";
     $cAction      = "Insert";
@@ -82,6 +84,10 @@
                 <label>Email</label>
                 <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
                 <input type="hidden" name="whois" value="<?= $whois ?>">
+              </div>
+              <div class="form-group">
+                <label>Pekerjaan</label>
+                <input name="cJob" id="cJob" type="text" class="form-control" placeholder="Pekerjaan" value="<?= $cJob ?>">
               </div>
               <div class="form-group">
                 <label>Interviewer</label>
@@ -337,15 +343,18 @@
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var hasil = JSON.parse(this.responseText);
+          console.log(hasil);
           var id = hasil.data[0].reg_id;
           var nama = hasil.data[0].reg_name;
           var tlp = hasil.data[0].reg_tlp;
           var email = hasil.data[0].reg_email;
+          var job = hasil.data[0].job_name;
 
           document.getElementById('cKodeWawancara').value = id;
           document.getElementById('cNama').value = nama;
           document.getElementById('cNomorTelepon').value = tlp;
           document.getElementById('cEmail').value = email;
+          document.getElementById('cJob').value = job;
         }
       };
       xmlhttp.open("GET", "<?= site_url('recruitment/wawancara_id') ?>/" + id, true);
@@ -358,6 +367,7 @@
       var cNama = $('#cNama').val();
       var cNomorTelepon = $('#cNomorTelepon').val();
       var cEmail = $('#cEmail').val();
+      var cJob = $('#cJob').val();
       var cStatus = $('#cStatus').val();
       var cLevel = $('#cLevel').val();
       var whois = $('#whois').val();
@@ -389,6 +399,7 @@
             "&cNama=" + cNama +
             "&cNomorTelepon=" + cNomorTelepon +
             "&cStatus=" + cStatus +
+            "&cJob=" + cJob +
             "&cLevel=" + cLevel +
             "&cEmail=" + cEmail,
           url: "<?= site_url('recruitment_act/wawancara/Insert') ?>",
@@ -402,6 +413,7 @@
             $('#cNama').val("");
             $('#cNomorTelepon').val("");
             $('#cEmail').val("");
+            $('#cJob').val("");
             $('#cStatus').val("")
             $('#cLevel').val("")
             $('#cNama').focus()
@@ -417,6 +429,7 @@
       var cNomorTelepon = $('#cNomorTelepon').val();
       var cEmail = $('#cEmail').val();
       var cStatus = $('#cStatus').val();
+      var cJob = $('#cJob').val();
       var cLevel = $('#cLevel').val();
       var cTahap = $('#cTahap').val();
       $.ajax({
@@ -426,6 +439,7 @@
           "&cNama=" + cNama +
           "&cNomorTelepon=" + cNomorTelepon +
           "&cStatus=" + cStatus +
+          "&cJob=" + cJob +
           "&cTahap=" + cTahap +
           "&cLevel=" + cLevel +
           "&cEmail=" + cEmail,
