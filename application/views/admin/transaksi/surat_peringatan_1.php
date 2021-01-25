@@ -196,9 +196,9 @@
                      <option value="<?= $dbRow['id_pegawai'] ?>">
                        <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
                      </option>';
-                     <?php
-                     }
-                     ?>
+                   <?php
+                    }
+                    ?>
                  </select>
                </div>
              </div>
@@ -272,18 +272,18 @@
 
  <script type="text/javascript">
    function cek_pegawai(data) {
-        // alert(data);
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                hasil = (this.responseText).split('~');
-                
-                // alert (hasil);
-                document.getElementById('cNik').value = hasil[0];
-                document.getElementById('cJabatan').value = hasil[1];
-            }
-        };
-        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
-        xmlhttp.send();
-    }
+     // alert(data);
+     var xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function() {
+       if (this.readyState == 4 && this.status == 200) {
+         hasil = (this.responseText).split('~');
+
+         // alert (hasil);
+         document.getElementById('cNik').value = hasil[0];
+         document.getElementById('cJabatan').value = hasil[1];
+       }
+     };
+     xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
+     xmlhttp.send();
+   }
  </script>

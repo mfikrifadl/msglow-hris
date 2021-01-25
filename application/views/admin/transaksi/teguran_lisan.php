@@ -3,6 +3,8 @@
 ?>
 <?php
 if ($action == "edit") {
+    // $cNikPegawai = $nik_select;
+    $cNamaJabatan = $nj_select;
     foreach ($field as $column) {
         $cIdSuratPeringatan     =   $column['id'];
         $cIdPegawai             =   $column['id_pegawai'];
@@ -10,7 +12,7 @@ if ($action == "edit") {
         $cJum_teguran_lisan     =   $column['jum_teguran_lisan'];
         $dTgl                   =   $column['tanggal'];
         $cNikPegawai            =   $column['nik'];
-        $cNamaJabatan           =   $column['nama_jabatan'];
+        // $cNamaJabatan           =   $column['nama_jabatan'];
         $cNama                  =   $column['nama'];
         $cKeterangan            =   $column['keterangan_teguran'];
         $cIconButton            =   "refresh";
@@ -148,7 +150,7 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Nama :</label>
                                 <div class="col-8">
-                                    <select class="comboBox form-control" onchange="changeValue(this.value)" name="cIdPegawai">
+                                    <select class="comboBox form-control" onchange="cek_pegawai(this.value)" name="cIdPegawai">
                                         <option></option>
                                         <?php
                                         $jsArray = "var jason = new Array();\n";
@@ -158,7 +160,6 @@ else {
                                                 <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
                                             </option>';
                                         <?php
-                                            $jsArray .= "jason['" . $dbRow['id_pegawai'] . "'] = {nik:'" . addslashes(($dbRow['nik'])) . "'};\n";
                                         }
                                         ?>
                                     </select>
@@ -174,7 +175,13 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Jabatan :</label>
                                 <div class="col-8">
-                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
+                                    <?php
+                                    if ($action == "edit") { ?>
+                                        <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
+
+                                    <?php } else { ?>
+                                        <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
+                                    <?php   } ?>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -275,10 +282,19 @@ else {
 
 
 <script type="text/javascript">
-    <?php echo $jsArray; ?>
+    function cek_pegawai(data) {
+        // alert(data);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                hasil = (this.responseText).split('~');
 
-    function changeValue(id) {
-        document.getElementById('cNik').value = jason[id].nik;
-        document.getElementById('cJabatan').value = jason[id].nama_jabatan;
-    };
+                // alert (hasil);
+                document.getElementById('cNik').value = hasil[0];
+                document.getElementById('cJabatan').value = hasil[1];
+            }
+        };
+        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
+        xmlhttp.send();
+    }
 </script>

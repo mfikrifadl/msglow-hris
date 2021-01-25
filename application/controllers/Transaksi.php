@@ -21,7 +21,7 @@ class Transaksi extends CI_Controller
 		$this->load->helper('form');
 		$this->load->helper('download');
 	}
-	
+
 	public  function Date2String($dTgl)
 	{
 		//return 2012-11-22
@@ -142,7 +142,7 @@ class Transaksi extends CI_Controller
 		// echo "ini adalah : $cNamaSearch";
 
 		if ($cPin == '') {
-			
+
 			$data['cek_pegawai']	= $this->relasi->GetDataPelanggaran($cNamaSearch);
 			$data['keterangan']     = "PIN Belum Di Isi ";
 			$data['pin']			=  urldecode($cPin);
@@ -231,11 +231,12 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function kontrak($Aksi = "", $Id = ""){
+	public function kontrak($Aksi = "", $Id = "")
+	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'Manajemen Pegawai';
 		$data['file']   = 'Form Kontrak Pegawai';
-		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['row']	= $this->model->View('kontrak', 'id');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
 		if ($Aksi == 'edit') {
@@ -382,7 +383,7 @@ class Transaksi extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('tb_pengunduran_diri', 'id_pengunduran_diri', $Id);
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
-		}elseif ($Aksi == 'delete') {
+		} elseif ($Aksi == 'delete') {
 			//$data['delete'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		}
 
@@ -404,7 +405,7 @@ class Transaksi extends CI_Controller
 	public function update_master_pegawai()
 	{
 		$id = $this->input->post('pin');
-		
+
 		$data = array(
 			'pin' => $this->input->post('pin'),
 			'nip' => $this->input->post('nip'),
@@ -417,59 +418,97 @@ class Transaksi extends CI_Controller
 		// echo $data;
 
 		$this->model->Update('master_pegawai', 'pin', $id, $data);
-
 	}
 
-	public function teguran_lisan($Aksi = "", $Id = ""){
+	public function teguran_lisan($Aksi = "", $Id = "")
+	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Teguran Lisan';
-		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2', 'is_delete', '0');
+		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat', '2', 'is_delete', '0');
 		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
-		
+		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
 		if ($Aksi == 'view') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
-		}
-		elseif ($Aksi == 'edit') {
+
+			$dbArea = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+			foreach ($dbArea as $key => $vaArea) {
+				$idP = $vaArea['id_pegawai'];
+			}
+
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);			
+			$nama_jabatan_view = "";
+			foreach ($dbView as $key => $vaView) {				
+				$nama_jabatan_view = $vaView['nama_jabatan'];
+			}			
+			// $data['nj_select'] = $nama_jabatan_view;
+
+		} elseif ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+
+			$dbArea = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+			foreach ($dbArea as $key => $vaArea) {
+				$idP = $vaArea['id_pegawai'];
+			}
+
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
+			$nik = "";
+			$nama_jabatan = "";
+			foreach ($dbView as $key => $vaView) {
+				$nik = $vaView['nik'];
+				$nama_jabatan = $vaView['nama_jabatan'];
+			}
+			$data['nik_select'] = $nik;
+			$data['nj_select'] = $nama_jabatan;
+		} else {
 		}
-		else {
-			
-		}
-		
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/teguran_lisan', $data);
 		$this->load->view('admin/container/footer');
 	}
 
-	public function surat_teguran($Aksi = "", $Id = ""){
-		
+	public function surat_teguran($Aksi = "", $Id = "")
+	{
+
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Surat Teguran';
-		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat','2', 'is_delete', '0');
-		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat', '1', 'is_delete', '0');
+		// $data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'view') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
-		}
-		elseif ($Aksi == 'edit') {
+		} elseif ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+
+			$dbArea = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+			foreach ($dbArea as $key => $vaArea) {
+				$idP = $vaArea['id_pegawai'];
+			}
+
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
+			foreach ($dbView as $key => $vaView) {
+				$nik = $vaView['nik'];
+				$nama_jabatan = $vaView['nama_jabatan'];
+			}
+			$data['nik_select'] = $nik;
+			$data['nj_select'] = $nama_jabatan;
+		} else {
 		}
-		else {
-			
-		}		
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_teguran', $data);
 		$this->load->view('admin/container/footer');
 	}
 
-	public function sp1($Aksi = "", $Id = ""){
+	public function sp1($Aksi = "", $Id = "")
+	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Surat Peringatan I';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
-		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
@@ -479,12 +518,13 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function sp2($Aksi = "", $Id = ""){
+	public function sp2($Aksi = "", $Id = "")
+	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Surat Peringatan II';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
-		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
@@ -494,12 +534,13 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function sp3($Aksi = "", $Id = ""){
+	public function sp3($Aksi = "", $Id = "")
+	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Surat Peringatan III';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
-		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);

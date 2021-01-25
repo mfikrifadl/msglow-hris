@@ -133,6 +133,90 @@ class Surat_act extends CI_Controller
         }
     }
 
+    public function surat_teguran($Type = "", $Id = "")
+    {        
+        if ($Type == 'Insert') {
+
+            $dataInsert = array(
+                'tanggal'           =>  $this->input->post('dTgl'),
+                'nomor_surat'           =>  $this->input->post('nNomorSurat'),
+                'jum_teguran_lisan' =>  $this->input->post('tl'),
+                'id_kategori_surat' =>  $this->input->post('idSurat'),
+                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+                'uraian'            =>  $this->input->post('cUraian'),                
+                'keterangan'        =>  $this->input->post('cKet'),
+                'mulai_berlaku'            =>  $this->input->post('cMulai_berlaku'),
+                'berlaku_sampai'            =>  $this->input->post('cBerlaku_sampai'),
+                'create'            =>  $this->input->post('cCreate'),
+                'general_manager'            =>  $this->input->post('cGeneral_manager'), 
+
+            );
+            
+            $seralizedArrayInsert = serialize($dataInsert);
+            $vaLog = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayInsert,
+                'nama' => $this->session->userdata('nama')
+            );
+
+            $this->model->Insert("log", $vaLog);
+            $this->model->Insert('tb_surat_peringatan', $dataInsert);
+            redirect(site_url('transaksi/surat_teguran/I'));
+        } elseif ($Type == 'Update') {
+
+            $dataUpdate = array(
+                'tanggal'           =>  $this->input->post('dTgl'),
+                'nomor_surat'           =>  $this->input->post('nNomorSurat'),
+                'jum_teguran_lisan' =>  $this->input->post('tl'),
+                'id_kategori_surat' =>  $this->input->post('idSurat'),
+                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+                'uraian'            =>  $this->input->post('cUraian'),                
+                'keterangan'        =>  $this->input->post('cKet'),
+                'mulai_berlaku'            =>  $this->input->post('cMulai_berlaku'),
+                'berlaku_sampai'            =>  $this->input->post('cBerlaku_sampai'),
+                'create'            =>  $this->input->post('cCreate'),
+                'general_manager'            =>  $this->input->post('cGeneral_manager'), 
+
+            );
+
+            $seralizedArrayUpdate = serialize($dataUpdate);
+            $vaLog2 = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayUpdate,
+                'nama' => $this->session->userdata('nama')
+            );
+            $this->model->Insert("log", $vaLog2);
+            $this->model->update('tb_surat_peringatan', 'id', $Id, $dataUpdate);
+            redirect(site_url('transaksi/surat_teguran/U'));
+        } elseif ($Type == 'Delete') {
+
+            $dataDelete = array(			
+                'is_delete'		=> 1
+            );
+
+            $seralizedArrayDelete = serialize($dataDelete);
+            $vaLog2 = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayDelete,
+                'nama' => $this->session->userdata('nama')
+            );
+
+            $this->model->Insert("log", $vaLog2);
+			$this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
+            redirect(site_url('transaksi/surat_teguran/D'));
+            
+        }
+    }
+
     public function sp1($Type = "", $Id = "")
     {
 

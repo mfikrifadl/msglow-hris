@@ -815,7 +815,10 @@ class Transaksi_act extends CI_Controller
 						t1.nama, 
 						t3.nama_jabatan, 
 						t1.tanggal_masuk_kerja,
-						t1.tgl_kontrak_berakhir FROM tb_pegawai t1 JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan WHERE t1.id_pegawai = "'.$id.'"';
+						t1.tgl_kontrak_berakhir FROM tb_pegawai t1 
+						JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai 
+						JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan 
+						WHERE t1.id_pegawai = "'.$id.'"';
 		$db = $this->db->query($query);
 		foreach ($db->result() as $vaData) {
 		    $nik = $vaData->nik;
@@ -831,4 +834,5 @@ class Transaksi_act extends CI_Controller
 
 		echo $nik."~".$jabatan."~".$tempat_lahir."~".$tanggal_lahir."~".$no_ktp."~".$alamat_asal."~".$nama."~".$tanggal_masuk_kerja."~".$tgl_kontrak_berakhir;
 	}
+	
 }
