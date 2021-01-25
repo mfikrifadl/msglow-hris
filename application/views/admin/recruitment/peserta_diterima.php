@@ -92,17 +92,26 @@
                       <?php
                       } elseif ($vaArea['status'] == "lolos") {
                       ?>
-                        <a href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
-                          <button class="btn btn-info btn-sm" style="font-size: 10px;"> <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai </button>
+                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Masukkan Ke Data Pegawai" href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
+
+                          <i class="fa fa-sign-in-alt"></i>
+
+                        </a>
+                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email/' . $vaArea['id_recruitment'] . '') ?>">
+                          <i class="flaticon-mail"></i>
                         </a>
                       <?php
                       } else {
 
                       ?>
-                        <a href="<?= site_url('recruitment_act/aksi/lolos/' . $vaArea['id_recruitment'] . '') ?>">
-                          <button class="btn btn-success btn-sm"> <i class="fa fa-sign-in-alt"></i>Lolos </button>
+
+                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_act/aksi/lolos/' . $vaArea['id_recruitment'] . '') ?>">
+                          <i class="flaticon2-check-mark"></i>
                         </a>
-                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment'] ?>"> <i class="fa fa-sign-in-alt"></i>Tidak Lolos </button>
+                        <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment'] ?>">
+                          <i class="flaticon2-cross"></i>
+                        </a>
+
                         <!-- Modal edit category -->
                         <div id="id-<?= $vaArea['id_recruitment'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alasanTidakLolos" aria-hidden="true">
                           <div class="modal-dialog">
