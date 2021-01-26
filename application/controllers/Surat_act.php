@@ -21,48 +21,48 @@ class Surat_act extends CI_Controller
     }
 
     public  function Date2String($dTgl)
-	{
-		//return 2012-11-22
-		list($cDate, $cMount, $cYear)	= explode("-", $dTgl);
-		if (strlen($cDate) == 2) {
-			$dTgl	= $cYear . "-" . $cMount . "-" . $cDate;
-		}
-		return $dTgl;
-	}
+    {
+        //return 2012-11-22
+        list($cDate, $cMount, $cYear)    = explode("-", $dTgl);
+        if (strlen($cDate) == 2) {
+            $dTgl    = $cYear . "-" . $cMount . "-" . $cDate;
+        }
+        return $dTgl;
+    }
 
-	public  function String2Date($dTgl)
-	{
-		//return 22-11-2012  
-		list($cYear, $cMount, $cDate)	= explode("-", $dTgl);
-		if (strlen($cYear) == 4) {
-			$dTgl	= $cDate . "-" . $cMount . "-" . $cYear;
-		}
-		return $dTgl;
-	}
+    public  function String2Date($dTgl)
+    {
+        //return 22-11-2012  
+        list($cYear, $cMount, $cDate)    = explode("-", $dTgl);
+        if (strlen($cYear) == 4) {
+            $dTgl    = $cDate . "-" . $cMount . "-" . $cYear;
+        }
+        return $dTgl;
+    }
 
-	public function TimeStamp()
-	{
-		date_default_timezone_set("Asia/Jakarta");
-		$Data = date("H:i:s");
-		return $Data;
-	}
+    public function TimeStamp()
+    {
+        date_default_timezone_set("Asia/Jakarta");
+        $Data = date("H:i:s");
+        return $Data;
+    }
 
-	public function DateStamp()
-	{
-		date_default_timezone_set("Asia/Jakarta");
-		$Data = date("d-m-Y");
-		return $Data;
-	}
+    public function DateStamp()
+    {
+        date_default_timezone_set("Asia/Jakarta");
+        $Data = date("d-m-Y");
+        return $Data;
+    }
 
-	public function DateTimeStamp()
-	{
-		date_default_timezone_set("Asia/Jakarta");
-		$Data = date("d-m-Y h:i:s");
-		return $Data;
-	}
+    public function DateTimeStamp()
+    {
+        date_default_timezone_set("Asia/Jakarta");
+        $Data = date("d-m-Y h:i:s");
+        return $Data;
+    }
 
     public function teguran_lisan($Type = "", $Id = "")
-    {        
+    {
         if ($Type == 'Insert') {
 
             $dataInsert = array(
@@ -73,7 +73,7 @@ class Surat_act extends CI_Controller
                 'keterangan'        =>  $this->input->post('cKet'),
 
             );
-            
+
             $seralizedArrayInsert = serialize($dataInsert);
             $vaLog = array(
                 'tgl' => $this->Date2String($this->DateStamp()),
@@ -112,8 +112,8 @@ class Surat_act extends CI_Controller
             redirect(site_url('transaksi/teguran_lisan/U'));
         } elseif ($Type == 'Delete') {
 
-            $dataDelete = array(			
-                'is_delete'		=> 1
+            $dataDelete = array(
+                'is_delete'        => 1
             );
 
             $seralizedArrayDelete = serialize($dataDelete);
@@ -127,14 +127,13 @@ class Surat_act extends CI_Controller
             );
 
             $this->model->Insert("log", $vaLog2);
-			$this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
+            $this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
             redirect(site_url('transaksi/teguran_lisan/D'));
-            
         }
     }
 
     public function surat_teguran($Type = "", $Id = "")
-    {        
+    {
         if ($Type == 'Insert') {
 
             $dataInsert = array(
@@ -143,15 +142,15 @@ class Surat_act extends CI_Controller
                 'jum_teguran_lisan' =>  $this->input->post('tl'),
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
-                'uraian'            =>  $this->input->post('cUraian'),                
+                'uraian'            =>  $this->input->post('cUraian'),
                 'keterangan'        =>  $this->input->post('cKet'),
                 'mulai_berlaku'            =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'            =>  $this->input->post('cBerlaku_sampai'),
                 'create'            =>  $this->input->post('cCreate'),
-                'general_manager'            =>  $this->input->post('cGeneral_manager'), 
+                'general_manager'            =>  $this->input->post('cGeneral_manager'),
 
             );
-            
+
             $seralizedArrayInsert = serialize($dataInsert);
             $vaLog = array(
                 'tgl' => $this->Date2String($this->DateStamp()),
@@ -173,12 +172,12 @@ class Surat_act extends CI_Controller
                 'jum_teguran_lisan' =>  $this->input->post('tl'),
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
-                'uraian'            =>  $this->input->post('cUraian'),                
+                'uraian'            =>  $this->input->post('cUraian'),
                 'keterangan'        =>  $this->input->post('cKet'),
                 'mulai_berlaku'            =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'            =>  $this->input->post('cBerlaku_sampai'),
                 'create'            =>  $this->input->post('cCreate'),
-                'general_manager'            =>  $this->input->post('cGeneral_manager'), 
+                'general_manager'            =>  $this->input->post('cGeneral_manager'),
 
             );
 
@@ -196,8 +195,8 @@ class Surat_act extends CI_Controller
             redirect(site_url('transaksi/surat_teguran/U'));
         } elseif ($Type == 'Delete') {
 
-            $dataDelete = array(			
-                'is_delete'		=> 1
+            $dataDelete = array(
+                'is_delete'        => 1
             );
 
             $seralizedArrayDelete = serialize($dataDelete);
@@ -211,9 +210,8 @@ class Surat_act extends CI_Controller
             );
 
             $this->model->Insert("log", $vaLog2);
-			$this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
+            $this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
             redirect(site_url('transaksi/surat_teguran/D'));
-            
         }
     }
 
@@ -278,5 +276,13 @@ class Surat_act extends CI_Controller
             $this->model->Insert('tb_surat_peringatan', $dataInsert);
             redirect(site_url('transaksi/sp3'));
         }
+    }
+
+    public function cetak_pdf()
+    {
+        $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+        $html = $this->load->view('admin/transaksi/cetak_pdf', [], true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
     }
 }
