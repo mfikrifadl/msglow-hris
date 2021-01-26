@@ -297,4 +297,22 @@ class Surat_act extends CI_Controller
         $mpdf->Output();
         redirect(site_url('transaksi/sp1'));
     }
+    public function cetak_sp2($id = '')
+    {
+        $data['data'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $id);
+        $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+        $html = $this->load->view('admin/transaksi/cetak_sp2', $data, true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        redirect(site_url('transaksi/sp2'));
+    }
+    public function cetak_sp3($id = '')
+    {
+        $data['data'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $id);
+        $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+        $html = $this->load->view('admin/transaksi/cetak_sp3', $data, true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        redirect(site_url('transaksi/sp3'));
+    }
 }

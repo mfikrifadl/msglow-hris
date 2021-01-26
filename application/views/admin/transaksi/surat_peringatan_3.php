@@ -118,19 +118,11 @@ if ($action == "edit") {
                   <td><?= ($vaPeringatan['nomor_surat']) ?></td>
                   <td><?= ($vaPeringatan['nama']) ?></td>
                   <td><?= ($vaPeringatan['Keterangan']) ?></td>
-                  <!-- <td align="center">
-                     <a class="btn-link" title="View Data" target="_blank" href="<?php //site_url('laporan/lp_sp/' . $vaPeringatan['id'] . '/1') 
-                                                                                  ?>">
-                       <i class="fa fa-print"></i>
-                     </a>|
-                     <a class="btn-link" title="Edit Data" href="<?php //site_url('surat/surat_peringatan_1/edit/' . $vaPeringatan['id'] . '') 
-                                                                  ?>">
-                       <i class="fa fa-edit"></i>
-                     </a>|
-                     <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?')){ window.location.href='<?= site_url('surat_act/surat_peringatan_1/Delete/' . $vaPeringatan['id'] . '') ?>'}">
-                       <i class="fa fa-trash-o"></i>
-                     </a>
-                   </td> -->
+                  <td align="center">
+                    <a class="btn-link" title="Print SP" target="_blank" href="<?= site_url('Surat_act/cetak_sp1/' . $vaPeringatan['id'] . '') ?>">
+                      <i class="fa fa-print"></i>
+                    </a>
+                  </td>
                 </tr>
               <?php } ?>
             </tbody>
@@ -185,23 +177,23 @@ if ($action == "edit") {
               </p>
             </div>
             <div class="form-group row">
-               <label for="example-text-input" class="col-1 col-form-label">Nama :</label>
-               <div class="col-3">
-                 <select class="comboBox form-control" onchange="cek_pegawai(this.value)" name="cIdPegawai">
-                   <option></option>
-                   <?php
-                    $jsArray = "var jason = new Array();\n";
-                    foreach ($pegawai as $dbRow) {
-                    ?>
-                     <option value="<?= $dbRow['id_pegawai'] ?>">
-                       <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
-                     </option>';
-                     <?php
-                     }
-                     ?>
-                 </select>
-               </div>
-             </div>
+              <label for="example-text-input" class="col-1 col-form-label">Nama :</label>
+              <div class="col-3">
+                <select class="comboBox form-control" onchange="cek_pegawai(this.value)" name="cIdPegawai">
+                  <option></option>
+                  <?php
+                  $jsArray = "var jason = new Array();\n";
+                  foreach ($pegawai as $dbRow) {
+                  ?>
+                    <option value="<?= $dbRow['id_pegawai'] ?>">
+                      <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
+                    </option>';
+                  <?php
+                  }
+                  ?>
+                </select>
+              </div>
+            </div>
             <div class="form-group row">
               <label for="example-text-input" class="col-1 col-form-label">NIK :</label>
               <div class="col-3">
