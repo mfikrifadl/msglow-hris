@@ -225,10 +225,12 @@ class Surat_act extends CI_Controller
                 'nomor_surat'       =>  $this->input->post('nNomorSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'uraian'            =>  $this->input->post('cUraian'),
+                'jabatan'            =>  $this->input->post('cJabatan'),
                 'create'            =>  $this->input->post('cCreate'),
                 'general_manager'   =>  $this->input->post('cGeneral_manager'),
                 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
+                'id_kategori_surat'    =>  3,
             );
             // print_r($dataInsert);
             $this->model->Insert('tb_surat_peringatan', $dataInsert);
@@ -284,5 +286,15 @@ class Surat_act extends CI_Controller
         $html = $this->load->view('admin/transaksi/cetak_pdf', [], true);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
+    }
+
+    public function cetak_sp1($id = '')
+    {
+        $data['data'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $id);
+        $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+        $html = $this->load->view('admin/transaksi/cetak_sp1', $data, true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        redirect(site_url('transaksi/sp1'));
     }
 }
