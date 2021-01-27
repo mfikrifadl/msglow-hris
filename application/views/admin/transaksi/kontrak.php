@@ -85,17 +85,17 @@ if ($action == "edit") {
         </div>
 
         <!--konten halaman ini bisa isi disini mulai dari <div class="row"> pada setiap widgetnya-->
-        <form method="post" enctype="multipart/form-data" action="<?= site_url('transaksi_act/kontrak/' . $cAction . '') ?>">
-            <div class="row">
-                <div class="col-6">
-                    <div class="kt-portlet">
-                        <div class="kt-portlet__head btn btn-success">
-                            <div class="kt-portlet__head-label">
-                                <h3 class="kt-portlet__head-title text-light">
-                                    Form Kontrak Pegawai
-                                </h3>
-                            </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head btn btn-success">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title text-light">
+                                Form Kontrak Pegawai
+                            </h3>
                         </div>
+                    </div>
+                    <form method="post" enctype="multipart/form-data" action="<?= site_url('transaksi_act/kontrak/' . $cAction . '') ?>">
                         <div class="kt-portlet__body">
                             <div class="form-group">
                                 Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
@@ -190,57 +190,62 @@ if ($action == "edit") {
                                 <label>Tanggal Kontrak Berakhir</label>
                                 <div class="input-group">
                                     <input type="date" name="dTglKontrakBerakhir" id="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy">
+                                    <input type="hidden" name="cCreate" value="<?= $cCreate ?>">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="kt-portlet">
-                        <div class="kt-portlet__head btn btn-success">
-                            <div class="kt-portlet__head-label">
-                                <h3 class="kt-portlet__head-title text-light">
-                                    Tabel Kontrak Pegawai
-                                </h3>
+                            <div class="form-group">
+                                <button type="submit">Save Data</button>
                             </div>
                         </div>
-
-                        <div class="kt-portlet__body">
-                            <table class="table table-striped table-bordered" id="DataTable">
-                                <thead>
-                                    <tr>
-                                        <td>No</td>
-                                        <td>Tanggal</td>
-                                        <td>Nomor Surat</td>
-                                        <td>Pegawai</td>
-                                        <td>Tipe Surat</td>
-                                        <td>Action</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 0;
-                                    foreach ($row as $key => $vaPeringatan) {
-                                    ?>
-                                        <tr>
-                                            <td><?= ++$no; ?></td>
-                                            <td><?= $vaPeringatan['tanggal'] ?></td>
-                                            <td><?= $vaPeringatan['nomor_surat'] ?></td>
-                                            <td><?= $vaPeringatan['nama'] ?></td>
-                                            <td><?= $vaPeringatan['Keterangan'] ?></td>
-                                            <td></td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                    </form>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head btn btn-success">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title text-light">
+                                Tabel Kontrak Pegawai
+                            </h3>
                         </div>
                     </div>
-                </div>
 
+                    <div class="kt-portlet__body">
+                        <table class="table table-striped table-bordered" id="DataTable">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Tanggal</td>
+                                    <td>Nomor Surat</td>
+                                    <td>Nama Pegawai</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 0;
+                                foreach ($row as $key => $vaPeringatan) {
+                                ?>
+                                    <tr>
+                                        <td><?= ++$no; ?></td>
+                                        <td><?= $vaPeringatan['tanggal'] ?></td>
+                                        <td><?= $vaPeringatan['no_surat'] ?></td>
+                                        <td><?= $vaPeringatan['nama'] ?></td>
+                                        <td align="center">
+                                            <a class="btn-link" title="Print Kontrak" target="_blank" href="<?= site_url('Surat_act/cetak_kontrak/' . $vaPeringatan['id_pegawai'] . '') ?>">
+                                                <i class="fa fa-print"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -250,11 +255,10 @@ if ($action == "edit") {
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 hasil = (this.responseText).split('~');
-                
                 // alert (hasil);
                 document.getElementById('cNik').value = hasil[0];
                 document.getElementById('cJabatan').value = hasil[1];
-                document.getElementById('ttl').value = hasil[2]+', '+hasil[3];
+                document.getElementById('ttl').value = hasil[2] + ', ' + hasil[3];
                 document.getElementById('ktp').value = hasil[4];
                 document.getElementById('alamatktp').value = hasil[5];
                 document.getElementById('cJabatan').value = hasil[6];

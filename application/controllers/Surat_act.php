@@ -280,12 +280,14 @@ class Surat_act extends CI_Controller
         }
     }
 
-    public function cetak_pdf()
+    public function cetak_kontrak($id='')
     {
+        $data['data'] = $this->db->query('SELECT * from kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai = t2.id_pegawai where t1.id_pegawai='.$id.'')->result_array();;
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
-        $html = $this->load->view('admin/transaksi/cetak_pdf', [], true);
+        $html = $this->load->view('admin/transaksi/cetak_kontrak', $data, true);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
+        redirect(site_url('Transaksi/kontrak'));
     }
 
     public function cetak_sp1($id = '')

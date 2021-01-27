@@ -415,21 +415,21 @@ class Transaksi_act extends CI_Controller
 	}
 
 	public function kontrak($Type = "", $Id = "")
-    {
+	{
 
-        if ($Type == 'Insert' or $Type == 'Update') {
+		if ($Type == 'Insert' or $Type == 'Update') {
 
-            $dataInsert = array(
-                'tanggal'       	=>  date("Y-m-d"),
-                'no'       			=>  $this->input->post('nNomorSurat'),
-                'id_pegawai'        =>  $this->input->post('cIdPegawai'),
-                'cCreate'           =>  $this->input->post('cCreate'),
-            );
-            // print_r($dataInsert);
-            $this->model->Insert('kontak', $dataInsert);
-            redirect(site_url('transaksi/kontrak'));
-        }
-    }
+			$dataInsert = array(
+				'tanggal'       	=>  date("Y-m-d"),
+				'no_surat'       	=>  $this->input->post('nNomorSurat'),
+				'id_pegawai'        =>  $this->input->post('cIdPegawai'),
+				'cCreate'           =>  $this->input->post('cCreate'),
+			);
+
+			$this->model->Insert('kontrak', $dataInsert);
+			redirect(site_url('transaksi/kontrak'));
+		}
+	}
 
 	public function jabatan_pegawai($Type = "", $id = "")
 	{
@@ -805,7 +805,8 @@ class Transaksi_act extends CI_Controller
 		echo "$Tgl";
 	}
 
-	public function get_pegawai($id=''){
+	public function get_pegawai($id = '')
+	{
 		// $db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $id);
 		$query = 'SELECT t1.id_pegawai,
 						t1.nik, t1.tanggal_lahir,
@@ -818,10 +819,10 @@ class Transaksi_act extends CI_Controller
 						t1.tgl_kontrak_berakhir FROM tb_pegawai t1 
 						JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai 
 						JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan 
-						WHERE t1.id_pegawai = "'.$id.'"';
+						WHERE t1.id_pegawai = "' . $id . '"';
 		$db = $this->db->query($query);
 		foreach ($db->result() as $vaData) {
-		    $nik = $vaData->nik;
+			$nik = $vaData->nik;
 			$jabatan = $vaData->nama_jabatan;
 			$tempat_lahir = $vaData->tempat_lahir;
 			$tanggal_lahir = $vaData->tanggal_lahir;
@@ -832,7 +833,6 @@ class Transaksi_act extends CI_Controller
 			$tgl_kontrak_berakhir = $vaData->tgl_kontrak_berakhir;
 		}
 
-		echo $nik."~".$jabatan."~".$tempat_lahir."~".$tanggal_lahir."~".$no_ktp."~".$alamat_asal."~".$nama."~".$tanggal_masuk_kerja."~".$tgl_kontrak_berakhir;
+		echo $nik . "~" . $jabatan . "~" . $tempat_lahir . "~" . $tanggal_lahir . "~" . $no_ktp . "~" . $alamat_asal . "~" . $nama . "~" . $tanggal_masuk_kerja . "~" . $tgl_kontrak_berakhir;
 	}
-	
 }

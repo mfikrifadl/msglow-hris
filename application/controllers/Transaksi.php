@@ -238,7 +238,7 @@ class Transaksi extends CI_Controller
 		$data['menu']   = 'Manajemen Pegawai';
 		$data['file']   = 'Form Kontrak Pegawai';
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
-		$data['row']	= $this->model->View('kontrak', 'id');
+		$data['row']	= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai')->result_array();
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
@@ -427,7 +427,7 @@ class Transaksi extends CI_Controller
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Teguran Lisan';
 		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat', '2', 'is_delete', '0');
-		$data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
 		if ($Aksi == 'view') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
@@ -437,11 +437,11 @@ class Transaksi extends CI_Controller
 				$idP = $vaArea['id_pegawai'];
 			}
 
-			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);			
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
 			$nama_jabatan_view = "";
-			foreach ($dbView as $key => $vaView) {				
+			foreach ($dbView as $key => $vaView) {
 				$nama_jabatan_view = $vaView['nama_jabatan'];
-			}			
+			}
 			// $data['nj_select'] = $nama_jabatan_view;
 
 		} elseif ($Aksi == 'edit') {
