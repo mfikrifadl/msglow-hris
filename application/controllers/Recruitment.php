@@ -78,7 +78,7 @@ class Recruitment extends CI_Controller
 		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
 		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
 
-		$url 				= 'http://127.0.0.1/career/administrator/rest_api/';
+		$url 				= 'http://127.0.0.1/msglow-career/administrator/rest_api/';
 		$content 			= file_get_contents($url); // put the contents of the file into a variable
 		$data2 				= json_decode($content, true);
 		$data['registrant']	= $data2['data'];
@@ -101,7 +101,7 @@ class Recruitment extends CI_Controller
 		$data['file']   	= 'View Wawancara';
 		$data['wawancara']	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
 
-		$url 				= 'http://127.0.0.1/career/administrator/rest_api?reg_id=' . $Id;
+		$url 				= 'http://127.0.0.1/msglow-career/administrator/rest_api?reg_id=' . $Id;
 		$content 			= file_get_contents($url); // put the contents of the file into a variable
 		$data2 				= json_decode($content, true);
 		$data['registrant']	= $data2['data'];
@@ -113,7 +113,7 @@ class Recruitment extends CI_Controller
 
 	public function wawancara_id($Id = "")
 	{
-		$url 		= 'http://127.0.0.1/career/administrator/rest_api?reg_id=' . $Id;
+		$url 		= 'http://127.0.0.1/msglow-career/administrator/rest_api?reg_id=' . $Id;
 		$content 	= file_get_contents($url); // put the contents of the file into a variable
 
 		echo $content;

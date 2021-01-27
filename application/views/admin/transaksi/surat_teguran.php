@@ -40,6 +40,7 @@ if ($Nolast->num_rows() > 0) {
 $cNomorSuratFix = "No." . "####" . "/ST/HRD/" . $cRomawai . "/" . date("Y") . " ";
 ?>
 <?php
+
 if ($action == "edit") {
     $cNikPegawai = $nik_select;
     $cNamaJabatan = $nj_select;
@@ -199,7 +200,7 @@ if ($action == "edit") {
                                                     </div>
                                                     <?php
                                                     if ($action == "view") {
-                                                        // $cNamaJabatan = $nj_select;
+                                                        $cNamaJabatan = $nj_select;
                                                         foreach ($field as $column) {
                                                             $cIdSuratPeringatan =   $column['id'];
                                                             $cIdKategoriSurat   =   $column['id_kategori_surat'];
@@ -269,8 +270,7 @@ if ($action == "edit") {
                                                         <div class="form-group row">
                                                             <label for="example-text-input" class="col-1 col-form-label">Jabatan :</label>
                                                             <div class="col-3">
-                                                                <input type="text" class="form-control" readonly="true" >
-                                                                <!-- <input type="text" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>"> -->
+                                                                <input type="text" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 text-left">
@@ -444,7 +444,7 @@ if ($action == "edit") {
                                                                 <?php } else { ?>
                                                                     <input type="text" name="cCreate" id="cCreate" class="form-control">
                                                                 <?php   } ?>
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -455,7 +455,7 @@ if ($action == "edit") {
                                                                 <?php } else { ?>
                                                                     <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control">
                                                                 <?php   } ?>
-                                                                
+
                                                             </div>
                                                         </div>
 

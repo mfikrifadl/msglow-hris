@@ -149,7 +149,7 @@
                                 <select class="comboBox form-control" name="cIdRefJabatan">
                                   <option></option>
                                   <?php foreach ($jabatan as $key => $vaJabatan) { ?>
-                                    <option value="<?= $vaJabatan['id_ref_jabatan'] ?>" <?php if ($vaJabatan['id_ref_jabatan'] == $cIdJabatan) echo "selected"; ?>>
+                                    <option value="<?= $vaJabatan['id_ref_jabatan'] ?>" <?php if ($vaJabatan['id_ref_jabatan'] == $cIdRefJabatan) echo "selected"; ?>>
                                       <?= $vaJabatan['nama_jabatan'] ?>
                                     </option>
                                   <?php } ?>

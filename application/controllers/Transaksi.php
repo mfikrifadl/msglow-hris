@@ -217,8 +217,8 @@ class Transaksi extends CI_Controller
 		$dataHeader['file'] = 'JABATAN PEGAWAI';
 		$dataHeader['action'] = $Aksi;
 		$query 				= $this->db->query('select t1.nama, t1.nik, t3.nama_jabatan from tb_pegawai t1 JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan');
-		$data['pegawai']	= $query->result_array();
-		// $data['pegawai']	= $this->model->ViewASC('tb_pegawai', 'nama');
+		// $data['pegawai']	= $query->result_array();
+		$data['pegawai']	= $this->model->ViewASC('tb_pegawai', 'nama');
 		$data['sub_unit']	= $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
 		$data['jabatan']	= $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
 		$data['row']		= $this->relasi->GetDataJabatanPegawai();
@@ -438,12 +438,14 @@ class Transaksi extends CI_Controller
 			}
 
 			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
-			$nama_jabatan_view = "";
+			$nik = "";
+			$nama_jabatan = "";
 			foreach ($dbView as $key => $vaView) {
-				$nama_jabatan_view = $vaView['nama_jabatan'];
+				$nik = $vaView['nik'];
+				$nama_jabatan = $vaView['nama_jabatan'];
 			}
-			// $data['nj_select'] = $nama_jabatan_view;
-
+			$data['nik_select'] = $nik;
+			$data['nj_select'] = $nama_jabatan;
 		} elseif ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
 
@@ -476,11 +478,22 @@ class Transaksi extends CI_Controller
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Surat Teguran';
 		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat', '1', 'is_delete', '0');
-		// $data['pegawai']= $this->model->View('tb_pegawai', 'id_pegawai');
-		$data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
+		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
+		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'view') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+
+			$dbArea = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+			foreach ($dbArea as $key => $vaArea) {
+				$idP = $vaArea['id_pegawai'];
+			}
+
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
+			foreach ($dbView as $key => $vaView) {
+				$nama_jabatan = $vaView['nama_jabatan'];
+			}
+			$data['nj_select'] = $nama_jabatan;
 		} elseif ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
 
