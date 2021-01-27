@@ -120,7 +120,7 @@
         <tr>
             <td valign='top'>2.</td>
             <td valign='top' colspan=5>Jangka waktu
-                Perjanjian ini dapat berakhir sebelum jangka waktunya habis apabila:<span style='mso-spacerun:yes'>.</span></td>
+                Perjanjian ini dapat berakhir sebelum jangka waktunya habis apabila:</td>
         </tr>
         <tr>
             <td valign='top'></td>
@@ -179,7 +179,7 @@
         <tr>
             <td valign='top'>2.</td>
             <td valign='top' colspan=5><B>PIHAK PERTAMA</B> berhak
-                memberi tugas dan tanggungjawab kepada <B>PIHAK KEDUA</B> selain dari yang<span style='mso-spacerun:yes'>. </span>disebutkan diatas.</td>
+                memberi tugas dan tanggungjawab kepada <B>PIHAK KEDUA</B> selain dari yang disebutkan diatas.</td>
         </tr>
         <tr>
             <td valign='top'>3.</td>
