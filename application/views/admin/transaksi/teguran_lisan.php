@@ -83,7 +83,22 @@ else {
                         </div>
 
                         <?php
-                        if ($action == "view") { ?>
+                        if ($action == "view") {
+
+                            foreach ($field as $column) {
+                                $cIdSuratPeringatan     =   $column['id'];
+                                $cIdPegawai             =   $column['id_pegawai'];
+                                $cIdKategoriSurat       =   $column['id_kategori_surat'];
+                                $cJum_teguran_lisan     =   $column['jum_teguran_lisan'];
+                                $dTgl                   =   $column['tanggal'];
+                                $cNikPegawai            =   $column['nik'];
+                                $cNama                  =   $column['nama'];
+                                $cKeterangan            =   $column['keterangan_teguran'];
+                                $cIconButton            =   "refresh";
+                                $cValueButton           =   "Kembali";
+                            }
+
+                        ?>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Tertanggal: </label>
@@ -115,7 +130,7 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Jabatan :</label>
                                 <div class="col-8">
-                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="">
+                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $nj_select ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -187,7 +202,13 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Keterangan :</label>
                                 <div class="col-8">
-                                    <textarea class="form-control" name="cKet" placeholder="Keterangan" value="<?= $cKeterangan ?>"></textarea>
+                                    <?php
+                                    if ($action == "edit") { ?>
+                                        <textarea class="form-control" name="cKet" placeholder="Keterangan"> <?= $cKeterangan ?> </textarea>
+                                    <?php } else { ?>
+                                        <textarea class="form-control" name="cKet" placeholder="Keterangan">  </textarea>
+                                    <?php   } ?>
+                                    
                                 </div>
                             </div>
 
