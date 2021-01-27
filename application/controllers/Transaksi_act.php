@@ -418,17 +418,28 @@ class Transaksi_act extends CI_Controller
 	{
 
 		if ($Type == 'Insert' or $Type == 'Update') {
-
 			$dataInsert = array(
-				'tanggal'       	=>  date("Y-m-d"),
-				'no_surat'       	=>  $this->input->post('nNomorSurat'),
-				'id_pegawai'        =>  $this->input->post('cIdPegawai'),
-				'cCreate'           =>  $this->input->post('cCreate'),
+				'tanggal'       =>  date("Y-m-d"),
+				'no_surat'      =>  $this->input->post('nNomorSurat'),
+				'id_pegawai'	=>  $this->input->post('cIdPegawai'),
+				'cCreate'		=>  $this->input->post('cCreate'),
+				'is_deleted'	=>  0
 			);
-
-			$this->model->Insert('kontrak', $dataInsert);
-			redirect(site_url('transaksi/kontrak'));
+		} elseif ($Type=='Delete'){
+			$dataInsert = array(
+				'is_delete'		=>	1
+			);
 		}
+
+		if($Type == 'Insert'){
+			$this->model->Insert('kontrak', $dataInsert);	
+		} elseif($Type=='Update'){
+			$this->model->Update('kontrak', 'id_pegawai', $Id, $dataInsert);	
+		} elseif($Type=='Delete'){
+			$this->model->Update_Delete('kontrak', 'id_pegawai', $Id, $dataInsert);
+		}
+
+		redirect(site_url('transaksi/kontrak'));
 	}
 
 	public function jabatan_pegawai($Type = "", $id = "")

@@ -71,6 +71,7 @@ class Surat_act extends CI_Controller
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'keterangan'        =>  $this->input->post('cKet'),
+                'id_kategori_surat' =>  2,
 
             );
 
@@ -138,17 +139,17 @@ class Surat_act extends CI_Controller
 
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
-                'nomor_surat'           =>  $this->input->post('nNomorSurat'),
+                'nomor_surat'       =>  $this->input->post('nNomorSurat'),
                 'jum_teguran_lisan' =>  $this->input->post('tl'),
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'uraian'            =>  $this->input->post('cUraian'),
                 'keterangan'        =>  $this->input->post('cKet'),
-                'mulai_berlaku'            =>  $this->input->post('cMulai_berlaku'),
-                'berlaku_sampai'            =>  $this->input->post('cBerlaku_sampai'),
+                'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
+                'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
                 'create'            =>  $this->input->post('cCreate'),
-                'general_manager'            =>  $this->input->post('cGeneral_manager'),
-
+                'general_manager'   =>  $this->input->post('cGeneral_manager'),
+                'id_kategori_surat' =>  1,
             );
 
             $seralizedArrayInsert = serialize($dataInsert);
@@ -222,15 +223,15 @@ class Surat_act extends CI_Controller
 
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
+                'id_kategori_surat' =>  3,
                 'nomor_surat'       =>  $this->input->post('nNomorSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'uraian'            =>  $this->input->post('cUraian'),
-                'jabatan'            =>  $this->input->post('cJabatan'),
+                'jabatan'           =>  $this->input->post('cJabatan'),
                 'create'            =>  $this->input->post('cCreate'),
                 'general_manager'   =>  $this->input->post('cGeneral_manager'),
                 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
-                'id_kategori_surat'    =>  3,
             );
             // print_r($dataInsert);
             $this->model->Insert('tb_surat_peringatan', $dataInsert);
@@ -245,6 +246,7 @@ class Surat_act extends CI_Controller
 
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
+                'id_kategori_surat' =>  4,
                 'nomor_surat'       =>  $this->input->post('nNomorSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'uraian'            =>  $this->input->post('cUraian'),
@@ -266,6 +268,7 @@ class Surat_act extends CI_Controller
 
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
+                'id_kategori_surat' =>  5,
                 'nomor_surat'       =>  $this->input->post('nNomorSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'uraian'            =>  $this->input->post('cUraian'),

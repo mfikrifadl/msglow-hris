@@ -238,7 +238,7 @@ class Transaksi extends CI_Controller
 		$data['menu']   = 'Manajemen Pegawai';
 		$data['file']   = 'Form Kontrak Pegawai';
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
-		$data['row']	= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai')->result_array();
+		$data['row']	= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai WHERE t1.is_deleted=0')->result_array();
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
