@@ -221,6 +221,7 @@
                   <td>No</td>
                   <td>Kode Wawancara</td>
                   <td>Peserta</td>
+                  <td>Posisi</td>
                   <td>Status</td>
                   <td>Action</td>
                 </tr>
@@ -238,6 +239,7 @@
                       <?= ($vaArea['nomor_telepon']) ?> <br />
                       <?= ($vaArea['email']) ?>
                     </td>
+                    <td> <?= ($vaArea['job']) ?> </td>
                     <td>
                       <?php
                       if ($vaArea['recruitment'] == 'pemanggilan') {
@@ -251,6 +253,9 @@
                       <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['recruitment']) ?></span>
                     </td>
                     <td>
+                      <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $vaArea['kode_wawancara'] . '') ?>">
+                        <i class="flaticon-mail"></i>
+                      </a>
                       <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                         <i class="flaticon-edit"></i>
                       </a>

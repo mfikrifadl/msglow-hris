@@ -286,18 +286,7 @@
             <i class="kt-menu__ver-arrow la la-angle-right"></i>
           </a>
           <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-            <ul class="kt-menu__subnav">
-
-              <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('master/area_kerja'); ?>" class="kt-menu__link ">
-                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                    <span></span>
-                  </i>
-                  <span class="kt-menu__link-text">
-                    Form
-                  </span>
-                </a>
-              </li>
+            <ul class="kt-menu__subnav">           
 
               <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('transaksi/teguran_lisan'); ?>" class="kt-menu__link ">
