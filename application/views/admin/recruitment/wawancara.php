@@ -89,7 +89,7 @@
               <div class="form-group">
                 <label>Pekerjaan</label>
                 <input name="cJob" id="cJob" type="text" class="form-control" placeholder="Pekerjaan" value="<?= $cJob ?>">
-                <input type="hidden" name="cJob_id" id="cJob_id" value="<?= $cJob_id ?>">
+                <input type="text" name="cJob_id" id="cJob_id" value="<?= $cJob_id ?>">
               </div>
               <div class="form-group">
                 <label>Interviewer</label>

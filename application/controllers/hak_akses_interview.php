@@ -67,14 +67,16 @@ class hak_akses_interview extends CI_Controller
         $dataHeader['menu']     = 'Hak Akses Interview';
         $dataHeader['file']     = 'Hak Akses';
         $dataHeader['action']     = $Aksi;
-        $data['pegawais']        = $this->model->ViewASC('v_username', 'nama');
-        $data['row']        = $this->db->get_where('v_username', ['is_interview >=' =>  1])->result_array();
+        $data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan','Manager');
+        $data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan','nama_jabatan');  
+        $data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja','nama_sub_unit_kerja');       
+        $data['row']        = $this->model->ViewASC('tb_form_pengajuan','nama_pengaju_form');  
 
         $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
         $this->load->view('admin/container/footer');
     }
-    public function aksi($Aksi = "", $Id = "")
+    public function form_pengajuan($Aksi = "", $Id = "")
     {
         $dataHeader['menu']     = 'Hak Akses Interview';
         $dataHeader['file']     = 'Hak Akses';
@@ -87,8 +89,22 @@ class hak_akses_interview extends CI_Controller
             'is_interview' => 2
         );
 
+        $idForm = date('YmdHis');
+
+        $data = array(
+            'id_form'                   => $idForm,
+            'nama_pengaju_form'         => $this->input->post('cIdPegawai'),
+            'unit_kerja_pengaju_form'   => $this->input->post('cJabatan'),
+            'sub_unit_kerja_pf'         => $this->input->post('cSuk'),
+            'add_man_power_uk'          => $this->input->post('cUnit_k'),
+            'add_man_power_suk'         => $this->input->post('pSuk'),
+            'total_man_power'           => $this->input->post('jmlP'),
+        );
+        
+
         if ($Aksi == 'tambah') {
-            $this->db->update('user', $data_tambah, ['id'  => $this->input->post('cIdPegawai')]);
+            $this->model->Insert("tb_form_pengajuan", $data);
+            // $this->db->update('user', $data_tambah, ['id'  => $this->input->post('cIdPegawai')]);
         } elseif ($Aksi == 'approve') {
             $this->db->update('user', $data_approve, ['id'  => $Id]);
         } elseif ($Aksi == 'unapprove') {

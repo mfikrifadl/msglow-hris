@@ -2,6 +2,19 @@
 $cIconButton    =   "save";
 $cValueButton   =   "Pengajuan";
 $cAction        =   "Insert";
+
+if ($action == "edit") {    
+    foreach ($pegawai as $column) {        
+        $cIdPegawai         = $column['id_pegawai'];     
+    } 
+    foreach ($unit_kerja as $columnUK) {  
+        $cIdRefJabatan      = $columnUK['id_ref_jabatan'];    
+    } 
+} else {   
+    $cIdPegawai         =   "";    
+    $cIdRefJabatan      = ""; 
+}
+
 ?>
 
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
@@ -21,7 +34,7 @@ $cAction        =   "Insert";
                     </ul>
                 </div>
             </div>
-            <form method="post" enctype="multipart/form-data" action="<?= site_url('hak_akses_interview/aksi/tambah') ?>">
+            <form method="post" enctype="multipart/form-data" action="<?= site_url('hak_akses_interview/form_pengajuan/tambah') ?>">
                 <div class="col">
 
                     <!--begin::Portlet Data Keluarga-->
@@ -41,34 +54,79 @@ $cAction        =   "Insert";
                                         <!--begin::Form-->
                                         <div class="kt-portlet__body">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Nama Manager</label>
-                                                    <select name="cIdPegawai" class="form-control kt-selectpicker" data-live-search="true">
-                                                        <option></option>
-                                                        <?php foreach ($pegawais as $pegawai) { ?>
-                                                            <option value="<?= $pegawai['id'] ?>"><?= $pegawai['nama'] ?></option>
-                                                        <?php } ?>
+                                                    <select name="cIdPegawai" onchange="cek_pegawai(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                                    <option></option>
+                                                                    <?php
+                                                                    $jsArray = "var jason = new Array();\n";
+                                                                    foreach ($pegawai as $dbRow) {
+                                                                    ?>
+                                                                        <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
+                                                                            <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
+                                                                        </option>';
+                                                                    <?php
+                                                                    }
+                                                                    ?>
                                                     </select>
-
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label>NIK</label>
+                                                    <input type="text" name="cNik" id="cNik" readonly="true" value="" class="form-control">
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label>Jabatan</label>
+                                                    <input type="text" name="cJabatan" id="cJabatan" readonly="true" value="" class="form-control">
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label>Sub Unit Kerja</label>
+                                                    <input type="text" name="cSuk" id="cSuk" readonly="true" value="" class="form-control">
                                                 </div>
                                             </div> <!-- /.col-form -->
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label>Unit Kerja Manager</label>
-                                                    <input type="text" name="ukm" value="" class="form-control">
-                                                </div>
-                                            </div> <!-- /.col-form -->
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Mengajukan permohonan penambahan karyawan pada bagian : </label>
-                                                    <input type="text" name="uk" value="" class="form-control">
+                                                    <label>Mengajukan permohonan penambahan karyawan pada Unit Kerja : </label>
+                                                    <select name="cUnit_k" onchange="cek_sub_unit_kerja(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                                    <option></option>
+                                                                    <?php
+                                                                    $jsArray = "var jason = new Array();\n";
+                                                                    foreach ($unit_kerja as $rowUk) {
+                                                                    ?>
+                                                                        <option value="<?= $rowUk['id_ref_jabatan'] ?>" <?php if ($rowUk['id_ref_jabatan'] == $cIdRefJabatan) echo 'selected'; ?>>
+                                                                            <?= $rowUk['nama_jabatan'] ?>
+                                                                        </option>';
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                    </select>
                                                 </div>
                                             </div> <!-- /.col-form -->
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Sub Unit Kerja </label>
-                                                    <input type="text" name="uk" value="" class="form-control">
+                                                    <!-- <select name="pSuk" id="pSuk" class="form-control kt-selectpicker" data-live-search="true"> -->
+                                                    <select name="pSuk" class="form-control kt-selectpicker" data-live-search="true">
+                                                    <option></option>
+                                                                    <?php
+                                                                    $jsArray = "var jason = new Array();\n";
+                                                                    foreach ($sub_unit_kerja as $rowUk) {
+                                                                    ?>
+                                                                        <option value="<?= $rowUk['id_unit_kerja'] ?>" <?php //if ($rowUk['id_unit_kerja'] == $cIdUnitKerja) echo 'selected'; ?>>
+                                                                            <?= $rowUk['nama_sub_unit_kerja'] ?>
+                                                                        </option>';
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                    </select>
+                                                    <input type="hidden" name="cIdSubUnitKerja" id="cIdSubUnitKerja">
+                                                    <input type="hidden" name="cIdUnitKerja" id="cIdUnitKerja">
                                                 </div>
                                             </div> <!-- /.col-form -->
                                             <div class="col-3">
@@ -126,41 +184,53 @@ $cAction        =   "Insert";
                                                 <thead>
                                                     <tr>
                                                         <td>No</td>
-                                                        <td>Username</td>
-                                                        <td>Nama</td>
-                                                        <td>Level</td>
+                                                        <td>Nama Pengaju Form</td>
+                                                        <td>Jabatan Unit Kerja</td>
+                                                        <td>Sub Unit Kerja</td>
+                                                        <td>Tambah Pegawai Bagian</td>
+                                                        <td>Sub Unit Kerja</td>
+                                                        <td>Total</td>
                                                         <td>Action</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php $no = 0;
                                                     foreach ($row as $key => $vaArea) {
-                                                        if ($vaArea['is_deleted'] == 1) {
+                                                        if ($vaArea['is_delete'] == 1) {
                                                         } else { ?>
 
                                                             <tr>
                                                                 <td><?= ++$no; ?></td>
                                                                 <td>
-                                                                    <?= $vaArea['username'] ?>
+                                                                    <?= $vaArea['nama_pengaju_form'] ?>
                                                                 </td>
                                                                 <td>
-                                                                    <?= $vaArea['nama'] ?>
+                                                                    <?= $vaArea['unit_kerja_pengaju_form'] ?>
                                                                 </td>
                                                                 <td>
-                                                                    <?= $vaArea['level'] ?>
+                                                                    <?= $vaArea['sub_unit_kerja_pf'] ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?= $vaArea['add_man_power_uk'] ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?= $vaArea['add_man_power_suk'] ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?= $vaArea['total_man_power'] ?>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <?php if ($vaArea['is_interview'] == 1) { ?>
-                                                                        <a class="btn btn-sm btn-outline-primary btn-elevate" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah approve akun ini?'))
+                                                                    <?php //if ($vaArea['is_interview'] == 1) { ?>
+                                                                        <!-- <a class="btn btn-sm btn-outline-primary btn-elevate" title="Approve" onclick="if(confirm('Apakah anda yakin akah approve akun ini?'))
                                 { window.location.href='<?= site_url('hak_akses_interview/aksi/approve/' . $vaArea['id'] . '') ?>'}">
                                                                             Approve
-                                                                        </a>
-                                                                    <?php } else { ?>
-                                                                        <a class="btn btn-sm btn-outline-danger btn-elevate" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah unapprove akun ini?'))
+                                                                        </a> -->
+                                                                    <?php //} else { ?>
+                                                                        <!-- <a class="btn btn-sm btn-outline-danger btn-elevate" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah unapprove akun ini?'))
                                 { window.location.href='<?= site_url('hak_akses_interview/aksi/unapprove/' . $vaArea['id'] . '') ?>'}">
                                                                             UnApprove
-                                                                        </a>
-                                                                    <?php } ?>
+                                                                        </a> -->
+                                                                    <?php //} ?>
                                                                 </td>
                                                             <?php } ?>
                                                         <?php } ?>
@@ -188,3 +258,40 @@ $cAction        =   "Insert";
     </div>
     <!-- end:: Content -->
 </div>
+
+<script type="text/javascript">
+    function cek_pegawai(data) {
+        // alert(data);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                hasil = (this.responseText).split('~');
+
+                // alert (hasil);
+                document.getElementById('cNik').value = hasil[0];
+                document.getElementById('cJabatan').value = hasil[1];
+                document.getElementById('cSuk').value = hasil[2];
+
+            }
+        };
+        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai_jabatan/') ?>/" + data, true);
+        xmlhttp.send();
+    }
+    function cek_sub_unit_kerja(data) {
+        // alert(data);
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                hasil = (this.responseText).split('~');
+
+                // alert (hasil);
+                document.getElementById('cIdSubUnitKerja').value = hasil[0];
+                document.getElementById('cIdUnitKerja').value = hasil[1];
+                document.getElementById('pSuk').value = hasil[2];
+
+            }
+        };
+        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_sub_unit_kerja/') ?>/" + data, true);
+        xmlhttp.send();
+    }
+</script>

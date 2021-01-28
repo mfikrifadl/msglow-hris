@@ -846,4 +846,33 @@ class Transaksi_act extends CI_Controller
 
 		echo $nik . "~" . $jabatan . "~" . $tempat_lahir . "~" . $tanggal_lahir . "~" . $no_ktp . "~" . $alamat_asal . "~" . $nama . "~" . $tanggal_masuk_kerja . "~" . $tgl_kontrak_berakhir;
 	}
+
+	public function get_pegawai_jabatan($id = '')
+	{
+		// $db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $id);
+		$query = 'SELECT * FROM v_data_pegawai_jabatan WHERE id_pegawai = "' . $id . '" AND nama_jabatan = "Manager"';
+		$db = $this->db->query($query);
+		foreach ($db->result() as $vaData) {
+			$nik = $vaData->nik;
+			$jabatan = $vaData->nama_jabatan;
+			$sub_unit_kerja = $vaData->nama_sub_unit_kerja;
+			
+		}
+
+		echo $nik . "~" . $jabatan . "~" . $sub_unit_kerja;
+	}
+	public function get_sub_unit_kerja($id = '')
+	{
+		// $db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $id);
+		$query = 'SELECT * FROM tb_sub_unit_kerja WHERE id_unit_kerja = "' . $id . '" ';
+		$db = $this->db->query($query);
+		foreach ($db->result() as $vaData) {
+			$id_sub_unit_kerja = $vaData->id_sub_unit_kerja;
+			$id_unit_kerja = $vaData->id_unit_kerja;
+			$sub_unit_kerja = $vaData->nama_sub_unit_kerja;
+			
+		}
+
+		echo $id_sub_unit_kerja . "~" . $id_unit_kerja . "~" . $sub_unit_kerja;
+	}
 }
