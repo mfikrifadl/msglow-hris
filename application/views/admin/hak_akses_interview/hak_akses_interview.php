@@ -40,10 +40,10 @@ $cAction        =   "Insert";
                                     <div class="card-body">
                                         <!--begin::Form-->
                                         <div class="kt-portlet__body">
-
-                                            <div class="col">
+                                        <div class="row">
+                                            <div class="col-6">
                                                 <div class="form-group">
-                                                    <label>Nama Pegawai</label>
+                                                    <label>Nama Manager</label>
                                                     <select name="cIdPegawai" class="form-control kt-selectpicker" data-live-search="true">
                                                         <option></option>
                                                         <?php foreach ($pegawais as $pegawai) { ?>
@@ -53,6 +53,32 @@ $cAction        =   "Insert";
 
                                                 </div>
                                             </div> <!-- /.col-form -->
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Unit Kerja Manager</label>
+                                                    <input type="text" name="ukm" value="" class="form-control">
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Mengajukan permohonan penambahan karyawan pada bagian : </label>
+                                                    <input type="text" name="uk" value="" class="form-control">
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label>Sub Unit Kerja </label>
+                                                    <input type="text" name="uk" value="" class="form-control">
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label>Total penambahan pegawai : </label>
+                                                    <input type="text" name="jmlP" value="" class="form-control">
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                        </div>
+                                            
 
                                             <!-- /.col-form -->
                                             <div class="col-sm-12">
