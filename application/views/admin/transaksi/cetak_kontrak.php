@@ -6,6 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<?php
+function hari_ini($hari)
+{
+    switch ($hari) {
+        case 'Sun':
+            $hari_ini = "Minggu";
+            break;
+
+        case 'Mon':
+            $hari_ini = "Senin";
+            break;
+
+        case 'Tue':
+            $hari_ini = "Selasa";
+            break;
+
+        case 'Wed':
+            $hari_ini = "Rabu";
+            break;
+
+        case 'Thu':
+            $hari_ini = "Kamis";
+            break;
+
+        case 'Fri':
+            $hari_ini = "Jumat";
+            break;
+
+        case 'Sat':
+            $hari_ini = "Sabtu";
+            break;
+
+        default:
+            $hari_ini = "Tidak di ketahui";
+            break;
+    }
+    return $hari_ini;
+}
+
+function bulan_ini($bulan)
+{
+    switch ($bulan) {
+        case 'Jan':
+            $bulan_ini = "Januari";
+            break;
+
+        case 'Feb':
+            $bulan_ini = "Februari";
+            break;
+
+        case 'Mar':
+            $bulan_ini = "Maret";
+            break;
+
+        case 'Apr':
+            $bulan_ini = "April";
+            break;
+
+        case 'May':
+            $bulan_ini = "Mei";
+            break;
+
+        case 'Jun':
+            $bulan_ini = "Juni";
+            break;
+
+        case 'Jul':
+            $bulan_ini = "Juli";
+            break;
+
+        case 'Aug':
+            $bulan_ini = "Agustus";
+            break;
+
+        case 'Sep':
+            $bulan_ini = "September";
+            break;
+
+        case 'Oct':
+            $bulan_ini = "Oktober";
+            break;
+
+        case 'Nov':
+            $bulan_ini = "November";
+            break;
+
+        case 'Dec':
+            $bulan_ini = "Desember";
+            break;
+
+        default:
+            $bulan_ini = "Tidak di ketahui";
+            break;
+    }
+    return $bulan_ini;
+}
+?>
 
 <body>
     <table>
@@ -13,13 +110,13 @@
             <td valign='top' colspan=6 align="center"><B><U>PERJANJIAN KERJA WAKTU TERTENTU</U></B></td>
         </tr>
         <tr>
-            <td valign='top' colspan=6 align="center"><B><?= $data[0]['no_surat'];?></B></td>
+            <td valign='top' colspan=6 align="center"><B><?= $data[0]['no_surat']; ?></B></td>
         </tr>
         <tr>
             <td valign='top' colspan=6><br /></td>
         </tr>
         <tr>
-            <td valign='top' colspan=6>Pada hari ini, .... Tanggal <?= date('d') ?> Bulan <?= date('m') ?> Tahun <?= date('Y') ?> (
+            <td valign='top' colspan=6>Pada hari ini, <?= hari_ini(date("D")) ?> Tanggal <?= date('d') ?> Bulan <?= bulan_ini(date('M')) ?> Tahun <?= date('Y') ?> (
                 ........ ) bertempat di kantor <B>PT KOSMETIKA CANTIK INDONESIA</B> di Malang, telah
                 diadakan kesepakatan antara :</td>
         </tr>
@@ -52,7 +149,7 @@
             <td valign='top'></td>
             <td valign='top' colspan=2><span lang=SV>Tempat, Tanggal Lahir</span></td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=2></td>
+            <td valign='top' colspan=2><?= $data[0]['tempat_lahir'].', '.$data[0]['tanggal_lahir']?></td>
         </tr>
         <tr>
             <td valign='top'></td>
@@ -362,7 +459,7 @@
             <td valign='top' colspan=6 align="center"><B>PASAL 7</B></td>
         </tr>
         <tr>
-            <td valign='top' colspan=6><B>PERATURAN TATA TERTIB</B></td>
+            <td valign='top' colspan=6 align="center"><B>PERATURAN TATA TERTIB</B></td>
         </tr>
         <tr>
             <td valign='top'>1.</td>
@@ -372,24 +469,24 @@
         </tr>
         <tr>
             <td valign='top'></td>
-            <td valign='top'>a</td>
+            <td valign='top'>a.</td>
             <td valign='top' colspan=4>Alamat tempat tinggal</td>
         </tr>
         <tr>
             <td valign='top'></td>
-            <td valign='top'>b</td>
+            <td valign='top'>b.</td>
             <td valign='top' colspan=4>Keadaan keluarga
                 seperti perkawinan, kelahiran, kematian dan lain-lain.</td>
         </tr>
         <tr>
             <td valign='top'></td>
-            <td valign='top'>c</td>
+            <td valign='top'>c.</td>
             <td valign='top' colspan=4>Anggota keluarga yang
                 terdekat</td>
         </tr>
         <tr>
             <td valign='top'></td>
-            <td valign='top'>d</td>
+            <td valign='top'>d.</td>
             <td valign='top' colspan=4>Salinan Kartu Tanda
                 Penduduk (KTP) dan Kartu Keluarga.</td>
         </tr>
@@ -447,7 +544,7 @@
         <tr>
             <td valign='top'></td>
             <td valign='top'></td>
-            <td valign='top' colspan=3>Malang, <?= date('d').'-'.date('m').'-'.date('Y') ?></td>
+            <td valign='top' colspan=3>Malang, <?= date('d') . ' ' . bulan_ini(date('M')) . ' ' . date('Y') ?></td>
             <td valign='top'></td>
         </tr>
         <tr>

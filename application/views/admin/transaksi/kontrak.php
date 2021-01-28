@@ -236,6 +236,12 @@ if ($action == "edit") {
                                         <td align="center">
                                             <a class="btn-link" title="Print Kontrak" target="_blank" href="<?= site_url('Surat_act/cetak_kontrak/' . $vaPeringatan['id_pegawai'] . '') ?>">
                                                 <i class="fa fa-print"></i>
+                                            </a>|
+                                            <a class="btn-link" title="Edit Kontrak" target="_blank" href="<?= site_url('transaksi_act/kontrak/Update' . $vaPeringatan['id_pegawai'] . '') ?>">
+                                                <i class="fa fa-pen"></i>
+                                            </a>|
+                                            <a class="btn-link" title="Delete Kontrak" href="<?= site_url('transaksi_act/kontrak/Delete' . $vaPeringatan['id_pegawai'] . '') ?>">
+                                                <i class="fa fa-trash"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -261,7 +267,6 @@ if ($action == "edit") {
                 document.getElementById('ttl').value = hasil[2] + ', ' + hasil[3];
                 document.getElementById('ktp').value = hasil[4];
                 document.getElementById('alamatktp').value = hasil[5];
-                document.getElementById('cJabatan').value = hasil[6];
                 document.getElementById('dTglMasukKerja').value = hasil[7];
                 document.getElementById('dTglKontrakBerakhir').value = hasil[8];
             }
