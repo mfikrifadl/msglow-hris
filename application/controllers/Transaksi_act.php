@@ -854,25 +854,19 @@ class Transaksi_act extends CI_Controller
 		$db = $this->db->query($query);
 		foreach ($db->result() as $vaData) {
 			$nik = $vaData->nik;
+			$nama = $vaData->nama;
 			$jabatan = $vaData->nama_jabatan;
 			$sub_unit_kerja = $vaData->nama_sub_unit_kerja;
 			
 		}
 
-		echo $nik . "~" . $jabatan . "~" . $sub_unit_kerja;
+		echo $nik . "~" . $nama . "~" . $jabatan . "~" . $sub_unit_kerja;
 	}
-	public function get_sub_unit_kerja($id = '')
+	public function get_sub_unit_kerja($id)
 	{
 		// $db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $id);
-		$query = 'SELECT * FROM tb_sub_unit_kerja WHERE id_unit_kerja = "' . $id . '" ';
-		$db = $this->db->query($query);
-		foreach ($db->result() as $vaData) {
-			$id_sub_unit_kerja = $vaData->id_sub_unit_kerja;
-			$id_unit_kerja = $vaData->id_unit_kerja;
-			$sub_unit_kerja = $vaData->nama_sub_unit_kerja;
-			
-		}
-
-		echo $id_sub_unit_kerja . "~" . $id_unit_kerja . "~" . $sub_unit_kerja;
+		// $query = 'SELECT * FROM tb_sub_unit_kerja WHERE id_unit_kerja = "' . $id . '" ';
+		$data['row']	= $this->relasi->GetSubUnitKerja($id);
+		$this->load->view('admin/hak_akses_interview/tb_sub_unit_kerja', $data);
 	}
 }

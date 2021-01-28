@@ -93,7 +93,8 @@ class hak_akses_interview extends CI_Controller
 
         $data = array(
             'id_form'                   => $idForm,
-            'nama_pengaju_form'         => $this->input->post('cIdPegawai'),
+            'nik'                       => $this->input->post('cIdPegawai'),
+            'nama_pengaju_form'         => $this->input->post('cNama'),
             'unit_kerja_pengaju_form'   => $this->input->post('cJabatan'),
             'sub_unit_kerja_pf'         => $this->input->post('cSuk'),
             'add_man_power_uk'          => $this->input->post('cUnit_k'),
@@ -112,5 +113,20 @@ class hak_akses_interview extends CI_Controller
         }
 
         redirect(site_url('hak_akses_interview'));
+
     }
+
+    public function unit_kerja()
+    {
+       
+        $data_unit_kerja     = $this->db->query("SELECT * FROM tb_ref_jabatan ORDER BY nama_jabatan");  
+        return $data_unit_kerja;
+    }
+
+    public function sub_unit_kerja($id)
+    { 
+        $data_sub_unit_kerja = $this->db->query("SELECT * FROM tb_sub_unit_kerja suk LEFT JOIN tb_ref_jabatan rj ON suk.id_unit_kerja = rj.id_ref_jabatan WHERE suk.id_unit_kerja='$id'");
+        return $data_sub_unit_kerja;
+    }
+
 }

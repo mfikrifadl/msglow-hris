@@ -93,7 +93,7 @@ if ($action == "edit") {
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label>Mengajukan permohonan penambahan karyawan pada Unit Kerja : </label>
-                                                    <select name="cUnit_k" onchange="cek_sub_unit_kerja(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                                    <select name="cUnit_k" id="cUnit_k" onchange="cek_sub_unit_kerja(this.value)" class="form-control kt-selectpicker" data-live-search="true">
                                                     <option></option>
                                                                     <?php
                                                                     $jsArray = "var jason = new Array();\n";
@@ -111,20 +111,8 @@ if ($action == "edit") {
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label>Sub Unit Kerja </label>
-                                                    <!-- <select name="pSuk" id="pSuk" class="form-control kt-selectpicker" data-live-search="true"> -->
-                                                    <select name="pSuk" class="form-control kt-selectpicker" data-live-search="true">
-                                                    <option></option>
-                                                                    <?php
-                                                                    $jsArray = "var jason = new Array();\n";
-                                                                    foreach ($sub_unit_kerja as $rowUk) {
-                                                                    ?>
-                                                                        <option value="<?= $rowUk['id_unit_kerja'] ?>" <?php //if ($rowUk['id_unit_kerja'] == $cIdUnitKerja) echo 'selected'; ?>>
-                                                                            <?= $rowUk['nama_sub_unit_kerja'] ?>
-                                                                        </option>';
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                    </select>
+                                                    <div id="data_sub_unit_kerja"></div>
+                                                    
                                                     <input type="hidden" name="cIdSubUnitKerja" id="cIdSubUnitKerja">
                                                     <input type="hidden" name="cIdUnitKerja" id="cIdUnitKerja">
                                                 </div>
@@ -277,21 +265,20 @@ if ($action == "edit") {
         xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai_jabatan/') ?>/" + data, true);
         xmlhttp.send();
     }
-    function cek_sub_unit_kerja(data) {
-        // alert(data);
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                hasil = (this.responseText).split('~');
+    function cek_sub_unit_kerja(data) {        
 
-                // alert (hasil);
-                document.getElementById('cIdSubUnitKerja').value = hasil[0];
-                document.getElementById('cIdUnitKerja').value = hasil[1];
-                document.getElementById('pSuk').value = hasil[2];
+        var cUnit_k = $('#cUnit_k').val();
+        $.ajax({
+        type: "POST",
+        url: "<?= base_url() ?>transaksi_act/get_sub_unit_kerja/" + cUnit_k,
+        cache: false,
+        beforeSend: function() {
+            $('#data_sub_unit_kerja').html("Cek Data Ke Sistem .. ");
+        },
+        success: function(msg) {
+            $("#data_sub_unit_kerja").html(msg);
+        }
+        });
 
-            }
-        };
-        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_sub_unit_kerja/') ?>/" + data, true);
-        xmlhttp.send();
     }
 </script>
