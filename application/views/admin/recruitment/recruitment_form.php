@@ -193,7 +193,7 @@ $whois_date = date('d-m-Y H:i:s');
                                                 <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
                                                 </a>
-                                                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $vaArea['id_recruitment'] . '') ?>">
+                                                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-mail"></i>
                                                 </a>
                                                 <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))

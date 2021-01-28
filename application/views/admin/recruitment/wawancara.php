@@ -14,6 +14,7 @@
       $cStatus        =   $column['status'];
       $cLevel        =   $column['level_id'];
       $cJob       =   $column['job'];
+      $cJob_id          =   $column['job_id'];
       // $cTahap         =   $column['tahap'];
       $cIconButton   =   "refresh";
       $cValueButton  =   "Update Data";
@@ -32,6 +33,7 @@
     $cLevel        =   "";
     $cTahap         =   "";
     $cJob         =   "";
+    $cJob_id          =  "";
     $cIconButton  = "save";
     $cValueButton = "Save Data";
     $cAction      = "Insert";
@@ -70,12 +72,12 @@
                 <label>Kode Wawancara</label>
                 <input type="text" name="cKodeWawancara" id="cKodeWawancara" placeholder="Kode Wawancara" class="form-control" value="<?= $cKodeWawancara ?>" required>
                 <input type="hidden" value="<?= $cIdWawancara ?>" name="cIdWawancara" id="cIdWawancara">
-                <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">
+                <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">                
               </div>
               <div class="form-group">
                 <label>Nama</label>
                 <input type="text" name="cNama" id="cNama" class="form-control" placeholder="Nama Peserta" value="<?= $cNama ?>">
-              </div>
+              </div>              
               <div class="form-group">
                 <label>Nomor Telepon</label>
                 <input type="text" name="cNomorTelepon" id="cNomorTelepon" class="form-control" placeholder="Nomor Telepon" value="<?= $cNomorTelepon ?>">
@@ -83,11 +85,11 @@
               <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
-                <input type="hidden" name="whois" value="<?= $whois ?>">
               </div>
               <div class="form-group">
                 <label>Pekerjaan</label>
                 <input name="cJob" id="cJob" type="text" class="form-control" placeholder="Pekerjaan" value="<?= $cJob ?>">
+                <input type="hidden" name="cJob_id" id="cJob_id" value="<?= $cJob_id ?>">
               </div>
               <div class="form-group">
                 <label>Interviewer</label>
@@ -99,7 +101,6 @@
                     </option>
                   <?php } ?>
                 </select>
-                <input type="hidden" value="Wawancara" name="cTahap" id="cTahap">
               </div>
               <div class="form-group">
                 <label>Tanggal Wawancara</label>
@@ -113,7 +114,6 @@
                   <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
                   <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
                 </select>
-                <input type="hidden" value="Wawancara" name="cTahap" id="cTahap">
               </div>
             </div>
             <div class="kt-portlet__foot">
@@ -121,7 +121,7 @@
                 <?php
                 if ($action == 'edit') {
                 ?>
-                  <button type="button" onclick="return update('<?= $cKodeWawancara ?>');" class="btn btn-flat btn-primary">
+                  <button type="submit" class="btn btn-flat btn-primary">
                     <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                   </button>
                 <?php } else { ?>
@@ -223,6 +223,7 @@
                   <td>Peserta</td>
                   <td>Posisi</td>
                   <td>Status</td>
+                  <td>Status Email</td>
                   <td>Action</td>
                 </tr>
               </thead>
@@ -235,9 +236,10 @@
                       <strong><?= $vaArea['kode_wawancara'] ?></strong> <br />
                       <?= $vaArea['tanggal_wawancara'] ?>
                     </td>
-                    <td><?= ($vaArea['nama']) ?> <br />
-                      <?= ($vaArea['nomor_telepon']) ?> <br />
-                      <?= ($vaArea['email']) ?>
+                    <td>
+                      <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
+                      <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
+                      <b> Email : </b> <?= ($vaArea['email']) ?>
                     </td>
                     <td> <?= ($vaArea['job']) ?> </td>
                     <td>
@@ -252,8 +254,9 @@
                       ?>
                       <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['recruitment']) ?></span>
                     </td>
+                    <td> <?= ($vaArea['status_email_adm']) ?> </td>
                     <td>
-                      <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $vaArea['kode_wawancara'] . '') ?>">
+                      <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/wawancara/' . $vaArea['id_recruitment'] . '') ?>">
                         <i class="flaticon-mail"></i>
                       </a>
                       <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
@@ -299,6 +302,7 @@
                   <td>No</td>
                   <td>Kode Wawancara</td>
                   <td>Peserta</td>
+                  <td>Status Email</td>
                   <td>Action</td>
                 </tr>
               </thead>
@@ -311,11 +315,18 @@
                       <strong><?= $vaArea['kode_wawancara'] ?></strong> <br />
                       <?= $vaArea['tanggal_wawancara'] ?>
                     </td>
-                    <td><?= ($vaArea['nama']) ?> <br />
-                      <?= ($vaArea['nomor_telepon']) ?> <br />
-                      <?= ($vaArea['email']) ?>
+                    <td>
+                      <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
+                      <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
+                      <b> Email : </b> <?= ($vaArea['email']) ?>
                     </td>
                     <td>
+                      <?= ($vaArea['status_email_tidaklolos']) ?> 
+                    </td>
+                    <td>
+                      <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/wawancara/' . $vaArea['id_recruitment'] . '') ?>">
+                        <i class="flaticon-mail"></i>
+                      </a>
                       <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                         <i class="flaticon-edit"></i>
                       </a>
@@ -354,12 +365,14 @@
           var tlp = hasil.data[0].reg_tlp;
           var email = hasil.data[0].reg_email;
           var job = hasil.data[0].job_name;
+          var job_id = hasil.data[0].job_id;
 
           document.getElementById('cKodeWawancara').value = id;
           document.getElementById('cNama').value = nama;
           document.getElementById('cNomorTelepon').value = tlp;
           document.getElementById('cEmail').value = email;
           document.getElementById('cJob').value = job;
+          document.getElementById('cJob_id').value = job_id;
         }
       };
       xmlhttp.open("GET", "<?= site_url('recruitment/wawancara_id') ?>/" + id, true);
@@ -373,6 +386,7 @@
       var cNomorTelepon = $('#cNomorTelepon').val();
       var cEmail = $('#cEmail').val();
       var cJob = $('#cJob').val();
+      var cJob_id = $('#cJob_id').val();
       var cStatus = $('#cStatus').val();
       var cLevel = $('#cLevel').val();
       var whois = $('#whois').val();
@@ -389,7 +403,13 @@
           animation: 'slide',
           type: 'warning'
         });
-      } else if (cStatus == "") {
+      } else if (cLevel == "") {
+        new PNotify({
+          text: 'Interviewer belum diisi!',
+          animation: 'slide',
+          type: 'warning'
+        });
+      }else if (cStatus == "") {
         new PNotify({
           text: 'Status belum diisi!',
           animation: 'slide',
@@ -405,6 +425,7 @@
             "&cNomorTelepon=" + cNomorTelepon +
             "&cStatus=" + cStatus +
             "&cJob=" + cJob +
+            "&cJob_id=" + cJob_id +
             "&cLevel=" + cLevel +
             "&cEmail=" + cEmail,
           url: "<?= site_url('recruitment_act/wawancara/Insert') ?>",
@@ -419,46 +440,13 @@
             $('#cNomorTelepon').val("");
             $('#cEmail').val("");
             $('#cJob').val("");
+            $('#cJob_id').val("");
             $('#cStatus').val("")
             $('#cLevel').val("")
             $('#cNama').focus()
           }
         });
       }
-    }
-
-    function update(id) {
-      var cKodeWawancara = $('#cIdWawancara').val();
-      var dTglWawancara = $('#dTglWawancara').val();
-      var cNama = $('#cNama').val();
-      var cNomorTelepon = $('#cNomorTelepon').val();
-      var cEmail = $('#cEmail').val();
-      var cStatus = $('#cStatus').val();
-      var cJob = $('#cJob').val();
-      var cLevel = $('#cLevel').val();
-      var cTahap = $('#cTahap').val();
-      $.ajax({
-        type: "POST",
-        data: "cIdWawancara=" + cKodeWawancara +
-          "&dTglWawancara=" + dTglWawancara +
-          "&cNama=" + cNama +
-          "&cNomorTelepon=" + cNomorTelepon +
-          "&cStatus=" + cStatus +
-          "&cJob=" + cJob +
-          "&cTahap=" + cTahap +
-          "&cLevel=" + cLevel +
-          "&cEmail=" + cEmail,
-        url: "<?= site_url('recruitment_act/edit_wawancara') ?>/" + id,
-        cache: false,
-        success: function(msg) {
-          new PNotify({
-            title: 'Success!',
-            text: 'Berhasil Update Data',
-            type: 'success'
-          });
-          window.location.href = "<?= site_url('recruitment/wawancara') ?>";
-        }
-      });
     }
 
     function selesai() {

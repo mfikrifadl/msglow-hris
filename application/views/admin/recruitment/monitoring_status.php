@@ -32,10 +32,9 @@
                   <td>No</td>
                   <td>Kode Wawancara</td>
                   <td>Tanggal Wawancara</td>
-                  <td>Nama</td>
-                  <td>Nomor Telepon</td>
-                  <td>Email</td>
-                  <td>Status</td>
+                  <td>Data Pelamar</td>
+                  <td>Tahap Test</td>
+                  <td>Status Test</td>
                 </tr>
               </thead>
               <tbody>
@@ -50,13 +49,10 @@
                       <?= $vaArea['tanggal_wawancara'] ?>
                     </td>
                     <td>
-                      <?= $vaArea['nama'] ?>
-                    </td>
-                    <td>
-                      <?= $vaArea['nomor_telepon'] ?>
-                    </td>
-                    <td>
-                      <?= $vaArea['email'] ?>
+                      <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
+                      <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
+                      <b> Email : </b> <?= ($vaArea['email']) ?> <br />
+                      <b> Posisi : </b> <?= ($vaArea['job']) ?>
                     </td>
                     <td>
 
@@ -67,18 +63,25 @@
                         $cLabel = 'danger';
                       } else  $cLabel = 'info';
                       ?>
-                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?php if ($vaArea['status'] == 'lolos') echo 'Lolos';
-                                                                                                      elseif ($vaArea['status'] == 'tidaklolos') echo 'tidak lolos';
-                                                                                                      elseif ($vaArea['interview_hrga'] != null) echo 'Interview HRGA';
-                                                                                                      elseif ($vaArea['interview_user_2'] != null) echo 'Interview User 2';
-                                                                                                      elseif ($vaArea['interview_user_1'] != null) echo 'Interview User 1';
-                                                                                                      elseif ($vaArea['uji_kompetensi'] != null) echo 'Uji Kompetensi';
-                                                                                                      elseif ($vaArea['psiko_test'] != null) echo 'Psiko Test';
-                                                                                                      elseif ($vaArea['recruitment'] != null) echo 'Administrasi';
-                                                                                                      else echo $vaArea['status'] ?></span>
+                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                        <?= $vaArea['tahap_r'] ?>
+                      </span>
                       <!-- <label class="label label-<?= $cLabel ?>"><?= ($vaArea['status']) ?></label> -->
 
                     </td>
+                    <td>
+                      <?php
+                      if ($vaArea['recruitment'] == 'lolos') {
+                        $cLabel = 'success';
+                      } else if ($vaArea['recruitment'] == 'tidaklolos') {
+                        $cLabel = 'danger';
+                      } else  $cLabel = 'info';
+                      ?>
+                      <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                        <?= $vaArea['recruitment'] ?>
+                      </span>
+                    </td>
+
                   </tr>
                 <?php } ?>
               </tbody>
@@ -110,11 +113,10 @@
                 <tr>
                   <td>No</td>
                   <td>Kode Wawancara</td>
-                  <td>Nama</td>
-                  <td>Nomor Telepon</td>
-                  <td>Email</td>
+                  <td>Data Pelamar</td>
                   <td>Nilai Tes</td>
-                  <td>Status</td>
+                  <td>Tahap Test</td>
+                  <td>Status Test</td>
                 </tr>
               </thead>
               <tbody>
@@ -130,13 +132,10 @@
                         <?= $vaArea2['kode_wawancara'] ?>
                       </td>
                       <td>
-                        <?= $vaArea2['nama'] ?>
-                      </td>
-                      <td>
-                        <?= $vaArea2['nomor_telepon'] ?>
-                      </td>
-                      <td>
-                        <?= $vaArea2['email'] ?>
+                        <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
+                        <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
+                        <b> Email : </b> <?= ($vaArea['email']) ?> <br />
+                        <b> Posisi : </b> <?= ($vaArea['job']) ?>
                       </td>
                       <td><?= ($vaArea2['total_nilai']) ?> <br />
                       </td>
@@ -150,15 +149,20 @@
                           $cLabel = 'info';
                         }
                         ?>
-                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?php if ($vaArea2['status'] == 'lolos') echo 'Lolos';
-                                                                                                        elseif ($vaArea['status'] == 'tidaklolos') echo 'tidak lolos';
-                                                                                                        elseif ($vaArea2['interview_hrga'] != null) echo 'Interview HRGA';
-                                                                                                        elseif ($vaArea2['interview_user_2'] != null) echo 'Interview User 2';
-                                                                                                        elseif ($vaArea2['interview_user_1'] != null) echo 'Interview User 1';
-                                                                                                        elseif ($vaArea2['uji_kompetensi'] != null) echo 'Uji Kompetensi';
-                                                                                                        elseif ($vaArea2['psiko_test'] != null) echo 'Psiko Test';
-                                                                                                        elseif ($vaArea2['recruitment'] != null) echo 'Administrasi';
-                                                                                                        else echo $vaArea2['status'] ?></span>
+                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                          <?= $vaArea['tahap_r'] ?>
+                        </span>
+                      </td>
+                      <td><?php
+                          if ($vaArea['recruitment'] == 'lolos') {
+                            $cLabel = 'success';
+                          } else if ($vaArea['recruitment'] == 'tidaklolos') {
+                            $cLabel = 'danger';
+                          } else  $cLabel = 'info';
+                          ?>
+                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                          <?= $vaArea['recruitment'] ?>
+                        </span>
                       </td>
                     </tr>
 

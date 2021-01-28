@@ -123,66 +123,79 @@ class Recruitment_act extends CI_Controller
 
 	public function wawancara($Type = "", $id = "")
 	{
+		
 		$data_create = array(
-			'kode_wawancara' => $this->input->post('cKodeWawancara'),
+			'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
 			'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
-			'nama'	=> $this->input->post('cNama'),
-			'created_by'	=> $this->input->post('whois'),
-			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
-			'recruitment'	=> $this->input->post('cStatus'),
-			'job'	=> $this->input->post('cJob'),
-			'email'	=> $this->input->post('cEmail'),
-			'level_id'	=> $this->input->post('cLevel'),
-			'status'	=> 'pending',
-			'tahap_r'	=> 'Test Administrasi',
+			'nama'				=> $this->input->post('cNama'),
+			'created_by'		=> $this->input->post('whois'),
+			'nomor_telepon'		=> $this->input->post('cNomorTelepon'),
+			'recruitment'		=> $this->input->post('cStatus'),
+			'job'				=> $this->input->post('cJob'),
+			'job_id'			=> $this->input->post('cJob_id'),
+			'email'				=> $this->input->post('cEmail'),
+			'status_email_adm'	=> 'Belum Kirim Email',
+			'level_id'			=> $this->input->post('cLevel'),
+			'status'			=> 'pending',
+			'tahap_r'			=> 'Test Administrasi',
 		);
 
 		$data_update = array(
-			'kode_wawancara' => $this->input->post('cKodeWawancara'),
+			'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
+			'update_by'			=> $this->input->post('whois'),
+			'nama'				=> $this->input->post('cNama'),
+			'nomor_telepon'		=> $this->input->post('cNomorTelepon'),
+			'email'				=> $this->input->post('cEmail'),
+			'job'				=> $this->input->post('cJob'),
+			'job_id'			=> $this->input->post('cJob_id'),
+			'level_id'			=> $this->input->post('cLevel'),
+			'tahap_r'			=> 'Test Administrasi',
 			'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
-			'nama'	=> $this->input->post('cNama'),
-			'update_by'	=> $this->input->post('whois'),
-			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
-			'recruitment'	=> $this->input->post('cStatus'),
-			'job'	=> $this->input->post('cJob'),
-			'level_id'	=> $this->input->post('cLevel'),
-			'email'	=> $this->input->post('cEmail'),
-			'tahap_r'	=> 'Test Administrasi',
+			'recruitment'		=> $this->input->post('cStatus'),
+			'status_email_adm'	=> 'Belum Kirim Email',	
+		);
+
+		$data_delete = array(
+			'status_email_adm'	=> 'Belum Kirim Email',
+			'is_delete' => 1
 		);
 
 		$data = array(
-			'kode_wawancara' => $this->input->post('cKodeWawancara'),
+			'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
 			'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
-			'nama'	=> $this->input->post('cNama'),
-			'created_by'	=> $this->input->post('whois'),
-			'update_by'	=> $this->input->post('whois'),
-			'nomor_telepon'	=> $this->input->post('cNomorTelepon'),
-			'recruitment'	=> $this->input->post('cStatus'),
-			'job'	=> $this->input->post('cJob'),
-			'level_id'	=> $this->input->post('cLevel'),
-			'email'	=> $this->input->post('cEmail'),
-			'tahap_r'	=> 'Test Administrasi',
+			'nama'				=> $this->input->post('cNama'),
+			'created_by'		=> $this->input->post('whois'),
+			'update_by'			=> $this->input->post('whois'),
+			'nomor_telepon'		=> $this->input->post('cNomorTelepon'),
+			'recruitment'		=> $this->input->post('cStatus'),
+			'job'				=> $this->input->post('cJob'),
+			'job_id'			=> $this->input->post('cJob_id'),
+			'level_id'			=> $this->input->post('cLevel'),
+			'email'				=> $this->input->post('cEmail'),
+			'tahap_r'			=> 'Test Administrasi',
 		);
 
 		$seralizedArray = serialize($data);
 		$vaLog = array(
-			'tgl' => $this->Date2String($this->DateStamp()),
-			'waktu' => $this->TimeStamp(),
-			'nama_table' => 'recruitment',
-			'action' => $Type,
-			'query' => $seralizedArray,
-			'nama' => $this->session->userdata('nama')
+			'tgl' 			=> $this->Date2String($this->DateStamp()),
+			'waktu' 		=> $this->TimeStamp(),
+			'nama_table' 	=> 'recruitment',
+			'action' 		=> $Type,
+			'query' 		=> $seralizedArray,
+			'nama' 			=> $this->session->userdata('nama')
 		);
 		$this->model->Insert("log", $vaLog);
 
 		if ($Type == "Insert") {
 			$this->model->Insert('recruitment', $data_create);
 			$this->model->Insert("log", $vaLog);
+			redirect(site_url('recruitment/wawancara/'));
 		} elseif ($Type == "Update") {
-			$this->model->Update('recruitment', 'id_recruitment', $id, $data_update);
+			$this->model->Update('recruitment', 'kode_wawancara', $id, $data_update);
 			$this->model->Insert("log", $vaLog);
+			redirect(site_url('recruitment/wawancara/'));
 		} elseif ($Type == "Delete") {
-			$this->model->Delete('recruitment', 'id_recruitment', $id);
+			$this->model->Update_Delete('recruitment', 'kode_wawancara', $id, $data_delete);
 			redirect(site_url('recruitment/wawancara/'));
 		}
 	}
@@ -230,12 +243,14 @@ class Recruitment_act extends CI_Controller
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_psiko_test'	=> $this->input->post('nNilaiTes'),
 			'tgl_psiko_test'	=> $this->input->post('dTglWawancara'),
-			'psiko_test'	=> $this->input->post('cStatus'),
+			'status_email_p'	=> 'Belum Kirim Email',
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tahap_r'	=> 'Psikotest',
 		);
 
 		$data_update_delete = array(
 			'is_delete' => 1,
+			'status_email_p'	=> 'Belum Kirim Email',
 			'delete_by'	=> $whois,
 			'delete_date'	=> $whois_date,
 
@@ -246,8 +261,9 @@ class Recruitment_act extends CI_Controller
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_psiko_test'	=> $this->input->post('nNilaiTes'),
 			'tgl_psiko_test'	=> $this->input->post('dTglWawancara'),
-			'psiko_test'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tahap_r'	=> 'Psikotest',
+			'status_email_p'	=> 'Belum Kirim Email',
 		);
 
 		$seralizedArray = serialize($data);
@@ -286,13 +302,15 @@ class Recruitment_act extends CI_Controller
 			'update_by'	=> $this->input->post('whois'),
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_uji_kompetensi'	=> $this->input->post('nNilaiTes'),
-			'uji_kompetensi'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_uji_kompetensi'	=> $this->input->post('dTglWawancara'),
 			'tahap_r'	=> 'Uji Kompetensi',
+			'status_email_uk'	=> 'Belum Kirim Email',
 		);
 
 		$data_update_delete = array(
 			'is_delete' => 1,
+			'status_email_uk'	=> 'Belum Kirim Email',
 			'delete_by'	=> $whois,
 			'delete_date'	=> $whois_date,
 
@@ -302,9 +320,10 @@ class Recruitment_act extends CI_Controller
 			'id_wawancara' => $this->input->post('cIdTest'),
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_uji_kompetensi'	=> $this->input->post('nNilaiTes'),
-			'uji_kompetensi'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_uji_kompetensi'	=> $this->input->post('dTglWawancara'),
 			'tahap_r'	=> 'Uji Kompetensi',
+			'status_email_uk'	=> 'Belum Kirim Email',
 		);
 
 		$seralizedArray = serialize($data);
@@ -342,13 +361,15 @@ class Recruitment_act extends CI_Controller
 			'update_by'	=> $this->input->post('whois'),
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_interview_user_1'	=> $this->input->post('nNilaiTes'),
-			'interview_user_1'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_interview_user_1'	=> $this->input->post('dTglWawancara'),
 			'tahap_r'	=> 'Interview User 1',
+			'status_email_u1'	=> 'Belum Kirim Email',
 		);
 
 		$data_update_delete = array(
 			'is_delete' => 1,
+			'status_email_u1'	=> 'Belum Kirim Email',
 			'delete_by'	=> $whois,
 			'delete_date'	=> $whois_date,
 
@@ -358,9 +379,10 @@ class Recruitment_act extends CI_Controller
 			'id_wawancara' => $this->input->post('cIdTest'),
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_interview_user_1'	=> $this->input->post('nNilaiTes'),
-			'interview_user_1'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_interview_user_1'	=> $this->input->post('dTglWawancara'),
 			'tahap_r'	=> 'Interview User 1',
+			'status_email_u1'	=> 'Belum Kirim Email',
 		);
 
 		$seralizedArray = serialize($data);
@@ -398,13 +420,15 @@ class Recruitment_act extends CI_Controller
 			'update_by'	=> $this->input->post('whois'),
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_interview_user_2'	=> $this->input->post('nNilaiTes'),
-			'interview_user_2'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_interview_user_2'	=> $this->input->post('dTglWawancara'),
 			'tahap_r'	=> 'Interview User 2',
+			'status_email_u2'	=> 'Belum Kirim Email',
 		);
 
 		$data_update_delete = array(
 			'is_delete' => 1,
+			'status_email_u2'	=> 'Belum Kirim Email',
 			'delete_by'	=> $whois,
 			'delete_date'	=> $whois_date,
 
@@ -414,9 +438,10 @@ class Recruitment_act extends CI_Controller
 			'id_wawancara' => $this->input->post('cIdTest'),
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_interview_user_2'	=> $this->input->post('nNilaiTes'),
-			'interview_user_2'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_interview_user_2'	=> $this->input->post('dTglWawancara'),
 			'tahap_r'	=> 'Interview User 2',
+			'status_email_u2'	=> 'Belum Kirim Email',
 		);
 
 		$seralizedArray = serialize($data);
@@ -454,14 +479,16 @@ class Recruitment_act extends CI_Controller
 			'update_by'	=> $this->input->post('whois'),
 			'update_date'	=> $this->input->post('whois_date'),
 			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
-			'interview_hrga'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
 			'status'	=> 'validasi',
 			'tahap_r'	=> 'Interview HRGA',
+			'status_email_hrga'	=> 'Belum Kirim Email',
 		);
 
 		$data_update_delete = array(
 			'is_delete' => 1,
+			'status_email_hrga'	=> 'Belum Kirim Email',
 			'delete_by'	=> $whois,
 			'delete_date'	=> $whois_date,
 
@@ -471,10 +498,11 @@ class Recruitment_act extends CI_Controller
 			'id_wawancara' => $this->input->post('cIdTest'),
 			'kode_wawancara'	=> $cKodeWawancara,
 			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
-			'interview_hrga'	=> $this->input->post('cStatus'),
+			'recruitment'	=> $this->input->post('cStatus'),
 			'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
 			'status'	=> 'validasi',
 			'tahap_r'	=> 'Interview HRGA',
+			'status_email_hrga'	=> 'Belum Kirim Email',
 		);
 
 		$seralizedArray = serialize($data);
