@@ -205,7 +205,7 @@
         <li class="kt-menu__item" aria-haspopup="true">
           <a href="<?= site_url('hak_akses_interview'); ?>" class="kt-menu__link ">
             <i class="kt-menu__link-icon flaticon2-document"></i>
-            <span class="kt-menu__link-text">Pengajuan Hak Interview </span>
+            <span class="kt-menu__link-text">Pengajuan Tambah Karyawan </span>
           </a>
         </li>
 
