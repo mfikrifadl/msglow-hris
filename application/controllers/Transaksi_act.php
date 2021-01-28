@@ -427,7 +427,7 @@ class Transaksi_act extends CI_Controller
 			);
 		} elseif ($Type=='Delete'){
 			$dataInsert = array(
-				'is_delete'		=>	1
+				'is_deleted'		=>	1
 			);
 		}
 

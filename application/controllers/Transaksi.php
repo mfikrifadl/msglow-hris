@@ -234,14 +234,26 @@ class Transaksi extends CI_Controller
 
 	public function kontrak($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'Manajemen Pegawai';
-		$data['file']   = 'Form Kontrak Pegawai';
-		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
-		$data['row']	= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai WHERE t1.is_deleted=0')->result_array();
-		$data['Nolast']	= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
-		if ($Aksi == 'edit') {
-			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+		$data['action'] 	= $Aksi;
+		$data['menu']   	= 'Manajemen Pegawai';
+		$data['file']   	= 'Form Kontrak Pegawai';
+		$data['pegawai'] 	= $this->model->View('tb_pegawai', 'id_pegawai');
+		$data['row']		= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai WHERE t1.is_deleted=0')->result_array();
+		$data['Nolast']		= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
+		if ($Aksi == 'Update') {
+			$data['field'] 	= $this->db->query('SELECT * FROM
+													kontrak
+													INNER JOIN
+													tb_pegawai
+													ON 
+														kontrak.id_pegawai = tb_pegawai.id_pegawai
+													INNER JOIN
+													tb_ref_jabatan
+													INNER JOIN
+													tb_jabatan_pegawai
+													ON 
+														tb_ref_jabatan.id_ref_jabatan = tb_jabatan_pegawai.id_ref_jabatan AND
+														tb_pegawai.id_pegawai = tb_jabatan_pegawai.id_pegawai')->result_array();
 		}
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/kontrak', $data);
