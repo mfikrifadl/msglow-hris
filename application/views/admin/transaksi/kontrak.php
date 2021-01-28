@@ -39,36 +39,39 @@ if ($Nolast->num_rows() > 0) {
 $cNomorSuratFix = "No." . "####" . "/CNTK-ID/PKWT/" . $cRomawai . "/" . date("Y") . " ";
 ?>
 <?php
-if ($action == "edit") {
+if ($action == "Update") {
     foreach ($field as $column) {
-        $cIdSuratPeringatan =   $column['id'];
-        $cIdKategoriSurat   =   $column['id_kategori_surat'];
-        $dTgl               =   $column['tanggal'];
-        $nNomorSurat        =   $column['nomor_surat'];
-        $cIdPegawai         =   $column['id_pegawai'];
-        $cOutlet            =   $column['outlet'];
-        $cUraian            =   $column['uraian'];
-        $cKeterangan        =   $column['keterangan'];
-        $cCreate            =   $column['create'];
-        $cCC                =   $column['cc'];
-        $cIconButton        =   "refresh";
-        $cValueButton       =   "Update Data";
+        $cId          =   $column['id'];
+        $nNomorSurat  =   $column['no_surat'];
+        $cIdPegawai   =   $column['id_pegawai'];
+        $cNik         =   $column['nik'];
+        $cCreate      =   $column['cCreate'];
+        $cTtl         =   $column['tempat_lahir'].', '.$column['tanggal_lahir'];
+        $cKtp         =   $column['no_ktp'];
+        $cAlamat      =   $column['alamat_asal'];
+        $cJabatan     =   $column['nama_jabatan'];
+        $cMasuk       =   $column['tanggal_masuk_kerja'];
+        $cAkhir       =   $column['tgl_kontrak_berakhir'];
+        $cIconButton  =   "refresh";
+        $cValueButton =   "Update Data";
     }
-    $cAction = "Update/" . $cIdSuratPeringatan . "";
+    $cAction = "Update/" . $cId . "";
 } else {
-    $cIdSuratPeringatan =   "";
-    $cIdKategoriSurat   =   "";
-    $dTgl               =   "";
-    $nNomorSurat        =   $cNomorSuratFix;
+    $cId                =   "";
+    $nNomorSurat        =   "";
     $cIdPegawai         =   "";
-    $cOutlet            =   "";
-    $cUraian            =   "";
-    $cKeterangan        =   "";
+    $cNik               =   "";
+    $nNomorSurat        =   $cNomorSuratFix;
+    $cTtl               =   "";
+    $cKtp               =   "";
+    $cAlamat            =   "";$cKeterangan        =   "";
     $cCreate            =   $this->session->userdata('nama');
-    $cCC                =   "";
-    $cIconButton    =   "save";
-    $cValueButton   =   "Save Data";
-    $cAction        =   "Insert";
+    $cJabatan           =   "";
+    $cMasuk             =   "";
+        $cAkhir         =   "";
+    $cIconButton        =   "save";
+    $cValueButton       =   "Save Data";
+    $cAction            =   "Insert";
 }
 ?>
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
@@ -126,7 +129,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>NIK</label>
                                 <div class="input-group">
-                                    <input type="text" name="cNik" id="cNik" class="form-control">
+                                    <input type="text" name="cNik" id="cNik" class="form-control" value="<?= $cNik ?>">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -135,7 +138,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Tempat Tanggal Lahir</label>
                                 <div class="input-group">
-                                    <input type="text" name="ttl" id="ttl" class="form-control" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="ttl" id="ttl" class="form-control" data-date-format="dd/mm/yyyy" value="<?= $cTtl ?>">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -144,7 +147,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Nomor KTP</label>
                                 <div class="input-group">
-                                    <input type="text" name="ktp" id="ktp" class="form-control" placeholder="Nomor KTP" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="ktp" id="ktp" class="form-control" placeholder="Nomor KTP" value="<?= $cKtp ?>">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -153,7 +156,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Alamat Sesuai KTP</label>
                                 <div class="input-group">
-                                    <textarea type="text" name="alamatktp" id="alamatktp" class="form-control" placeholder="Alamat Sesuai KTP" data-date-format="dd/mm/yyyy"></textarea>
+                                    <textarea type="text" name="alamatktp" id="alamatktp" class="form-control" placeholder="Alamat Sesuai KTP"><?= $cAlamat ?></textarea>
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -162,7 +165,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Jabatan</label>
                                 <div class="input-group">
-                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" placeholder="jabatan" data-date-format="dd/mm/yyyy">
+                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" placeholder="jabatan" value="<?= $cJabatan ?>">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -180,7 +183,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Tanggal Masuk Kerja</label>
                                 <div class="input-group">
-                                    <input type="date" name="dTglMasukKerja" id="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy">
+                                    <input type="date" name="dTglMasukKerja" id="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" value="<?= $cMasuk ?>">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
                                     </div>
@@ -189,7 +192,7 @@ if ($action == "edit") {
                             <div class="form-group">
                                 <label>Tanggal Kontrak Berakhir</label>
                                 <div class="input-group">
-                                    <input type="date" name="dTglKontrakBerakhir" id="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy">
+                                    <input type="date" name="dTglKontrakBerakhir" id="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" value="<?= $cAkhir ?>">
                                     <input type="hidden" name="cCreate" value="<?= $cCreate ?>">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar-o"></i>
@@ -197,7 +200,7 @@ if ($action == "edit") {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit">Save Data</button>
+                                <button type="submit" class="btn btn-flat btn-primary"><?=$cValueButton?></button>
                             </div>
                         </div>
                     </form>
@@ -237,10 +240,10 @@ if ($action == "edit") {
                                             <a class="btn-link" title="Print Kontrak" target="_blank" href="<?= site_url('Surat_act/cetak_kontrak/' . $vaPeringatan['id_pegawai'] . '') ?>">
                                                 <i class="fa fa-print"></i>
                                             </a>|
-                                            <a class="btn-link" title="Edit Kontrak" target="_blank" href="<?= site_url('transaksi_act/kontrak/Update' . $vaPeringatan['id_pegawai'] . '') ?>">
+                                            <a class="btn-link" title="Edit Kontrak" target="_blank" href="<?= site_url('transaksi/kontrak/Update/' . $vaPeringatan['id'] . '') ?>">
                                                 <i class="fa fa-pen"></i>
                                             </a>|
-                                            <a class="btn-link" title="Delete Kontrak" href="<?= site_url('transaksi_act/kontrak/Delete' . $vaPeringatan['id_pegawai'] . '') ?>">
+                                            <a class="btn-link" title="Delete Kontrak" href="<?= site_url('transaksi_act/kontrak/Delete/' . $vaPeringatan['id_pegawai'] . '') ?>">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>
