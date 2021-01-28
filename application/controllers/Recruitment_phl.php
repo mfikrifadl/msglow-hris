@@ -30,7 +30,7 @@ class Recruitment_phl extends CI_Controller
         $data['row']        = $this->model->ViewWhereNot('recruitment_phl', 'administrasi', 'tidaklolos');
         $data['tdklolos']    = $this->model->ViewWhere('recruitment_phl', 'administrasi', 'tidaklolos');
 
-        $url                 = 'http://127.0.0.1/career/administrator/rest_api/';
+        $url                 = 'http://127.0.0.1/msglow-career/administrator/rest_api/';
         $content             = file_get_contents($url); // put the contents of the file into a variable
         $data2                 = json_decode($content, true);
         $data['registrant']    = $data2['data'];
