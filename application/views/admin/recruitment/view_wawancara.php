@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="col-lg-10 kt-align-center">
                                         <h4 style="text-align: center; width: 100%;">Curriculum Vitae(CV)</h4>
-                                        <iframe height="1000px" width="70%" src="<?php echo "http://192.168.100.16/career2/" . $row['reg_cv'] . "/" . $row['reg_judul']; ?>" style="width:100%; border:none;"></iframe>
+                                        <iframe height="1000px" width="70%" src="<?= "http://localhost/msglow-career/" . $row['reg_cv'] . "/" . $row['reg_judul']; ?>" style="width:100%; border:none;"></iframe>
                                     </div>
                                     <div class="col-lg-1 kt-align-center">
 
