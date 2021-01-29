@@ -425,17 +425,17 @@ class Transaksi_act extends CI_Controller
 				'cCreate'		=>  $this->input->post('cCreate'),
 				'is_deleted'	=>  0
 			);
-		} elseif ($Type=='Delete'){
+		} elseif ($Type == 'Delete') {
 			$dataInsert = array(
 				'is_deleted'		=>	1
 			);
 		}
 
-		if($Type == 'Insert'){
-			$this->model->Insert('kontrak', $dataInsert);	
-		} elseif($Type=='Update'){
-			$this->model->Update('kontrak', 'id_pegawai', $Id, $dataInsert);	
-		} elseif($Type=='Delete'){
+		if ($Type == 'Insert') {
+			$this->model->Insert('kontrak', $dataInsert);
+		} elseif ($Type == 'Update') {
+			$this->model->Update('kontrak', 'id_pegawai', $Id, $dataInsert);
+		} elseif ($Type == 'Delete') {
 			$this->model->Update_Delete('kontrak', 'id_pegawai', $Id, $dataInsert);
 		}
 
@@ -857,15 +857,12 @@ class Transaksi_act extends CI_Controller
 			$nama = $vaData->nama;
 			$jabatan = $vaData->nama_jabatan;
 			$sub_unit_kerja = $vaData->nama_sub_unit_kerja;
-			
 		}
 
 		echo $nik . "~" . $nama . "~" . $jabatan . "~" . $sub_unit_kerja;
 	}
 	public function get_sub_unit_kerja($id)
 	{
-		// $db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $id);
-		// $query = 'SELECT * FROM tb_sub_unit_kerja WHERE id_unit_kerja = "' . $id . '" ';
 		$data['row']	= $this->relasi->GetSubUnitKerja($id);
 		$this->load->view('admin/hak_akses_interview/tb_sub_unit_kerja', $data);
 	}

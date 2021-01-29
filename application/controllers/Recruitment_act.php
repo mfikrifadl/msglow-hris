@@ -123,7 +123,7 @@ class Recruitment_act extends CI_Controller
 
 	public function wawancara($Type = "", $id = "")
 	{
-		
+
 		$data_create = array(
 			'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
 			'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
@@ -152,7 +152,7 @@ class Recruitment_act extends CI_Controller
 			'tahap_r'			=> 'Test Administrasi',
 			'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
 			'recruitment'		=> $this->input->post('cStatus'),
-			'status_email_adm'	=> 'Belum Kirim Email',	
+			'status_email_adm'	=> 'Belum Kirim Email',
 		);
 
 		$data_delete = array(

@@ -72,12 +72,12 @@
                 <label>Kode Wawancara</label>
                 <input type="text" name="cKodeWawancara" id="cKodeWawancara" placeholder="Kode Wawancara" class="form-control" value="<?= $cKodeWawancara ?>" required>
                 <input type="hidden" value="<?= $cIdWawancara ?>" name="cIdWawancara" id="cIdWawancara">
-                <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">                
+                <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">
               </div>
               <div class="form-group">
                 <label>Nama</label>
                 <input type="text" name="cNama" id="cNama" class="form-control" placeholder="Nama Peserta" value="<?= $cNama ?>">
-              </div>              
+              </div>
               <div class="form-group">
                 <label>Nomor Telepon</label>
                 <input type="text" name="cNomorTelepon" id="cNomorTelepon" class="form-control" placeholder="Nomor Telepon" value="<?= $cNomorTelepon ?>">
@@ -321,7 +321,7 @@
                       <b> Email : </b> <?= ($vaArea['email']) ?>
                     </td>
                     <td>
-                      <?= ($vaArea['status_email_tidaklolos']) ?> 
+                      <?= ($vaArea['status_email_tidaklolos']) ?>
                     </td>
                     <td>
                       <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/wawancara/' . $vaArea['id_recruitment'] . '') ?>">
@@ -409,7 +409,7 @@
           animation: 'slide',
           type: 'warning'
         });
-      }else if (cStatus == "") {
+      } else if (cStatus == "") {
         new PNotify({
           text: 'Status belum diisi!',
           animation: 'slide',

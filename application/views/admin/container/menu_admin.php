@@ -286,7 +286,7 @@
             <i class="kt-menu__ver-arrow la la-angle-right"></i>
           </a>
           <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-            <ul class="kt-menu__subnav">           
+            <ul class="kt-menu__subnav">
 
               <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('transaksi/teguran_lisan'); ?>" class="kt-menu__link ">

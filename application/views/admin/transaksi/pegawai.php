@@ -77,7 +77,7 @@ if ($action == "edit") {
   foreach ($lastno->result_array() as $key => $vaDataLast) {
     (int)$last = $vaDataLast['nik'];
   }
-  $last2 = $last+1;
+  $last2 = $last + 1;
   $tahun = date('y');
   $bulan = date('m');
   $no_urut = '99' . $tahun . $bulan . $last2;

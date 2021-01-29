@@ -67,10 +67,10 @@ class hak_akses_interview extends CI_Controller
         $dataHeader['menu']     = 'Hak Akses Interview';
         $dataHeader['file']     = 'Hak Akses';
         $dataHeader['action']     = $Aksi;
-        $data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan','Manager');
-        $data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan','nama_jabatan');  
-        $data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja','nama_sub_unit_kerja');       
-        $data['row']        = $this->model->ViewASC('tb_form_pengajuan','nama_pengaju_form');  
+        $data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan', 'Manager');
+        $data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
+        $data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
+        $data['row']        = $this->model->ViewASC('v_form_pengajuan', 'nama_pengaju_form');
 
         $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
@@ -98,35 +98,37 @@ class hak_akses_interview extends CI_Controller
             'unit_kerja_pengaju_form'   => $this->input->post('cJabatan'),
             'sub_unit_kerja_pf'         => $this->input->post('cSuk'),
             'add_man_power_uk'          => $this->input->post('cUnit_k'),
-            'add_man_power_suk'         => $this->input->post('pSuk'),
+            'id_sub_unit_kerja'         => $this->input->post('pSuk'),
             'total_man_power'           => $this->input->post('jmlP'),
         );
-        
+
 
         if ($Aksi == 'tambah') {
             $this->model->Insert("tb_form_pengajuan", $data);
             // $this->db->update('user', $data_tambah, ['id'  => $this->input->post('cIdPegawai')]);
         } elseif ($Aksi == 'approve') {
             $this->db->update('user', $data_approve, ['id'  => $Id]);
-        } elseif ($Aksi == 'unapprove') {
+        }
+        // elseif ($Aksi == 'edit') {
+        //     $data['subUnitKerja']	= $this->model->ViewWhere('tb_sub_unit_kerja', 'id_Unit_kerja', $Id);
+        // }
+        elseif ($Aksi == 'unapprove') {
             $this->db->update('user', $data_tambah, ['id'  => $Id]);
         }
 
         redirect(site_url('hak_akses_interview'));
-
     }
 
     public function unit_kerja()
     {
-       
-        $data_unit_kerja     = $this->db->query("SELECT * FROM tb_ref_jabatan ORDER BY nama_jabatan");  
+
+        $data_unit_kerja     = $this->db->query("SELECT * FROM tb_ref_jabatan ORDER BY nama_jabatan");
         return $data_unit_kerja;
     }
 
     public function sub_unit_kerja($id)
-    { 
+    {
         $data_sub_unit_kerja = $this->db->query("SELECT * FROM tb_sub_unit_kerja suk LEFT JOIN tb_ref_jabatan rj ON suk.id_unit_kerja = rj.id_ref_jabatan WHERE suk.id_unit_kerja='$id'");
         return $data_sub_unit_kerja;
     }
-
 }

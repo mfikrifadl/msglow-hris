@@ -135,7 +135,7 @@ $whois_date = date('d-m-Y H:i:s');
                                                 No : Telepon <?= $vaArea['nomor_telepon'] ?> <br />
                                                 Email : <?= $vaArea['email'] ?> <br />
                                             </strong>
-                                            
+
                                         </td>
                                         <td><?= ($vaArea[$nilai_test]) ?> <br />
                                         </td>
@@ -156,33 +156,33 @@ $whois_date = date('d-m-Y H:i:s');
                                         <td>
                                             <?php
                                             if ($controller_name == "psiko_test") {
-                                                if($vaArea['status_email_p'] == NULL){
+                                                if ($vaArea['status_email_p'] == NULL) {
                                                     echo "Belum Kirim Email";
-                                                }else{
+                                                } else {
                                                     echo "$vaArea[status_email_p]";
                                                 }
-                                            } elseif($controller_name == "uji_kompetensi") {
-                                                if($vaArea['status_email_uk'] == NULL){
+                                            } elseif ($controller_name == "uji_kompetensi") {
+                                                if ($vaArea['status_email_uk'] == NULL) {
                                                     echo "Belum Kirim Email";
-                                                }else{
+                                                } else {
                                                     echo "$vaArea[status_email_uk]";
                                                 }
-                                            } elseif($controller_name == "interview_user_1") {
-                                                if($vaArea['status_email_u1'] == NULL){
+                                            } elseif ($controller_name == "interview_user_1") {
+                                                if ($vaArea['status_email_u1'] == NULL) {
                                                     echo "Belum Kirim Email";
-                                                }else{
+                                                } else {
                                                     echo "$vaArea[status_email_u1]";
                                                 }
-                                            } elseif($controller_name == "interview_user_2") {
-                                                if($vaArea['status_email_u2'] == NULL){
+                                            } elseif ($controller_name == "interview_user_2") {
+                                                if ($vaArea['status_email_u2'] == NULL) {
                                                     echo "Belum Kirim Email";
-                                                }else{
+                                                } else {
                                                     echo "$vaArea[status_email_u2]";
                                                 }
-                                            } elseif($controller_name == "interview_hrga") {
-                                                if($vaArea['status_email_hrga'] == NULL){
+                                            } elseif ($controller_name == "interview_hrga") {
+                                                if ($vaArea['status_email_hrga'] == NULL) {
                                                     echo "Belum Kirim Email";
-                                                }else{
+                                                } else {
                                                     echo "$vaArea[status_email_hrga]";
                                                 }
                                             }

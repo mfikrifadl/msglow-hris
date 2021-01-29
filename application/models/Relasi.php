@@ -651,5 +651,4 @@ INNER JOIN tb_pegawai ON tb_pegawai.id_pegawai = tb_pengunduran_diri.id_pegawai 
 		$Query = $this->db->query("SELECT * FROM tb_sub_unit_kerja WHERE id_unit_kerja = '$id' ");
 		return $Query->result_array();
 	}
-
 }

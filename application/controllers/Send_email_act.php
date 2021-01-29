@@ -352,74 +352,74 @@ class Send_email_act extends CI_Controller
                 if ($this->email->send()) {
                     if ($controller_name == "wawancara") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "DELIVERED"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_adm' => "DELIVERED"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "psiko_test") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "DELIVERED"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_p' => "DELIVERED"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "uji_kompetensi") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "DELIVERED"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_uk' => "DELIVERED"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "interview_user_1") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "DELIVERED"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_u1' => "DELIVERED"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "interview_user_2") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "DELIVERED"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_u2' => "DELIVERED"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "interview_hrga") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "DELIVERED"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_hrga' => "DELIVERED"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } else {
@@ -427,74 +427,74 @@ class Send_email_act extends CI_Controller
                 } else {
                     if ($controller_name == "wawancara") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "NOT SENT"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_adm' => "NOT SENT"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "psiko_test") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "NOT SENT"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_p' => "NOT SENT"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "uji_kompetensi") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "NOT SENT"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_uk' => "NOT SENT"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "interview_user_1") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "NOT SENT"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_u1' => "NOT SENT"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "interview_user_2") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "NOT SENT"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_u2' => "NOT SENT"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } elseif ($controller_name == "interview_hrga") {
                         $data = array();
-                        if($status_tes == "TIDAKLOLOS"){
+                        if ($status_tes == "TIDAKLOLOS") {
                             $data = array(
                                 'status_email_tidaklolos' => "NOT SENT"
-                            );                            
-                        }else{
+                            );
+                        } else {
                             $data = array(
                                 'status_email_hrga' => "NOT SENT"
-                            );                            
+                            );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                     } else {
