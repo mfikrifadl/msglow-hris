@@ -71,12 +71,33 @@ class Send_email_act extends CI_Controller
             $nama_R = "";
             $email_R = "";
             $status_tes = "";
+            $next_test = "";
+            $tgl_test = "";
             foreach ($db as $key => $vaDataR) {
                 $nama_R = strtoupper($vaDataR['nama']);
-                $status_tes = strtoupper($vaDataR['recruitment']);
+
                 $email_R = $vaDataR['email'];
                 $tahap_r = strtoupper($vaDataR['tahap_r']);
                 $posisi = strtoupper($vaDataR['job']);
+                if ($controller_name == "wawancara") {
+                    $status_tes = strtoupper($vaDataR['recruitment']);
+                } 
+                if ($controller_name == "psiko_test") {
+                    $status_tes = strtoupper($vaDataR['psiko_test']);
+                } 
+                if ($controller_name == "uji_kompetensi") {
+                    $status_tes = strtoupper($vaDataR['uji_kompetensi']);
+                } 
+                if ($controller_name == "interview_user_1") {
+                    $status_tes = strtoupper($vaDataR['interview_user_1']);
+                } 
+                if ($controller_name == "interview_user_2") {
+                    $status_tes = strtoupper($vaDataR['interview_user_2']);
+                }
+                if ($controller_name == "interview_hrga") {
+                    $status_tes = strtoupper($vaDataR['interview_hrga']);
+                }
+
 
                 $tgl_wawancara = $vaDataR['tanggal_wawancara'];
                 $tgl_psikotes = $vaDataR['tgl_psiko_test'];
@@ -86,13 +107,11 @@ class Send_email_act extends CI_Controller
                 $tgl_interview_hrga = $vaDataR['tgl_interview_hrga'];
 
                 //========================== FUNGSI NEXT TEST CALON PELAMAR ==============================================
-                $next_test = "";
-                $tgl_test = "";
 
                 if ($tahap_r == "TEST ADMINISTRASI") {
-                    $next_test = "PSIKOTES";
+                    $next_test = "PSIKOTEST";
                     $tgl_test = $tgl_wawancara;
-                } elseif ($tahap_r == "PSIKOTES") {
+                } elseif ($tahap_r == "PSIKOTEST") {
                     $next_test = "UJI KOMPETENSI";
                     $tgl_test = $tgl_psikotes;
                 } elseif ($tahap_r == "UJI KOMPETENSI") {
@@ -111,8 +130,8 @@ class Send_email_act extends CI_Controller
                 }
                 //========================== FUNGSI NEXT TEST CALON PELAMAR ==============================================
             }
-
-            // Konfigurasi email
+            //echo"$tahap_r-$next_test-$tgl_test-$status_tes-$posisi-$nama_R-$email_R";
+            //Konfigurasi email
             $config = [
                 'mailtype'  => 'html',
                 'charset'   => 'utf-8',

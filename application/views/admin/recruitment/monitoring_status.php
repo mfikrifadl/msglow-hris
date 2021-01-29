@@ -70,15 +70,74 @@
 
                     </td>
                     <td>
-                      <?php
-                      if ($vaArea['recruitment'] == 'lolos') {
-                        $cLabel = 'success';
-                      } else if ($vaArea['recruitment'] == 'tidaklolos') {
-                        $cLabel = 'danger';
-                      } else  $cLabel = 'info';
+                      <?php                     
+
+                      $status_test = "";
+                      $cLabel = "";
+                      if ($vaArea['tahap_r'] == "Test Administrasi") {
+
+                        if ($vaArea['recruitment'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea['recruitment'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        } else  $cLabel = 'info';
+
+                        $status_test = $vaArea['recruitment'];
+
+                      } elseif ($vaArea['tahap_r'] == "Psikotest") {
+
+                        if ($vaArea['psiko_test'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea['psiko_test'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        } else  $cLabel = 'info';
+
+                        $status_test = $vaArea['psiko_test'];
+
+                      } elseif ($vaArea['tahap_r'] == "Uji Kompetensi") {
+
+                        if ($vaArea['uji_kompetensi'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea['uji_kompetensi'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        } else  $cLabel = 'info';
+
+                        $status_test = $vaArea['uji_kompetensi'];
+
+                      } elseif ($vaArea['tahap_r'] == "Interview User 1") {
+
+                        if ($vaArea['interview_user_1'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea['interview_user_1'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        } else  $cLabel = 'info';
+
+                        $status_test = $vaArea['interview_user_1'];
+
+                      } elseif ($vaArea['tahap_r'] == "Interview User 2") {
+
+                        if ($vaArea['interview_user_2'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea['interview_user_2'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        } else  $cLabel = 'info';
+
+                        $status_test = $vaArea['interview_user_2'];
+
+                      } elseif ($vaArea['tahap_r'] == "Interview HRGA") {
+
+                        if ($vaArea['interview_hrga'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea['interview_hrga'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        } else  $cLabel = 'info';
+
+                        $status_test = $vaArea['interview_hrga'];
+                      }
+
                       ?>
                       <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                        <?= $vaArea['recruitment'] ?>
+                        <?= $status_test ?>
                       </span>
                     </td>
 
