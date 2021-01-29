@@ -40,7 +40,7 @@ if ($action == "edit") {
                 </div>
             </div>
             <form method="post" enctype="multipart/form-data" action="<?= site_url('hak_akses_interview/form_pengajuan/tambah') ?>">
-                <div class="col">
+                <div class="col-12">
 
                     <!--begin::Portlet Data Keluarga-->
                     <div class="kt-portlet">
@@ -51,7 +51,7 @@ if ($action == "edit") {
                             <div class="card">
                                 <div class="card-header" id="headingOne6">
                                     <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapsePengajuanFormInterviewer" aria-expanded="true" aria-controls="collapsePengajuanFormInterviewer">
-                                        <strong> Form Pengajuan Interviewer </strong>
+                                        <strong> Form Pengajuan Penambahan Pegawai </strong>
                                     </div>
                                 </div>
                                 <div id="collapsePengajuanFormInterviewer" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
@@ -132,12 +132,10 @@ if ($action == "edit") {
                                             <!-- /.col-form -->
                                             <div class="col-sm-12">
                                                 <div class="kt-portlet__foot">
-
-                                                    <div class="col-sm-12">
-                                                        <button type="submit" class="btn btn-flat btn-primary">
-                                                            <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                                                        </button>
-                                                    </div>
+                                                <br /><br /><br /><br /><br /><br />
+                                                    <button type="submit" class="btn btn-flat btn-primary">
+                                                        <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div><!-- /.row -->
@@ -149,6 +147,7 @@ if ($action == "edit") {
                         <!--end::Accordion-->
                     </div>
                     <!--end::Portlet Data Keluarga-->
+                </div>
             </form>
             <!-- End Form -->
             <?php if ($this->session->userdata('level') == 1) { ?>
@@ -211,20 +210,12 @@ if ($action == "edit") {
                                                                     <?= $vaArea['total_man_power'] ?>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <?php //if ($vaArea['is_interview'] == 1) { 
-                                                                    ?>
-                                                                    <!-- <a class="btn btn-sm btn-outline-primary btn-elevate" title="Approve" onclick="if(confirm('Apakah anda yakin akah approve akun ini?'))
-                                { window.location.href='<?= site_url('hak_akses_interview/aksi/approve/' . $vaArea['id'] . '') ?>'}">
-                                                                            Approve
-                                                                        </a> -->
-                                                                    <?php //} else { 
-                                                                    ?>
-                                                                    <!-- <a class="btn btn-sm btn-outline-danger btn-elevate" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah unapprove akun ini?'))
-                                { window.location.href='<?= site_url('hak_akses_interview/aksi/unapprove/' . $vaArea['id'] . '') ?>'}">
-                                                                            UnApprove
-                                                                        </a> -->
-                                                                    <?php //} 
-                                                                    ?>
+                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="">
+                                                                        <i class="flaticon-edit"></i>
+                                                                    </a>
+                                                                    <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data">
+                                                                        <i class="flaticon-delete"></i>
+                                                                    </a>
                                                                 </td>
                                                             <?php } ?>
                                                         <?php } ?>

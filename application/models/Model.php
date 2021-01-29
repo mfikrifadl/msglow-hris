@@ -90,6 +90,12 @@ class Model extends CI_Model
 		$Query = $this->db->query("SELECT * FROM " . $Table . " ORDER BY " . $Order . " DESC LIMIT 0,$Limit");
 		return $Query->result_array();
 	}
+	
+	public function View2Or($Table, $Where, $WhereValue, $OrWhere, $OrWhereValue )
+	{
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Where . " = '" . $WhereValue . "' OR ".$OrWhere." = '".$OrWhereValue."' ");
+		return $Query->result_array();
+	}
 
 	public function ViewWhere($Table, $WhereField, $WhereValue)
 	{
