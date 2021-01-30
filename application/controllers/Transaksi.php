@@ -489,7 +489,7 @@ class Transaksi extends CI_Controller
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Surat Teguran';
-		$data['row']	= $this->model->ViewWhereAnd('v_pegawai_pelanggaran_sp', 'id_kategori_surat', '1', 'is_delete', '0');
+		$data['row']	= $this->model->ViewWhere('v_teguran_lisan', 'id_kategori_surat', '1');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
