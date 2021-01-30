@@ -166,7 +166,7 @@ class Recruitment extends CI_Controller
 
 		curl_close($curl);
 
-		redirect('recruitment/wawancara')
+		redirect('recruitment/wawancara');
 	}
 
 	public function psiko_test($Aksi = "", $Id = "")
