@@ -137,7 +137,7 @@ if ($action == "edit") {
                                                             <td><?= ($vaPeringatan['tanggal']) ?></td>
                                                             <td><?= ($vaPeringatan['nomor_surat']) ?></td>
                                                             <td><?= ($vaPeringatan['nama']) ?></td>
-                                                            <td><?= ($vaPeringatan['Keterangan']) ?></td>
+                                                            <td><?= ($vaPeringatan['keterangan_surat']) ?></td>
                                                             <td class="text-center">
                                                                 <a class="btn-link" title="View Data" href="<?= site_url('transaksi/surat_teguran/view/' . $vaPeringatan['id'] . '') ?>">
                                                                     <i class="fa fa-eye text-success"></i>

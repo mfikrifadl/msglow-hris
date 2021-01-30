@@ -253,7 +253,7 @@ else {
                                 <td>Tanggal</td>
                                 <td>NIK</td>
                                 <td>Pegawai</td>
-                                <td>Tipe Surat</td>
+                                <td>Keterangan</td>
                                 <td>Jumlah</td>
                                 <td>Action</td>
                             </tr>
@@ -267,7 +267,7 @@ else {
                                     <td><?= ($vaPeringatan['tanggal']) ?></td>
                                     <td><?= ($vaPeringatan['nik']) ?></td>
                                     <td><?= ($vaPeringatan['nama']) ?></td>
-                                    <td><?= ($vaPeringatan['Keterangan']) ?></td>
+                                    <td><?= ($vaPeringatan['keterangan']) ?></td>
                                     <td><?= ($vaPeringatan['jum_teguran_lisan']) ?></td>
                                     <td>
                                         <a class="btn-link" title="View Data" href="<?= site_url('transaksi/teguran_lisan/view/' . $vaPeringatan['id'] . '') ?>">
