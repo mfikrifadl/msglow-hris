@@ -70,6 +70,31 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/login', $data);
 	}
 
+	public function cURL_API($id="",$method=""){
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => $method,
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU='
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		
+		return $response;
+	}
+
 	public function wawancara($Aksi = "", $Id = "")
 	{
 		$data['action'] 	= $Aksi;
@@ -78,10 +103,10 @@ class Recruitment extends CI_Controller
 		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
 		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
 
-		$url 				= 'http://127.0.0.1/msglow-career/administrator/rest_api/';
-		$content 			= file_get_contents($url); // put the contents of the file into a variable
-		$data2 				= json_decode($content, true);
+		$response 			= $this->cURL_API('','GET');
+		$data2 				= json_decode($response, true);
 		$data['registrant']	= $data2['data'];
+
 		$data['levels']	= $this->model->view('level', 'id_level');
 
 		if ($Aksi == 'edit') {
@@ -101,8 +126,7 @@ class Recruitment extends CI_Controller
 		$data['file']   	= 'View Wawancara';
 		$data['wawancara']	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
 
-		$url 				= 'http://127.0.0.1/msglow-career/administrator/rest_api?reg_id=' . $Id;
-		$content 			= file_get_contents($url); // put the contents of the file into a variable
+		$content 			= $this->cURL_API($Id,'GET');
 		$data2 				= json_decode($content, true);
 		$data['registrant']	= $data2['data'];
 
@@ -113,8 +137,7 @@ class Recruitment extends CI_Controller
 
 	public function wawancara_id($Id = "")
 	{
-		$url 		= 'http://127.0.0.1/msglow-career/administrator/rest_api?reg_id=' . $Id;
-		$content 	= file_get_contents($url); // put the contents of the file into a variable
+		$content = $this->cURL_API($Id,'GET');
 
 		echo $content;
 	}

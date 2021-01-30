@@ -170,23 +170,23 @@
                     <td><?= ++$no; ?></td>
                     <td>
                       <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
-                        <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-success">
+                        <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-success">
                           <i class="flaticon2-edit"></i>
                         </button>
-                        <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['reg_id'] . '') ?>">
+                        <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
                           <i class="la la-search"></i>
                         </a>
-                        <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-danger">
+                        <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">
                           <i class="flaticon2-trash"></i>
                         </button>
                       </div>
                     </td>
-                    <td><?= ($vaAreaa['reg_id']) ?></td>
-                    <td><?= ($vaAreaa['job_name']) ?></td>
-                    <td><?= ($vaAreaa['reg_name']) ?></td>
-                    <td><?= ($vaAreaa['graduate']) ?></td>
-                    <td><?= ($vaAreaa['reg_email']) ?></td>
-                    <td><?= ($vaAreaa['reg_tlp']) ?></td>
+                    <td><?= $vaAreaa['reg_id'] ?></td>
+                    <td><?= $vaAreaa['job_name'] ?></td>
+                    <td><?= $vaAreaa['reg_name'] ?></td>
+                    <td><?= $vaAreaa['graduate'] ?></td>
+                    <td><?= $vaAreaa['reg_email'] ?></td>
+                    <td><?= $vaAreaa['reg_tlp'] ?></td>
                   </tr>
                 <?php } ?>
               </tbody>
@@ -360,14 +360,14 @@
         if (this.readyState == 4 && this.status == 200) {
           var hasil = JSON.parse(this.responseText);
           console.log(hasil);
-          var id = hasil.data[0].reg_id;
+          var reg_id = hasil.data[0].reg_id;
           var nama = hasil.data[0].reg_name;
           var tlp = hasil.data[0].reg_tlp;
           var email = hasil.data[0].reg_email;
           var job = hasil.data[0].job_name;
           var job_id = hasil.data[0].job_id;
 
-          document.getElementById('cKodeWawancara').value = id;
+          document.getElementById('cKodeWawancara').value = reg_id;
           document.getElementById('cNama').value = nama;
           document.getElementById('cNomorTelepon').value = tlp;
           document.getElementById('cEmail').value = email;
