@@ -110,7 +110,7 @@
                 <label>Status</label>
                 <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus">
                   <option></option>
-                  <option value="pemanggilan" <?php if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
+                  <!-- <option value="pemanggilan" <?php //if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option> -->
                   <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
                   <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
                 </select>

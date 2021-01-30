@@ -88,6 +88,7 @@
                         </span>
                       </a>
                     </li>
+
                     <li class="kt-menu__item " aria-haspopup="true">
                       <a href="<?= site_url('recruitment/interview_hrga'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
@@ -95,6 +96,17 @@
                         </i>
                         <span class="kt-menu__link-text">
                           Interview HRGA
+                        </span>
+                      </a>
+                    </li>
+
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/tes_kesehatan'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Tes Kesehatan
                         </span>
                       </a>
                     </li>
@@ -208,8 +220,6 @@
             <span class="kt-menu__link-text">Pengajuan Tambah Karyawan </span>
           </a>
         </li>
-
-
 
         <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
