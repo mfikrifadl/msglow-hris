@@ -70,7 +70,7 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/login', $data);
 	}
 
-	public function cURL_API($id="",$method=""){
+	function cURL_API($id="",$method="",$data){
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
@@ -103,7 +103,7 @@ class Recruitment extends CI_Controller
 		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
 		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
 
-		$response 			= $this->cURL_API('','GET');
+		$response 			= $this->cURL_API('','GET','');
 		$data2 				= json_decode($response, true);
 		$data['registrant']	= $data2['data'];
 
@@ -126,7 +126,7 @@ class Recruitment extends CI_Controller
 		$data['file']   	= 'View Wawancara';
 		$data['wawancara']	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
 
-		$content 			= $this->cURL_API($Id,'GET');
+		$content 			= $this->cURL_API($Id,'GET','');
 		$data2 				= json_decode($content, true);
 		$data['registrant']	= $data2['data'];
 
@@ -137,9 +137,36 @@ class Recruitment extends CI_Controller
 
 	public function wawancara_id($Id = "")
 	{
-		$content = $this->cURL_API($Id,'GET');
+		$content = $this->cURL_API($Id,'GET','');
 
-		echo $content;
+		echo $content;	
+	}
+
+	public function delete_registrant($id=""){
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'PUT',
+			CURLOPT_POSTFIELDS => 'is_delete=1',
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+				'Content-Type: application/x-www-form-urlencoded'
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		redirect('recruitment/wawancara')
 	}
 
 	public function psiko_test($Aksi = "", $Id = "")
