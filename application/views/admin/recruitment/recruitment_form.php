@@ -2,10 +2,16 @@
 if ($action == "edit") {
     foreach ($field as $column) {
         $cIdTest  =   $column['id_recruitment'];
+        $cKodeWawancara  =   $column['kode_wawancara'];
         $createBy       =   $this->session->userdata('nama');
         $updateBy       =   $this->session->userdata('nama');
         $deleteBy       =   $this->session->userdata('nama');
-        $nNilaiTes      =   $column[$nilai_test];
+        if ($controller_name == "tes_kesehatan") {
+            $nNilaiTes     =   "";
+        } else {
+            $nNilaiTes      =   $column[$nilai_test];
+        }
+
         $cStatus        =   $column[$controller_name];
         $dTglWawancara  =   $column[$date];
         $cIconButton   =   "refresh";
@@ -14,6 +20,7 @@ if ($action == "edit") {
     $cAction = "Update/" . $cIdTest . "";
 } else {
     $cIdTest  =   "";
+    $cKodeWawancara  =   "";
     $nNilaiTes     =   "";
     $cStatus        =   "";
     $dTglWawancara = "";
@@ -66,16 +73,89 @@ $whois_date = date('d-m-Y H:i:s');
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Nilai <?= $file ?></label>
-                            <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
-                            <input type="hidden" name="whois" value="<?= $whois ?>">
-                            <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
-                        </div>
+
+                        <?php
+                        if ($controller_name == "tes_kesehatan") {
+                        } else {
+                        ?>
+                            <div class="form-group">
+                                <label>Nilai <?= $file ?></label>
+                                <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
+                                <input type="hidden" name="whois" value="<?= $whois ?>">
+                                <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
+                                <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
+                            </div>
+                        <?php
+                        }
+                        ?>
+
                         <div class="form-group">
                             <label>Tanggal Test</label>
                             <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>">
                         </div>
+
+                        <?php
+                        if ($controller_name == "tes_kesehatan") {
+
+                        ?>
+                            <div class="form-group">
+
+                                <label> Upload Hasil Tes Kesehatan : </label>
+                                <b><span id="file_error" style="color: red;"></span></b>
+                                <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
+                                <div id="preview"></div>
+                                <span class="form-text text-muted">
+                                    <ol>
+                                        <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
+                                        <li>Max Size 1MB</li>
+                                    </ol>
+                                </span>
+                            </div>
+
+                            <?php
+                            // if ($vaArea['hasil_tes_kesehatan'] == NULL) {
+                            ?>
+                                <!-- <div class="form-group">
+
+                                    <label> Upload Hasil Tes Kesehatan : </label>
+                                    <b><span id="file_error" style="color: red;"></span></b>
+                                    <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
+                                    <div id="preview"></div>
+                                    <span class="form-text text-muted">
+                                        <ol>
+                                            <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
+                                            <li>Max Size 1MB</li>
+                                        </ol>
+                                    </span> -->
+
+                                    <!-- <label>Upload Hasil Tes Kesehatan</label>
+                                    <input type="file" name="cTesKes" id="cTesKes" class="form-control" value=""> -->
+                                <!-- </div> -->
+                            <?php
+                            // } else {
+                            ?>
+                                <!-- <div class="form-group">
+
+                                    <label> Upload Hasil Tes Kesehatan : </label>
+                                    <b><span id="file_error" style="color: red;"></span></b>
+                                    <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" />
+                                    <div id="preview"></div>
+                                    <span class="form-text text-muted">
+                                        <ol>
+                                            <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
+                                            <li>Max Size 1MB</li>
+                                        </ol>
+                                    </span> -->
+
+                                    <!-- <label>Upload Hasil Tes Kesehatan</label>
+                                <input type="file" name="cTesKes" id="cTesKes" class="form-control" value=""> -->
+                                <!-- </div> -->
+                        <?php
+                        //     }
+                        // } else {
+                        }
+                        ?>
+
                         <div class="form-group form-group-last">
                             <label>Status</label>
                             <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus">
@@ -88,7 +168,7 @@ $whois_date = date('d-m-Y H:i:s');
                     </div>
                     <div class="kt-portlet__foot">
                         <div class="kt-form__actions">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" id="button" class="btn btn-primary">
                                 <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                             </button>
                         </div>
@@ -110,7 +190,17 @@ $whois_date = date('d-m-Y H:i:s');
                                 <td>No</td>
                                 <td>Kode Wawancara</td>
                                 <td>Calon Pegawai</td>
-                                <td>Nilai Tes</td>
+                                <?php
+                                if ($controller_name == "tes_kesehatan") {
+                                ?>
+                                    <td>Hasil Tes Kesehatan</td>
+                                <?php
+                                } else {
+                                ?>
+                                    <td>Nilai Tes</td>
+                                <?php
+                                }
+                                ?>
                                 <td>Status</td>
                                 <td>Status Email</td>
                                 <td>Action</td>
@@ -137,7 +227,49 @@ $whois_date = date('d-m-Y H:i:s');
                                             </strong>
 
                                         </td>
-                                        <td><?= ($vaArea[$nilai_test]) ?> <br />
+                                        <td>
+
+                                            <?php
+                                            if ($controller_name == "tes_kesehatan") {
+                                                //echo $vaArea['hasil_tes_kesehatan'];
+                                                if ($vaArea['hasil_tes_kesehatan'] == NULL) {
+                                                } else {
+                                            ?>
+                                                    <button type="button" class="btn btn-bold btn-label-info btn-outline-info btn-sm" data-toggle="modal" data-target="#kt_modal_3"> Preview</button>
+
+                                                    <!--begin::Modal-->
+
+                                                    <div class="modal fade" id="kt_modal_3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Hasil Tes Kesehatan <?= $vaArea['nama'] ?></h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form>
+                                                                        <div class="form-group">
+                                                                            <img src="<?= base_url() ?><?= $vaArea['hasil_tes_kesehatan'] ?>" style="width:500%;max-width:700px" />
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--end::Modal-->
+
+                                            <?php
+                                                }
+                                            } else {
+                                                echo $vaArea[$nilai_test];
+                                            }
+                                            ?>
+
                                         </td>
                                         <td>
                                             <?php
@@ -158,32 +290,50 @@ $whois_date = date('d-m-Y H:i:s');
                                             if ($controller_name == "psiko_test") {
                                                 if ($vaArea['status_email_p'] == NULL) {
                                                     echo "Belum Kirim Email";
+                                                } elseif ($vaArea['psiko_test'] == "tidaklolos") {
+                                                    echo "$vaArea[status_email_tidaklolos]";
                                                 } else {
                                                     echo "$vaArea[status_email_p]";
                                                 }
                                             } elseif ($controller_name == "uji_kompetensi") {
                                                 if ($vaArea['status_email_uk'] == NULL) {
                                                     echo "Belum Kirim Email";
+                                                } elseif ($vaArea['uji_kompetensi'] == "tidaklolos") {
+                                                    echo "$vaArea[status_email_tidaklolos]";
                                                 } else {
                                                     echo "$vaArea[status_email_uk]";
                                                 }
                                             } elseif ($controller_name == "interview_user_1") {
                                                 if ($vaArea['status_email_u1'] == NULL) {
                                                     echo "Belum Kirim Email";
+                                                } elseif ($vaArea['interview_user_1'] == "tidaklolos") {
+                                                    echo "$vaArea[status_email_tidaklolos]";
                                                 } else {
                                                     echo "$vaArea[status_email_u1]";
                                                 }
                                             } elseif ($controller_name == "interview_user_2") {
                                                 if ($vaArea['status_email_u2'] == NULL) {
                                                     echo "Belum Kirim Email";
+                                                } elseif ($vaArea['interview_user_2'] == "tidaklolos") {
+                                                    echo "$vaArea[status_email_tidaklolos]";
                                                 } else {
                                                     echo "$vaArea[status_email_u2]";
                                                 }
                                             } elseif ($controller_name == "interview_hrga") {
                                                 if ($vaArea['status_email_hrga'] == NULL) {
                                                     echo "Belum Kirim Email";
+                                                } elseif ($vaArea['interview_hrga'] == "tidaklolos") {
+                                                    echo "$vaArea[status_email_tidaklolos]";
                                                 } else {
                                                     echo "$vaArea[status_email_hrga]";
+                                                }
+                                            } elseif ($controller_name == "tes_kesehatan") {
+                                                if ($vaArea['status_email_tes_kesehatan'] == NULL) {
+                                                    echo "Belum Kirim Email";
+                                                } elseif ($vaArea['tes_kesehatan'] == "tidaklolos") {
+                                                    echo "$vaArea[status_email_tidaklolos]";
+                                                } else {
+                                                    echo "$vaArea[status_email_tes_kesehatan]";
                                                 }
                                             }
                                             ?>
@@ -220,3 +370,63 @@ $whois_date = date('d-m-Y H:i:s');
 </div>
 
 <!-- end:: Content -->
+
+<!-- Javascript -->
+<script type="text/javascript">
+    function validasiEkstensi() {
+        var inputFile = document.getElementById('file');
+        var cekData = document.getElementById('cekData');
+        var cekData = document.getElementById('mybtn');
+        var pathFile = inputFile.value;
+        var ekstensiOk = /(\.jpg|\.jpeg|\.png)$/i;
+
+        $("#file_error").html("");
+        $("#btn_disabled").html("");
+        var file_size = $('#file')[0].files[0].size;
+        if (file_size > 1000000) {
+            $("#file_error").html("** File maksimal 1MB");
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').innerHTML = '<img src="' + e.target.result + '" style="width:100%;max-width:300px"/>';
+            };
+            reader.readAsDataURL(inputFile.files[0]);
+
+            if (inputFile.files && inputFile.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').innerHTML = '<img src="' + e.target.result + '" style="width:100%;max-width:300px"/>';
+                    document.getElementById('mybtn').innerHTML = '<button type="submit" id="button" class="btn btn-primary" disabled>';
+                };
+                reader.readAsDataURL(inputFile.files[0]);
+            }
+
+            //return false;
+        } else if (!ekstensiOk.exec(pathFile)) {
+            $("#file_error").html("** Sorry Your Ekstension File is not allowed.");
+            inputFile.value = '';
+
+            if (inputFile.files && inputFile.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').innerHTML = '<img src="' + e.target.result + '" style="width:100%;max-width:300px"/>';
+                    document.getElementById('mybtn').innerHTML = '<button type="submit" id="button" class="btn btn-primary" disabled>';
+                };
+                reader.readAsDataURL(inputFile.files[0]);
+            }
+
+            //return false;
+        } else {
+            // Preview gambar
+            if (inputFile.files && inputFile.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').innerHTML = '<img src="' + e.target.result + '" style="width:100%;max-width:300px"/>';
+                    document.getElementById('mybtn').innerHTML = '<button type="submit" id="button" class="btn btn-primary">';
+                };
+                reader.readAsDataURL(inputFile.files[0]);
+            }
+        }
+
+    }
+</script>
+<!-- end Javascript -->

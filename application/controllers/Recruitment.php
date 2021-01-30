@@ -207,6 +207,22 @@ class Recruitment extends CI_Controller
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
 	}
+	
+	public function tes_kesehatan($Aksi = "", $Id = "")
+	{
+		$data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment';
+		$data['file']   = 'Tes Kesehatan';
+		$data['controller_name']   = 'tes_kesehatan';
+		$data['date'] = 'tgl_tes_kesehatan';
+		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos', 'interview_hrga' => 'lolos'])->result_array();
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
+	}
 
 	public function monitoring_status($Aksi = "", $Id = "")
 	{

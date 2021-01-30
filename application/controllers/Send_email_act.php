@@ -81,21 +81,24 @@ class Send_email_act extends CI_Controller
                 $posisi = strtoupper($vaDataR['job']);
                 if ($controller_name == "wawancara") {
                     $status_tes = strtoupper($vaDataR['recruitment']);
-                } 
+                }
                 if ($controller_name == "psiko_test") {
                     $status_tes = strtoupper($vaDataR['psiko_test']);
-                } 
+                }
                 if ($controller_name == "uji_kompetensi") {
                     $status_tes = strtoupper($vaDataR['uji_kompetensi']);
-                } 
+                }
                 if ($controller_name == "interview_user_1") {
                     $status_tes = strtoupper($vaDataR['interview_user_1']);
-                } 
+                }
                 if ($controller_name == "interview_user_2") {
                     $status_tes = strtoupper($vaDataR['interview_user_2']);
                 }
                 if ($controller_name == "interview_hrga") {
                     $status_tes = strtoupper($vaDataR['interview_hrga']);
+                }
+                if ($controller_name == "tes_kesehatan") {
+                    $status_tes = strtoupper($vaDataR['tes_kesehatan']);
                 }
 
 
@@ -105,6 +108,7 @@ class Send_email_act extends CI_Controller
                 $tgl_interview_u1 = $vaDataR['tgl_interview_user_1'];
                 $tgl_interview_u2 = $vaDataR['tgl_interview_user_2'];
                 $tgl_interview_hrga = $vaDataR['tgl_interview_hrga'];
+                $tgl_tes_kesehatan = $vaDataR['tgl_tes_kesehatan'];
 
                 //========================== FUNGSI NEXT TEST CALON PELAMAR ==============================================
 
@@ -124,13 +128,16 @@ class Send_email_act extends CI_Controller
                     $next_test = "INTERVIEW HRGA";
                     $tgl_test = $tgl_interview_u2;
                 } elseif ($tahap_r == "INTERVIEW HRGA") {
-                    $next_test = "SELAMAT ANDA TELAH LOLOS SEMUA TES";
+                    $next_test = "TES KESEHATAN";
                     $tgl_test = $tgl_interview_hrga;
+                } elseif ($tahap_r == "TES KESEHATAN") {
+                    $next_test = "SELAMAT ANDA TELAH LOLOS SEMUA TES";
+                    $tgl_test = $tgl_tes_kesehatan;
                 } else {
                 }
                 //========================== FUNGSI NEXT TEST CALON PELAMAR ==============================================
             }
-            //echo"$tahap_r-$next_test-$tgl_test-$status_tes-$posisi-$nama_R-$email_R";
+            // echo"$tahap_r-$next_test-$tgl_test-$status_tes-$posisi-$nama_R-$email_R";
             //Konfigurasi email
             $config = [
                 'mailtype'  => 'html',
@@ -222,7 +229,7 @@ class Send_email_act extends CI_Controller
                             ";
             //==========================END BODY EMAIL PEMANGGILAN TES ADMINISTRASI SAMPAI INTERVIEW HRGA====================
             //===================BODY EMAIL MASIH MENJALANI TES ADMINISTRASI SAMPAI INTERVIEW HRGA===============================
-            $formEmail1[] = " 
+            $formEmailLolosTest[] = " 
                                 <table width=700>
                                 <tr>
                                     <td>
@@ -242,7 +249,8 @@ class Send_email_act extends CI_Controller
                                         Sehubungan dengan proses Seleksi Recruitment Kandidat Pegawai Baru Di MS Glow Office dengan Posisi Sebagai $posisi. <br />
                                         kepada Saudara <b>$nama_R</b> bahwa anda telah dinyatakan <b>$status_tes</b> pada tahap <b>$tahap_r</b>. <br /><br />
 
-                                        Kepada Saudara <b>$nama_R</b> dapat melanjutkan tes ke tahap selanjutnya yaitu <b>$next_test</b> pada tanggal <b>$tgl_test</b>. <br /><br />
+                                        Kepada Saudara <b>$nama_R</b> dapat melanjutkan tes ke tahap selanjutnya yaitu <b>$next_test</b>. <br />
+                                        Kami segera mengumumkan Tanggal tes selanjutnya di email ini.<br /><br />
 
                                         Demikian atas perhatian Bapak/Ibu/Sdr. kami sampaikan terimakasih. <br /><br />
 
@@ -263,8 +271,48 @@ class Send_email_act extends CI_Controller
                             ";
             //==========================END BODY EMAIL MASIH MENJALANI TES ADMINISTRASI SAMPAI INTERVIEW HRGA====================
 
+            //===================BODY EMAIL TES KESEHATAN================================================================
+            $formEmailTesKesehatan[] = " 
+                            <table width=700>
+                            <tr>
+                                <td>
+                                    MS GLOW OFFICE MALANG <br />
+                                    HRD MS GLOW OFFICE
+                                    <hr>
+                                </td>
+                            <tr>
+                                <td>
+                                    Kepada Yth. $nama_R
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Dengan hormat, <br /> <br />
+
+                                    Sehubungan dengan proses Seleksi Recruitment Kandidat Pegawai Baru Di MS Glow Office dengan Posisi Sebagai $posisi. <br />
+                                    maka kepada Saudara <b>$nama_R</b> bahwa anda telah dinyatakan <b>$status_tes</b>. <br /><br />
+
+                                    Kepada Saudara <b>$nama_R</b> silahkan melakukan tes kesehatan pada tanggal <b>$tgl_test</b> di Clinic Ms Glow Malang : <br /><br />
+                                    <b> Alamat : Jl. Guntur No.08, Oro-oro Dowo, Kec. Klojen, Kota Malang, Jawa Timur 65119 </b> <br />
+                                    <b> Kirim Hasil Tes Kesehatan di Nomor WA : 0857-8567-8038 </b>
+
+                                    Demikian atas perhatian Bapak/Ibu/Sdr. kami sampaikan terimakasih. <br /><br />
+
+                                    Hormat kami,<br /> <br /> <br />
+
+
+                                    <b><u> Venna.Rosia M., ST., MM., CHRM </u></b><br />
+                                    MANAGER HRD. MS GLOW OFFICE MALANG
+                                </td>
+                            </tr>
+
+                            </table> 
+
+                            ";
+            //==========================END BODY EMAIL TES KESEHATAN=========================================================
+
             //===================BODY EMAIL LOLOS SEMUA TES================================================================
-            $formEmail2[] = " 
+            $formEmailCompleted[] = " 
                             <table width=700>
                             <tr>
                                 <td>
@@ -284,9 +332,7 @@ class Send_email_act extends CI_Controller
                                     Sehubungan dengan proses Seleksi Recruitment Kandidat Pegawai Baru Di MS Glow Office dengan Posisi Sebagai $posisi. <br />
                                     maka kepada Saudara <b>$nama_R</b> bahwa anda telah dinyatakan <b>$next_test</b>. <br /><br />
 
-                                    Kepada Saudara <b>$nama_R</b> silahkan melakukan tes kesehatan pada tanggal <b>$tgl_test</b> di Clinic Ms Glow Malang : <br /><br />
-                                    <b> Alamat : Jl. Guntur No.08, Oro-oro Dowo, Kec. Klojen, Kota Malang, Jawa Timur 65119 </b> <br />
-                                    <b> Kirim Hasil Tes Kesehatan di Nomor WA : 0857-8567-8038 </b>
+                                    Kepada Saudara <b>$nama_R</b> dapat masuk kerja mulai tanggal <b>$tgl_test</b> <br />
 
                                     Demikian atas perhatian Bapak/Ibu/Sdr. kami sampaikan terimakasih. <br /><br />
 
@@ -309,7 +355,7 @@ class Send_email_act extends CI_Controller
                 $this->load->library('email', $config);
 
                 // Email dan nama pengirim
-                $this->email->from('emailtester965@gmail.com', 'emailtester965@gmail.com');
+                $this->email->from('emailtester965@gmail.com', 'MS GLOW OFFICE MALANG');
 
                 // Email penerima
                 $this->email->to("$email_R"); // Ganti dengan email tujuan anda
@@ -318,10 +364,10 @@ class Send_email_act extends CI_Controller
                 $this->email->attach('');
 
                 // Subject email
-                $this->email->subject('Send Email Dengan SMTP Gmail CodeIgniter 3');
+                $this->email->subject('RECRUITMENT MS GLOW OFFICE MALANG');
 
                 // Isi email
-                $this->email->message("$formEmail2[0]");
+                $this->email->message("$formEmailCompleted[0]");
 
                 // Tampilkan pesan sukses atau error
                 if ($this->email->send()) {
@@ -335,13 +381,13 @@ class Send_email_act extends CI_Controller
                     );
                     $this->model->Update('recruitment', 'id_recruitment', $id, $data);
                 }
-            } else {
+            }  else {
 
                 // Load library email dan konfigurasinya
                 $this->load->library('email', $config);
 
                 // Email dan nama pengirim
-                $this->email->from('vickyagassi996@gmail.com', 'vickyagassi996@gmail.com');
+                $this->email->from('vickyagassi996@gmail.com', 'MS GLOW OFFICE MALANG');
 
                 // Email penerima
                 $this->email->to("$email_R"); // Ganti dengan email tujuan anda
@@ -350,7 +396,7 @@ class Send_email_act extends CI_Controller
                 $this->email->attach('');
 
                 // Subject email
-                $this->email->subject('RECRUITMENT MS GLOW EMPLOYEE');
+                $this->email->subject('RECRUITMENT MS GLOW OFFICE MALANG');
 
                 // Isi email
                 // Isi email
@@ -358,14 +404,11 @@ class Send_email_act extends CI_Controller
                     $this->email->message("$formEmailPemanggilan[0]");
                 }
                 if ($status_tes == "LOLOS") {
-                    $this->email->message("$formEmail1[0]");
+                    $this->email->message("$formEmailLolosTest[0]");
                 }
                 if ($status_tes == "TIDAKLOLOS") {
                     $this->email->message("$formEmailTidakLolos[0]");
                 }
-
-
-                // $this->email->message("$formEmail1[0]");
 
                 // Tampilkan pesan sukses atau error
                 if ($this->email->send()) {
@@ -441,7 +484,19 @@ class Send_email_act extends CI_Controller
                             );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
-                    } else {
+                    } elseif ($controller_name == "tes_kesehatan") {
+                        $data = array();
+                        if ($status_tes == "TIDAKLOLOS") {
+                            $data = array(
+                                'status_email_tidaklolos' => "DELIVERED"
+                            );
+                        } else {
+                            $data = array(
+                                'status_email_p' => "DELIVERED"
+                            );
+                        }
+                        $this->model->Update('recruitment', 'id_recruitment', $id, $data);
+                    }else {
                     }
                 } else {
                     if ($controller_name == "wawancara") {
@@ -513,6 +568,18 @@ class Send_email_act extends CI_Controller
                         } else {
                             $data = array(
                                 'status_email_hrga' => "NOT SENT"
+                            );
+                        }
+                        $this->model->Update('recruitment', 'id_recruitment', $id, $data);
+                    } elseif ($controller_name == "tes_kesehatan") {
+                        $data = array();
+                        if ($status_tes == "TIDAKLOLOS") {
+                            $data = array(
+                                'status_email_tidaklolos' => "NOT SENT"
+                            );
+                        } else {
+                            $data = array(
+                                'status_email_p' => "NOT SENT"
                             );
                         }
                         $this->model->Update('recruitment', 'id_recruitment', $id, $data);
