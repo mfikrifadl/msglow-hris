@@ -607,6 +607,7 @@ class Recruitment_act extends CI_Controller
 		$whois_date = date('d-m-Y H:i:s');
 		//==========================GET DATA FOTO =============================================
 		$cKodeWawancara = $this->input->post('cKW');
+		$cStatus = $this->input->post('cStatus');
 
 		$nama = $_FILES['cTesKes']['name'];
 		$x = explode('.', $nama);
@@ -619,6 +620,12 @@ class Recruitment_act extends CI_Controller
 		//==========================GET DATA FOTO =============================================
 		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $this->input->post('cIdTest') . "' ");
 
+		$status = "";
+		if ($cStatus == "lolos") {
+			$status = "validasi";
+		} else {
+			$status = "pending";
+		}
 		foreach ($dbKode->result_array() as $key => $vaKode) {
 			$cKodeWawancara = $vaKode['kode_wawancara'];
 		}
@@ -629,7 +636,7 @@ class Recruitment_act extends CI_Controller
 			'hasil_tes_kesehatan'	=> $folder,
 			'tes_kesehatan'	=> $this->input->post('cStatus'),
 			'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
-			'status'	=> 'pending',
+			'status'	=> $status,
 			'tahap_r'	=> 'Tes Kesehatan',
 			'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
 			'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -650,7 +657,7 @@ class Recruitment_act extends CI_Controller
 			'hasil_tes_kesehatan'	=> $folder,
 			'tes_kesehatan'	=> $this->input->post('cStatus'),
 			'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
-			'status'	=> 'pending',
+			'status'	=> $status,
 			'tahap_r'	=> 'Tes Kesehatan',
 			'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
 			'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -682,6 +689,7 @@ class Recruitment_act extends CI_Controller
 
 	public function to_pegawai($id = "")
 	{
+		// echo "$id";
 		$whois = $this->session->userdata('nama');
 		date_default_timezone_set('Asia/Jakarta');
 		$whois_date = date('d-m-Y H:i:s');
@@ -695,11 +703,26 @@ class Recruitment_act extends CI_Controller
 			$cEmail 	    = $vaKode['email'];
 		}
 
+		$dbPegawai = $this->db->query("SELECT * FROM tb_pegawai ORDER BY nik DESC LIMIT 1 ");
+		$setNik = "";
+		foreach ($dbPegawai->result_array() as $keyNik => $vaKodeNik) {
+			$cNik 			= $vaKodeNik['nik'];
+			if ($cNik == NULL) {
+				$cYear = date('Y');
+				$month = date('m');
+				$year = substr($cYear, 2);
+				$setNik = "99" . $year . "" . $month . "0001";
+			} else {
+				$intNik = intval($cNik);
+				$setNik = $intNik + 1;
+			}
+		}
+
 		$data = array(
 			'created_by' => $whois,
 			'created_date'	=> $whois_date,
-			// 'id_status'	=> $this->input->post('nNilaiTes'),
-			'nik'		=> $cKodeWawancara,
+			'kode_wawancara'	=> $setNik,
+			'nik'		=> $setNik,
 			'nama'		=> $cNama,
 			'tanggal_masuk_kerja' => date("Y-m-d"),
 		);
@@ -732,7 +755,7 @@ class Recruitment_act extends CI_Controller
 		$this->model->Insert("log", $vaLog);
 
 		$this->model->Insert('tb_pegawai', $data);
-		$this->model->Update('tes_praktik', 'id_wawancara', $id, $dataStatus);
+		$this->model->Update('recruitment', 'id_recruitment', $id, $dataStatus);
 		redirect(site_url('recruitment/peserta_diterima/I'));
 	}
 	public function send_email($id = "")

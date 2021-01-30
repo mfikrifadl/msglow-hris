@@ -6,125 +6,212 @@
       <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
         <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
           <ul class="kt-menu__nav ">
-            <li class="kt-menu__item" aria-haspopup="true">
-              <a href="<?= base_url() ?>" class="kt-menu__link ">
-                <i class="kt-menu__link-icon flaticon2-setup"></i>
-                <span class="kt-menu__link-text">Dashboard </span>
-              </a>
-            </li>
+          <li class="kt-menu__item" aria-haspopup="true">
+          <a href="<?= base_url() ?>" class="kt-menu__link ">
+            <i class="kt-menu__link-icon flaticon2-setup"></i>
+            <span class="kt-menu__link-text">Dashboard </span>
+          </a>
+        </li>
+        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+          <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+            <i class="kt-menu__link-icon flaticon-users-1"></i>
+            <span class="kt-menu__link-text">
+              Recruitment
+            </span>
+            <i class="kt-menu__ver-arrow la la-angle-right"></i>
+          </a>
+          <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+            <ul class="kt-menu__subnav">
 
-            <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
-              <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
-                <i class="kt-menu__link-icon flaticon-users-1"></i>
-                <span class="kt-menu__link-text">
-                  Recruitment
-                </span>
-                <i class="kt-menu__ver-arrow la la-angle-right"></i>
-              </a>
-              <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
-                <ul class="kt-menu__subnav">
+              <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Staff
+                  </span>
+                  <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                </a>
+                <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+                  <ul class="kt-menu__subnav">
 
-                  <!-- <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('recruitment/wawancara') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Test Administrasi
-                      </span>
-                    </a>
-                  </li> -->
-<!-- 
-                  <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Psikotes
-                      </span>
-                    </a>
-                  </li> -->
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/wawancara'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Administrasi
+                        </span>
+                      </a>
+                    </li>
 
-                  <!-- <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('recruitment/wawancara') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Uji Kompetensi
-                      </span>
-                    </a>
-                  </li> -->
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Psiko Test
+                        </span>
+                      </a>
+                    </li>
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/uji_kompetensi'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Uji Kompetensi
+                        </span>
+                      </a>
+                    </li>
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/interview_user_1'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Interview User 1
+                        </span>
+                      </a>
+                    </li>
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/interview_user_2'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Interview User 2
+                        </span>
+                      </a>
+                    </li>
 
-                  <!-- <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('recruitment/wawancara') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Interview User 1
-                      </span>
-                    </a>
-                  </li> -->
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/interview_hrga'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Interview HRGA
+                        </span>
+                      </a>
+                    </li>
 
-                  <!-- <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Interview User 2
-                      </span>
-                    </a>
-                  </li> -->
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/tes_kesehatan'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Tes Kesehatan
+                        </span>
+                      </a>
+                    </li>
 
-                  <!-- <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Interview HRGA
-                      </span>
-                    </a>
-                  </li> -->
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/peserta_diterima'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Peserta Diterima
+                        </span>
+                      </a>
+                    </li>
 
-                  <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('recruitment/tes_praktik') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Tes Keterampilan
-                      </span>
-                    </a>
-                  </li>
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment/monitoring_status'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Monitoring Status
+                        </span>
+                      </a>
+                    </li>
 
-                  <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('recruitment/peserta_diterima') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Peserta Diterima
-                      </span>
-                    </a>
-                  </li>
+                  </ul>
+                </div>
+              </li>
 
-                  <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<?= site_url('recruitment/monitoring_status') ?>" class="kt-menu__link ">
-                      <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                        <span></span>
-                      </i>
-                      <span class="kt-menu__link-text">
-                        Monitoring Status
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
+              <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    PHL
+                  </span>
+                  <i class="kt-menu__ver-arrow la la-angle-right">
+                  </i>
+                </a>
+                <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+                  <ul class="kt-menu__subnav">
+
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment_phl/administrasi'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Administrasi
+                        </span>
+                      </a>
+                    </li>
+
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment_phl/wawancara_hr'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Wawancara HR
+                        </span>
+                      </a>
+                    </li>
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment_phl/interview_user_1'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Interview User 1
+                        </span>
+                      </a>
+                    </li>
+
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment_phl/peserta_diterima'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Peserta Diterima
+                        </span>
+                      </a>
+                    </li>
+
+                    <li class="kt-menu__item " aria-haspopup="true">
+                      <a href="<?= site_url('recruitment_phl/monitoring_status'); ?>" class="kt-menu__link ">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                          <span></span>
+                        </i>
+                        <span class="kt-menu__link-text">
+                          Monitoring Status
+                        </span>
+                      </a>
+                    </li>
+
+                  </ul>
+                </div>
+              </li>
+
+
+            </ul>
+          </div>
+        </li>
 
             <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
               <a href="javascript:;" class="kt-menu__link kt-menu__toggle">

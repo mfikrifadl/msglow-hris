@@ -143,10 +143,7 @@ function String2Date($dTgl)
           <i class="la la-pencil"></i> Edit
         </a>
         
-        <button class="btn btn-flat btn-warning" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                      { window.location.href='<?= site_url('transaksi_act/pegawai/Delete/' . $vaPegawai['id_pegawai'] . ''); ?>'}">
-          <i class="la la-trash"></i> Hapus
-        </button>
+        
 
         <button class="btn btn-flat btn-danger" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-times"></i> Close

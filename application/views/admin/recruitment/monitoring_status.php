@@ -133,6 +133,15 @@
                         } else  $cLabel = 'info';
 
                         $status_test = $vaArea['interview_hrga'];
+                      }elseif ($vaArea['tahap_r'] == "Tes Kesehatan") {
+
+                        if ($vaArea['tes_kesehatan'] == 'lolos') {
+                          $cLabel = 'success';
+                        } else if ($vaArea['tes_kesehatan'] == 'tidaklolos') {
+                          $cLabel = 'danger';
+                        } else  $cLabel = 'info';
+
+                        $status_test = $vaArea['tes_kesehatan'];
                       }
 
                       ?>

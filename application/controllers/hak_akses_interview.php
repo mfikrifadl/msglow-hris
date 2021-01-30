@@ -62,7 +62,7 @@ class hak_akses_interview extends CI_Controller
         return $Data;
     }
 
-    public function index($Aksi = "", $Id = "")
+    public function index_form($Aksi = "", $Id = "")
     {
         $dataHeader['menu']     = 'Hak Akses Interview';
         $dataHeader['file']     = 'Hak Akses';
