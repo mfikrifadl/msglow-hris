@@ -66,9 +66,9 @@ class Surat_act extends CI_Controller
         if ($Type == 'Insert') {
 
             $dataInsert = array(
-                'tanggal'           =>  $this->input->post('dTgl'),
-                'jum_teguran_lisan' =>  $this->input->post('tl'),
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
+                'jum_teguran_lisan' =>  $this->input->post('tl'),
+                'tanggal'           =>  $this->input->post('dTgl'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'keterangan'        =>  $this->input->post('cKet'),
                 'id_kategori_surat' =>  2,
