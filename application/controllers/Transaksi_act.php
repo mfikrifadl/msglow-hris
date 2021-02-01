@@ -710,6 +710,15 @@ class Transaksi_act extends CI_Controller
 			$masa_kerja = "$tahun Tahun, $bulan Bulan";
 			// echo "masa kerja : $masa_kerja";
 
+
+			$st_resign = $this->input->post('cIdStatus');
+			$tgl_resign = "";
+			if ($st_resign < 6) {
+				$tgl_resign = NULL;
+			} else {
+				$tgl_resign = $this->Date2String($this->input->post('dTgl'));
+			}
+
 			$data = array(
 				'masa_kerja'	=> $masa_kerja,
 				'tanggal_masuk_kerja'	=> $TglAwalKerja,
@@ -717,11 +726,13 @@ class Transaksi_act extends CI_Controller
 				'id_ref_jabatan'	=> $id_ref_jabatan,
 				'id_sub_unit_kerja'	=> $id_sub_unit,
 				'id_pegawai'	=> $this->input->post('cIdPegawai'),
-				'tanggal'		=> $this->Date2String($this->input->post('dTgl')),
-				'status'		=> $this->input->post('cIdStatus'),
+				'tanggal'		=> $tgl_resign,
+				'status'		=> $st_resign,
 				'keterangan'	=> $this->input->post('cKeterangan')
 			);
+			
 			$dataPegawai   = array('id_status_mengundurkan_diri' => $this->input->post('cIdStatus'));
+			$dataCancel		= array('id_status_mengundurkan_diri' => '0');
 		}
 
 		$seralizedArrayInsert = serialize($data);
@@ -752,10 +763,20 @@ class Transaksi_act extends CI_Controller
 
 			redirect(site_url('transaksi/pengundurandiri_pegawai/I'));
 		} elseif ($Type == "Update") {
-			$this->model->Update('tb_pengunduran_diri', 'id_pengunduran_diri', $id, $data);
-			$this->model->Insert("log", $vaLog);
-			$this->model->Update('tb_pegawai', 'id_pegawai', $this->input->post('cIdPegawai'), $dataPegawai);
-			$this->model->Insert("log", $vaLog2);
+
+			if ($st_resign < 6) {
+				$this->model->Delete('tb_pengunduran_diri', 'id_pengunduran_diri', $id);
+				$this->model->Insert("log", $vaLog);
+				$this->model->Update('tb_pegawai', 'id_pegawai', $this->input->post('cIdPegawai'), $dataCancel);
+				$this->model->Insert("log", $vaLog2);
+			} else {
+				$this->model->Update('tb_pengunduran_diri', 'id_pengunduran_diri', $id, $data);
+				$this->model->Insert("log", $vaLog);
+				$this->model->Update('tb_pegawai', 'id_pegawai', $this->input->post('cIdPegawai'), $dataPegawai);
+				$this->model->Insert("log", $vaLog2);
+			}
+
+
 
 			redirect(site_url('transaksi/pengundurandiri_pegawai/U'));
 		} elseif ($Type == "Delete") {
@@ -828,8 +849,8 @@ class Transaksi_act extends CI_Controller
 						t3.nama_jabatan, 
 						t1.tanggal_masuk_kerja,
 						t1.tgl_kontrak_berakhir FROM tb_pegawai t1 
-						JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai 
-						JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan 
+						LEFT JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai 
+						LEFT JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan 
 						WHERE t1.id_pegawai = "' . $id . '"';
 		$db = $this->db->query($query);
 		foreach ($db->result() as $vaData) {

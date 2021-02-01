@@ -14,6 +14,9 @@
       $cIconButton   =   "refresh";
       $cValueButton  =   "Update Data";
     }
+    foreach ($pegawai as $column) {
+      $tglMasukKerja   = $column['tanggal_masuk_kerja'];
+    }
     $cAction = "Update/" . $cIdPengunduranDiri . "";
   } else {
     $cIdPengunduranDiri   = "";
@@ -86,10 +89,24 @@
                 </div>
 
                 <div class="col-sm-2">
-                  <div class="form-group">
-                    <label>Tanggal Masuk Kerja</label>
-                    <div class="form_control" id="show"></div>
-                  </div>
+                  <?php
+                  if ($action == "edit") {
+                  ?>
+                    <div class="form-group">
+                      <label>Tanggal Masuk Kerja</label>
+                      <input type="text" readonly="true" class="form_control" value="<?=$tglMasukKerja?>">
+                    </div>
+                  <?php
+                  } else {
+                  ?>
+                    <div class="form-group">
+                      <label>Tanggal Masuk Kerja</label>
+                      <div class="form_control" id="show"></div>
+                    </div>
+                  <?php
+                  }
+                  ?>
+
                 </div>
 
                 <div class="col-sm-3">
@@ -100,17 +117,30 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <label>Status</label>
+                    <label>Status </label>
                     <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" required>
                       <option></option>
-                      <option value="6" <?php if ($cIdStatus == 6) echo "selected"; ?>>Mengundurkan Diri</option>
-                      <option value="7" <?php if ($cIdStatus == 7) echo "selected"; ?>>Gugur</option>
-                      <option value="8" <?php if ($cIdStatus == 8) echo "selected"; ?>>PHK</option>
-                      <option value="9" <?php if ($cIdStatus == 9) echo "selected"; ?>>Mengundurkan Diri Tanpa Ke Kantor</option>
-                      <option value="10" <?php if ($cIdStatus == 10) echo "selected"; ?>>Mengundurkan Diri Tanpa Alasan</option>
-                      <option value="11" <?php if ($cIdStatus == 11) echo "selected"; ?>>Cut Off</option>
-                      <option value="12" <?php if ($cIdStatus == 12) echo "selected"; ?>>Mutasi Klinik</option>
-                      <option value="13" <?php if ($cIdStatus == 13) echo "selected"; ?>>Mutasi Gudang</option>
+
+                      <?php foreach ($st_karyawan as $key => $vaSt_karyawan) {
+                        
+
+                      ?>
+                          <option value="<?= $vaSt_karyawan['id_status']  ?>" <?php if ($vaSt_karyawan['id_status'] == $cIdStatus) echo "selected"; ?>>
+                            <?= $vaSt_karyawan['status'] ?> 
+                          </option>
+
+                      <?php
+                      } 
+                      ?>
+
+                      <!-- <option value="6" <?php //if ($cIdStatus == 6) echo "selected"; ?>>Mengundurkan Diri</option>
+                      <option value="7" <?php //if ($cIdStatus == 7) echo "selected"; ?>>Gugur</option>
+                      <option value="8" <?php //if ($cIdStatus == 8) echo "selected"; ?>>PHK</option>
+                      <option value="9" <?php //if ($cIdStatus == 9) echo "selected"; ?>>Mengundurkan Diri Tanpa Ke Kantor</option>
+                      <option value="10" <?php //if ($cIdStatus == 10) echo "selected"; ?>>Mengundurkan Diri Tanpa Alasan</option>
+                      <option value="11" <?php //if ($cIdStatus == 11) echo "selected"; ?>>Cut Off</option>
+                      <option value="12" <?php //if ($cIdStatus == 12) echo "selected"; ?>>Mutasi Klinik</option>
+                      <option value="13" <?php //if ($cIdStatus == 13) echo "selected"; ?>>Mutasi Gudang</option> -->
                     </select>
                   </div>
                 </div>
@@ -203,10 +233,6 @@
 
                           <a class="btn-link" title="View Data" href="<?= site_url('transaksi/pengundurandiri_pegawai/edit/' . $vaKetidakhadiran['id_pengunduran_diri'] . '') ?>">
                             <i class="fa fa-edit text-info"></i>
-                          </a>
-                          |
-                          <a class="btn-link" title="Delete Data" href="<?= site_url('transaksi_act/pengundurandiri_pegawai/Delete/' . $vaKetidakhadiran['id_pengunduran_diri'] . '') ?>">
-                            <i class="fa fa-trash text-danger"></i>
                           </a>
 
                         </td>

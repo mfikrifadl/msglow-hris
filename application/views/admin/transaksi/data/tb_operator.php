@@ -19,7 +19,7 @@
           <td>Id</td>
           <td>Nama</td>
           <td>Nik</td>
-          <td>Outlet</td>
+          <td>Office</td>
           <td>Action</td>
         </tr>
       </thead>

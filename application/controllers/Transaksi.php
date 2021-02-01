@@ -385,15 +385,34 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
+	public function pengajuan_form_karyawan($Aksi = "", $Id = "")
+    {
+        $dataHeader['menu']     = 'Hak Akses Interview';
+        $dataHeader['file']     = 'Hak Akses';
+        $dataHeader['action']     = $Aksi;
+        $data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan', 'Manager');
+        $data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
+        $data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
+        $data['row']        = $this->model->ViewASC('v_form_pengajuan', 'nama_pengaju_form');
+
+        $this->load->view('admin/container/header', $dataHeader);
+        $this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
+        $this->load->view('admin/container/footer');
+    }
+
 	public function pengundurandiri_pegawai($Aksi = "", $Id = "")
 	{
+		// echo $Id;
 		$dataHeader['menu'] = 'Manajemen Pegawai';
 		$dataHeader['file'] = 'PENGUNDURAN DIRI PEGAWAI';
 		$dataHeader['action'] = $Aksi;
 		$data['pegawai']	= $this->model->ViewASC('tb_pegawai', 'nik');
 		$data['row']		= $this->relasi->GetDataPengundurandiriPegawai();
+		$data['st_karyawan']	= $this->model->ViewAsc('tb_status_karyawan', 'id_status');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_pengunduran_diri', 'id_pengunduran_diri', $Id);
+			$data['pegawai']	= $this->model->ViewWhere('v_pengunduran_diri', 'id_pengunduran_diri',$Id);
+			
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		} elseif ($Aksi == 'delete') {

@@ -36,7 +36,7 @@
                 </svg>
               </div>
             </div>
-            <div id="datakerjapegawai" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="datakerjapegawai" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <div class="form-group">
@@ -81,7 +81,7 @@
                 </svg>
               </div>
             </div>
-            <div id="datagaji" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="datagaji" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <div class="form-group">
@@ -122,7 +122,7 @@
                 </svg>
               </div>
             </div>
-            <div id="dataasuransi" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="dataasuransi" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <div class="form-group">
@@ -161,7 +161,7 @@
                 </svg>
               </div>
             </div>
-            <div id="datapribadi" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="datapribadi" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <div class="row">
@@ -283,7 +283,7 @@
                 </svg>
               </div>
             </div>
-            <div id="datakontak" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="datakontak" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <div class="form-group">
@@ -330,7 +330,7 @@
                 </svg>
               </div>
             </div>
-            <div id="datakeluarga" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="datakeluarga" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <div class="row">
@@ -430,7 +430,7 @@
                 </svg>
               </div>
             </div>
-            <div id="panggilankerja" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="panggilankerja" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
@@ -475,7 +475,7 @@
                 </svg>
               </div>
             </div>
-            <div id="datapernyataan" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="datapernyataan" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
@@ -523,7 +523,7 @@
                 </svg>
               </div>
             </div>
-            <div id="suratpernyataansp1sp2" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="suratpernyataansp1sp2" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
@@ -576,7 +576,7 @@
                 </svg>
               </div>
             </div>
-            <div id="istirahat" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="istirahat" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
@@ -625,7 +625,7 @@
                 </svg>
               </div>
             </div>
-            <div id="skorsing" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="skorsing" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
@@ -671,7 +671,7 @@
                 </svg>
               </div>
             </div>
-            <div id="mutasi" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="mutasi" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
@@ -720,7 +720,7 @@
                 </svg>
               </div>
             </div>
-            <div id="tugas" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="tugas" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
@@ -766,7 +766,7 @@
                 </svg>
               </div>
             </div>
-            <div id="phk" class="collapse" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="phk" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <!--isi content disini-->
