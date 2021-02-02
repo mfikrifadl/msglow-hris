@@ -12,6 +12,7 @@ class Surat_act extends CI_Controller
         $this->load->model('relasi');
         // Meload Library session
         $this->load->library('session');
+        $this->load->library('mpdf');
         //Meload database
         $this->load->database();
         //Meload url 
