@@ -2,6 +2,7 @@
 if ($action == "edit") {
     foreach ($field as $column) {
         $cIdTest  =   $column['id_recruitment'];
+
         $cKodeWawancara  =   $column['kode_wawancara'];
         $createBy       =   $this->session->userdata('nama');
         $updateBy       =   $this->session->userdata('nama');
@@ -96,63 +97,28 @@ $whois_date = date('d-m-Y H:i:s');
 
                         <?php
                         if ($controller_name == "tes_kesehatan") {
+                            foreach ($hasil_tes_kesehatan as $key => $value) {
+
+                                if ($value['hasil_tes_kesehatan'] == null) {
 
                         ?>
-                            <div class="form-group">
+                                    <div class="form-group">
 
-                                <label> Upload Hasil Tes Kesehatan : </label>
-                                <b><span id="file_error" style="color: red;"></span></b>
-                                <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
-                                <div id="preview"></div>
-                                <span class="form-text text-muted">
-                                    <ol>
-                                        <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
-                                        <li>Max Size 1MB</li>
-                                    </ol>
-                                </span>
-                            </div>
-
-                            <?php
-                            // if ($vaArea['hasil_tes_kesehatan'] == NULL) {
-                            ?>
-                                <!-- <div class="form-group">
-
-                                    <label> Upload Hasil Tes Kesehatan : </label>
-                                    <b><span id="file_error" style="color: red;"></span></b>
-                                    <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
-                                    <div id="preview"></div>
-                                    <span class="form-text text-muted">
-                                        <ol>
-                                            <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
-                                            <li>Max Size 1MB</li>
-                                        </ol>
-                                    </span> -->
-
-                                    <!-- <label>Upload Hasil Tes Kesehatan</label>
-                                    <input type="file" name="cTesKes" id="cTesKes" class="form-control" value=""> -->
-                                <!-- </div> -->
-                            <?php
-                            // } else {
-                            ?>
-                                <!-- <div class="form-group">
-
-                                    <label> Upload Hasil Tes Kesehatan : </label>
-                                    <b><span id="file_error" style="color: red;"></span></b>
-                                    <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" />
-                                    <div id="preview"></div>
-                                    <span class="form-text text-muted">
-                                        <ol>
-                                            <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
-                                            <li>Max Size 1MB</li>
-                                        </ol>
-                                    </span> -->
-
-                                    <!-- <label>Upload Hasil Tes Kesehatan</label>
-                                <input type="file" name="cTesKes" id="cTesKes" class="form-control" value=""> -->
-                                <!-- </div> -->
+                                        <label> Upload Hasil Tes Kesehatan : </label>
+                                        <b><span id="file_error" style="color: red;"></span></b>
+                                        <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
+                                        <div id="preview"></div>
+                                        <span class="form-text text-muted">
+                                            <ol>
+                                                <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
+                                                <li>Max Size 1MB</li>
+                                            </ol>
+                                        </span>
+                                    </div>
                         <?php
-                        //     }
-                        // } else {
+
+                                }
+                            }
                         }
                         ?>
 

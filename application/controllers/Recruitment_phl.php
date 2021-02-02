@@ -22,29 +22,91 @@ class Recruitment_phl extends CI_Controller
         $this->load->helper('download');
     }
 
+    function cURL_API($id="",$method="",$data){
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => $method,
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU='
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		
+		return $response;
+	}
+
     public function administrasi($Aksi = "", $Id = "")
     {
-        $data['action']     = $Aksi;
-        $data['menu']       = 'Recruitment PHL';
-        $data['file']       = 'Administrasi';
-        $data['row']        = $this->model->ViewWhereNot('recruitment_phl', 'administrasi', 'tidaklolos');
-        $data['tdklolos']    = $this->model->ViewWhere('recruitment_phl', 'administrasi', 'tidaklolos');
 
-        $url                 = 'http://127.0.0.1/msglow-career/administrator/rest_api/';
-        $content             = file_get_contents($url); // put the contents of the file into a variable
-        $data2                 = json_decode($content, true);
-        $data['registrant']    = $data2['data'];
-        $data['levels']    = $this->model->view('level', 'id_level');
-        $data['lokasis']    = $this->model->view('kategori_phl', 'id_kategori_phl');
+        $data['action'] 	= $Aksi;
+		$data['menu']   	= 'Recruitment PHL';
+		$data['file']   	= 'Administrasi';
+		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
+		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
+        $data['data_recruitment_phl']	= $this->model->GetDataTeLolosAdmPHL();
+        $data['data_recruitment_tidak_lolos_phl']	= $this->model->GetDataTesTidakLolosPHL();
 
-        if ($Aksi == 'edit') {
-            $data['field']     = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
-        }
+		$response 			= $this->cURL_API('','GET','');
+        $data2 				= json_decode($response, true);
+        
+		$data['registrant']	= $data2['data'];
+		$data['levels']	= $this->model->view('level', 'id_level');
+        $data['lokasis']    = $this->model->view('kategori_phl','lokasi');
 
-        $this->load->view('admin/container/header', $data);
+		if ($Aksi == 'edit') {
+			$data['field']     = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
+		}
+
+		$this->load->view('admin/container/header', $data);
         $this->load->view('admin/recruitment_phl/administrasi', $data);
         $this->load->view('admin/container/footer');
     }
+
+    public function administrasi_id($Id = "")
+	{
+		$content = $this->cURL_API($Id,'GET','');
+
+		echo $content;	
+	}
+
+	public function delete_registrant($id=""){
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'PUT',
+			CURLOPT_POSTFIELDS => 'is_delete=1',
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+				'Content-Type: application/x-www-form-urlencoded'
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		redirect('recruitment_phl/administrasi');
+	}
 
     public function wawancara_hr($Aksi = "", $Id = "")
     {

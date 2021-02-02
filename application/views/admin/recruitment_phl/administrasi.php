@@ -13,6 +13,7 @@ if ($action == "edit") {
         $cStatus        =   $column['administrasi'];
         $cLevel        =   $column['level_id'];
         $cDivisi         =   $column['divisi'];
+        $cJob_id          =   $column['job_id'];
         $cKategori        =   $column['kategori_phl_id'];
         $cIconButton   =   "refresh";
         $cValueButton  =   "Update Data";
@@ -22,6 +23,7 @@ if ($action == "edit") {
     $cIdWawancara   =   "";
     $cKodeWawancara   =   "";
     $cDivisi   =   "";
+    $cJob_id          =   "";
     $cKategori =   "";
     $dTglWawancara  =   "";
     $cNama          =   "";
@@ -106,7 +108,8 @@ if ($action == "edit") {
                         </div>
                         <div class="form-group">
                             <label>Divisi</label>
-                            <input name="cDivisi" id="cDivisi" class="form-control" placeholder="Divisi" value="<?= $cDivisi ?>">
+                            <input name="cDivisi" id="cDivisi" class="form-control" readonly="true" placeholder="Divisi" value="<?= $cDivisi ?>">
+                            <input type="hidden" name="cJob_id" id="cJob_id" value="<?= $cJob_id ?>">
                         </div>
                         <div class="form-group">
                             <label>Tanggal Wawancara</label>
@@ -115,8 +118,7 @@ if ($action == "edit") {
                         <div class="form-group">
                             <label>Status</label>
                             <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus">
-                                <option></option>
-                                <option value="pemanggilan" <?php if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
+                                <option></option>                                
                                 <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
                                 <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
                             </select>
@@ -176,15 +178,13 @@ if ($action == "edit") {
                                     <td><?= ++$no; ?></td>
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
-                                            <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-success">
+                                            <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-success">
                                                 <i class="flaticon2-edit"></i>
                                             </button>
-                                            <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['reg_id'] . '') ?>">
+                                            <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
                                                 <i class="la la-search"></i>
                                             </a>
-                                            <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-danger">
-                                                <i class="flaticon2-trash"></i>
-                                            </button>
+
                                         </div>
                                     </td>
                                     <td><?= ($vaAreaa['reg_id']) ?></td>
@@ -233,7 +233,7 @@ if ($action == "edit") {
                         </thead>
                         <tbody>
                             <?php $no = 0;
-                            foreach ($row as $key => $vaArea) { ?>
+                            foreach ($data_recruitment_phl as $key => $vaArea) { ?>
                                 <tr>
                                     <td><?= ++$no; ?></td>
                                     <td>
@@ -261,7 +261,7 @@ if ($action == "edit") {
                                             <i class="flaticon-edit"></i>
                                         </a>
                                         <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
+                                { window.location.href='<?= site_url('recruitment_phl_act/administrasi/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
                                             <i class="flaticon-delete"></i>
                                         </a>
                                     </td>
@@ -305,7 +305,7 @@ if ($action == "edit") {
                         </thead>
                         <tbody>
                             <?php $no = 0;
-                            foreach ($tdklolos as $key => $vaArea) { ?>
+                            foreach ($data_recruitment_tidak_lolos_phl as $key => $vaArea) { ?>
                                 <tr>
                                     <td><?= ++$no; ?></td>
                                     <td>
@@ -349,18 +349,23 @@ if ($action == "edit") {
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var hasil = JSON.parse(this.responseText);
-                var id = hasil.data[0].reg_id;
+                console.log(hasil);
+                var reg_id = hasil.data[0].reg_id;
                 var nama = hasil.data[0].reg_name;
                 var tlp = hasil.data[0].reg_tlp;
                 var email = hasil.data[0].reg_email;
+                var job = hasil.data[0].job_name;
+                var job_id = hasil.data[0].job_id;
 
-                document.getElementById('cKodeWawancara').value = id;
+                document.getElementById('cKodeWawancara').value = reg_id;
                 document.getElementById('cNama').value = nama;
                 document.getElementById('cNomorTelepon').value = tlp;
                 document.getElementById('cEmail').value = email;
+                document.getElementById('cDivisi').value = job;
+                document.getElementById('cJob_id').value = job_id;
             }
         };
-        xmlhttp.open("GET", "<?= site_url('recruitment/wawancara_id') ?>/" + id, true);
+        xmlhttp.open("GET", "<?= site_url('recruitment_phl/administrasi_id') ?>/" + id, true);
         xmlhttp.send();
     }
 
@@ -372,6 +377,7 @@ if ($action == "edit") {
         var cEmail = $('#cEmail').val();
         var cStatus = $('#cStatus').val();
         var cDivisi = $('#cDivisi').val();
+        var cJob_id = $('#cJob_id').val();
         var cKategori = $('#cKategori').val();
         var cLevel = $('#cLevel').val();
         var whois = $('#whois').val();
@@ -385,6 +391,18 @@ if ($action == "edit") {
         } else if (dTglWawancara == "") {
             new PNotify({
                 text: 'Tanggal belum diisi!',
+                animation: 'slide',
+                type: 'warning'
+            });
+        } else if (cLevel == "") {
+            new PNotify({
+                text: 'Interviewer belum diisi!',
+                animation: 'slide',
+                type: 'warning'
+            });
+        } else if (cKategori == "") {
+            new PNotify({
+                text: 'Penempatan belum diisi!',
                 animation: 'slide',
                 type: 'warning'
             });
@@ -404,6 +422,7 @@ if ($action == "edit") {
                     "&cNomorTelepon=" + cNomorTelepon +
                     "&cStatus=" + cStatus +
                     "&cDivisi=" + cDivisi +
+                    "&cJob_id=" + cJob_id +
                     "&cKategori=" + cKategori +
                     "&cLevel=" + cLevel +
                     "&cEmail=" + cEmail,
@@ -421,6 +440,7 @@ if ($action == "edit") {
                     $('#cStatus').val("")
                     $('#cLevel').val("")
                     $('#cDivisi').val("")
+                    $('#cJob_id').val("")
                     $('#cKategori').val("")
                     $('#cNama').focus()
                 }
@@ -436,6 +456,7 @@ if ($action == "edit") {
         var cEmail = $('#cEmail').val();
         var cStatus = $('#cStatus').val();
         var cDivisi = $('#cDivisi').val();
+        var cJob_id = $('#cJob_id').val();
         var cKategori = $('#cKategori').val();
         var cLevel = $('#cLevel').val();
         $.ajax({
@@ -446,6 +467,7 @@ if ($action == "edit") {
                 "&cNomorTelepon=" + cNomorTelepon +
                 "&cStatus=" + cStatus +
                 "&cDivisi=" + cDivisi +
+                "&cJob_id=" + cJob_id +
                 "&cKategori=" + cKategori +
                 "&cLevel=" + cLevel +
                 "&cEmail=" + cEmail,

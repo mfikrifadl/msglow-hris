@@ -98,10 +98,13 @@
                                             <?php
                                             } else {
                                             ?>
-                                                <a href="<?= site_url('recruitment_phl_act/aksi/lolos/' . $vaArea['id_recruitment_phl'] . '') ?>">
-                                                    <button class="btn btn-success btn-sm"> <i class="fa fa-sign-in-alt"></i>Lolos </button>
+                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_phl_act/aksi/lolos/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                                    <i class="flaticon2-check-mark"></i>
                                                 </a>
-                                                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment_phl'] ?>"> <i class="fa fa-sign-in-alt"></i>Tidak Lolos </button>
+                                                <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment_phl'] ?>">
+                                                    <i class="flaticon2-cross"></i>
+                                                </a>
+                                                
                                                 <!-- Modal edit category -->
                                                 <div id="id-<?= $vaArea['id_recruitment_phl'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alasanTidakLolos" aria-hidden="true">
                                                     <div class="modal-dialog">

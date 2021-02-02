@@ -255,6 +255,8 @@ if ($this->session->userdata('id') == '') {
             $cMenu  = 'menu_recruitment.php';
           } elseif ($this->session->userdata('level') >= 3) {
             $cMenu  = 'menu_kepegawaian.php';
+          } elseif ($this->session->userdata('level') >= 4) {
+            $cMenu  = 'menu_kepegawaian.php';
           } else {
             $cMenu  = 'login.php';
           }

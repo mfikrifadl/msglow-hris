@@ -75,6 +75,7 @@ class Recruitment_phl_act extends CI_Controller
             'level_id'    => $this->input->post('cLevel'),
             'kategori_phl_id'    => $this->input->post('cKategori'),
             'divisi'    => $this->input->post('cDivisi'),
+            'job_id'    => $this->input->post('cJob_id'),
             'status'    => 'pending',
         );
 
@@ -89,7 +90,14 @@ class Recruitment_phl_act extends CI_Controller
             'email'    => $this->input->post('cEmail'),
             'kategori_phl_id'    => $this->input->post('cKategori'),
             'divisi'    => $this->input->post('cDivisi'),
+            'job_id'    => $this->input->post('cJob_id'),
         );
+
+        $data_delete = array(
+			'status_email_adm'	=> 'Belum Kirim Email',
+			'status_email_tidaklolos'	=> 'Belum Kirim Email',
+			'is_delete' => 1
+		);
 
         $data = array(
             'kode_wawancara' => $this->input->post('cKodeWawancara'),
@@ -103,6 +111,7 @@ class Recruitment_phl_act extends CI_Controller
             'email'    => $this->input->post('cEmail'),
             'kategori_phl_id'    => $this->input->post('cKategori'),
             'divisi'    => $this->input->post('cDivisi'),
+            'job_id'    => $this->input->post('cJob_id'),
         );
 
         $seralizedArray = serialize($data);
@@ -123,7 +132,7 @@ class Recruitment_phl_act extends CI_Controller
             $this->model->Update('recruitment_phl', 'id_recruitment_phl', $id, $data_update);
             $this->model->Insert("log", $vaLog);
         } elseif ($Type == "Delete") {
-            $this->model->Delete('recruitment_phl', 'id_recruitment_phl', $id);
+            $this->model->Update_Delete('recruitment_phl', 'id_recruitment_phl', $id, $data_delete);
             redirect(site_url('recruitment_phl/administrasi/'));
         }
     }

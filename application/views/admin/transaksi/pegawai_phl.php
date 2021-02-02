@@ -74,11 +74,10 @@ if ($action == "edit") {
   }
   $cAction = "Update/" . $cIdPegawai . "";
 } else {
-  $last = '';
   foreach ($lastno->result_array() as $key => $vaDataLast) {
-    $last = $vaDataLast['nik'];
+    (int)$last = $vaDataLast['nik'];
   }
-  $last2 = (int)$last + 1;
+  $last2 = $last + 1;
   $tahun = date('y');
   $bulan = date('m');
   $no_urut = '99' . $tahun . $bulan . $last2;
@@ -172,7 +171,7 @@ if ($action == "edit") {
               <div class="card">
                 <div class="card-header" id="headingTablePegawai">
                   <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseTablePegawai" aria-expanded="true" aria-controls="collapseTablePegawai">
-                    <strong> Data Table Pegawai </strong>
+                    <strong> Data Table Pegawai PHL </strong>
                   </div>
                 </div>
                 <div id="collapseTablePegawai" class="collapse show" aria-labelledby="headingTablePegawai" data-parent="#accordionTablePegawai">
@@ -182,13 +181,6 @@ if ($action == "edit") {
                     <div class="col-md-12">
                       <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs" id="myTabs">
-                          <li class="active text-dark">
-                            <!-- <a href="#" class="btn btn-label-facebook"><i class="socicon-facebook"></i> Facebook</a>&nbsp; -->
-                            <button type="button" onclick="return GetDataOperator();" class="btn btn-label-facebook">
-                              Data Pegawai Ms Glow
-                            </button>
-                            <!-- <a href="#tab_1" onclick="" data-toggle="tab">Data Pegawai Operator</a> -->
-                          </li>
                           <li class="active text-dark">
                             <!-- <a href="#" class="btn btn-label-facebook"><i class="socicon-facebook"></i> Facebook</a>&nbsp; -->
                             <button type="button" onclick="return GetDataOperator();" class="btn btn-label-facebook">
@@ -1410,7 +1402,7 @@ if ($action == "edit") {
     $('.loding').show();
     $.ajax({
       type: "GET",
-      url: "<?= site_url('transaksi/tb_operator') ?>",
+      url: "<?= site_url('transaksi/tb_operator_phl') ?>",
       cache: false,
       beforeSend: function() {
         $('#data_operator').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");

@@ -730,7 +730,7 @@ class Transaksi_act extends CI_Controller
 				'status'		=> $st_resign,
 				'keterangan'	=> $this->input->post('cKeterangan')
 			);
-			
+
 			$dataPegawai   = array('id_status_mengundurkan_diri' => $this->input->post('cIdStatus'));
 			$dataCancel		= array('id_status_mengundurkan_diri' => '0');
 		}
@@ -829,12 +829,14 @@ class Transaksi_act extends CI_Controller
 	{
 
 		$cTglSearch    = urldecode($result);
-		$db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $cTglSearch);
+		$db = $this->model->GetDataPegawai($cTglSearch);
 		$Tgl = "";
+		$status_kerja = "";
 		foreach ($db as $key => $vaData) {
 			$Tgl = $vaData['tanggal_masuk_kerja'];
+			$status_kerja = $vaData['status'];
 		}
-		echo "$Tgl";
+		//echo "$Tgl";
 	}
 
 	public function get_pegawai($id = '')
@@ -866,6 +868,29 @@ class Transaksi_act extends CI_Controller
 		}
 
 		echo $nik . "~" . $jabatan . "~" . $tempat_lahir . "~" . $tanggal_lahir . "~" . $no_ktp . "~" . $alamat_asal . "~" . $nama . "~" . $tanggal_masuk_kerja . "~" . $tgl_kontrak_berakhir;
+	}
+
+	public function get_data_pegawai($id = '')
+	{
+		// $db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $id);
+		$query = 'SELECT t1.id_pegawai,
+		t1.nik, 						
+		t2.status,						 
+		t1.nama, 						
+		t1.tanggal_masuk_kerja
+		FROM tb_pegawai t1 
+		LEFT JOIN tb_status_karyawan t2 ON t1.id_status = t2.id_status 						
+		WHERE t1.id_pegawai  = "' . $id . '"';
+		$db = $this->db->query($query);
+		foreach ($db->result() as $vaData) {
+			$id_pegawai = $vaData->id_pegawai;
+			$nik = $vaData->nik;
+			$nama = $vaData->nama;
+			$status = $vaData->status;
+			$tanggal_masuk_kerja = $vaData->tanggal_masuk_kerja;
+		}
+		//echo "testing";
+		echo $tanggal_masuk_kerja . "~" . $status .  "~" . $id_pegawai . "~" . $nama . "~" . $nik;
 	}
 
 	public function get_pegawai_jabatan($id = '')

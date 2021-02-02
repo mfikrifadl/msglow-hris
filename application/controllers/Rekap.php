@@ -6,7 +6,7 @@ class Rekap extends CI_Controller{
      public function __construct()
     {
         parent::__construct();
-         $this->load->model('model');
+        $this->load->model('model');
         $this->load->helper('form');
         $this->load->library('fpdf');
         $this->load->library('excel/Biffwriter');

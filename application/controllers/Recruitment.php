@@ -74,7 +74,7 @@ class Recruitment extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
+			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -102,7 +102,8 @@ class Recruitment extends CI_Controller
 		$data['file']   	= 'Wawancara';
 		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
 		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
-
+		$data['data_recruitment']	= $this->model->ViewWhere('recruitment','is_delete', '0');
+		$data['data_recruitment_tidak_lolos']	= $this->model->GetDataTesTidakLolos();
 		$response 			= $this->cURL_API('','GET','');
 		$data2 				= json_decode($response, true);
 		$data['registrant']	= $data2['data'];
@@ -146,7 +147,7 @@ class Recruitment extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
+			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -264,6 +265,7 @@ class Recruitment extends CI_Controller
 		$data['menu']   = 'Recruitment';
 		$data['file']   = 'Tes Kesehatan';
 		$data['controller_name']   = 'tes_kesehatan';
+		$data['hasil_tes_kesehatan'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		$data['date'] = 'tgl_tes_kesehatan';
 		$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos', 'interview_hrga' => 'lolos'])->result_array();
 		if ($Aksi == 'edit') {

@@ -234,7 +234,16 @@
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
-                  <span class="kt-menu__link-text">Data Pegawai</span>
+                  <span class="kt-menu__link-text">Data Pegawai Staff</span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?= site_url('transaksi/pegawai_phl'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">Data Pegawai PHL</span>
                 </a>
               </li>
 

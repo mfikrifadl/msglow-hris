@@ -103,7 +103,7 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Tertanggal: </label>
                                 <div class="col-8">
-                                    <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
+                                    <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">

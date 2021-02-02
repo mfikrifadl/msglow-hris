@@ -176,9 +176,9 @@
                         <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
                           <i class="la la-search"></i>
                         </a>
-                        <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">
+                        <!-- <button type="button" onclick="deleteReg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">
                           <i class="flaticon2-trash"></i>
-                        </button>
+                        </button> -->
                       </div>
                     </td>
                     <td><?= $vaAreaa['reg_id'] ?></td>
@@ -229,7 +229,7 @@
               </thead>
               <tbody>
                 <?php $no = 0;
-                foreach ($row as $key => $vaArea) { ?>
+                foreach ($data_recruitment as $key => $vaArea) { ?>
                   <tr>
                     <td><?= ++$no; ?></td>
                     <td>
@@ -308,7 +308,7 @@
               </thead>
               <tbody>
                 <?php $no = 0;
-                foreach ($tdklolos as $key => $vaArea) { ?>
+                foreach ($data_recruitment_tidak_lolos as $key => $vaArea) { ?>
                   <tr>
                     <td><?= ++$no; ?></td>
                     <td>
@@ -355,6 +355,31 @@
 
   <script type="text/javascript">
     function setinput(id) {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var hasil = JSON.parse(this.responseText);
+          console.log(hasil);
+          var reg_id = hasil.data[0].reg_id;
+          var nama = hasil.data[0].reg_name;
+          var tlp = hasil.data[0].reg_tlp;
+          var email = hasil.data[0].reg_email;
+          var job = hasil.data[0].job_name;
+          var job_id = hasil.data[0].job_id;
+
+          document.getElementById('cKodeWawancara').value = reg_id;
+          document.getElementById('cNama').value = nama;
+          document.getElementById('cNomorTelepon').value = tlp;
+          document.getElementById('cEmail').value = email;
+          document.getElementById('cJob').value = job;
+          document.getElementById('cJob_id').value = job_id;
+        }
+      };
+      xmlhttp.open("GET", "<?= site_url('recruitment/wawancara_id') ?>/" + id, true);
+      xmlhttp.send();
+    }
+
+    function deleteReg(id) {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

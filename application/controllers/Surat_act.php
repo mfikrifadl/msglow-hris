@@ -12,7 +12,6 @@ class Surat_act extends CI_Controller
         $this->load->model('relasi');
         // Meload Library session
         $this->load->library('session');
-        $this->load->library('mpdf');
         //Meload database
         $this->load->database();
         //Meload url 
@@ -69,11 +68,10 @@ class Surat_act extends CI_Controller
             $dataInsert = array(
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'jum_teguran_lisan' =>  $this->input->post('tl'),
-                'tanggal'           =>  $this->input->post('dTgl'),
+                'mulai_berlaku'     =>  $this->input->post('dTgl'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'keterangan'        =>  $this->input->post('cKet'),
                 'id_kategori_surat' =>  2,
-
             );
 
             $seralizedArrayInsert = serialize($dataInsert);

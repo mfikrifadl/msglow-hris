@@ -78,6 +78,13 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/transaksi/data/tb_operator', $data);
 	}
 
+	public function tb_operator_phl()
+	{
+
+		$data['row']	= $this->relasi->GetDataPegawaiPhl();
+		$this->load->view('admin/transaksi/data/tb_operator_phl', $data);
+	}
+
 	public function tb_absensi()
 	{
 
@@ -457,7 +464,7 @@ class Transaksi extends CI_Controller
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Teguran Lisan';
-		$data['row']	= $this->model->ViewWhere('v_teguran_lisan', 'id_kategori_surat', '2');
+		$data['row']	= $this->db->query('SELECT * FROM v_teguran_lisan where id_kategori_surat=2 AND is_delete=0')->result_array();
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
 		if ($Aksi == 'view') {
@@ -508,7 +515,7 @@ class Transaksi extends CI_Controller
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
 		$data['file']   = 'Surat Teguran';
-		$data['row']	= $this->model->ViewWhere('v_teguran_lisan', 'id_kategori_surat', '1');
+		$data['row']	= $this->db->query('SELECT * FROM v_teguran_lisan where id_kategori_surat=1 AND is_delete=0')->result_array();
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');

@@ -152,6 +152,24 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function GetDataTesTidakLolos()
+	{
+		$Query = $this->db->query("SELECT * FROM recruitment WHERE recruitment = 'tidaklolos' AND is_delete = '0' ");
+		return $Query->result_array();
+	}
+
+	public function GetDataTesTidakLolosPHL()
+	{
+		$Query = $this->db->query("SELECT * FROM recruitment_phl WHERE administrasi = 'tidaklolos' AND is_delete = '0' ");
+		return $Query->result_array();
+	}
+
+	public function GetDataTeLolosAdmPHL()
+	{
+		$Query = $this->db->query("SELECT * FROM recruitment_phl WHERE administrasi = 'lolos' AND is_delete = '0' ");
+		return $Query->result_array();
+	}
+
 	public function GetCekAbsen($Id)
 	{
 		$Query = $this->db->query("SELECT * FROM tb_gaji WHERE id_absen = '$Id' ");
@@ -169,6 +187,27 @@ class Model extends CI_Model
 		$Query = $this->db->query("SELECT * FROM tb_cuti_gaji WHERE id_absen = '$Id' ");
 		return $Query;
 	}
+
+	public function GetDataPegawai($id)
+	{
+		$Query = 'SELECT t1.id_pegawai,
+						t1.nik, t1.tanggal_lahir,
+						t1.tempat_lahir, 
+						t1.no_ktp,
+						t4.status,
+						t1.alamat_asal, 
+						t1.nama, 
+						t3.nama_jabatan, 
+						t1.tanggal_masuk_kerja,
+						t1.tgl_kontrak_berakhir FROM tb_pegawai t1 
+						LEFT JOIN tb_status_karyawan t4 ON t1.id_status = t4.id_status
+						LEFT JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai 
+						LEFT JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan 
+						WHERE t1.id_pegawai = "' . $id . '"';
+		return $Query;
+	}
+
+	
 
 	public function GetCekPendapatan($Id, $Bulan, $Tahun)
 	{

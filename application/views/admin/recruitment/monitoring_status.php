@@ -185,6 +185,7 @@
                   <td>Nilai Tes</td>
                   <td>Tahap Test</td>
                   <td>Status Test</td>
+                  <td>Keterangan</td>
                 </tr>
               </thead>
               <tbody>
@@ -222,14 +223,19 @@
                         </span>
                       </td>
                       <td><?php
-                          if ($vaArea['recruitment'] == 'lolos') {
+                          if ($vaArea['status'] == 'lolos') {
                             $cLabel = 'success';
-                          } else if ($vaArea['recruitment'] == 'tidaklolos') {
+                          } else if ($vaArea['status'] == 'tidaklolos') {
                             $cLabel = 'danger';
                           } else  $cLabel = 'info';
                           ?>
                         <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                          <?= $vaArea['recruitment'] ?>
+                          <?= $vaArea['status'] ?>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="kt-badge kt-badge--inline kt-badge--pill ">
+                          <?= $vaArea['alasan_tidak_lolos'] ?>
                         </span>
                       </td>
                     </tr>

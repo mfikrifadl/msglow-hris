@@ -198,7 +198,7 @@ class Recruitment_act extends CI_Controller
 			$this->model->Insert("log", $vaLog);
 			redirect(site_url('recruitment/wawancara/'));
 		} elseif ($Type == "Delete") {
-			$this->model->Update_Delete('recruitment', 'kode_wawancara', $id, $data_delete);
+			$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
 			redirect(site_url('recruitment/wawancara/'));
 		}
 	}
