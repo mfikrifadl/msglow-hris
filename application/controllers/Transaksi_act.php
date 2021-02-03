@@ -912,4 +912,87 @@ class Transaksi_act extends CI_Controller
 		$data['row']	= $this->relasi->GetSubUnitKerja($id);
 		$this->load->view('admin/hak_akses_interview/tb_sub_unit_kerja', $data);
 	}
+
+	public function form_pengajuan($Aksi = "", $Id = "")
+	{
+		$dataHeader['menu']     = 'Hak Akses Interview';
+		$dataHeader['file']     = 'Hak Akses';
+		$dataHeader['action']     = $Aksi;
+
+		$data_tambah = array(
+			'is_interview' => 1
+		);
+		$data_approve = array(
+			'is_interview' => 2
+		);
+
+		$idForm = date('YmdHis');
+
+		$unit_kerja = $this->input->post('cUnit_k');
+		$sub_unit_kerja = $this->input->post('pSuk');
+		$jmlP =  $this->input->post('jmlP');
+		// echo "$unit_kerja-$sub_unit_kerja-$jmlP <br />";
+		$data = array();
+		if (empty($unit_kerja) && empty($sub_unit_kerja) && empty($jmlP)) {
+			// echo "if 1";
+			$data = array(				
+				'job_career'         		=> $this->input->post('cJob_career'),
+			);
+		} elseif (empty($unit_kerja) && empty($sub_unit_kerja)) {
+			// echo "elseif 2";
+			$data = array(				
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'total_man_power'         		=> $this->input->post('jmlP'),
+			);
+		} elseif (empty($unit_kerja) && empty($jmlP)) {
+			// echo "elseif 3";
+			$data = array(				
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
+			);
+		} elseif (empty($sub_unit_kerja) && empty($jmlP)) {
+			// echo "elseif 4";
+			$data = array(				
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
+			);
+		} elseif (empty($jmlP)) {
+			// echo "elseif 5";
+			$data = array(				
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
+			 'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
+			);
+		} else {
+			// echo "else";
+			$data = array(
+				'id_form'                   => $idForm,
+				'id_pegawai'                => $this->input->post('cIdPegawai'),
+				'nik'                		=> $this->input->post('cNik'),
+				'nama_pengaju_form'         => $this->input->post('cNama'),
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'unit_kerja_pengaju_form'   => $this->input->post('cJabatan'),
+				'sub_unit_kerja_pf'         => $this->input->post('cSuk'),
+				'add_man_power_uk'          => $this->input->post('cUnit_k'),
+				'id_sub_unit_kerja'         => $this->input->post('pSuk'),
+				'total_man_power'           => $this->input->post('jmlP'),
+			);
+		}
+
+		if ($Aksi == 'tambah') {
+			$this->model->Insert("tb_form_pengajuan", $data);
+			// $this->db->update('user', $data_tambah, ['id'  => $this->input->post('cIdPegawai')]);
+		} 
+		// elseif ($Aksi == 'approve') {
+		// 	$this->db->update('tb_form_pengajuan', $data_approve, ['id'  => $Id]);
+		// } 
+		elseif ($Aksi == 'Update') {
+			$this->model->Update("tb_form_pengajuan", "id_form", $Id, $data);
+		} 
+		// elseif ($Aksi == 'unapprove') {
+		// 	$this->db->update('user', $data_tambah, ['id'  => $Id]);
+		// }
+
+		redirect(site_url('transaksi/pengajuan_form_karyawan'));
+	}
 }

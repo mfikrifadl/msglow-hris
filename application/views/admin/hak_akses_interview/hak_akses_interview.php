@@ -4,20 +4,37 @@ $cValueButton   =   "Pengajuan";
 $cAction        =   "Insert";
 
 if ($action == "edit") {
-    foreach ($pegawai as $column) {
-        $cIdPegawai         = $column['id_pegawai'];
-    }
-    foreach ($unit_kerja as $columnUK) {
-        $cIdRefJabatan      = $columnUK['id_ref_jabatan'];
-    }
-    // foreach ($subUnitKerja as $columnUK) {  
-    //     $cIdUnitKerja      = $columnUK['id_unit_kerja'];    
-    // }
 
+    foreach ($row_edit as $columnP) {
+        $cId_form      = $columnP['id_form'];
+        $cJob_career      = $columnP['job_career'];
+        $cIdPegawai         = $columnP['id_pegawai'];
+        $cNik         = $columnP['nik'];
+        $cJabatan_pengaju_form         = $columnP['unit_kerja_pengaju_form'];
+        $cSub_unit_kerja_pf         = $columnP['sub_unit_kerja_pf'];
+        $cSub_unit_kerja         = $columnP['nama_sub_unit_kerja'];
+        $cId_sub_unit_kerja         = $columnP['id_sub_unit_kerja'];
+        $cId_ref_jabatan         = $columnP['add_man_power_uk'];
+        $ctotal_man_power         = $columnP['total_man_power'];
+        $cNama_jabatan         = $columnP['nama_jabatan'];
+        $cNama_pengaju_form         = $columnP['nama_pengaju_form'];
+    }
+    $cValueButton   =   "Update";
 } else {
+    $cId_form      = "";
+    $cJob_career      = "";
+    $cNik         = "";
+    $cJabatan_pengaju_form         = "";
+    $cSub_unit_kerja_pf         = "";
+    $cId_sub_unit_kerja         = "";
+    $cSub_unit_kerja         = "";
+    $cId_ref_jabatan         = "";
     $cIdPegawai         = "";
-    $cIdRefJabatan      = "";
-    // $cIdUnitKerja       = "";
+    $cJob_career        = "";
+    $ctotal_man_power         = "";
+    $cNama_jabatan         = "";
+    $cNama_pengaju_form         = "";
+    $cValueButton   =   "tambah";
 }
 
 ?>
@@ -39,7 +56,7 @@ if ($action == "edit") {
                     </ul>
                 </div>
             </div>
-            <form method="post" enctype="multipart/form-data" action="<?= site_url('hak_akses_interview/form_pengajuan/tambah') ?>">
+            <form method="post" enctype="multipart/form-data" action="<?= site_url('transaksi_act/form_pengajuan/' . $cValueButton . '/' . $cId_form) ?>">
                 <div class="col-12">
 
                     <!--begin::Portlet Data Keluarga-->
@@ -62,40 +79,78 @@ if ($action == "edit") {
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label>Nama Manager</label>
-                                                        <select name="cIdPegawai" onchange="cek_pegawai(this.value)" class="form-control kt-selectpicker" data-live-search="true">
-                                                            <option></option>
-                                                            <?php
-                                                            $jsArray = "var jason = new Array();\n";
-                                                            foreach ($pegawai as $dbRow) {
-                                                            ?>
-                                                                <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
-                                                                    <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
-                                                                </option>';
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                        <?php
+                                                        if ($action == "edit") {
+                                                        ?>
+                                                            <input type="text" readonly="true" value="<?= $cNama_pengaju_form ?>" class="form-control">
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <select name="cIdPegawai" onchange="cek_pegawai(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                                                <option></option>
+                                                                <?php
+                                                                $jsArray = "var jason = new Array();\n";
+                                                                foreach ($pegawai as $dbRow) {
+                                                                ?>
+                                                                    <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
+                                                                        <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
+                                                                    </option>';
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </div>
                                                 </div> <!-- /.col-form -->
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label>NIK</label>
-                                                        <input type="text" name="cNik" id="cNik" readonly="true" value="" class="form-control">
+                                                        <input type="text" name="cNik" id="cNik" readonly="true" value="<?= $cNik ?>" class="form-control">
                                                         <input type="hidden" name="cNama" id="cNama">
                                                     </div>
                                                 </div> <!-- /.col-form -->
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label>Jabatan</label>
-                                                        <input type="text" name="cJabatan" id="cJabatan" readonly="true" value="" class="form-control">
+                                                        <input type="text" name="cJabatan" id="cJabatan" readonly="true" value="<?= $cJabatan_pengaju_form ?>" class="form-control">
                                                     </div>
                                                 </div> <!-- /.col-form -->
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label>Sub Unit Kerja</label>
-                                                        <input type="text" name="cSuk" id="cSuk" readonly="true" value="" class="form-control">
+                                                        <input type="text" name="cSuk" id="cSuk" readonly="true" value="<?= $cSub_unit_kerja_pf ?>" class="form-control">
                                                     </div>
                                                 </div> <!-- /.col-form -->
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>DATA SEBELUMNYA </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label>Mengajukan permohonan penambahan karyawan pada Unit Kerja : </label>
+                                                        <input type="text" readonly="true" value="<?= $cNama_jabatan ?>" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label>Sub Unit Kerja </label>
+                                                        <input type="text" readonly="true" value="<?= $cSub_unit_kerja ?>" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label>Total Penambahan Pegawai </label>
+                                                        <input type="text" readonly="true" value="<?= $ctotal_man_power ?>" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>DATA UPDATE </label>
+                                                    </div>
+                                                </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label>Mengajukan permohonan penambahan karyawan pada Unit Kerja : </label>
@@ -105,7 +160,8 @@ if ($action == "edit") {
                                                             $jsArray = "var jason = new Array();\n";
                                                             foreach ($unit_kerja as $rowUk) {
                                                             ?>
-                                                                <option value="<?= $rowUk['id_ref_jabatan'] ?>" <?php if ($rowUk['id_ref_jabatan'] == $cIdRefJabatan) echo 'selected'; ?>>
+                                                                <option value="<?= $rowUk['id_ref_jabatan'] ?>" <?php //if ($rowUk['id_ref_jabatan'] == $cId_ref_jabatan) echo 'selected'; 
+                                                                                                                ?>>
                                                                     <?= $rowUk['nama_jabatan'] ?>
                                                                 </option>';
                                                             <?php
@@ -114,25 +170,32 @@ if ($action == "edit") {
                                                         </select>
                                                     </div>
                                                 </div> <!-- /.col-form -->
+
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label>Sub Unit Kerja </label>
                                                         <div id="data_sub_unit_kerja"></div>
                                                     </div>
                                                 </div> <!-- /.col-form -->
+
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label>Total penambahan pegawai : </label>
-                                                        <input type="text" name="jmlP" value="" class="form-control">
+                                                        <input type="text" name="jmlP" class="form-control">
                                                     </div>
                                                 </div> <!-- /.col-form -->
                                             </div>
-
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Nama Job Career </label>
+                                                    <input type="text" name="cJob_career" value="<?= $cJob_career ?>" class="form-control">
+                                                </div>
+                                            </div> <!-- /.col-form -->
 
                                             <!-- /.col-form -->
                                             <div class="col-sm-12">
                                                 <div class="kt-portlet__foot">
-                                                <br /><br /><br /><br /><br /><br />
+                                                    <br /><br /><br /><br /><br /><br />
                                                     <button type="submit" class="btn btn-flat btn-primary">
                                                         <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                                                     </button>
@@ -210,12 +273,19 @@ if ($action == "edit") {
                                                                     <?= $vaArea['total_man_power'] ?>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="">
+                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                        <i class="flaticon2-plus"></i>
+                                                                    </a>
+                                                                    <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Unapprove" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                        <i class="flaticon2-delete"></i>
+                                                                    </a>
+                                                                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon-edit"></i>
                                                                     </a>
                                                                     <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data">
                                                                         <i class="flaticon-delete"></i>
                                                                     </a>
+
                                                                 </td>
                                                             <?php } ?>
                                                         <?php } ?>

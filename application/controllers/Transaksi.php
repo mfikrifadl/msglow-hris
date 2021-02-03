@@ -393,19 +393,38 @@ class Transaksi extends CI_Controller
 	}
 
 	public function pengajuan_form_karyawan($Aksi = "", $Id = "")
-    {
-        $dataHeader['menu']     = 'Hak Akses Interview';
-        $dataHeader['file']     = 'Hak Akses';
-        $dataHeader['action']     = $Aksi;
-        $data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan', 'Manager');
-        $data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
-        $data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
-        $data['row']        = $this->model->ViewASC('v_form_pengajuan', 'nama_pengaju_form');
+	{
+		$dataHeader['menu']     = 'Hak Akses Interview';
+		$dataHeader['file']     = 'Hak Akses';
+		$dataHeader['action']     = $Aksi;
+		$data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan', 'Manager');
+		$data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
+		$data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
+		$data['row']        = $this->model->ViewASC('v_form_pengajuan', 'nama_pengaju_form');
 
-        $this->load->view('admin/container/header', $dataHeader);
-        $this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
-        $this->load->view('admin/container/footer');
-    }
+		if ($Aksi == "edit") {
+			$data['row_edit']        = $this->model->ViewWhere('v_form_pengajuan', 'id_form', $Id);
+			$data['subUnitKerja']	= $this->model->ViewWhere('tb_sub_unit_kerja', 'id_Unit_kerja', $Id);
+			$data['show_sub_uk']	= $this->relasi->ShowSubUnitKerja();
+		}
+
+		$this->load->view('admin/container/header', $dataHeader);
+		$this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
+		$this->load->view('admin/container/footer');
+	}
+
+	public function unit_kerja()
+	{
+
+		$data_unit_kerja     = $this->db->query("SELECT * FROM tb_ref_jabatan ORDER BY nama_jabatan");
+		return $data_unit_kerja;
+	}
+
+	public function sub_unit_kerja($id)
+	{
+		$data_sub_unit_kerja = $this->db->query("SELECT * FROM tb_sub_unit_kerja suk LEFT JOIN tb_ref_jabatan rj ON suk.id_unit_kerja = rj.id_ref_jabatan WHERE suk.id_unit_kerja='$id'");
+		return $data_sub_unit_kerja;
+	}
 
 	public function pengundurandiri_pegawai($Aksi = "", $Id = "")
 	{
@@ -418,8 +437,7 @@ class Transaksi extends CI_Controller
 		$data['st_karyawan']	= $this->model->ViewAsc('tb_status_karyawan', 'id_status');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_pengunduran_diri', 'id_pengunduran_diri', $Id);
-			$data['pegawai']	= $this->model->ViewWhere('v_pengunduran_diri', 'id_pengunduran_diri',$Id);
-			
+			$data['pegawai']	= $this->model->ViewWhere('v_pengunduran_diri', 'id_pengunduran_diri', $Id);
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		} elseif ($Aksi == 'delete') {
