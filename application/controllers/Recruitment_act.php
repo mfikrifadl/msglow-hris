@@ -609,14 +609,19 @@ class Recruitment_act extends CI_Controller
 		$cKodeWawancara = $this->input->post('cKW');
 		$cStatus = $this->input->post('cStatus');
 
-		$nama = $_FILES['cTesKes']['name'];
-		$x = explode('.', $nama);
-		$ekstensi = strtolower(end($x));
-		$ukuran    = $_FILES['cTesKes']['size'];
+		$folder = "";
+		if ($cStatus == "pemanggilan") {
+			$folder = "";
+		} else {
+			$nama = $_FILES['cTesKes']['name'];
+			$x = explode('.', $nama);
+			$ekstensi = strtolower(end($x));
+			$ukuran    = $_FILES['cTesKes']['size'];
 
-		$nama_baru = $cKodeWawancara . "." . $ekstensi; //ganti nama file sesuai ekstensi
-		$file_temp = $_FILES['cTesKes']['tmp_name']; //data temp yang di upload
-		$folder    = "assets2/media/hasil_tes_kesehatan/$nama_baru"; //folder tujuan
+			$nama_baru = $cKodeWawancara . "." . $ekstensi; //ganti nama file sesuai ekstensi
+			$file_temp = $_FILES['cTesKes']['tmp_name']; //data temp yang di upload
+			$folder    = "assets2/media/hasil_tes_kesehatan/$nama_baru"; //folder tujuan
+		}
 		//==========================GET DATA FOTO =============================================
 		$dbKode = $this->db->query("SELECT * FROM recruitment WHERE id_recruitment = '" . $this->input->post('cIdTest') . "' ");
 
@@ -630,38 +635,75 @@ class Recruitment_act extends CI_Controller
 			$cKodeWawancara = $vaKode['kode_wawancara'];
 		}
 
-		$data_update = array(
-			'update_by'	=> $this->input->post('whois'),
-			'update_date'	=> $this->input->post('whois_date'),
-			'hasil_tes_kesehatan'	=> $folder,
-			'tes_kesehatan'	=> $this->input->post('cStatus'),
-			'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
-			'status'	=> $status,
-			'tahap_r'	=> 'Tes Kesehatan',
-			'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
-			'status_email_tidaklolos'	=> 'Belum Kirim Email',
-		);
+		$data_update = array();
+		$data_update_delete = array();
+		$data = array();
+		if ($cStatus == "pemanggilan" || $cStatus == "lolos") {
+			$data_update = array(
+				'update_by'	=> $this->input->post('whois'),
+				'update_date'	=> $this->input->post('whois_date'),
+				'hasil_tes_kesehatan'	=> $folder,
+				'tes_kesehatan'	=> $this->input->post('cStatus'),
+				'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
+				'status'	=> $status,
+				'tahap_r'	=> 'Tes Kesehatan',
+				'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+			);
 
-		$data_update_delete = array(
-			'is_delete' => 1,
-			'status_email_hrga'	=> 'Belum Kirim Email',
-			'status_email_tidaklolos'	=> 'Belum Kirim Email',
-			'delete_by'	=> $whois,
-			'delete_date'	=> $whois_date,
+			$data_update_delete = array(
+				'is_delete' => 1,
+				'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+				'delete_by'	=> $whois,
+				'delete_date'	=> $whois_date,
 
-		);
+			);
 
-		$data = array(
-			'update_by'	=> $this->input->post('whois'),
-			'update_date'	=> $this->input->post('whois_date'),
-			'hasil_tes_kesehatan'	=> $folder,
-			'tes_kesehatan'	=> $this->input->post('cStatus'),
-			'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
-			'status'	=> $status,
-			'tahap_r'	=> 'Tes Kesehatan',
-			'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
-			'status_email_tidaklolos'	=> 'Belum Kirim Email',
-		);
+			$data = array(
+				'update_by'	=> $this->input->post('whois'),
+				'update_date'	=> $this->input->post('whois_date'),
+				'hasil_tes_kesehatan'	=> $folder,
+				'tes_kesehatan'	=> $this->input->post('cStatus'),
+				'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
+				'status'	=> $status,
+				'tahap_r'	=> 'Tes Kesehatan',
+				'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+			);
+		} else {
+			$data_update = array(
+				'update_by'	=> $this->input->post('whois'),
+				'update_date'	=> $this->input->post('whois_date'),
+				'tes_kesehatan'	=> $this->input->post('cStatus'),
+				'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
+				'status'	=> $status,
+				'tahap_r'	=> 'Tes Kesehatan',
+				'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+			);
+
+			$data_update_delete = array(
+				'is_delete' => 1,
+				'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+				'delete_by'	=> $whois,
+				'delete_date'	=> $whois_date,
+
+			);
+
+			$data = array(
+				'update_by'	=> $this->input->post('whois'),
+				'update_date'	=> $this->input->post('whois_date'),
+				'tes_kesehatan'	=> $this->input->post('cStatus'),
+				'tgl_tes_kesehatan'	=> $this->input->post('dTglWawancara'),
+				'status'	=> $status,
+				'tahap_r'	=> 'Tes Kesehatan',
+				'status_email_tes_kesehatan'	=> 'Belum Kirim Email',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+			);
+		}
+
 
 		$seralizedArray = serialize($data);
 		$vaLog = array(
@@ -724,6 +766,7 @@ class Recruitment_act extends CI_Controller
 			'kode_wawancara'	=> $setNik,
 			'nik'		=> $setNik,
 			'nama'		=> $cNama,
+			'id_status'	=> 3,
 			'tanggal_masuk_kerja' => date("Y-m-d"),
 		);
 		$dataStatus = array(
@@ -758,6 +801,7 @@ class Recruitment_act extends CI_Controller
 		$this->model->Update('recruitment', 'id_recruitment', $id, $dataStatus);
 		redirect(site_url('recruitment/peserta_diterima/I'));
 	}
+
 	public function send_email($id = "")
 	{
 		$recruitment = $this->db->get_where('recruitment', ['id_recruitment' => $id])->row_array();

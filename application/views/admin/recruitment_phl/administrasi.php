@@ -118,7 +118,7 @@ if ($action == "edit") {
                         <div class="form-group">
                             <label>Status</label>
                             <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus">
-                                <option></option>                                
+                                <option></option>
                                 <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
                                 <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
                             </select>
@@ -165,6 +165,7 @@ if ($action == "edit") {
                                 <td>Action</td>
                                 <td>ID Registrant</td>
                                 <td>Lowongan</td>
+                                <td>Kategori</td>
                                 <td>Nama</td>
                                 <td>Pendidikan</td>
                                 <td>Email</td>
@@ -173,28 +174,35 @@ if ($action == "edit") {
                         </thead>
                         <tbody>
                             <?php $no = 0;
-                            foreach ($registrant as $vaAreaa) { ?>
-                                <tr>
-                                    <td><?= ++$no; ?></td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
-                                            <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-success">
-                                                <i class="flaticon2-edit"></i>
-                                            </button>
-                                            <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
-                                                <i class="la la-search"></i>
-                                            </a>
+                            foreach ($registrant as $vaAreaa) {
+                                if ($vaAreaa['work_time'] == "PHL") {
+                            ?>
 
-                                        </div>
-                                    </td>
-                                    <td><?= ($vaAreaa['reg_id']) ?></td>
-                                    <td><?= ($vaAreaa['job_name']) ?></td>
-                                    <td><?= ($vaAreaa['reg_name']) ?></td>
-                                    <td><?= ($vaAreaa['graduate']) ?></td>
-                                    <td><?= ($vaAreaa['reg_email']) ?></td>
-                                    <td><?= ($vaAreaa['reg_tlp']) ?></td>
-                                </tr>
-                            <?php } ?>
+                                    <tr>
+                                        <td><?= ++$no; ?></td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
+                                                <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-success">
+                                                    <i class="flaticon2-edit"></i>
+                                                </button>
+                                                <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
+                                                    <i class="la la-search"></i>
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                        <td><?= ($vaAreaa['reg_id']) ?></td>
+                                        <td><?= ($vaAreaa['job_name']) ?></td>
+                                        <td><?= ($vaAreaa['work_time']) ?></td>
+                                        <td><?= ($vaAreaa['reg_name']) ?></td>
+                                        <td><?= ($vaAreaa['graduate']) ?></td>
+                                        <td><?= ($vaAreaa['reg_email']) ?></td>
+                                        <td><?= ($vaAreaa['reg_tlp']) ?></td>
+                                    </tr>
+                            <?php
+                                } else {
+                                }
+                            } ?>
                         </tbody>
                     </table>
                 </div>
@@ -228,6 +236,7 @@ if ($action == "edit") {
                                 <td>Kode Wawancara</td>
                                 <td>Peserta</td>
                                 <td>Status</td>
+                                <td>Status Email</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
@@ -257,6 +266,12 @@ if ($action == "edit") {
                                         <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['administrasi']) ?></span>
                                     </td>
                                     <td>
+                                        <?= $vaArea['status_email_adm'] ?>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email_phl/administrasi/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                            <i class="flaticon-mail"></i>
+                                        </a>
                                         <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
                                             <i class="flaticon-edit"></i>
                                         </a>
@@ -317,6 +332,9 @@ if ($action == "edit") {
                                         <?= ($vaArea['email']) ?>
                                     </td>
                                     <td>
+                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email_phl/administrasi/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                            <i class="flaticon-mail"></i>
+                                        </a>
                                         <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
                                             <i class="flaticon-edit"></i>
                                         </a>

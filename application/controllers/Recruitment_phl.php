@@ -26,7 +26,7 @@ class Recruitment_phl extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -85,7 +85,7 @@ class Recruitment_phl extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -139,6 +139,23 @@ class Recruitment_phl extends CI_Controller
         $this->load->view('admin/container/header', $data);
         $this->load->view('admin/recruitment_phl/recruitment_form', $data);
         $this->load->view('admin/container/footer');
+    }
+
+    public function tes_kesehatan_phl($Aksi = "", $Id = "")
+    {
+        $data['action'] = $Aksi;
+		$data['menu']   = 'Recruitment PHL';
+		$data['file']   = 'Tes Kesehatan';
+		$data['controller_name']   = 'tes_kesehatan_phl';
+		$data['hasil_tes_kesehatan'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
+		$data['date'] = 'tgl_tes_kesehatan_phl';
+		$data['row']	= $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'wawancara_hr' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
+		if ($Aksi == 'edit') {
+			$data['field'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
+		}
+		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/recruitment_phl/recruitment_form', $data);
+		$this->load->view('admin/container/footer');
     }
 
     public function peserta_diterima($Aksi = "", $Id = "")

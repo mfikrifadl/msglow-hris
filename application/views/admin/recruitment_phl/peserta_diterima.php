@@ -92,7 +92,7 @@
                                             <?php
                                             } elseif ($vaArea['status'] == "lolos") {
                                             ?>
-                                                <a href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                                <a href="<?= site_url('recruitment_act/to_pegawai_phl/' . $vaArea['id_recruitment_phl'] . '') ?>">
                                                     <button class="btn btn-info btn-sm" style="font-size: 10px;"> <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai </button>
                                                 </a>
                                             <?php

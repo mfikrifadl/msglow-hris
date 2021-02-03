@@ -74,7 +74,7 @@ class Recruitment extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -147,7 +147,7 @@ class Recruitment extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/career/api/registrant/'.$id,
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
