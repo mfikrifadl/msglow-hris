@@ -123,34 +123,57 @@ if ($action == "edit") {
                                                         <input type="text" name="cSuk" id="cSuk" readonly="true" value="<?= $cSub_unit_kerja_pf ?>" class="form-control">
                                                     </div>
                                                 </div> <!-- /.col-form -->
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label>DATA SEBELUMNYA </label>
+                                                <?php
+                                                if ($action == "edit") {
+                                                ?>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <hr />
+                                                            <label>
+                                                                <h5 class="text-info"> DATA SEBELUMNYA</h5>
+                                                            </label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label>Mengajukan permohonan penambahan karyawan pada Unit Kerja : </label>
-                                                        <input type="text" readonly="true" value="<?= $cNama_jabatan ?>" class="form-control">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label>Mengajukan permohonan penambahan karyawan pada Unit Kerja : </label>
+                                                            <input type="text" readonly="true" value="<?= $cNama_jabatan ?>" class="form-control">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="form-group">
-                                                        <label>Sub Unit Kerja </label>
-                                                        <input type="text" readonly="true" value="<?= $cSub_unit_kerja ?>" class="form-control">
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label>Sub Unit Kerja </label>
+                                                            <input type="text" readonly="true" value="<?= $cSub_unit_kerja ?>" class="form-control">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div class="form-group">
-                                                        <label>Total Penambahan Pegawai </label>
-                                                        <input type="text" readonly="true" value="<?= $ctotal_man_power ?>" class="form-control">
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label>Total Penambahan Pegawai </label>
+                                                            <input type="text" readonly="true" value="<?= $ctotal_man_power ?>" class="form-control">
+
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label>DATA UPDATE </label>
+                                                    <div class="col-12">
+                                                        <hr />
                                                     </div>
-                                                </div>
+                                                <?php
+                                                } else {
+                                                }
+                                                ?>
+
+                                                <?php
+                                                if ($action == "edit") {
+                                                ?>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <h5 class="text-danger"> DATA UPDATE</h5>
+                                                        </div>
+                                                    </div>
+                                                <?php
+                                                } else {
+                                                }
+                                                ?>
+
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label>Mengajukan permohonan penambahan karyawan pada Unit Kerja : </label>
@@ -191,11 +214,12 @@ if ($action == "edit") {
                                                     <input type="text" name="cJob_career" value="<?= $cJob_career ?>" class="form-control">
                                                 </div>
                                             </div> <!-- /.col-form -->
-
+                                            <div class="col-12">
+                                                <hr />
+                                            </div>
                                             <!-- /.col-form -->
                                             <div class="col-sm-12">
-                                                <div class="kt-portlet__foot">
-                                                    <br /><br /><br /><br /><br /><br />
+                                                <div class="form-group">
                                                     <button type="submit" class="btn btn-flat btn-primary">
                                                         <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                                                     </button>
@@ -287,9 +311,9 @@ if ($action == "edit") {
                                                                 </td>
                                                                 <td class="text-center">
                                                                     <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
-                                                                        <i class="flaticon2-plus"></i>
+                                                                        <i class="flaticon2-check-mark"></i>
                                                                     </a>
-                                                                    <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Unapprove" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
+                                                                    <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Reject" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon2-delete"></i>
                                                                     </a>
                                                                     <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
