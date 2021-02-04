@@ -65,7 +65,7 @@ class Relasi extends CI_Model
 			 (MONTH('" . date('Y-m-d') . "') - MONTH (p.tanggal_masuk_kerja)) +
 			 (SIGN(DAY('" . date('Y-m-d') . "') / DAY (p.tanggal_masuk_kerja)) - 1) AS MasaKerja
 
-		FROM tb_pegawai p WHERE p.id_status < 6 ORDER BY p.nik,p.nama ASC"
+		FROM tb_pegawai p WHERE p.id_status = 4 ORDER BY p.nik,p.nama ASC"
 		);
 		return $Query->result_array();
 	}
@@ -83,7 +83,7 @@ class Relasi extends CI_Model
 			 (MONTH('" . date('Y-m-d') . "') - MONTH (p.tanggal_masuk_kerja)) +
 			 (SIGN(DAY('" . date('Y-m-d') . "') / DAY (p.tanggal_masuk_kerja)) - 1) AS MasaKerja
 
-		FROM tb_pegawai p WHERE p.id_status < 6 ORDER BY p.nik,p.nama ASC"
+		FROM tb_pegawai p WHERE p.id_status = 3 ORDER BY p.nik,p.nama ASC"
 		);
 		return $Query->result_array();
 	}

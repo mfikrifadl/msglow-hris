@@ -24,9 +24,13 @@ class Transaksi_act extends CI_Controller
 	public  function Date2String($dTgl)
 	{
 		//return 2012-11-22
-		list($cDate, $cMount, $cYear)	= explode("-", $dTgl);
-		if (strlen($cDate) == 2) {
-			$dTgl	= $cYear . "-" . $cMount . "-" . $cDate;
+		if (empty($dTgl)) {
+			$dTgl = '';
+		} else {
+			list($cDate, $cMount, $cYear)	= explode("-", $dTgl);
+			if (strlen($cDate) == 2) {
+				$dTgl	= $cYear . "-" . $cMount . "-" . $cDate;
+			}
 		}
 		return $dTgl;
 	}
@@ -937,34 +941,49 @@ class Transaksi_act extends CI_Controller
 		if (empty($unit_kerja) && empty($sub_unit_kerja) && empty($jmlP)) {
 			// echo "if 1";
 			$data = array(
+<<<<<<< HEAD
 				'status_pengajuan'                => 'on hold',
+=======
+>>>>>>> 214aa8be06afed7e869244a9002e400ba0478789
 				'job_career'         		=> $this->input->post('cJob_career'),
 			);
 		} elseif (empty($unit_kerja) && empty($sub_unit_kerja)) {
 			// echo "elseif 2";
 			$data = array(
+<<<<<<< HEAD
 				'status_pengajuan'                => 'on hold',
+=======
+>>>>>>> 214aa8be06afed7e869244a9002e400ba0478789
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'total_man_power'         		=> $this->input->post('jmlP'),
 			);
 		} elseif (empty($unit_kerja) && empty($jmlP)) {
 			// echo "elseif 3";
 			$data = array(
+<<<<<<< HEAD
 				'status_pengajuan'                => 'on hold',
+=======
+>>>>>>> 214aa8be06afed7e869244a9002e400ba0478789
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
 			);
 		} elseif (empty($sub_unit_kerja) && empty($jmlP)) {
 			// echo "elseif 4";
 			$data = array(
+<<<<<<< HEAD
 				'status_pengajuan'                => 'on hold',
+=======
+>>>>>>> 214aa8be06afed7e869244a9002e400ba0478789
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
 			);
 		} elseif (empty($jmlP)) {
 			// echo "elseif 5";
 			$data = array(
+<<<<<<< HEAD
 				'status_pengajuan'                => 'on hold',
+=======
+>>>>>>> 214aa8be06afed7e869244a9002e400ba0478789
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
 				'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
@@ -998,6 +1017,7 @@ class Transaksi_act extends CI_Controller
 
 		if ($Aksi == 'tambah') {
 			$this->model->Insert("tb_form_pengajuan", $data);
+<<<<<<< HEAD
 		} elseif ($Aksi == 'approve') {
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_approve);
 		} elseif ($Aksi == 'Update') {
@@ -1005,6 +1025,19 @@ class Transaksi_act extends CI_Controller
 		} elseif ($Aksi == 'unapprove') {
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_unapprove);
 		}
+=======
+			// $this->db->update('user', $data_tambah, ['id'  => $this->input->post('cIdPegawai')]);
+		}
+		// elseif ($Aksi == 'approve') {
+		// 	$this->db->update('tb_form_pengajuan', $data_approve, ['id'  => $Id]);
+		// } 
+		elseif ($Aksi == 'Update') {
+			$this->model->Update("tb_form_pengajuan", "id_form", $Id, $data);
+		}
+		// elseif ($Aksi == 'unapprove') {
+		// 	$this->db->update('user', $data_tambah, ['id'  => $Id]);
+		// }
+>>>>>>> 214aa8be06afed7e869244a9002e400ba0478789
 
 		redirect(site_url('transaksi/pengajuan_form_karyawan'));
 	}

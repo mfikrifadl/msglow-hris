@@ -191,7 +191,7 @@ if ($action == "edit") {
                           </li>
                           <li class="active text-dark">
                             <!-- <a href="#" class="btn btn-label-facebook"><i class="socicon-facebook"></i> Facebook</a>&nbsp; -->
-                            <button type="button" onclick="return GetDataOperator();" class="btn btn-label-facebook">
+                            <button type="button" onclick="return GetDataOperatorPHL();" class="btn btn-label-facebook">
                               Data Pegawai PHL Ms Glow
                             </button>
                             <!-- <a href="#tab_1" onclick="" data-toggle="tab">Data Pegawai Operator</a> -->
@@ -268,7 +268,7 @@ if ($action == "edit") {
                                 <?php } ?>
                               </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="golker">
                               <label>Golongan Kerja</label>
                               <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja" required>
                                 <option></option>
@@ -279,6 +279,15 @@ if ($action == "edit") {
                                 <?php } ?>
                               </select>
                             </div>
+                            <?php
+                            if ($cIdStatus==3){
+                              ?>
+                              <script>
+                              document.getElementById('golker').style.display = 'none';
+                              </script>
+                              <?php
+                            }
+                            ?>
                             <div class="form-group">
                               <label>Status Kerja</label>
                               <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" required>
@@ -1411,6 +1420,21 @@ if ($action == "edit") {
     $.ajax({
       type: "GET",
       url: "<?= site_url('transaksi/tb_operator') ?>",
+      cache: false,
+      beforeSend: function() {
+        $('#data_operator').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+      },
+      success: function(msg) {
+        $("#data_operator").html(msg);
+      }
+    });
+  }
+
+  function GetDataOperatorPHL() {
+    $('.loding').show();
+    $.ajax({
+      type: "GET",
+      url: "<?= site_url('transaksi/tb_operator_phl') ?>",
       cache: false,
       beforeSend: function() {
         $('#data_operator').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");

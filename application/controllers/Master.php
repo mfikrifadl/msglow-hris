@@ -118,7 +118,7 @@ class Master extends CI_Controller
 		$data['file']   = 'Home';
 
 		$query 			= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tanggal_lahir) = MONTH(NOW()) AND DAY(tanggal_lahir) = DAY(NOW())');
-		$query2 		= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tgl_kontrak_berakhir) = MONTH(NOW()) AND DAY(tgl_kontrak_berakhir) = DAY(NOW())');
+		$query2 		= $this->db->query('SELECT * FROM tb_pegawai WHERE TIMESTAMPDIFF(MONTH, CURRENT_TIMESTAMP(), tgl_kontrak_berakhir) = 0');
 		$data['ultah']	= $query->result_array();
 		$data['kontrak'] = $query2->result_array();
 
