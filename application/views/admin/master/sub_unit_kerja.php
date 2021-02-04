@@ -47,7 +47,7 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label>Pilih Unit Kerja</label>
-                    <select class="comboBox form-control" name="cIdUnitKerja">
+                    <select class="comboBox form-control" name="cIdUnitKerja" id="cIdUnitKerja">
                       <option></option>
                       <?php foreach ($unit_kerja as $key => $vaUnitKerja) {
                         if ($vaUnitKerja['is_deleted'] == 1) {
@@ -67,14 +67,14 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label>Sub Unit Kerja</label>
-                    <Input type="text" name="cSubUnitKerja" class="form-control" placeholder="Sub Unit Kerja" value="<?= $cNamaSubUnitKerja ?>">
+                    <Input type="text" name="cSubUnitKerja" id="cSubUnitKerja" class="form-control" placeholder="Sub Unit Kerja" value="<?= $cNamaSubUnitKerja ?>">
                   </div>
                 </div>
               </div>
             </div>
             <div class="kt-portlet__foot">
               <div class="kt-form__actions">
-                <button type="submit" class="btn btn-flat btn-primary">
+                <button type="button" onclick="return save();" class="btn btn-flat btn-primary">
                   <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                 </button>
               </div>
@@ -128,3 +128,46 @@
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    function save() {
+      var cIdUnitKerja = $('#cIdUnitKerja').val();
+      var cSubUnitKerja = $('#cSubUnitKerja').val();
+      
+      // alert(dTglWawancara);
+      if (cIdUnitKerja == "") {
+        new PNotify({
+          text: 'Unit Kerja Belum Di isi!',
+          animation: 'slide',
+          type: 'warning'
+        });
+      } else if (cSubUnitKerja == "") {
+        new PNotify({
+          text: 'Sub Unit Kerja Belum Di isi!',
+          animation: 'slide',
+          type: 'warning'
+        });
+      } else {
+        $.ajax({
+          type: "POST",
+          data: "cIdUnitKerja=" + cIdUnitKerja +
+            "&cSubUnitKerja=" + cSubUnitKerja,
+          url: "<?= site_url('action/sub_unit_kerja/'.$cAction) ?>",
+          cache: false,
+          success: function(msg) {
+            new PNotify({
+              // title: 'Success!',
+              //text: 'Berhasil Simpan Data Sub Unit Kerja. Input Data Berikutnya',
+              type: 'success'
+            });
+            $('#cIdUnitKerja').val("");
+            $('#cSubUnitKerja').val("");
+            $('#cIdUnitKerja').focus()
+
+            alert("Berhasil Simpan Data Sub Unit Kerja. Input Data Berikutnya");
+            window.location.href = "<?= site_url('master/sub_unit_kerja') ?>";
+          }
+        });
+      }
+    }
+  </script>

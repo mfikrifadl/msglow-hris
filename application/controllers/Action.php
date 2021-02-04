@@ -88,7 +88,7 @@ class Action extends CI_Controller
 			'kode_area'	=> $this->input->post('cKodeArea')
 		);
 
-		$dataDelete = array(			
+		$dataDelete = array(
 			'is_deleted'	=> 1
 		);
 
@@ -120,9 +120,9 @@ class Action extends CI_Controller
 			$this->model->Update('tb_area_kerja', 'id_area', $id, $data);
 			$this->model->Insert("log", $vaLog);
 			redirect(site_url('master/area_kerja/U'));
-		} elseif ($Type == "Delete") {			
+		} elseif ($Type == "Delete") {
 
-			$this->model->Update_Delete('tb_area_kerja', 'id_area', $id , $dataDelete);
+			$this->model->Update_Delete('tb_area_kerja', 'id_area', $id, $dataDelete);
 			$this->model->Insert("log", $vaLog2);
 			redirect(site_url('master/area_kerja/D'));
 		}
@@ -153,7 +153,7 @@ class Action extends CI_Controller
 			'nama_sub_unit_kerja' => $this->input->post('cSubUnitKerja')
 		);
 
-		$dataDelete = array(			
+		$dataDelete = array(
 			'is_deleted'	=> 1
 		);
 
@@ -317,7 +317,7 @@ class Action extends CI_Controller
 			'nama' => $this->input->post('cNama')
 		);
 
-		$dataDelete = array(			
+		$dataDelete = array(
 			'is_delete'	=> 1
 		);
 
