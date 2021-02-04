@@ -313,6 +313,9 @@ else {
                 // alert (hasil);
                 document.getElementById('cNik').value = hasil[0];
                 document.getElementById('cJabatan').value = hasil[1];
+                if(hasil[1]==''){
+                    alert ('Inputkan Jabatan Pegawai Terlebih Dahulu di Form Input Jabatan');
+                }
             }
         };
         xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);

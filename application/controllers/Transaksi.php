@@ -174,7 +174,7 @@ class Transaksi extends CI_Controller
 		$dataHeader['menu'] 	= 'Manajemen Pegawai';
 		$dataHeader['file'] 	= 'DATA PEGAWAI';
 		$dataHeader['action'] 	= $Aksi;
-		$data['lastno']			= $this->db->query('SELECT SUBSTR(nik,7,4) as nik FROM tb_pegawai');
+		$data['lastno']			= $this->db->query('SELECT MAX(SUBSTR(nik,7,4)) as nik FROM tb_pegawai');
 		$data['kerja']	   		= $this->model->ViewASC('tb_kerja', 'id_kerja');
 		$data['pendidikan']		= $this->model->ViewASC('tb_pendidikan', 'id_pendidikan');
 		$data['pegawai']		= $this->model->ViewASC('tb_pegawai', 'nama');

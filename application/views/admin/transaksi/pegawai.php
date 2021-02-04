@@ -259,7 +259,7 @@ if ($action == "edit") {
                           <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
                             <div class="form-group">
                               <label>Area Kerja</label>
-                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdArea" required>
+                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdArea" >
                                 <option></option>
                                 <?php foreach ($area as $key => $vaArea) { ?>
                                   <option value="<?= $vaArea['id_area'] ?>" <?php if ($vaArea['id_area'] == $cIdArea) echo "selected"; ?>>
@@ -268,9 +268,25 @@ if ($action == "edit") {
                                 <?php } ?>
                               </select>
                             </div>
+                            <div class="form-group">
+                              <label>Status Kerja</label>
+                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" onchange="hideshow(this.value)">
+                                <option></option>
+                                <?php foreach ($status as $key => $vaStatus) {
+                                  if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4) { ?>
+
+                                    <option value="<?= $vaStatus['id_status'] ?>" <?php if ($vaStatus['id_status'] == $cIdStatus) echo "selected"; ?>>
+                                      <?= $vaStatus['status'] ?>
+                                    </option>
+
+                                <?php  } else {
+                                  }
+                                } ?>
+                              </select>
+                            </div>
                             <div class="form-group" id="golker">
                               <label>Golongan Kerja</label>
-                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja" required>
+                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja" >
                                 <option></option>
                                 <?php foreach ($kerja as $key => $vaKerja) { ?>
                                   <option value="<?= $vaKerja['id_kerja'] ?>" <?php if ($vaKerja['id_kerja'] == $cIdKerja) echo "selected"; ?>>
@@ -288,22 +304,6 @@ if ($action == "edit") {
                               <?php
                             }
                             ?>
-                            <div class="form-group">
-                              <label>Status Kerja</label>
-                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" required>
-                                <option></option>
-                                <?php foreach ($status as $key => $vaStatus) {
-                                  if ($vaStatus['id_status'] < 6) { ?>
-
-                                    <option value="<?= $vaStatus['id_status'] ?>" <?php if ($vaStatus['id_status'] == $cIdStatus) echo "selected"; ?>>
-                                      <?= $vaStatus['status'] ?>
-                                    </option>
-
-                                <?php  } else {
-                                  }
-                                } ?>
-                              </select>
-                            </div>
                             <div class="form-group">
                               <label>Office</label>
                               <div class="input-group">
@@ -587,7 +587,7 @@ if ($action == "edit") {
 
                               <div class="form-group">
                                 <label>Pendidikan</label>
-                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdPendidikan" required="true">
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdPendidikan" >
                                   <option></option>
                                   <?php foreach ($pendidikan as $key => $vaPendidikan) { ?>
                                     <option value="<?= $vaPendidikan['id_pendidikan'] ?>" <?php if ($vaPendidikan['id_pendidikan'] == $cIdPendidikan) echo "selected"; ?>>
@@ -1067,6 +1067,16 @@ if ($action == "edit") {
       //display the calculated age
       return document.getElementById("ages").value = ageString;
 
+    }
+  }
+
+  function hideshow(id_status){
+    var x = document.getElementById('golker');
+    
+    if(id_status==4){
+      x.style.display = 'block';
+    } else{
+      x.style.display = 'none';
     }
   }
 

@@ -139,8 +139,12 @@ if ($action == "edit") {
                                                             <td><?= ($vaPeringatan['nama']) ?></td>
                                                             <td><?= ($vaPeringatan['keterangan_surat']) ?></td>
                                                             <td class="text-center">
-                                                                <a class="btn-link" title="View Data" href="<?= site_url('transaksi/surat_teguran/view/' . $vaPeringatan['id'] . '') ?>">
+                                                                <!-- <a class="btn-link" title="View Data" href="<?php //echo site_url('transaksi/surat_teguran/view/' . $vaPeringatan['id'] . '') 
+                                                                                                                    ?>">
                                                                     <i class="fa fa-eye text-success"></i>
+                                                                </a> -->
+                                                                <a class="btn-link" title="Print Surat Teguran" target="_blank" href="<?= site_url('Surat_act/cetak_surat_teguran/' . $vaPeringatan['id'] . '') ?>">
+                                                                    <i class="fa fa-print"></i>
                                                                 </a>
                                                                 |
                                                                 <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/surat_teguran/edit/' . $vaPeringatan['id'] . '') ?>">
@@ -500,6 +504,9 @@ if ($action == "edit") {
                 // alert (hasil);
                 document.getElementById('cNik').value = hasil[0];
                 document.getElementById('cJabatan').value = hasil[1];
+                if (hasil[1] == '') {
+                    alert('Inputkan Jabatan Pegawai Terlebih Dahulu di Form Input Jabatan');
+                }
             }
         };
         xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);

@@ -240,7 +240,7 @@ if ($action == "Update") {
                                             <a class="btn-link" title="Print Kontrak" target="_blank" href="<?= site_url('Surat_act/cetak_kontrak/' . $vaPeringatan['id_pegawai'] . '') ?>">
                                                 <i class="fa fa-print"></i>
                                             </a>|
-                                            <a class="btn-link" title="Edit Kontrak" target="_blank" href="<?= site_url('transaksi/kontrak/Update/' . $vaPeringatan['id'] . '') ?>">
+                                            <a class="btn-link" title="Edit Kontrak" href="<?= site_url('transaksi/kontrak/Update/' . $vaPeringatan['id'] . '') ?>">
                                                 <i class="fa fa-pen"></i>
                                             </a>|
                                             <a class="btn-link" title="Delete Kontrak" href="<?= site_url('transaksi_act/kontrak/Delete/' . $vaPeringatan['id_pegawai'] . '') ?>">

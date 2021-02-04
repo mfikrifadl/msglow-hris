@@ -175,6 +175,11 @@
                               <button type="submit" class="btn btn-flat btn-primary">
                                 <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                               </button>
+                              <?php if ($action == 'edit') {?>
+                                <a href="<?= site_url('transaksi/jabatan_pegawai') ?>" class="btn btn-primary">
+                                <i class="fa fa-hand-point-left" aria-hidden="true"></i> Kembali
+                              </a>
+                              <?php } ?>
                             </div>
                           </div>
                         </form>
@@ -192,39 +197,43 @@
         <div class="col-md-8">
 
           <!--begin::Portlet-->
-          <div class="kt-portlet">
+          <!-- <div class="kt-portlet">
             <div class="kt-portlet__head">
               <div class="kt-portlet__head-label">
                 <h3 class="kt-portlet__head-title">
                   <strong>Cari Jabatan Pegawai</strong>
                 </h3>
               </div>
-            </div>
+            </div> -->
 
-            <!--begin::Form-->
-            <div class="kt-portlet__body">
+          <!--begin::Form-->
+          <!-- <div class="kt-portlet__body">
               <div class="row">
                 <div class="form-group input-group">
                   <div class="col-10">
                     <select class="comboBox form-control" name="cIdPegawai" id="cIdPegawai">
                       <option></option>
-                      <?php foreach ($pegawai as $key => $vaPegawai) { ?>
-                        <option value="<?= $vaPegawai['id_pegawai'] ?>">
-                          <?= $vaPegawai['nik'] ?> : <?= $vaPegawai['nama'] ?>
+                      <?php //foreach ($pegawai as $key => $vaPegawai) { 
+                      ?>
+                        <option value="<?php //$vaPegawai['id_pegawai'] 
+                                        ?>">
+                          <?php // $vaPegawai['nik'] 
+                          ?> : <?php // $vaPegawai['nama'] 
+                                ?>
                         </option>
-                      <?php } ?>
+                      <?php// } ?>
                     </select>
                   </div>
                   <div class="input-group-append">
-                    <button type="button" onclick="window.location.href='<?= base_url() ?>transaksi/jabatan_pegawai/view/'+document.getElementById('cIdPegawai').value" class="btn btn-danger btn-sm btn-icon btn-brand btn-icon-md">
+                    <button type="button" onclick="window.location.href='<?php// base_url() ?>transaksi/jabatan_pegawai/view/'+document.getElementById('cIdPegawai').value" class="btn btn-danger btn-sm btn-icon btn-brand btn-icon-md">
                       <i class="fa fa-search"></i>
                     </button>
                   </div>
                 </div>
               </div>
-            </div>
-            <!--end::Form-->
-          </div>
+            </div> -->
+          <!--end::Form-->
+          <!-- </div> -->
 
           <!--end::Portlet-->
 
