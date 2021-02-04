@@ -319,7 +319,7 @@ if ($action == "edit") {
                                                                     <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon-edit"></i>
                                                                     </a>
-                                                                    <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data">
+                                                                    <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" href="<?= site_url('transaksi_act/form_pengajuan/delete/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon-delete"></i>
                                                                     </a>
 

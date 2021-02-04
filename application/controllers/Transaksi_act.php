@@ -998,6 +998,10 @@ class Transaksi_act extends CI_Controller
 			'status_pengajuan'                   => 'unapprove',
 		);
 
+		$data_delete = array(
+			'is_delete'                   => '1',
+		);
+
 
 
 		if ($Aksi == 'tambah') {
@@ -1008,6 +1012,8 @@ class Transaksi_act extends CI_Controller
 			$this->model->Update("tb_form_pengajuan", "id_form", $Id, $data);
 		} elseif ($Aksi == 'unapprove') {
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_unapprove);
+		} elseif ($Aksi == 'delete') {
+			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_delete);
 		}
 
 		redirect(site_url('transaksi/pengajuan_form_karyawan'));
