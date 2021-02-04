@@ -270,8 +270,9 @@ class Recruitment_phl_act extends CI_Controller
         $cKodeWawancara = $this->input->post('cKW');
         $cStatus = $this->input->post('cStatus');
 
-        $folder = "";
-        if ($cStatus == "pemanggilan") {
+        $folder = "";        
+        $nama = "";
+        if ($cStatus == "pemanggilan" || $cStatus == "tidaklolos") {
             $folder = "";
         } else {
             $nama = $_FILES['cTesKes']['name'];
@@ -283,6 +284,7 @@ class Recruitment_phl_act extends CI_Controller
             $file_temp = $_FILES['cTesKes']['tmp_name']; //data temp yang di upload
             $folder    = "assets2/media/hasil_tes_kesehatan/$nama_baru"; //folder tujuan
         }
+        
         //==========================GET DATA FOTO =============================================
         $dbKode = $this->db->query("SELECT * FROM recruitment_phl WHERE id_recruitment_phl = '" . $this->input->post('cIdTest') . "' ");
 
@@ -364,10 +366,7 @@ class Recruitment_phl_act extends CI_Controller
                 'status_email_tidaklolos'    => 'Belum Kirim Email',
             );
         }
-
-
-
-
+        
         $seralizedArray = serialize($data);
         $vaLog = array(
             'tgl' => $this->Date2String($this->DateStamp()),

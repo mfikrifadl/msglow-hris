@@ -282,7 +282,7 @@ class Recruitment extends CI_Controller
 		$data['menu']   = 'Recruitment';
 		$data['file']   = 'Monitoring Status';
 		$data['row']	= $this->model->View('recruitment', 'kode_wawancara');
-		$data['nilai'] = $this->db->query("SELECT *, sum(nilai_psiko_test + nilai_uji_kompetensi + nilai_interview_user_1 + nilai_interview_user_2 + nilai_interview_hrga) AS total_nilai FROM recruitment ORDER BY kode_wawancara DESC ")->result_array();
+		$data['nilai'] = $this->db->query("SELECT *, sum(nilai_psiko_test + nilai_uji_kompetensi + nilai_interview_user_1 + nilai_interview_user_2 + nilai_interview_hrga) AS total_nilai FROM recruitment  GROUP BY `id_recruitment` ORDER BY kode_wawancara DESC ")->result_array();
 
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/monitoring_status', $data);

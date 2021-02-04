@@ -915,6 +915,7 @@ class Transaksi_act extends CI_Controller
 
 	public function form_pengajuan($Aksi = "", $Id = "")
 	{
+
 		$dataHeader['menu']     = 'Hak Akses Interview';
 		$dataHeader['file']     = 'Hak Akses';
 		$dataHeader['action']     = $Aksi;
@@ -935,38 +936,44 @@ class Transaksi_act extends CI_Controller
 		$data = array();
 		if (empty($unit_kerja) && empty($sub_unit_kerja) && empty($jmlP)) {
 			// echo "if 1";
-			$data = array(				
+			$data = array(
+				'status_pengajuan'                => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
 			);
 		} elseif (empty($unit_kerja) && empty($sub_unit_kerja)) {
 			// echo "elseif 2";
-			$data = array(				
+			$data = array(
+				'status_pengajuan'                => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'total_man_power'         		=> $this->input->post('jmlP'),
 			);
 		} elseif (empty($unit_kerja) && empty($jmlP)) {
 			// echo "elseif 3";
-			$data = array(				
+			$data = array(
+				'status_pengajuan'                => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
 			);
 		} elseif (empty($sub_unit_kerja) && empty($jmlP)) {
 			// echo "elseif 4";
-			$data = array(				
+			$data = array(
+				'status_pengajuan'                => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
 			);
 		} elseif (empty($jmlP)) {
 			// echo "elseif 5";
-			$data = array(				
+			$data = array(
+				'status_pengajuan'                => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
 				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
-			 'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
+				'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
 			);
 		} else {
 			// echo "else";
 			$data = array(
 				'id_form'                   => $idForm,
+				'status_pengajuan'                => 'on hold',
 				'id_pegawai'                => $this->input->post('cIdPegawai'),
 				'nik'                		=> $this->input->post('cNik'),
 				'nama_pengaju_form'         => $this->input->post('cNama'),
@@ -979,19 +986,25 @@ class Transaksi_act extends CI_Controller
 			);
 		}
 
+		$data_approve = array(
+			'status_pengajuan'                   => 'approve',
+		);
+
+		$data_unapprove = array(
+			'status_pengajuan'                   => 'unapprove',
+		);
+
+
+
 		if ($Aksi == 'tambah') {
 			$this->model->Insert("tb_form_pengajuan", $data);
-			// $this->db->update('user', $data_tambah, ['id'  => $this->input->post('cIdPegawai')]);
-		} 
-		// elseif ($Aksi == 'approve') {
-		// 	$this->db->update('tb_form_pengajuan', $data_approve, ['id'  => $Id]);
-		// } 
-		elseif ($Aksi == 'Update') {
+		} elseif ($Aksi == 'approve') {
+			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_approve);
+		} elseif ($Aksi == 'Update') {
 			$this->model->Update("tb_form_pengajuan", "id_form", $Id, $data);
-		} 
-		// elseif ($Aksi == 'unapprove') {
-		// 	$this->db->update('user', $data_tambah, ['id'  => $Id]);
-		// }
+		} elseif ($Aksi == 'unapprove') {
+			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_unapprove);
+		}
 
 		redirect(site_url('transaksi/pengajuan_form_karyawan'));
 	}

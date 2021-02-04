@@ -237,6 +237,7 @@ if ($action == "edit") {
                                                 <thead>
                                                     <tr>
                                                         <td>No</td>
+                                                        <td>Status Form</td>
                                                         <td>Nama Pengaju Form</td>
                                                         <td>Jabatan Unit Kerja</td>
                                                         <td>Sub Unit Kerja</td>
@@ -254,6 +255,18 @@ if ($action == "edit") {
 
                                                             <tr>
                                                                 <td><?= ++$no; ?></td>
+                                                                <td>
+                                                                    <?php
+                                                                    if ($vaArea['status_pengajuan'] == 'approve') {
+                                                                        $cLabel = 'success';
+                                                                    } else if ($vaArea['status_pengajuan'] == 'unapprove') {
+                                                                        $cLabel = 'danger';
+                                                                    } else  $cLabel = 'info';
+                                                                    ?>
+                                                                    <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                                                                        <?= $vaArea['status_pengajuan'] ?>
+                                                                    </span>
+                                                                </td>
                                                                 <td>
                                                                     <?= $vaArea['nama_pengaju_form'] ?>
                                                                 </td>
@@ -273,10 +286,10 @@ if ($action == "edit") {
                                                                     <?= $vaArea['total_man_power'] ?>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon2-plus"></i>
                                                                     </a>
-                                                                    <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Unapprove" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                    <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Unapprove" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon2-delete"></i>
                                                                     </a>
                                                                     <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">

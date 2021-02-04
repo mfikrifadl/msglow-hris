@@ -6,10 +6,15 @@ if ($action == "edit") {
         $createBy       =   $this->session->userdata('nama');
         $updateBy       =   $this->session->userdata('nama');
         $deleteBy       =   $this->session->userdata('nama');
+
+        $nNilaiTes = "";
         if ($controller_name == "tes_kesehatan_phl") {
             $nNilaiTes     =   "";
+        } elseif ($controller_name == "wawancara_hr") {
+            $nNilaiTes      =   $column['nilai_wawancara_hr'];
+        } elseif ($controller_name == "interview_user_1") {
+            $nNilaiTes      =   $column['nilai_interview_user_1'];
         } else {
-            $nNilaiTes      =   $column[$nilai_test];
         }
 
         $cStatus        =   $column[$controller_name];
@@ -80,9 +85,7 @@ $whois_date = date('d-m-Y H:i:s');
                             <div class="form-group">
                                 <label>Nilai <?= $file ?></label>
                                 <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
-                                <input type="hidden" name="whois" value="<?= $whois ?>">
-                                <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
-                                <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
+
                             </div>
                         <?php
                         }
@@ -91,6 +94,9 @@ $whois_date = date('d-m-Y H:i:s');
                         <div class="form-group">
                             <label>Tanggal Test</label>
                             <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>">
+                            <input type="hidden" name="whois" value="<?= $whois ?>">
+                            <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
+                            <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
                         </div>
 
                         <?php
@@ -115,6 +121,7 @@ $whois_date = date('d-m-Y H:i:s');
                                     </div>
                         <?php
 
+                                } else {
                                 }
                             }
                         }
@@ -172,7 +179,7 @@ $whois_date = date('d-m-Y H:i:s');
                         <tbody>
                             <?php $no = 0;
                             foreach ($row as $key => $vaArea) {
-                                if ($vaArea['is_delete'] == 1) {
+                                if ($vaArea['is_delete'] == 1 || $vaArea['status'] == "Menjadi Pegawai") {
                                 } else {
                             ?>
 

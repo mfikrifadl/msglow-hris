@@ -70,7 +70,7 @@
 
                     </td>
                     <td>
-                      <?php                     
+                      <?php
 
                       $status_test = "";
                       $cLabel = "";
@@ -83,7 +83,6 @@
                         } else  $cLabel = 'info';
 
                         $status_test = $vaArea['recruitment'];
-
                       } elseif ($vaArea['tahap_r'] == "Psikotest") {
 
                         if ($vaArea['psiko_test'] == 'lolos') {
@@ -93,7 +92,6 @@
                         } else  $cLabel = 'info';
 
                         $status_test = $vaArea['psiko_test'];
-
                       } elseif ($vaArea['tahap_r'] == "Uji Kompetensi") {
 
                         if ($vaArea['uji_kompetensi'] == 'lolos') {
@@ -103,7 +101,6 @@
                         } else  $cLabel = 'info';
 
                         $status_test = $vaArea['uji_kompetensi'];
-
                       } elseif ($vaArea['tahap_r'] == "Interview User 1") {
 
                         if ($vaArea['interview_user_1'] == 'lolos') {
@@ -113,7 +110,6 @@
                         } else  $cLabel = 'info';
 
                         $status_test = $vaArea['interview_user_1'];
-
                       } elseif ($vaArea['tahap_r'] == "Interview User 2") {
 
                         if ($vaArea['interview_user_2'] == 'lolos') {
@@ -123,7 +119,6 @@
                         } else  $cLabel = 'info';
 
                         $status_test = $vaArea['interview_user_2'];
-
                       } elseif ($vaArea['tahap_r'] == "Interview HRGA") {
 
                         if ($vaArea['interview_hrga'] == 'lolos') {
@@ -133,7 +128,7 @@
                         } else  $cLabel = 'info';
 
                         $status_test = $vaArea['interview_hrga'];
-                      }elseif ($vaArea['tahap_r'] == "Tes Kesehatan") {
+                      } elseif ($vaArea['tahap_r'] == "Tes Kesehatan") {
 
                         if ($vaArea['tes_kesehatan'] == 'lolos') {
                           $cLabel = 'success';
@@ -190,56 +185,66 @@
               </thead>
               <tbody>
                 <?php $no = 0;
+                //    var_dump($nilai);
                 foreach ($nilai as $key => $vaArea2) {
+                  
                   if ($vaArea2['is_delete'] == 1) {
                   } else {
                 ?>
-
                     <tr>
-                      <td><?= ++$no; ?></td>
-                      <td>
-                        <?= $vaArea2['kode_wawancara'] ?>
-                      </td>
-                      <td>
-                        <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
-                        <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
-                        <b> Email : </b> <?= ($vaArea['email']) ?> <br />
-                        <b> Posisi : </b> <?= ($vaArea['job']) ?>
-                      </td>
-                      <td><?= ($vaArea2['total_nilai']) ?> <br />
-                      </td>
-                      <td>
-                        <?php
-                        if ($vaArea2['status'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea2['status'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else {
-                          $cLabel = 'info';
-                        }
-                        ?>
-                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                          <?= $vaArea['tahap_r'] ?>
-                        </span>
-                      </td>
-                      <td><?php
-                          if ($vaArea['status'] == 'lolos') {
+                      <?php
+                      if ($vaArea2['total_nilai'] == 0 || $vaArea2['total_nilai'] == 0 || empty($vaArea2['total_nilai'])) {
+                      } else {
+                      ?>
+                        <td><?= ++$no; ?></td>
+                        <td>
+                          <?= $vaArea2['kode_wawancara'] ?>
+                        </td>
+                        <td>
+                          <b> Nama : </b> <?= ($vaArea2['nama']) ?> <br />
+                          <b> No. Hp : </b> <?= ($vaArea2['nomor_telepon']) ?> <br />
+                          <b> Email : </b> <?= ($vaArea2['email']) ?> <br />
+                          <b> Posisi : </b> <?= ($vaArea2['job']) ?>
+                        </td>
+                        <td>
+                          <?= $vaArea2['total_nilai'] ?>
+                        </td>
+                        <td>
+                          <?php
+                          if ($vaArea2['status'] == 'Menjadi Pegawai') {
                             $cLabel = 'success';
-                          } else if ($vaArea['status'] == 'tidaklolos') {
+                          } else if ($vaArea2['status'] == 'tidaklolos') {
                             $cLabel = 'danger';
-                          } else  $cLabel = 'info';
+                          } else if ($vaArea2['status'] == 'lolos') {
+                            $cLabel = 'info';
+                          } else  $cLabel = 'warning';
                           ?>
-                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                          <?= $vaArea['status'] ?>
-                        </span>
-                      </td>
-                      <td>
-                        <span class="kt-badge kt-badge--inline kt-badge--pill ">
-                          <?= $vaArea['alasan_tidak_lolos'] ?>
-                        </span>
-                      </td>
+                          <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                            <?= $vaArea2['tahap_r'] ?>
+                          </span>
+                        </td>
+                        <td><?php
+                            if ($vaArea2['status'] == 'Menjadi Pegawai') {
+                              $cLabel = 'success';
+                            } else if ($vaArea2['status'] == 'tidaklolos') {
+                              $cLabel = 'danger';
+                            } else if ($vaArea2['status'] == 'lolos') {
+                              $cLabel = 'info';
+                            } else  $cLabel = 'warning';
+                            ?>
+                          <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                            <?= $vaArea2['status'] ?>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="kt-badge kt-badge--inline kt-badge--pill ">
+                            <?= $vaArea2['alasan_tidak_lolos'] ?>
+                          </span>
+                        </td>
+                      <?php
+                      }
+                      ?>
                     </tr>
-
                   <?php
                   }
                   ?>

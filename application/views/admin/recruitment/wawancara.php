@@ -9,6 +9,7 @@
       // $dTglWawancara  =   String2Date($column['tanggal_wawancara']);
       $dTglWawancara  =   $column['tanggal_wawancara'];
       $cNama          =   $column['nama'];
+      $cStatus_recruitment  =   $column['recruitment'];
       $cNomorTelepon  =   $column['nomor_telepon'];
       $cEmail         =   $column['email'];
       $cStatus        =   $column['status'];
@@ -21,6 +22,7 @@
     }
     $cAction = "Update/" . $cKodeWawancara . "";
   } else {
+    $cStatus_recruitment  =   "";
     $cIdWawancara   =   "";
     $cKodeWawancara   =   "";
     // $cKodeWawancara =   "WWCR-" . date("ymd");
@@ -110,10 +112,10 @@
                 <label>Status</label>
                 <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus">
                   <option></option>
-                  <!-- <option value="pemanggilan" <?php //if ($cStatus == 'pemanggilan') echo "selected"; 
+                  <!-- <option value="pemanggilan" <?php //if ($cStatus_recruitment == 'pemanggilan') echo "selected"; 
                                                     ?>>Pemanggilan</option> -->
-                  <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
-                  <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
+                  <option value="lolos" <?php if ($cStatus_recruitment == 'lolos') echo "selected"; ?>>Lolos</option>
+                  <option value="tidaklolos" <?php if ($cStatus_recruitment == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
                 </select>
               </div>
             </div>
@@ -130,9 +132,9 @@
                     <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                   </button>
                 <?php } ?>
-                <button type="button" onclick="return selesai();" class="btn btn-flat btn-success">
+                <!-- <button type="button" onclick="return selesai();" class="btn btn-flat btn-success">
                   <i class="fa fa-arrow-right"></i> Selesai
-                </button>
+                </button> -->
               </div>
             </div>
           </form>
@@ -477,12 +479,14 @@
             $('#cStatus').val("")
             $('#cLevel').val("")
             $('#cNama').focus()
+
+            window.location.href = "<?= site_url('recruitment/wawancara') ?>";
           }
         });
       }
     }
 
-    function selesai() {
-      window.location.href = "<?= site_url('recruitment/wawancara') ?>";
-    }
+    // function selesai() {
+    //   window.location.href = "<?= site_url('recruitment/wawancara') ?>";
+    // }
   </script>

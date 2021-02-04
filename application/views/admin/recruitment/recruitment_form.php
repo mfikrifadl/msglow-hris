@@ -7,12 +7,28 @@ if ($action == "edit") {
         $createBy       =   $this->session->userdata('nama');
         $updateBy       =   $this->session->userdata('nama');
         $deleteBy       =   $this->session->userdata('nama');
+        //$nNilaiTes     =   "";
         if ($controller_name == "tes_kesehatan") {
+            $cStatus_tes = $column['tes_kesehatan'];
             $nNilaiTes     =   "";
+        } elseif ($controller_name == "psiko_test") {
+            $cStatus_tes = $column['psiko_test'];
+            $nNilaiTes      =   $column['nilai_psiko_test'];
+        } elseif ($controller_name == "uji_kompetensi") {
+            $cStatus_tes = $column['uji_kompetensi'];
+            $nNilaiTes      =   $column['nilai_uji_kompetensi'];
+        } elseif ($controller_name == "interview_user_1") {
+            $cStatus_tes = $column['interview_user_1'];
+            $nNilaiTes      =   $column['nilai_interview_user_1'];
+        } elseif ($controller_name == "interview_user_2") {
+            $cStatus_tes = $column['interview_user_2'];
+            $nNilaiTes      =   $column['nilai_interview_user_2'];
+        } elseif ($controller_name == "interview_hrga") {
+            $cStatus_tes = $column['interview_hrga'];
+            $nNilaiTes      =   $column['nilai_interview_hrga'];
         } else {
-            $nNilaiTes      =   $column[$nilai_test];
         }
-
+        
         $cStatus        =   $column[$controller_name];
         $dTglWawancara  =   $column[$date];
         $cIconButton   =   "refresh";
@@ -20,6 +36,7 @@ if ($action == "edit") {
     }
     $cAction = "Update/" . $cIdTest . "";
 } else {
+    
     $cIdTest  =   "";
     $cKodeWawancara  =   "";
     $nNilaiTes     =   "";
@@ -64,7 +81,7 @@ $whois_date = date('d-m-Y H:i:s');
                     <div class="kt-portlet__body">
                         <div class="form-group">
                             <label>Nama Peserta</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest">
+                            <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest" required>
                                 <option></option>
                                 <?php
                                 foreach ($row as $key => $value) {
@@ -82,9 +99,6 @@ $whois_date = date('d-m-Y H:i:s');
                             <div class="form-group">
                                 <label>Nilai <?= $file ?></label>
                                 <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
-                                <input type="hidden" name="whois" value="<?= $whois ?>">
-                                <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
-                                <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
                             </div>
                         <?php
                         }
@@ -92,14 +106,17 @@ $whois_date = date('d-m-Y H:i:s');
 
                         <div class="form-group">
                             <label>Tanggal Test</label>
-                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>">
+                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>" required>
+                            <input type="hidden" name="whois" value="<?= $whois ?>">
+                            <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
+                            <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
                         </div>
 
                         <?php
                         if ($controller_name == "tes_kesehatan") {
                             foreach ($hasil_tes_kesehatan as $key => $value) {
 
-                                if ($value['hasil_tes_kesehatan'] == null) {
+                                if ($value['hasil_tes_kesehatan'] == null && $value['tes_kesehatan'] == 'pemanggilan') {
 
                         ?>
                                     <div class="form-group">
@@ -117,6 +134,7 @@ $whois_date = date('d-m-Y H:i:s');
                                     </div>
                         <?php
 
+                                } else {
                                 }
                             }
                         }
@@ -124,11 +142,11 @@ $whois_date = date('d-m-Y H:i:s');
 
                         <div class="form-group form-group-last">
                             <label>Status</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus">
+                            <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
                                 <option></option>
-                                <option value="pemanggilan" <?php if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
-                                <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
-                                <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
+                                <option value="pemanggilan" <?php if ($cStatus_tes == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
+                                <option value="lolos" <?php if ($cStatus_tes == 'lolos') echo "selected"; ?>>Lolos</option>
+                                <option value="tidaklolos" <?php if ($cStatus_tes == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
                             </select>
                         </div>
                     </div>
@@ -176,7 +194,7 @@ $whois_date = date('d-m-Y H:i:s');
                             <?php $no = 0;
                             $cEmail = "";
                             foreach ($row as $key => $vaArea) {
-                                if ($vaArea['is_delete'] == 1) {
+                                if ($vaArea['is_delete'] == 1 || $vaArea['status'] == "Menjadi Pegawai") {
                                 } else {
                             ?>
 
