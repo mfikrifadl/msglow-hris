@@ -162,17 +162,19 @@ class Recruitment_act extends CI_Controller
 				'email'				=> $this->input->post('cEmail'),
 				'status_email_adm'	=> 'Belum Kirim Email',
 				'level_id'			=> $this->input->post('cLevel'),
-				'status'			=> 'pending',
-				'psiko_test'			=> 'pending',
-				'uji_kompetensi'			=> 'pending',
-				'interview_user_1'			=> 'pending',
-				'interview_user_2'			=> 'pending',
-				'interview_hrga'			=> 'pending',
-				'tes_kesehatan'			=> 'pending',
+				'status'			=> 'on review',
+				'psiko_test'			=> 'on review',
+				'uji_kompetensi'			=> 'on review',
+				'interview_user_1'			=> 'on review',
+				'interview_user_2'			=> 'on review',
+				'interview_hrga'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
 				'tahap_r'			=> 'Test Administrasi',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
 			);
 		}
+
+		$data_update = array();
 		if ($status_tes == "tidaklolos") {
 			$data_update = array(
 				'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
@@ -211,13 +213,13 @@ class Recruitment_act extends CI_Controller
 				'recruitment'		=> $this->input->post('cStatus'),
 				'status_email_adm'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
-				'status'			=> 'pending',
-				'psiko_test'			=> 'pending',
-				'uji_kompetensi'			=> 'pending',
-				'interview_user_1'			=> 'pending',
-				'interview_user_2'			=> 'pending',
-				'interview_hrga'			=> 'pending',
-				'tes_kesehatan'			=> 'pending',
+				'status'			=> 'on review',
+				'psiko_test'			=> 'on review',
+				'uji_kompetensi'			=> 'on review',
+				'interview_user_1'			=> 'on review',
+				'interview_user_2'			=> 'on review',
+				'interview_hrga'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
 			);
 		}
 
@@ -243,13 +245,13 @@ class Recruitment_act extends CI_Controller
 			'tahap_r'			=> 'Test Administrasi',
 			'status_email_adm'	=> 'Belum Kirim Email',
 			'level_id'			=> $this->input->post('cLevel'),
-			'status'			=> 'pending',
-			'psiko_test'			=> 'pending',
-			'uji_kompetensi'			=> 'pending',
-			'interview_user_1'			=> 'pending',
-			'interview_user_2'			=> 'pending',
-			'interview_hrga'			=> 'pending',
-			'tes_kesehatan'			=> 'pending',
+			'status'			=> 'on review',
+			'psiko_test'			=> 'on review',
+			'uji_kompetensi'			=> 'on review',
+			'interview_user_1'			=> 'on review',
+			'interview_user_2'			=> 'on review',
+			'interview_hrga'			=> 'on review',
+			'tes_kesehatan'			=> 'on review',
 			'tahap_r'			=> 'Test Administrasi',
 			'status_email_tidaklolos'	=> 'Belum Kirim Email',
 		);
@@ -347,12 +349,12 @@ class Recruitment_act extends CI_Controller
 				'psiko_test'	=> $this->input->post('cStatus'),
 				'tahap_r'	=> 'Psikotest',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
-				'status'			=> 'pending',
-				'uji_kompetensi'			=> 'pending',
-				'interview_user_1'			=> 'pending',
-				'interview_user_2'			=> 'pending',
-				'interview_hrga'			=> 'pending',
-				'tes_kesehatan'			=> 'pending',
+				'status'			=> 'on review',
+				'uji_kompetensi'			=> 'on review',
+				'interview_user_1'			=> 'on review',
+				'interview_user_2'			=> 'on review',
+				'interview_hrga'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
 			);
 		}
 
@@ -438,11 +440,11 @@ class Recruitment_act extends CI_Controller
 				'tahap_r'	=> 'Uji Kompetensi',
 				'status_email_uk'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
-				'status'			=> 'pending',
-				'interview_user_1'			=> 'pending',
-				'interview_user_2'			=> 'pending',
-				'interview_hrga'			=> 'pending',
-				'tes_kesehatan'			=> 'pending',
+				'status'			=> 'on review',
+				'interview_user_1'			=> 'on review',
+				'interview_user_2'			=> 'on review',
+				'interview_hrga'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
 			);
 		}
 
@@ -527,10 +529,10 @@ class Recruitment_act extends CI_Controller
 				'tahap_r'	=> 'Interview User 1',
 				'status_email_u1'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
-				'status'			=> 'pending',
-				'interview_user_2'			=> 'pending',
-				'interview_hrga'			=> 'pending',
-				'tes_kesehatan'			=> 'pending',
+				'status'			=> 'on review',
+				'interview_user_2'			=> 'on review',
+				'interview_hrga'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
 			);
 		}
 
@@ -614,9 +616,9 @@ class Recruitment_act extends CI_Controller
 				'tahap_r'	=> 'Interview User 2',
 				'status_email_u2'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
-				'status'			=> 'pending',
-				'interview_hrga'			=> 'pending',
-				'tes_kesehatan'			=> 'pending',
+				'status'			=> 'on review',
+				'interview_hrga'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
 			);
 		}
 
@@ -677,8 +679,7 @@ class Recruitment_act extends CI_Controller
 				'update_date'	=> $this->input->post('whois_date'),
 				'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 				'interview_hrga'	=> $this->input->post('cStatus'),
-				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
-				'status'	=> 'pending',
+				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),				
 				'tahap_r'	=> 'Interview HRGA',
 				'status_email_hrga'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -696,13 +697,12 @@ class Recruitment_act extends CI_Controller
 				'update_date'	=> $this->input->post('whois_date'),
 				'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 				'interview_hrga'	=> $this->input->post('cStatus'),
-				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
-				'status'	=> 'pending',
+				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),				
 				'tahap_r'	=> 'Interview HRGA',
 				'status_email_hrga'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
-				'status'			=> 'pending',
-				'tes_kesehatan'			=> 'pending',
+				'status'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
 			);
 		}
 
@@ -720,7 +720,7 @@ class Recruitment_act extends CI_Controller
 			'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 			'interview_hrga'	=> $this->input->post('cStatus'),
 			'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
-			'status'	=> 'pending',
+			'status'	=> 'on review',
 			'tahap_r'	=> 'Interview HRGA',
 			'status_email_hrga'	=> 'Belum Kirim Email',
 			'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -760,7 +760,7 @@ class Recruitment_act extends CI_Controller
 
 		$folder = "";
 
-		if ($cStatus == "pemanggilan") {
+		if ($cStatus == "pemanggilan" || $cStatus == "tidaklolos") {
 			$folder = "";
 		} else {
 			$nama = $_FILES['cTesKes']['name'];
@@ -780,7 +780,7 @@ class Recruitment_act extends CI_Controller
 		if ($cStatus == "lolos") {
 			$status = "validasi";
 		} else {
-			$status = "pending";
+			$status = "tidaklolos";
 		}
 		foreach ($dbKode->result_array() as $key => $vaKode) {
 			$cKodeWawancara = $vaKode['kode_wawancara'];
@@ -920,7 +920,7 @@ class Recruitment_act extends CI_Controller
 			'kode_wawancara'	=> $setNik,
 			'nik'		=> $setNik,
 			'nama'		=> $cNama,
-			'id_status'	=> 3,
+			'id_status'	=> 4,
 			'tanggal_masuk_kerja' => date("Y-m-d"),
 		);
 		$dataStatus = array(

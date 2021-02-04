@@ -73,20 +73,20 @@ if ($action == "edit") {
                         </div>
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" name="cNama" id="cNama" class="form-control" placeholder="Nama Peserta" value="<?= $cNama ?>">
+                            <input type="text" name="cNama" id="cNama" class="form-control" placeholder="Nama Peserta" value="<?= $cNama ?>" required>
                         </div>
                         <div class="form-group">
                             <label>Nomor Telepon</label>
-                            <input type="text" name="cNomorTelepon" id="cNomorTelepon" class="form-control" placeholder="Nomor Telepon" value="<?= $cNomorTelepon ?>">
+                            <input type="text" name="cNomorTelepon" id="cNomorTelepon" class="form-control" placeholder="Nomor Telepon" value="<?= $cNomorTelepon ?>" required>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
+                            <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>" required>
                             <input type="hidden" name="whois" value="<?= $whois ?>">
                         </div>
                         <div class="form-group">
                             <label>Interviewer</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel" name="cLevel">
+                            <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel" name="cLevel" required>
                                 <option></option>
                                 <?php foreach ($levels as $key => $level) { ?>
                                     <option value="<?= $level['id_level'] ?>" <?php if ($cLevel == $level['id_level']) echo "selected"; ?>>
@@ -97,7 +97,7 @@ if ($action == "edit") {
                         </div>
                         <div class="form-group">
                             <label>Penempatan</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" id="cKategori" name="cKategori">
+                            <select class="form-control kt-selectpicker" data-live-search="true" id="cKategori" name="cKategori" required>
                                 <option></option>
                                 <?php foreach ($lokasis as $key => $lokasi) { ?>
                                     <option value="<?= $lokasi['id_kategori_phl'] ?>" <?php if ($cKategori == $lokasi['id_kategori_phl']) echo "selected"; ?>>
@@ -108,16 +108,16 @@ if ($action == "edit") {
                         </div>
                         <div class="form-group">
                             <label>Divisi</label>
-                            <input name="cDivisi" id="cDivisi" class="form-control" readonly="true" placeholder="Divisi" value="<?= $cDivisi ?>">
+                            <input name="cDivisi" id="cDivisi" class="form-control" readonly="true" placeholder="Divisi" value="<?= $cDivisi ?>" required>
                             <input type="hidden" name="cJob_id" id="cJob_id" value="<?= $cJob_id ?>">
                         </div>
                         <div class="form-group">
                             <label>Tanggal Wawancara</label>
-                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Wawancara" value="<?= $dTglWawancara ?>">
+                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Wawancara" value="<?= $dTglWawancara ?>" required>
                         </div>
                         <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus">
+                            <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus" required>
                                 <option></option>
                                 <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
                                 <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
@@ -137,9 +137,9 @@ if ($action == "edit") {
                                     <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                                 </button>
                             <?php } ?>
-                            <button type="button" onclick="return selesai();" class="btn btn-flat btn-success">
+                            <!-- <button type="button" onclick="return selesai();" class="btn btn-flat btn-success">
                                 <i class="fa fa-arrow-right"></i> Selesai
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </form>
@@ -339,7 +339,7 @@ if ($action == "edit") {
                                             <i class="flaticon-edit"></i>
                                         </a>
                                         <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
+                                { window.location.href='<?= site_url('recruitment_phl_act/administrasi/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
                                             <i class="flaticon-delete"></i>
                                         </a>
                                     </td>
@@ -461,6 +461,8 @@ if ($action == "edit") {
                     $('#cJob_id').val("")
                     $('#cKategori').val("")
                     $('#cNama').focus()
+
+                    window.location.href = "<?= site_url('recruitment_phl/administrasi') ?>";
                 }
             });
         }
@@ -468,7 +470,7 @@ if ($action == "edit") {
 
     function update(id) {
         var cKodeWawancara = $('#cKodeWawancara').val();
-        var dTglWawancara = $('#dTglWawancara').val();
+        var dTglWawancara = $('#tglW').val();
         var cNama = $('#cNama').val();
         var cNomorTelepon = $('#cNomorTelepon').val();
         var cEmail = $('#cEmail').val();
@@ -477,10 +479,12 @@ if ($action == "edit") {
         var cJob_id = $('#cJob_id').val();
         var cKategori = $('#cKategori').val();
         var cLevel = $('#cLevel').val();
+        var whois = $('#whois').val();
         $.ajax({
             type: "POST",
             data: "cKodeWawancara=" + cKodeWawancara +
                 "&dTglWawancara=" + dTglWawancara +
+                "&whois=" + whois +
                 "&cNama=" + cNama +
                 "&cNomorTelepon=" + cNomorTelepon +
                 "&cStatus=" + cStatus +
@@ -497,12 +501,22 @@ if ($action == "edit") {
                     text: 'Berhasil Update Data',
                     type: 'success'
                 });
+
+                $('#cNama').val("");
+                $('#cNomorTelepon').val("");
+                $('#cEmail').val("");
+                $('#cStatus').val("")
+                $('#cLevel').val("")
+                $('#cDivisi').val("")
+                $('#cJob_id').val("")
+                $('#cKategori').val("")
+                $('#cNama').focus()
                 window.location.href = "<?= site_url('recruitment_phl/administrasi') ?>";
             }
         });
     }
 
-    function selesai() {
-        window.location.href = "<?= site_url('recruitment_phl/administrasi') ?>";
-    }
+    // function selesai() {
+    //     window.location.href = "<?= site_url('recruitment_phl/administrasi') ?>";
+    // }
 </script>

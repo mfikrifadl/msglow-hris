@@ -68,7 +68,7 @@ $whois_date = date('d-m-Y H:i:s');
                     <div class="kt-portlet__body">
                         <div class="form-group">
                             <label>Nama Peserta</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest">
+                            <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest" required>
                                 <option></option>
                                 <?php
                                 foreach ($row as $key => $value) {
@@ -93,7 +93,7 @@ $whois_date = date('d-m-Y H:i:s');
 
                         <div class="form-group">
                             <label>Tanggal Test</label>
-                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>">
+                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>" required>
                             <input type="hidden" name="whois" value="<?= $whois ?>">
                             <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
                             <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
@@ -128,7 +128,7 @@ $whois_date = date('d-m-Y H:i:s');
                         ?>
                         <div class="form-group form-group-last">
                             <label>Status</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus">
+                            <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
                                 <option></option>
                                 <option value="pemanggilan" <?php if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
                                 <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
