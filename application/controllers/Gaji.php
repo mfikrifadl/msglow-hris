@@ -12,6 +12,7 @@ class Gaji extends CI_Controller
 		error_reporting(0);
 		//MenLoad model yang berada di Folder Model dan namany model
 		$this->load->model('model');
+		$this->load->model('AbsensiModel');
 		$this->load->model('relasi');
 		// Meload Library session 
 		$this->load->library('session');
@@ -102,48 +103,55 @@ class Gaji extends CI_Controller
 	}
 
 	public function absensi_pegawai($Aksi = "", $Id = "")
-	{		
+	{
 		$dataHeader['menu'] = 'Manajemen Absensi';
 		$dataHeader['file'] = 'Absensi Pegawai';
 		$data['action'] = $Aksi;
-		$data['id_absen']	=	$Id;
+		//$data['id_absen']	=	$Id;
 
-		$data_absensi = $this->model->View('attlog');		
-			foreach ($data_absensi as $key => $vaArea) {
-				$c_id = date("YmdHis");
-                
+		$data_absensi = $this->model->View('attlog');
+		$data_log_absen = array();
+		foreach ($data_absensi as $key => $vaArea) {
+			$c_id = date("YmdHis");
+			$tgl_hari_ini = date('Y-m-d');
 
-                $pin = $vaArea['A'];
-                $attlog = $vaArea['B'];
-                $verify = $vaArea['C'];
-                $status_scan = $vaArea['D'];
-                $cloud_id = $vaArea['E'];
+			$pin = $vaArea['pin'];
+			$attlog = $vaArea['attlog'];
+			$verify = $vaArea['verify'];
+			$status_scan = $vaArea['status_scan'];
+			$cloud_id = $vaArea['cloud_id'];
 
-                $a_attlog = explode(" ", $attlog);
-                $tgl = $a_attlog[0];
-                $waktu = $a_attlog[1];
+			$a_attlog = explode(" ", $attlog);
+			$tgl = $a_attlog[0];
+			$waktu = $a_attlog[1];
 
+			if ($tgl_hari_ini == $tgl) {
+				// echo "pin : $pin <br />";
+				// echo "attlog : $attlog <br />";
+				// echo "tanggal cek roll : $tgl <br />";
+				// echo "waktu cek roll : $waktu <br />";
+				// echo "verify : $verify <br />";
+				// echo "status_scan : $status_scan <br />";
+				// echo "cloud_id : $cloud_id <br /><br />";
 
-                // echo "pin : $pin <br />";
-                // echo "attlog : $attlog <br />";
-                // echo "tanggal cek roll : $tgl <br />";
-                // echo "waktu cek roll : $waktu <br />";
-                // echo "verify : $verify <br />";
-                // echo "status_scan : $status_scan <br />";
-                // echo "cloud_id : $cloud_id <br /><br />";
+				array_push($data_log_absen, array(
 
-                array_push($data_log_absen, array(
-                    'id' => $id,
-                    'pin' => $row['A'],
-                    'attlog' => $row['B'],
-                    'tanggal' => $tgl,
-                    'waktu' => $waktu,
-                    'verify' => $row['C'],
-                    'status_scan' => $row['D'],
-                    'cloud_id' => $row['E']
-                ));
+				    'pin' => $pin,
+				    'attlog' => $attlog,
+				    'tanggal' => $tgl,
+				    'waktu' => $waktu,
+				    'verify' => $verify,
+				    'status_scan' => $status_scan,
+				    'cloud_id' => $cloud_id
+				));
+
+				
+			} else {
+				//echo "asd";
 			}
-
+			
+		}
+		$this->AbsensiModel->insert_data_log_absen($data_log_absen);
 
 		$this->load->view('admin/container/header', $dataHeader);		
 		$this->load->view('admin/gaji/absensi', $data);
