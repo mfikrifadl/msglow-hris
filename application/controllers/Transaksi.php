@@ -437,7 +437,8 @@ class Transaksi extends CI_Controller
 		$data['st_karyawan']	= $this->model->ViewAsc('tb_status_karyawan', 'id_status');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_pengunduran_diri', 'id_pengunduran_diri', $Id);
-			$data['pegawai']	= $this->model->ViewWhere('v_pengunduran_diri', 'id_pengunduran_diri', $Id);
+			$data['pegawai']	= $this->model->ViewWhere('v_pengunduran_diri', 'id_pengunduran_diri',$Id);
+			
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		} elseif ($Aksi == 'delete') {
@@ -448,6 +449,7 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/transaksi/pengunduran_pegawai', $data);
 		$this->load->view('admin/container/footer');
 	}
+
 
 
 
