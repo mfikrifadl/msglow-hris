@@ -264,7 +264,7 @@ else {
                             ?>
                                 <tr>
                                     <td><?= ++$no; ?></td>
-                                    <td><?= ($vaPeringatan['tanggal']) ?></td>
+                                    <td><?= ($vaPeringatan['mulai_berlaku']) ?></td>
                                     <td><?= ($vaPeringatan['nik']) ?></td>
                                     <td><?= ($vaPeringatan['nama']) ?></td>
                                     <td><?= ($vaPeringatan['keterangan']) ?></td>

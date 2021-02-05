@@ -177,7 +177,13 @@
              </div>
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">Perihal: </label>
-               <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan I</label>
+               <div class="col-3">
+                 <select name="jenis_sp" class="form-control" onchange="jenissurat(this.value)">
+                   <option value="sp1">Surat Peringatan I</option>
+                   <option value="sp2">Surat Peringatan II</option>
+                   <option value="sp3">Surat Peringatan III</option>
+                 </select>
+               </div>
              </div>
              <div style="text-align: center;">
                <h4 style="text-decoration: underline;">SURAT TEGURAN</h4>
@@ -332,5 +338,16 @@
      };
      xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
      xmlhttp.send();
+   }
+
+   function jenissurat(surat) {
+     x = document.getElementById('jenis_srt');
+     if (surat == 'sp1') {
+       x = 'SP-I';
+     } else if (surat == 'sp2') {
+       x = 'SP-II';
+     } else {
+       x = 'SP-III';
+     }
    }
  </script>
