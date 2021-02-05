@@ -189,10 +189,10 @@
                                                   <?= $vaArea2['kode_wawancara'] ?>
                                               </td>
                                               <td>
-                                                  <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
-                                                  <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
-                                                  <b> Email : </b> <?= ($vaArea['email']) ?> <br />
-                                                  <b> Posisi : </b> <?= ($vaArea['divisi']) ?>
+                                                  <b> Nama : </b> <?= ($vaArea2['nama']) ?> <br />
+                                                  <b> No. Hp : </b> <?= ($vaArea2['nomor_telepon']) ?> <br />
+                                                  <b> Email : </b> <?= ($vaArea2['email']) ?> <br />
+                                                  <b> Posisi : </b> <?= ($vaArea2['divisi']) ?>
                                               </td>
                                               <td>
                                                   <?= $vaArea2['total_nilai'] ?>
@@ -208,7 +208,7 @@
                                                     } else  $cLabel = 'info';
                                                     ?>
                                                   <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                                                      <?= $vaArea['tahap_r'] ?>
+                                                      <?= $vaArea2['tahap_r'] ?>
                                                   </span>
                                               </td>
                                               <td><?php
@@ -221,12 +221,12 @@
                                                     } else  $cLabel = 'info';
                                                     ?>
                                                   <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                                                      <?= $vaArea['status'] ?>
+                                                      <?= $vaArea2['status'] ?>
                                                   </span>
                                               </td>
                                               <td>
                                                   <span class="kt-badge kt-badge--inline kt-badge--pill ">
-                                                      <?= $vaArea['alasan_tidak_lolos'] ?>
+                                                      <?= $vaArea2['alasan_tidak_lolos'] ?>
                                                   </span>
                                               </td>
                                       </tr>

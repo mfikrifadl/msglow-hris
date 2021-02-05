@@ -57,11 +57,11 @@
                     <td>
 
                       <?php
-                       if ($vaArea2['status'] == 'Menjadi Pegawai') {
+                       if ($vaArea['status'] == 'Menjadi Pegawai') {
                         $cLabel = 'success';
-                      } else if ($vaArea2['status'] == 'tidaklolos') {
+                      } else if ($vaArea['status'] == 'tidaklolos') {
                         $cLabel = 'danger';
-                      } else if ($vaArea2['status'] == 'on review') {
+                      } else if ($vaArea['status'] == 'on review') {
                         $cLabel = 'warning';
                       } else  $cLabel = 'info';
                       ?>
@@ -77,11 +77,11 @@
                       $status_test = "";
                       $cLabel = "";
 
-                      if ($vaArea2['status'] == 'Menjadi Pegawai') {
+                      if ($vaArea['status'] == 'Menjadi Pegawai') {
                         $cLabel = 'success';
-                      } else if ($vaArea2['status'] == 'tidaklolos') {
+                      } else if ($vaArea['status'] == 'tidaklolos') {
                         $cLabel = 'danger';
-                      } else if ($vaArea2['status'] == 'on review') {
+                      } else if ($vaArea['status'] == 'on review') {
                         $cLabel = 'warning';
                       } else  $cLabel = 'info';
 
@@ -210,7 +210,7 @@
                 //    var_dump($nilai);
                 foreach ($nilai as $key => $vaArea2) {
 
-                  if ($vaArea2['is_delete'] == 1) {
+                  if ($ ['is_delete'] == 1) {
                   } else {
                 ?>
                     <tr>
