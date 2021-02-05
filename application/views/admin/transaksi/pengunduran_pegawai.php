@@ -4,7 +4,7 @@ if ($action == "edit") {
     $cIdPengunduranDiri   = $column['id_pengunduran_diri'];
     $cIdPegawai           = $column['id_pegawai'];
     // $cNIKPegawai          = $column['nik'];
-    // $cGolongan            = $column['id_kerja'];
+    $cStatus_karyawan            = $column['status_karyawan'];
     // $cSTPegawai           = $column['id_status'];
     $cTgl_masuk_kerja     = String2Date_masuk_kerja($column['tanggal_masuk_kerja']);
     $cTgl_masa_kerja     = String2Date_masa_kerja($column['masa_kerja']);
@@ -22,7 +22,7 @@ if ($action == "edit") {
   $cIdPengunduranDiri   = "";
   $cIdPegawai           = "";
   // $cNIKPegawai          = "";
-  // $cGolongan            = "";
+  $cStatus_karyawan            = "";
   // $cSTPegawai           = "";
   $cIdStatus            = "";
   $cTgl_masuk_kerja     = date("d-m-Y");
@@ -88,21 +88,20 @@ if ($action == "edit") {
                 </div>
               </div>
 
-              <div class="col-sm-2">
+              <div class="col-sm-4">
                 <?php
                 if ($action == "edit") {
                 ?>
                   <div class="form-group">
                     <label>Tanggal Masuk Kerja</label>
-                    <input type="text" readonly="true" class="form_control" value="<?= $tglMasukKerja ?>">
+                    <input type="text" readonly="true" class="form-control" value="<?= $tglMasukKerja ?>">
                   </div>
                 <?php
                 } else {
                 ?>
                   <div class="form-group">
                     <label>Tanggal Masuk Kerja</label>
-                    
-                    <input type="text" readonly="true" class="form_control" id="cTgl_masuk_kerja">
+                    <input type="text" readonly="true" class="form-control" id="cTgl_masuk_kerja">
                   </div>
                 <?php
                 }
@@ -110,52 +109,72 @@ if ($action == "edit") {
 
               </div>
 
-              <div class="col-sm-3">
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Status Pegawai </label>
+                  <div class="form-group">
+                    <?php
+                    if ($action == "edit") {
+                      foreach ($st_karyawan as $key => $vaKaryawan) {
+                        if ($vaKaryawan['id_status'] == $cStatus_karyawan) {
+                    ?>
+                          <input type="text" readonly="true" class="form-control" value="<?= $vaKaryawan['status'] ?>">
+                      <?php
+                        }
+                      }
+                      ?>
+
+                      <!-- <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatusPegawai" required>
+                        <option></option> -->
+                        <?php
+                        // foreach ($st_karyawan as $key => $vaKaryawan) { ?>
+                          <!-- <option value="<?= $vaKaryawan['id_status'] ?>" <?php if ($vaKaryawan['id_status'] == $cStatus_karyawan) echo "selected"; ?>>
+                            <?= $vaKaryawan['status'] ?>
+                          </option> -->
+                        <?php //} ?>
+                      <!-- </select> -->
+                    <?php
+                    } else {
+                    ?>
+                      <input type="text" readonly="true" class="form-control" id="cNama_status_kerja">
+                    <?php
+                    }
+                    ?>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
                 <div class="form-group">
                   <label>Tanggal Resign / Gugur</label>
                   <input type="text" class="form-control" value="<?= $dTgl ?>" data-date-format="dd-mm-yyyy" name="dTgl" id="kt_datepicker_1" required>
                 </div>
               </div>
-              <div class="col-sm-3">
-                <div class="form-group">
-                  <label>Status Pegawai</label>
-                  <input type="text" readonly="true" class="form_control" id="cStatus_kerja">
-                </div>
-              </div>
-              <div class="col-sm-3">
+
+              <div class="col-sm-6">
                 <div class="form-group">
                   <label>Status Resign </label>
                   <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" required>
-                    <option></option>
+                    <option value="0">Batal Resign</option>
 
-                    <?php foreach ($st_karyawan as $key => $vaSt_karyawan) {
-
-
-                    ?>
-                      <!-- <option value="<?= $vaSt_karyawan['id_status']  ?>" <?php //if ($vaSt_karyawan['id_status'] == $cIdStatus) echo "selected"; ?>>
-                        <?= $vaSt_karyawan['status'] ?>
-                      </option> -->
-
-                    <?php
-                    }
-                    ?>
-
-                    <option value="6" <?php if ($cIdStatus == 6) echo "selected"; 
-                                            ?>>Mengundurkan Diri</option>
-                      <option value="7" <?php if ($cIdStatus == 7) echo "selected"; 
-                                        ?>>Gugur</option>
-                      <option value="8" <?php if ($cIdStatus == 8) echo "selected"; 
-                                        ?>>PHK</option>
-                      <option value="9" <?php if ($cIdStatus == 9) echo "selected"; 
-                                        ?>>Mengundurkan Diri Tanpa Ke Kantor</option>
-                      <option value="10" <?php if ($cIdStatus == 10) echo "selected"; 
-                                          ?>>Mengundurkan Diri Tanpa Alasan</option>
-                      <option value="11" <?php if ($cIdStatus == 11) echo "selected"; 
-                                          ?>>Cut Off</option>
-                      <option value="12" <?php if ($cIdStatus == 12) echo "selected"; 
-                                          ?>>Mutasi Klinik</option>
-                      <option value="13" <?php if ($cIdStatus == 13) echo "selected"; 
-                                          ?>>Mutasi Gudang</option>
+                    <option value="6" <?php if ($cIdStatus == 6) echo "selected";
+                                      ?>>Mengundurkan Diri</option>
+                    <option value="7" <?php if ($cIdStatus == 7) echo "selected";
+                                      ?>>Gugur</option>
+                    <option value="8" <?php if ($cIdStatus == 8) echo "selected";
+                                      ?>>PHK</option>
+                    <option value="9" <?php if ($cIdStatus == 9) echo "selected";
+                                      ?>>Mengundurkan Diri Tanpa Ke Kantor</option>
+                    <option value="10" <?php if ($cIdStatus == 10) echo "selected";
+                                        ?>>Mengundurkan Diri Tanpa Alasan</option>
+                    <option value="11" <?php if ($cIdStatus == 11) echo "selected";
+                                        ?>>Cut Off</option>
+                    <option value="12" <?php if ($cIdStatus == 12) echo "selected";
+                                        ?>>Mutasi Klinik</option>
+                    <option value="13" <?php if ($cIdStatus == 13) echo "selected";
+                                        ?>>Mutasi Gudang</option>
                   </select>
                 </div>
               </div>
@@ -256,13 +275,13 @@ if ($action == "edit") {
                 </tbody>
               </table>
 
-              <!-- <div class="row">
+              <div class="row">
                 <div class="col-sm-12">
-                  <a href="<?php// echo site_url('rekap/mengundurkan_diri') ?>" class="btn btn-primary btn-flat" target="_blank">
+                  <a href="<?= site_url('rekap/mengundurkan_diri') ?>" class="btn btn-primary btn-flat" target="_blank">
                     <i class="fa fa-print"></i> Cetak Excel
                   </a>
                 </div>
-              </div> -->
+              </div>
 
             </div>
 
@@ -278,21 +297,22 @@ if ($action == "edit") {
 </div>
 
 <script>
-   function cek_pegawai(data) {
-      //alert(data);
-     var xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = function() {
-       if (this.readyState == 4 && this.status == 200) {
-         hasil = (this.responseText).split('~');
+  function cek_pegawai(data) {
+    //alert(data);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        hasil = (this.responseText).split('~');
 
-          //alert (this.responseText);
-         document.getElementById('cTgl_masuk_kerja').value = hasil[0];
-         document.getElementById('cStatus_kerja').value = hasil[1];
-       }
-     };
-     xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_data_pegawai/') ?>/" + data, true);
-     xmlhttp.send();
-    }
+        //alert (this.responseText);
+        document.getElementById('cTgl_masuk_kerja').value = hasil[0];
+        document.getElementById('cNama_status_kerja').value = hasil[2];
+        // document.getElementById('cNama_status_kerja').value = hasil[2];
+      }
+    };
+    xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_data_pegawai/') ?>/" + data, true);
+    xmlhttp.send();
+  }
 </script>
 
 <!-- end:: Content -->
