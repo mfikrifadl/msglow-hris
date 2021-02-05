@@ -233,9 +233,9 @@
                             $cLabel = 'success';
                           } else if ($vaArea2['status'] == 'tidaklolos') {
                             $cLabel = 'danger';
-                          } else if ($vaArea2['status'] == 'lolos') {
-                            $cLabel = 'info';
-                          } else  $cLabel = 'warning';
+                          } else if ($vaArea2['status'] == 'on review') {
+                            $cLabel = 'warning';
+                          } else  $cLabel = 'info';
                           ?>
                           <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
                             <?= $vaArea2['tahap_r'] ?>
@@ -246,9 +246,9 @@
                               $cLabel = 'success';
                             } else if ($vaArea2['status'] == 'tidaklolos') {
                               $cLabel = 'danger';
-                            } else if ($vaArea2['status'] == 'lolos') {
-                              $cLabel = 'info';
-                            } else  $cLabel = 'warning';
+                            } else if ($vaArea2['status'] == 'on review') {
+                              $cLabel = 'warning';
+                            } else  $cLabel = 'info';
                             ?>
                           <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
                             <?= $vaArea2['status'] ?>

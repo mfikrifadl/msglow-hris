@@ -53,9 +53,9 @@ class Model extends CI_Model
 		$Query = $this->db->query("SELECT MAX($kolom) AS LastIdFix FROM  $table");
 		return $Query->result_array();
 	}
-	public function View($Table, $Order)
+	public function View($Table)
 	{
-		$Query = $this->db->query("SELECT * FROM " . $Table . " ORDER BY " . $Order . " DESC");
+		$Query = $this->db->query("SELECT * FROM " . $Table );
 		return $Query->result_array();
 	}
 
@@ -82,6 +82,12 @@ class Model extends CI_Model
 	public function ViewASC($Table, $Order)
 	{
 		$Query = $this->db->query("SELECT * FROM " . $Table . " ORDER BY " . $Order . " ASC");
+		return $Query->result_array();
+	}
+
+	public function ViewDesc($Table, $Order)
+	{
+		$Query = $this->db->query("SELECT * FROM " . $Table . " ORDER BY " . $Order . " DESC");
 		return $Query->result_array();
 	}
 

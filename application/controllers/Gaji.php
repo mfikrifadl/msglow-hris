@@ -102,19 +102,51 @@ class Gaji extends CI_Controller
 	}
 
 	public function absensi_pegawai($Aksi = "", $Id = "")
-	{
-		// $this->load->view('admin/gaji/view');
+	{		
 		$dataHeader['menu'] = 'Manajemen Absensi';
 		$dataHeader['file'] = 'Absensi Pegawai';
 		$data['action'] = $Aksi;
 		$data['id_absen']	=	$Id;
-		// echo $this->session->userdata('nama');
-		// echo $this->session->userdata('user');
-		// echo $this->session->userdata('level');
-		// echo $this->session->userdata('id');
-		$this->load->view('admin/container/header', $dataHeader);
-		// $this->load->view('admin/gaji/absensi', $data);
-		$this->load->view('admin/gaji/absensi2', $data);
+
+		$data_absensi = $this->model->View('attlog');		
+			foreach ($data_absensi as $key => $vaArea) {
+				$c_id = date("YmdHis");
+                
+
+                $pin = $vaArea['A'];
+                $attlog = $vaArea['B'];
+                $verify = $vaArea['C'];
+                $status_scan = $vaArea['D'];
+                $cloud_id = $vaArea['E'];
+
+                $a_attlog = explode(" ", $attlog);
+                $tgl = $a_attlog[0];
+                $waktu = $a_attlog[1];
+
+
+                // echo "pin : $pin <br />";
+                // echo "attlog : $attlog <br />";
+                // echo "tanggal cek roll : $tgl <br />";
+                // echo "waktu cek roll : $waktu <br />";
+                // echo "verify : $verify <br />";
+                // echo "status_scan : $status_scan <br />";
+                // echo "cloud_id : $cloud_id <br /><br />";
+
+                array_push($data_log_absen, array(
+                    'id' => $id,
+                    'pin' => $row['A'],
+                    'attlog' => $row['B'],
+                    'tanggal' => $tgl,
+                    'waktu' => $waktu,
+                    'verify' => $row['C'],
+                    'status_scan' => $row['D'],
+                    'cloud_id' => $row['E']
+                ));
+			}
+
+
+		$this->load->view('admin/container/header', $dataHeader);		
+		$this->load->view('admin/gaji/absensi', $data);
 		$this->load->view('admin/container/footer');
 	}
 

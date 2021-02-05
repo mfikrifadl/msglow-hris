@@ -56,10 +56,12 @@
                                       </td>
                                       <td>
                                           <?php
-                                            if ($vaArea['status'] == 'lolos') {
+                                            if ($vaArea['status'] == 'Menjadi Pegawai') {
                                                 $cLabel = 'success';
                                             } else if ($vaArea['status'] == 'tidaklolos') {
                                                 $cLabel = 'danger';
+                                            } else if ($vaArea['status'] == 'on review') {
+                                                $cLabel = 'warning';
                                             } else  $cLabel = 'info';
                                             ?>
                                           <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
