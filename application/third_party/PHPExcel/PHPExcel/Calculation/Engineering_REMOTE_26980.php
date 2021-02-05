@@ -1470,9 +1470,6 @@ class PHPExcel_Calculation_Engineering
      *                                    If number is not a valid hexadecimal number, HEX2BIN returns
      *                                    the #NUM! error value.
      *                                    If HEX2BIN requires more than places characters, it returns
-<<<<<<< HEAD
-     *                         
-=======
      *                                    the #NUM! error value.
      * @param    integer        $places        The number of characters to use. If places is omitted,
      *                                    HEX2BIN uses the minimum number of characters necessary. Places
@@ -2651,4 +2648,3 @@ class PHPExcel_Calculation_Engineering
         return ($value * self::$unitConversions[$unitGroup1][$fromUOM][$toUOM]) / $toMultiplier;
     }
 }
->>>>>>> 77cde18606a4e8e2dd9f05d183407c36d6e6d410
