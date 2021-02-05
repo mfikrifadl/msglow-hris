@@ -254,6 +254,7 @@
                     <td> <?= ($vaArea['job']) ?> </td>
                     <td>
                       <?php
+                      $cLabel='';
                       if ($vaArea['recruitment'] == 'pemanggilan') {
                         $cLabel = 'info';
                       } else if ($vaArea['recruitment'] == 'lolos') {
