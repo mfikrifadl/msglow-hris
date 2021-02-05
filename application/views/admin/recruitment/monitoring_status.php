@@ -74,75 +74,93 @@
 
                       $status_test = "";
                       $cLabel = "";
-                      if ($vaArea['tahap_r'] == "Test Administrasi") {
 
-                        if ($vaArea['recruitment'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['recruitment'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else  $cLabel = 'info';
+                      if ($vaArea['status'] == 'Menjadi Pegawai') {
+                        $cLabel = 'success';
+                      } else if ($vaArea['status'] == 'on review') {
+                        $cLabel = 'warning';
+                      } else  $cLabel = 'info';
 
-                        $status_test = $vaArea['recruitment'];
-                      } elseif ($vaArea['tahap_r'] == "Psikotest") {
-
-                        if ($vaArea['psiko_test'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['psiko_test'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else  $cLabel = 'info';
-
-                        $status_test = $vaArea['psiko_test'];
-                      } elseif ($vaArea['tahap_r'] == "Uji Kompetensi") {
-
-                        if ($vaArea['uji_kompetensi'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['uji_kompetensi'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else  $cLabel = 'info';
-
-                        $status_test = $vaArea['uji_kompetensi'];
-                      } elseif ($vaArea['tahap_r'] == "Interview User 1") {
-
-                        if ($vaArea['interview_user_1'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['interview_user_1'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else  $cLabel = 'info';
-
-                        $status_test = $vaArea['interview_user_1'];
-                      } elseif ($vaArea['tahap_r'] == "Interview User 2") {
-
-                        if ($vaArea['interview_user_2'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['interview_user_2'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else  $cLabel = 'info';
-
-                        $status_test = $vaArea['interview_user_2'];
-                      } elseif ($vaArea['tahap_r'] == "Interview HRGA") {
-
-                        if ($vaArea['interview_hrga'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['interview_hrga'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else  $cLabel = 'info';
-
-                        $status_test = $vaArea['interview_hrga'];
-                      } elseif ($vaArea['tahap_r'] == "Tes Kesehatan") {
-
-                        if ($vaArea['tes_kesehatan'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['tes_kesehatan'] == 'tidaklolos') {
-                          $cLabel = 'danger';
-                        } else  $cLabel = 'info';
-
-                        $status_test = $vaArea['tes_kesehatan'];
-                      }
-
+                      $status_test = $vaArea['status'];
                       ?>
                       <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                        <?= $status_test ?>
+                        <?= $vaArea['status'] ?>
                       </span>
+                      <?php
+                      // if ($vaArea['tahap_r'] == "Test Administrasi") {
+
+                      //   if ($vaArea['recruitment'] == 'lolos') {
+                      //     $cLabel = 'success';
+                      //   } else if ($vaArea['recruitment'] == 'tidaklolos') {
+                      //     $cLabel = 'danger';
+                      //   } else  $cLabel = 'info';
+
+                      //   $status_test = $vaArea['recruitment'];
+
+                      // } elseif ($vaArea['tahap_r'] == "Psikotest") {
+
+                      //   if ($vaArea['psiko_test'] == 'lolos') {
+                      //     $cLabel = 'success';
+                      //   } else if ($vaArea['psiko_test'] == 'tidaklolos') {
+                      //     $cLabel = 'danger';
+                      //   } else  $cLabel = 'info';
+
+                      //   $status_test = $vaArea['psiko_test'];
+
+                      // } elseif ($vaArea['tahap_r'] == "Uji Kompetensi") {
+
+                      //   if ($vaArea['uji_kompetensi'] == 'lolos') {
+                      //     $cLabel = 'success';
+                      //   } else if ($vaArea['uji_kompetensi'] == 'tidaklolos') {
+                      //     $cLabel = 'danger';
+                      //   } else  $cLabel = 'info';
+
+                      //   $status_test = $vaArea['uji_kompetensi'];
+
+                      // } elseif ($vaArea['tahap_r'] == "Interview User 1") {
+
+                      //   if ($vaArea['interview_user_1'] == 'lolos') {
+                      //     $cLabel = 'success';
+                      //   } else if ($vaArea['interview_user_1'] == 'tidaklolos') {
+                      //     $cLabel = 'danger';
+                      //   } else  $cLabel = 'info';
+
+                      //   $status_test = $vaArea['interview_user_1'];
+
+                      // } elseif ($vaArea['tahap_r'] == "Interview User 2") {
+
+                      //   if ($vaArea['interview_user_2'] == 'lolos') {
+                      //     $cLabel = 'success';
+                      //   } else if ($vaArea['interview_user_2'] == 'tidaklolos') {
+                      //     $cLabel = 'danger';
+                      //   } else  $cLabel = 'info';
+
+                      //   $status_test = $vaArea['interview_user_2'];
+
+                      // } elseif ($vaArea['tahap_r'] == "Interview HRGA") {
+
+                      //   if ($vaArea['interview_hrga'] == 'lolos') {
+                      //     $cLabel = 'success';
+                      //   } else if ($vaArea['interview_hrga'] == 'tidaklolos') {
+                      //     $cLabel = 'danger';
+                      //   } else  $cLabel = 'info';
+
+                      //   $status_test = $vaArea['interview_hrga'];
+                      // }elseif ($vaArea['tahap_r'] == "Tes Kesehatan") {
+
+                      //   if ($vaArea['tes_kesehatan'] == 'lolos') {
+                      //     $cLabel = 'success';
+                      //   } else if ($vaArea['tes_kesehatan'] == 'tidaklolos') {
+                      //     $cLabel = 'danger';
+                      //   } else  $cLabel = 'info';
+
+                      //   $status_test = $vaArea['tes_kesehatan'];
+                      // }
+
+                      ?>
+                      <!-- <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+  <?= $status_test ?>
+</span> -->
                     </td>
 
                   </tr>
@@ -187,7 +205,7 @@
                 <?php $no = 0;
                 //    var_dump($nilai);
                 foreach ($nilai as $key => $vaArea2) {
-                  
+
                   if ($vaArea2['is_delete'] == 1) {
                   } else {
                 ?>
