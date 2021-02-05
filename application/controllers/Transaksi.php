@@ -581,7 +581,20 @@ class Transaksi extends CI_Controller
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'edit') {
-			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+
+			$dbArea = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+			foreach ($dbArea as $key => $vaArea) {
+				$idP = $vaArea['id_pegawai'];
+			}
+
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
+			foreach ($dbView as $key => $vaView) {
+				$nik = $vaView['nik'];
+				$nama_jabatan = $vaView['nama_jabatan'];
+			}
+			$data['nik_select'] = $nik;
+			$data['nj_select'] = $nama_jabatan;
 		}
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
@@ -597,7 +610,20 @@ class Transaksi extends CI_Controller
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'edit') {
-			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+
+			$dbArea = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+			foreach ($dbArea as $key => $vaArea) {
+				$idP = $vaArea['id_pegawai'];
+			}
+
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
+			foreach ($dbView as $key => $vaView) {
+				$nik = $vaView['nik'];
+				$nama_jabatan = $vaView['nama_jabatan'];
+			}
+			$data['nik_select'] = $nik;
+			$data['nj_select'] = $nama_jabatan;
 		}
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_peringatan_2', $data);
@@ -613,7 +639,20 @@ class Transaksi extends CI_Controller
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
 		if ($Aksi == 'edit') {
-			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'nomor_surat', $Id);
+			$data['field'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+
+			$dbArea = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $Id);
+			foreach ($dbArea as $key => $vaArea) {
+				$idP = $vaArea['id_pegawai'];
+			}
+
+			$dbView = $this->model->ViewWhere('v_data_sp', 'id_pegawai', $idP);
+			foreach ($dbView as $key => $vaView) {
+				$nik = $vaView['nik'];
+				$nama_jabatan = $vaView['nama_jabatan'];
+			}
+			$data['nik_select'] = $nik;
+			$data['nj_select'] = $nama_jabatan;
 		}
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_peringatan_3', $data);

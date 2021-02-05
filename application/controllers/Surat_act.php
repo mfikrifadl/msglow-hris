@@ -232,8 +232,13 @@ class Surat_act extends CI_Controller
                 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
             );
-            // print_r($dataInsert);
-            $this->model->Insert('tb_surat_peringatan', $dataInsert);
+
+            if ($Type == 'Insert') {
+                $this->model->Insert('tb_surat_peringatan', $dataInsert);
+            } elseif ($Type == 'Update') {
+                $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
+            }
+
             redirect(site_url('transaksi/sp1'));
         }
     }
@@ -254,8 +259,13 @@ class Surat_act extends CI_Controller
                 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
             );
-            // print_r($dataInsert);
-            $this->model->Insert('tb_surat_peringatan', $dataInsert);
+
+            if ($Type == 'Insert') {
+                $this->model->Insert('tb_surat_peringatan', $dataInsert);
+            } elseif ($Type == 'Update') {
+                $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
+            }
+
             redirect(site_url('transaksi/sp2'));
         }
     }
@@ -276,15 +286,20 @@ class Surat_act extends CI_Controller
                 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
             );
-            // print_r($dataInsert);
-            $this->model->Insert('tb_surat_peringatan', $dataInsert);
+
+            if ($Type == 'Insert') {
+                $this->model->Insert('tb_surat_peringatan', $dataInsert);
+            } elseif ($Type == 'Update') {
+                $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
+            }
+
             redirect(site_url('transaksi/sp3'));
         }
     }
 
-    public function cetak_kontrak($id='')
+    public function cetak_kontrak($id = '')
     {
-        $data['data'] = $this->db->query('SELECT * from kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai = t2.id_pegawai where t1.id_pegawai='.$id.'')->result_array();;
+        $data['data'] = $this->db->query('SELECT * from kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai = t2.id_pegawai where t1.id_pegawai=' . $id . '')->result_array();;
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
         $html = $this->load->view('admin/transaksi/cetak_kontrak', $data, true);
         $mpdf->WriteHTML($html);
@@ -292,7 +307,7 @@ class Surat_act extends CI_Controller
         redirect(site_url('Transaksi/kontrak'));
     }
 
-    public function cetak_surat_teguran($id='')
+    public function cetak_surat_teguran($id = '')
     {
         $data['data'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $id);
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);

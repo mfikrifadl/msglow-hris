@@ -40,17 +40,24 @@
   ?>
  <?php
   if ($action == "edit") {
+    $cNikPegawai = $nik_select;
+    $cNamaJabatan = $nj_select;
+
     foreach ($field as $column) {
       $cIdSuratPeringatan =   $column['id'];
       $cIdKategoriSurat   =   $column['id_kategori_surat'];
       $dTgl               =   $column['tanggal'];
+      $tgl_mulai_berlaku  =   $column['mulai_berlaku'];
+      $tgl_berlaku_sampai =   $column['berlaku_sampai'];
       $nNomorSurat        =   $column['nomor_surat'];
       $cIdPegawai         =   $column['id_pegawai'];
-      $cOutlet            =   $column['outlet'];
+      // $cNikPegawai     =   $column['nik'];
+      // $cNama           =   $column['nama'];
+      // $cOutlet         =   $column['outlet'];
       $cUraian            =   $column['uraian'];
-      $cKeterangan        =   $column['keterangan'];
+      // $cKeterangan     =   $column['keterangan'];
       $cCreate            =   $column['create'];
-      $cCC                =   $column['cc'];
+      $cCC                =   $column['general_manager'];
       $cIconButton        =   "refresh";
       $cValueButton       =   "Update Data";
     }
@@ -59,11 +66,15 @@
     $cIdSuratPeringatan =   "";
     $cIdKategoriSurat   =   "";
     $dTgl               =   "";
+    $tgl_mulai_berlaku  =   "";
+    $tgl_berlaku_sampai =   "";
     $nNomorSurat        =   $cNomorSuratFix;
     $cIdPegawai         =   "";
-    $cOutlet            =   "";
+    $cNikPegawai        =   "";
+    $cNama              =  "";
+    // $cOutlet         =   "";
     $cUraian            =   "";
-    $cKeterangan        =   "";
+    // $cKeterangan     =   "";
     $cCreate            =   "Venna Rosia Marheta";
     $cCC                =   "";
     $cIconButton    =   "save";
@@ -121,6 +132,10 @@
                    <td align="center">
                      <a class="btn-link" title="Print SP" target="_blank" href="<?= site_url('Surat_act/cetak_sp1/' . $vaPeringatan['id'] . '') ?>">
                        <i class="fa fa-print"></i>
+                     </a>
+                     |
+                     <a class="btn-link" title="Edit SP" href="<?= site_url('transaksi/sp1/edit/' . $vaPeringatan['id'] . '') ?>">
+                       <i class="fa fa-pen"></i>
                      </a>
                    </td>
                  </tr>
@@ -185,7 +200,7 @@
                     $jsArray = "var jason = new Array();\n";
                     foreach ($pegawai as $dbRow) {
                     ?>
-                     <option value="<?= $dbRow['id_pegawai'] ?>">
+                     <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
                        <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
                      </option>';
                    <?php
@@ -197,13 +212,26 @@
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">NIK :</label>
                <div class="col-3">
-                 <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
+                 <?php
+                  if ($action == "edit") { ?>
+                   <input type="text" name="cNik" id="cNik" class="form-control" readonly="true" value="<?= $cNikPegawai ?>">
+
+                 <?php } else { ?>
+                   <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
+                 <?php   } ?>
+
                </div>
              </div>
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">Jabatan :</label>
                <div class="col-3">
-                 <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
+                 <?php if ($action == "edit") { ?>
+                   <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
+
+                 <?php } else { ?>
+                   <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
+                 <?php   } ?>
+
                </div>
              </div>
              <div class="col-12" align="left">
@@ -213,15 +241,29 @@
              </div>
              <div class="form-group">
                <div class="col-12">
-                 <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"><?= $cUraian ?></textarea>
+                 <?php if ($action == "edit") { ?>
+                   <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"><?= $cUraian ?></textarea>
+
+                 <?php } else { ?>
+                   <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"></textarea>
+                 <?php   } ?>
+
                </div>
-               <!-- <textarea class="form-control" name="cUraian" placeholder="Uraian" rows="10"><?php // $cUraian 
-                                                                                                  ?></textarea> -->
+
              </div>
-             <div class="col-12" align="left">
-               <p>
-               <h4>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai"></h4>
-               </p>
+             <div class="col-12 text-left">
+
+               <?php if ($action == "edit") { ?>
+                 <p>
+                 <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku" value="<?= $tgl_mulai_berlaku ?>"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai" value="<?= $tgl_berlaku_sampai ?>"> </h6>
+                 </p>
+
+               <?php } else { ?>
+                 <p>
+                 <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai"> </h6>
+                 </p>
+               <?php   } ?>
+
              </div>
              <div class="col-12" align="left">
                <p>
@@ -238,13 +280,22 @@
              <div class="form-group row">
                <label for="example-text-input" class="col-2 col-form-label">Manager HRD :</label>
                <div class="col-3">
-                 <input type="text" name="cCreate" id="cCreate" class="form-control" value="<?= $cCreate ?>">
+                 <?php if ($action == "edit") { ?>
+                   <input type="text" name="cCreate" id="cCreate" class="form-control" value="<?= $cCreate ?>">
+                 <?php } else { ?>
+                   <input type="text" name="cCreate" id="cCreate" class="form-control">
+                 <?php   } ?>
+
                </div>
              </div>
              <div class="form-group row">
                <label for="example-text-input" class="col-2 col-form-label">General Manager :</label>
                <div class="col-3">
-                 <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control">
+                 <?php if ($action == "edit") { ?>
+                   <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control" value="<?= $cCC ?>">
+                 <?php } else { ?>
+                   <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control">
+                 <?php   } ?>
                </div>
              </div>
              <div class="form-group">

@@ -122,6 +122,10 @@ if ($action == "edit") {
                     <a class="btn-link" title="Print SP" target="_blank" href="<?= site_url('Surat_act/cetak_sp2/' . $vaPeringatan['id'] . '') ?>">
                       <i class="fa fa-print"></i>
                     </a>
+                    |
+                    <a class="btn-link" title="Edit SP" href="<?= site_url('transaksi/sp2/edit/' . $vaPeringatan['id'] . '') ?>">
+                      <i class="fa fa-pen"></i>
+                    </a>
                   </td>
                 </tr>
               <?php } ?>
