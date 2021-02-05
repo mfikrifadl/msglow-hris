@@ -275,14 +275,6 @@ if ($action == "edit") {
                 </tbody>
               </table>
 
-              <div class="row">
-                <div class="col-sm-12">
-                  <a href="<?= site_url('rekap/mengundurkan_diri') ?>" class="btn btn-primary btn-flat" target="_blank">
-                    <i class="fa fa-print"></i> Cetak Excel
-                  </a>
-                </div>
-              </div>
-
             </div>
 
           </div>

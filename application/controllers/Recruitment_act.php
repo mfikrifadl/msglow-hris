@@ -759,7 +759,7 @@ class Recruitment_act extends CI_Controller
 		$cStatus = $this->input->post('cStatus');
 
 		$folder = "";
-
+		// $file_temp = "";
 		if ($cStatus == "pemanggilan" || $cStatus == "tidaklolos") {
 			$folder = "";
 		} else {
@@ -868,6 +868,8 @@ class Recruitment_act extends CI_Controller
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
 		);
+		// echo $file_temp;
+		// die('asds'); 
 		$this->model->Insert("log", $vaLog);
 
 		if ($Type == "Delete") {
@@ -877,7 +879,7 @@ class Recruitment_act extends CI_Controller
 			if ($data_update['tes_kesehatan'] == 'lolos') {
 				$data_update['status'] == 'lolos';
 			}
-			move_uploaded_file($file_temp, "$folder"); //fungsi upload
+			move_uploaded_file($file_temp, $folder); //fungsi upload
 			$this->model->Update('recruitment', 'id_recruitment', $this->input->post('cIdTest'), $data_update);
 			redirect(site_url('recruitment/tes_kesehatan'));
 		}

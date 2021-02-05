@@ -28,7 +28,7 @@ if ($action == "edit") {
             $nNilaiTes      =   $column['nilai_interview_hrga'];
         } else {
         }
-        
+
         $cStatus        =   $column[$controller_name];
         $dTglWawancara  =   $column[$date];
         $cIconButton   =   "refresh";
@@ -36,7 +36,7 @@ if ($action == "edit") {
     }
     $cAction = "Update/" . $cIdTest . "";
 } else {
-    
+
     $cIdTest  =   "";
     $cKodeWawancara  =   "";
     $nNilaiTes     =   "";
@@ -77,40 +77,61 @@ $whois_date = date('d-m-Y H:i:s');
                 </div>
 
                 <!--begin::Form-->
-                <form class="kt-form" method="post" enctype="multipart/form-data" action="<?= site_url('recruitment_act/' . $controller_name . '/' . $cAction . '') ?>">
-                    <div class="kt-portlet__body">
-                        <div class="form-group">
-                            <label>Nama Peserta</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest" required>
-                                <option></option>
+
+                <?php
+                if ($action == "edit") {
+                ?>
+                    <form class="kt-form" method="post" enctype="multipart/form-data" action="<?= site_url('recruitment_act/' . $controller_name . '/' . $cAction . '') ?>">
+                        <div class="kt-portlet__body">
+                            <div class="form-group">
+                                <label>Nama Peserta</label>
                                 <?php
                                 foreach ($row as $key => $value) {
-                                    # code...
+                                    if ($cIdTest == $value['id_recruitment']) {
                                 ?>
-                                    <option value="<?= $value['id_recruitment'] ?>" <?php if ($cIdTest == $value['id_recruitment']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                                        <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?>">
+                                <?php
+                                    } else {
+                                    }
+                                }
+                                ?>
 
-                        <?php
-                        if ($controller_name == "tes_kesehatan") {
-                        } else {
-                        ?>
-                            <div class="form-group">
-                                <label>Nilai <?= $file ?></label>
-                                <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
+                                <!-- <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest" required>
+                                <option></option> -->
+                                <?php
+                                // foreach ($row as $key => $value) {
+                                # code...
+                                ?>
+                                <!-- <option value="<?= $value['id_recruitment'] ?>" <?php if ($cIdTest == $value['id_recruitment']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option> -->
+                                <?php //} 
+                                ?>
+                                <!-- </select> -->
                             </div>
-                        <?php
-                        }
-                        ?>
 
-                        <div class="form-group">
-                            <label>Tanggal Test</label>
-                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>" required>
-                            <input type="hidden" name="whois" value="<?= $whois ?>">
-                            <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
-                            <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
-                        </div>
+                            <?php
+                            if ($controller_name == "tes_kesehatan") {
+                            } else {
+                            ?>
+                                <div class="form-group">
+                                    <label>Nilai <?= $file ?></label>
+                                    <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+                            <div class="form-group">
+                                <label>Tanggal Test</label>
+                                <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>" required>
+                                <input type="hidden" name="whois" value="<?= $whois ?>">
+                                <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
+                                <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
+                            </div>
+
+                        <?php
+                    } else {
+                    }
+                        ?>
 
                         <?php
                         if ($controller_name == "tes_kesehatan") {
@@ -132,33 +153,39 @@ $whois_date = date('d-m-Y H:i:s');
                                             </ol>
                                         </span>
                                     </div>
-                        <?php
+
+                                    <div class="form-group form-group-last">
+                                        <label>Status</label>
+                                        <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
+                                            <option></option>
+                                            <option value="pemanggilan" <?php if ($cStatus_tes == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
+                                            <option value="lolos" <?php if ($cStatus_tes == 'lolos') echo "selected"; ?>>Lolos</option>
+                                            <option value="tidaklolos" <?php if ($cStatus_tes == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
+                                        </select>
+                                    </div>
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <button type="submit" id="button" class="btn btn-primary">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+        <?php
+
+
+
 
                                 } else {
                                 }
                             }
                         }
-                        ?>
+        ?>
 
-                        <div class="form-group form-group-last">
-                            <label>Status</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
-                                <option></option>
-                                <option value="pemanggilan" <?php if ($cStatus_tes == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
-                                <option value="lolos" <?php if ($cStatus_tes == 'lolos') echo "selected"; ?>>Lolos</option>
-                                <option value="tidaklolos" <?php if ($cStatus_tes == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="kt-portlet__foot">
-                        <div class="kt-form__actions">
-                            <button type="submit" id="button" class="btn btn-primary">
-                                <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <!--end::Form-->
+
+
+        <!--end::Form-->
 
             </div>
             <!--end::Portlet-->

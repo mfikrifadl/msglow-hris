@@ -364,7 +364,7 @@ class Recruitment_phl_act extends CI_Controller
         $cStatus = $this->input->post('cStatus');
 
         $folder = "";
-
+        $file_temp = "";
         if ($cStatus == "pemanggilan" || $cStatus == "tidaklolos") {
             $folder = "";
         } else {
@@ -462,7 +462,6 @@ class Recruitment_phl_act extends CI_Controller
                 'status_email_tidaklolos'    => 'Belum Kirim Email',
             );
         }
-
         $seralizedArray = serialize($data);
         $vaLog = array(
             'tgl' => $this->Date2String($this->DateStamp()),
@@ -481,7 +480,7 @@ class Recruitment_phl_act extends CI_Controller
             if ($data_update['tes_kesehatan_phl'] == 'lolos') {
                 $data_update['status'] == 'lolos';
             }
-            move_uploaded_file($file_temp, "$folder"); //fungsi upload
+            move_uploaded_file($file_temp, $folder); //fungsi upload
             $this->model->Update('recruitment_phl', 'id_recruitment_phl', $this->input->post('cIdTest'), $data_update);
             redirect(site_url('recruitment_phl/tes_kesehatan_phl'));
         }
