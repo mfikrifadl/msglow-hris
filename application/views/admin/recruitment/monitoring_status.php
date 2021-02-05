@@ -210,7 +210,7 @@
                 //    var_dump($nilai);
                 foreach ($nilai as $key => $vaArea2) {
 
-                  if ($ ['is_delete'] == 1) {
+                  if ($vaArea2 ['is_delete'] == 1) {
                   } else {
                 ?>
                     <tr>
