@@ -80,9 +80,9 @@
                                                 $cLabel = 'success';
                                             } else if ($vaArea['status'] == 'on review') {
                                                 $cLabel = 'warning';
-                                            } elseif($vaArea['status'] == 'tidaklolos'){
+                                            } elseif ($vaArea['status'] == 'tidaklolos') {
                                                 $cLabel = 'danger';
-                                            }else  $cLabel = 'info';
+                                            } else  $cLabel = 'info';
 
                                             $status_test = $vaArea['status'];
                                             ?>
@@ -199,22 +199,24 @@
                                               </td>
                                               <td>
                                                   <?php
-                                                    if ($vaArea2['status'] == 'lolos') {
+                                                    if ($vaArea2['status'] == 'Menjadi Pegawai') {
                                                         $cLabel = 'success';
                                                     } else if ($vaArea2['status'] == 'tidaklolos') {
                                                         $cLabel = 'danger';
-                                                    } else {
-                                                        $cLabel = 'info';
-                                                    }
+                                                    } else if ($vaArea2['status'] == 'on review') {
+                                                        $cLabel = 'warning';
+                                                    } else  $cLabel = 'info';
                                                     ?>
                                                   <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
                                                       <?= $vaArea['tahap_r'] ?>
                                                   </span>
                                               </td>
                                               <td><?php
-                                                    if ($vaArea['status'] == 'Menjadi Pegawai') {
+                                                    if ($vaArea2['status'] == 'Menjadi Pegawai') {
                                                         $cLabel = 'success';
-                                                    } else if ($vaArea['status'] == 'on review') {
+                                                    } else if ($vaArea2['status'] == 'tidaklolos') {
+                                                        $cLabel = 'danger';
+                                                    } else if ($vaArea2['status'] == 'on review') {
                                                         $cLabel = 'warning';
                                                     } else  $cLabel = 'info';
                                                     ?>

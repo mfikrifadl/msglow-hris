@@ -57,10 +57,12 @@
                     <td>
 
                       <?php
-                      if ($vaArea['status'] == 'lolos') {
+                       if ($vaArea2['status'] == 'Menjadi Pegawai') {
                         $cLabel = 'success';
-                      } else if ($vaArea['status'] == 'tidaklolos') {
+                      } else if ($vaArea2['status'] == 'tidaklolos') {
                         $cLabel = 'danger';
+                      } else if ($vaArea2['status'] == 'on review') {
+                        $cLabel = 'warning';
                       } else  $cLabel = 'info';
                       ?>
                       <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
@@ -75,9 +77,11 @@
                       $status_test = "";
                       $cLabel = "";
 
-                      if ($vaArea['status'] == 'Menjadi Pegawai') {
+                      if ($vaArea2['status'] == 'Menjadi Pegawai') {
                         $cLabel = 'success';
-                      } else if ($vaArea['status'] == 'on review') {
+                      } else if ($vaArea2['status'] == 'tidaklolos') {
+                        $cLabel = 'danger';
+                      } else if ($vaArea2['status'] == 'on review') {
                         $cLabel = 'warning';
                       } else  $cLabel = 'info';
 
