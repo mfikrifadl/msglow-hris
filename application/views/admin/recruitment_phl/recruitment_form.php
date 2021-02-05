@@ -55,7 +55,7 @@ $whois_date = date('d-m-Y H:i:s');
         <div class="col-4">
             <!--begin::Portlet-->
             <?php
-            if($action == "edit"){
+            if ($action == "edit") {
             ?>
 
                 <div class="kt-portlet">
@@ -74,21 +74,21 @@ $whois_date = date('d-m-Y H:i:s');
                                 <label>Nama Peserta</label>
                                 <!-- <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest" required>
                                     <option></option> -->
-                                    <?php
-                                    foreach ($row as $key => $value) {
-                                        if ($cIdTest == $value['id_recruitment_phl']){
-                                        ?>
-                                            <input type="text" readonly="true" class="form-control" value="<?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?>" required>
-                                            <input type="hidden" name="cIdTest" value="<?= $value['id_recruitment_phl'] ?>">
-                                        <?php
-                                        }else{
-                                        
-                                        }
+                                <?php
+                                foreach ($row as $key => $value) {
+                                    if ($cIdTest == $value['id_recruitment_phl']) {
+                                ?>
+                                        <input type="text" readonly="true" class="form-control" value="<?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?>" required>
+                                        <input type="hidden" name="cIdTest" value="<?= $value['id_recruitment_phl'] ?>">
+                                <?php
+                                    } else {
                                     }
-                                    ?>
-                                    
-                                        <!-- <option value="<?= $value['id_recruitment_phl'] ?>" <?php if ($cIdTest == $value['id_recruitment_phl']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option> -->
-                                    <?php //} ?>
+                                }
+                                ?>
+
+                                <!-- <option value="<?= $value['id_recruitment_phl'] ?>" <?php if ($cIdTest == $value['id_recruitment_phl']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option> -->
+                                <?php //} 
+                                ?>
                                 <!-- </select> -->
                             </div>
                             <?php
@@ -163,11 +163,10 @@ $whois_date = date('d-m-Y H:i:s');
                 <!--end::Portlet-->
 
             <?php
-            }else{
-
+            } else {
             }
             ?>
-            
+
         </div>
 
         <div class="col-8">
