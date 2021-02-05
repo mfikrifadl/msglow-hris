@@ -78,7 +78,9 @@
                                                 $cLabel = 'success';
                                             } else if ($vaArea['status'] == 'on review') {
                                                 $cLabel = 'warning';
-                                            } else  $cLabel = 'info';
+                                            } elseif($vaArea['status'] == 'tidaklolos'){
+                                                $cLabel = 'danger';
+                                            }else  $cLabel = 'info';
 
                                             $status_test = $vaArea['status'];
                                             ?>
