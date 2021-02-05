@@ -54,100 +54,120 @@ $whois_date = date('d-m-Y H:i:s');
     <div class="row">
         <div class="col-4">
             <!--begin::Portlet-->
-            <div class="kt-portlet">
-                <div class="kt-portlet__head">
-                    <div class="kt-portlet__head-label">
-                        <h3 class="kt-portlet__head-title">
-                            Input Data <?= $file ?>
-                        </h3>
+            <?php
+            if($action == "edit"){
+            ?>
+
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                Input Data <?= $file ?>
+                            </h3>
+                        </div>
                     </div>
-                </div>
 
-                <!--begin::Form-->
-                <form class="kt-form" method="post" enctype="multipart/form-data" action="<?= site_url('recruitment_phl_act/' . $controller_name . '/' . $cAction . '') ?>">
-                    <div class="kt-portlet__body">
-                        <div class="form-group">
-                            <label>Nama Peserta</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest" required>
-                                <option></option>
-                                <?php
-                                foreach ($row as $key => $value) {
-                                    # code...
-                                ?>
-                                    <option value="<?= $value['id_recruitment_phl'] ?>" <?php if ($cIdTest == $value['id_recruitment_phl']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <?php
-                        if ($controller_name == "tes_kesehatan_phl") {
-                        } else {
-                        ?>
+                    <!--begin::Form-->
+                    <form class="kt-form" method="post" enctype="multipart/form-data" action="<?= site_url('recruitment_phl_act/' . $controller_name . '/' . $cAction . '') ?>">
+                        <div class="kt-portlet__body">
                             <div class="form-group">
-                                <label>Nilai <?= $file ?></label>
-                                <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
-
+                                <label>Nama Peserta</label>
+                                <!-- <select class="form-control kt-selectpicker" data-live-search="true" name="cIdTest" required>
+                                    <option></option> -->
+                                    <?php
+                                    foreach ($row as $key => $value) {
+                                        if ($cIdTest == $value['id_recruitment_phl']){
+                                        ?>
+                                            <input type="text" readonly="true" class="form-control" value="<?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?>" required>
+                                            <input type="hidden" name="cIdTest" value="<?= $value['id_recruitment_phl'] ?>">
+                                        <?php
+                                        }else{
+                                        
+                                        }
+                                    }
+                                    ?>
+                                    
+                                        <!-- <option value="<?= $value['id_recruitment_phl'] ?>" <?php if ($cIdTest == $value['id_recruitment_phl']) echo "selected"; ?>><?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?></option> -->
+                                    <?php //} ?>
+                                <!-- </select> -->
                             </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            if ($controller_name == "tes_kesehatan_phl") {
+                            } else {
+                            ?>
+                                <div class="form-group">
+                                    <label>Nilai <?= $file ?></label>
+                                    <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $nNilaiTes ?>">
 
-                        <div class="form-group">
-                            <label>Tanggal Test</label>
-                            <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>" required>
-                            <input type="hidden" name="whois" value="<?= $whois ?>">
-                            <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
-                            <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
-                        </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
 
-                        <?php
-                        if ($controller_name == "tes_kesehatan_phl") {
-                            foreach ($hasil_tes_kesehatan as $key => $value) {
+                            <div class="form-group">
+                                <label>Tanggal Test</label>
+                                <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $dTglWawancara ?>" required>
+                                <input type="hidden" name="whois" value="<?= $whois ?>">
+                                <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
+                                <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
+                            </div>
 
-                                if ($value['hasil_tes_kesehatan_phl'] == null && $value['tes_kesehatan_phl'] == 'pemanggilan') {
+                            <?php
+                            if ($controller_name == "tes_kesehatan_phl") {
+                                foreach ($hasil_tes_kesehatan as $key => $value) {
 
-                        ?>
-                                    <div class="form-group">
+                                    if ($value['hasil_tes_kesehatan_phl'] == null && $value['tes_kesehatan_phl'] == 'pemanggilan') {
 
-                                        <label> Upload Hasil Tes Kesehatan : </label>
-                                        <b><span id="file_error" style="color: red;"></span></b>
-                                        <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
-                                        <div id="preview"></div>
-                                        <span class="form-text text-muted">
-                                            <ol>
-                                                <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
-                                                <li>Max Size 1MB</li>
-                                            </ol>
-                                        </span>
-                                    </div>
-                        <?php
+                            ?>
+                                        <div class="form-group">
 
-                                } else {
+                                            <label> Upload Hasil Tes Kesehatan : </label>
+                                            <b><span id="file_error" style="color: red;"></span></b>
+                                            <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
+                                            <div id="preview"></div>
+                                            <span class="form-text text-muted">
+                                                <ol>
+                                                    <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
+                                                    <li>Max Size 1MB</li>
+                                                </ol>
+                                            </span>
+                                        </div>
+                            <?php
+
+                                    } else {
+                                    }
                                 }
                             }
-                        }
-                        ?>
-                        <div class="form-group form-group-last">
-                            <label>Status</label>
-                            <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
-                                <option></option>
-                                <option value="pemanggilan" <?php if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
-                                <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
-                                <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
-                            </select>
+                            ?>
+                            <div class="form-group form-group-last">
+                                <label>Status</label>
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
+                                    <option></option>
+                                    <option value="pemanggilan" <?php if ($cStatus == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
+                                    <option value="lolos" <?php if ($cStatus == 'lolos') echo "selected"; ?>>Lolos</option>
+                                    <option value="tidaklolos" <?php if ($cStatus == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="kt-portlet__foot">
-                        <div class="kt-form__actions">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                            </button>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <!--end::Form-->
+                    </form>
+                    <!--end::Form-->
 
-            </div>
-            <!--end::Portlet-->
+                </div>
+                <!--end::Portlet-->
+
+            <?php
+            }else{
+
+            }
+            ?>
+            
         </div>
 
         <div class="col-8">

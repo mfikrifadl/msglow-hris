@@ -759,7 +759,7 @@ class Recruitment_act extends CI_Controller
 		$cStatus = $this->input->post('cStatus');
 
 		$folder = "";
-		// $file_temp = "";
+		$file_temp = "";
 		if ($cStatus == "pemanggilan" || $cStatus == "tidaklolos") {
 			$folder = "";
 		} else {
@@ -868,8 +868,7 @@ class Recruitment_act extends CI_Controller
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
 		);
-		// echo $file_temp;
-		// die('asds'); 
+		
 		$this->model->Insert("log", $vaLog);
 
 		if ($Type == "Delete") {

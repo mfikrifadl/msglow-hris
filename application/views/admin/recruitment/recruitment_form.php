@@ -67,29 +67,32 @@ $whois_date = date('d-m-Y H:i:s');
     <div class="row">
         <div class="col-4">
             <!--begin::Portlet-->
-            <div class="kt-portlet">
-                <div class="kt-portlet__head">
-                    <div class="kt-portlet__head-label">
-                        <h3 class="kt-portlet__head-title">
-                            Input Data <?= $file ?>
-                        </h3>
+
+            <?php
+            if ($action == "edit") {
+            ?>
+
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                Input Data <?= $file ?>
+                            </h3>
+                        </div>
                     </div>
-                </div>
 
-                <!--begin::Form-->
-
-                <?php
-                if ($action == "edit") {
-                ?>
+                    <!--begin::Form-->
                     <form class="kt-form" method="post" enctype="multipart/form-data" action="<?= site_url('recruitment_act/' . $controller_name . '/' . $cAction . '') ?>">
                         <div class="kt-portlet__body">
+
                             <div class="form-group">
                                 <label>Nama Peserta</label>
                                 <?php
                                 foreach ($row as $key => $value) {
                                     if ($cIdTest == $value['id_recruitment']) {
                                 ?>
-                                        <input type="text" name="nNilaiTes" class="form-control" placeholder="Nilai Tes" value="<?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?>">
+                                        <input type="text" class="form-control" value="<?= $value['kode_wawancara'] ?> - <?= $value['nama'] ?>">
+                                        <input type="hidden" name="cIdTest" value="<?= $value['id_recruitment'] ?>">
                                 <?php
                                     } else {
                                     }
@@ -128,41 +131,43 @@ $whois_date = date('d-m-Y H:i:s');
                                 <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
                             </div>
 
-                        <?php
-                    } else {
-                    }
-                        ?>
+                            <?php
+                            if ($controller_name == "tes_kesehatan") {
+                                foreach ($hasil_tes_kesehatan as $key => $value) {
 
-                        <?php
-                        if ($controller_name == "tes_kesehatan") {
-                            foreach ($hasil_tes_kesehatan as $key => $value) {
+                                    if ($value['hasil_tes_kesehatan'] == null && $value['tes_kesehatan'] == 'pemanggilan') {
 
-                                if ($value['hasil_tes_kesehatan'] == null && $value['tes_kesehatan'] == 'pemanggilan') {
+                            ?>
+                                        <div class="form-group">
 
-                        ?>
-                                    <div class="form-group">
+                                            <label> Upload Hasil Tes Kesehatan : </label>
+                                            <b><span id="file_error" style="color: red;"></span></b>
+                                            <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
+                                            <div id="preview"></div>
+                                            <span class="form-text text-muted">
+                                                <ol>
+                                                    <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
+                                                    <li>Max Size 1MB</li>
+                                                </ol>
+                                            </span>
+                                        </div>
+                            <?php
 
-                                        <label> Upload Hasil Tes Kesehatan : </label>
-                                        <b><span id="file_error" style="color: red;"></span></b>
-                                        <input type="file" class="form-control btn btn-label-brand btn-bold btn-sm" id="file" name="cTesKes" onchange="return validasiEkstensi()" required />
-                                        <div id="preview"></div>
-                                        <span class="form-text text-muted">
-                                            <ol>
-                                                <li>Allowed File - <b>images(jpeg,jpg,png).</b></li>
-                                                <li>Max Size 1MB</li>
-                                            </ol>
-                                        </span>
-                                    </div>
+                                    } else {
+                                    }
+                                }
+                            }
+                            ?>
 
-                                    <div class="form-group form-group-last">
-                                        <label>Status</label>
-                                        <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
-                                            <option></option>
-                                            <option value="pemanggilan" <?php if ($cStatus_tes == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
-                                            <option value="lolos" <?php if ($cStatus_tes == 'lolos') echo "selected"; ?>>Lolos</option>
-                                            <option value="tidaklolos" <?php if ($cStatus_tes == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
-                                        </select>
-                                    </div>
+                            <div class="form-group form-group-last">
+                                <label>Status</label>
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cStatus" required>
+                                    <option></option>
+                                    <option value="pemanggilan" <?php if ($cStatus_tes == 'pemanggilan') echo "selected"; ?>>Pemanggilan</option>
+                                    <option value="lolos" <?php if ($cStatus_tes == 'lolos') echo "selected"; ?>>Lolos</option>
+                                    <option value="tidaklolos" <?php if ($cStatus_tes == 'tidaklolos') echo "selected"; ?>>Tidak Lolos</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="kt-portlet__foot">
                             <div class="kt-form__actions">
@@ -172,23 +177,16 @@ $whois_date = date('d-m-Y H:i:s');
                             </div>
                         </div>
                     </form>
-        <?php
+                    <!--end::Form-->
 
+                </div>
+                <!--end::Portlet-->
 
+            <?php
+            } else {
+            }
+            ?>
 
-
-                                } else {
-                                }
-                            }
-                        }
-        ?>
-
-
-
-        <!--end::Form-->
-
-            </div>
-            <!--end::Portlet-->
         </div>
 
         <div class="col-8">
