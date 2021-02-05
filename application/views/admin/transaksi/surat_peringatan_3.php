@@ -169,11 +169,12 @@ if ($action == "edit") {
               <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan III</label>
             </div>
             <div style="text-align: center;">
-              <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>
-              <?php if ($action != 'edit') { ?>
-                Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
-                <div style="justify-content: center;display: flex;"><input type="text" name="nNomorSurat" class="form-control" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>"></div>
-              <?php } ?>
+              <h4 style="text-decoration: underline;">SURAT TEGURAN</h4>
+              Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
+              <div style="justify-content: center;display: flex;">
+                <input type="text" name="nNomorSurat" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
+              </div>
+
             </div>
             <div class="col-12" align="left">
               <p>
@@ -189,7 +190,7 @@ if ($action == "edit") {
                   $jsArray = "var jason = new Array();\n";
                   foreach ($pegawai as $dbRow) {
                   ?>
-                    <option value="<?= $dbRow['id_pegawai'] ?>">
+                    <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
                       <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
                     </option>';
                   <?php
@@ -201,13 +202,26 @@ if ($action == "edit") {
             <div class="form-group row">
               <label for="example-text-input" class="col-1 col-form-label">NIK :</label>
               <div class="col-3">
-                <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
+                <?php
+                if ($action == "edit") { ?>
+                  <input type="text" name="cNik" id="cNik" class="form-control" readonly="true" value="<?= $cNikPegawai ?>">
+
+                <?php } else { ?>
+                  <input type="text" name="cNik" id="cNik" class="form-control" readonly="true">
+                <?php   } ?>
+
               </div>
             </div>
             <div class="form-group row">
               <label for="example-text-input" class="col-1 col-form-label">Jabatan :</label>
               <div class="col-3">
-                <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
+                <?php if ($action == "edit") { ?>
+                  <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
+
+                <?php } else { ?>
+                  <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true">
+                <?php   } ?>
+
               </div>
             </div>
             <div class="col-12" align="left">
@@ -217,15 +231,29 @@ if ($action == "edit") {
             </div>
             <div class="form-group">
               <div class="col-12">
-                <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"><?= $cUraian ?></textarea>
+                <?php if ($action == "edit") { ?>
+                  <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"><?= $cUraian ?></textarea>
+
+                <?php } else { ?>
+                  <textarea name="cUraian" class="summernote form-control" id="kt_summernote_1"></textarea>
+                <?php   } ?>
+
               </div>
-              <!-- <textarea class="form-control" name="cUraian" placeholder="Uraian" rows="10"><?php // $cUraian 
-                                                                                                ?></textarea> -->
+
             </div>
-            <div class="col-12" align="left">
-              <p>
-              <h4>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai"></h4>
-              </p>
+            <div class="col-12 text-left">
+
+              <?php if ($action == "edit") { ?>
+                <p>
+                <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku" value="<?= $tgl_mulai_berlaku ?>"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai" value="<?= $tgl_berlaku_sampai ?>"> </h6>
+                </p>
+
+              <?php } else { ?>
+                <p>
+                <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai"> </h6>
+                </p>
+              <?php   } ?>
+
             </div>
             <div class="col-12" align="left">
               <p>
@@ -242,13 +270,22 @@ if ($action == "edit") {
             <div class="form-group row">
               <label for="example-text-input" class="col-2 col-form-label">Manager HRD :</label>
               <div class="col-3">
-                <input type="text" name="cCreate" id="cCreate" class="form-control" value="<?= $cCreate ?>">
+                <?php if ($action == "edit") { ?>
+                  <input type="text" name="cCreate" id="cCreate" class="form-control" value="<?= $cCreate ?>">
+                <?php } else { ?>
+                  <input type="text" name="cCreate" id="cCreate" class="form-control">
+                <?php   } ?>
+
               </div>
             </div>
             <div class="form-group row">
               <label for="example-text-input" class="col-2 col-form-label">General Manager :</label>
               <div class="col-3">
-                <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control">
+                <?php if ($action == "edit") { ?>
+                  <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control" value="<?= $cCC ?>">
+                <?php } else { ?>
+                  <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control">
+                <?php   } ?>
               </div>
             </div>
             <div class="form-group">

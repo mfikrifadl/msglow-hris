@@ -180,11 +180,12 @@
                <label for="example-text-input" class="col-3 col-form-label">Surat Peringatan I</label>
              </div>
              <div style="text-align: center;">
-               <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>
-               <?php if ($action != 'edit') { ?>
-                 Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
-                 <div style="justify-content: center;display: flex;"><input type="text" name="nNomorSurat" class="form-control" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>"></div>
-               <?php } ?>
+               <h4 style="text-decoration: underline;">SURAT TEGURAN</h4>
+               Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
+               <div style="justify-content: center;display: flex;">
+                 <input type="text" name="nNomorSurat" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
+               </div>
+
              </div>
              <div class="col-12" align="left">
                <p>
