@@ -64,7 +64,7 @@
             <td valign='top' colspan=8 style="text-align: justify;">Surat Peringatan ini belaku mulai tanggal <?= $data[0]['mulai_berlaku'] ?> dan berakhir pada tanggal <?= $data[0]['berlaku_sampai'] ?>( 3 bulan masa review.)</td>
         </tr>
         <tr>
-            <td valign='top' colspan=8 style="text-align: justify;">Selama masih dalam status Peringatan I, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.</td>
+            <td valign='top' colspan=8 style="text-align: justify;">Selama masih dalam status <?= $data[0]['Keterangan'] ?>, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.</td>
         </tr>
         <tr>
             <td valign='top' colspan=8 style="text-align: justify;">Harapan kami agar yang bersangkutan untuk lebih mentaati peraturan dan lebih disiplin serta tanggung jawab sebagai karyawan yang baik. Semoga dengan diterbitkan surat ini ybs bisa menerima hal ini.</td>
