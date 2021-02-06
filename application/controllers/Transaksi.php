@@ -574,7 +574,7 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	public function sp1($Aksi = "", $Id = "")
+	public function sp($Aksi = "", $Id = "")
 	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';

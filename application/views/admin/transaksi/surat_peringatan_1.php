@@ -49,6 +49,7 @@
       $dTgl               =   $column['tanggal'];
       $tgl_mulai_berlaku  =   $column['mulai_berlaku'];
       $tgl_berlaku_sampai =   $column['berlaku_sampai'];
+      $jenis_sp           =   $column['Keterangan'];
       $nNomorSurat        =   $column['nomor_surat'];
       $cIdPegawai         =   $column['id_pegawai'];
       // $cNikPegawai     =   $column['nik'];
@@ -80,6 +81,13 @@
     $cIconButton    =   "save";
     $cValueButton   =   "Save Data";
     $cAction        =   "Insert";
+  }
+  if($cIdKategoriSurat==3){
+    $id_kategori_sp = 'SP-I';
+  } elseif ($cIdKategoriSurat==4){
+    $id_kategori_sp = 'SP-II';
+  } elseif ($cIdKategoriSurat==5){
+    $id_kategori_sp = 'SP-III';
   }
 
   ?>
@@ -134,7 +142,7 @@
                        <i class="fa fa-print"></i>
                      </a>
                      |
-                     <a class="btn-link" title="Edit SP" href="<?= site_url('transaksi/sp1/edit/' . $vaPeringatan['id'] . '') ?>">
+                     <a class="btn-link" title="Edit SP" href="<?= site_url('transaksi/sp/edit/' . $vaPeringatan['id'] . '') ?>">
                        <i class="fa fa-pen"></i>
                      </a>
                    </td>
@@ -179,6 +187,9 @@
                <label for="example-text-input" class="col-1 col-form-label">Perihal: </label>
                <div class="col-3">
                  <select name="jenis_sp" class="form-control" onchange="getnomorsurat(this.value)">
+                 <?php if ($action == "edit") { ?>
+                   <option value="<?= $id_kategori_sp ?>"><?= $jenis_sp ?></option>
+                   <?php } ?>
                    <option value="SP-I">Surat Peringatan I</option>
                    <option value="SP-II">Surat Peringatan II</option>
                    <option value="SP-III">Surat Peringatan III</option>
@@ -302,7 +313,7 @@
                    <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control" value="<?= $cCC ?>">
                  <?php } else { ?>
                    <input type="text" name="cGeneral_manager" id="cGeneral_manager" class="form-control">
-                 <?php   } ?>
+                 <?php } ?>
                </div>
              </div>
              <div class="form-group">
@@ -323,11 +334,11 @@
  <script type="text/javascript">
    function getnomorsurat(jenissp) {
      if (jenissp == 'SP-I') {
-      document.getElementById('nomorsrt').value = 'No.####/SP-I/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
+       document.getElementById('nomorsrt').value = 'No.####/SP-I/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
      } else if (jenissp == 'SP-II') {
-      document.getElementById('nomorsrt').value = 'No.####/SP-II/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
+       document.getElementById('nomorsrt').value = 'No.####/SP-II/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
      } else if (jenissp == 'SP-III') {
-      document.getElementById('nomorsrt').value = 'No.####/SP-III/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
+       document.getElementById('nomorsrt').value = 'No.####/SP-III/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
      }
    }
 

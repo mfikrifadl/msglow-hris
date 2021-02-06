@@ -226,7 +226,7 @@ class Surat_act extends CI_Controller
             } else if ($this->input->post('jenis_sp')=='SP-III'){
                 $jenis = 5;
             }
-            
+
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
                 'id_kategori_surat' =>  $jenis,
@@ -246,7 +246,7 @@ class Surat_act extends CI_Controller
                 $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
             }
 
-            redirect(site_url('transaksi/sp1'));
+            redirect(site_url('transaksi/sp'));
         }
     }
 
