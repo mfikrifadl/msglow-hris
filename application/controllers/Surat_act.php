@@ -20,7 +20,7 @@ class Surat_act extends CI_Controller
         $this->load->helper('download');
     }
 
-    public  function Date2String($dTgl)
+    public function Date2String($dTgl)
     {
         //return 2012-11-22
         list($cDate, $cMount, $cYear)    = explode("-", $dTgl);
@@ -219,10 +219,17 @@ class Surat_act extends CI_Controller
     {
 
         if ($Type == 'Insert' or $Type == 'Update') {
-
+            if ($this->input->post('jenis_sp')=='SP-I'){
+                $jenis = 3;
+            } else if ($this->input->post('jenis_sp')=='SP-II'){
+                $jenis = 4;
+            } else if ($this->input->post('jenis_sp')=='SP-III'){
+                $jenis = 5;
+            }
+            
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
-                'id_kategori_surat' =>  3,
+                'id_kategori_surat' =>  $jenis,
                 'nomor_surat'       =>  $this->input->post('nNomorSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'uraian'            =>  $this->input->post('cUraian'),

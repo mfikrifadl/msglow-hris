@@ -33,10 +33,10 @@
   if ($Nolast->num_rows() > 0) {
     $NoSuratTerakhir = $cLastNoSurat;
   } else {
-    $NoSuratTerakhir = "No.0001/SP-I/HRD/" . $cRomawai . "/" . date("Y") . "";
+    $NoSuratTerakhir = "No.0001/SP-I/HRD/" . $cRomawai . "/" . date("Y");
   }
 
-  $cNomorSuratFix = "No." . "####" . "/SP-I/HRD/" . $cRomawai . "/" . date("Y") . " ";
+  $cNomorSuratFix = "No." . "####" . "/SP-I/HRD/" . $cRomawai . "/" . date("Y");
   ?>
  <?php
   if ($action == "edit") {
@@ -102,7 +102,7 @@
          <div class="kt-portlet__head">
            <div class="kt-portlet__head-label">
              <h3 class="kt-portlet__head-title">
-               Data Table Surat Peringatan Pegawai (SP1)
+               Data Table Surat Peringatan Pegawai
              </h3>
            </div>
          </div>
@@ -159,7 +159,7 @@
            <div class="kt-portlet__head">
              <div class="kt-portlet__head-label">
                <h3 class="kt-portlet__head-title">
-                 Form Surat Peringatan I
+                 Form Surat Peringatan
                </h3>
              </div>
            </div>
@@ -172,24 +172,24 @@
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">Tertanggal: </label>
                <div class="col-3">
-                 <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
+                 <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>" required>
                </div>
              </div>
              <div class="form-group row">
                <label for="example-text-input" class="col-1 col-form-label">Perihal: </label>
                <div class="col-3">
-                 <select name="jenis_sp" class="form-control" onchange="jenissurat(this.value)">
-                   <option value="sp1">Surat Peringatan I</option>
-                   <option value="sp2">Surat Peringatan II</option>
-                   <option value="sp3">Surat Peringatan III</option>
+                 <select name="jenis_sp" class="form-control" onchange="getnomorsurat(this.value)">
+                   <option value="SP-I">Surat Peringatan I</option>
+                   <option value="SP-II">Surat Peringatan II</option>
+                   <option value="SP-III">Surat Peringatan III</option>
                  </select>
                </div>
              </div>
              <div style="text-align: center;">
-               <h4 style="text-decoration: underline;">SURAT TEGURAN</h4>
+               <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>
                Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
                <div style="justify-content: center;display: flex;">
-                 <input type="text" name="nNomorSurat" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
+                 <input type="text" name="nNomorSurat" class="form-control text-center" style="width:30%" id="nomorsrt" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
                </div>
 
              </div>
@@ -262,12 +262,12 @@
 
                <?php if ($action == "edit") { ?>
                  <p>
-                 <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku" value="<?= $tgl_mulai_berlaku ?>"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai" value="<?= $tgl_berlaku_sampai ?>"> </h6>
+                 <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku" oninput="tigabulan(this.value)" value="<?= $tgl_mulai_berlaku ?>"> dan berakhir pada tanggal <input type="date" id="cBerlaku_sampai" name="cBerlaku_sampai" value="<?= $tgl_berlaku_sampai ?>"> </h6>
                  </p>
 
                <?php } else { ?>
                  <p>
-                 <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku"> dan berakhir pada tanggal <input type="date" name="cBerlaku_sampai"> </h6>
+                 <h6>Surat Peringatan ini belaku mulai tanggal <input type="date" name="cMulai_berlaku" onchange="tigabulan(this.value)"> dan berakhir pada tanggal <input type="date" id="cBerlaku_sampai" name="cBerlaku_sampai"> </h6>
                  </p>
                <?php   } ?>
 
@@ -321,6 +321,16 @@
 
 
  <script type="text/javascript">
+   function getnomorsurat(jenissp) {
+     if (jenissp == 'SP-I') {
+      document.getElementById('nomorsrt').value = 'No.####/SP-I/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
+     } else if (jenissp == 'SP-II') {
+      document.getElementById('nomorsrt').value = 'No.####/SP-II/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
+     } else if (jenissp == 'SP-III') {
+      document.getElementById('nomorsrt').value = 'No.####/SP-III/HRD/<?= $cRomawai ?>/<?= date("Y") ?>';
+     }
+   }
+
    function cek_pegawai(data) {
      // alert(data);
      var xmlhttp = new XMLHttpRequest();
@@ -338,16 +348,5 @@
      };
      xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
      xmlhttp.send();
-   }
-
-   function jenissurat(surat) {
-     x = document.getElementById('jenis_srt');
-     if (surat == 'sp1') {
-       x = 'SP-I';
-     } else if (surat == 'sp2') {
-       x = 'SP-II';
-     } else {
-       x = 'SP-III';
-     }
    }
  </script>

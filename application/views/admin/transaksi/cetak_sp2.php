@@ -8,30 +8,96 @@
 </head>
 
 <body>
-    <img src="<?= base_url() ?>upload/logo-surat.png" style="width:12%"></b>
-    <p style="text-align: center;"><strong>HUMAN RESOURCES DEVELOPMENT</strong></p>
-    <hr />
-    <p>Tertanggal&nbsp; &nbsp; &nbsp; &nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?= $data[0]['tanggal'] ?></p>
-    <p>Perihal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Surat Peringatan II</p>
-    <p style="text-align: center;"><strong><u>SURAT PERINGATAN</u></strong></p>
-    <p style="text-align: center;"><?= $data[0]['nomor_surat'] ?></p>
-    <p>Dalam rangka menegakkan kedisiplinan dan tanggung jawab serta menjalankan peraturan perusahaan maka atas nama perusahaan, dengan ini menerangkan bahwa:</p>
-    <p>Nama&nbsp; &nbsp; &nbsp; &nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?= $data[0]['nama'] ?></p>
-    <p>Jabatan&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?= $data[0]['jabatan'] ?></p>
-    <p>Maka dengan ini, Diberikan <strong><u>Surat Peringatan II</u></strong> terkait dengan tindak pelanggaran yang saudara lakukan, yakni</p>
-    <ol>
-        <?= $data[0]['uraian'] ?>
-    </ol>
-    <p>Surat Peringatan ini belaku mulai<span style="color: #ff0000;"> tanggal <?= $data[0]['mulai_berlaku'] ?> dan berakhir pada tanggal <?= $data[0]['berlaku_sampai'] ?></span> ( <?= substr($data[0]['berlaku_sampai'], 5, 2) - substr($data[0]['mulai_berlaku'], 5, 2) ?> bulan masa review ).</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Selama masih dalam status Peringatan II, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Harapan kami agar yang bersangkutan untuk lebih mentaati peraturan dan lebih disiplin serta tanggung jawab sebagai karyawan yang baik. Semoga dengan diterbitkan surat ini ybs bisa menerima hal ini.</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Demikian <strong>Surat Peringatan II</strong> ini dibuat agar dapat ditaati sebagaimana mestinya. Diharapkan yang bersangkutan berkenan merubah sikap dan mampu menunjukkan sikap profesinoalisme dalam bekerja.</p>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Atas perhatian dan kerjasamanya kami selaku manajemen mengucapkan terima kasih. Dan bisa sebagai koreksi dan intropeksi diri selanjutnya.</p>
-    <p>&nbsp;&nbsp;Penerima&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manager &nbsp;Produk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manager HRD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; General Manager</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<?= $data[0]['nama'] ?>)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(Alissa Kurnia)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (Venna Rosia Marheta)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(Sheila Marthalia)</p>
+    <img src="<?= base_url() ?>upload/logo-surat.png" style="width:20%"></b>
+    <table border=0 style="font-size: 12pt;">
+        <tr height=20 style='height:15.0pt'>
+            <td valign='top' colspan=8 align="center" style="font-size: 18pt;"><b>HUMAN RESOURCES DEVELOPMENT</b></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 align="center"><hr/></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 align="center"><br/></td>
+        </tr>
+        <tr height=20 style='height:15.0pt'>
+            <td valign='top'>Tertanggal</td>
+            <td valign='top'>:</td>
+            <td valign='top' colspan=6><?= $data[0]['tanggal'] ?></td>
+        </tr>
+        <tr>
+            <td valign='top'>Perihal</td>
+            <td valign='top'>:</td>
+            <td valign='top' colspan=6><?= $data[0]['Keterangan'] ?></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8><br/></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 align="center"><b><u>SURAT PERINGATAN</u></b></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 align="center"><?= $data[0]['nomor_surat'] ?></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 align="center"><br/></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 style="text-align: justify;">Dalam rangka menegakkan kedisiplinan dan tanggung jawab serta menjalankan peraturan perusahaan maka atas nama perusahaan, dengan ini menerangkan bahwa:</td>
+        </tr>
+        <tr height=20 style='height:15.0pt'>
+            <td valign='top'>Nama</td>
+            <td valign='top'>:</td>
+            <td valign='top' colspan=6><?= $data[0]['nama'] ?></td>
+        </tr>
+        <tr>
+            <td valign='top'>Jabatan</td>
+            <td valign='top'>:</td>
+            <td valign='top' colspan=6><?= $data[0]['nama_jabatan'] ?></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 style="text-align: justify;">Maka dengan ini, Diberikan <b><?= $data[0]['Keterangan'] ?></b> terkait dengan tindak pelanggaran yang saudara lakukan, yakni:</td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8><?= $data[0]['uraian'] ?></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 style="text-align: justify;">Surat Peringatan ini belaku mulai tanggal <?= $data[0]['mulai_berlaku'] ?> dan berakhir pada tanggal <?= $data[0]['berlaku_sampai'] ?>( 3 bulan masa review.)</td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 style="text-align: justify;">Selama masih dalam status Peringatan I, yang bersangkutan tidak diperbolehkan melanggar tata tertib kerja sebagaimana sudah diatur dalam Peraturan Perusahaan, atau bersedia menerima resiko ke tingkat lebih lanjut.</td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 style="text-align: justify;">Harapan kami agar yang bersangkutan untuk lebih mentaati peraturan dan lebih disiplin serta tanggung jawab sebagai karyawan yang baik. Semoga dengan diterbitkan surat ini ybs bisa menerima hal ini.</td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 style="text-align: justify;">Demikian <b><?= $data[0]['Keterangan'] ?></b> ini dibuat agar dapat ditaati sebagaimana mestinya. Diharapkanyang bersangkutan berkenan merubah sikap dan mampu menunjukkan sikap profesinoalisme dalam bekerja.</td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8 style="text-align: justify;">Atas perhatian dan kerjasamanya kami selaku manajemen mengucapkan terima kasih. Dan bisa sebagai koreksi dan intropeksi diri selanjutnya.</td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8><br/></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=2 align="center">Penerima</td>
+            <td valign='top' colspan=3 align="center">Manager HRD</td>
+            <td valign='top' colspan=3 align="center">General Manager</td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8><br /></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8><br /></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=8><br /></td>
+        </tr>
+        <tr>
+            <td valign='top' colspan=2 align="center">( <?= $data[0]['nama'] ?> )</td>
+            <td valign='top' colspan=3 align="center">( <?= $data[0]['create'] ?> )</td>
+            <td valign='top' colspan=3 align="center">( GHGJSA HSJDH )</td>
+        </tr>
+    </table>
 </body>
 
 </html>

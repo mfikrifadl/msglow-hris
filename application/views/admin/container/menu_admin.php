@@ -332,12 +332,12 @@
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
-                  <span class="kt-menu__link-text">Surat Peringatan 1</span>
+                  <span class="kt-menu__link-text">Surat Peringatan</span>
                 </a>
               </li>
 
-              <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('transaksi/sp2'); ?>" class="kt-menu__link ">
+              <!-- <li class="kt-menu__item " aria-haspopup="true">
+                <a href="<?php //echo  site_url('transaksi/sp2'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -346,13 +346,13 @@
               </li>
 
               <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('transaksi/sp3'); ?>" class="kt-menu__link ">
+                <a href="<?php //echo site_url('transaksi/sp3'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
                   <span class="kt-menu__link-text">Surat Peringatan 3</span>
                 </a>
-              </li>
+              </li> -->
 
             </ul>
           </div>

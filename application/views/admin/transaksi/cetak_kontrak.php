@@ -149,7 +149,7 @@ function bulan_ini($bulan)
             <td valign='top'></td>
             <td valign='top' colspan=2><span lang=SV>Tempat, Tanggal Lahir</span></td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=2><?= $data[0]['tempat_lahir'].', '.$data[0]['tanggal_lahir']?></td>
+            <td valign='top' colspan=2><?= $data[0]['tempat_lahir'].', '.date('d',strtotime($data[0]['tanggal_lahir'])).' '.bulan_ini(date('M',strtotime($data[0]['tanggal_lahir']))).' '.date('Y',strtotime($data[0]['tanggal_lahir']))?></td>
         </tr>
         <tr>
             <td valign='top'></td>
@@ -337,7 +337,7 @@ function bulan_ini($bulan)
         </tr>
         <tr>
             <td valign='top'></td>
-            <td valign='top' colspan=2>Hari Senin . Jumat</td>
+            <td valign='top' colspan=2>Hari Senin - Jumat</td>
             <td valign='top'>:</td>
             <td valign='top' colspan=2>Jam 08.00 WIB s/d
                 17.00 WIB</td>
@@ -551,7 +551,7 @@ function bulan_ini($bulan)
             <td valign='top'></td>
             <td valign='top'></td>
             <td valign='top' colspan=3>PIHAK PERTAMA,</td>
-            <td valign='top'>PIHAK KEDUA,</td>
+            <td valign='top' >PIHAK KEDUA,</td>
         </tr>
         <tr>
             <td valign='top' colspan=6><br /></td>
@@ -566,7 +566,7 @@ function bulan_ini($bulan)
             <td valign='top'></td>
             <td valign='top'></td>
             <td valign='top' colspan=3><B><U>GILANG WIDYA PRAMANA</U></B></td>
-            <td valign='top'><B><U><?= $data[0]['nama'] ?></U></B></td>
+            <td valign='top'><B><U><?= strtoupper($data[0]['nama']) ?></U></B></td>
         </tr>
         <tr>
             <td valign='top'></td>

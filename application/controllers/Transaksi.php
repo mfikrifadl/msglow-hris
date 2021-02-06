@@ -578,7 +578,7 @@ class Transaksi extends CI_Controller
 	{
 		$data['action'] = $Aksi;
 		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Peringatan I';
+		$data['file']   = 'Surat Peringatan';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
