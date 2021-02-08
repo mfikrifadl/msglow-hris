@@ -89,8 +89,7 @@ if ($action == "edit") {
                               <tbody>
                                 <?php $no = 0;
                                 foreach ($absensi as $key => $vaArea) {
-                                  if ($vaArea['is_delete'] == 1) {
-                                  } else { ?>
+                                  ?>
 
                                     <tr>
                                       <td><?= ++$no; ?></td>
@@ -110,7 +109,7 @@ if ($action == "edit") {
                                         <?= $vaArea['cloud_id'] ?>
                                       </td>
 
-                                  <?php }
+                                  <?php 
                                 } ?>
                               </tbody>
                             </table>
