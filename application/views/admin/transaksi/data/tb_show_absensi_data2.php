@@ -1,5 +1,9 @@
     <!-- DATA TABLES -->
     <!-- <link href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" /> -->
+    <link href="<?php echo base_url(); ?>assets2/plugins/general/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets2/plugins/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets2/plugins/general/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-autofill-bs4/css/autoFill.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -12,91 +16,142 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-rowreorder-bs4/css/rowReorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <table class="table table-striped- table-bordered table-hover table-checkable" style="width: 100%" id='DataTable2'>
-      <thead>
-        <tr>
-          <!-- <td>ID</td> -->
-          <td>PIN</td>
-          <td>Tanggal</td>
-          <td>Jam_Datang</td>
-          <td>Jam_Pulang</td>
-          <td>Total_Jam_Kerja</td>
-          <td>Total_Jam_Lembur</td>
-          <td>Verify</td>
-          <td>Status_Scan</td>
-          <td>Keterangan</td>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <?php $no = 0;
-          foreach ($row as $key => $vaPegawai) { ?>
-            <!-- <td><?= $vaPegawai['id'] ?></td> -->
-            <td><?= $vaPegawai['pin'] ?></td>
-            <td><?= $vaPegawai['tanggal'] ?></td>
-            <td><?= $vaPegawai['jam_datang'] ?></td>
-            <td><?= $vaPegawai['jam_pulang'] ?></td>
-            <td>
-              <?php
-              //Menghitung total jam kerja
-              $jam_datang = new DateTime($vaPegawai['jam_datang']);
-              $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
+    <div class="kt-portlet kt-portlet--height-fluid">
+      <div class="kt-portlet">
+        <div class="kt-portlet__body">
+          <table class="table table-striped- table-bordered table-hover table-checkable" style="width: 100%" id='DataTable2'>
+            <thead>
+              <tr>
+                <td>No</td>
+                <td>Nama</td>
+                <td>Departement</td>
+                <td>Tanggal</td>
+                <td>Jam_Datang</td>
+                <td>Jam_Pulang</td>
+                <td>Total_Jam_Kerja</td>
+                <td>Keterangan</td>
+                <td>Keterlambatan</td>
+                <td>Overtime</td>
+                <td>Keterangan_Lain-Lain</td>
 
-              $t_scan_pulang = "17:00:00";
-              $x_jam_pulang = new DateTime($t_scan_pulang);
-              $t_jam = $x_jam_pulang->sub(new DateInterval('PT1H')); //jam istirahat
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <?php $no = 0;
+                foreach ($row as $key => $vaPegawai) { ?>
+                  <td><?= ++$no; ?></td>
+                  <td><?= $vaPegawai['nama'] ?></td>
+                  <td><?= $vaPegawai['nama_jabatan'] ?></td>
+                  <td><?= $vaPegawai['tanggal'] ?></td>
+                  <td><?= $vaPegawai['jam_datang'] ?></td>
+                  <td><?= $vaPegawai['jam_pulang'] ?></td>
+                  <td>
+                    <?php
+                    //Menghitung total jam kerja
+                    $jam_datang = new DateTime($vaPegawai['jam_datang']);
+                    $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
 
-              $hit_jam_kerja = $jam_datang->diff($t_jam);
-              $jumlah1 = $hit_jam_kerja->format('%H:%I:%S');
-              $tot_jam_kerja = (string)$jumlah1;
+                    $t_scan_pulang = "17:00:00";
+                    $x_jam_pulang = new DateTime($t_scan_pulang);
+                    $t_jam = $x_jam_pulang->sub(new DateInterval('PT1H')); //jam istirahat
 
-              if ($jam_datang == $jam_pulang) {
-                echo "Please Check Validation";
-              } else {
-                echo "$tot_jam_kerja";
-              }
+                    $hit_jam_kerja = $jam_datang->diff($t_jam);
+                    $jumlah1 = $hit_jam_kerja->format('%H:%I:%S');
+                    $tot_jam_kerja = (string)$jumlah1;
 
-
-              ?>
-            </td>
-            <td>
-              <?php
-              //Menghitung total jam lembur
-              $set_jam_lembur = "17:50:00";
-              $t_set_jam_lembur = new DateTime($set_jam_lembur);
-
-              $t_jam_pulang = "17:00:00";
-              $x_jam_pulang = new DateTime($t_jam_pulang);
-
-              $hit_jam_lembur = $jam_pulang->diff($x_jam_pulang);
-              $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
-              $tot_jam_lembur = (string)$jumlah2;
-
-              if ($jam_pulang > $t_set_jam_lembur) {
-                echo "$tot_jam_lembur";
-              } else {
-              }
+                    if ($jam_datang == $jam_pulang) {
+                      echo "Please Check Validation";
+                    } elseif ($vaPegawai['jam_datang'] == null || empty($vaPegawai['jam_datang'])) {
+                    } elseif (!empty($vaPegawai['jam_datang'])) {
+                      echo "$tot_jam_kerja";
+                    } else {
+                    }
 
 
-              ?>
-            </td>
-            <td><?= $vaPegawai['verify'] ?></td>
-            <td><?= $vaPegawai['status_scan'] ?></td>
-            <td>
-              <input style="width: 150px;" class="form-control form-control-sm form-filter kt-input" id="keterangan_<?= $vaPegawai['id'] ?>" type="text" value="<?= $vaPegawai['keterangan']; ?>" onkeyup="update_import('<?= $vaPegawai['id']; ?>');" autocomplete="off">
-            </td>
+                    ?>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <select name="keterangan" class="form-control kt-selectpicker" data-live-search="true">
+                        <option></option>
+                        <option value="0" <?php //if ($cStatusKawin == 0) echo "selected"; 
+                                          ?>>Shift 2</option>
+                        <option value="1" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                          ?>>Tugas Kantor</option>
+                        <option value="2" <?php //if ($cStatusKawin == 0) echo "selected"; 
+                                          ?>>Ijin Durasi</option>
+                        <option value="3" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                          ?>>Berangkat Bali</option>
+                        <option value="4" <?php //if ($cStatusKawin == 0) echo "selected"; 
+                                          ?>>Kirim Luar kota</option>
+                        <option value="5" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                          ?>>Ijin Keperluan Pribadi</option>
+                        <option value="6" <?php //if ($cStatusKawin == 0) echo "selected"; 
+                                          ?>>Penyesuaian Finger</option>
+                        <option value="7" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                          ?>>Berangkat Bali</option>
+                        <option value="8" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                          ?>>Pengiriman Bali</option>
+                        <option value="9" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                          ?>>Pulang Dari Bali</option>
+                        <option value="0" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                          ?>>Berangkat Kirim Bali</option>
+                        <option value="11" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                            ?>>STSD</option>
+                        <option value="12" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                            ?>>SSD</option>
+                        <option value="13" <?php //if ($cStatusKawin == 1) echo "selected"; 
+                                            ?>>Tanpa Keterangan</option>
+                      </select>
+                    </div>
+                  </td>
 
-            <input id="pin_<?= $vaPegawai['id']; ?>" type="hidden" name="pin" value="<?= $vaPegawai['pin'] ?>">
-            <input id="id_<?= $vaPegawai['id']; ?>" type="hidden" name="id" value="<?= $vaPegawai['id'] ?>">
-            <input id="tanggal_<?= $vaPegawai['id'] ?>" type="hidden" name="tanggal" value="<?= $vaPegawai['tanggal'] ?>">
-            <input id="ft_<?= $vaPegawai['id'] ?>" type="hidden" name="ft" value="<?= $tot_jam_kerja ?>">
-            <input id="lembur_<?= $vaPegawai['id'] ?>" type="hidden" name="lembur" value="<?= $tot_jam_lembur ?>">
+                  <td>
+                    <input style="width: 150px;" class="form-control form-control-sm form-filter kt-input" id="keterangan_<?= $vaPegawai['id'] ?>" type="text" value="<?= $vaPegawai['keterlambatan']; ?>" onkeyup="update_import('<?= $vaPegawai['id']; ?>');" autocomplete="off">
+                  </td>
 
-        </tr>
-      <?php } ?>
-      </tbody>
-    </table>
+                  <td>
+                    <?php
+                    //Menghitung total jam lembur
+                    $set_jam_lembur = "17:30:00";
+                    $t_set_jam_lembur = new DateTime($set_jam_lembur);
+
+                    $set_jam_pulang_default = "17:00:00";
+                    $t_set_jam_pulang_default = new DateTime($set_jam_pulang_default);
+
+                    //$t_jam_pulang = "20:00:00";
+                    //$x_jam_pulang = new DateTime($t_jam_pulang);
+                    if ($jam_pulang > $t_set_jam_lembur) {
+                      $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
+                      $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
+                      $tot_jam_lembur = (string)$jumlah2;
+
+                      echo "$tot_jam_lembur";
+                    } else {
+                    }
+
+
+
+                    // if ($x_jam_pulang > $t_set_jam_lembur) {
+                    //   echo "$tot_jam_lembur";
+                    // } else {
+                    // }
+                    ?>
+                  </td>
+
+                  <td>
+                    <input style="width: 150px;" class="form-control form-control-sm form-filter kt-input" id="keterangan_<?= $vaPegawai['id'] ?>" type="text" value="" onkeyup="update_import('<?= $vaPegawai['id']; ?>');" autocomplete="off">
+                  </td>
+
+              </tr>
+            <?php } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
     <!--begin::Modal-->
     <div class="modal fade" id="operator" tabindex="-1" role="dialog" aria-hidden="true">
@@ -153,6 +208,12 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <script src="<?php echo base_url(); ?>assets2/js/pages/crud/datatables/extensions/colreorder.js" type="text/javascript"></script>
+
+    <script src="<?php echo base_url(); ?>assets2/plugins/general/plugins/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets2/plugins/general/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets2/plugins/general/select2/dist/js/select2.full.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select/js/dataTables.select.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets2/js/pages/crud/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
 
     <script type="text/javascript">
       $("#DataTable2").dataTable({

@@ -152,7 +152,9 @@
 
 <script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/advanced-search.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets2/js/pages/crud/forms/widgets/summernote.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/column-search.js" type="text/javascript"></script>
 
+<script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/column-search.js" type="text/javascript"></script>
 <!-- ================================= CSS BAWAAN =================================================== -->
 <!-- jQuery 2.1.3 -->
 <!-- <script src="<?= base_url() ?>assets/plugins/jQuery/jQuery-2.1.3.min.js"></script> -->
@@ -218,6 +220,25 @@
   });
   $.fn.modal.Constructor.prototype.enforceFocus = function() {};
   $("#DataTable").dataTable({
+    scrollY: '50vh',
+    scrollX: 'true',
+    scrollCollapse: true,
+    "oLanguage": {
+      "sLengthMenu": "Tampilkan _MENU_ data per halaman",
+      "sSearch": "Pencarian: ",
+      "sZeroRecords": "Maaf, tidak ada data yang ditemukan",
+      "sInfo": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
+      "sInfoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
+      "sInfoFiltered": "(di filter dari _MAX_ total data)",
+      "oPaginate": {
+        "sFirst": "Awal",
+        "sLast": "Akhir",
+        "sPrevious": "Sebelumnya",
+        "sNext": "Selanjutnya"
+      }
+    }
+  });
+  $("#DataTable_absensi").dataTable({
     scrollY: '50vh',
     scrollX: 'true',
     scrollCollapse: true,

@@ -117,7 +117,8 @@ class Relasi extends CI_Model
 
 	public function GetDataAbsensi_tabel_new()
 	{
-		$Query = $this->db->query("SELECT * FROM v_log_absen ORDER BY tanggal DESC");
+		// $Query = $this->db->query("SELECT * FROM v_log_absen ORDER BY tanggal DESC");
+		$Query = $this->db->query("SELECT * FROM v_log_data_absen ORDER BY tanggal DESC");
 		return $Query->result_array();
 	}
 

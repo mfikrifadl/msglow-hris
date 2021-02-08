@@ -107,56 +107,22 @@ class Gaji extends CI_Controller
 		$dataHeader['menu'] = 'Manajemen Absensi';
 		$dataHeader['file'] = 'Absensi Pegawai';
 		$data['action'] = $Aksi;
-		//$data['id_absen']	=	$Id;
 
-		$data_absensi = $this->model->View('attlog');
-		$data_log_absen = array();
-		foreach ($data_absensi as $key => $vaArea) {
-			$c_id = date("YmdHis");
-			$tgl_hari_ini = date('Y-m-d');
+		$data['absensi'] = $this->model->View('attlog');
+		$data['row']	= $this->relasi->GetDataAbsensi_tabel_new();
+		//$data['id_absen']	=	$Id;		
 
-			$pin = $vaArea['pin'];
-			$attlog = $vaArea['attlog'];
-			$verify = $vaArea['verify'];
-			$status_scan = $vaArea['status_scan'];
-			$cloud_id = $vaArea['cloud_id'];
-
-			$a_attlog = explode(" ", $attlog);
-			$tgl = $a_attlog[0];
-			$waktu = $a_attlog[1];
-
-			if ($tgl_hari_ini == $tgl) {
-				// echo "pin : $pin <br />";
-				// echo "attlog : $attlog <br />";
-				// echo "tanggal cek roll : $tgl <br />";
-				// echo "waktu cek roll : $waktu <br />";
-				// echo "verify : $verify <br />";
-				// echo "status_scan : $status_scan <br />";
-				// echo "cloud_id : $cloud_id <br /><br />";
-
-				array_push($data_log_absen, array(
-
-				    'pin' => $pin,
-				    'attlog' => $attlog,
-				    'tanggal' => $tgl,
-				    'waktu' => $waktu,
-				    'verify' => $verify,
-				    'status_scan' => $status_scan,
-				    'cloud_id' => $cloud_id
-				));
-
-				
-			} else {
-				//echo "asd";
-			}
-			
-		}
-		$this->AbsensiModel->insert_data_log_absen($data_log_absen);
-
-		$this->load->view('admin/container/header', $dataHeader);		
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/gaji/absensi', $data);
 		$this->load->view('admin/container/footer');
 	}
+
+	// public function tb_absensi()
+	// {
+	// 	// $data['row']	= $this->relasi->GetDataAbsensi_tabel_new();
+	// 	$data['row']	= $this->model->View('v_data_log_absen');
+	// 	$this->load->view('admin/transaksi/data/tb_show_absensi_data2', $data);
+	// }
 
 	public function req_update_absen($Aksi = "", $Id = "")
 	{
