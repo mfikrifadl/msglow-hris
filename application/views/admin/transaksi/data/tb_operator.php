@@ -76,22 +76,6 @@
 
     <!--end::Modal-->
 
-    <!-- <div class="modal fade bs-example-modal-lg" id="operator" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header bg-red">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true" class="la la-remove"></span>
-            </button>
-            <h5 class="modal-title" id="myModalLabel">View Data Pegawai</h5>
-          </div>
-          <div class="modal-body">
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-
     <!-- DATA TABES SCRIPT -->
     <!-- <script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script> -->
