@@ -434,7 +434,7 @@ if ($action == "edit") {
     var id = $('#id_' + id).val();
     var keterangan = $('#ket_' + id).val();
     var ket_lain = $('#ket_lain_' + id).val();
-     alert(keterangan);
+     //alert(keterangan);
 
     var values = {
       'id': id,
@@ -442,17 +442,17 @@ if ($action == "edit") {
       'ket_lain': ket_lain
     }
 
-    // $.ajax({
-    //   url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
-    //   type: "POST",
-    //   data: values,
-    //   success: function(data) {
-    //     //option pesan berhasil send data
-    //     // alert (tanggal);
-    //   },
-    //   error: function(data, status, error) {
-    //     alert(data.responseText);
-    //   }
-    // });
+    $.ajax({
+      url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        // alert (tanggal);
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
   }
 </script>
