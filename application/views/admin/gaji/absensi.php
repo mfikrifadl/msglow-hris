@@ -472,7 +472,7 @@ if ($action == "edit") {
 
   function cetak_pdf() {
     var dTgl_cetak = $('#dTgl_cetak').val();
-    // alert(dTglAbsensi);
+    // alert(dTgl_cetak);
     if (dTgl_cetak == "") {
       new PNotify({
         text: 'Pilih Tanggal Absensi terlebih dahulu!',
