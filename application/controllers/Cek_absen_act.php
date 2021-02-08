@@ -30,4 +30,22 @@ class Cek_absen_act extends CI_Controller
 
 		$this->model->Update('log_absen', 'id', $id, $data);
     }
+
+    public function cetak_absensi(){
+        $tgl = $this->input->post('dTgl_cetak');
+        //echo $tgl;
+
+        $data = array(
+            'tgl' => $tgl
+        );
+
+        $data['log_absen'] = $this->model->ViewWhere('v_log_data_absen', 'tanggal', $tgl);
+        $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+        $html = $this->load->view('admin/gaji/cetak_absensi', $data, true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        redirect(site_url('gaji/absensi_pegawai'));
+
+    }
+
 }
