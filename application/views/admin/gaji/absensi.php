@@ -418,7 +418,7 @@ if ($action == "edit") {
   function run() {
 
     var dTgl = $('#dTgl').val();
-    // alert(dTglAbsensi);
+    // alert(dTgl);
     if (dTgl == "") {
       new PNotify({
         text: 'Pilih Tanggal Absensi terlebih dahulu!',
