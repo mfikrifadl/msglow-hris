@@ -6,7 +6,7 @@ if ($action == "edit") {
     $cIdStatusAbsensi =   $column['id_status_absensi'];
     $cIdPegawai       =   $column['id_pegawai'];
     $dTglAbsen        =   String2Date($column['tanggal_absen']);
-    $cKeterangan      =   $column['keterangan'];
+    // $cKeterangan      =   $column['keterangan'];
     $cIconButton      =   "refresh";
     $cValueButton     =   "Update Data";
   }
@@ -17,7 +17,6 @@ if ($action == "edit") {
   $cIdStatusAbsensi   =   "";
   $cIdPegawai         =   "";
   $dTglAbsen          =   "";
-  $cKeterangan        =   "";
   $cIconButton        =   "save";
   $cValueButton       =   "Save Data";
   $cAction            =   "Insert";
@@ -180,12 +179,13 @@ if ($action == "edit") {
                         <div class="kt-portlet__body">
                           <form method="post" enctype="multipart/form-data" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
                             <div class="form-group">
+                              <div id="printchatbox"> </div>
                               <label>
                                 <h5>Input Tanggal Absensi Yang Akan Di Cetak </h5>
                               </label>
                               <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
                               <hr />
-                            </div>
+                            </div>                            
 
                             <table class="table table-striped table-bordered text-center" id='DataTable_absensi'>
                               <thead>
@@ -196,8 +196,8 @@ if ($action == "edit") {
                                   <td>Tanggal</td>
                                   <td>Jam_Datang</td>
                                   <td>Jam_Pulang</td>
-                                  <td>Total_Jam_Kerja</td>
-                                  <td>Keterangan</td>
+                                  <!-- <td>Total_Jam_Kerja</td> -->
+                                  <td colspan="2">Keterangan</td>
                                   <td>Keterlambatan</td>
                                   <td>Overtime</td>
                                   <td>Keterangan_Lain-Lain</td>
@@ -208,6 +208,10 @@ if ($action == "edit") {
                                 <tr>
                                   <?php $no = 0;
                                   foreach ($row as $key => $vaPegawai) {
+                                    // Jam Datang Karyawan
+                                    $jam_datang = new DateTime($vaPegawai['jam_datang']);
+                                    $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
+
                                   ?>
                                     <td><?= ++$no; ?></td>
                                     <td><?= $vaPegawai['nama'] ?></td>
@@ -215,64 +219,65 @@ if ($action == "edit") {
                                     <td><?= $vaPegawai['tanggal'] ?></td>
                                     <td><?= $vaPegawai['jam_datang'] ?></td>
                                     <td><?= $vaPegawai['jam_pulang'] ?></td>
-                                    <td>
-                                      <?php
-                                      //Menghitung total jam kerja
-                                      $jam_datang = new DateTime($vaPegawai['jam_datang']);
-                                      $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
+                                    <!-- <td> -->
+                                    <?php
+                                    //Menghitung total jam kerja
+                                    // $jam_datang = new DateTime($vaPegawai['jam_datang']);
+                                    // $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
 
-                                      $t_scan_pulang = "17:00:00";
-                                      $x_jam_pulang = new DateTime($t_scan_pulang);
-                                      $t_jam = $x_jam_pulang->sub(new DateInterval('PT1H')); //jam istirahat
+                                    // $t_scan_pulang = "17:00:00";
+                                    // $x_jam_pulang = new DateTime($t_scan_pulang);
+                                    // $t_jam = $x_jam_pulang->sub(new DateInterval('PT1H')); //jam istirahat
 
-                                      $hit_jam_kerja = $jam_datang->diff($t_jam);
-                                      $jumlah1 = $hit_jam_kerja->format('%H:%I:%S');
-                                      $tot_jam_kerja = (string)$jumlah1;
+                                    // $hit_jam_kerja = $jam_datang->diff($t_jam);
+                                    // $jumlah1 = $hit_jam_kerja->format('%H:%I:%S');
+                                    // $tot_jam_kerja = (string)$jumlah1;
 
-                                      if ($jam_datang == $jam_pulang) {
-                                        echo "Please Check Validation";
-                                      } elseif ($vaPegawai['jam_datang'] == null || empty($vaPegawai['jam_datang'])) {
-                                      } elseif (!empty($vaPegawai['jam_datang'])) {
-                                        echo "$tot_jam_kerja";
-                                      } else {
-                                      }
+                                    // if ($jam_datang == $jam_pulang) {
+                                    //   echo "Please Check Validation";
+                                    // } elseif ($vaPegawai['jam_datang'] == null || empty($vaPegawai['jam_datang'])) {
+                                    // } elseif (!empty($vaPegawai['jam_datang'])) {
+                                    //   echo "$tot_jam_kerja";
+                                    // } else {
+                                    // }
 
 
-                                      ?>
-                                    </td>
-                                    <td>
+                                    ?>
+                                    <!-- </td> -->
+                                    <td colspan="2">
                                       <div class="form-group">
-                                        <select id="ket_<?= $vaPegawai['id'] ?>" onkeyup="updateDataAbsen('<?= $vaPegawai['id']; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
+                                        <select id="ket_<?= $vaPegawai['id']; ?>" onkeyup="update_ket('<?= $vaPegawai['id']; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                           <option></option>
-                                          <option value="1" <?php //if ($cStatusKawin == 0) echo "selected"; 
-                                                            ?>>Shift 2</option>
-                                          <option value="2" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                            ?>>Tugas Kantor</option>
-                                          <option value="3" <?php //if ($cStatusKawin == 0) echo "selected"; 
-                                                            ?>>Ijin Durasi</option>
-                                          <option value="4" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                            ?>>Berangkat Bali</option>
-                                          <option value="5" <?php //if ($cStatusKawin == 0) echo "selected"; 
-                                                            ?>>Kirim Luar kota</option>
-                                          <option value="6" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                            ?>>Ijin Keperluan Pribadi</option>
-                                          <option value="7" <?php //if ($cStatusKawin == 0) echo "selected"; 
-                                                            ?>>Penyesuaian Finger</option>
-                                          <option value="8" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                            ?>>Berangkat Bali</option>
-                                          <option value="9" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                            ?>>Pengiriman Bali</option>
-                                          <option value="10" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                              ?>>Pulang Dari Bali</option>
-                                          <option value="11" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                              ?>>Berangkat Kirim Bali</option>
-                                          <option value="12" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                              ?>>STSD</option>
-                                          <option value="13" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                              ?>>SSD</option>
-                                          <option value="14" <?php //if ($cStatusKawin == 1) echo "selected"; 
-                                                              ?>>Tanpa Keterangan</option>
+                                          <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan'] == "Shift 2") echo "selected";
+                                                                                    ?>>Shift 2</option>
+                                          <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan'] == "Tugas Kantor") echo "selected";
+                                                                                          ?>>Tugas Kantor</option>
+                                          <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan'] == "Penyesuaian Finger") echo "selected";
+                                                                                                ?>>Penyesuaian Finger</option>
+                                          <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan'] == "Kirim Luar kota") echo "selected";
+                                                                                            ?>>Kirim Luar kota</option>
+                                          <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan'] == "Pengiriman Bali") echo "selected";
+                                                                                            ?>>Pengiriman Bali</option>
+                                          <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan'] == "Berangkat Kirim Bali") echo "selected";
+                                                                                                  ?>>Berangkat Kirim Bali</option>
+                                          <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan'] == "Pulang Dari Bali") echo "selected";
+                                                                                              ?>>Pulang Dari Bali </option>
+                                          <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan'] == "Ijin Durasi") echo "selected";
+                                                                                        ?>>Ijin Durasi</option>
+                                          <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan'] == "Ijin Keperluan Pribadi") echo "selected";
+                                                                                                    ?>>Ijin Keperluan Pribadi</option>
+                                          <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan'] == "STSD") echo "selected";
+                                                                                  ?>>STSD</option>
+                                          <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan'] == "SSD") echo "selected";
+                                                                                  ?>>SSD</option>
+                                          <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan'] == "Tanpa Keterangan") echo "selected";
+                                                                                              ?>>Tanpa Keterangan</option>
                                         </select>
+                                      </div>
+                                      <div class="form-group">
+                                        <button type="button" title="Update Data" id="id_<?= $vaPegawai['id']; ?>" onclick="return update_ket('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
+                                          <i class="flaticon2-send-1"></i>
+                                        </button>
                                       </div>
                                     </td>
 
@@ -333,7 +338,9 @@ if ($action == "edit") {
 
                             <div class='row'>
                               <div class='col-sm-12 text-left'>
-                                <button class='btn btn-success' name="submit" type='submit'>Cetak PDF</button>
+                                <button class='btn btn-success' name="submit" type='submit'>
+                                <i class="flaticon2-google-drive-file"></i>Cetak PDF
+                                </button>
                               </div>
                             </div>
 
@@ -443,11 +450,47 @@ if ($action == "edit") {
     }
   }
 
+  function update_ket(id) {
+
+    var ket = $('#ket_' + id).val();
+    var idAbs = $('#id_' + id).val();
+    var values = {
+      'id': id,
+      'ket': ket
+    }
+    //alert(id+ket);  
+
+    if (ket == "") {
+      new PNotify({
+        text: 'Pilih Keterangan terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        url: "<?= base_url() . 'cek_absen_act/update_absen_keterangan' ?>",
+        type: "POST",
+        data: values,
+        success: function(data) {
+          new PNotify({
+            // title: 'Success!',
+            text: 'Berhasil Update Keterangan Data Absensi.',
+            type: 'success'
+          });
+          //option pesan berhasil send data
+          // alert (tanggal);
+        },
+        error: function(data, status, error) {
+          alert(data.responseText);
+        }
+      });
+    }
+  }
+
   function updateDataAbsen(id) {
-    // var conv_tgl = new Date(tgl).getTime();
-    var id = $('#id_' + id).val();
-    var keterangan = $('#ket_' + id).val();
+
     var ket_lain = $('#ket_lain_' + id).val();
+<<<<<<< HEAD
 <<<<<<< HEAD
      //alert(keterangan);
 ||||||| merged common ancestors
@@ -455,10 +498,14 @@ if ($action == "edit") {
 =======
     //alert(keterangan);
 >>>>>>> e4ed6f13c760b5516657d9bfa784eefe1015e36d
+||||||| merged common ancestors
+    //alert(keterangan);
+=======
+    // alert(id+ket_lain);
+>>>>>>> d6f9bcb413e64d0d13082479ad541ba093d0765f
 
     var values = {
       'id': id,
-      'keterangan': keterangan,
       'ket_lain': ket_lain
     }
 

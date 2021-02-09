@@ -21,10 +21,9 @@ class Cek_absen_act extends CI_Controller
     public function update_absen()
     {
         $id = $this->input->post('id');
-        //$ket_lain = $this->input->post('ket_lain');
-
+        
 		$data = array(		
-            'keterangan' => $this->input->post('keterangan'),
+            //'keterangan' => $this->input->post('keterangan'),
 			'ket_lain' => $this->input->post('ket_lain')
 		);
 
@@ -45,6 +44,18 @@ class Cek_absen_act extends CI_Controller
         $mpdf->WriteHTML($html);
         $mpdf->Output();
         redirect(site_url('gaji/absensi_pegawai'));
+
+    }
+    
+    public function update_absen_keterangan(){
+        //$keterangan = $this->input->post('ket');
+        $id = $this->input->post('id');
+
+        $data = array(		
+            'keterangan' => $this->input->post('ket')			
+		);
+
+		$this->model->Update('log_absen', 'id', $id, $data);
 
     }
 
