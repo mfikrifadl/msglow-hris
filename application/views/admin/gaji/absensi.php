@@ -490,13 +490,52 @@ if ($action == "edit") {
   function updateDataAbsen(id) {
 
     var ket_lain = $('#ket_lain_' + id).val();
+<<<<<<< HEAD
+<<<<<<< HEAD
+     //alert(keterangan);
+||||||| merged common ancestors
+     alert(keterangan);
+=======
+    //alert(keterangan);
+>>>>>>> e4ed6f13c760b5516657d9bfa784eefe1015e36d
+||||||| merged common ancestors
+    //alert(keterangan);
+=======
     // alert(id+ket_lain);
+>>>>>>> d6f9bcb413e64d0d13082479ad541ba093d0765f
 
     var values = {
       'id': id,
       'ket_lain': ket_lain
     }
 
+<<<<<<< HEAD
+    $.ajax({
+      url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        // alert (tanggal);
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
+||||||| merged common ancestors
+    // $.ajax({
+    //   url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
+    //   type: "POST",
+    //   data: values,
+    //   success: function(data) {
+    //     //option pesan berhasil send data
+    //     // alert (tanggal);
+    //   },
+    //   error: function(data, status, error) {
+    //     alert(data.responseText);
+    //   }
+    // });
+=======
     $.ajax({
       url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
       type: "POST",
@@ -543,5 +582,6 @@ if ($action == "edit") {
         }
       });
     }
+>>>>>>> e4ed6f13c760b5516657d9bfa784eefe1015e36d
   }
 </script>
