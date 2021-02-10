@@ -109,8 +109,7 @@ class Gaji extends CI_Controller
 		$data['action'] = $Aksi;
 
 		$data['absensi'] = $this->model->View('attlog');
-		$data['row']	= $this->relasi->GetDataAbsensi_tabel_new();
-		//$data['id_absen']	=	$Id;		
+		$data['row']	= $this->relasi->GetDataAbsensi_tabel_new();		
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/gaji/absensi', $data);

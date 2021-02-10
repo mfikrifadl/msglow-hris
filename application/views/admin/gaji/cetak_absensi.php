@@ -25,7 +25,7 @@
         <tr height=20 style='height:15.0pt'>
             <td valign='top'>Tertanggal</td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=6><?= $tgl ?></td>
+            <td valign='top' colspan=6><?= $tgl ?> s/d <?= $tgl_end ?></td>
         </tr>
         <tr>
             <td valign='top'>Perihal</td>

@@ -65,6 +65,12 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function ViewWhereLikeOr($Table, $WhereField1, $WhereValue1, $WhereField2, $WhereValue2)
+	{
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE ".$WhereField1." LIKE '%" . $WhereValue1."%' OR ".$WhereField2." LIKE '%" . $WhereValue2."%'");
+		return $Query->result_array();
+	}
+
 
 	public function Pegawai()
 	{

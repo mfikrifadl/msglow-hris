@@ -91,7 +91,8 @@ class Cek_absen extends CI_Controller
     public function import()
     {
         $dTgl = $this->input->post('dTgl');
-        echo "$dTgl <br />";
+        $dTgl_end = $this->input->post('dTgl_end');
+        //echo "$dTgl <br />";
 
         $data_absensi = $this->model->View('attlog');
         $data_log_absen = array();
@@ -109,7 +110,7 @@ class Cek_absen extends CI_Controller
             $tgl = $a_attlog[0];
             $waktu = $a_attlog[1];
 
-            if ($tgl == $dTgl) {
+            if ($tgl == $dTgl || $tgl == $dTgl_end) {
                 // echo "pin : $pin <br />";
                 // echo "attlog : $attlog <br />";
                 // echo "tanggal cek roll : $tgl <br />";
@@ -137,5 +138,22 @@ class Cek_absen extends CI_Controller
         redirect(site_url('gaji/absensi_pegawai/'));
     }
 
+    public function get_data_absensi(){
+        $dTgl = $this->input->post('dTgl');
+        $dTgl_end = $this->input->post('dTgl_end');
+                
+        $data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
+        $this->load->view('admin/gaji/tb_absensi', $data);
+
+    }
+
+    public function get_data_absensi_import(){
+        $dTgl_cetak = $this->input->post('dTgl_cetak');
+        $dTgl_cetak_end = $this->input->post('dTgl_cetak_end');
+                
+        $data['row'] = $this->model->ViewWhereLikeOr('v_log_data_absen','tanggal',$dTgl_cetak,'tanggal',$dTgl_cetak_end);
+        $this->load->view('admin/gaji/tb_absensi_import', $data);
+
+    }
     
 }

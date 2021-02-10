@@ -8,7 +8,7 @@
       <ul class="kt-menu__nav ">
 
         <li class="kt-menu__item" aria-haspopup="true">
-          <a href="<?= base_url() ?>" class="kt-menu__link ">
+          <a href="<?= base_url() ?>" class="kt-menu__link">
             <i class="kt-menu__link-icon flaticon2-setup"></i>
             <span class="kt-menu__link-text">Dashboard </span>
           </a>
@@ -390,7 +390,7 @@
                 </a>
               </li>
 
-              <li class="kt-menu__item " aria-haspopup="true">
+              <!-- <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('gaji/req_update_absen'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -402,7 +402,7 @@
                     <span class="kt-badge kt-badge--brand">2</span>
                   </span>
                 </a>
-              </li>
+              </li> -->
 
             </ul>
           </div>
