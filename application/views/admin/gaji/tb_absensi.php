@@ -27,36 +27,8 @@
         </thead>
         <tbody>
             <?php $no = 0;
+
             foreach ($data_absensi as $key => $vaArea) {
-                // $attlog = $vaArea['attlog'];
-                // $a_attlog = explode(" ", $attlog);
-                // $tgl = $a_attlog[0];
-                // $waktu = $a_attlog[1];
-                // //EXPLODE TGL DARI DATABASE
-                // $a_tgl = explode("-", $tgl);
-                // $tahun = $a_tgl[0];
-                // $bulan = $a_tgl[1];
-                // $tanggal = $a_tgl[2];
-                // //END EXPLODE
-
-                // //EXPLODE TANGGAL DARI INPUTAN 1
-                // $i_tgl_1 = explode("-", $dTgl);
-                // $i_tahun_1 = $i_tgl_1[0];
-                // $i_bulan_1 = $i_tgl_1[1];
-                // $i_tanggal_1 = $i_tgl_1[2];
-                // //END EXPLODE
-
-                // //EXPLODE TANGGAL DARI INPUTAN 2
-                // $i_tgl_2 = explode("-", $dTgl_end);
-                // $i_tahun_2 = $i_tgl_2[0];
-                // $i_bulan_2 = $i_tgl_2[1];
-                // $i_tanggal_2 = $i_tgl_2[2];
-                // //END EXPLODE
-                // if($){
-
-                // }else{
-
-                // }
             ?>
                 <tr>
                     <td><?= ++$no; ?></td>
@@ -79,16 +51,21 @@
             <?php } ?>
         </tbody>
     </table>
+    <?php if (empty($data_absensi)) {
+    } else {
+    ?>
+        <div class='row'>
+            <div class='col-sm-6 text-right'>
+                <button class='btn btn-success' onclick="return run();" type='button'>Import</button>
+                <!-- <button class='btn btn-success' name="submit" type='submit'>Import</button> -->
+            </div>
+            <div class='col-sm-6 text-left'>
+                <a class='btn btn-danger' href="<?= base_url('cek_absen') ?>">Cancel</a>
+            </div>
+        </div>
+    <?php
+    } ?>
 
-    <div class='row'>
-        <div class='col-sm-6 text-right'>
-            <button class='btn btn-success' onclick="return run();" type='button'>Import</button>
-            <!-- <button class='btn btn-success' name="submit" type='submit'>Import</button> -->
-        </div>
-        <div class='col-sm-6 text-left'>
-            <a class='btn btn-danger' href="<?= base_url('cek_absen') ?>">Cancel</a>
-        </div>
-    </div>
     </form>
     <div class="form-group">
         <div id="loading"></div>

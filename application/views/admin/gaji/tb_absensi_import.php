@@ -161,14 +161,21 @@
         </tbody>
     </table>
     <hr>
-
-    <div class='row'>
-        <div class='col-sm-12 text-left'>
-            <button class='btn btn-success' name="submit" type='submit'>
-                <i class="flaticon2-google-drive-file"></i>Cetak PDF
-            </button>
+    <?php
+    if (empty($row)) {
+    } else {
+    ?>
+        <div class='row'>
+            <div class='col-sm-12 text-left'>
+                <button class='btn btn-success' name="submit" type='submit'>
+                    <i class="flaticon2-google-drive-file"></i>Cetak PDF
+                </button>
+            </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
+
 
     <!-- DATA TABES SCRIPT -->
     <!-- <script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
