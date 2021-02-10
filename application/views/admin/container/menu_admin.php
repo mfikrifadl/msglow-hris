@@ -358,7 +358,7 @@
           </div>
         </li>
 
-        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <!-- <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon2-open-text-book"></i>
             <span class="kt-menu__link-text">Absensi</span>
@@ -388,7 +388,7 @@
                     Cek Absensi
                   </span>
                 </a>
-              </li>
+              </li> -->
 
               <!-- <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('gaji/req_update_absen'); ?>" class="kt-menu__link ">
@@ -403,17 +403,17 @@
                   </span>
                 </a>
               </li> -->
-
+<!-- 
             </ul>
           </div>
-        </li>
+        </li> -->
 
-        <!-- <li class="kt-menu__item" aria-haspopup="true">
+        <li class="kt-menu__item" aria-haspopup="true">
           <a href="<?= site_url('gaji/absensi_pegawai'); ?>" class="kt-menu__link ">
             <i class="kt-menu__link-icon flaticon2-open-text-book"></i>
             <span class="kt-menu__link-text">Absensi </span>
           </a>
-        </li> -->
+        </li>
 
         <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
