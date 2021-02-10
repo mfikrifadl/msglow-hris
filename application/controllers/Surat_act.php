@@ -217,15 +217,16 @@ class Surat_act extends CI_Controller
 
     public function sp1($Type = "", $Id = "")
     {
-
+        $jenis = "";
         if ($Type == 'Insert' or $Type == 'Update') {
-            if ($this->input->post('jenis_sp')=='SP-I'){
+            if ($this->input->post('jenis_sp') == 'SP-I') {
                 $jenis = 3;
-            } else if ($this->input->post('jenis_sp')=='SP-II'){
+            } else if ($this->input->post('jenis_sp') == 'SP-II') {
                 $jenis = 4;
-            } else if ($this->input->post('jenis_sp')=='SP-III'){
+            } else if ($this->input->post('jenis_sp') == 'SP-III') {
                 $jenis = 5;
             }
+            // echo $jenis;
 
             $dataInsert = array(
                 'tanggal'           =>  $this->input->post('dTgl'),

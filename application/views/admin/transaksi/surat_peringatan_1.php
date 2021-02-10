@@ -36,7 +36,7 @@
     $NoSuratTerakhir = "No.0001/SP-I/HRD/" . $cRomawai . "/" . date("Y");
   }
 
-  $cNomorSuratFix = "No." . "####" . "/SP-I/HRD/" . $cRomawai . "/" . date("Y");
+  $cNomorSuratFix = "No." . "0001" . "/SP-I/HRD/" . $cRomawai . "/" . date("Y");
   ?>
  <?php
   if ($action == "edit") {
@@ -82,11 +82,11 @@
     $cValueButton   =   "Save Data";
     $cAction        =   "Insert";
   }
-  if($cIdKategoriSurat==3){
+  if ($cIdKategoriSurat == 3) {
     $id_kategori_sp = 'SP-I';
-  } elseif ($cIdKategoriSurat==4){
+  } elseif ($cIdKategoriSurat == 4) {
     $id_kategori_sp = 'SP-II';
-  } elseif ($cIdKategoriSurat==5){
+  } elseif ($cIdKategoriSurat == 5) {
     $id_kategori_sp = 'SP-III';
   }
 
@@ -130,24 +130,28 @@
              <tbody>
                <?php $no = 0;
                 foreach ($row as $key => $vaPeringatan) {
+                  if ($vaPeringatan['id_kategori_surat'] == "3" || $vaPeringatan['id_kategori_surat'] == "4" || $vaPeringatan['id_kategori_surat'] == "5") {
                 ?>
-                 <tr>
-                   <td><?= ++$no; ?></td>
-                   <td><?= ($vaPeringatan['tanggal']) ?></td>
-                   <td><?= ($vaPeringatan['nomor_surat']) ?></td>
-                   <td><?= ($vaPeringatan['nama']) ?></td>
-                   <td><?= ($vaPeringatan['Keterangan']) ?></td>
-                   <td align="center">
-                     <a class="btn-link" title="Print SP" target="_blank" href="<?= site_url('Surat_act/cetak_sp1/' . $vaPeringatan['id'] . '') ?>">
-                       <i class="fa fa-print"></i>
-                     </a>
-                     |
-                     <a class="btn-link" title="Edit SP" href="<?= site_url('transaksi/sp/edit/' . $vaPeringatan['id'] . '') ?>">
-                       <i class="fa fa-pen"></i>
-                     </a>
-                   </td>
-                 </tr>
-               <?php } ?>
+                   <tr>
+                     <td><?= ++$no; ?></td>
+                     <td><?= ($vaPeringatan['tanggal']) ?></td>
+                     <td><?= ($vaPeringatan['nomor_surat']) ?></td>
+                     <td><?= ($vaPeringatan['nama']) ?></td>
+                     <td><?= ($vaPeringatan['Keterangan']) ?></td>
+                     <td align="center">
+                       <a class="btn-link" title="Print SP" target="_blank" href="<?= site_url('Surat_act/cetak_sp1/' . $vaPeringatan['id'] . '') ?>">
+                         <i class="fa fa-print"></i>
+                       </a>
+                       |
+                       <a class="btn-link" title="Edit SP" href="<?= site_url('transaksi/sp/edit/' . $vaPeringatan['id'] . '') ?>">
+                         <i class="fa fa-pen"></i>
+                       </a>
+                     </td>
+                   </tr>
+               <?php
+                  } else {
+                  }
+                } ?>
              </tbody>
            </table>
          </div>
@@ -187,8 +191,8 @@
                <label for="example-text-input" class="col-1 col-form-label">Perihal: </label>
                <div class="col-3">
                  <select name="jenis_sp" class="form-control" onchange="getnomorsurat(this.value)">
-                 <?php if ($action == "edit") { ?>
-                   <option value="<?= $id_kategori_sp ?>"><?= $jenis_sp ?></option>
+                   <?php if ($action == "edit") { ?>
+                     <option value="<?= $id_kategori_sp ?>"><?= $jenis_sp ?></option>
                    <?php } ?>
                    <option value="SP-I">Surat Peringatan I</option>
                    <option value="SP-II">Surat Peringatan II</option>
