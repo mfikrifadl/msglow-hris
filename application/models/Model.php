@@ -71,6 +71,14 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function ViewBetween($Table, $Column, $WhereValue1, $WhereValue2)
+	{
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Column . "  BETWEEN '" . $WhereValue1."' AND '" . $WhereValue2."' ");
+		return $Query->result_array();
+	}
+
+	
+
 
 	public function Pegawai()
 	{

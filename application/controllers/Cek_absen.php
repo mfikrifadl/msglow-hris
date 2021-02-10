@@ -141,8 +141,22 @@ class Cek_absen extends CI_Controller
     public function get_data_absensi(){
         $dTgl = $this->input->post('dTgl');
         $dTgl_end = $this->input->post('dTgl_end');
+
+        $time_a = date('H:i:s', mktime(0,0,0));
+        $time_b = date('H:i:s', mktime(23,59,59));
+
+        $x = $dTgl ." ".$time_a;
+        $y = $dTgl_end ." ".$time_b;
+        //echo "$y";
+
+        $data = array(
+            'dTgl' => $dTgl,
+            'dTgl_end' => $dTgl_end
+
+        );
                 
-        $data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
+        //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
+        $data['data_absensi'] = $this->model->ViewBetween('attlog','attlog',$x,$y);
         $this->load->view('admin/gaji/tb_absensi', $data);
 
     }
@@ -150,8 +164,14 @@ class Cek_absen extends CI_Controller
     public function get_data_absensi_import(){
         $dTgl_cetak = $this->input->post('dTgl_cetak');
         $dTgl_cetak_end = $this->input->post('dTgl_cetak_end');
+
+        $data = array(
+            'dTgl_cetak' => $dTgl_cetak,
+            'dTgl_cetak_end' => $dTgl_cetak_end
+
+        );
                 
-        $data['row'] = $this->model->ViewWhereLikeOr('v_log_data_absen','tanggal',$dTgl_cetak,'tanggal',$dTgl_cetak_end);
+        $data['row'] = $this->model->ViewBetween('v_log_data_absen','tanggal',$dTgl_cetak,$dTgl_cetak_end);
         $this->load->view('admin/gaji/tb_absensi_import', $data);
 
     }
