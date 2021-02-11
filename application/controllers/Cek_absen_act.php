@@ -57,7 +57,7 @@ class Cek_absen_act extends CI_Controller
             'tgl_end' => $tgl_end
         );
 
-        $data['log_absen'] = $this->model->ViewBetween('v_log_data_absen','tanggal',$tgl,$tgl_end);
+        $data['log_absen'] = $this->model->ViewBetweenOrder('v_log_data_absen','tanggal',$tgl,$tgl_end,'nama');
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
         $html = $this->load->view('admin/gaji/cetak_absensi', $data, true);
         $mpdf->WriteHTML($html);

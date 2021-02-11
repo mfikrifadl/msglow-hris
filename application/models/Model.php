@@ -77,6 +77,13 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function ViewBetweenOrder($Table, $Column, $WhereValue1, $WhereValue2, $Order)
+	{
+		
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Column . "  BETWEEN '" . $WhereValue1."' AND '" . $WhereValue2."' ORDER BY ". $Order ." ");
+		return $Query->result_array();
+	}
+
 	
 
 

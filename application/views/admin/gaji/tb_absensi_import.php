@@ -16,7 +16,10 @@
     <table class="table table-striped table-bordered text-center" id='DataTable_absensi'>
         <thead>
             <tr>
-               
+                <td>No </td>
+                <td>Nama</td>
+                <td>Departement</td>
+                <td>Tanggal</td>
                 <td>Jam_Datang</td>
                 <td>Jam_Pulang</td>
                 <!-- <td>Total_Jam_Kerja</td> -->
@@ -36,7 +39,10 @@
                     $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
 
                 ?>
-                    
+                    <td><?= ++$no; ?></td>
+                    <td><?= $vaPegawai['nama'] ?></td>
+                    <td><?= $vaPegawai['nama_jabatan'] ?></td>
+                    <td><?= $vaPegawai['tanggal'] ?></td>
                     <td><?= $vaPegawai['jam_datang'] ?></td>
                     <td><?= $vaPegawai['jam_pulang'] ?></td>
                     <!-- <td> -->
@@ -187,25 +193,4 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- <script type="text/javascript">
-        $("#table_scroll_x").dataTable({
-            // scrollY: '50vh',
-            scrollX: 'true',
-            scrollCollapse: true,
-            "oLanguage": {
-                "sLengthMenu": "Tampilkan _MENU_ data per halaman",
-                "sSearch": "Pencarian: ",
-                "sZeroRecords": "Maaf, tidak ada data yang ditemukan",
-                "sInfo": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
-                "sInfoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
-                "sInfoFiltered": "(di filter dari _MAX_ total data)",
-                "oPaginate": {
-                    "sFirst": "Awal",
-                    "sLast": "Akhir",
-                    "sPrevious": "Sebelumnya",
-                    "sNext": "Selanjutnya"
-                }
-            }
-        });
-    </script>
-     -->
+    
