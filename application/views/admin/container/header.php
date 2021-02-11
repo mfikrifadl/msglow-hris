@@ -237,7 +237,7 @@ if ($this->session->userdata('id') == '') {
           <!-- begin:: Title -->
           <h3 class="kt-header__title kt-grid__item pull-right">
             <span class="hidden-xs text-secondary">Welcome
-              <span class="hidden-xs text-light"><?= $this->session->userdata('nama') ?></span>
+              <span class="hidden-xs text-light"><?= $this->session->userdata('nama') ?><?= $this->session->userdata('level') ?></span>
             </span>
 
           </h3>
@@ -253,9 +253,9 @@ if ($this->session->userdata('id') == '') {
             $cMenu  = 'menu_admin.php';
           } elseif ($this->session->userdata('level') == 2) {
             $cMenu  = 'menu_recruitment.php';
-          } elseif ($this->session->userdata('level') >= 3) {
+          } elseif ($this->session->userdata('level') == 3) {
             $cMenu  = 'menu_kepegawaian.php';
-          } elseif ($this->session->userdata('level') >= 4) {
+          } elseif ($this->session->userdata('level') == 4) {
             $cMenu  = 'menu_manager.php';
           } else {
             $cMenu  = 'login.php';

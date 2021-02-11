@@ -1189,6 +1189,8 @@
         <!-- end:: Content -->
       </div>
 
-    <?php } else { ?>
+    <?php } else if ($this->session->userdata('level') == 4){ 
+
+    } else { ?>
 
     <?php } ?>
