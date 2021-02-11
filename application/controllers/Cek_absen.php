@@ -157,7 +157,10 @@ class Cek_absen extends CI_Controller
                 
         //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
         $data['data_absensi'] = $this->model->ViewBetween('attlog','attlog',$x,$y);
-        $this->load->view('admin/gaji/tb_absensi', $data);
+        
+		$this->load->view('admin/gaji/tb_absensi', $data);
+		$this->load->view('admin/container/footer_dataTable');
+        
 
     }
 
@@ -173,6 +176,7 @@ class Cek_absen extends CI_Controller
                 
         $data['row'] = $this->model->ViewBetween('v_log_data_absen','tanggal',$dTgl_cetak,$dTgl_cetak_end);
         $this->load->view('admin/gaji/tb_absensi_import', $data);
+        $this->load->view('admin/container/footer_dataTable');
 
     }
     

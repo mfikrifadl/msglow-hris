@@ -52,7 +52,7 @@
         <tr>
             <td valign='top'>Jabatan</td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=6><?= $data[0]['nama_jabatan'] ?></td>
+            <td valign='top' colspan=6><?= $data[0]['jabatan'] ?></td>
         </tr>
         <tr>
             <td valign='top' colspan=8 style="text-align: justify;">Maka dengan ini, Diberikan <b><u><?= $data[0]['Keterangan'] ?></u></b> terkait dengan tindak pelanggaran yang saudara lakukan, yakni:</td>

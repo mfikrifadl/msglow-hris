@@ -140,7 +140,7 @@ else {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <a href="<?= site_url('transaksi/teguran_lisan') ?>" class="btn btn-primary">
+                                <a href="<?= site_url('hrd/teguran_lisan') ?>" class="btn btn-primary">
                                     <i class="fa fa-hand-point-left" aria-hidden="true"></i> Kembali
                                 </a>
                             </div>
@@ -267,14 +267,14 @@ else {
                                     <td><?= ($vaPeringatan['mulai_berlaku']) ?></td>
                                     <td><?= ($vaPeringatan['nik']) ?></td>
                                     <td><?= ($vaPeringatan['nama']) ?></td>
-                                    <td><?= ($vaPeringatan['keterangan']) ?></td>
+                                    <td><?= ($vaPeringatan['keterangan_teguran']) ?></td>
                                     <td><?= ($vaPeringatan['jum_teguran_lisan']) ?></td>
                                     <td>
-                                        <a class="btn-link" title="View Data" href="<?= site_url('transaksi/teguran_lisan/view/' . $vaPeringatan['id'] . '') ?>">
+                                        <a class="btn-link" title="View Data" href="<?= site_url('hrd/teguran_lisan/view/' . $vaPeringatan['id'] . '') ?>">
                                             <i class="fa fa-eye text-success"></i>
                                         </a>
                                         |
-                                        <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/teguran_lisan/edit/' . $vaPeringatan['id'] . '') ?>">
+                                        <a class="btn-link" title="Edit Data" href="<?= site_url('hrd/teguran_lisan/edit/' . $vaPeringatan['id'] . '') ?>">
                                             <i class="fa fa-edit text-info"></i>
                                         </a>
                                         |
@@ -318,7 +318,7 @@ else {
                 }
             }
         };
-        xmlhttp.open("GET", "<?= site_url('Transaksi_act/get_pegawai/') ?>/" + data, true);
+        xmlhttp.open("GET", "<?= site_url('hrd_act/get_pegawai/') ?>/" + data, true);
         xmlhttp.send();
     }
 </script>

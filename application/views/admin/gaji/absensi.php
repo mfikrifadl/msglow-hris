@@ -92,7 +92,7 @@ if ($action == "edit") {
                               </div>
 
                             </div>
-
+                            
                             <br />
                             <div id="data_absensi"></div>
                             <br />
@@ -166,8 +166,8 @@ if ($action == "edit") {
                                   <span class="form-text text-muted">date range selection</span>
                                 </div>
                               </div>
-
                             </div>
+                            
                             <br />
                             <div id="data_absensi_import"></div>
                             <br />
@@ -192,7 +192,7 @@ if ($action == "edit") {
 
         </div>
       </div>
-    </div>
+    </div> 
 
 
 
@@ -289,25 +289,25 @@ if ($action == "edit") {
     }
   }
 
-  $("#table_scroll_x").dataTable({
-    // scrollY: '50vh',
-    scrollX: 'true',
-    scrollCollapse: true,
-    "oLanguage": {
-      "sLengthMenu": "Tampilkan _MENU_ data per halaman",
-      "sSearch": "Pencarian: ",
-      "sZeroRecords": "Maaf, tidak ada data yang ditemukan",
-      "sInfo": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
-      "sInfoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
-      "sInfoFiltered": "(di filter dari _MAX_ total data)",
-      "oPaginate": {
-        "sFirst": "Awal",
-        "sLast": "Akhir",
-        "sPrevious": "Sebelumnya",
-        "sNext": "Selanjutnya"
-      }
-    }
-  });
+  // $("#table_scroll_x").dataTable({
+  //   // scrollY: '50vh',
+  //   scrollX: 'true',
+  //   scrollCollapse: true,
+  //   "oLanguage": {
+  //     "sLengthMenu": "Tampilkan _MENU_ data per halaman",
+  //     "sSearch": "Pencarian: ",
+  //     "sZeroRecords": "Maaf, tidak ada data yang ditemukan",
+  //     "sInfo": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
+  //     "sInfoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
+  //     "sInfoFiltered": "(di filter dari _MAX_ total data)",
+  //     "oPaginate": {
+  //       "sFirst": "Awal",
+  //       "sLast": "Akhir",
+  //       "sPrevious": "Sebelumnya",
+  //       "sNext": "Selanjutnya"
+  //     }
+  //   }
+  // });
 
   function run() {
 

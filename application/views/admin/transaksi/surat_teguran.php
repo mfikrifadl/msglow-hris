@@ -137,7 +137,7 @@ if ($action == "edit") {
                                                             <td><?= ($vaPeringatan['tanggal']) ?></td>
                                                             <td><?= ($vaPeringatan['nomor_surat']) ?></td>
                                                             <td><?= ($vaPeringatan['nama']) ?></td>
-                                                            <td><?= ($vaPeringatan['keterangan_surat']) ?></td>
+                                                            <td><?= ($vaPeringatan['Keterangan']) ?></td>
                                                             <td class="text-center">
                                                                 <!-- <a class="btn-link" title="View Data" href="<?php //echo site_url('transaksi/surat_teguran/view/' . $vaPeringatan['id'] . '') 
                                                                                                                     ?>">
@@ -147,7 +147,7 @@ if ($action == "edit") {
                                                                     <i class="fa fa-print"></i>
                                                                 </a>
                                                                 |
-                                                                <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/surat_teguran/edit/' . $vaPeringatan['id'] . '') ?>">
+                                                                <a class="btn-link" title="Edit Data" href="<?= site_url('hrd/surat_teguran/edit/' . $vaPeringatan['id'] . '') ?>">
                                                                     <i class="fa fa-edit text-info"></i>
                                                                 </a>
                                                                 |
@@ -321,7 +321,7 @@ if ($action == "edit") {
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <a href="<?= site_url('transaksi/surat_teguran') ?>" class="btn btn-primary">
+                                                            <a href="<?= site_url('hrd/surat_teguran') ?>" class="btn btn-primary">
                                                                 <i class="fa fa-hand-point-left" aria-hidden="true"></i> Kembali
                                                             </a>
                                                         </div>

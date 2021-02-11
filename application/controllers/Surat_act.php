@@ -86,7 +86,7 @@ class Surat_act extends CI_Controller
 
             $this->model->Insert("log", $vaLog);
             $this->model->Insert('tb_surat_peringatan', $dataInsert);
-            redirect(site_url('transaksi/teguran_lisan/I'));
+            redirect(site_url('hrd/teguran_lisan/I'));
         } elseif ($Type == 'Update') {
 
             $dataUpdate = array(
@@ -109,7 +109,7 @@ class Surat_act extends CI_Controller
             );
             $this->model->Insert("log", $vaLog2);
             $this->model->update('tb_surat_peringatan', 'id', $Id, $dataUpdate);
-            redirect(site_url('transaksi/teguran_lisan/U'));
+            redirect(site_url('hrd/teguran_lisan/U'));
         } elseif ($Type == 'Delete') {
 
             $dataDelete = array(
@@ -128,7 +128,7 @@ class Surat_act extends CI_Controller
 
             $this->model->Insert("log", $vaLog2);
             $this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
-            redirect(site_url('transaksi/teguran_lisan/D'));
+            redirect(site_url('hrd/teguran_lisan/D'));
         }
     }
 
@@ -163,7 +163,7 @@ class Surat_act extends CI_Controller
 
             $this->model->Insert("log", $vaLog);
             $this->model->Insert('tb_surat_peringatan', $dataInsert);
-            redirect(site_url('transaksi/surat_teguran/I'));
+            redirect(site_url('hrd/surat_teguran/I'));
         } elseif ($Type == 'Update') {
 
             $dataUpdate = array(
@@ -192,7 +192,7 @@ class Surat_act extends CI_Controller
             );
             $this->model->Insert("log", $vaLog2);
             $this->model->update('tb_surat_peringatan', 'id', $Id, $dataUpdate);
-            redirect(site_url('transaksi/surat_teguran/U'));
+            redirect(site_url('hrd/surat_teguran/U'));
         } elseif ($Type == 'Delete') {
 
             $dataDelete = array(
@@ -211,7 +211,7 @@ class Surat_act extends CI_Controller
 
             $this->model->Insert("log", $vaLog2);
             $this->model->Update_Delete('tb_surat_peringatan', 'id', $Id, $dataDelete);
-            redirect(site_url('transaksi/surat_teguran/D'));
+            redirect(site_url('hrd/surat_teguran/D'));
         }
     }
 
@@ -247,7 +247,7 @@ class Surat_act extends CI_Controller
                 $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
             }
 
-            redirect(site_url('transaksi/sp'));
+            redirect(site_url('hrd/sp'));
         }
     }
 
@@ -274,7 +274,7 @@ class Surat_act extends CI_Controller
                 $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
             }
 
-            redirect(site_url('transaksi/sp2'));
+            redirect(site_url('hrd/sp2'));
         }
     }
 
@@ -301,7 +301,7 @@ class Surat_act extends CI_Controller
                 $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
             }
 
-            redirect(site_url('transaksi/sp3'));
+            redirect(site_url('hrd/sp3'));
         }
     }
 
@@ -317,12 +317,12 @@ class Surat_act extends CI_Controller
 
     public function cetak_surat_teguran($id = '')
     {
-        $data['data'] = $this->model->ViewWhere('v_pegawai_pelanggaran_sp', 'id', $id);
+        $data['data'] = $this->model->ViewWhere('v_teguran_lisan', 'id', $id);
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
         $html = $this->load->view('admin/transaksi/cetak_surat_teguran', $data, true);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
-        redirect(site_url('Transaksi/kontrak'));
+        redirect(site_url('hrd/kontrak'));
     }
 
     public function cetak_sp1($id = '')
@@ -332,7 +332,7 @@ class Surat_act extends CI_Controller
         $html = $this->load->view('admin/transaksi/cetak_sp1', $data, true);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
-        redirect(site_url('transaksi/sp1'));
+        redirect(site_url('hrd/sp1'));
     }
     public function cetak_sp2($id = '')
     {
@@ -341,7 +341,7 @@ class Surat_act extends CI_Controller
         $html = $this->load->view('admin/transaksi/cetak_sp2', $data, true);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
-        redirect(site_url('transaksi/sp2'));
+        redirect(site_url('hrd/sp2'));
     }
     public function cetak_sp3($id = '')
     {
@@ -350,6 +350,6 @@ class Surat_act extends CI_Controller
         $html = $this->load->view('admin/transaksi/cetak_sp3', $data, true);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
-        redirect(site_url('transaksi/sp3'));
+        redirect(site_url('hrd/sp3'));
     }
 }

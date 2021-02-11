@@ -16,14 +16,11 @@
     <table class="table table-striped table-bordered text-center" id='DataTable_absensi'>
         <thead>
             <tr>
-                <td>No </td>
-                <td>Nama</td>
-                <td>Departement</td>
-                <td>Tanggal</td>
+               
                 <td>Jam_Datang</td>
                 <td>Jam_Pulang</td>
                 <!-- <td>Total_Jam_Kerja</td> -->
-                <td colspan="2">Keterangan</td>
+                <td>Keterangan</td>
                 <td>Keterlambatan</td>
                 <td>Overtime</td>
                 <td>Keterangan_Lain-Lain</td>
@@ -39,10 +36,7 @@
                     $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
 
                 ?>
-                    <td><?= ++$no; ?></td>
-                    <td><?= $vaPegawai['nama'] ?></td>
-                    <td><?= $vaPegawai['nama_jabatan'] ?></td>
-                    <td><?= $vaPegawai['tanggal'] ?></td>
+                    
                     <td><?= $vaPegawai['jam_datang'] ?></td>
                     <td><?= $vaPegawai['jam_pulang'] ?></td>
                     <!-- <td> -->
@@ -70,7 +64,7 @@
 
                     ?>
                     <!-- </td> -->
-                    <td colspan="2">
+                    <td>
                         <div class="form-group">
                             <select id="ket_<?= $vaPegawai['id']; ?>" onkeyup="update_ket('<?= $vaPegawai['id']; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                 <option></option>
@@ -193,8 +187,11 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript">
-        $(".DataTablePegawaiJos").dataTable({
+    <!-- <script type="text/javascript">
+        $("#table_scroll_x").dataTable({
+            // scrollY: '50vh',
+            scrollX: 'true',
+            scrollCollapse: true,
             "oLanguage": {
                 "sLengthMenu": "Tampilkan _MENU_ data per halaman",
                 "sSearch": "Pencarian: ",
@@ -211,16 +208,4 @@
             }
         });
     </script>
-    <script>
-        function GetDataModal(id) {
-            $("#operator").modal('show');
-            $.ajax({
-                type: "GET",
-                url: "<?= base_url() ?>transaksi/tb_detail_pegawai/" + id,
-                cache: false,
-                success: function(msg) {
-                    $(".modal-body").html(msg);
-                }
-            });
-        }
-    </script>
+     -->

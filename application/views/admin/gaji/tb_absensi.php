@@ -13,7 +13,7 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <table class="table table-striped table-bordered" id="DataTable">
+    <table class='table table-striped table-bordered' id='DataTableWawancara'>
         <thead>
             <tr>
                 <td>No </td>
@@ -87,7 +87,7 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(".DataTablePegawaiJos").dataTable({
             "oLanguage": {
                 "sLengthMenu": "Tampilkan _MENU_ data per halaman",
@@ -104,17 +104,24 @@
                 }
             }
         });
-    </script>
-    <script>
-        function GetDataModal(id) {
-            $("#operator").modal('show');
-            $.ajax({
-                type: "GET",
-                url: "<?= base_url() ?>transaksi/tb_detail_pegawai/" + id,
-                cache: false,
-                success: function(msg) {
-                    $(".modal-body").html(msg);
+
+        $("#table_scroll_x").dataTable({
+            // scrollY: '50vh',
+            scrollX: 'true',
+            scrollCollapse: true,
+            "oLanguage": {
+                "sLengthMenu": "Tampilkan _MENU_ data per halaman",
+                "sSearch": "Pencarian: ",
+                "sZeroRecords": "Maaf, tidak ada data yang ditemukan",
+                "sInfo": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
+                "sInfoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
+                "sInfoFiltered": "(di filter dari _MAX_ total data)",
+                "oPaginate": {
+                    "sFirst": "Awal",
+                    "sLast": "Akhir",
+                    "sPrevious": "Sebelumnya",
+                    "sNext": "Selanjutnya"
                 }
-            });
-        }
-    </script>
+            }
+        });
+    </script> -->

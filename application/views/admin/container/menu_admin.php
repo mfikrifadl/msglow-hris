@@ -7,13 +7,13 @@
     <div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500">
       <ul class="kt-menu__nav ">
 
-        <li class="kt-menu__item" aria-haspopup="true">
+        <li class="kt-menu__item <?= $this->uri->segment(1) == '' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
           <a href="<?= base_url() ?>" class="kt-menu__link">
             <i class="kt-menu__link-icon flaticon2-setup"></i>
             <span class="kt-menu__link-text">Dashboard </span>
           </a>
         </li>
-        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'recruitment' || $this->uri->segment(1) == 'recruitment_phl' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon-users-1"></i>
             <span class="kt-menu__link-text">
@@ -24,7 +24,7 @@
           <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
             <ul class="kt-menu__subnav">
 
-              <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+              <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'recruitment' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                 <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -37,7 +37,7 @@
                 <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
                   <ul class="kt-menu__subnav">
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'wawancara' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/wawancara'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -48,7 +48,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'psiko_test' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/psiko_test'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -58,7 +58,7 @@
                         </span>
                       </a>
                     </li>
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'uji_kompetensi' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/uji_kompetensi'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -68,7 +68,7 @@
                         </span>
                       </a>
                     </li>
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'interview_user_1' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/interview_user_1'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -78,7 +78,7 @@
                         </span>
                       </a>
                     </li>
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'interview_user_2' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/interview_user_2'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -89,7 +89,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'interview_hrga' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/interview_hrga'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -100,7 +100,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'tes_kesehatan' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/tes_kesehatan'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -111,7 +111,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'peserta_diterima' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/peserta_diterima'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -122,7 +122,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'monitoring_status' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment/monitoring_status'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -137,7 +137,7 @@
                 </div>
               </li>
 
-              <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+              <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'recruitment_phl' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                 <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -151,7 +151,7 @@
                 <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
                   <ul class="kt-menu__subnav">
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'administrasi' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment_phl/administrasi'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -162,7 +162,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'wawancara_hr' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment_phl/wawancara_hr'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -172,7 +172,7 @@
                         </span>
                       </a>
                     </li>
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'interview_user_1' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment_phl/interview_user_1'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -183,7 +183,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'tes_kesehatan_phl' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment_phl/tes_kesehatan_phl'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -194,7 +194,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'peserta_diterima' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment_phl/peserta_diterima'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -205,7 +205,7 @@
                       </a>
                     </li>
 
-                    <li class="kt-menu__item " aria-haspopup="true">
+                    <li class="kt-menu__item <?= $this->uri->segment(2) == 'monitoring_status' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                       <a href="<?= site_url('recruitment_phl/monitoring_status'); ?>" class="kt-menu__link ">
                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                           <span></span>
@@ -225,14 +225,14 @@
           </div>
         </li>
 
-        <li class="kt-menu__item" aria-haspopup="true">
+        <!-- <li class="kt-menu__item <?= $this->uri->segment(2) == 'pengajuan_form_karyawan' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
           <a href="<?= site_url('transaksi/pengajuan_form_karyawan'); ?>" class="kt-menu__link ">
             <i class="kt-menu__link-icon flaticon2-document"></i>
             <span class="kt-menu__link-text">Pengajuan Tambah Karyawan </span>
           </a>
-        </li>
+        </li> -->
 
-        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'transaksi' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon2-user"></i>
             <span class="kt-menu__link-text">Pegawai</span>
@@ -240,7 +240,7 @@
           </a>
           <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
             <ul class="kt-menu__subnav">
-              <li class="kt-menu__item " aria-haspopup="true">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'pegawai' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('transaksi/pegawai'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -249,7 +249,7 @@
                 </a>
               </li>              
 
-              <li class="kt-menu__item " aria-haspopup="true">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'kontrak' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('transaksi/kontrak'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -258,7 +258,16 @@
                 </a>
               </li>
 
-              <li class="kt-menu__item " aria-haspopup="true">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'pengajuan_form_karyawan' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
+                <a href="<?= site_url('transaksi/pengajuan_form_karyawan'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">Pengajuan Tambah Karyawan</span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'jabatan_pegawai' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('transaksi/jabatan_pegawai'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -285,7 +294,7 @@
                 </a>
               </li> -->
 
-              <li class="kt-menu__item " aria-haspopup="true">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'pengundurandiri_pegawai' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('transaksi/pengundurandiri_pegawai'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -298,7 +307,7 @@
           </div>
         </li>
 
-        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'hrd' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon-rotate"></i>
             <span class="kt-menu__link-text">
@@ -309,8 +318,8 @@
           <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
             <ul class="kt-menu__subnav">
 
-              <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('transaksi/teguran_lisan'); ?>" class="kt-menu__link ">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'teguran_lisan' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
+                <a href="<?= site_url('hrd/teguran_lisan'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -318,8 +327,8 @@
                 </a>
               </li>
 
-              <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('transaksi/surat_teguran'); ?>" class="kt-menu__link ">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'surat_teguran' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
+                <a href="<?= site_url('hrd/surat_teguran'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -327,8 +336,8 @@
                 </a>
               </li>
 
-              <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('transaksi/sp'); ?>" class="kt-menu__link ">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'sp' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
+                <a href="<?= site_url('hrd/sp'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -408,14 +417,14 @@
           </div>
         </li> -->
 
-        <li class="kt-menu__item" aria-haspopup="true">
+        <li class="kt-menu__item <?= $this->uri->segment(2) == 'absensi_pegawai' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
           <a href="<?= site_url('gaji/absensi_pegawai'); ?>" class="kt-menu__link ">
             <i class="kt-menu__link-icon flaticon2-open-text-book"></i>
             <span class="kt-menu__link-text">Absensi </span>
           </a>
         </li>
 
-        <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'master' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon2-layers"></i>
             <span class="kt-menu__link-text">
@@ -426,7 +435,7 @@
           <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
             <ul class="kt-menu__subnav">
 
-              <li class="kt-menu__item " aria-haspopup="true">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'area_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('master/area_kerja'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -437,7 +446,7 @@
                 </a>
               </li>
 
-              <li class="kt-menu__item " aria-haspopup="true">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'sub_unit_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('master/sub_unit_kerja'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -459,7 +468,7 @@
                 </a>
               </li> -->
 
-              <li class="kt-menu__item " aria-haspopup="true">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'outlet' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('master/outlet'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
