@@ -256,7 +256,7 @@ if ($this->session->userdata('id') == '') {
           } elseif ($this->session->userdata('level') >= 3) {
             $cMenu  = 'menu_kepegawaian.php';
           } elseif ($this->session->userdata('level') >= 4) {
-            $cMenu  = 'menu_kepegawaian.php';
+            $cMenu  = 'menu_manager.php';
           } else {
             $cMenu  = 'login.php';
           }
