@@ -179,7 +179,7 @@ if ($action == "edit") {
                         <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-success">
                           <i class="flaticon2-edit"></i>
                         </button>
-                        <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
+                        <a class="btn btn-outline-warning" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
                           <i class="la la-search"></i>
                         </a>
                         <!-- <button type="button" onclick="deleteReg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">

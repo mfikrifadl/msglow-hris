@@ -279,7 +279,7 @@ class Recruitment_act extends CI_Controller
 				'tahap_r'			=> 'Test Administrasi',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
 			);
-		}		
+		}
 
 		$seralizedArray = serialize($data);
 		$vaLog = array(
@@ -293,23 +293,26 @@ class Recruitment_act extends CI_Controller
 		$this->model->Insert("log", $vaLog);
 		$cViewDataPelamar 			= $this->model->CekDataPelamar('recruitment', 'kode_wawancara', $code);
 		if ($cViewDataPelamar->num_rows() > 0) {
-			// $data['cek_pegawai']	= $this->model->CekDataPelamar('recruitment', 'kode_wawancara', $code);
-			// $data['keterangan']     = " Sistem Mendeteksi Kemiripan Data Pelamar ";
-			
-			// $this->load->view('admin/recruitment/peserta_diterima', $data);
+?>
+			<script type="text/javascript">
+				alert("DATA SUDAH DIINPUTKAN");
+			</script>
+<?php
 		} else {
 			if ($Type == "Insert") {
 				$this->model->Insert('recruitment', $data_create);
 				$this->model->Insert("log", $vaLog);
 				redirect(site_url('recruitment/wawancara/'));
-			} elseif ($Type == "Update") {
-				$this->model->Update('recruitment', 'kode_wawancara', $id, $data_update);
-				$this->model->Insert("log", $vaLog);
-				redirect(site_url('recruitment/wawancara/'));
-			} elseif ($Type == "Delete") {
-				$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
-				redirect(site_url('recruitment/wawancara/'));
 			}
+		}
+
+		if ($Type == "Update") {
+			$this->model->Update('recruitment', 'kode_wawancara', $id, $data_update);
+			$this->model->Insert("log", $vaLog);
+			redirect(site_url('recruitment/wawancara/'));
+		} elseif ($Type == "Delete") {
+			$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
+			redirect(site_url('recruitment/wawancara/'));
 		}
 	}
 

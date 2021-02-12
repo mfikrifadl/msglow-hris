@@ -188,15 +188,15 @@ class Recruitment_phl_act extends CI_Controller
 			if ($Type == "Insert") {
                 $this->model->Insert('recruitment_phl', $data_create);
                 $this->model->Insert("log", $vaLog);
-            } elseif ($Type == "Update") {
-                $this->model->Update('recruitment_phl', 'id_recruitment_phl', $id, $data_update);
-                $this->model->Insert("log", $vaLog);
-            } elseif ($Type == "Delete") {
-                $this->model->Update_Delete('recruitment_phl', 'id_recruitment_phl', $id, $data_delete);
-                redirect(site_url('recruitment_phl/administrasi/'));
-            }
+            } 
 		}
-        
+        if ($Type == "Update") {
+            $this->model->Update('recruitment_phl', 'id_recruitment_phl', $id, $data_update);
+            $this->model->Insert("log", $vaLog);
+        } elseif ($Type == "Delete") {
+            $this->model->Update_Delete('recruitment_phl', 'id_recruitment_phl', $id, $data_delete);
+            redirect(site_url('recruitment_phl/administrasi/'));
+        }
     }
 
     public function wawancara_hr($Type = "", $id = "")
