@@ -143,6 +143,7 @@ class Recruitment_phl extends CI_Controller
 
     public function tes_kesehatan_phl($Aksi = "", $Id = "")
     {
+        // echo"$Aksi - $Id";
         $data['action'] = $Aksi;
 		$data['menu']   = 'Recruitment PHL';
 		$data['file']   = 'Tes Kesehatan';

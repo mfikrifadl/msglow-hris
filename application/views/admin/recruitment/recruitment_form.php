@@ -244,32 +244,39 @@ $whois_date = date('d-m-Y H:i:s');
                                                 if ($vaArea['hasil_tes_kesehatan'] == NULL) {
                                                 } else {
                                             ?>
-                                                    <button type="button" class="btn btn-bold btn-label-info btn-outline-info btn-sm" data-toggle="modal" data-target="#kt_modal_3"> Preview</button>
+                                                    <button type="button" class="btn btn-bold btn-label-info btn-outline-info btn-sm" data-toggle="modal" data-target="#kt_modal_3<?= $vaArea['id_recruitment'] ?>"> Preview </button>
 
                                                     <!--begin::Modal-->
+                                                    <?php
+                                                    $no = 0;
+                                                    foreach ($row as $key => $vaAreaModal) {
+                                                        ++$no;
+                                                    ?>
+                                                        <div class="modal fade" id="kt_modal_3<?= $vaAreaModal['id_recruitment'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
 
-                                                    <div class="modal fade" id="kt_modal_3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Hasil Tes Kesehatan <?= $vaArea['nama'] ?></h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form>
-                                                                        <div class="form-group">
-                                                                            <img src="<?= base_url() ?><?= $vaArea['hasil_tes_kesehatan'] ?>" style="width:500%;max-width:700px" />
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Hasil Tes Kesehatan <?= $vaAreaModal['nama'] ?></h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form>
+                                                                            <div class="form-group">
+                                                                                <img src="<?= base_url() ?><?= $vaAreaModal['hasil_tes_kesehatan'] ?>" style="width:500%;max-width:700px" />
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
+                                                    <?php
+                                                    } ?>
                                                     <!--end::Modal-->
 
                                             <?php
@@ -349,7 +356,7 @@ $whois_date = date('d-m-Y H:i:s');
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group" aria-label="First group">
-                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit/' . $vaArea['id_recruitment'] . '') ?>">
+                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' .'/'.$vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
                                                 </a>
                                                 <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">

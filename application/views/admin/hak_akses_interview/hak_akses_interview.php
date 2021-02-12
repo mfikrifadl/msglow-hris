@@ -83,6 +83,8 @@ if ($action == "edit") {
                                                         if ($action == "edit") {
                                                         ?>
                                                             <input type="text" readonly="true" value="<?= $cNama_pengaju_form ?>" class="form-control">
+
+                                                            <input type="hidden" name="cIdPegawai" value="<?= $cIdPegawai ?>">
                                                         <?php
                                                         } else {
                                                         ?>
@@ -108,7 +110,19 @@ if ($action == "edit") {
                                                     <div class="form-group">
                                                         <label>NIK</label>
                                                         <input type="text" name="cNik" id="cNik" readonly="true" value="<?= $cNik ?>" class="form-control">
-                                                        <input type="hidden" name="cNama" id="cNama">
+                                                        <?php
+                                                        if ($action == "edit") {
+                                                        ?>
+                                                            <input type="hidden" name="cNama" value="<?= $cNama_pengaju_form ?>">
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <input type="hidden" name="cNama" id="cNama">
+                                                        <?php
+                                                        }
+                                                        ?>
+
+
                                                     </div>
                                                 </div> <!-- /.col-form -->
                                                 <div class="col-3">

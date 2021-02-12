@@ -109,10 +109,15 @@ class Recruitment extends CI_Controller
 		$data['registrant']	= $data2['data'];
 
 		$data['levels']	= $this->model->view('level', 'id_level');
+		
 
 		if ($Aksi == 'edit') {
 			$data['field'] 	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
 		}
+		// elseif($Aksi == 'ket'){
+		// 	// $data['field'] 	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
+		// 	//$data['ket_data'] = $Id;
+		// }
 
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/wawancara', $data);
@@ -271,6 +276,8 @@ class Recruitment extends CI_Controller
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
+
+		//echo "$Aksi - $Id";
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');

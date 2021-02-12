@@ -101,24 +101,29 @@
               </thead>
               <tbody>
                 <?php $no = 0;
-                foreach ($row as $key => $vaSubUnit) { ?>
-                  <tr>
-                    <td><?= ++$no; ?></td>
-                    <td><?= $vaSubUnit['UnitKerja'] ?></td>
-                    <td><?= substr($vaSubUnit['nama_sub_unit_kerja'], 0, 30) ?>..</td>
-                    <td class="text-center">
+                foreach ($row as $key => $vaSubUnit) {
+                  if ($vaSubUnit['is_deleted'] == "1") {
+                  } else {
+                ?>
+                    <tr>
+                      <td><?= ++$no; ?></td>
+                      <td><?= $vaSubUnit['UnitKerja'] ?></td>
+                      <td><?= substr($vaSubUnit['nama_sub_unit_kerja'], 0, 30) ?>..</td>
+                      <td class="text-center">
 
-                      <a class="btn btn-outline-success btn-sm btn-icon btn-icon-md" title="Edit Data" href="<?= site_url('master/sub_unit_kerja/edit/' . $vaSubUnit['id_sub_unit_kerja'] . '') ?>">
-                        <i class="flaticon-edit"></i>
-                      </a>
-                      <a class="btn btn-outline-danger btn-sm btn-icon btn-icon-md" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                        <a class="btn btn-outline-success btn-sm btn-icon btn-icon-md" title="Edit Data" href="<?= site_url('master/sub_unit_kerja/edit/' . $vaSubUnit['id_sub_unit_kerja'] . '') ?>">
+                          <i class="flaticon-edit"></i>
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm btn-icon btn-icon-md" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('action/sub_unit_kerja/Delete/' . $vaSubUnit['id_sub_unit_kerja'] . '') ?>'}">
-                        <i class="flaticon-delete"></i>
-                      </a>
+                          <i class="flaticon-delete"></i>
+                        </a>
 
-                    </td>
-                  </tr>
-                <?php } ?>
+                      </td>
+                    </tr>
+                <?php
+                  }
+                } ?>
               </tbody>
             </table>
           </div>
@@ -133,7 +138,7 @@
     function save() {
       var cIdUnitKerja = $('#cIdUnitKerja').val();
       var cSubUnitKerja = $('#cSubUnitKerja').val();
-      
+
       // alert(dTglWawancara);
       if (cIdUnitKerja == "") {
         new PNotify({
@@ -152,14 +157,14 @@
           type: "POST",
           data: "cIdUnitKerja=" + cIdUnitKerja +
             "&cSubUnitKerja=" + cSubUnitKerja,
-          url: "<?= site_url('action/sub_unit_kerja/'.$cAction) ?>",
+          url: "<?= site_url('action/sub_unit_kerja/' . $cAction) ?>",
           cache: false,
           success: function(msg) {
-            new PNotify({
-              // title: 'Success!',
-              //text: 'Berhasil Simpan Data Sub Unit Kerja. Input Data Berikutnya',
-              type: 'success'
-            });
+            // new PNotify({
+            //   // title: 'Success!',
+            //   text: 'Berhasil Simpan Data Sub Unit Kerja. Input Data Berikutnya',
+            //   type: 'success'
+            // });
             $('#cIdUnitKerja').val("");
             $('#cSubUnitKerja').val("");
             $('#cIdUnitKerja').focus()

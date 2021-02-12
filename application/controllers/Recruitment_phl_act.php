@@ -65,6 +65,7 @@ class Recruitment_phl_act extends CI_Controller
     public function administrasi($Type = "", $id = "")
     {
         $status_tes = $this->input->post('cStatus');
+        $code = $this->input->post('cKodeWawancara');
         $data_create = array();
         
         if ($status_tes == "tidaklolos") {
@@ -180,17 +181,22 @@ class Recruitment_phl_act extends CI_Controller
             'nama' => $this->session->userdata('nama')
         );
         $this->model->Insert("log", $vaLog);
-
-        if ($Type == "Insert") {
-            $this->model->Insert('recruitment_phl', $data_create);
-            $this->model->Insert("log", $vaLog);
-        } elseif ($Type == "Update") {
-            $this->model->Update('recruitment_phl', 'id_recruitment_phl', $id, $data_update);
-            $this->model->Insert("log", $vaLog);
-        } elseif ($Type == "Delete") {
-            $this->model->Update_Delete('recruitment_phl', 'id_recruitment_phl', $id, $data_delete);
-            redirect(site_url('recruitment_phl/administrasi/'));
-        }
+        $cViewDataPelamar 			= $this->model->CekDataPelamar('recruitment_phl', 'kode_wawancara', $code);
+		if ($cViewDataPelamar->num_rows() > 0) {
+			
+		} else {
+			if ($Type == "Insert") {
+                $this->model->Insert('recruitment_phl', $data_create);
+                $this->model->Insert("log", $vaLog);
+            } elseif ($Type == "Update") {
+                $this->model->Update('recruitment_phl', 'id_recruitment_phl', $id, $data_update);
+                $this->model->Insert("log", $vaLog);
+            } elseif ($Type == "Delete") {
+                $this->model->Update_Delete('recruitment_phl', 'id_recruitment_phl', $id, $data_delete);
+                redirect(site_url('recruitment_phl/administrasi/'));
+            }
+		}
+        
     }
 
     public function wawancara_hr($Type = "", $id = "")

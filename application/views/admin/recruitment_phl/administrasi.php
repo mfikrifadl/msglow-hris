@@ -242,46 +242,51 @@ if ($action == "edit") {
                         </thead>
                         <tbody>
                             <?php $no = 0;
-                            foreach ($data_recruitment_phl as $key => $vaArea) { ?>
-                                <tr>
-                                    <td><?= ++$no; ?></td>
-                                    <td>
-                                        <strong><?= $vaArea['kode_wawancara'] ?></strong> <br />
-                                        <?= $vaArea['tanggal_wawancara'] ?>
-                                    </td>
-                                    <td><?= ($vaArea['nama']) ?> <br />
-                                        <?= ($vaArea['nomor_telepon']) ?> <br />
-                                        <?= ($vaArea['email']) ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if ($vaArea['administrasi'] == 'pemanggilan') {
-                                            $cLabel = 'info';
-                                        } else if ($vaArea['administrasi'] == 'lolos') {
-                                            $cLabel = 'success';
-                                        } else if ($vaArea['administrasi'] == 'tidaklolos') {
-                                            $cLabel = 'danger';
-                                        }
-                                        ?>
-                                        <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['administrasi']) ?></span>
-                                    </td>
-                                    <td>
-                                        <?= $vaArea['status_email_adm'] ?>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email_phl/administrasi/' . $vaArea['id_recruitment_phl'] . '') ?>">
-                                            <i class="flaticon-mail"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
-                                            <i class="flaticon-edit"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('recruitment_phl_act/administrasi/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
-                                            <i class="flaticon-delete"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                            foreach ($data_recruitment_phl as $key => $vaArea) {
+                                if ($vaArea['status'] == "Menjadi Pegawai" || $vaArea['status'] == "tidaklolos") {
+                                } else {
+                            ?>
+                                    <tr>
+                                        <td><?= ++$no; ?></td>
+                                        <td>
+                                            <strong><?= $vaArea['kode_wawancara'] ?></strong> <br />
+                                            <?= $vaArea['tanggal_wawancara'] ?>
+                                        </td>
+                                        <td><?= ($vaArea['nama']) ?> <br />
+                                            <?= ($vaArea['nomor_telepon']) ?> <br />
+                                            <?= ($vaArea['email']) ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($vaArea['administrasi'] == 'pemanggilan') {
+                                                $cLabel = 'info';
+                                            } else if ($vaArea['administrasi'] == 'lolos') {
+                                                $cLabel = 'success';
+                                            } else if ($vaArea['administrasi'] == 'tidaklolos') {
+                                                $cLabel = 'danger';
+                                            }
+                                            ?>
+                                            <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>"><?= ($vaArea['administrasi']) ?></span>
+                                        </td>
+                                        <td>
+                                            <?= $vaArea['status_email_adm'] ?>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email_phl/administrasi/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                                <i class="flaticon-mail"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                                <i class="flaticon-edit"></i>
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                    { window.location.href='<?= site_url('recruitment_phl_act/administrasi/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
+                                                <i class="flaticon-delete"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            } ?>
                         </tbody>
                     </table>
                 </div>

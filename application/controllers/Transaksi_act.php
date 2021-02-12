@@ -990,6 +990,16 @@ class Transaksi_act extends CI_Controller
 			);
 		}
 
+		// echo $this->input->post('cIdPegawai')." - id pegawai <br />";
+		// echo $this->input->post('cNik')." - nik pegawai <br />";
+		// echo $this->input->post('cNama')." - nama pegawai<br />";
+		// echo $this->input->post('cJob_career')." - career <br />";
+		// echo $this->input->post('cJabatan')." - jabatan <br />";
+		// echo $this->input->post('cSuk')." - csuk<br />";
+		// echo $this->input->post('cUnit_k')." - cunitk<br />";
+		// echo $this->input->post('pSuk')." - psuk<br />";
+		// echo $this->input->post('jmlP')." - jmlp<br />";
+
 		$data_approve = array(
 			'status_pengajuan'                   => 'approve',
 		);

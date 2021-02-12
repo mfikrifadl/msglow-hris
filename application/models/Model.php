@@ -84,7 +84,12 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
-	
+	public function CekDataPelamar($Table, $Where, $WhereValue)
+	{
+
+		$Query = $this->db->query("SELECT * FROM ". $Table ." WHERE ". $Where ." LIKE '%" . $WhereValue . "%' ");
+		return $Query;
+	}
 
 
 	public function Pegawai()

@@ -11,6 +11,7 @@ class Recruitment_act extends CI_Controller
 
 		//MenLoad model yang berada di Folder Model dan namany model
 		$this->load->model('model');
+		$this->load->model('relasi');
 		// Meload Library session 
 		$this->load->library('session');
 		//Meload database
@@ -124,6 +125,7 @@ class Recruitment_act extends CI_Controller
 	public function wawancara($Type = "", $id = "")
 	{
 		$status_tes = $this->input->post('cStatus');
+		$code = $this->input->post('cKodeWawancara');
 
 		$data_create = array();
 		if ($status_tes == "tidaklolos") {
@@ -230,31 +232,54 @@ class Recruitment_act extends CI_Controller
 			'is_delete' => 1
 		);
 
-		$data = array(
-			'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
-			'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
-			'nama'				=> $this->input->post('cNama'),
-			'created_by'		=> $this->input->post('whois'),
-			'update_by'			=> $this->input->post('whois'),
-			'nomor_telepon'		=> $this->input->post('cNomorTelepon'),
-			'recruitment'		=> $this->input->post('cStatus'),
-			'job'				=> $this->input->post('cJob'),
-			'job_id'			=> $this->input->post('cJob_id'),
-			'level_id'			=> $this->input->post('cLevel'),
-			'email'				=> $this->input->post('cEmail'),
-			'tahap_r'			=> 'Test Administrasi',
-			'status_email_adm'	=> 'Belum Kirim Email',
-			'level_id'			=> $this->input->post('cLevel'),
-			'status'			=> 'on review',
-			'psiko_test'			=> 'on review',
-			'uji_kompetensi'			=> 'on review',
-			'interview_user_1'			=> 'on review',
-			'interview_user_2'			=> 'on review',
-			'interview_hrga'			=> 'on review',
-			'tes_kesehatan'			=> 'on review',
-			'tahap_r'			=> 'Test Administrasi',
-			'status_email_tidaklolos'	=> 'Belum Kirim Email',
-		);
+		$data = array();
+		if ($status_tes == "tidaklolos") {
+			$data = array(
+				'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
+				'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
+				'nama'				=> $this->input->post('cNama'),
+				'created_by'		=> $this->input->post('whois'),
+				'nomor_telepon'		=> $this->input->post('cNomorTelepon'),
+				'recruitment'		=> $this->input->post('cStatus'),
+				'job'				=> $this->input->post('cJob'),
+				'job_id'			=> $this->input->post('cJob_id'),
+				'email'				=> $this->input->post('cEmail'),
+				'status_email_adm'	=> 'Belum Kirim Email',
+				'level_id'			=> $this->input->post('cLevel'),
+				'status'			=> 'tidaklolos',
+				'psiko_test'			=> 'tidaklolos',
+				'uji_kompetensi'			=> 'tidaklolos',
+				'interview_user_1'			=> 'tidaklolos',
+				'interview_user_2'			=> 'tidaklolos',
+				'interview_hrga'			=> 'tidaklolos',
+				'tes_kesehatan'			=> 'tidaklolos',
+				'tahap_r'			=> 'Test Administrasi',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+			);
+		} else {
+			$data = array(
+				'kode_wawancara' 	=> $this->input->post('cKodeWawancara'),
+				'tanggal_wawancara'	=> $this->input->post('dTglWawancara'),
+				'nama'				=> $this->input->post('cNama'),
+				'created_by'		=> $this->input->post('whois'),
+				'nomor_telepon'		=> $this->input->post('cNomorTelepon'),
+				'recruitment'		=> $this->input->post('cStatus'),
+				'job'				=> $this->input->post('cJob'),
+				'job_id'			=> $this->input->post('cJob_id'),
+				'email'				=> $this->input->post('cEmail'),
+				'status_email_adm'	=> 'Belum Kirim Email',
+				'level_id'			=> $this->input->post('cLevel'),
+				'status'			=> 'on review',
+				'psiko_test'			=> 'on review',
+				'uji_kompetensi'			=> 'on review',
+				'interview_user_1'			=> 'on review',
+				'interview_user_2'			=> 'on review',
+				'interview_hrga'			=> 'on review',
+				'tes_kesehatan'			=> 'on review',
+				'tahap_r'			=> 'Test Administrasi',
+				'status_email_tidaklolos'	=> 'Belum Kirim Email',
+			);
+		}		
 
 		$seralizedArray = serialize($data);
 		$vaLog = array(
@@ -266,19 +291,59 @@ class Recruitment_act extends CI_Controller
 			'nama' 			=> $this->session->userdata('nama')
 		);
 		$this->model->Insert("log", $vaLog);
-
-		if ($Type == "Insert") {
-			$this->model->Insert('recruitment', $data_create);
-			$this->model->Insert("log", $vaLog);
-			redirect(site_url('recruitment/wawancara/'));
-		} elseif ($Type == "Update") {
-			$this->model->Update('recruitment', 'kode_wawancara', $id, $data_update);
-			$this->model->Insert("log", $vaLog);
-			redirect(site_url('recruitment/wawancara/'));
-		} elseif ($Type == "Delete") {
-			$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
-			redirect(site_url('recruitment/wawancara/'));
+		$cViewDataPelamar 			= $this->model->CekDataPelamar('recruitment', 'kode_wawancara', $code);
+		if ($cViewDataPelamar->num_rows() > 0) {
+			// $data['cek_pegawai']	= $this->model->CekDataPelamar('recruitment', 'kode_wawancara', $code);
+			// $data['keterangan']     = " Sistem Mendeteksi Kemiripan Data Pelamar ";
+			
+			// $this->load->view('admin/recruitment/peserta_diterima', $data);
+		} else {
+			if ($Type == "Insert") {
+				$this->model->Insert('recruitment', $data_create);
+				$this->model->Insert("log", $vaLog);
+				redirect(site_url('recruitment/wawancara/'));
+			} elseif ($Type == "Update") {
+				$this->model->Update('recruitment', 'kode_wawancara', $id, $data_update);
+				$this->model->Insert("log", $vaLog);
+				redirect(site_url('recruitment/wawancara/'));
+			} elseif ($Type == "Delete") {
+				$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
+				redirect(site_url('recruitment/wawancara/'));
+			}
 		}
+	}
+
+	function cURL_API($id = "", $method = "", $data)
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/' . $id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => $method,
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU='
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		return $response;
+	}
+
+	public function wawancara_id($Id = "")
+	{
+		$content = $this->cURL_API($Id, 'GET', '');
+
+		echo $content;
 	}
 
 	public function edit_wawancara($id)
@@ -679,7 +744,7 @@ class Recruitment_act extends CI_Controller
 				'update_date'	=> $this->input->post('whois_date'),
 				'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 				'interview_hrga'	=> $this->input->post('cStatus'),
-				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),				
+				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
 				'tahap_r'	=> 'Interview HRGA',
 				'status_email_hrga'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -697,7 +762,7 @@ class Recruitment_act extends CI_Controller
 				'update_date'	=> $this->input->post('whois_date'),
 				'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 				'interview_hrga'	=> $this->input->post('cStatus'),
-				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),				
+				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
 				'tahap_r'	=> 'Interview HRGA',
 				'status_email_hrga'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -868,7 +933,7 @@ class Recruitment_act extends CI_Controller
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
 		);
-		
+
 		$this->model->Insert("log", $vaLog);
 
 		if ($Type == "Delete") {

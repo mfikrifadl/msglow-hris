@@ -97,9 +97,9 @@
                           <i class="fa fa-sign-in-alt"></i>
 
                         </a>
-                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email/' . $vaArea['id_recruitment'] . '') ?>">
+                        <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email/peserta_diterima/' . $vaArea['id_recruitment'] . '') ?>">
                           <i class="flaticon-mail"></i>
-                        </a>
+                        </a> -->
                       <?php
                       } else {
 
