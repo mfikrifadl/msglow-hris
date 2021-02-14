@@ -36,10 +36,13 @@
                             <div class="kt-portlet__body">
                                 <div class="row">
                                     <div class="col-md-12">
+                                    
+                                        <div class="form-group">
+                                            <a href="<?php echo base_url(); ?>recruitment/wawancara/" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+                                        </div>
                                         <div class="kt-portlet">
 
                                             <!--begin::Accordion-->
-
                                             <div class="accordion accordion-solid accordion-toggle-plus" id="accordionDATA">
                                                 <div class="card">
                                                     <div class="card-header" id="headingDATA">
@@ -100,11 +103,7 @@
                                                                     </div>
 
                                                                 </div>
-                                                                <div class="kt-portlet__foot">
-                                                                    <div class="kt-form__actions">
-                                                                        <a href="<?php echo base_url(); ?>recruitment/wawancara/" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
-                                                                    </div>
-                                                                </div>
+
                                                             </div>
                                                             <!--end::Portlet Data Kontak-->
                                                         </div>

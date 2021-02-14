@@ -320,6 +320,7 @@ if ($action == "edit") {
                                 <td>No</td>
                                 <td>Kode Wawancara</td>
                                 <td>Peserta</td>
+                                <td>Status Email</td>
                                 <td>Action</td>
                             </tr>
                         </thead>
@@ -335,6 +336,8 @@ if ($action == "edit") {
                                     <td><?= ($vaArea['nama']) ?> <br />
                                         <?= ($vaArea['nomor_telepon']) ?> <br />
                                         <?= ($vaArea['email']) ?>
+                                    </td>
+                                    <td><?= ($vaArea['status_email_adm']) ?>                                        
                                     </td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email_phl/administrasi/' . $vaArea['id_recruitment_phl'] . '') ?>">

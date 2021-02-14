@@ -473,7 +473,7 @@ if ($action == "edit") {
                           <div class="form-group">
                             <label>Nik</label>
                             <div class="input-group">
-                              <input type="text" name="cNik" class="form-control" placeholder="Nik Pegawai" value="<?= $cNik ?>">
+                              <input type="text" readonly="true" name="cNik" class="form-control" placeholder="Nik Pegawai" value="<?= $cNik ?>">
                               <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">
                                   <i class="kt-font-success fa fa-credit-card"></i>
@@ -500,7 +500,7 @@ if ($action == "edit") {
                           <div class="form-group">
                             <label>Nama</label>
                             <div class="input-group">
-                              <input type="text" id="cNamaPegawai" name="cNama" class="form-control" placeholder="Nama Pegawai" value="<?= $cNama  ?>">
+                              <input type="text" id="cNamaPegawai" readonly="true" name="cNama" class="form-control" placeholder="Nama Pegawai" value="<?= $cNama  ?>">
                               <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">
                                   <i class="kt-font-success fa fa-user"></i>
