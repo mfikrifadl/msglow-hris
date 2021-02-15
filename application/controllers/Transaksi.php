@@ -189,8 +189,10 @@ class Transaksi extends CI_Controller
 		$data['masakerja'] 		= $this->relasi->GetDataMasaKerja($Id);
 		if ($Aksi == 'edit') {
 			$data['field'] 	= $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $Id);
+			$data['v_tb_kontrak_pegawai']		= $this->model->ViewWhere('kontrak', 'id_pegawai', $Id);
 		} elseif ($Aksi == 'view') {
 			$data['view'] 		= $this->relasi->GetDataPegawaiSearch($Id);
+			$data['v_tb_kontrak_pegawai']		= $this->model->ViewWhere('kontrak', 'id_pegawai', $Id);
 		}
 
 		$this->load->view('admin/container/header', $dataHeader);
@@ -203,15 +205,11 @@ class Transaksi extends CI_Controller
 		$dataHeader['menu'] = 'Manajemen Pegawai';
 		$dataHeader['file'] = 'VIEW PEGAWAI';
 		$dataHeader['action'] = $Aksi;
-		$data['view'] 		= $this->relasi->GetDataPegawaiSearch($Id);
-		$data['panggilan'] 	= $this->relasi->GetSuratPanggilanPegawaiSearch($Id);
-		$data['pernyataan'] = $this->relasi->GetSuratPernyataanPegawaiSearch($Id);
+		$data['view'] 		= $this->model->ViewWhere('v_tb_pegawai','id_pegawai',$Id);
 		$data['peringatan'] = $this->relasi->GetSuratPeringatanPegawaiSearch($Id);
-		$data['istirahat']  = $this->relasi->GetSuratIstirahatPegawaiSearch($Id);
-		$data['skorsing']	= $this->relasi->GetSuratSkorsingPegawaiSearch($Id);
-		$data['mutasi']		= $this->relasi->GetDataMutasiPegawaiSearch($Id);
-		$data['tugas']		= $this->relasi->GetDataTugasPegawaiSearch($Id);
-
+		//$data['srt_teguran'] = $this->model->ViewWhere($Id);
+		$data['teguran_lisan'] = $this->model->ViewWhere('v_teguran_lisan','id_pegawai',$Id);
+		$data['masa_kerja'] = $this->model->ViewWhere('v_tb_kontrak_pegawai','id_pegawai',$Id);	
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/view.pegawai.php', $data);
@@ -241,13 +239,17 @@ class Transaksi extends CI_Controller
 
 	public function kontrak($Aksi = "", $Id = "")
 	{
+		// echo"$Id";
 		$data['action'] 	= $Aksi;
 		$data['menu']   	= 'Manajemen Pegawai';
 		$data['file']   	= 'Form Kontrak Pegawai';
-		$data['pegawai'] 	= $this->model->View('tb_pegawai', 'id_pegawai');
-		$data['row']		= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai WHERE t1.is_deleted=0')->result_array();
+		$data['pegawai'] 	= $this->model->View('v_tb_pegawai', 'id_pegawai');
+		$data['v_kontrak'] 	= $this->model->ViewDesc('v_kontrak_pegawai', 'id');
+		// $data['row']		= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai WHERE t1.is_deleted=0')->result_array();
 		$data['Nolast']		= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
 		if ($Aksi == 'Update') {
+			$data['kontrak_pegawai'] 	= $this->model->ViewWhere('v_kontrak_pegawai', 'id', $Id);
+			
 			$data['field'] 	= $this->db->query('SELECT * FROM
 													kontrak
 													INNER JOIN

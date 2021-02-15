@@ -300,6 +300,9 @@
     "bSort": true,
     "bInfo": true,
     "bAutoWidth": false,
+    scrollY: '50vh',
+    scrollX: 'true',
+    scrollCollapse: true,
     "oLanguage": {
       "sLengthMenu": "Tampilkan _MENU_ data per halaman",
       "sSearch": "Pencarian: ",

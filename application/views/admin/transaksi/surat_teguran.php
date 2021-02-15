@@ -25,19 +25,21 @@ if (date("m") == '01') {
 } elseif (date("m") == '12') {
     $cRomawai = 'XII';
 }
-
+$cLastNoSurat = "";
 foreach ($Nolast->result_array() as $key => $vaDataLast) {
     $cLastNoSurat = $vaDataLast['nomor_surat'];
 }
 
-
-if ($Nolast->num_rows() > 0) {
-    $NoSuratTerakhir = $cLastNoSurat;
+$cNomorSuratFix = "";
+if (empty($cLastNoSurat) || $cLastNoSurat == "" || $cLastNoSurat == null) {
+    $hasil = "0001";
+    $cNomorSuratFix = "No." . $hasil . "/ST/HRD/" . $cRomawai . "/" . date("Y") . " ";
 } else {
-    $NoSuratTerakhir = "No.0001/ST/HRD/" . $cRomawai . "/" . date("Y") . "";
+    $hasil_hit = $cLastNoSurat + 1;
+    $hasil = sprintf("%04d", $hasil_hit);
+    $cNomorSuratFix = "No." . $hasil . "/ST/HRD/" . $cRomawai . "/" . date("Y") . " ";
 }
 
-$cNomorSuratFix = "No." . "####" . "/ST/HRD/" . $cRomawai . "/" . date("Y") . " ";
 ?>
 <?php
 
@@ -103,85 +105,6 @@ if ($action == "edit") {
 
                 <!--begin::Accordion-->
 
-                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionDataTable">
-                    <div class="card">
-                        <div class="card-header" id="headingDataTable">
-                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataTable" aria-expanded="true" aria-controls="collapseDataTable">
-                                <strong> Data Table Surat Teguran </strong>
-                            </div>
-                        </div>
-                        <div id="collapseDataTable" class="collapse show" aria-labelledby="headingDataTable" data-parent="#accordionDataTable">
-                            <div class="card-body">
-                                <!--begin::Form-->
-                                <div class="kt-portlet__body">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-
-                                            <table class="table table-striped table-bordered" id="DataTable">
-                                                <thead>
-                                                    <tr>
-                                                        <td>No</td>
-                                                        <td>Tanggal</td>
-                                                        <td>Nomor Surat</td>
-                                                        <td>Pegawai</td>
-                                                        <td>Tipe Surat</td>
-                                                        <td>Action</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php $no = 0;
-                                                    foreach ($row as $key => $vaPeringatan) {
-                                                    ?>
-                                                        <tr>
-                                                            <td><?= ++$no; ?></td>
-                                                            <td><?= ($vaPeringatan['tanggal']) ?></td>
-                                                            <td><?= ($vaPeringatan['nomor_surat']) ?></td>
-                                                            <td><?= ($vaPeringatan['nama']) ?></td>
-                                                            <td><?= ($vaPeringatan['Keterangan']) ?></td>
-                                                            <td class="text-center">
-                                                                <!-- <a class="btn-link" title="View Data" href="<?php //echo site_url('transaksi/surat_teguran/view/' . $vaPeringatan['id'] . '') 
-                                                                                                                    ?>">
-                                                                    <i class="fa fa-eye text-success"></i>
-                                                                </a> -->
-                                                                <a class="btn-link" title="Print Surat Teguran" target="_blank" href="<?= site_url('Surat_act/cetak_surat_teguran/' . $vaPeringatan['id'] . '') ?>">
-                                                                    <i class="fa fa-print"></i>
-                                                                </a>
-                                                                |
-                                                                <a class="btn-link" title="Edit Data" href="<?= site_url('hrd/surat_teguran/edit/' . $vaPeringatan['id'] . '') ?>">
-                                                                    <i class="fa fa-edit text-info"></i>
-                                                                </a>
-                                                                |
-                                                                <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                                                    { window.location.href='<?= site_url('surat_act/surat_teguran/Delete/' . $vaPeringatan['id'] . '') ?>'}">
-                                                                    <i class="fa fa-trash text-danger"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-
-                                        </div> <!-- /.col-form -->
-
-                                    </div><!-- /.row -->
-                                </div>
-                                <!--end::Portlet Data Kontak-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end::Accordion-->
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <!--begin::Portlet Data Kontak-->
-            <div class="kt-portlet">
-
-                <!--begin::Accordion-->
-
                 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
                     <div class="card">
                         <div class="card-header" id="headingOne6">
@@ -189,7 +112,11 @@ if ($action == "edit") {
                                 <strong> Form Surat Teguran </strong>
                             </div>
                         </div>
-                        <div id="collapseDataKontak" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
+                        <?php
+                        $show = "collapse show";
+                        $collapse = "collapse";
+                        ?>
+                        <div id="collapseDataKontak" class="<?= $action == "edit" ? $show : $collapse ?>" aria-labelledby="headingOne6" data-parent="#accordionExample6">
                             <div class="card-body">
                                 <!--begin::Form-->
                                 <div class="kt-portlet__body">
@@ -240,17 +167,8 @@ if ($action == "edit") {
                                                         <div style="text-align: center;">
                                                             <h4 style="text-decoration: underline;">SURAT TEGURAN</h4>
 
-                                                            <!-- <strong class="text-center"><?= $NoSuratTerakhir ?></strong> -->
                                                             <div style="justify-content: center;display: flex;">
-                                                                <?php
-                                                                if ($nNomorSurat == "") {
-                                                                    echo "No. -";
-                                                                } else { ?>
-                                                                    <input readonly="true" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
-                                                                <?php
-                                                                }
-                                                                ?>
-
+                                                                <input readonly="true" name="nNomorSurat" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $cNomorSuratFix ?>">
                                                             </div>
 
                                                         </div>
@@ -262,19 +180,19 @@ if ($action == "edit") {
                                                         <div class="form-group row">
                                                             <label for="example-text-input" class="col-1 col-form-label">Nama :</label>
                                                             <div class="col-3">
-                                                                <input type="text" class="form-control" readonly="true" value=" <?= $cNama ?>">
+                                                                <input type="text" readonly="true" class="form-control" readonly="true" value=" <?= $cNama ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="example-text-input" class="col-1 col-form-label">NIK :</label>
                                                             <div class="col-3">
-                                                                <input type="text" class="form-control" readonly="true" value=" <?= $cNikPegawai ?>">
+                                                                <input type="text" readonly="true" class="form-control" readonly="true" value=" <?= $cNikPegawai ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="example-text-input" class="col-1 col-form-label">Jabatan :</label>
                                                             <div class="col-3">
-                                                                <input type="text" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
+                                                                <input type="text" readonly="true" class="form-control" readonly="true" value="<?= $cNamaJabatan ?>">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 text-left">
@@ -331,7 +249,7 @@ if ($action == "edit") {
                                                             <label for="example-text-input" class="col-1 col-form-label">Tertanggal </label>
                                                             <label for="example-text-input" class="col-1 col-form-label"> : </label>
                                                             <div class="col-2">
-                                                                <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
+                                                                <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>" required>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -341,9 +259,9 @@ if ($action == "edit") {
                                                         </div>
                                                         <div style="text-align: center;">
                                                             <h4 style="text-decoration: underline;">SURAT TEGURAN</h4>
-                                                            Nomor Terakhir : <strong><?= $NoSuratTerakhir ?></strong>
+
                                                             <div style="justify-content: center;display: flex;">
-                                                                <input type="text" name="nNomorSurat" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
+                                                                <input readonly="true" name="nNomorSurat" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $nNomorSurat ?>">
                                                             </div>
 
                                                         </div>
@@ -490,6 +408,87 @@ if ($action == "edit") {
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!--begin::Portlet Data Kontak-->
+            <div class="kt-portlet">
+
+                <!--begin::Accordion-->
+
+                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionDataTable">
+                    <div class="card">
+                        <div class="card-header" id="headingDataTable">
+                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataTable" aria-expanded="true" aria-controls="collapseDataTable">
+                                <strong> Data Table Surat Teguran </strong>
+                            </div>
+                        </div>
+                        <div id="collapseDataTable" class="collapse show" aria-labelledby="headingDataTable" data-parent="#accordionDataTable">
+                            <div class="card-body">
+                                <!--begin::Form-->
+                                <div class="kt-portlet__body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+
+                                            <table class="table table-striped table-bordered" id="DataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <td>No</td>
+                                                        <td>Tanggal</td>
+                                                        <td>Nomor Surat</td>
+                                                        <td>Pegawai</td>
+                                                        <td>Tipe Surat</td>
+                                                        <td>Action</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $no = 0;
+                                                    foreach ($row as $key => $vaPeringatan) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= ++$no; ?></td>
+                                                            <td><?= ($vaPeringatan['tanggal']) ?></td>
+                                                            <td><?= ($vaPeringatan['nomor_surat']) ?></td>
+                                                            <td><?= ($vaPeringatan['nama']) ?></td>
+                                                            <td><?= ($vaPeringatan['Keterangan']) ?></td>
+                                                            <td class="text-center">
+                                                                <!-- <a class="btn-link" title="View Data" href="<?php //echo site_url('transaksi/surat_teguran/view/' . $vaPeringatan['id'] . '') 
+                                                                                                                    ?>">
+                                                                    <i class="fa fa-eye text-success"></i>
+                                                                </a> -->
+                                                                <a class="btn-link" title="Print Surat Teguran" target="_blank" href="<?= site_url('Surat_act/cetak_surat_teguran/' . $vaPeringatan['id'] . '') ?>">
+                                                                    <i class="fa fa-print"></i>
+                                                                </a>
+                                                                |
+                                                                <a class="btn-link" title="Edit Data" href="<?= site_url('hrd/surat_teguran/edit/' . $vaPeringatan['id'] . '') ?>">
+                                                                    <i class="fa fa-pen text-info"></i>
+                                                                </a>
+                                                                
+                                                                <!-- <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                                                    { window.location.href='<?= site_url('surat_act/surat_teguran/Delete/' . $vaPeringatan['id'] . '') ?>'}">
+                                                                    <i class="fa fa-trash text-danger"></i>
+                                                                </a> -->
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+
+                                        </div> <!-- /.col-form -->
+
+                                    </div><!-- /.row -->
+                                </div>
+                                <!--end::Portlet Data Kontak-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Accordion-->
+            </div>
+        </div>
+    </div>
+
+
 
 </div>
 

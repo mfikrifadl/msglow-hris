@@ -234,151 +234,249 @@ if ($action == "edit") {
         </div>
       </div>
       <!--End::Row-->
-      <form method="post" enctype="multipart/form-data" action="<?= site_url('transaksi_act/pegawai/' . $cAction . '') ?>">
-        <div class="row">
-          <div class="col-md-12">
+      <?php
+      if ($action == "edit") {
+      ?>
+        <form method="post" enctype="multipart/form-data" action="<?= site_url('transaksi_act/pegawai/' . $cAction . '') ?>">
+          <div class="row">
+            <div class="col-md-12">
 
-            <!--begin::Portlet Data Kerja-->
-            <div class="kt-portlet">
+              <!--begin::Portlet Data Kerja-->
+              <div class="kt-portlet">
 
-              <!--begin::Accordion-->
+                <!--begin::Accordion-->
 
-              <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
-                <div class="card">
-                  <div class="card-header" id="headingOne6">
-                    <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKerja" aria-expanded="true" aria-controls="collapseDataKerja">
-                      <strong> Input Data Kerja </strong>
+                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+                  <div class="card">
+                    <div class="card-header" id="headingOne6">
+                      <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKerja" aria-expanded="true" aria-controls="collapseDataKerja">
+                        <strong> Input Data Kerja </strong>
+                      </div>
                     </div>
-                  </div>
-                  <div id="collapseDataKerja" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
-                    <div class="card-body">
-                      <!--begin::Form-->
-                      <div class="row">
+                    <div id="collapseDataKerja" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
+                      <div class="card-body">
+                        <!--begin::Form-->
+                        <div class="row">
 
-                        <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
-                          <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
-                            <div class="form-group">
-                              <label>Area Kerja</label>
-                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdArea" >
-                                <option></option>
-                                <?php foreach ($area as $key => $vaArea) { ?>
-                                  <option value="<?= $vaArea['id_area'] ?>" <?php if ($vaArea['id_area'] == $cIdArea) echo "selected"; ?>>
-                                    <?= $vaArea['nama_area'] ?>
-                                  </option>
-                                <?php } ?>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                              <label>Status Kerja</label>
-                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" onchange="hideshow(this.value)">
-                                <option></option>
-                                <?php foreach ($status as $key => $vaStatus) {
-                                  if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4) { ?>
-
-                                    <option value="<?= $vaStatus['id_status'] ?>" <?php if ($vaStatus['id_status'] == $cIdStatus) echo "selected"; ?>>
-                                      <?= $vaStatus['status'] ?>
-                                    </option>
-
-                                <?php  } else {
-                                  }
-                                } ?>
-                              </select>
-                            </div>
-                            <div class="form-group" id="golker">
-                              <label>Golongan Kerja</label>
-                              <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja" >
-                                <option></option>
-                                <?php foreach ($kerja as $key => $vaKerja) { ?>
-                                  <option value="<?= $vaKerja['id_kerja'] ?>" <?php if ($vaKerja['id_kerja'] == $cIdKerja) echo "selected"; ?>>
-                                    <?= $vaKerja['kerja'] ?>
-                                  </option>
-                                <?php } ?>
-                              </select>
-                            </div>
-                            <?php
-                            if ($cIdStatus==3){
-                              ?>
-                              <script>
-                              document.getElementById('golker').style.display = 'none';
-                              </script>
-                              <?php
-                            }
-                            ?>
-                            <div class="form-group">
-                              <label>Office</label>
-                              <div class="input-group">
-                                <select class="form-control kt-selectpicker" data-live-search="true" name="cOutlet">
+                          <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+                            <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
+                              <div class="form-group">
+                                <label>Area Kerja</label>
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdArea">
                                   <option></option>
-                                  <?php foreach ($outlet as $key => $vaOutlet) { ?>
-                                    <option value="<?= $vaOutlet['id_outlet'] ?>" <?php if ($vaOutlet['id_outlet'] == $cOutlet) echo "selected"; ?>>
-                                      <?= $vaOutlet['kode'] ?> : <?= $vaOutlet['nama'] ?>
+                                  <?php foreach ($area as $key => $vaArea) { ?>
+                                    <option value="<?= $vaArea['id_area'] ?>" <?php if ($vaArea['id_area'] == $cIdArea) echo "selected"; ?>>
+                                      <?= $vaArea['nama_area'] ?>
                                     </option>
                                   <?php } ?>
                                 </select>
-                                <div class="input-group-append">
-                                  <span class="input-group-text " id="basic-addon2">
-                                    <i class="kt-font-success flaticon2-architecture-and-city"></i>
-                                  </span>
+                              </div>
+                              <div class="form-group">
+                                <label>Status Kerja</label>
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" onchange="hideshow(this.value)">
+                                  <option></option>
+                                  <?php foreach ($status as $key => $vaStatus) {
+                                    if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4) { ?>
+
+                                      <option value="<?= $vaStatus['id_status'] ?>" <?php if ($vaStatus['id_status'] == $cIdStatus) echo "selected"; ?>>
+                                        <?= $vaStatus['status'] ?>
+                                      </option>
+
+                                  <?php  } else {
+                                    }
+                                  } ?>
+                                </select>
+                              </div>
+                              <div class="form-group" id="golker">
+                                <label>Golongan Kerja</label>
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja">
+                                  <option></option>
+                                  <?php foreach ($kerja as $key => $vaKerja) { ?>
+                                    <option value="<?= $vaKerja['id_kerja'] ?>" <?php if ($vaKerja['id_kerja'] == $cIdKerja) echo "selected"; ?>>
+                                      <?= $vaKerja['kerja'] ?>
+                                    </option>
+                                  <?php } ?>
+                                </select>
+                              </div>
+                              <?php
+                              if ($cIdStatus == 3) {
+                              ?>
+                                <script>
+                                  document.getElementById('golker').style.display = 'none';
+                                </script>
+                              <?php
+                              }
+                              ?>
+                              <div class="form-group">
+                                <label>Office</label>
+                                <div class="input-group">
+                                  <select class="form-control kt-selectpicker" data-live-search="true" name="cOutlet">
+                                    <option></option>
+                                    <?php foreach ($outlet as $key => $vaOutlet) { ?>
+                                      <option value="<?= $vaOutlet['id_outlet'] ?>" <?php if ($vaOutlet['id_outlet'] == $cOutlet) echo "selected"; ?>>
+                                        <?= $vaOutlet['kode'] ?> : <?= $vaOutlet['nama'] ?>
+                                      </option>
+                                    <?php } ?>
+                                  </select>
+                                  <div class="input-group-append">
+                                    <span class="input-group-text " id="basic-addon2">
+                                      <i class="kt-font-success flaticon2-architecture-and-city"></i>
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <label>Tanggal Masuk Kerja</label>
-                              <div class="input-group">
-                                <input type="date" name="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy" value="<?= $dTglMasukKerja ?>" id="tglDT">
-                                <div class="input-group-addon">
-                                  <i class="fa fa-calendar-o"></i>
+                              <div class="form-group">
+                                <label>Tanggal Masuk Kerja</label>
+                                <div class="input-group">
+                                  <input type="date" name="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy" value="<?= $dTglMasukKerja ?>" id="tglDT">
+                                  <div class="input-group-addon">
+                                    <i class="fa fa-calendar-o"></i>
+                                  </div>
                                 </div>
                               </div>
+                              <!-- <div class="form-group">
+                                <label>Tanggal Kontrak Berakhir</label>
+                                <div class="input-group">
+                                  <input type="text" readonly="true" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy" value="<?= $dTglKontrakBerakhir ?>">
+                                  <div class="input-group-addon">
+                                    <i class="fa fa-calendar-o"></i>
+                                  </div>
+                                </div>
+                              </div> -->
                             </div>
-                            <div class="form-group">
-                              <label>Tanggal Kontrak Berakhir</label>
-                              <div class="input-group">
-                                <input type="date" name="dTglKontrakBerakhir" class="form-control" placeholder="Tanggal Kontrak Berakhir" data-date-format="dd/mm/yyyy" value="<?= $dTglKontrakBerakhir ?>">
-                                <div class="input-group-addon">
-                                  <i class="fa fa-calendar-o"></i>
+                          </div>
+
+                          <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+                            <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
+                              <div class="form-group">
+                                <label>Pembayaran Gaji <?= $cJenisBayar ?></label>
+                                <div class="input-group">
+                                  <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true">
+                                    <option></option>
+                                    <?php foreach ($bayar as $key => $vaBayar) { ?>
+                                      <option value="<?= $vaBayar['id_pembayaran'] ?>" <?php if ($vaBayar['id_pembayaran'] == $cJenisBayar) echo "selected"; ?>>
+                                        <?= $vaBayar['jenis_pembayaran'] ?>
+                                      </option>
+                                    <?php } ?>
+                                  </select>
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-success flaticon-price-tag"></i>
+                                    </span>
+                                  </div>
+
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Cabang Bank</label>
+                                <div class="input-group">
+                                  <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-success flaticon2-map"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Nomor Rekening</label>
+                                <div class="input-group">
+                                  <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-success fa fa-credit-card"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>Atas Nama</label>
+                                <div class="input-group">
+                                  <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-success fa fa-user"></i>
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
+
+                          <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+                            <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
+                              <div class="form-group">
+                                <label>No. NPWP</label>
+                                <div class="input-group">
+                                  <input type="text" name="cNPWP" class="form-control" value="<?= $cNPWP ?>" placeholder="No. NPWP">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-success fa fa-qrcode"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>No. BPJS KTK</label>
+                                <div class="input-group">
+                                  <input type="text" name="cBPJSKTK" class="form-control" value="<?= $cBPJSKTK ?>" placeholder="No. BPJS KTK">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-success fa fa-qrcode"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label>No. BPJS Kes</label>
+                                <div class="input-group">
+                                  <input type="text" name="cBPJSKES" class="form-control" value="<?= $cBPJSKES ?>" placeholder="No. BPJS Kes">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-success fa fa-qrcode"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <!--end::Portlet Data Kerja-->
+                      </div> <!-- end row -->
+                    </div>
+                  </div>
+                </div>
+
+                <!--end::Accordion-->
+              </div>
+            </div>
+            <div class="col-md-12">
+
+              <!--begin::Portlet Data Pribadi-->
+              <div class="kt-portlet">
+
+                <!--begin::Accordion-->
+
+                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+                  <div class="card">
+                    <div class="card-header" id="headingOne6">
+                      <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataPribadi" aria-expanded="true" aria-controls="collapseDataPribadi">
+                        <strong> Input Data Pribadi </strong>
+                      </div>
+                    </div>
+                    <div id="collapseDataPribadi" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
+                      <div class="card-body">
+                        <div class="col-sm-12 col-md-12">
+                          <div id="tb_pelanggaran"> </div>
                         </div>
 
-                        <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
-                          <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
+                        <div class="row">
+                          <div class="col-sm-4 col-md-4">
                             <div class="form-group">
-                              <label>Pembayaran Gaji <?= $cJenisBayar ?></label>
+                              <label>Nik</label>
                               <div class="input-group">
-                                <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true">
-                                  <option></option>
-                                  <?php foreach ($bayar as $key => $vaBayar) { ?>
-                                    <option value="<?= $vaBayar['id_pembayaran'] ?>" <?php if ($vaBayar['id_pembayaran'] == $cJenisBayar) echo "selected"; ?>>
-                                      <?= $vaBayar['jenis_pembayaran'] ?>
-                                    </option>
-                                  <?php } ?>
-                                </select>
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-success flaticon-price-tag"></i>
-                                  </span>
-                                </div>
-
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label>Cabang Bank</label>
-                              <div class="input-group">
-                                <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-success flaticon2-map"></i>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label>Nomor Rekening</label>
-                              <div class="input-group">
-                                <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening">
+                                <input type="text" readonly="true" name="cNik" id="cNik" class="form-control" placeholder="Nik Pegawai" value="<?= $cNik ?>">
                                 <div class="input-group-append">
                                   <span class="input-group-text" id="basic-addon2">
                                     <i class="kt-font-success fa fa-credit-card"></i>
@@ -386,10 +484,26 @@ if ($action == "edit") {
                                 </div>
                               </div>
                             </div>
+                          </div> <!-- /.col-form -->
+                          <div class="col-sm-3 col-md-3">
                             <div class="form-group">
-                              <label>Atas Nama</label>
+                              <label>PIN</label>
                               <div class="input-group">
-                                <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama">
+                                <input type="text" id="cPinFinger" name="cPin" class="form-control" placeholder="PIN Finger" value="<?= $cPin  ?>">
+                                <div class="input-group-append">
+                                  <span class="input-group-text" id="basic-addon2">
+                                    <i class="kt-font-success fa fa-qrcode"></i>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div><!-- /.col-form -->
+                          <div class="col-sm-4 col-md-4">
+                            <div class="form-group">
+                              <label>Nama</label>
+                              <div class="input-group">
+                                <input type="text" id="cNamaPegawai" readonly="true" name="cNama" class="form-control" placeholder="Nama Pegawai" value="<?= $cNama  ?>">
                                 <div class="input-group-append">
                                   <span class="input-group-text" id="basic-addon2">
                                     <i class="kt-font-success fa fa-user"></i>
@@ -397,491 +511,452 @@ if ($action == "edit") {
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
+                          </div> <!-- /.col-form -->
+                          <div class="col-sm-1 col-md-1">
+                            <div class="form-group">
+                              <label>Cek PIN</label>
+                              <button type="button" onclick="return CekNamaPegawai();" class="btn btn-outline-success btn-md btn-icon btn-icon-md">
+                                <i class="flaticon2-refresh"></i>
+                              </button>
+                            </div>
+                          </div> <!-- /.col-form -->
+                          <div class="row">
+                            <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+                              <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
 
-                        <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
-                          <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
-                            <div class="form-group">
-                              <label>No. NPWP</label>
-                              <div class="input-group">
-                                <input type="text" name="cNPWP" class="form-control" value="<?= $cNPWP ?>" placeholder="No. NPWP">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-success fa fa-qrcode"></i>
-                                  </span>
+                                <div class="form-group">
+                                  <label>Tempat Lahir</label>
+                                  <input type="text" name="cTempatLahir" class="form-control" placeholder="Tempat Lahir" value="<?= $cTempatLahir ?>">
                                 </div>
+
+                                <div class="form-group">
+                                  <label>Tanggal Lahir</label>
+                                  <div class="input-group">
+                                    <input type="date" name="dTglLahir" onchange="ageCalculator();" class="form-control" value="<?= $dTglLahir ?>" id="dob">
+                                    <button type="button" onclick="javascript:dob.value=''">X</button>
+                                    <div class="input-group-addon">
+                                      <i class="fa fa-calendar-o"></i>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label>Umur</label>
+                                  <div class="input-group">
+                                    <input type="text" name="cUmur" id="ages" class="form-control" value="<?= $cUmur ?>" style="background-color:#fff;" id="ages" disabled>
+                                  </div>
+                                </div>
+
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label>No. BPJS KTK</label>
-                              <div class="input-group">
-                                <input type="text" name="cBPJSKTK" class="form-control" value="<?= $cBPJSKTK ?>" placeholder="No. BPJS KTK">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-success fa fa-qrcode"></i>
-                                  </span>
+
+                            <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+                              <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
+
+                                <div class="form-group">
+                                  <label>Agama</label>
+                                  <select name="cAgama" class="form-control kt-selectpicker" data-live-search="true">
+                                    <option></option>
+                                    <option value="1" <?php if ($cAgama == 1) echo "selected"; ?>>Islam</option>
+                                    <option value="2" <?php if ($cAgama == 2) echo "selected"; ?>>Protestan</option>
+                                    <option value="3" <?php if ($cAgama == 3) echo "selected"; ?>>Katolik</option>
+                                    <option value="4" <?php if ($cAgama == 4) echo "selected"; ?>>Hindu</option>
+                                    <option value="5" <?php if ($cAgama == 5) echo "selected"; ?>>Buddha</option>
+                                    <option value="6" <?php if ($cAgama == 6) echo "selected"; ?>>Konghucu</option>
+                                  </select>
                                 </div>
+
+                                <div class="form-group">
+                                  <label>Jenis Kelamin</label>
+                                  <select name="cJenisKelamin" class="form-control kt-selectpicker" data-live-search="true">
+                                    <option></option>
+                                    <option value="1" <?php if ($cJk == 1) echo "selected"; ?>>Laki-Laki</option>
+                                    <option value="2" <?php if ($cJk == 2) echo "selected"; ?>>Perempuan</option>
+                                  </select>
+                                </div>
+
+                                <div class="form-group">
+                                  <label>Gol. Darah</label>
+                                  <div class="input-group">
+
+                                    <select name="cGolDar" class="form-control kt-selectpicker" data-live-search="true">
+                                      <option></option>
+                                      <option value="A" <?php if ($cGolDar == "A") echo "selected"; ?>>A</option>
+                                      <option value="A-" <?php if ($cGolDar == "A-") echo "selected"; ?>>A-</option>
+                                      <option value="B" <?php if ($cGolDar == "B") echo "selected"; ?>>B</option>
+                                      <option value="B-" <?php if ($cGolDar == "B-") echo "selected"; ?>>B-</option>
+                                      <option value="AB" <?php if ($cGolDar == "AB") echo "selected"; ?>>AB</option>
+                                      <option value="AB-" <?php if ($cGolDar == "AB-") echo "selected"; ?>>AB-</option>
+                                      <option value="O" <?php if ($cGolDar == "O") echo "selected"; ?>>O</option>
+                                    </select>
+
+                                    <!-- <input type="text" name="cGolDar" class="form-control" placeholder="Gol. Darah" value="<?= $cGolDar ?>"> -->
+                                  </div>
+                                </div>
+
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label>No. BPJS Kes</label>
-                              <div class="input-group">
-                                <input type="text" name="cBPJSKES" class="form-control" value="<?= $cBPJSKES ?>" placeholder="No. BPJS Kes">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-success fa fa-qrcode"></i>
-                                  </span>
+
+                            <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+                              <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
+
+                                <div class="form-group">
+                                  <label>Pendidikan</label>
+                                  <select class="form-control kt-selectpicker" data-live-search="true" name="cIdPendidikan">
+                                    <option></option>
+                                    <?php foreach ($pendidikan as $key => $vaPendidikan) { ?>
+                                      <option value="<?= $vaPendidikan['id_pendidikan'] ?>" <?php if ($vaPendidikan['id_pendidikan'] == $cIdPendidikan) echo "selected"; ?>>
+                                        <?= $vaPendidikan['nama_pendidikan'] ?>
+                                      </option>
+                                    <?php } ?>
+                                  </select>
                                 </div>
+
+                                <div class="form-group">
+                                  <label>Jurusan</label>
+                                  <input type="text" name="cJurusan" class="form-control" placeholder="Jurusan" value="<?= $cJurusan ?>">
+                                </div>
+
                               </div>
                             </div>
                           </div>
+
+                          <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <label>Alamat Domisili</label>
+                              <textarea class="form-control" name="cAlamat" placeholder="Alamat Sekarang"><?= $cAlamat ?></textarea>
+                            </div>
+                          </div> <!-- /.col-form -->
+                          <div class="col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <label>Alamat Sesuai KTP</label>
+                              <textarea class="form-control" name="cAlamatAsal" placeholder="Alamat Sesuai KTP"><?= $cAlamatAsal ?></textarea>
+                            </div>
+                          </div> <!-- /.col-form -->
+
                         </div>
+                        <!--end::Portlet Data Pribadi-->
 
                       </div>
-                      <!--end::Portlet Data Kerja-->
-                    </div> <!-- end row -->
-                  </div>
-                </div>
-              </div>
-
-              <!--end::Accordion-->
-            </div>
-          </div>
-          <div class="col-md-12">
-
-            <!--begin::Portlet Data Pribadi-->
-            <div class="kt-portlet">
-
-              <!--begin::Accordion-->
-
-              <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
-                <div class="card">
-                  <div class="card-header" id="headingOne6">
-                    <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataPribadi" aria-expanded="true" aria-controls="collapseDataPribadi">
-                      <strong> Input Data Pribadi </strong>
                     </div>
                   </div>
-                  <div id="collapseDataPribadi" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
-                    <div class="card-body">
-                      <div class="col-sm-12 col-md-12">
-                        <div id="tb_pelanggaran"> </div>
+                </div>
+
+                <!--end::Accordion-->
+
+              </div>
+              <!--end::Portlet Data Pribadi-->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <!--begin::Portlet Data Kontak-->
+              <div class="kt-portlet">
+
+                <!--begin::Accordion-->
+
+                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+                  <div class="card">
+                    <div class="card-header" id="headingOne6">
+                      <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKontak" aria-expanded="true" aria-controls="collapseDataKontak">
+                        <strong> Input Data Kontak </strong>
                       </div>
-
-                      <div class="row">
-                        <div class="col-sm-4 col-md-4">
-                          <div class="form-group">
-                            <label>Nik</label>
-                            <div class="input-group">
-                              <input type="text" readonly="true" name="cNik" class="form-control" placeholder="Nik Pegawai" value="<?= $cNik ?>">
-                              <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">
-                                  <i class="kt-font-success fa fa-credit-card"></i>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div> <!-- /.col-form -->
-                        <div class="col-sm-3 col-md-3">
-                          <div class="form-group">
-                            <label>PIN</label>
-                            <div class="input-group">
-                              <input type="text" id="cPinFinger" name="cPin" class="form-control" placeholder="PIN Finger" value="<?= $cPin  ?>">
-                              <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">
-                                  <i class="kt-font-success fa fa-qrcode"></i>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                        </div><!-- /.col-form -->
-                        <div class="col-sm-4 col-md-4">
-                          <div class="form-group">
-                            <label>Nama</label>
-                            <div class="input-group">
-                              <input type="text" id="cNamaPegawai" readonly="true" name="cNama" class="form-control" placeholder="Nama Pegawai" value="<?= $cNama  ?>">
-                              <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">
-                                  <i class="kt-font-success fa fa-user"></i>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div> <!-- /.col-form -->
-                        <div class="col-sm-1 col-md-1">
-                          <div class="form-group">
-                            <label>Cek PIN</label>
-                            <button type="button" onclick="return CekNamaPegawai();" class="btn btn-outline-success btn-md btn-icon btn-icon-md">
-                              <i class="flaticon2-refresh"></i>
-                            </button>
-                          </div>
-                        </div> <!-- /.col-form -->
-                        <div class="row">
-                          <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
-                            <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
-
+                    </div>
+                    <div id="collapseDataKontak" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
+                      <div class="card-body">
+                        <!--begin::Form-->
+                        <div class="kt-portlet__body">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-12">
                               <div class="form-group">
-                                <label>Tempat Lahir</label>
-                                <input type="text" name="cTempatLahir" class="form-control" placeholder="Tempat Lahir" value="<?= $cTempatLahir ?>">
-                              </div>
-
-                              <div class="form-group">
-                                <label>Tanggal Lahir</label>
+                                <label>Nomor KTP</label>
                                 <div class="input-group">
-                                  <input type="date" name="dTglLahir" onchange="ageCalculator();" class="form-control" value="<?= $dTglLahir ?>" id="dob">
-                                  <button type="button" onclick="javascript:dob.value=''">X</button>
-                                  <div class="input-group-addon">
-                                    <i class="fa fa-calendar-o"></i>
+                                  <input type="text" name="nKtp" class="form-control" placeholder="Nomor KTP" value="<?= $nKtp ?>">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-info fa fa-list-alt"></i>
+                                    </span>
                                   </div>
                                 </div>
                               </div>
-
+                            </div> <!-- /.col-form -->
+                            <div class="col-sm-12 col-md-12">
                               <div class="form-group">
-                                <label>Umur</label>
+                                <label>Email</label>
                                 <div class="input-group">
-                                  <input type="text" name="cUmur" id="ages" class="form-control" value="<?= $cUmur ?>" style="background-color:#fff;" id="ages" disabled>
+                                  <input type="text" name="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-info fa fa-envelope"></i>
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
-
-                            </div>
-                          </div>
-
-                          <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
-                            <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
-
+                            </div> <!-- /.col-form -->
+                            <div class="col-sm-12 col-md-12">
                               <div class="form-group">
-                                <label>Agama</label>
-                                <select name="cAgama" class="form-control kt-selectpicker" data-live-search="true">
-                                  <option></option>
-                                  <option value="1" <?php if ($cAgama == 1) echo "selected"; ?>>Islam</option>
-                                  <option value="2" <?php if ($cAgama == 2) echo "selected"; ?>>Protestan</option>
-                                  <option value="3" <?php if ($cAgama == 3) echo "selected"; ?>>Katolik</option>
-                                  <option value="4" <?php if ($cAgama == 4) echo "selected"; ?>>Hindu</option>
-                                  <option value="5" <?php if ($cAgama == 5) echo "selected"; ?>>Buddha</option>
-                                  <option value="6" <?php if ($cAgama == 6) echo "selected"; ?>>Konghucu</option>
-                                </select>
-                              </div>
-
-                              <div class="form-group">
-                                <label>Jenis Kelamin</label>
-                                <select name="cJenisKelamin" class="form-control kt-selectpicker" data-live-search="true">
-                                  <option></option>
-                                  <option value="1" <?php if ($cJk == 1) echo "selected"; ?>>Laki-Laki</option>
-                                  <option value="2" <?php if ($cJk == 2) echo "selected"; ?>>Perempuan</option>
-                                </select>
-                              </div>
-
-                              <div class="form-group">
-                                <label>Gol. Darah</label>
+                                <label>Handphone</label>
                                 <div class="input-group">
-                                  <input type="text" name="cGolDar" class="form-control" placeholder="Gol. Darah" value="<?= $cGolDar ?>">
+                                  <input type="text" name="nHandphone" class="form-control" value="<?= $nHandphone ?>" placeholder="Handphone">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-info fa fa-phone"></i>
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
+                            </div> <!-- /.col-form -->
 
-                            </div>
-                          </div>
-
-                          <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
-                            <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
-
+                            <div class="col-sm-12 col-md-12">
                               <div class="form-group">
-                                <label>Pendidikan</label>
-                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdPendidikan" >
-                                  <option></option>
-                                  <?php foreach ($pendidikan as $key => $vaPendidikan) { ?>
-                                    <option value="<?= $vaPendidikan['id_pendidikan'] ?>" <?php if ($vaPendidikan['id_pendidikan'] == $cIdPendidikan) echo "selected"; ?>>
-                                      <?= $vaPendidikan['nama_pendidikan'] ?>
-                                    </option>
-                                  <?php } ?>
-                                </select>
+                                <label>Foto </label>
+                                <div class="input-group">
+                                  <input type="file" name="foto" class="form-control">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                      <i class="kt-font-info fa fa-camera"></i>
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
-
-                              <div class="form-group">
-                                <label>Jurusan</label>
-                                <input type="text" name="cJurusan" class="form-control" placeholder="Jurusan" value="<?= $cJurusan ?>">
-                              </div>
-
-                            </div>
-                          </div>
+                            </div> <!-- /.col-form -->
+                          </div><!-- /.row -->
                         </div>
-
-                        <div class="col-sm-6 col-md-6">
-                          <div class="form-group">
-                            <label>Alamat Domisili</label>
-                            <textarea class="form-control" name="cAlamat" placeholder="Alamat Sekarang"><?= $cAlamat ?></textarea>
-                          </div>
-                        </div> <!-- /.col-form -->
-                        <div class="col-sm-6 col-md-6">
-                          <div class="form-group">
-                            <label>Alamat Sesuai KTP</label>
-                            <textarea class="form-control" name="cAlamatAsal" placeholder="Alamat Sesuai KTP"><?= $cAlamatAsal ?></textarea>
-                          </div>
-                        </div> <!-- /.col-form -->
-
+                        <!--end::Portlet Data Kontak-->
                       </div>
-                      <!--end::Portlet Data Pribadi-->
-
                     </div>
                   </div>
                 </div>
+                <!--end::Accordion-->
               </div>
-
-              <!--end::Accordion-->
-
             </div>
-            <!--end::Portlet Data Pribadi-->
-          </div>
-        </div>
+            <div class="col-md-8">
 
-        <div class="row">
-          <div class="col-md-4">
-            <!--begin::Portlet Data Kontak-->
-            <div class="kt-portlet">
+              <!--begin::Portlet Data Keluarga-->
+              <div class="kt-portlet">
 
-              <!--begin::Accordion-->
+                <!--begin::Accordion-->
 
-              <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
-                <div class="card">
-                  <div class="card-header" id="headingOne6">
-                    <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKontak" aria-expanded="true" aria-controls="collapseDataKontak">
-                      <strong> Input Data Kontak </strong>
-                    </div>
-                  </div>
-                  <div id="collapseDataKontak" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
-                    <div class="card-body">
-                      <!--begin::Form-->
-                      <div class="kt-portlet__body">
-                        <div class="row">
-                          <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                              <label>Nomor KTP</label>
-                              <div class="input-group">
-                                <input type="text" name="nKtp" class="form-control" placeholder="Nomor KTP" value="<?= $nKtp ?>">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-info fa fa-list-alt"></i>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div> <!-- /.col-form -->
-                          <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                              <label>Email</label>
-                              <div class="input-group">
-                                <input type="text" name="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-info fa fa-envelope"></i>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div> <!-- /.col-form -->
-                          <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                              <label>Handphone</label>
-                              <div class="input-group">
-                                <input type="text" name="nHandphone" class="form-control" value="<?= $nHandphone ?>" placeholder="Handphone">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-info fa fa-phone"></i>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div> <!-- /.col-form -->
-
-                          <div class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                              <label>Foto </label>
-                              <div class="input-group">
-                                <input type="file" name="foto" class="form-control">
-                                <div class="input-group-append">
-                                  <span class="input-group-text" id="basic-addon2">
-                                    <i class="kt-font-info fa fa-camera"></i>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div> <!-- /.col-form -->
-                        </div><!-- /.row -->
+                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+                  <div class="card">
+                    <div class="card-header" id="headingOne6">
+                      <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKeluarga" aria-expanded="true" aria-controls="collapseDataKeluarga">
+                        <strong> Data Keluarga </strong>
                       </div>
-                      <!--end::Portlet Data Kontak-->
                     </div>
-                  </div>
-                </div>
-              </div>
-              <!--end::Accordion-->
-            </div>
-          </div>
-          <div class="col-md-8">
+                    <div id="collapseDataKeluarga" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
+                      <div class="card-body">
+                        <!--begin::Form-->
+                        <div class="kt-portlet__body">
 
-            <!--begin::Portlet Data Keluarga-->
-            <div class="kt-portlet">
 
-              <!--begin::Accordion-->
+                          <?php
+                          if ($cStatusKawin == 0) {
+                          ?>
+                            <div class="row">
 
-              <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
-                <div class="card">
-                  <div class="card-header" id="headingOne6">
-                    <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKeluarga" aria-expanded="true" aria-controls="collapseDataKeluarga">
-                      <strong> Data Keluarga </strong>
-                    </div>
-                  </div>
-                  <div id="collapseDataKeluarga" class="collapse show" aria-labelledby="headingOne6" data-parent="#accordionExample6">
-                    <div class="card-body">
-                      <!--begin::Form-->
-                      <div class="kt-portlet__body">
-                        <div class="row">
+                              <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                  <label>Input Status Perkawinan </label>
+                                  <select name="cStatusKawin" id="cStatusKawin" class="form-control kt-selectpicker" data-live-search="true">
+                                    <option></option>
+                                    <option value="0" <?php if ($cStatusKawin == 0) echo "selected"; ?>>Menikah</option>
+                                    <option value="1" <?php if ($cStatusKawin == 1) echo "selected"; ?>>Belum Menikah</option>
+                                  </select>
+                                  <!-- <input type="text" name="cStatusKawin" class="form-control" placeholder="Status Perkawinan" value="<?= $cStatusKawin ?>"> -->
 
-                          <div class="col-sm-6 col-md-6">
-                            <div class="form-group">
-                              <label>Status Perkawinan</label>
-                              <select name="cStatusKawin" class="form-control kt-selectpicker" data-live-search="true">
-                                <option></option>
-                                <option value="0" <?php if ($cStatusKawin == 0) echo "selected"; ?>>Menikah</option>
-                                <option value="1" <?php if ($cStatusKawin == 1) echo "selected"; ?>>Belum Menikah</option>
-                              </select>
-                              <!-- <input type="text" name="cStatusKawin" class="form-control" placeholder="Status Perkawinan" value="<?= $cStatusKawin ?>"> -->
+                                </div>
+                              </div> <!-- /.col-form -->
 
-                            </div>
-                          </div> <!-- /.col-form -->
 
-                          <div class="col-sm-6 col-md-6">
-                            <div class="form-group">
-                              <label>Nama Istri/Suami</label>
-                              <input type="text" name="cNamaPasangan" class="form-control" placeholder="Nama Istri/Suami" value="<?= $cNamaPasangan ?>">
 
-                            </div>
-                          </div> <!-- /.col-form -->
+                              <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                  <label>Nama Istri/Suami</label>
+                                  <input type="text" name="cNamaPasangan" class="form-control" placeholder="Nama Istri/Suami" value="<?= $cNamaPasangan ?>">
 
-                          <div class="col-sm-6 col-md-6">
-                            <div class="form-group">
-                              <label>Tgl Lahir Istri/Suami</label>
-                              <div class="input-group">
-                                <!-- <input type="text" name="dTglLahirIstri" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirIstri ?>" id="tglDT"> -->
-                                <input type="date" name="dTglLahirIstri" onchange="umurPasangan();" class="form-control" value="<?= $dTglLahirIstri ?>" id="dobPasangan">
-                                <button type="button" onclick="javascript:dobPasangan.value=''">X</button>
-                                <div class="input-group-addon">
-                                  <i class="fa fa-calendar-o"></i>
                                 </div>
                               </div>
-                            </div>
-                          </div> <!-- /.col-form -->
+                              <!-- /.col-form -->
 
-                          <div class="col-sm-6 col-md-6">
-                            <div class="form-group">
-                              <label>Umur</label>
-                              <input type="text" name="nUmurPasangan" id="agesPasangan" class="form-control" placeholder="Umur" value="<?= $nUmurPasangan ?>" style="background-color:#fff;" disabled>
-
-                            </div>
-                          </div> <!-- /.col-form -->
-
-                          <div class="col-sm-12">
-                            <div class="kt-portlet__foot">
-                            </div>
-                          </div>
-
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Nama Anak Ke-1</label>
-                              <input type="text" name="nAnak1" class="form-control" placeholder="Nama Anak Ke-1" value="<?= $nAnak1 ?>">
-
-                            </div>
-                          </div> <!-- /.col-form -->
-
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Tgl Lahir Anak Ke-1</label>
-                              <div class="input-group">
-                                <!-- <input type="text" name="dTglLahirAnak1" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirAnak1 ?>" id="tglDT"> -->
-                                <input type="date" name="dTglLahirAnak1" onchange="umurAnak1();" class="form-control" value="<?= $dTglLahirAnak1 ?>" id="dobAnak1">
-                                <button type="button" onclick="javascript:dobAnak1.value=''">X</button>
-                                <div class="input-group-addon">
-                                  <i class="fa fa-calendar-o"></i>
+                              <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                  <label>Tgl Lahir Istri/Suami</label>
+                                  <div class="input-group">
+                                    <!-- <input type="text" name="dTglLahirIstri" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirIstri ?>" id="tglDT"> -->
+                                    <input type="date" name="dTglLahirIstri" onchange="umurPasangan();" class="form-control" value="<?= $dTglLahirIstri ?>" id="dobPasangan">
+                                    <button type="button" onclick="javascript:dobPasangan.value=''">X</button>
+                                    <div class="input-group-addon">
+                                      <i class="fa fa-calendar-o"></i>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div> <!-- /.col-form -->
+                              <!-- /.col-form -->
 
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Umur Anak Ke-1</label>
-                              <input type="text" name="nUmurAnak1" id="agesAnak1" class="form-control" placeholder="Umur" value="<?= $nUmurAnak1 ?>" style="background-color:#fff;" disabled>
+                              <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                  <label>Umur</label>
+                                  <input type="text" name="nUmurPasangan" id="agesPasangan" class="form-control" placeholder="Umur" value="<?= $nUmurPasangan ?>" style="background-color:#fff;" disabled>
 
-                            </div>
-                          </div> <!-- /.col-form -->
-
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Nama Anak Ke-2</label>
-                              <input type="text" name="nAnak2" class="form-control" placeholder="Nama Anak Ke-2" value="<?= $nAnak2 ?>">
-
-                            </div>
-                          </div> <!-- /.col-form -->
-
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Tgl Lahir Anak Ke-2</label>
-                              <div class="input-group">
-                                <!-- <input type="text" name="dTglLahirAnak2" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirAnak2 ?>" id="tglDT"> -->
-                                <input type="date" name="dTglLahirAnak2" onchange="umurAnak2();" class="form-control" value="<?= $dTglLahirAnak2 ?>" id="dobAnak2">
-                                <button type="button" onclick="javascript:dobAnak2.value=''">X</button>
-                                <div class="input-group-addon">
-                                  <i class="fa fa-calendar-o"></i>
                                 </div>
                               </div>
-                            </div>
-                          </div> <!-- /.col-form -->
+                              <!-- /.col-form -->
 
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Umur Anak Ke-2</label>
-                              <input type="text" name="nUmurAnak2" id="agesAnak2" class="form-control" placeholder="Umur" value="<?= $nUmurAnak2 ?>" style="background-color:#fff;" disabled>
-
-                            </div>
-                          </div> <!-- /.col-form -->
-
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Nama Anak Ke-3</label>
-                              <input type="text" name="nAnak3" class="form-control" placeholder="Nama Anak Ke-3" value="<?= $nAnak3 ?>">
-
-                            </div>
-                          </div> <!-- /.col-form -->
-
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Tgl Lahir Anak Ke-3</label>
-                              <div class="input-group">
-                                <!-- <input type="text" name="dTglLahirAnak3" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirAnak3 ?>" id="tglDT"> -->
-                                <input type="date" name="dTglLahirAnak3" onchange="umurAnak3();" class="form-control" value="<?= $dTglLahirAnak3 ?>" id="dobAnak3">
-                                <button type="button" onclick="javascript:dobAnak3.value=''">X</button>
-                                <div class="input-group-addon">
-                                  <i class="fa fa-calendar-o"></i>
+                              <div class="col-sm-12">
+                                <div class="kt-portlet__foot">
                                 </div>
                               </div>
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Nama Anak Ke-1</label>
+                                  <input type="text" name="nAnak1" class="form-control" placeholder="Nama Anak Ke-1" value="<?= $nAnak1 ?>">
+
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Tgl Lahir Anak Ke-1</label>
+                                  <div class="input-group">
+                                    <!-- <input type="text" name="dTglLahirAnak1" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirAnak1 ?>" id="tglDT"> -->
+                                    <input type="date" name="dTglLahirAnak1" onchange="umurAnak1();" class="form-control" value="<?= $dTglLahirAnak1 ?>" id="dobAnak1">
+                                    <button type="button" onclick="javascript:dobAnak1.value=''">X</button>
+                                    <div class="input-group-addon">
+                                      <i class="fa fa-calendar-o"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Umur Anak Ke-1</label>
+                                  <input type="text" name="nUmurAnak1" id="agesAnak1" class="form-control" placeholder="Umur" value="<?= $nUmurAnak1 ?>" style="background-color:#fff;" disabled>
+
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Nama Anak Ke-2</label>
+                                  <input type="text" name="nAnak2" class="form-control" placeholder="Nama Anak Ke-2" value="<?= $nAnak2 ?>">
+
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Tgl Lahir Anak Ke-2</label>
+                                  <div class="input-group">
+                                    <!-- <input type="text" name="dTglLahirAnak2" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirAnak2 ?>" id="tglDT"> -->
+                                    <input type="date" name="dTglLahirAnak2" onchange="umurAnak2();" class="form-control" value="<?= $dTglLahirAnak2 ?>" id="dobAnak2">
+                                    <button type="button" onclick="javascript:dobAnak2.value=''">X</button>
+                                    <div class="input-group-addon">
+                                      <i class="fa fa-calendar-o"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Umur Anak Ke-2</label>
+                                  <input type="text" name="nUmurAnak2" id="agesAnak2" class="form-control" placeholder="Umur" value="<?= $nUmurAnak2 ?>" style="background-color:#fff;" disabled>
+
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Nama Anak Ke-3</label>
+                                  <input type="text" name="nAnak3" class="form-control" placeholder="Nama Anak Ke-3" value="<?= $nAnak3 ?>">
+
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Tgl Lahir Anak Ke-3</label>
+                                  <div class="input-group">
+                                    <!-- <input type="text" name="dTglLahirAnak3" class="form-control" data-date-format="dd-mm-yyyy" value="<?= $dTglLahirAnak3 ?>" id="tglDT"> -->
+                                    <input type="date" name="dTglLahirAnak3" onchange="umurAnak3();" class="form-control" value="<?= $dTglLahirAnak3 ?>" id="dobAnak3">
+                                    <button type="button" onclick="javascript:dobAnak3.value=''">X</button>
+                                    <div class="input-group-addon">
+                                      <i class="fa fa-calendar-o"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Umur Anak Ke-3</label>
+                                  <input type="text" name="nUmurAnak3" id="agesAnak3" class="form-control" placeholder="Umur" value="<?= $nUmurAnak3 ?>" style="background-color:#fff;" disabled>
+
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
+
+                              <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                  <label>Jumlah Anak</label>
+                                  <input type="text" name="nJumlahAnak" class="form-control" placeholder="Jumlah Anak" value="<?= $nJumlahAnak ?>">
+
+                                </div>
+                              </div>
+                              <!-- /.col-form -->
                             </div>
-                          </div> <!-- /.col-form -->
+                          <?php
+                          } elseif ($cStatusKawin == 1) {
+                          ?>
+                            <div class="row">
+                              <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                  <label>Input Status Perkawinan </label>
+                                  <select name="cStatusKawin" id="cStatusKawin" onchange="setInputPasangan(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                    <option></option>
+                                    <option value="0" <?php if ($cStatusKawin == 0) echo "selected"; ?>>Menikah</option>
+                                    <option value="1" <?php if ($cStatusKawin == 1) echo "selected"; ?>>Belum Menikah</option>
+                                  </select>
+                                  <!-- <input type="text" name="cStatusKawin" class="form-control" placeholder="Status Perkawinan" value="<?= $cStatusKawin ?>"> -->
 
-                          <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Umur Anak Ke-3</label>
-                              <input type="text" name="nUmurAnak3" id="agesAnak3" class="form-control" placeholder="Umur" value="<?= $nUmurAnak3 ?>" style="background-color:#fff;" disabled>
-
+                                </div>
+                              </div> <!-- /.col-form -->
                             </div>
-                          </div> <!-- /.col-form -->
+                          <?php
+                          } else {
+                          ?>
+                            <div class="row">
+                              <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                  <label>Input Status Perkawinan </label>
+                                  <select name="cStatusKawin" id="cStatusKawin" onchange="setInputPasangan(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                    <option></option>
+                                    <option value="0" <?php if ($cStatusKawin == 0) echo "selected"; ?>>Menikah</option>
+                                    <option value="1" <?php if ($cStatusKawin == 1) echo "selected"; ?>>Belum Menikah</option>
+                                  </select>
+                                  <!-- <input type="text" name="cStatusKawin" class="form-control" placeholder="Status Perkawinan" value="<?= $cStatusKawin ?>"> -->
 
-                          <!-- <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                              <label>Jumlah Anak</label>
-                              <input type="text" name="nJumlahAnak" class="form-control" placeholder="Jumlah Anak" value="<?= $nJumlahAnak ?>">
-
+                                </div>
+                              </div> <!-- /.col-form -->
                             </div>
-                          </div>  -->
-                          <!-- /.col-form -->
+                          <?php
+                          }
+                          ?>
+
+
+                          <div id="form_input_pasangan"></div>
 
                           <!-- <div class="col-sm-4 col-md-4">
                             <div class="form-group">
@@ -941,7 +1016,8 @@ if ($action == "edit") {
                           <!-- /.col-form -->
                           <div class="col-sm-12">
                             <div class="kt-portlet__foot">
-
+                              <br />
+                              <br />
                               <?php if ($action != 'edit' and $this->session->userdata('level') == 3) { ?>
                                 <div class="col-sm-12">
                                   <button type="button" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-flat btn-primary">
@@ -968,9 +1044,15 @@ if ($action == "edit") {
             </div>
             <!--end::Portlet Data Keluarga-->
           </div>
-        </div>
-      </form>
-      <!-- End Form -->
+        </form>
+
+
+        <!-- End Form -->
+      <?php
+      } else {
+      }
+      ?>
+
     </section>
     <!--End::Dashboard 6-->
   </div>
@@ -980,6 +1062,26 @@ if ($action == "edit") {
 
 <script type="text/javascript">
   function validateForm() {
+
+  }
+
+  function setInputPasangan(data) {
+
+    var cStatusKawin = $('#cStatusKawin').val();
+    var cNik = $('#cNik').val();
+    $.ajax({
+      type: "POST",
+      data: "cNik=" + cNik +
+        "&cStatusKawin=" + cStatusKawin,
+      url: "<?= site_url('transaksi_act/formInputPasangan/') ?>",
+      cache: false,
+      beforeSend: function() {
+        $('#form_input_pasangan').html("Cek Data Ke Sistem .. ");
+      },
+      success: function(msg) {
+        $("#form_input_pasangan").html(msg);
+      }
+    });
 
   }
 
@@ -1070,12 +1172,12 @@ if ($action == "edit") {
     }
   }
 
-  function hideshow(id_status){
+  function hideshow(id_status) {
     var x = document.getElementById('golker');
-    
-    if(id_status==4){
+
+    if (id_status == 4) {
       x.style.display = 'block';
-    } else{
+    } else {
       x.style.display = 'none';
     }
   }

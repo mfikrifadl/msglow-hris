@@ -11,6 +11,8 @@ if ($action == "edit") {
         $cIdKategoriSurat       =   $column['id_kategori_surat'];
         $cJum_teguran_lisan     =   $column['jum_teguran_lisan'];
         $dTgl                   =   $column['tanggal'];
+        $dTgl_start             =   $column['mulai_berlaku'];
+        $dTgl_end               =   $column['berlaku_sampai'];
         $cNikPegawai            =   $column['nik'];
         // $cNamaJabatan           =   $column['nama_jabatan'];
         $cNama                  =   $column['nama'];
@@ -41,6 +43,8 @@ else {
     $cIdKategoriSurat   =   "";
     $cJum_teguran_lisan =   "";
     $dTgl               =   "";
+    $dTgl_end               =   "";
+    $dTgl_start               =   "";
     $cNikPegawai         =   "";
     $cNamaJabatan           =   "";
     $cNama         =   "";
@@ -91,6 +95,8 @@ else {
                                 $cIdKategoriSurat       =   $column['id_kategori_surat'];
                                 $cJum_teguran_lisan     =   $column['jum_teguran_lisan'];
                                 $dTgl                   =   $column['tanggal'];
+                                $dTgl_start             =   $column['mulai_berlaku'];
+                                $dTgl_end               =   $column['berlaku_sampai'];
                                 $cNikPegawai            =   $column['nik'];
                                 $cNama                  =   $column['nama'];
                                 $cKeterangan            =   $column['keterangan_teguran'];
@@ -103,40 +109,46 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Tertanggal: </label>
                                 <div class="col-8">
-                                    <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>" required>
+                                    <input type="text" readonly="true" class="form-control" placeholder="Tanggal" value="<?= $dTgl_start ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-4 col-form-label">Sampai Tanggal: </label>
+                                <div class="col-8">
+                                    <input type="text" readonly="true" class="form-control" placeholder="Tanggal" value="<?= $dTgl_end ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Perihal: </label>
                                 <label for="example-text-input" class="col-5 col-form-label"> Teguran Lisan ke - </label>
                                 <div class="col-3">
-                                    <input type="number" name="tl" class="form-control" value="<?= $cJum_teguran_lisan ?>">
+                                    <input type="number" readonly="true" class="form-control" value="<?= $cJum_teguran_lisan ?>">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Nama :</label>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" readonly="true" value=" <?= $cNama ?>">
+                                    <input type="text" readonly="true" class="form-control" readonly="true" value=" <?= $cNama ?>">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">NIK :</label>
                                 <div class="col-8">
-                                    <input type="text" name="cNik" id="cNik" class="form-control" readonly="true" value="<?= $cNikPegawai ?>">
+                                    <input type="text" readonly="true" name="cNik" id="cNik" class="form-control" readonly="true" value="<?= $cNikPegawai ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Jabatan :</label>
                                 <div class="col-8">
-                                    <input type="text" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $nj_select ?>">
+                                    <input type="text" readonly="true" name="cJabatan" id="cJabatan" class="form-control" readonly="true" value="<?= $nj_select ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Keterangan :</label>
                                 <div class="col-8">
-                                    <textarea class="form-control" name="cKet" placeholder="Keterangan"> <?= $cKeterangan ?> </textarea>
+                                    <textarea class="form-control" readonly="true" name="cKet" placeholder="Keterangan"> <?= $cKeterangan ?> </textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -151,7 +163,13 @@ else {
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">Tertanggal: </label>
                                 <div class="col-8">
-                                    <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl ?>">
+                                    <input type="date" name="dTgl" class="form-control" placeholder="Tanggal" value="<?= $dTgl_start ?>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-4 col-form-label">Sampai Tanggal: </label>
+                                <div class="col-8">
+                                    <input type="date" name="dTgl_end" class="form-control" placeholder="Tanggal" value="<?= $dTgl_end ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -161,25 +179,41 @@ else {
                                     <input type="number" name="tl" class="form-control" value="<?= $cJum_teguran_lisan ?>">
                                 </div>
                             </div>
+                            <?php
+                            if ($action == "edit") {
+                            ?>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-4 col-form-label">Nama :</label>
+                                    <div class="col-8">
+                                        <input type="text" readonly="true" class="form-control" value="<?= $cNama ?>">
 
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-4 col-form-label">Nama :</label>
-                                <div class="col-8">
-                                    <select class="comboBox form-control" onchange="cek_pegawai(this.value)" name="cIdPegawai">
-                                        <option></option>
-                                        <?php
-                                        $jsArray = "var jason = new Array();\n";
-                                        foreach ($pegawai as $dbRow) {
-                                        ?>
-                                            <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
-                                                <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
-                                            </option>';
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php
+                            } else {
+                            ?>
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-4 col-form-label">Nama :</label>
+                                    <div class="col-8">
+                                        <select class="comboBox form-control" onchange="cek_pegawai(this.value)" name="cIdPegawai">
+                                            <option></option>
+                                            <?php
+                                            $jsArray = "var jason = new Array();\n";
+                                            foreach ($pegawai as $dbRow) {
+                                            ?>
+                                                <option value="<?= $dbRow['id_pegawai'] ?>" <?php if ($dbRow['id_pegawai'] == $cIdPegawai) echo 'selected'; ?>>
+                                                    <?= $dbRow['nik'] ?> : <?= $dbRow['nama'] ?>
+                                                </option>';
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-4 col-form-label">NIK :</label>
@@ -208,7 +242,7 @@ else {
                                     <?php } else { ?>
                                         <textarea class="form-control" name="cKet" placeholder="Keterangan">  </textarea>
                                     <?php   } ?>
-                                    
+
                                 </div>
                             </div>
 
@@ -313,8 +347,8 @@ else {
                 // alert (hasil);
                 document.getElementById('cNik').value = hasil[0];
                 document.getElementById('cJabatan').value = hasil[1];
-                if(hasil[1]==''){
-                    alert ('Inputkan Jabatan Pegawai Terlebih Dahulu di Form Input Jabatan');
+                if (hasil[1] == '') {
+                    alert('Inputkan Jabatan Pegawai Terlebih Dahulu di Form Input Jabatan');
                 }
             }
         };

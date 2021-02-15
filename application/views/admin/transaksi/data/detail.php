@@ -126,7 +126,7 @@ function String2Date($dTgl)
           <?php if (empty($vaPegawai['foto'])) { ?>
             <img src="<?= base_url() ?>upload/default.gif" height="100px">
           <?php } else { ?>
-            <img src="<?= base_url() . $vaPegawai['foto'] ?>" height="100px">
+            <img src="<?= base_url() .'/'. $vaPegawai['foto'] ?>" height="100px">
           <?php } ?>
         </div>
 
@@ -139,7 +139,7 @@ function String2Date($dTgl)
     <div class="row">
       <div class="pull-left" style="margin-left:20px">
 
-        <a class="btn btn-flat btn-success" target="_blank" href="<?= site_url('transaksi/pegawai/edit/' . $vaPegawai['id_pegawai'] . ''); ?>">
+        <a class="btn btn-flat btn-success" href="<?= site_url('transaksi/pegawai/edit/' . $vaPegawai['id_pegawai'] . ''); ?>">
           <i class="la la-pencil"></i> Edit
         </a>
         

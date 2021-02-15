@@ -9,7 +9,8 @@
     </div>
   </div>
   <?php
-  function age($tgl){
+  function age($tgl)
+  {
     $bday = new Datetime($tgl);
     $today = new Datetime(date('y-m-d'));
     $diff = $today->diff($bday);
@@ -58,6 +59,10 @@
                   <div class="form-group">
                     <label><b>Tanggal Masuk Kerja:</b></label>
                     <p class="form-control-static"><?= String2Date($vaView['tanggal_masuk_kerja']) ?></p>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Tanggal Kontrak Selesai:</b></label>
+                    <p class="form-control-static"><?= String2Date($vaView['tanggal_kontrak_habis']) ?></p>
                   </div>
                 </div>
               </div>
@@ -209,7 +214,7 @@
                     <div class="col-4">
                       <div class="form-group">
                         <label><b>Agama:</b></label>
-                        <p class="form-control-static"><?= (!empty($vaView['agama'])) ? $vaView['agama'] : "-" ?></p>
+                        <p class="form-control-static"><?= (!empty($vaView['ket_agama'])) ? $vaView['ket_agama'] : "-" ?></p>
                       </div>
                     </div>
                     <div class="col-4">
@@ -230,7 +235,7 @@
                     <div class="col-4">
                       <div class="form-group">
                         <label><b>Gol.Darah:</b></label>
-                        <p class="form-control-static"><?= (!empty($vaView['agama'])) ? $vaView['agama'] : "-" ?></p>
+                        <p class="form-control-static"><?= (!empty($vaView['gol_darah'])) ? $vaView['gol_darah'] : "-" ?></p>
                       </div>
                     </div>
                   </div>
@@ -412,15 +417,16 @@
           </div>
         </div>
       </div>
-    </div><br />
+    </div>
+    <br />
 
     <div class="row">
       <div class="col-6">
-        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
+        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionTeguranLisan">
           <div class="card">
-            <div class="card-header" id="headingOne8">
-              <div class="card-title" data-toggle="collapse" data-target="#panggilankerja" aria-expanded="true" aria-controls="collapseOne8">
-                Panggilan Kerja
+            <div class="card-header" id="headingTeguranLisan">
+              <div class="card-title" data-toggle="collapse" data-target="#TeguranLisan" aria-expanded="true" aria-controls="collapseTeguranLisan">
+                Teguran Lisan
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <polygon points="0 0 24 0 24 24 0 24" />
@@ -430,90 +436,104 @@
                 </svg>
               </div>
             </div>
-            <div id="panggilankerja" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
+            <div id="TeguranLisan" class="collapse show" aria-labelledby="headingTeguranLisan" data-parent="#accordionTeguranLisan">
               <div class="card-body">
                 <div class="kt-portlet__body">
                   <table class="table table-striped table-bordered DataTableEdit">
                     <thead>
                       <tr>
-                        <td>Tanggal</td>
-                        <td>Nomor Surat</td>
-                        <td>Act</td>
+                        <td>Tanggal Mulai Berlaku</td>
+                        <td>Tanggal Berakhir</td>
+                        <td>Keterangan</td>
                       </tr>
                     </thead>
                     <tbody>
                       <?php $No = 0;
-                      foreach ($panggilan as $key => $vaPanggilan) { ?>
-                        <tr>
-                          <td><?= String2Date($vaPanggilan['tgl']) ?></td>
-                          <td><?= $vaPanggilan['nomor_surat'] ?></td>
-                          <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('laporan/lp_panggilan/' . $vaPanggilan['id_panggilan'] . '') ?>">
-                              <i class="fa fa-print"></i>
-                            </a></td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
-          <div class="card">
-            <div class="card-header" id="headingOne8">
-              <div class="card-title" data-toggle="collapse" data-target="#datapernyataan" aria-expanded="true" aria-controls="collapseOne8">
-                Data Pernyataan
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <polygon points="0 0 24 0 24 24 0 24" />
-                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
-                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div id="datapernyataan" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
-              <div class="card-body">
-                <div class="kt-portlet__body">
-                  <table class="table table-striped table-bordered DataTableEdit">
-                    <thead>
-                      <tr>
-                        <td>Tanggal</td>
-                        <td>Nomor Surat</td>
-                        <td>Act</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $No = 0;
-                      foreach ($pernyataan as $key => $vaPernyataan) { ?>
-                        <tr>
-                          <td><?= String2Date($vaPernyataan['tgl']) ?></td>
-                          <td><?= $vaPernyataan['nomor_surat'] ?></td>
-                          <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('laporan/lp_pernyataan/' . $vaPernyataan['id_pernyataan'] . '') ?>">
-                              <i class="fa fa-print"></i>
-                            </a></td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><br />
+                      foreach ($teguran_lisan as $key => $vaTeguran_lisan) {
+                        if ($vaTeguran_lisan['id_kategori_surat'] == 2) {
+                      ?>
+                          <tr>
+                            <td><?= String2Date($vaTeguran_lisan['mulai_berlaku']) ?></td>
+                            <td><?= String2Date($vaTeguran_lisan['berlaku_sampai']) ?></td>
+                            <td><?= $vaTeguran_lisan['Keterangan'] ?></td>
 
+                          </tr>
+                      <?php
+                        } else {
+                        }
+                      } ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionSuratTeguran">
+          <div class="card">
+            <div class="card-header" id="headingSuratTeguran">
+              <div class="card-title" data-toggle="collapse" data-target="#SuratTeguran" aria-expanded="true" aria-controls="collapseSuratTeguran">
+                Surat Teguran
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <polygon points="0 0 24 0 24 24 0 24" />
+                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
+                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div id="SuratTeguran" class="collapse show" aria-labelledby="headingSuratTeguran" data-parent="#accordionSuratTeguran">
+              <div class="card-body">
+                <div class="kt-portlet__body">
+                  <table class="table table-striped table-bordered DataTableEdit">
+                    <thead>
+                      <tr>
+                        <td>Tanggal Mulai Berlaku</td>
+                        <td>Tanggal Berakhir</td>
+                        <td>Nomor Surat</td>
+                        <td>Keterangan</td>
+                        <td>Act</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php $No = 0;
+                      foreach ($teguran_lisan as $key => $vaSuratTeguran) {
+                        if ($vaSuratTeguran['id_kategori_surat'] == 1) {
+                      ?>
+                          <tr>
+                            <td><?= String2Date($vaSuratTeguran['mulai_berlaku']) ?></td>
+                            <td><?= String2Date($vaSuratTeguran['berlaku_sampai']) ?></td>
+                            <td><?= $vaSuratTeguran['nomor_surat'] ?></td>
+                            <td><?= $vaSuratTeguran['Keterangan'] ?></td>
+                            <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('Surat_act/cetak_surat_teguran/' . $vaSuratTeguran['id'] . '') ?>">
+                                <i class="fa fa-print"></i>
+                              </a></td>
+                          </tr>
+                      <?php
+                        } else {
+                        }
+                      } ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
     <div class="row">
       <div class="col-6">
         <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
           <div class="card">
             <div class="card-header" id="headingOne8">
               <div class="card-title" data-toggle="collapse" data-target="#suratpernyataansp1sp2" aria-expanded="true" aria-controls="collapseOne8">
-                Surat Pernyataan SP1 & SP2
+                Surat Pernyataan SP1, SP2, Dan SP3
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <polygon points="0 0 24 0 24 24 0 24" />
@@ -529,7 +549,8 @@
                   <table class="table table-striped table-bordered DataTableEdit">
                     <thead>
                       <tr>
-                        <td>Tanggal</td>
+                        <td>Tanggal_Mulai_Berlaku</td>
+                        <td>Tanggal_Berakhir</td>
                         <td>Nomor Surat</td>
                         <td>Keterangan</td>
                         <td>Act</td>
@@ -537,22 +558,22 @@
                     </thead>
                     <tbody>
                       <?php $No = 0;
-                      foreach ($peringatan as $key => $vaPeringatan) {
-                        if ($vaPeringatan['id_kategori_surat'] == 3) {
-                          $cOption = 1;
+                      foreach ($teguran_lisan as $key => $vaPeringatan) {
+                        if ($vaPeringatan['id_kategori_surat'] == 3 || $vaPeringatan['id_kategori_surat'] == 4 || $vaPeringatan['id_kategori_surat'] == 5) {
+                      ?>
+                          <tr>
+                            <td><?= String2Date($vaPeringatan['mulai_berlaku']) ?></td>
+                            <td><?= String2Date($vaPeringatan['berlaku_sampai']) ?></td>
+                            <td><?= $vaPeringatan['nomor_surat'] ?></td>
+                            <td><?= $vaPeringatan['Keterangan'] ?></td>
+                            <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('Surat_act/cetak_sp1/' . $vaPeringatan['id'] . '') ?>">
+                                <i class="fa fa-print"></i>
+                              </a></td>
+                          </tr>
+                      <?php
                         } else {
-                          $cOption = 2;
                         }
-                      ?>
-                        <tr>
-                          <td><?= String2Date($vaPeringatan['tanggal']) ?></td>
-                          <td><?= $vaPeringatan['nomor_surat'] ?></td>
-                          <td><?= $vaPeringatan['Kategori'] ?></td>
-                          <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('laporan/lp_sp/' . $vaPeringatan['id'] . '/' . $cOption . '') ?>">
-                              <i class="fa fa-print"></i>
-                            </a></td>
-                        </tr>
-                      <?php } ?>
+                      } ?>
                     </tbody>
                   </table>
                 </div>
@@ -561,221 +582,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
-          <div class="card">
-            <div class="card-header" id="headingOne8">
-              <div class="card-title" data-toggle="collapse" data-target="#istirahat" aria-expanded="true" aria-controls="collapseOne8">
-                Istirahat
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <polygon points="0 0 24 0 24 24 0 24" />
-                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
-                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div id="istirahat" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
-              <div class="card-body">
-                <div class="kt-portlet__body">
-                  <table class="table table-striped table-bordered DataTableEdit">
-                    <thead>
-                      <tr>
-                        <td>Tanggal</td>
-                        <td>Nomor Surat</td>
-                        <td>Act</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $No = 0;
-                      foreach ($istirahat as $key => $vaIstirahat) {
-                      ?>
-                        <tr>
-                          <td><?= String2Date($vaIstirahat['tgl']) ?></td>
-                          <td><?= $vaIstirahat['nomor_surat'] ?></td>
-                          <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('laporan/lp_istirahat/' . $vaIstirahat['id_istirahat'] . '') ?>">
-                              <i class="fa fa-print"></i>
-                            </a></td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><br />
-
-    <div class="row">
-      <div class="col-6">
-        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
-          <div class="card">
-            <div class="card-header" id="headingOne8">
-              <div class="card-title" data-toggle="collapse" data-target="#skorsing" aria-expanded="true" aria-controls="collapseOne8">
-                Skorsing
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <polygon points="0 0 24 0 24 24 0 24" />
-                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
-                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div id="skorsing" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
-              <div class="card-body">
-                <div class="kt-portlet__body">
-                  <table class="table table-striped table-bordered DataTableEdit">
-                    <thead>
-                      <tr>
-                        <td>Tanggal</td>
-                        <td>Nomor Surat</td>
-                        <td>Act</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $No = 0;
-                      foreach ($skorsing as $key => $vaSkorsing) {
-                      ?>
-                        <tr>
-                          <td><?= String2Date($vaSkorsing['tgl']) ?></td>
-                          <td><?= $vaSkorsing['nomor_surat'] ?></td>
-                          <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('laporan/lp_skorsing/' . $vaSkorsing['id_skorsing'] . '') ?>">
-                              <i class="fa fa-print"></i>
-                            </a></td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
-          <div class="card">
-            <div class="card-header" id="headingOne8">
-              <div class="card-title" data-toggle="collapse" data-target="#mutasi" aria-expanded="true" aria-controls="collapseOne8">
-                Mutasi
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <polygon points="0 0 24 0 24 24 0 24" />
-                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
-                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div id="mutasi" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
-              <div class="card-body">
-                <div class="kt-portlet__body">
-                  <table class="table table-striped table-bordered DataTableEdit">
-                    <thead>
-                      <tr>
-                        <td>Tanggal</td>
-                        <td>Nomor Surat</td>
-                        <td>Act</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $No = 0;
-                      foreach ($mutasi as $key => $vaMutasi) {
-                      ?>
-                        <tr>
-                          <td><?= String2Date($vaMutasi['tanggal']) ?></td>
-                          <td><?= $vaMutasi['nomor_mutasi'] ?></td>
-                          <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('laporan/lp_mutasi/' . $vaMutasi['id_mutasi'] . '') ?>">
-                              <i class="fa fa-print"></i>
-                            </a></td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><br />
-
-    <div class="row">
-      <div class="col-6">
-        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
-          <div class="card">
-            <div class="card-header" id="headingOne8">
-              <div class="card-title" data-toggle="collapse" data-target="#tugas" aria-expanded="true" aria-controls="collapseOne8">
-                Skorsing
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <polygon points="0 0 24 0 24 24 0 24" />
-                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
-                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div id="tugas" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
-              <div class="card-body">
-                <div class="kt-portlet__body">
-                  <table class="table table-striped table-bordered DataTableEdit">
-                    <thead>
-                      <tr>
-                        <td>Tanggal</td>
-                        <td>Nomor Surat</td>
-                        <td>Act</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $No = 0;
-                      foreach ($tugas as $key => $vaTugas) {
-                      ?>
-                        <tr>
-                          <td><?= String2Date($vaTugas['tgl']) ?></td>
-                          <td><?= $vaTugas['nomor_surat'] ?></td>
-                          <td><a class="btn-link" title="View Data" target="_blank" href="<?= site_url('laporan/lp_tugas/' . $vaTugas['id_tugas'] . '') ?>">
-                              <i class="fa fa-print"></i>
-                            </a></td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="accordion accordion-solid accordion-toggle-svg" id="accordionExample8">
-          <div class="card">
-            <div class="card-header" id="headingOne8">
-              <div class="card-title" data-toggle="collapse" data-target="#phk" aria-expanded="true" aria-controls="collapseOne8">
-                PHK
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <polygon points="0 0 24 0 24 24 0 24" />
-                    <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero" />
-                    <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) " />
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <div id="phk" class="collapse show" aria-labelledby="headingOne8" data-parent="#accordionExample8">
-              <div class="card-body">
-                <div class="kt-portlet__body">
-                  <!--isi content disini-->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><br />
+    </div>
+    <br />
 </div>
 <?php } ?>

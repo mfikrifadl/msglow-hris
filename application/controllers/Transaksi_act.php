@@ -290,7 +290,7 @@ class Transaksi_act extends CI_Controller
 					// 'referensi'				=>	$this->input->post('cReferensi'),
 					// 'tlp_referensi'			=>	$this->input->post('nTlpReferensi'),
 					'tanggal_masuk_kerja' 	=> 	$this->Date2String($this->input->post('dTglMasukKerja')),
-					'tgl_kontrak_berakhir' 	=> 	$this->Date2String($this->input->post('dTglKontrakBerakhir')),
+					// 'tgl_kontrak_berakhir' 	=> 	$this->Date2String($this->input->post('dTglKontrakBerakhir')),
 					// 'bobot_nilai'			=>  $this->input->post('nBobot'),
 					'pendidikan'			=>	$this->input->post('cIdPendidikan'),
 					'jurusan'				=>	$this->input->post('cJurusan'),
@@ -345,7 +345,7 @@ class Transaksi_act extends CI_Controller
 					// 'referensi'				=>	$this->input->post('cReferensi'),
 					// 'tlp_referensi'			=>	$this->input->post('nTlpReferensi'),
 					'tanggal_masuk_kerja' 	=> 	$this->Date2String($this->input->post('dTglMasukKerja')),
-					'tgl_kontrak_berakhir' 	=> 	$this->Date2String($this->input->post('dTglKontrakBerakhir')),
+					// 'tgl_kontrak_berakhir' 	=> 	$this->Date2String($this->input->post('dTglKontrakBerakhir')),
 					// 'bobot_nilai'			=>  $this->input->post('nBobot'),
 					'foto'					=>  "upload/pegawai/" . $Waktu . $namafoto,
 					'pendidikan'			=>	$this->input->post('cIdPendidikan'),
@@ -420,11 +420,18 @@ class Transaksi_act extends CI_Controller
 
 	public function kontrak($Type = "", $Id = "")
 	{
+		$tgl_masuk_kerja = $this->input->post('dTglMasukKerja');
+		$masa_kontrak = $this->input->post('masa_kontrak');		
 
-		if ($Type == 'Insert' or $Type == 'Update') {
+		$t_masa_kontrak = date('Y-m-d', strtotime('+'.$masa_kontrak.' month', strtotime( $tgl_masuk_kerja ))); //tambah tanggal sebanyak 6 bulan
+		
+
+		if ($Type == 'Insert') {
 			$dataInsert = array(
-				'tanggal'       =>  date("Y-m-d"),
+				'tanggal_masuk_kerja'       =>  $this->input->post('dTglMasukKerja'),
+				'tanggal_kontrak_habis'       =>  $t_masa_kontrak,
 				'no_surat'      =>  $this->input->post('nNomorSurat'),
+				'masa_kontrak'      =>  $this->input->post('masa_kontrak'),
 				'id_pegawai'	=>  $this->input->post('cIdPegawai'),
 				'cCreate'		=>  $this->input->post('cCreate'),
 				'is_deleted'	=>  0
@@ -433,14 +440,20 @@ class Transaksi_act extends CI_Controller
 			$dataInsert = array(
 				'is_deleted'		=>	1
 			);
+		} elseif($Type == 'Update'){
+			$dataUpdate = array(							
+				'masa_kontrak'      =>  $this->input->post('masa_kontrak'),
+				'tanggal_kontrak_habis'       =>  $t_masa_kontrak,				
+				'cCreate'		=>  $this->input->post('cCreate'),				
+			);
 		}
 
 		if ($Type == 'Insert') {
 			$this->model->Insert('kontrak', $dataInsert);
 		} elseif ($Type == 'Update') {
-			$this->model->Update('kontrak', 'id_pegawai', $Id, $dataInsert);
+			$this->model->Update('kontrak', 'id', $Id, $dataUpdate);
 		} elseif ($Type == 'Delete') {
-			$this->model->Update_Delete('kontrak', 'id_pegawai', $Id, $dataInsert);
+			$this->model->Update_Delete('kontrak', 'id', $Id, $dataInsert);
 		}
 
 		redirect(site_url('transaksi/kontrak'));
@@ -843,32 +856,45 @@ class Transaksi_act extends CI_Controller
 		//echo "$Tgl";
 	}
 
+	public function formInputPasangan()
+	{
+		$cStatusKawin = $this->input->post("cStatusKawin");
+		$cNik = $this->input->post("cNik");
+		
+		$data = array(
+			'cStatusKawin' => $cStatusKawin
+		);
+
+		$data['st_pernikahan'] = $this->model->ViewWhere('tb_pegawai', 'nik', $cNik);
+		$this->load->view('admin/transaksi/data/tb_form_input_pasangan', $data);
+	}
+
 	public function get_pegawai($id = '')
 	{
-		// $db = $this->model->ViewWhere('tb_pegawai', 'id_pegawai', $id);
-		$query = 'SELECT t1.id_pegawai,
-						t1.nik, t1.tanggal_lahir,
-						t1.tempat_lahir, 
-						t1.no_ktp, 
-						t1.alamat_asal, 
-						t1.nama, 
-						t3.nama_jabatan, 
-						t1.tanggal_masuk_kerja,
-						t1.tgl_kontrak_berakhir FROM tb_pegawai t1 
-						LEFT JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai 
-						LEFT JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan 
-						WHERE t1.id_pegawai = "' . $id . '"';
-		$db = $this->db->query($query);
-		foreach ($db->result() as $vaData) {
-			$nik = $vaData->nik;
-			$jabatan = $vaData->nama_jabatan;
-			$tempat_lahir = $vaData->tempat_lahir;
-			$tanggal_lahir = $vaData->tanggal_lahir;
-			$no_ktp = $vaData->no_ktp;
-			$alamat_asal = $vaData->alamat_asal;
-			$nama = $vaData->nama;
-			$tanggal_masuk_kerja = $vaData->tanggal_masuk_kerja;
-			$tgl_kontrak_berakhir = $vaData->tgl_kontrak_berakhir;
+		 $db = $this->model->ViewWhere('v_tb_pegawai', 'id_pegawai', $id);
+		// $query = 'SELECT t1.id_pegawai,
+		// 				t1.nik, t1.tanggal_lahir,
+		// 				t1.tempat_lahir, 
+		// 				t1.no_ktp, 
+		// 				t1.alamat_asal, 
+		// 				t1.nama, 
+		// 				t3.nama_jabatan, 
+		// 				t1.tanggal_masuk_kerja,
+		// 				t1.tgl_kontrak_berakhir FROM tb_pegawai t1 
+		// 				LEFT JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai 
+		// 				LEFT JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan 
+		// 				WHERE t1.id_pegawai = "' . $id . '"';
+		// $db = $this->db->query($query);
+		foreach ($db as $vaData) {
+			$nik = $vaData['nik'];
+			$jabatan = $vaData['jabatan'];
+			$tempat_lahir = $vaData['tempat_lahir'];
+			$tanggal_lahir = $vaData['tanggal_lahir'];
+			$no_ktp = $vaData['no_ktp'];
+			$alamat_asal = $vaData['alamat_asal'];
+			$nama = $vaData['nama'];
+			$tanggal_masuk_kerja = $vaData['tanggal_masuk_kerja'];
+			$tgl_kontrak_berakhir = $vaData['tanggal_kontrak_habis'];
 		}
 
 		echo $nik . "~" . $jabatan . "~" . $tempat_lahir . "~" . $tanggal_lahir . "~" . $no_ktp . "~" . $alamat_asal . "~" . $nama . "~" . $tanggal_masuk_kerja . "~" . $tgl_kontrak_berakhir;
