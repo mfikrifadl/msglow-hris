@@ -72,30 +72,30 @@ if ($action == "edit") {
           <div class="kt-portlet__body">
             <div class="form-group">
               <label>Kode Wawancara</label>
-              <input type="text" name="cKodeWawancara" id="cKodeWawancara" placeholder="Kode Wawancara" class="form-control" value="<?= $cKodeWawancara ?>" required>
+              <input type="text" readonly="true" name="cKodeWawancara" id="cKodeWawancara" placeholder="Kode Wawancara" class="form-control" value="<?= $cKodeWawancara ?>" required>
               <input type="hidden" value="<?= $cIdWawancara ?>" name="cIdWawancara" id="cIdWawancara">
               <input type="hidden" value="<?= $whois ?>" name="whois" id="whois">
             </div>
             <div class="form-group">
               <label>Nama</label>
-              <input type="text" name="cNama" id="cNama" class="form-control" placeholder="Nama Peserta" value="<?= $cNama ?>">
+              <input type="text" name="cNama" id="cNama" class="form-control" placeholder="Nama Peserta" value="<?= $cNama ?>" required>
             </div>
             <div class="form-group">
               <label>Nomor Telepon</label>
-              <input type="text" name="cNomorTelepon" id="cNomorTelepon" class="form-control" placeholder="Nomor Telepon" value="<?= $cNomorTelepon ?>">
+              <input type="text" name="cNomorTelepon" id="cNomorTelepon" class="form-control" placeholder="Nomor Telepon" value="<?= $cNomorTelepon ?>" required>
             </div>
             <div class="form-group">
               <label>Email</label>
-              <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
+              <input type="email" name="cEmail" id="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>" required>
             </div>
             <div class="form-group">
               <label>Pekerjaan</label>
-              <input name="cJob" id="cJob" type="text" class="form-control" placeholder="Pekerjaan" value="<?= $cJob ?>">
+              <input name="cJob" readonly="true" id="cJob" type="text" class="form-control" placeholder="Pekerjaan" value="<?= $cJob ?>" required>
               <input type="hidden" name="cJob_id" id="cJob_id" value="<?= $cJob_id ?>">
             </div>
             <div class="form-group">
               <label>Interviewer</label>
-              <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel" name="cLevel">
+              <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel" name="cLevel" required>
                 <option></option>
                 <?php foreach ($levels as $key => $level) { ?>
                   <option value="<?= $level['id_level'] ?>" <?php if ($cLevel == $level['id_level']) echo "selected"; ?>>
@@ -106,11 +106,11 @@ if ($action == "edit") {
             </div>
             <div class="form-group">
               <label>Tanggal Wawancara</label>
-              <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Wawancara" value="<?= $dTglWawancara ?>">
+              <input type="date" name="dTglWawancara" id="tglW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Wawancara" value="<?= $dTglWawancara ?>" required>
             </div>
             <div class="form-group">
               <label>Status</label>
-              <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus">
+              <select class="form-control kt-selectpicker" data-live-search="true" id="cStatus" name="cStatus" required>
                 <option></option>
                 <!-- <option value="pemanggilan" <?php //if ($cStatus_recruitment == 'pemanggilan') echo "selected"; 
                                                   ?>>Pemanggilan</option> -->
