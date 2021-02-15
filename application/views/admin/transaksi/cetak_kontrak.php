@@ -143,25 +143,25 @@ function bulan_ini($bulan)
             <td valign='top'>II.</td>
             <td valign='top' colspan=2>Nama</td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=2><?= $data[0]['nama'] ?></td>
+            <td valign='top' colspan=2><B><?= strtoupper($data[0]['nama']) ?></B></td>
         </tr>
         <tr>
             <td valign='top'></td>
             <td valign='top' colspan=2><span lang=SV>Tempat, Tanggal Lahir</span></td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=2><?= $data[0]['tempat_lahir'].', '.date('d',strtotime($data[0]['tanggal_lahir'])).' '.bulan_ini(date('M',strtotime($data[0]['tanggal_lahir']))).' '.date('Y',strtotime($data[0]['tanggal_lahir']))?></td>
+            <td valign='top' colspan=2><B><?= strtoupper($data[0]['tempat_lahir']).', '.strtoupper($data[0]['tanggal_lahir'])?></B></td>
         </tr>
         <tr>
             <td valign='top'></td>
             <td valign='top' colspan=2>Nomor KTP</td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=2><?= $data[0]['no_ktp'] ?></td>
+            <td valign='top' colspan=2><B><?= strtoupper($data[0]['no_ktp']) ?></B></td>
         </tr>
         <tr>
             <td valign='top'></td>
             <td valign='top' colspan=2>Alamat sesuai KTP</td>
             <td valign='top'>:</td>
-            <td valign='top' colspan=2><?= $data[0]['alamat_asal'] ?></td>
+            <td valign='top' colspan=2><B><?= strtoupper($data[0]['alamat_asal']) ?></B></td>
         </tr>
         <tr>
             <td valign='top'></td>
@@ -187,7 +187,7 @@ function bulan_ini($bulan)
         <tr>
             <td valign='top'>1.</td>
             <td valign='top' colspan=5><B>PIHAK PERTAMA</B> dengan
-                ini menerima <B>PIHAK KEDUA</B> untuk bekerja dengan jabatan sebagai ....... di PT
+                ini menerima <B>PIHAK KEDUA</B> untuk bekerja dengan jabatan sebagai <B><?= strtoupper($data[0]['jabatan']) ?></B> di PT
                 KOSMETIKA CANTIK INDONESIA.</td>
         </tr>
         <tr>
@@ -210,9 +210,9 @@ function bulan_ini($bulan)
         <tr>
             <td valign='top'>1.</td>
             <td valign='top' colspan=5><B>PIHAK KEDUA</B> akan
-                menjalani masa kontrak selama ... (bulan) bulan terhitung dari tanggal
-                dimulainya hubungan kerja, terhitung sejak tanggal ......... dan berakhir
-                pada tanggal ......... dengan masa evaluasi selama 3 (tiga) bulan.</td>
+                menjalani masa kontrak selama <B><?= strtoupper($data[0]['masa_kontrak']) ?> (bulan)</B> bulan terhitung dari tanggal
+                dimulainya hubungan kerja, terhitung sejak tanggal <B><?= strtoupper($data[0]['tanggal_masuk_kerja']) ?></B> dan berakhir
+                pada tanggal <B><?= strtoupper($data[0]['tanggal_kontrak_habis']) ?></B> dengan masa evaluasi selama 3 (tiga) bulan.</td>
         </tr>
         <tr>
             <td valign='top'>2.</td>

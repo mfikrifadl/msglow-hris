@@ -12,7 +12,22 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-rowreorder-bs4/css/rowReorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
+    
+    <?php
+    if (empty($row)) {
+    } else {
+    ?>
+        <div class='row'>
+            <div class='col-sm-12 text-right'>
+                <button class='btn btn-success' name="submit" type='submit'>
+                    <i class="flaticon2-google-drive-file"></i>Cetak PDF
+                </button>
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+    <hr>
     <table class="table table-striped table-bordered text-center" id='DataTable_absensi'>
         <thead>
             <tr>
@@ -160,21 +175,7 @@
         ?>
         </tbody>
     </table>
-    <hr>
-    <?php
-    if (empty($row)) {
-    } else {
-    ?>
-        <div class='row'>
-            <div class='col-sm-12 text-left'>
-                <button class='btn btn-success' name="submit" type='submit'>
-                    <i class="flaticon2-google-drive-file"></i>Cetak PDF
-                </button>
-            </div>
-        </div>
-    <?php
-    }
-    ?>
+    
 
 
     <!-- DATA TABES SCRIPT -->

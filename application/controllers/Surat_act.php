@@ -67,8 +67,10 @@ class Surat_act extends CI_Controller
 
             $dataInsert = array(
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
+                'jabatan'           =>  $this->input->post('cJabatan'),
                 'jum_teguran_lisan' =>  $this->input->post('tl'),
                 'mulai_berlaku'     =>  $this->input->post('dTgl'),
+                'berlaku_sampai'     =>  $this->input->post('dTgl_end'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'keterangan'        =>  $this->input->post('cKet'),
                 'id_kategori_surat' =>  2,
@@ -91,6 +93,8 @@ class Surat_act extends CI_Controller
 
             $dataUpdate = array(
                 'tanggal'           =>  $this->input->post('dTgl'),
+                'mulai_berlaku'      =>  $this->input->post('dTgl'),
+                'berlaku_sampai'     =>  $this->input->post('dTgl_end'),
                 'jum_teguran_lisan' =>  $this->input->post('tl'),
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
@@ -143,6 +147,7 @@ class Surat_act extends CI_Controller
                 'id_kategori_surat' =>  $this->input->post('idSurat'),
                 'id_pegawai'        =>  $this->input->post('cIdPegawai'),
                 'uraian'            =>  $this->input->post('cUraian'),
+                'jabatan'            =>  $this->input->post('cJabatan'),
                 'keterangan'        =>  $this->input->post('cKet'),
                 'mulai_berlaku'     =>  $this->input->post('cMulai_berlaku'),
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
@@ -307,7 +312,7 @@ class Surat_act extends CI_Controller
 
     public function cetak_kontrak($id = '')
     {
-        $data['data'] = $this->db->query('SELECT * from kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai = t2.id_pegawai where t1.id_pegawai=' . $id . '')->result_array();;
+        $data['data'] = $this->model->ViewWhere('v_tb_pegawai','id_pegawai', $id);
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
         $html = $this->load->view('admin/transaksi/cetak_kontrak', $data, true);
         $mpdf->WriteHTML($html);

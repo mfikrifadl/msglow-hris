@@ -54,7 +54,7 @@ if ($action == "edit") {
             <div class="card">
               <div class="card-header" id="headingInputData">
                 <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseInputData" aria-expanded="true" aria-controls="collapseInputData">
-                  <strong> Data Absensi Hari Ini </strong>
+                  <strong> Data Absensi Oleh Mesin </strong>
                 </div>
               </div>
               <div id="collapseInputData" class="collapse show" aria-labelledby="headingInputData" data-parent="#accordionInputData">
@@ -130,7 +130,7 @@ if ($action == "edit") {
             <div class="card">
               <div class="card-header" id="headingTableAbsensi">
                 <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseTableAbsensi" aria-expanded="true" aria-controls="collapseTableAbsensi">
-                  <strong> Data Table Absensi </strong>
+                  <strong> Data Rekap Absensi </strong>
                 </div>
               </div>
               <div id="collapseTableAbsensi" class="collapse show" aria-labelledby="headingTableAbsensi" data-parent="#accordionTableAbsensi">
