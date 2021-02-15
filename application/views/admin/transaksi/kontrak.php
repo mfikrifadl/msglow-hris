@@ -292,26 +292,31 @@ if ($action == "Update") {
                             <tbody>
                                 <?php $no = 0;
                                 foreach ($v_kontrak as $key => $vaPeringatan) {
-                                ?>
-                                    <tr>
-                                        <td><?= ++$no; ?></td>
-                                        <td><?= $vaPeringatan['tanggal_masuk_kerja'] ?></td>
-                                        <td><?= $vaPeringatan['tanggal_kontrak_habis'] ?></td>
-                                        <td><?= $vaPeringatan['no_surat'] ?></td>
-                                        <td><?= $vaPeringatan['nama'] ?></td>
-                                        <td align="center">
-                                            <a class="btn-link" title="Print Kontrak" target="_blank" href="<?= site_url('Surat_act/cetak_kontrak/' . $vaPeringatan['id_pegawai'] . '') ?>">
-                                                <i class="fa fa-print"></i>
-                                            </a>|
-                                            <a class="btn-link" title="Edit Kontrak" href="<?= site_url('transaksi/kontrak/Update/' . $vaPeringatan['id'] . '') ?>">
-                                                <i class="fa fa-pen"></i>
-                                            </a>|
-                                            <!-- <a class="btn-link" title="Delete Kontrak" href="<?= site_url('transaksi_act/kontrak/Delete/' . $vaPeringatan['id_pegawai'] . '') ?>">
-                                                <i class="fa fa-trash"></i>
-                                            </a> -->
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+                                    if($vaPeringatan['is_deleted'] == 1){
+
+                                    }else{
+                                        ?>
+                                        <tr>
+                                            <td><?= ++$no; ?></td>
+                                            <td><?= $vaPeringatan['tanggal_masuk_kerja'] ?></td>
+                                            <td><?= $vaPeringatan['tanggal_kontrak_habis'] ?></td>
+                                            <td><?= $vaPeringatan['no_surat'] ?></td>
+                                            <td><?= $vaPeringatan['nama'] ?></td>
+                                            <td align="center">
+                                                <a class="btn-link" title="Print Kontrak" target="_blank" href="<?= site_url('Surat_act/cetak_kontrak/' . $vaPeringatan['id_pegawai'] . '') ?>">
+                                                    <i class="fa fa-print"></i>
+                                                </a>|
+                                                <a class="btn-link" title="Edit Kontrak" href="<?= site_url('transaksi/kontrak/Update/' . $vaPeringatan['id'] . '') ?>">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>|
+                                                <!-- <a class="btn-link" title="Delete Kontrak" href="<?= site_url('transaksi_act/kontrak/Delete/' . $vaPeringatan['id_pegawai'] . '') ?>">
+                                                    <i class="fa fa-trash"></i>
+                                                </a> -->
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                 } ?>
                             </tbody>
                         </table>
                     </div>
