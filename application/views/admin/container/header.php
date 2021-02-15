@@ -107,11 +107,16 @@ if ($this->session->userdata('id') == '') {
   function String2Date($dTgl)
   {
     //return 22-11-2012  
-    list($cYear, $cMount, $cDate) = explode("-", $dTgl);
-    if (strlen($cYear) == 4) {
-      $dTgl = $cDate . "-" . $cMount . "-" . $cYear;
+    if (empty($dTgl)) {
+      $dTgl = "";
+      return $dTgl;
+    } else {
+      list($cYear, $cMount, $cDate) = explode("-", $dTgl);
+      if (strlen($cYear) == 4) {
+        $dTgl = $cDate . "-" . $cMount . "-" . $cYear;
+      }
+      return $dTgl;
     }
-    return $dTgl;
   }
 
   function String2Date_masuk_kerja($cTgl_masuk_kerja)
