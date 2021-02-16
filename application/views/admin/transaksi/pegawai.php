@@ -752,7 +752,7 @@ if ($action == "edit") {
 
 
                           <?php
-                          if ($cStatusKawin == 0) {
+                          if ($cStatusKawin == 0 && !empty($cStatusKawin)) {
                           ?>
                             <div class="row">
 
@@ -935,16 +935,16 @@ if ($action == "edit") {
                               </div> <!-- /.col-form -->
                             </div>
                           <?php
-                          } else {
+                          } elseif ($cStatusKawin == "") {
                           ?>
                             <div class="row">
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
-                                  <label>Input Status Perkawinan </label>
+                                  <label>Input Status Perkawinan</label>
                                   <select name="cStatusKawin" id="cStatusKawin" onchange="setInputPasangan(this.value)" class="form-control kt-selectpicker" data-live-search="true">
                                     <option></option>
-                                    <option value="0" <?php if ($cStatusKawin == 0) echo "selected"; ?>>Menikah</option>
-                                    <option value="1" <?php if ($cStatusKawin == 1) echo "selected"; ?>>Belum Menikah</option>
+                                    <option value="0">Menikah</option>
+                                    <option value="1">Belum Menikah</option>
                                   </select>
                                   <!-- <input type="text" name="cStatusKawin" class="form-control" placeholder="Status Perkawinan" value="<?= $cStatusKawin ?>"> -->
 
