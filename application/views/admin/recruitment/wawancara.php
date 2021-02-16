@@ -486,7 +486,9 @@ if ($action == "edit") {
           $('#cLevel').val("")
           $('#cNama').focus()
 
-          window.location.href = "<?= site_url('recruitment/wawancara') ?>";
+          alert(msg);
+          //window.location.href = "<?= site_url('recruitment/wawancara') ?>";
+          //return false;
         }
       });
     }
