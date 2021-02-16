@@ -292,21 +292,20 @@ class Recruitment_act extends CI_Controller
 		);
 		$this->model->Insert("log", $vaLog);
 		$cViewDataPelamar 			= $this->model->CekDataPelamar('recruitment', 'kode_wawancara', $code);
-		if ($cViewDataPelamar->num_rows() > 0) {
-?>
-			<script type="text/javascript">
-				alert("DATA SUDAH DIINPUTKAN");
-			</script>
-<?php
-		} else {
-			if ($Type == "Insert") {
+
+		if ($Type == "Insert") {
+			if ($cViewDataPelamar->num_rows() > 0) {
+
+				$msg = 1;
+				return $msg;
+				//redirect(site_url('recruitment/wawancara/'));
+			} else {
+				$msg = 0;
 				$this->model->Insert('recruitment', $data_create);
 				$this->model->Insert("log", $vaLog);
 				redirect(site_url('recruitment/wawancara/'));
 			}
-		}
-
-		if ($Type == "Update") {
+		} elseif ($Type == "Update") {
 			$this->model->Update('recruitment', 'kode_wawancara', $id, $data_update);
 			$this->model->Insert("log", $vaLog);
 			redirect(site_url('recruitment/wawancara/'));
@@ -968,19 +967,20 @@ class Recruitment_act extends CI_Controller
 			$cEmail 	    = $vaKode['email'];
 		}
 
-		$dbPegawai = $this->db->query("SELECT * FROM tb_pegawai ORDER BY nik DESC LIMIT 1 ");
-		$setNik = "";
-		foreach ($dbPegawai->result_array() as $keyNik => $vaKodeNik) {
+		$dbPegawai = $this->model->ViewLimit('tb_pegawai', 'nik', 1);
+		$cNik = "";
+		foreach ($dbPegawai as $vaKodeNik) {
 			$cNik 			= $vaKodeNik['nik'];
-			if ($cNik == NULL) {
-				$cYear = date('Y');
-				$month = date('m');
-				$year = substr($cYear, 2);
-				$setNik = "99" . $year . "" . $month . "0001";
-			} else {
-				$intNik = intval($cNik);
-				$setNik = $intNik + 1;
-			}
+		}
+		$setNik = "";
+		if ($cNik == NULL || $cNik == "" || empty($cNik)) {
+			$cYear = date('Y');
+			$month = date('m');
+			$year = substr($cYear, 2);
+			$setNik = "99" . $year . "" . $month . "0001";
+		} else {
+			$intNik = intval($cNik);
+			$setNik = $intNik + 1;
 		}
 
 		$data = array(
