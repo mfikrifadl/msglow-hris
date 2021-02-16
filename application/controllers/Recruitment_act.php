@@ -296,11 +296,11 @@ class Recruitment_act extends CI_Controller
 		if ($Type == "Insert") {
 			if ($cViewDataPelamar->num_rows() > 0) {
 
-				$msg = 1;
-				return $msg;
+				//$msg = 1;
+				//return $msg;
 				//redirect(site_url('recruitment/wawancara/'));
 			} else {
-				$msg = 0;
+				//$msg = 0;
 				$this->model->Insert('recruitment', $data_create);
 				$this->model->Insert("log", $vaLog);
 				redirect(site_url('recruitment/wawancara/'));
