@@ -169,11 +169,37 @@ class Recruitment extends CI_Controller
 		));
 
 		$response = curl_exec($curl);
-
+		
 		curl_close($curl);
-
-		redirect('recruitment/wawancara');
+		//redirect(site_url('recruitment/wawancara'));		
 	}
+
+	public function reborn_delete_data_registrant($id=""){
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'PUT',
+			CURLOPT_POSTFIELDS => 'is_delete=0',
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+				'Content-Type: application/x-www-form-urlencoded'
+			),
+		));
+
+		$response = curl_exec($curl);
+		
+		curl_close($curl);
+		//redirect(site_url('recruitment/wawancara'));		
+	}
+	
 
 	public function psiko_test($Aksi = "", $Id = "")
 	{

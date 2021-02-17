@@ -298,7 +298,7 @@ if ($action == "edit") {
 
         //alert (this.responseText);
         document.getElementById('cTgl_masuk_kerja').value = hasil[0];
-        document.getElementById('cNama_status_kerja').value = hasil[2];
+        document.getElementById('cNama_status_kerja').value = hasil[1];
         // document.getElementById('cNama_status_kerja').value = hasil[2];
       }
     };

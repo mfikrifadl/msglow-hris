@@ -262,7 +262,7 @@ if ($action == "edit") {
                             <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
                               <div class="form-group">
                                 <label>Area Kerja</label>
-                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdArea">
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdArea" required>
                                   <option></option>
                                   <?php foreach ($area as $key => $vaArea) { ?>
                                     <option value="<?= $vaArea['id_area'] ?>" <?php if ($vaArea['id_area'] == $cIdArea) echo "selected"; ?>>
@@ -273,7 +273,7 @@ if ($action == "edit") {
                               </div>
                               <div class="form-group">
                                 <label>Status Kerja</label>
-                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" onchange="hideshow(this.value)">
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" onchange="hideshow(this.value)" required>
                                   <option></option>
                                   <?php foreach ($status as $key => $vaStatus) {
                                     if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4) { ?>
@@ -289,7 +289,7 @@ if ($action == "edit") {
                               </div>
                               <div class="form-group" id="golker">
                                 <label>Golongan Kerja</label>
-                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja">
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja" required>
                                   <option></option>
                                   <?php foreach ($kerja as $key => $vaKerja) { ?>
                                     <option value="<?= $vaKerja['id_kerja'] ?>" <?php if ($vaKerja['id_kerja'] == $cIdKerja) echo "selected"; ?>>
@@ -310,7 +310,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Office</label>
                                 <div class="input-group">
-                                  <select class="form-control kt-selectpicker" data-live-search="true" name="cOutlet">
+                                  <select class="form-control kt-selectpicker" data-live-search="true" name="cOutlet" required>
                                     <option></option>
                                     <?php foreach ($outlet as $key => $vaOutlet) { ?>
                                       <option value="<?= $vaOutlet['id_outlet'] ?>" <?php if ($vaOutlet['id_outlet'] == $cOutlet) echo "selected"; ?>>
@@ -328,7 +328,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Tanggal Masuk Kerja</label>
                                 <div class="input-group">
-                                  <input type="date" name="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy" value="<?= $dTglMasukKerja ?>" id="tglDT">
+                                  <input type="date" name="dTglMasukKerja" class="form-control" placeholder="Tanggal Masuk Kerja" data-date-format="dd/mm/yyyy" value="<?= $dTglMasukKerja ?>" id="tglDT" required>
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar-o"></i>
                                   </div>
@@ -351,7 +351,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Pembayaran Gaji <?= $cJenisBayar ?></label>
                                 <div class="input-group">
-                                  <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true">
+                                  <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true" required>
                                     <option></option>
                                     <?php foreach ($bayar as $key => $vaBayar) { ?>
                                       <option value="<?= $vaBayar['id_pembayaran'] ?>" <?php if ($vaBayar['id_pembayaran'] == $cJenisBayar) echo "selected"; ?>>
@@ -370,7 +370,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Cabang Bank</label>
                                 <div class="input-group">
-                                  <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank">
+                                  <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank" required>
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success flaticon2-map"></i>
@@ -381,7 +381,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Nomor Rekening</label>
                                 <div class="input-group">
-                                  <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening">
+                                  <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening" required>
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success fa fa-credit-card"></i>
@@ -392,7 +392,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Atas Nama</label>
                                 <div class="input-group">
-                                  <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama">
+                                  <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama" required>
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success fa fa-user"></i>
@@ -489,7 +489,7 @@ if ($action == "edit") {
                             <div class="form-group">
                               <label>PIN</label>
                               <div class="input-group">
-                                <input type="text" id="cPinFinger" name="cPin" class="form-control" placeholder="PIN Finger" value="<?= $cPin  ?>">
+                                <input type="text" id="cPinFinger" name="cPin" class="form-control" placeholder="PIN Finger" value="<?= $cPin  ?>" required>
                                 <div class="input-group-append">
                                   <span class="input-group-text" id="basic-addon2">
                                     <i class="kt-font-success fa fa-qrcode"></i>
@@ -503,7 +503,7 @@ if ($action == "edit") {
                             <div class="form-group">
                               <label>Nama</label>
                               <div class="input-group">
-                                <input type="text" id="cNamaPegawai" readonly="true" name="cNama" class="form-control" placeholder="Nama Pegawai" value="<?= $cNama  ?>">
+                                <input type="text" id="cNamaPegawai" readonly="true" name="cNama" class="form-control" placeholder="Nama Pegawai" value="<?= $cNama  ?>" required>
                                 <div class="input-group-append">
                                   <span class="input-group-text" id="basic-addon2">
                                     <i class="kt-font-success fa fa-user"></i>
@@ -526,13 +526,13 @@ if ($action == "edit") {
 
                                 <div class="form-group">
                                   <label>Tempat Lahir</label>
-                                  <input type="text" name="cTempatLahir" class="form-control" placeholder="Tempat Lahir" value="<?= $cTempatLahir ?>">
+                                  <input type="text" name="cTempatLahir" class="form-control" placeholder="Tempat Lahir" value="<?= $cTempatLahir ?>" required>
                                 </div>
 
                                 <div class="form-group">
                                   <label>Tanggal Lahir</label>
                                   <div class="input-group">
-                                    <input type="date" name="dTglLahir" onchange="ageCalculator();" class="form-control" value="<?= $dTglLahir ?>" id="dob">
+                                    <input type="date" name="dTglLahir" onchange="ageCalculator();" class="form-control" value="<?= $dTglLahir ?>" id="dob" required>
                                     <button type="button" onclick="javascript:dob.value=''">X</button>
                                     <div class="input-group-addon">
                                       <i class="fa fa-calendar-o"></i>
@@ -543,7 +543,7 @@ if ($action == "edit") {
                                 <div class="form-group">
                                   <label>Umur</label>
                                   <div class="input-group">
-                                    <input type="text" name="cUmur" id="ages" class="form-control" value="<?= $cUmur ?>" style="background-color:#fff;" id="ages" disabled>
+                                    <input type="text" name="cUmur" id="ages" class="form-control" value="<?= $cUmur ?>" style="background-color:#fff;" id="ages" disabled required>
                                   </div>
                                 </div>
 
@@ -555,7 +555,7 @@ if ($action == "edit") {
 
                                 <div class="form-group">
                                   <label>Agama</label>
-                                  <select name="cAgama" class="form-control kt-selectpicker" data-live-search="true">
+                                  <select name="cAgama" class="form-control kt-selectpicker" data-live-search="true" required>
                                     <option></option>
                                     <option value="1" <?php if ($cAgama == 1) echo "selected"; ?>>Islam</option>
                                     <option value="2" <?php if ($cAgama == 2) echo "selected"; ?>>Protestan</option>
@@ -568,7 +568,7 @@ if ($action == "edit") {
 
                                 <div class="form-group">
                                   <label>Jenis Kelamin</label>
-                                  <select name="cJenisKelamin" class="form-control kt-selectpicker" data-live-search="true">
+                                  <select name="cJenisKelamin" class="form-control kt-selectpicker" data-live-search="true" required>
                                     <option></option>
                                     <option value="1" <?php if ($cJk == 1) echo "selected"; ?>>Laki-Laki</option>
                                     <option value="2" <?php if ($cJk == 2) echo "selected"; ?>>Perempuan</option>
@@ -602,7 +602,7 @@ if ($action == "edit") {
 
                                 <div class="form-group">
                                   <label>Pendidikan</label>
-                                  <select class="form-control kt-selectpicker" data-live-search="true" name="cIdPendidikan">
+                                  <select class="form-control kt-selectpicker" data-live-search="true" name="cIdPendidikan" required>
                                     <option></option>
                                     <?php foreach ($pendidikan as $key => $vaPendidikan) { ?>
                                       <option value="<?= $vaPendidikan['id_pendidikan'] ?>" <?php if ($vaPendidikan['id_pendidikan'] == $cIdPendidikan) echo "selected"; ?>>
@@ -614,7 +614,7 @@ if ($action == "edit") {
 
                                 <div class="form-group">
                                   <label>Jurusan</label>
-                                  <input type="text" name="cJurusan" class="form-control" placeholder="Jurusan" value="<?= $cJurusan ?>">
+                                  <input type="text" name="cJurusan" class="form-control" placeholder="Jurusan" value="<?= $cJurusan ?>" required>
                                 </div>
 
                               </div>
@@ -624,13 +624,13 @@ if ($action == "edit") {
                           <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                               <label>Alamat Domisili</label>
-                              <textarea class="form-control" name="cAlamat" placeholder="Alamat Sekarang"><?= $cAlamat ?></textarea>
+                              <textarea class="form-control" name="cAlamat" placeholder="Alamat Sekarang" required><?= $cAlamat ?></textarea>
                             </div>
                           </div> <!-- /.col-form -->
                           <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                               <label>Alamat Sesuai KTP</label>
-                              <textarea class="form-control" name="cAlamatAsal" placeholder="Alamat Sesuai KTP"><?= $cAlamatAsal ?></textarea>
+                              <textarea class="form-control" name="cAlamatAsal" placeholder="Alamat Sesuai KTP" required><?= $cAlamatAsal ?></textarea>
                             </div>
                           </div> <!-- /.col-form -->
 
@@ -672,7 +672,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Nomor KTP</label>
                                 <div class="input-group">
-                                  <input type="text" name="nKtp" class="form-control" placeholder="Nomor KTP" value="<?= $nKtp ?>">
+                                  <input type="text" name="nKtp" class="form-control" placeholder="Nomor KTP" value="<?= $nKtp ?>" required>
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-info fa fa-list-alt"></i>
@@ -685,7 +685,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Email</label>
                                 <div class="input-group">
-                                  <input type="text" name="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>">
+                                  <input type="text" name="cEmail" class="form-control" placeholder="Email" value="<?= $cEmail ?>" required>
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-info fa fa-envelope"></i>
@@ -698,7 +698,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Handphone</label>
                                 <div class="input-group">
-                                  <input type="text" name="nHandphone" class="form-control" value="<?= $nHandphone ?>" placeholder="Handphone">
+                                  <input type="text" name="nHandphone" class="form-control" value="<?= $nHandphone ?>" placeholder="Handphone" required>
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-info fa fa-phone"></i>
@@ -712,7 +712,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Foto </label>
                                 <div class="input-group">
-                                  <input type="file" name="foto" class="form-control">
+                                  <input type="file" name="foto" class="form-control" required>
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-info fa fa-camera"></i>
@@ -759,7 +759,7 @@ if ($action == "edit") {
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                   <label>Input Status Perkawinan </label>
-                                  <select name="cStatusKawin" id="cStatusKawin" class="form-control kt-selectpicker" data-live-search="true">
+                                  <select name="cStatusKawin" id="cStatusKawin" class="form-control kt-selectpicker" data-live-search="true" required>
                                     <option></option>
                                     <option value="0" <?php if ($cStatusKawin == 0) echo "selected"; ?>>Menikah</option>
                                     <option value="1" <?php if ($cStatusKawin == 1) echo "selected"; ?>>Belum Menikah</option>
@@ -924,7 +924,7 @@ if ($action == "edit") {
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                   <label>Input Status Perkawinan </label>
-                                  <select name="cStatusKawin" id="cStatusKawin" onchange="setInputPasangan(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                  <select name="cStatusKawin" id="cStatusKawin" onchange="setInputPasangan(this.value)" class="form-control kt-selectpicker" data-live-search="true" required>
                                     <option></option>
                                     <option value="0" <?php if ($cStatusKawin == 0) echo "selected"; ?>>Menikah</option>
                                     <option value="1" <?php if ($cStatusKawin == 1) echo "selected"; ?>>Belum Menikah</option>
@@ -941,7 +941,7 @@ if ($action == "edit") {
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                   <label>Input Status Perkawinan</label>
-                                  <select name="cStatusKawin" id="cStatusKawin" onchange="setInputPasangan(this.value)" class="form-control kt-selectpicker" data-live-search="true">
+                                  <select name="cStatusKawin" id="cStatusKawin" onchange="setInputPasangan(this.value)" class="form-control kt-selectpicker" data-live-search="true" required>
                                     <option></option>
                                     <option value="0">Menikah</option>
                                     <option value="1">Belum Menikah</option>
@@ -1018,7 +1018,13 @@ if ($action == "edit") {
                             <div class="kt-portlet__foot">
                               <br />
                               <br />
-                              <?php if ($action != 'edit' and $this->session->userdata('level') == 3) { ?>
+                              <?php if ($action != 'edit' && $this->session->userdata('level') == 2) { ?>
+                                <div class="col-sm-12">
+                                  <button type="button" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-flat btn-primary">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                  </button>
+                                </div>
+                              <?php } elseif ($action != 'edit' && $this->session->userdata('level') == 4) { ?>
                                 <div class="col-sm-12">
                                   <button type="button" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-flat btn-primary">
                                     <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>

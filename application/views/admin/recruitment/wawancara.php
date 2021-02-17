@@ -170,7 +170,7 @@ if ($action == "edit") {
             <tbody>
               <?php $no = 0;
               foreach ($registrant as $vaAreaa) {
-                if ($vaAreaa['work_time'] == "Full Time") {
+                if ($vaAreaa['work_time'] == "Full Time" && $vaAreaa['is_delete'] == 0) {
               ?>
                   <tr>
                     <td><?= ++$no; ?></td>
@@ -182,9 +182,9 @@ if ($action == "edit") {
                         <a class="btn btn-outline-warning" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
                           <i class="la la-search"></i>
                         </a>
-                        <!-- <button type="button" onclick="deleteReg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">
-                            <i class="flaticon2-trash"></i>
-                          </button> -->
+                        <button type="button" onclick="deleteReg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">
+                          <i class="flaticon2-trash"></i>
+                        </button>
                       </div>
                     </td>
                     <td><?= $vaAreaa['reg_id'] ?></td>
@@ -363,6 +363,79 @@ if ($action == "edit") {
       <!--end::Portlet-->
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12">
+
+      <!--begin::Portlet-->
+      <div class="kt-portlet">
+
+        <!--begin::Form-->
+        <div class="kt-portlet__head">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+              Data Tidak Sesuai
+            </h3>
+          </div>
+        </div>
+
+        <div class="kt-portlet__body">
+          <table class="table table-striped table-bordered" id="DataTable">
+            <thead>
+              <tr>
+                <td>No</td>
+                <td>Action</td>
+                <td>ID Registrant</td>
+                <td>Lowongan</td>
+                <td>Kategori</td>
+                <td>Nama</td>
+                <td>Pendidikan</td>
+                <td>Email</td>
+                <td>Telp</td>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $no = 0;
+              foreach ($registrant as $vaAreaa) {
+                if ($vaAreaa['work_time'] == "Full Time" && $vaAreaa['is_delete'] == 1) {
+              ?>
+                  <tr>
+                    <td><?= ++$no; ?></td>
+                    <td>
+                      <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
+                        
+                        <a class="btn btn-outline-info" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
+                          <i class="la la-search"></i>
+                        </a>   
+                        <button type="button"title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-warning">
+                          <i class="flaticon-reply"></i>
+                        </button>
+
+                      </div>
+                    </td>
+                    <td><?= $vaAreaa['reg_id'] ?></td>
+                    <td><?= $vaAreaa['job_name'] ?></td>
+                    <td><?= $vaAreaa['work_time'] ?></td>
+                    <td><?= $vaAreaa['reg_name'] ?></td>
+                    <td><?= $vaAreaa['graduate'] ?></td>
+                    <td><?= $vaAreaa['reg_email'] ?></td>
+                    <td><?= $vaAreaa['reg_tlp'] ?></td>
+                  </tr>
+              <?php
+                } else {
+                }
+              } ?>
+            </tbody>
+          </table>
+        </div>
+
+        <!--end::Form-->
+      </div>
+
+      <!--end::Portlet-->
+    </div>
+  </div>
+
 </div>
 
 <!-- end:: Content -->
@@ -395,7 +468,7 @@ if ($action == "edit") {
     xmlhttp.send();
   }
 
-  function deleteReg(id) {
+  function contoh_deleteReg(id) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -416,8 +489,44 @@ if ($action == "edit") {
         document.getElementById('cJob_id').value = job_id;
       }
     };
-    xmlhttp.open("GET", "<?= site_url('recruitment/wawancara_id') ?>/" + id, true);
+    xmlhttp.open("GET", "<?= site_url('recruitment/delete_registrant') ?>/" + id, true);
     xmlhttp.send();
+  }
+
+  function deleteReg(id) {    
+    $.ajax({
+      type: "POST",
+      data: "id=" + id,
+      url: "<?= site_url('recruitment/delete_registrant') ?>/" + id,
+      cache: false,
+      success: function(msg) {
+        new PNotify({
+          // title: 'Success!',
+          text: 'Berhasil Delete Data Registrant.',
+          type: 'success'
+        });
+
+        window.location.href = "<?= site_url('recruitment/wawancara') ?>";
+      }
+    });
+  }
+
+  function reborn_data_reg(id) {    
+    $.ajax({
+      type: "POST",
+      data: "id=" + id,
+      url: "<?= site_url('recruitment/reborn_delete_data_registrant') ?>/" + id,
+      cache: false,
+      success: function(msg) {
+        new PNotify({
+          // title: 'Success!',
+          text: 'Berhasil Mengembalikan Data Registrant.',
+          type: 'success'
+        });
+
+        window.location.href = "<?= site_url('recruitment/wawancara') ?>";
+      }
+    });
   }
 
   function save() {
