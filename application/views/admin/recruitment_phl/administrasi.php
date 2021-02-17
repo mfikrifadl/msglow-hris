@@ -188,7 +188,7 @@ if ($action == "edit") {
                                                 <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
                                                     <i class="la la-search"></i>
                                                 </a>
-                                                <button type="button" onclick="deleteReg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">
+                                                <button type="button" onclick="deleteReg(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-danger">
                                                     <i class="flaticon2-trash"></i>
                                                 </button>
                                             </div>
@@ -348,6 +348,12 @@ if ($action == "edit") {
                                         <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
                                             <i class="flaticon-edit"></i>
                                         </a>
+                                        <a class="btn btn-outline-info" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaArea['kode_wawancara'] . '') ?>">
+                                            <i class="la la-search"></i>
+                                        </a>
+                                        <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaArea['kode_wawancara']) ?>)" class="btn btn-outline-warning">
+                                            <i class="flaticon-reply"></i>
+                                        </button>
                                         <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_phl_act/administrasi/Delete/' . $vaArea['id_recruitment_phl'] . '') ?>'}">
                                             <i class="flaticon-delete"></i>
@@ -409,7 +415,7 @@ if ($action == "edit") {
                                                 <a class="btn btn-outline-info" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaRegistrant['id'] . '') ?>">
                                                     <i class="la la-search"></i>
                                                 </a>
-                                                <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaRegistrant['id']) ?>)" class="btn btn-outline-warning">
+                                                <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaRegistrant['reg_id']) ?>)" class="btn btn-outline-warning">
                                                     <i class="flaticon-reply"></i>
                                                 </button>
 
