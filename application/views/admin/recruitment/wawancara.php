@@ -312,7 +312,7 @@ if ($action == "edit") {
         </div>
 
         <div class="kt-portlet__body">
-          <table class="table table-striped table-bordered" id="DataTable">
+          <table class="table table-striped table-bordered" id="DataTablePesertaTidakLolos">
             <thead>
               <tr>
                 <td>No</td>
@@ -380,7 +380,7 @@ if ($action == "edit") {
         </div>
 
         <div class="kt-portlet__body">
-          <table class="table table-striped table-bordered" id="DataTable">
+          <table class="table table-striped table-bordered" id="DataTableTidakSesuai">
             <thead>
               <tr>
                 <td>No</td>
