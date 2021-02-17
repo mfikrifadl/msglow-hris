@@ -39,103 +39,109 @@
                           </thead>
                           <tbody>
                               <?php $no = 0;
-                                foreach ($row as $key => $vaArea) { ?>
-                                  <tr>
-                                      <td><?= ++$no; ?></td>
-                                      <td>
-                                          <?= $vaArea['kode_wawancara'] ?>
-                                      </td>
-                                      <td>
-                                          <?= $vaArea['tanggal_wawancara'] ?>
-                                      </td>
-                                      <td>
-                                          <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
-                                          <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
-                                          <b> Email : </b> <?= ($vaArea['email']) ?> <br />
-                                          <b> Posisi : </b> <?= ($vaArea['divisi']) ?>
-                                      </td>
-                                      <td>
-                                          <?php
-                                            if ($vaArea['status'] == 'Menjadi Pegawai') {
-                                                $cLabel = 'success';
-                                            } else if ($vaArea['status'] == 'tidaklolos') {
-                                                $cLabel = 'danger';
-                                            } else if ($vaArea['status'] == 'on review') {
-                                                $cLabel = 'warning';
-                                            } else  $cLabel = 'info';
-                                            ?>
-                                          <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                                              <?= $vaArea['tahap_r'] ?>
-                                          </span>
-                                          <!-- <label class="label label-<?= $cLabel ?>"><?= ($vaArea['status']) ?></label> -->
+                                foreach ($row as $key => $vaArea) {
+                                    if ($vaArea['is_delete'] == 1) {
+                                    } else {
+                                ?>
+                                      <tr>
+                                          <td><?= ++$no; ?></td>
+                                          <td>
+                                              <?= $vaArea['kode_wawancara'] ?>
+                                          </td>
+                                          <td>
+                                              <?= $vaArea['tanggal_wawancara'] ?>
+                                          </td>
+                                          <td>
+                                              <b> Nama : </b> <?= ($vaArea['nama']) ?> <br />
+                                              <b> No. Hp : </b> <?= ($vaArea['nomor_telepon']) ?> <br />
+                                              <b> Email : </b> <?= ($vaArea['email']) ?> <br />
+                                              <b> Posisi : </b> <?= ($vaArea['divisi']) ?>
+                                          </td>
+                                          <td>
+                                              <?php
+                                                if ($vaArea['status'] == 'Menjadi Pegawai') {
+                                                    $cLabel = 'success';
+                                                } else if ($vaArea['status'] == 'tidaklolos') {
+                                                    $cLabel = 'danger';
+                                                } else if ($vaArea['status'] == 'on review') {
+                                                    $cLabel = 'warning';
+                                                } else  $cLabel = 'info';
+                                                ?>
+                                              <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                                                  <?= $vaArea['tahap_r'] ?>
+                                              </span>
+                                              <!-- <label class="label label-<?= $cLabel ?>"><?= ($vaArea['status']) ?></label> -->
 
-                                      </td>
-                                      <td>
-                                          <?php
+                                          </td>
+                                          <td>
+                                              <?php
 
-                                            $status_test = "";
-                                            $cLabel = "";
+                                                $status_test = "";
+                                                $cLabel = "";
 
-                                            if ($vaArea['status'] == 'Menjadi Pegawai') {
-                                                $cLabel = 'success';
-                                            } else if ($vaArea['status'] == 'on review') {
-                                                $cLabel = 'warning';
-                                            } elseif ($vaArea['status'] == 'tidaklolos') {
-                                                $cLabel = 'danger';
-                                            } else  $cLabel = 'info';
+                                                if ($vaArea['status'] == 'Menjadi Pegawai') {
+                                                    $cLabel = 'success';
+                                                } else if ($vaArea['status'] == 'on review') {
+                                                    $cLabel = 'warning';
+                                                } elseif ($vaArea['status'] == 'tidaklolos') {
+                                                    $cLabel = 'danger';
+                                                } else  $cLabel = 'info';
 
-                                            $status_test = $vaArea['status'];
-                                            ?>
-                                          <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                                              <?= $vaArea['status'] ?>
-                                          </span>
-                                          <?php
+                                                $status_test = $vaArea['status'];
+                                                ?>
+                                              <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                                                  <?= $vaArea['status'] ?>
+                                              </span>
+                                              <?php
 
-                                            // if ($vaArea['tahap_r'] == "Test Administrasi") {
+                                                // if ($vaArea['tahap_r'] == "Test Administrasi") {
 
-                                            //     if ($vaArea['administrasi'] == 'lolos') {
-                                            //         $cLabel = 'success';
-                                            //     } else if ($vaArea['administrasi'] == 'tidaklolos') {
-                                            //         $cLabel = 'danger';
-                                            //     } else  $cLabel = 'info';
+                                                //     if ($vaArea['administrasi'] == 'lolos') {
+                                                //         $cLabel = 'success';
+                                                //     } else if ($vaArea['administrasi'] == 'tidaklolos') {
+                                                //         $cLabel = 'danger';
+                                                //     } else  $cLabel = 'info';
 
-                                            //     $status_test = $vaArea['administrasi'];
-                                            // } elseif ($vaArea['tahap_r'] == "Wawancara HR") {
+                                                //     $status_test = $vaArea['administrasi'];
+                                                // } elseif ($vaArea['tahap_r'] == "Wawancara HR") {
 
-                                            //     if ($vaArea['wawancara_hr'] == 'lolos') {
-                                            //         $cLabel = 'success';
-                                            //     } else if ($vaArea['wawancara_hr'] == 'tidaklolos') {
-                                            //         $cLabel = 'danger';
-                                            //     } else  $cLabel = 'info';
+                                                //     if ($vaArea['wawancara_hr'] == 'lolos') {
+                                                //         $cLabel = 'success';
+                                                //     } else if ($vaArea['wawancara_hr'] == 'tidaklolos') {
+                                                //         $cLabel = 'danger';
+                                                //     } else  $cLabel = 'info';
 
-                                            //     $status_test = $vaArea['wawancara_hr'];
-                                            // } elseif ($vaArea['tahap_r'] == "Interview User 1") {
+                                                //     $status_test = $vaArea['wawancara_hr'];
+                                                // } elseif ($vaArea['tahap_r'] == "Interview User 1") {
 
-                                            //     if ($vaArea['interview_user_1'] == 'lolos') {
-                                            //         $cLabel = 'success';
-                                            //     } else if ($vaArea['interview_user_1'] == 'tidaklolos') {
-                                            //         $cLabel = 'danger';
-                                            //     } else  $cLabel = 'info';
+                                                //     if ($vaArea['interview_user_1'] == 'lolos') {
+                                                //         $cLabel = 'success';
+                                                //     } else if ($vaArea['interview_user_1'] == 'tidaklolos') {
+                                                //         $cLabel = 'danger';
+                                                //     } else  $cLabel = 'info';
 
-                                            //     $status_test = $vaArea['interview_user_1'];
-                                            // } elseif ($vaArea['tahap_r'] == "Tes Kesehatan") {
+                                                //     $status_test = $vaArea['interview_user_1'];
+                                                // } elseif ($vaArea['tahap_r'] == "Tes Kesehatan") {
 
-                                            //     if ($vaArea['tes_kesehatan_phl'] == 'lolos') {
-                                            //         $cLabel = 'success';
-                                            //     } else if ($vaArea['tes_kesehatan_phl'] == 'tidaklolos') {
-                                            //         $cLabel = 'danger';
-                                            //     } else  $cLabel = 'info';
+                                                //     if ($vaArea['tes_kesehatan_phl'] == 'lolos') {
+                                                //         $cLabel = 'success';
+                                                //     } else if ($vaArea['tes_kesehatan_phl'] == 'tidaklolos') {
+                                                //         $cLabel = 'danger';
+                                                //     } else  $cLabel = 'info';
 
-                                            //     $status_test = $vaArea['tes_kesehatan_phl'];
-                                            // }
+                                                //     $status_test = $vaArea['tes_kesehatan_phl'];
+                                                // }
 
-                                            ?>
-                                          <!-- <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                                                ?>
+                                              <!-- <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
                                               <?= $status_test ?>
                                           </span> -->
-                                      </td>
-                                  </tr>
-                              <?php } ?>
+                                          </td>
+                                      </tr>
+                              <?php
+                                    }
+                                }
+                                ?>
                           </tbody>
                       </table>
                   </div>
