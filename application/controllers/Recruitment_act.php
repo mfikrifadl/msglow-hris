@@ -301,6 +301,29 @@ class Recruitment_act extends CI_Controller
 				//redirect(site_url('recruitment/wawancara/'));
 			} else {
 				//$msg = 0;
+
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+					CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$code,
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'PUT',
+					CURLOPT_POSTFIELDS => 'is_delete=2',
+					CURLOPT_HTTPHEADER => array(
+						'token: YOZq0ltM8i',
+						'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+						'Content-Type: application/x-www-form-urlencoded'
+					),
+				));
+		
+				$response = curl_exec($curl);
+				
+				curl_close($curl);
+
 				$this->model->Insert('recruitment', $data_create);
 				$this->model->Insert("log", $vaLog);
 				redirect(site_url('recruitment/wawancara/'));
@@ -313,6 +336,35 @@ class Recruitment_act extends CI_Controller
 			$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
 			redirect(site_url('recruitment/wawancara/'));
 		}
+	}
+
+	public function reborn_delete_data_registrant($id=""){
+		$curl = curl_init();
+		//$delete_date = null;
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'PUT',
+			CURLOPT_POSTFIELDS => 'is_delete=0
+								&delete_date=null',
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+				'Content-Type: application/x-www-form-urlencoded'
+			),
+		));
+
+		$response = curl_exec($curl);
+		
+		curl_close($curl);
+		$this->model->Delete('recruitment', 'kode_wawancara', $id);
+		//redirect(site_url('recruitment/wawancara/'));
+		//redirect(site_url('recruitment/wawancara'));		
 	}
 
 	function cURL_API($id = "", $method = "", $data)

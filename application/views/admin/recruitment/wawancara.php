@@ -176,15 +176,15 @@ if ($action == "edit") {
                     <td><?= ++$no; ?></td>
                     <td>
                       <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
-                        <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-success">
+                        <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-success">
                           <i class="flaticon2-edit"></i>
                         </button>
                         <a class="btn btn-outline-warning" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
                           <i class="la la-search"></i>
                         </a>
-                        <button type="button" onclick="deleteReg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-danger">
+                        <!-- <button type="button" onclick="deleteReg(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-danger">
                           <i class="flaticon2-trash"></i>
-                        </button>
+                        </button> -->
                       </div>
                     </td>
                     <td><?= $vaAreaa['reg_id'] ?></td>
@@ -276,10 +276,10 @@ if ($action == "edit") {
                       <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                         <i class="flaticon-edit"></i>
                       </a>
-                      <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                      <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                   { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                         <i class="flaticon-delete"></i>
-                      </a>
+                      </a> -->
                     </td>
                   </tr>
               <?php
@@ -346,6 +346,12 @@ if ($action == "edit") {
                     <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                       <i class="flaticon-edit"></i>
                     </a>
+                    <a class="btn btn-sm btn-outline-primary btn-elevate btn-icon" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaArea['kode_wawancara'] . '') ?>">
+                      <i class="la la-search"></i>
+                    </a>
+                    <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaArea['kode_wawancara']) ?>)" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
+                      <i class="flaticon-reply"></i>
+                    </button>
                     <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                       <i class="flaticon-delete"></i>
@@ -362,79 +368,7 @@ if ($action == "edit") {
 
       <!--end::Portlet-->
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-
-      <!--begin::Portlet-->
-      <div class="kt-portlet">
-
-        <!--begin::Form-->
-        <div class="kt-portlet__head">
-          <div class="kt-portlet__head-label">
-            <h3 class="kt-portlet__head-title">
-              Data Tidak Sesuai
-            </h3>
-          </div>
-        </div>
-
-        <div class="kt-portlet__body">
-          <table class="table table-striped table-bordered" id="DataTableTidakSesuai">
-            <thead>
-              <tr>
-                <td>No</td>
-                <td>Action</td>
-                <td>ID Registrant</td>
-                <td>Lowongan</td>
-                <td>Kategori</td>
-                <td>Nama</td>
-                <td>Pendidikan</td>
-                <td>Email</td>
-                <td>Telp</td>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $no = 0;
-              foreach ($registrant as $vaAreaa) {
-                if ($vaAreaa['work_time'] == "Full Time" && $vaAreaa['is_delete'] == 1) {
-              ?>
-                  <tr>
-                    <td><?= ++$no; ?></td>
-                    <td>
-                      <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
-                        
-                        <a class="btn btn-outline-info" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
-                          <i class="la la-search"></i>
-                        </a>   
-                        <button type="button"title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-warning">
-                          <i class="flaticon-reply"></i>
-                        </button>
-
-                      </div>
-                    </td>
-                    <td><?= $vaAreaa['reg_id'] ?></td>
-                    <td><?= $vaAreaa['job_name'] ?></td>
-                    <td><?= $vaAreaa['work_time'] ?></td>
-                    <td><?= $vaAreaa['reg_name'] ?></td>
-                    <td><?= $vaAreaa['graduate'] ?></td>
-                    <td><?= $vaAreaa['reg_email'] ?></td>
-                    <td><?= $vaAreaa['reg_tlp'] ?></td>
-                  </tr>
-              <?php
-                } else {
-                }
-              } ?>
-            </tbody>
-          </table>
-        </div>
-
-        <!--end::Form-->
-      </div>
-
-      <!--end::Portlet-->
-    </div>
-  </div>
+  </div> 
 
 </div>
 
@@ -462,6 +396,7 @@ if ($action == "edit") {
         document.getElementById('cEmail').value = email;
         document.getElementById('cJob').value = job;
         document.getElementById('cJob_id').value = job_id;
+
       }
     };
     xmlhttp.open("GET", "<?= site_url('recruitment/wawancara_id') ?>/" + id, true);
@@ -493,7 +428,7 @@ if ($action == "edit") {
     xmlhttp.send();
   }
 
-  function deleteReg(id) {    
+  function deleteReg(id) {
     $.ajax({
       type: "POST",
       data: "id=" + id,
@@ -511,11 +446,11 @@ if ($action == "edit") {
     });
   }
 
-  function reborn_data_reg(id) {    
+  function reborn_data_reg(id) {
     $.ajax({
       type: "POST",
       data: "id=" + id,
-      url: "<?= site_url('recruitment/reborn_delete_data_registrant') ?>/" + id,
+      url: "<?= site_url('recruitment_act/reborn_delete_data_registrant') ?>/" + id,
       cache: false,
       success: function(msg) {
         new PNotify({
