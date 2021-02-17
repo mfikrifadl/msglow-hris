@@ -151,6 +151,8 @@ class Recruitment extends CI_Controller
 	public function delete_registrant($id=""){
 		$curl = curl_init();
 
+		$delete_date = date("Y-m_d");
+
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
@@ -160,7 +162,8 @@ class Recruitment extends CI_Controller
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'PUT',
-			CURLOPT_POSTFIELDS => 'is_delete=1',
+			CURLOPT_POSTFIELDS => 'is_delete=1
+								&delete_date='.$delete_date.'',
 			CURLOPT_HTTPHEADER => array(
 				'token: YOZq0ltM8i',
 				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
@@ -176,7 +179,7 @@ class Recruitment extends CI_Controller
 
 	public function reborn_delete_data_registrant($id=""){
 		$curl = curl_init();
-
+		//$delete_date = null;
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
 			CURLOPT_RETURNTRANSFER => true,
@@ -186,7 +189,8 @@ class Recruitment extends CI_Controller
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'PUT',
-			CURLOPT_POSTFIELDS => 'is_delete=0',
+			CURLOPT_POSTFIELDS => 'is_delete=0
+								&delete_date=null',
 			CURLOPT_HTTPHEADER => array(
 				'token: YOZq0ltM8i',
 				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
