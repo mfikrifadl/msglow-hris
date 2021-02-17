@@ -303,6 +303,7 @@ class Recruitment_act extends CI_Controller
 				//$msg = 0;
 
 				$curl = curl_init();
+				$delete_date = date("Y-m_d");
 				curl_setopt_array($curl, array(
 					CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$code,
 					CURLOPT_RETURNTRANSFER => true,
@@ -312,7 +313,8 @@ class Recruitment_act extends CI_Controller
 					CURLOPT_FOLLOWLOCATION => true,
 					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 					CURLOPT_CUSTOMREQUEST => 'PUT',
-					CURLOPT_POSTFIELDS => 'is_delete=2',
+					CURLOPT_POSTFIELDS => 'is_delete=2
+										&delete_date='.$delete_date.'',
 					CURLOPT_HTTPHEADER => array(
 						'token: YOZq0ltM8i',
 						'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
@@ -333,6 +335,31 @@ class Recruitment_act extends CI_Controller
 			$this->model->Insert("log", $vaLog);
 			redirect(site_url('recruitment/wawancara/'));
 		} elseif ($Type == "Delete") {
+
+			$curl = curl_init();
+			$delete_date = date("Y-m_d");
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$code,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'PUT',
+				CURLOPT_POSTFIELDS => 'is_delete=3
+									&delete_date='.$delete_date.'',
+				CURLOPT_HTTPHEADER => array(
+					'token: YOZq0ltM8i',
+					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+					'Content-Type: application/x-www-form-urlencoded'
+				),
+			));
+	
+			$response = curl_exec($curl);
+			
+			curl_close($curl);
+
 			$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
 			redirect(site_url('recruitment/wawancara/'));
 		}

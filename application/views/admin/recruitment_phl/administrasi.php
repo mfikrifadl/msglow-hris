@@ -175,22 +175,22 @@ if ($action == "edit") {
                         <tbody>
                             <?php $no = 0;
                             foreach ($registrant as $vaAreaa) {
-                                if ($vaAreaa['work_time'] == "PHL") {
+                                if ($vaAreaa['work_time'] == "PHL" && $vaAreaa['is_delete'] == 0) {
                             ?>
 
                                     <tr>
                                         <td><?= ++$no; ?></td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
-                                                <button type="button" onclick="setinput(<?= ($vaAreaa['id']) ?>)" class="btn btn-outline-success">
+                                                <button type="button" onclick="setinput(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-success">
                                                     <i class="flaticon2-edit"></i>
                                                 </button>
-                                                <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['id'] . '') ?>">
+                                                <a class="btn btn-outline-warning" title="View Data" target="_blank" href="<?= site_url('recruitment/view_wawancara/' . $vaAreaa['reg_id'] . '') ?>">
                                                     <i class="la la-search"></i>
                                                 </a>
-                                                <button type="button" onclick="deleteReg(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-danger">
+                                                <!-- <button type="button" onclick="deleteReg(<?= ($vaAreaa['reg_id']) ?>)" class="btn btn-outline-danger">
                                                     <i class="flaticon2-trash"></i>
-                                                </button>
+                                                </button> -->
                                             </div>
                                         </td>
                                         <td><?= ($vaAreaa['reg_id']) ?></td>
@@ -348,10 +348,10 @@ if ($action == "edit") {
                                         <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment_phl/administrasi/edit/' . $vaArea['id_recruitment_phl'] . '') ?>">
                                             <i class="flaticon-edit"></i>
                                         </a>
-                                        <a class="btn btn-outline-info" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaArea['kode_wawancara'] . '') ?>">
+                                        <a class="btn btn-sm btn-outline-primary btn-elevate btn-icon" title="View Data" href="<?= site_url('recruitment_phl/view_wawancara/' . $vaArea['kode_wawancara'] . '') ?>">
                                             <i class="la la-search"></i>
                                         </a>
-                                        <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaArea['kode_wawancara']) ?>)" class="btn btn-outline-warning">
+                                        <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaArea['kode_wawancara']) ?>)" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
                                             <i class="flaticon-reply"></i>
                                         </button>
                                         <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
@@ -361,78 +361,6 @@ if ($action == "edit") {
                                     </td>
                                 </tr>
                             <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!--end::Form-->
-            </div>
-
-            <!--end::Portlet-->
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-
-            <!--begin::Portlet-->
-            <div class="kt-portlet">
-
-                <!--begin::Form-->
-                <div class="kt-portlet__head">
-                    <div class="kt-portlet__head-label">
-                        <h3 class="kt-portlet__head-title">
-                            Data Tidak Sesuai
-                        </h3>
-                    </div>
-                </div>
-
-                <div class="kt-portlet__body">
-                    <table class="table table-striped table-bordered" id="DataTable">
-                        <thead>
-                            <tr>
-                                <td>No</td>
-                                <td>Action</td>
-                                <td>ID Registrant</td>
-                                <td>Lowongan</td>
-                                <td>Kategori</td>
-                                <td>Nama</td>
-                                <td>Pendidikan</td>
-                                <td>Email</td>
-                                <td>Telp</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $no = 0;
-                            foreach ($registrant as $vaRegistrant) {
-                                if ($vaRegistrant['work_time'] == "PHL" && $vaRegistrant['is_delete'] == 1) {
-                            ?>
-                                    <tr>
-                                        <td><?= ++$no; ?></td>
-                                        <td>
-                                            <div class="btn-group btn-group-sm" role="group" aria-label="Large button group">
-
-                                                <a class="btn btn-outline-info" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaRegistrant['id'] . '') ?>">
-                                                    <i class="la la-search"></i>
-                                                </a>
-                                                <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaRegistrant['reg_id']) ?>)" class="btn btn-outline-warning">
-                                                    <i class="flaticon-reply"></i>
-                                                </button>
-
-                                            </div>
-                                        </td>
-                                        <td><?= $vaRegistrant['reg_id'] ?></td>
-                                        <td><?= $vaRegistrant['job_name'] ?></td>
-                                        <td><?= $vaRegistrant['work_time'] ?></td>
-                                        <td><?= $vaRegistrant['reg_name'] ?></td>
-                                        <td><?= $vaRegistrant['graduate'] ?></td>
-                                        <td><?= $vaRegistrant['reg_email'] ?></td>
-                                        <td><?= $vaRegistrant['reg_tlp'] ?></td>
-                                    </tr>
-                            <?php
-                                } else {
-                                }
-                            } ?>
                         </tbody>
                     </table>
                 </div>
@@ -480,7 +408,7 @@ if ($action == "edit") {
         $.ajax({
             type: "POST",
             data: "id=" + id,
-            url: "<?= site_url('recruitment/delete_registrant') ?>/" + id,
+            url: "<?= site_url('recruitment_phl/delete_registrant') ?>/" + id,
             cache: false,
             success: function(msg) {
                 new PNotify({
@@ -495,10 +423,11 @@ if ($action == "edit") {
     }
 
     function reborn_data_reg(id) {
+        // alert(id);
         $.ajax({
             type: "POST",
             data: "id=" + id,
-            url: "<?= site_url('recruitment/reborn_delete_data_registrant') ?>/" + id,
+            url: "<?= site_url('recruitment_phl_act/reborn_delete_data_registrant') ?>/" + id,
             cache: false,
             success: function(msg) {
                 new PNotify({

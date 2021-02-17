@@ -67,7 +67,7 @@ class Recruitment_phl_act extends CI_Controller
         $status_tes = $this->input->post('cStatus');
         $code = $this->input->post('cKodeWawancara');
         $data_create = array();
-        
+
         if ($status_tes == "tidaklolos") {
             $data_create = array(
                 'kode_wawancara' => $this->input->post('cKodeWawancara'),
@@ -181,23 +181,101 @@ class Recruitment_phl_act extends CI_Controller
             'nama' => $this->session->userdata('nama')
         );
         $this->model->Insert("log", $vaLog);
-        $cViewDataPelamar 			= $this->model->CekDataPelamar('recruitment_phl', 'kode_wawancara', $code);
-		if ($cViewDataPelamar->num_rows() > 0) {
-			
-		} else {
-			if ($Type == "Insert") {
+        $cViewDataPelamar             = $this->model->CekDataPelamar('recruitment_phl', 'kode_wawancara', $code);
+
+        if ($Type == "Insert") {
+            if ($cViewDataPelamar->num_rows() > 0) {
+            } else {
+
+                $curl = curl_init();
+                $delete_date = date("Y-m_d");
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/' . $code,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'PUT',
+                    CURLOPT_POSTFIELDS => 'is_delete=2
+										&delete_date=' . $delete_date . '',
+                    CURLOPT_HTTPHEADER => array(
+                        'token: YOZq0ltM8i',
+                        'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+                        'Content-Type: application/x-www-form-urlencoded'
+                    ),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+
                 $this->model->Insert('recruitment_phl', $data_create);
                 $this->model->Insert("log", $vaLog);
-            } 
-		}
-        if ($Type == "Update") {
+            }
+        } elseif ($Type == "Update") {
             $this->model->Update('recruitment_phl', 'id_recruitment_phl', $id, $data_update);
             $this->model->Insert("log", $vaLog);
         } elseif ($Type == "Delete") {
+
+            $curl = curl_init();
+			$delete_date = date("Y-m_d");
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$code,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'PUT',
+				CURLOPT_POSTFIELDS => 'is_delete=3
+									&delete_date='.$delete_date.'',
+				CURLOPT_HTTPHEADER => array(
+					'token: YOZq0ltM8i',
+					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+					'Content-Type: application/x-www-form-urlencoded'
+				),
+			));
+	
+			$response = curl_exec($curl);
+			
+			curl_close($curl);
+            
             $this->model->Update_Delete('recruitment_phl', 'id_recruitment_phl', $id, $data_delete);
             redirect(site_url('recruitment_phl/administrasi/'));
         }
     }
+
+    public function reborn_delete_data_registrant($id=""){
+		$curl = curl_init();
+		//$delete_date = null;
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/'.$id,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'PUT',
+			CURLOPT_POSTFIELDS => 'is_delete=0
+								&delete_date=null',
+			CURLOPT_HTTPHEADER => array(
+				'token: YOZq0ltM8i',
+				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+				'Content-Type: application/x-www-form-urlencoded'
+			),
+		));
+
+		$response = curl_exec($curl);
+		
+		curl_close($curl);
+		$this->model->Delete('recruitment_phl', 'kode_wawancara', $id);
+		//redirect(site_url('recruitment/wawancara/'));
+		//redirect(site_url('recruitment/wawancara'));		
+	}
 
     public function wawancara_hr($Type = "", $id = "")
     {
@@ -442,7 +520,7 @@ class Recruitment_phl_act extends CI_Controller
                 'status'    => $status,
                 'tahap_r'    => 'Tes Kesehatan',
                 'status_email_tes_kesehatan_phl'    => 'Belum Kirim Email',
-                'status_email_tidaklolos'    => 'Belum Kirim Email',                
+                'status_email_tidaklolos'    => 'Belum Kirim Email',
                 'administrasi'            => 'tidaklolos',
                 'wawancara_hr'            => 'tidaklolos',
                 'interview_user_1'            => 'tidaklolos',
