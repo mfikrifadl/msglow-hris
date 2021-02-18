@@ -357,4 +357,22 @@ class Surat_act extends CI_Controller
         $mpdf->Output();
         redirect(site_url('hrd/sp3'));
     }
+    public function cetak_form_keluar_kantor()
+    {
+        $data['data'] = $this->model->View('v_data_pegawai_jabatan', 'id_pegawai');
+        $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+        $html = $this->load->view('admin/gaji/cetak_form_keluar_kantor', $data, true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        redirect(site_url('gaji/absensi_pegawai'));
+    }
+    public function cetak_form_cuti()
+    {
+        $data['data'] = $this->model->View('v_data_pegawai_jabatan', 'id_pegawai');
+        $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+        $html = $this->load->view('admin/gaji/cetak_form_cuti', $data, true);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
+        redirect(site_url('gaji/absensi_pegawai'));
+    }
 }

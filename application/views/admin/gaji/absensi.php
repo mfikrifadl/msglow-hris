@@ -70,29 +70,47 @@ if ($action == "edit") {
                           <div class="form-group">
 
                             <div class="row">
-
-                              <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Input Tanggal Absensi</label>
-                                <div class="col-lg-8 col-md-9 col-sm-12">
-                                  <div class="input-daterange input-group">
-                                    <input type="date" name="dTgl" id="dTgl" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
-                                    <div class="input-group-append">
-                                      <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
+                              <div class="col-sm-8 col-md-8">
+                                <div class="form-group row">
+                                  <label class="col-form-label col-lg-4 col-sm-12">Input Tanggal Absensi</label>
+                                  <div class="col-lg-8 col-md-9 col-sm-12">
+                                    <div class="input-daterange input-group">
+                                      <input type="date" name="dTgl" id="dTgl" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
+                                      <div class="input-group-append">
+                                        <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
+                                      </div>
+                                      <input type="date" name="dTgl_end" id="dTgl_end" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
+                                      <div class="input-group-append">
+                                        <span class="input-group-text"></span>
+                                      </div>
+                                      <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="GetDataAbsensi();" value="Search">
+                                        <i class="flaticon2-refresh"></i>
+                                      </button>
                                     </div>
-                                    <input type="date" name="dTgl_end" id="dTgl_end" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
-                                    <div class="input-group-append">
-                                      <span class="input-group-text"></span>
-                                    </div>
-                                    <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="GetDataAbsensi();" value="Search">
-                                      <i class="flaticon2-refresh"></i>
-                                    </button>
+                                    <span class="form-text text-muted">date range selection</span>
                                   </div>
-                                  <span class="form-text text-muted">date range selection</span>
                                 </div>
                               </div>
 
+                              <div class="col-sm-2 col-md-2">
+                                <div class="form-group pull-right">
+                                  <a type="button" class="btn btn-outline-primary btn-md" target="blank" href="<?= site_url('surat_act/cetak_form_keluar_kantor') ?>">
+                                    Form Keluar Kantor
+                                  </a>
+                                  <span class="form-text text-muted">Cetak Form</span>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-2 col-md-2">
+                                <div class="form-group">
+                                  <a type="button" class="btn btn-outline-primary btn-md" target="blank" href="<?= site_url('surat_act/cetak_form_cuti') ?>">
+                                    Form Cuti
+                                  </a>
+                                </div>
+                              </div>                              
+
                             </div>
-                            
+
                             <br />
                             <div id="data_absensi"></div>
                             <br />
@@ -167,7 +185,7 @@ if ($action == "edit") {
                                 </div>
                               </div>
                             </div>
-                            
+
                             <br />
                             <div id="data_absensi_import"></div>
                             <br />
@@ -192,7 +210,7 @@ if ($action == "edit") {
 
         </div>
       </div>
-    </div> 
+    </div>
 
 
 
