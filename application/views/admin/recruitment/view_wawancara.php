@@ -136,7 +136,7 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     if ($row['reg_ktp'] != null) { ?>
-                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/career/" . $row['reg_ktp']; ?>" style="width:100%; border:none;"></iframe>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_ktp']; ?>" style="width:100%; border:none;"></iframe>
                                                                     <?php } else {
                                                                     }
                                                                     ?>
@@ -170,7 +170,7 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     if ($row['reg_kk'] != null) { ?>
-                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/career/" . $row['reg_kk']; ?>" style="width:100%; border:none;"></iframe>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_kk']; ?>" style="width:100%; border:none;"></iframe>
                                                                     <?php } else {
                                                                     }
                                                                     ?>
@@ -204,7 +204,7 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     if ($row['reg_ijazah'] != null) { ?>
-                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/career/" . $row['reg_ijazah']; ?>" style="width:100%; border:none;"></iframe>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_ijazah']; ?>" style="width:100%; border:none;"></iframe>
                                                                     <?php } else {
                                                                     }
                                                                     ?>
@@ -238,7 +238,7 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     if ($row['reg_transkrip_nilai'] != null) { ?>
-                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/career/" . $row['reg_transkrip_nilai']; ?>" style="width:100%; border:none;"></iframe>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_transkrip_nilai']; ?>" style="width:100%; border:none;"></iframe>
                                                                     <?php } else {
                                                                     }
                                                                     ?>
@@ -274,7 +274,7 @@
                                                                     if ($row['reg_skck'] != null) { ?>
                                                                         <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_skck']; 
                                                                                                                         ?>" style="width:100%; border:none;"></iframe> -->
-                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/career/" . $row['reg_skck']; ?>" style="width:100%; border:none;"></iframe>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_skck']; ?>" style="width:100%; border:none;"></iframe>
                                                                     <?php } else {
                                                                     }
                                                                     ?>
@@ -308,7 +308,7 @@
                                                                 <div class="row">
                                                                     <?php
                                                                     if ($row['reg_cv'] != null) { ?>
-                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/career/" . $row['reg_cv'] . "/" . $row['reg_judul']; ?>" style="width:100%; border:none;"></iframe>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_cv']  ?>" style="width:100%; border:none;"></iframe>
                                                                         <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_cv'] . "/" . $row['reg_judul']; 
                                                                                                                         ?>" style="width:100%; border:none;"></iframe> -->
                                                                     <?php } else {
