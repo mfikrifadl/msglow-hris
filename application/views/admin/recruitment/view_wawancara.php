@@ -36,7 +36,7 @@
                             <div class="kt-portlet__body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                    
+
                                         <div class="form-group">
                                             <a href="<?php echo base_url(); ?>recruitment/wawancara/" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
                                         </div>
@@ -77,6 +77,12 @@
                                                                     </div>
 
                                                                     <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+
+                                                                        <div class="form-group">
+                                                                            <label>Tempat Lahir</label>
+                                                                            <input type="text" class="form-control" placeholder="<?php echo $row['tempat_lahir']; ?>" style="background-color:#fff;" disabled>
+                                                                        </div>
+
                                                                         <div class="form-group">
                                                                             <label>Nama Pendaftar</label>
                                                                             <input type="text" class="form-control" placeholder="<?php echo $row['reg_name']; ?>" style="background-color:#fff;" disabled>
@@ -90,6 +96,12 @@
                                                                     </div>
 
                                                                     <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
+
+                                                                        <div class="form-group">
+                                                                            <label>Tanggal Lahir</label>
+                                                                            <input type="text" class="form-control" placeholder="<?php echo $row['tgl_lahir']; ?>" style="background-color:#fff;" disabled>
+                                                                        </div>
+
                                                                         <div class="form-group">
                                                                             <label>Mendaftar Sebagai</label>
                                                                             <input type="text" class="form-control" placeholder="<?php echo $row['job_name']; ?>" style="background-color:#fff;" disabled>
