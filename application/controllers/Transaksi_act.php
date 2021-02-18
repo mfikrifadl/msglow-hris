@@ -421,10 +421,10 @@ class Transaksi_act extends CI_Controller
 	public function kontrak($Type = "", $Id = "")
 	{
 		$tgl_masuk_kerja = $this->input->post('dTglMasukKerja');
-		$masa_kontrak = $this->input->post('masa_kontrak');		
+		$masa_kontrak = $this->input->post('masa_kontrak');
 
-		$t_masa_kontrak = date('Y-m-d', strtotime('+'.$masa_kontrak.' month', strtotime( $tgl_masuk_kerja ))); //tambah tanggal sebanyak 6 bulan
-		
+		$t_masa_kontrak = date('Y-m-d', strtotime('+' . $masa_kontrak . ' month', strtotime($tgl_masuk_kerja))); //tambah tanggal sebanyak 6 bulan
+
 
 		if ($Type == 'Insert') {
 			$dataInsert = array(
@@ -440,11 +440,11 @@ class Transaksi_act extends CI_Controller
 			$dataInsert = array(
 				'is_deleted'		=>	1
 			);
-		} elseif($Type == 'Update'){
-			$dataUpdate = array(							
+		} elseif ($Type == 'Update') {
+			$dataUpdate = array(
 				'masa_kontrak'      =>  $this->input->post('masa_kontrak'),
-				'tanggal_kontrak_habis'       =>  $t_masa_kontrak,				
-				'cCreate'		=>  $this->input->post('cCreate'),				
+				'tanggal_kontrak_habis'       =>  $t_masa_kontrak,
+				'cCreate'		=>  $this->input->post('cCreate'),
 			);
 		}
 
@@ -860,7 +860,7 @@ class Transaksi_act extends CI_Controller
 	{
 		$cStatusKawin = $this->input->post("cStatusKawin");
 		$cNik = $this->input->post("cNik");
-		
+
 		$data = array(
 			'cStatusKawin' => $cStatusKawin
 		);
@@ -871,7 +871,7 @@ class Transaksi_act extends CI_Controller
 
 	public function get_pegawai($id = '')
 	{
-		 $db = $this->model->ViewWhere('v_tb_pegawai', 'id_pegawai', $id);
+		$db = $this->model->ViewWhere('v_tb_pegawai', 'id_pegawai', $id);
 		// $query = 'SELECT t1.id_pegawai,
 		// 				t1.nik, t1.tanggal_lahir,
 		// 				t1.tempat_lahir, 
@@ -964,40 +964,71 @@ class Transaksi_act extends CI_Controller
 		$jmlP =  $this->input->post('jmlP');
 		// echo "$unit_kerja-$sub_unit_kerja-$jmlP <br />";
 		$data = array();
+		$dataUpdate = array();
 		if (empty($unit_kerja) && empty($sub_unit_kerja) && empty($jmlP)) {
 			// echo "if 1";
 			$data = array(
-				'status_pengajuan'                => 'on hold',
+				'status_pengajuan'          => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+			);
+			$dataUpdate = array(
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
 			);
 		} elseif (empty($unit_kerja) && empty($sub_unit_kerja)) {
 			// echo "elseif 2";
 			$data = array(
-				'status_pengajuan'                => 'on hold',
+				'status_pengajuan'          => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
-				'total_man_power'         		=> $this->input->post('jmlP'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'total_man_power'         	=> $this->input->post('jmlP'),
+			);
+			$dataUpdate = array(
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'total_man_power'         	=> $this->input->post('jmlP'),
 			);
 		} elseif (empty($unit_kerja) && empty($jmlP)) {
 			// echo "elseif 3";
 			$data = array(
-				'status_pengajuan'                => 'on hold',
+				'status_pengajuan'          => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
-				'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'id_sub_unit_kerja'         => $this->input->post('pSuk'),
+			);
+			$dataUpdate = array(
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'id_sub_unit_kerja'         => $this->input->post('pSuk'),
 			);
 		} elseif (empty($sub_unit_kerja) && empty($jmlP)) {
 			// echo "elseif 4";
 			$data = array(
-				'status_pengajuan'                => 'on hold',
+				'status_pengajuan'          => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
-				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'add_man_power_uk'			=> $this->input->post('cUnit_k'),
+			);
+			$dataUpdate = array(
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'add_man_power_uk'			=> $this->input->post('cUnit_k'),
 			);
 		} elseif (empty($jmlP)) {
 			// echo "elseif 5";
 			$data = array(
-				'status_pengajuan'                => 'on hold',
+				'status_pengajuan'          => 'on hold',
 				'job_career'         		=> $this->input->post('cJob_career'),
-				'add_man_power_uk'         		=> $this->input->post('cUnit_k'),
-				'id_sub_unit_kerja'         		=> $this->input->post('pSuk'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'add_man_power_uk'         	=> $this->input->post('cUnit_k'),
+				'id_sub_unit_kerja'        	=> $this->input->post('pSuk'),
+			);
+			$dataUpdate = array(
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'add_man_power_uk'			=> $this->input->post('cUnit_k'),
+				'id_sub_unit_kerja'        	=> $this->input->post('pSuk'),
 			);
 		} else {
 			// echo "else";
@@ -1008,6 +1039,19 @@ class Transaksi_act extends CI_Controller
 				'nik'                		=> $this->input->post('cNik'),
 				'nama_pengaju_form'         => $this->input->post('cNama'),
 				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
+				'unit_kerja_pengaju_form'   => $this->input->post('cJabatan'),
+				'sub_unit_kerja_pf'         => $this->input->post('cSuk'),
+				'add_man_power_uk'          => $this->input->post('cUnit_k'),
+				'id_sub_unit_kerja'         => $this->input->post('pSuk'),
+				'total_man_power'           => $this->input->post('jmlP'),
+			);
+			$dataUpdate = array(
+				'id_pegawai'                => $this->input->post('cIdPegawai'),
+				'nik'                		=> $this->input->post('cNik'),
+				'nama_pengaju_form'         => $this->input->post('cNama'),
+				'job_career'         		=> $this->input->post('cJob_career'),
+				'job_desc'         			=> $this->input->post('cJobDesc'),
 				'unit_kerja_pengaju_form'   => $this->input->post('cJabatan'),
 				'sub_unit_kerja_pf'         => $this->input->post('cSuk'),
 				'add_man_power_uk'          => $this->input->post('cUnit_k'),
@@ -1025,6 +1069,7 @@ class Transaksi_act extends CI_Controller
 		// echo $this->input->post('cUnit_k')." - cunitk<br />";
 		// echo $this->input->post('pSuk')." - psuk<br />";
 		// echo $this->input->post('jmlP')." - jmlp<br />";
+		// echo $this->input->post('cJobDesc')." - Job Desc <br />";
 
 		$data_approve = array(
 			'status_pengajuan'                   => 'approve',
@@ -1032,23 +1077,103 @@ class Transaksi_act extends CI_Controller
 
 		$data_unapprove = array(
 			'status_pengajuan'                   => 'unapprove',
+			// 'is_delete'                   => '1',
 		);
 
 		$data_delete = array(
 			'is_delete'                   => '1',
 		);
 
-
+		$nama_job = $this->input->post('cJob_career');
+		$job_desc = $this->input->post('cJobDesc');
 
 		if ($Aksi == 'tambah') {
 			$this->model->Insert("tb_form_pengajuan", $data);
 		} elseif ($Aksi == 'approve') {
+
+			$data = $this->model->ViewWhere('v_form_pengajuan', 'id_form', $Id);
+			foreach ($data as $row) {
+				$namaJob = $row['job_career'];
+				$jobDesc = $row['job_desc'];
+			}
+
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'http://localhost/msglow-career/api/job/',
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'POST',
+				CURLOPT_POSTFIELDS => 'job_id='.$Id.'
+									&job_name=' . $namaJob . '
+									&job_desc=' . $jobDesc . '',
+				CURLOPT_HTTPHEADER => array(
+					'token: YOZq0ltM8i',
+					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+					'Content-Type: application/x-www-form-urlencoded'
+				),
+			));
+
+			$response = curl_exec($curl);
+
+			curl_close($curl);
+
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_approve);
 		} elseif ($Aksi == 'Update') {
-			$this->model->Update("tb_form_pengajuan", "id_form", $Id, $data);
-		} elseif ($Aksi == 'unapprove') {
+
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'http://localhost/msglow-career/api/job/'.$Id,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'PUT',
+				CURLOPT_POSTFIELDS => 'job_name=' . $nama_job . '
+									&job_desc=' . $job_desc . '',
+				CURLOPT_HTTPHEADER => array(
+					'token: YOZq0ltM8i',
+					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+					'Content-Type: application/x-www-form-urlencoded'
+				),
+			));
+
+			$response = curl_exec($curl);
+
+			curl_close($curl);
+
+			 $this->model->Update("tb_form_pengajuan", "id_form", $Id, $dataUpdate);
+		} elseif ($Aksi == 'unapprove') {		
+
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_unapprove);
 		} elseif ($Aksi == 'delete') {
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'http://localhost/msglow-career/api/job/'.$Id,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'PUT',
+				CURLOPT_POSTFIELDS => 'is_delete=1',
+				CURLOPT_HTTPHEADER => array(
+					'token: YOZq0ltM8i',
+					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+					'Content-Type: application/x-www-form-urlencoded'
+				),
+			));
+
+			$response = curl_exec($curl);
+
+			curl_close($curl);
+
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_delete);
 		}
 
