@@ -18,6 +18,7 @@ if ($action == "edit") {
         $ctotal_man_power         = $columnP['total_man_power'];
         $cNama_jabatan         = $columnP['nama_jabatan'];
         $cNama_pengaju_form         = $columnP['nama_pengaju_form'];
+        $cJobDesc         = $columnP['job_desc'];
     }
     $cValueButton   =   "Update";
 } else {
@@ -33,6 +34,7 @@ if ($action == "edit") {
     $cJob_career        = "";
     $ctotal_man_power         = "";
     $cNama_jabatan         = "";
+    $cJobDesc         = "";
     $cNama_pengaju_form         = "";
     $cValueButton   =   "tambah";
 }
@@ -229,6 +231,23 @@ if ($action == "edit") {
                                                 </div>
                                             </div> <!-- /.col-form -->
                                             <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Job Description</label>
+                                                    <?php
+                                                    if ($cJobDesc == null || $cJobDesc == "" || empty($cJobDesc)) {
+                                                    ?>
+                                                        <textarea name="cJobDesc" class="summernote form-control" id="kt_summernote_1" required></textarea>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <textarea name="cJobDesc" class="summernote form-control" id="kt_summernote_1" required><?= $cJobDesc ?></textarea>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                </div>
+                                            </div> <!-- /.col-form -->
+                                            <div class="col-12">
                                                 <hr />
                                             </div>
                                             <!-- /.col-form -->
@@ -324,9 +343,17 @@ if ($action == "edit") {
                                                                     <?= $vaArea['total_man_power'] ?>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
-                                                                        <i class="flaticon2-check-mark"></i>
-                                                                    </a>
+                                                                    <?php
+                                                                    if ($vaArea['status_pengajuan'] == 'approve') {
+                                                                    } else {
+                                                                    ?>
+                                                                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
+                                                                            <i class="flaticon2-check-mark"></i>
+                                                                        </a>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+
                                                                     <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Reject" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon2-delete"></i>
                                                                     </a>
