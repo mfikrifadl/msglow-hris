@@ -12,7 +12,7 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-rowreorder-bs4/css/rowReorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    
+
     <?php
     if (empty($row)) {
     } else {
@@ -32,16 +32,47 @@
         <thead>
             <tr>
                 <td>No </td>
+                <?php
+                if ($this->session->userdata('level') == 1) {
+                ?>
+                    <td>Action</td>
+                <?php
+                } else {
+                }
+                ?>
                 <td>Nama</td>
                 <td>Departement</td>
                 <td>Tanggal</td>
                 <td>Jam_Datang</td>
                 <td>Jam_Pulang</td>
                 <!-- <td>Total_Jam_Kerja</td> -->
-                <td>Keterangan</td>
+                <?php
+                if ($this->session->userdata('level') == 3) {
+                ?>
+                    <td>Keterangan_Absensi</td>
+                <?php
+                } elseif ($this->session->userdata('level') == 1) {
+                ?>
+                    <td>Keterangan_Permintaan_Update </td>
+                <?php
+                } else {
+                } ?>
+
                 <td>Keterlambatan</td>
                 <td>Overtime</td>
-                <td>Keterangan_Lain-Lain</td>
+                <?php
+                if ($this->session->userdata('level') == 3) {
+                ?>
+                    <td>Keterangan_Lain_Lain</td>
+                <?php
+                } elseif ($this->session->userdata('level') == 1) {
+                ?>
+                    <td>KLL_Permintaan_Update</td>
+                <?php
+                } else {
+                } ?>
+
+
 
             </tr>
         </thead>
@@ -55,6 +86,31 @@
 
                 ?>
                     <td><?= ++$no; ?></td>
+                    <?php
+                    if ($this->session->userdata('level') == 1) { ?>
+                        <td>
+                            <?php
+                            if (empty($vaPegawai['id_temp']) || $vaPegawai['id_temp'] == null || $vaPegawai['id_temp'] == "") {
+                            } else { ?>
+
+
+                                <button type="button" title="Approve" id="approve_<?= $vaPegawai['id']; ?>" onclick="return approvement('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                                <button type="button" title="Reject" id="reject_<?= $vaPegawai['id']; ?>" onclick="return reject('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-danger btn-elevate btn-icon">
+                                    <i class="flaticon2-delete"></i>
+                                </button>
+                                <input type="hidden" id="ket_abs_temp_<?= $vaPegawai['id']; ?>" value="<?= $vaPegawai['keterangan_temp']; ?>">
+                                <input type="hidden" id="ket_abs_lain_temp_<?= $vaPegawai['id']; ?>" value="<?= $vaPegawai['ket_lain_temp']; ?>">
+
+                            <?php
+                            }
+                            ?>
+                        </td>
+                    <?php
+                    } else {
+                    }
+                    ?>
                     <td><?= $vaPegawai['nama'] ?></td>
                     <td><?= $vaPegawai['nama_jabatan'] ?></td>
                     <td><?= $vaPegawai['tanggal'] ?></td>
@@ -85,42 +141,52 @@
 
                     ?>
                     <!-- </td> -->
-                    <td>
-                        <div class="form-group">
-                            <select id="ket_<?= $vaPegawai['id']; ?>" onkeyup="update_ket('<?= $vaPegawai['id']; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
-                                <option></option>
-                                <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan'] == "Shift 2") echo "selected";
-                                                                            ?>>Shift 2</option>
-                                <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan'] == "Tugas Kantor") echo "selected";
-                                                                                ?>>Tugas Kantor</option>
-                                <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan'] == "Penyesuaian Finger") echo "selected";
-                                                                                        ?>>Penyesuaian Finger</option>
-                                <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan'] == "Kirim Luar kota") echo "selected";
-                                                                                    ?>>Kirim Luar kota</option>
-                                <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan'] == "Pengiriman Bali") echo "selected";
-                                                                                    ?>>Pengiriman Bali</option>
-                                <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan'] == "Berangkat Kirim Bali") echo "selected";
-                                                                                        ?>>Berangkat Kirim Bali</option>
-                                <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan'] == "Pulang Dari Bali") echo "selected";
-                                                                                    ?>>Pulang Dari Bali </option>
-                                <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan'] == "Ijin Durasi") echo "selected";
-                                                                                ?>>Ijin Durasi</option>
-                                <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan'] == "Ijin Keperluan Pribadi") echo "selected";
-                                                                                            ?>>Ijin Keperluan Pribadi</option>
-                                <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan'] == "STSD") echo "selected";
-                                                                        ?>>STSD</option>
-                                <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan'] == "SSD") echo "selected";
-                                                                        ?>>SSD</option>
-                                <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan'] == "Tanpa Keterangan") echo "selected";
-                                                                                    ?>>Tanpa Keterangan</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" title="Update Data" id="id_<?= $vaPegawai['id']; ?>" onclick="return update_ket('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
-                                <i class="flaticon2-send-1"></i>
-                            </button>
-                        </div>
-                    </td>
+                    <?php
+                    if ($this->session->userdata('level') == 3) {
+                    ?>
+                        <td>
+                            <div class="form-group">
+                                <select id="ket_<?= $vaPegawai['id']; ?>" onkeyup="update_ket('<?= $vaPegawai['id']; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
+                                    <option></option>
+                                    <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan'] == "Shift 2") echo "selected";
+                                                                                ?>>Shift 2</option>
+                                    <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan'] == "Tugas Kantor") echo "selected";
+                                                                                    ?>>Tugas Kantor</option>
+                                    <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan'] == "Penyesuaian Finger") echo "selected";
+                                                                                            ?>>Penyesuaian Finger</option>
+                                    <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan'] == "Kirim Luar kota") echo "selected";
+                                                                                        ?>>Kirim Luar kota</option>
+                                    <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan'] == "Pengiriman Bali") echo "selected";
+                                                                                        ?>>Pengiriman Bali</option>
+                                    <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan'] == "Berangkat Kirim Bali") echo "selected";
+                                                                                            ?>>Berangkat Kirim Bali</option>
+                                    <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan'] == "Pulang Dari Bali") echo "selected";
+                                                                                        ?>>Pulang Dari Bali </option>
+                                    <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan'] == "Ijin Durasi") echo "selected";
+                                                                                    ?>>Ijin Durasi</option>
+                                    <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan'] == "Ijin Keperluan Pribadi") echo "selected";
+                                                                                                ?>>Ijin Keperluan Pribadi</option>
+                                    <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan'] == "STSD") echo "selected";
+                                                                            ?>>STSD</option>
+                                    <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan'] == "SSD") echo "selected";
+                                                                            ?>>SSD</option>
+                                    <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan'] == "Tanpa Keterangan") echo "selected";
+                                                                                        ?>>Tanpa Keterangan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" title="Update Data" id="id_<?= $vaPegawai['id']; ?>" onclick="return update_ket('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
+                                    <i class="flaticon2-send-1"></i>
+                                </button>
+                            </div>
+                        </td>
+                    <?php
+                    } elseif ($this->session->userdata('level') == 1) {
+                    ?>
+                        <td><?= $vaPegawai['keterangan_temp'] ?></td>
+                    <?php
+                    } else {
+                    } ?>
 
                     <td>
                         <?php
@@ -164,18 +230,29 @@
 
                         ?>
                     </td>
+                    <?php
+                    if ($this->session->userdata('level') == 3) {
+                    ?>
+                        <td>
+                            <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $vaPegawai['id'] ?>" type="text" value="<?= $vaPegawai['ket_lain'] ?>" onkeyup="updateDataAbsen('<?= $vaPegawai['id']; ?>');" autocomplete="off">
+                            <input id="id_<?= $vaPegawai['id']; ?>" type="hidden" name="id" value="<?= $vaPegawai['id'] ?>">
+                        </td>
+                    <?php
+                    } elseif ($this->session->userdata('level') == 1) {
+                        ?>
+                        <td><?= $vaPegawai['ket_lain_temp'] ?></td>
+                        <?php
+                    } else {
+                    }
+                    ?>
 
-                    <td>
-                        <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $vaPegawai['id'] ?>" type="text" value="<?= $vaPegawai['ket_lain'] ?>" onkeyup="updateDataAbsen('<?= $vaPegawai['id']; ?>');" autocomplete="off">
-                        <input id="id_<?= $vaPegawai['id']; ?>" type="hidden" name="id" value="<?= $vaPegawai['id'] ?>">
-                    </td>
 
             </tr>
         <?php }
         ?>
         </tbody>
     </table>
-    
+
 
 
     <!-- DATA TABES SCRIPT -->
@@ -193,5 +270,3 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-rowreorder-bs4/css/rowReorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
-    

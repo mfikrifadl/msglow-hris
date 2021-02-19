@@ -28,7 +28,7 @@ class Cek_absen extends CI_Controller
         $data['id_absen']    =    $Id;
 
         $data['absensi'] = $this->model->View('attlog');
-        $data['row']	= $this->relasi->GetDataAbsensi_tabel_new();
+        $data['row']    = $this->relasi->GetDataAbsensi_tabel_new();
 
         $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/gaji/absensi', $data);
@@ -92,7 +92,7 @@ class Cek_absen extends CI_Controller
     {
         $dTgl = $this->input->post('dTgl');
         $dTgl_end = $this->input->post('dTgl_end');
-        //echo "$dTgl <br />";
+        //echo "$dTgl - $dTgl_end <br />";
 
         $data_absensi = $this->model->View('attlog');
         $data_log_absen = array();
@@ -110,7 +110,13 @@ class Cek_absen extends CI_Controller
             $tgl = $a_attlog[0];
             $waktu = $a_attlog[1];
 
-            if ($tgl == $dTgl || $tgl == $dTgl_end) {
+            $t_dTgl = new DateTime($dTgl);
+            $t_dTgl_end = new DateTime($dTgl_end);
+            $tgl_attlog = new DateTime($tgl);
+
+            //echo"$t_dTgl - $t_dTgl_end - $tgl_attlog <br />";
+
+            if ($t_dTgl <= $t_dTgl_end && $t_dTgl_end >= $tgl_attlog) {
                 // echo "pin : $pin <br />";
                 // echo "attlog : $attlog <br />";
                 // echo "tanggal cek roll : $tgl <br />";
@@ -130,7 +136,7 @@ class Cek_absen extends CI_Controller
                     'cloud_id' => $cloud_id
                 ));
             } else {
-                // echo "asd";
+                //echo "asd";
             }
         }
 
@@ -138,15 +144,16 @@ class Cek_absen extends CI_Controller
         redirect(site_url('gaji/absensi_pegawai/'));
     }
 
-    public function get_data_absensi(){
+    public function get_data_absensi()
+    {
         $dTgl = $this->input->post('dTgl');
         $dTgl_end = $this->input->post('dTgl_end');
 
-        $time_a = date('H:i:s', mktime(0,0,0));
-        $time_b = date('H:i:s', mktime(23,59,59));
+        $time_a = date('H:i:s', mktime(0, 0, 0));
+        $time_b = date('H:i:s', mktime(23, 59, 59));
 
-        $x = $dTgl ." ".$time_a;
-        $y = $dTgl_end ." ".$time_b;
+        $x = $dTgl . " " . $time_a;
+        $y = $dTgl_end . " " . $time_b;
         //echo "$y";
 
         $data = array(
@@ -154,17 +161,16 @@ class Cek_absen extends CI_Controller
             'dTgl_end' => $dTgl_end
 
         );
-                
-        //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
-        $data['data_absensi'] = $this->model->ViewBetween('attlog','attlog',$x,$y);
-        
-		$this->load->view('admin/gaji/tb_absensi', $data);
-		$this->load->view('admin/container/footer_dataTable');
-        
 
+        //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
+        $data['data_absensi'] = $this->model->ViewBetween('attlog', 'attlog', $x, $y);
+
+        $this->load->view('admin/gaji/tb_absensi', $data);
+        $this->load->view('admin/container/footer_dataTable');
     }
 
-    public function get_data_absensi_import(){
+    public function get_data_absensi_import()
+    {
         $dTgl_cetak = $this->input->post('dTgl_cetak');
         $dTgl_cetak_end = $this->input->post('dTgl_cetak_end');
 
@@ -173,11 +179,9 @@ class Cek_absen extends CI_Controller
             'dTgl_cetak_end' => $dTgl_cetak_end
 
         );
-                
-        $data['row'] = $this->model->ViewBetween('v_log_data_absen','tanggal',$dTgl_cetak,$dTgl_cetak_end);
+
+        $data['row'] = $this->model->ViewBetweenAbsensi($dTgl_cetak, $dTgl_cetak_end);
         $this->load->view('admin/gaji/tb_absensi_import', $data);
         $this->load->view('admin/container/footer_dataTable');
-
     }
-    
 }
