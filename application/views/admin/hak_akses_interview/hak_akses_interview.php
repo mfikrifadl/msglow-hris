@@ -270,8 +270,7 @@ if ($action == "edit") {
                 </div>
             </form>
             <!-- End Form -->
-            <?php //if ($this->session->userdata('level') == 1) { 
-            ?>
+            
             <div class="row">
                 <div class="col-12">
 
@@ -399,7 +398,7 @@ if ($action == "edit") {
                     </div>
                 </div>
             </div>
-            <?php// } ?>
+            
             <!--End::Row-->
 
         </section>
