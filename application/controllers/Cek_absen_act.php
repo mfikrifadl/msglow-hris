@@ -27,7 +27,22 @@ class Cek_absen_act extends CI_Controller
 			'ket_lain' => $this->input->post('ket_lain')
 		);
 
-		$this->model->Update('log_absen', 'id', $id, $data);
+        $data_temp_insert = array(	
+            'id_temp'           => $this->input->post('id'),
+            'ket_lain_temp' => $this->input->post('ket_lain')			
+		);
+
+        $data_temp_update = array(	
+            'ket_lain_temp' => $this->input->post('ket_lain')			
+		);
+
+		//$this->model->Update('log_absen', 'id', $id, $data);
+        $cView = $this->db->query("SELECT * FROM temp_log_absen  WHERE id_temp = '" . $id . "' ");
+        if ($cView->num_rows() > 0) {
+            $this->model->Update('temp_log_absen', 'id_temp', $id, $data_temp_update);
+        }else{
+            $this->model->Insert('temp_log_absen', $data_temp_insert);
+        }
     }
 
     // public function cetak_absensi(){
@@ -57,7 +72,7 @@ class Cek_absen_act extends CI_Controller
             'tgl_end' => $tgl_end
         );
 
-        $data['log_absen'] = $this->model->ViewBetweenOrder('v_log_data_absen','tanggal',$tgl,$tgl_end,'nama');
+        $data['log_absen'] = $this->model->ViewBetweenAbsensi($tgl,$tgl_end);
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
         $html = $this->load->view('admin/gaji/cetak_absensi', $data, true);
         $mpdf->WriteHTML($html);
@@ -75,8 +90,38 @@ class Cek_absen_act extends CI_Controller
             'keterangan' => $this->input->post('ket')			
 		);
 
-		$this->model->Update('log_absen', 'id', $id, $data);
+        $data_temp = array(	
+            'id_temp'           => $this->input->post('id'),
+            'keterangan_temp' => $this->input->post('ket')			
+		);
 
+		//$this->model->Update('log_absen', 'id', $id, $data);
+
+        $cView = $this->db->query("SELECT * FROM temp_log_absen  WHERE id_temp = '" . $id . "' ");
+        if ($cView->num_rows() > 0) {
+            $this->model->Update('temp_log_absen', 'id_temp', $id, $data_temp);
+        }else{                        
+            $this->model->Insert('temp_log_absen', $data_temp);
+        }
+        
+
+    }
+
+    public function reject_update(){        
+        $id = $this->input->post('id');
+        $this->model->Delete('temp_log_absen','id_temp', $id);
+    }
+    
+    public function approvement_update(){
+        $id = $this->input->post('id');
+
+        $data = array(		
+            'keterangan' => $this->input->post('keterangan'),
+            'ket_lain' => $this->input->post('ket_lain')			
+		);        
+
+		$this->model->Update('log_absen', 'id', $id, $data); 
+        $this->model->Delete('temp_log_absen','id_temp', $id);
     }
 
 }

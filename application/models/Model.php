@@ -55,39 +55,55 @@ class Model extends CI_Model
 	}
 	public function View($Table)
 	{
-		$Query = $this->db->query("SELECT * FROM " . $Table );
+		$Query = $this->db->query("SELECT * FROM " . $Table);
 		return $Query->result_array();
 	}
 
 	public function ViewWhereNot($Table, $WhereField, $WhereValue)
 	{
-		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE ".$WhereField." NOT LIKE '" . $WhereValue."'");
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $WhereField . " NOT LIKE '" . $WhereValue . "'");
 		return $Query->result_array();
 	}
 
 	public function ViewWhereLikeOr($Table, $WhereField1, $WhereValue1, $WhereField2, $WhereValue2)
 	{
-		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE ".$WhereField1." LIKE '%" . $WhereValue1."%' OR ".$WhereField2." LIKE '%" . $WhereValue2."%'");
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $WhereField1 . " LIKE '%" . $WhereValue1 . "%' OR " . $WhereField2 . " LIKE '%" . $WhereValue2 . "%'");
 		return $Query->result_array();
 	}
 
 	public function ViewBetween($Table, $Column, $WhereValue1, $WhereValue2)
 	{
-		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Column . "  BETWEEN '" . $WhereValue1."' AND '" . $WhereValue2."' ");
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Column . "  BETWEEN '" . $WhereValue1 . "' AND '" . $WhereValue2 . "' ");
 		return $Query->result_array();
 	}
 
 	public function ViewBetweenOrder($Table, $Column, $WhereValue1, $WhereValue2, $Order)
 	{
-		
-		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Column . "  BETWEEN '" . $WhereValue1."' AND '" . $WhereValue2."' ORDER BY ". $Order ." ");
+
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Column . "  BETWEEN '" . $WhereValue1 . "' AND '" . $WhereValue2 . "' ORDER BY " . $Order . " ");
 		return $Query->result_array();
 	}
 
+	public function ViewBetweenAbsensi($WhereValue1, $WhereValue2)
+	{
+		$Query = $this->db->query("	SELECT B.id, E.id_temp, A.id_pegawai, A.nik, A.nama, D.nama_jabatan, B.tot_jam_kerja, B.tot_jam_lembur, B.keterangan, E.keterangan_temp, B.keterlambatan, B.ket_lain, E.ket_lain_temp, B.attlog, B.tanggal, MIN( B.waktu ) AS jam_datang, MAX( B.waktu ) AS jam_pulang, B.waktu
+									FROM
+										tb_pegawai A
+										LEFT JOIN log_absen B ON B.pin = A.nik 
+											AND (REPLACE(B.tanggal, '-', '') BETWEEN REPLACE('" . $WhereValue1 . "', '-', '') AND REPLACE('" . $WhereValue2 . "', '-', ''))
+										LEFT JOIN temp_log_absen E ON E.id_temp = B.id
+										LEFT JOIN tb_jabatan_pegawai C ON A.id_kerja = C.id_ref_jabatan
+										LEFT JOIN tb_ref_jabatan D ON D.id_ref_jabatan = C.id_ref_jabatan 
+									WHERE
+										IFNULL( A.id_status_mengundurkan_diri, 0 ) < 6 OR IFNULL( A.id_status_mengundurkan_diri, 0 ) > 11 
+									GROUP BY
+										A.nik");
+		return $Query->result_array();
+	}
 	public function CekDataPelamar($Table, $Where, $WhereValue)
 	{
 
-		$Query = $this->db->query("SELECT * FROM ". $Table ." WHERE ". $Where ." LIKE '%" . $WhereValue . "%' ");
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Where . " LIKE '%" . $WhereValue . "%' ");
 		return $Query;
 	}
 
@@ -122,10 +138,10 @@ class Model extends CI_Model
 		$Query = $this->db->query("SELECT * FROM " . $Table . " ORDER BY " . $Order . " DESC LIMIT 0,$Limit");
 		return $Query->result_array();
 	}
-	
-	public function View2Or($Table, $Where, $WhereValue, $OrWhere, $OrWhereValue )
+
+	public function View2Or($Table, $Where, $WhereValue, $OrWhere, $OrWhereValue)
 	{
-		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Where . " = '" . $WhereValue . "' OR ".$OrWhere." = '".$OrWhereValue."' ");
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $Where . " = '" . $WhereValue . "' OR " . $OrWhere . " = '" . $OrWhereValue . "' ");
 		return $Query->result_array();
 	}
 
@@ -138,13 +154,13 @@ class Model extends CI_Model
 	public function ViewWhereAktor($Table, $WhereField, $WhereValue)
 	{
 		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $WhereField . " = '" . $WhereValue . "' ORDER BY id DESC");
-		
+
 		return $Query->result_array();
 	}
 
 	public function ViewWhereAnd($Table, $WhereField, $WhereValue,  $WhereField2, $WhereValue2)
 	{
-		$Query = $this->db->query("SELECT * FROM ".$Table." WHERE " .$WhereField. " = '" . $WhereValue . "' AND  ".$WhereField2." = '".$WhereValue2."' ");
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE " . $WhereField . " = '" . $WhereValue . "' AND  " . $WhereField2 . " = '" . $WhereValue2 . "' ");
 		return $Query->result_array();
 	}
 
@@ -239,7 +255,7 @@ class Model extends CI_Model
 		return $Query;
 	}
 
-	
+
 
 	public function GetCekPendapatan($Id, $Bulan, $Tahun)
 	{

@@ -107,7 +107,7 @@ if ($action == "edit") {
                                     Form Cuti
                                   </a>
                                 </div>
-                              </div>                              
+                              </div>
 
                             </div>
 
@@ -161,7 +161,7 @@ if ($action == "edit") {
                     <div class="kt-portlet kt-portlet--height-fluid">
                       <div class="kt-portlet">
                         <div class="kt-portlet__body">
-                          <form method="post" enctype="multipart/form-data" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
+                          <form method="post" enctype="multipart/form-data" target="blank" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
 
                             <div class="row">
 
@@ -307,26 +307,6 @@ if ($action == "edit") {
     }
   }
 
-  // $("#table_scroll_x").dataTable({
-  //   // scrollY: '50vh',
-  //   scrollX: 'true',
-  //   scrollCollapse: true,
-  //   "oLanguage": {
-  //     "sLengthMenu": "Tampilkan _MENU_ data per halaman",
-  //     "sSearch": "Pencarian: ",
-  //     "sZeroRecords": "Maaf, tidak ada data yang ditemukan",
-  //     "sInfo": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
-  //     "sInfoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
-  //     "sInfoFiltered": "(di filter dari _MAX_ total data)",
-  //     "oPaginate": {
-  //       "sFirst": "Awal",
-  //       "sLast": "Akhir",
-  //       "sPrevious": "Sebelumnya",
-  //       "sNext": "Selanjutnya"
-  //     }
-  //   }
-  // });
-
   function run() {
 
     var dTgl = $('#dTgl').val();
@@ -364,7 +344,7 @@ if ($action == "edit") {
           $('#dTgl').focus()
           $('#loading').html("")
 
-          window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
+          //window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
         }
       });
     }
@@ -405,6 +385,62 @@ if ($action == "edit") {
         }
       });
     }
+  }
+
+  function approvement(id) {
+
+    var keterangan = $('#ket_abs_temp_' + id).val();
+    var ket_lain = $('#ket_abs_lain_temp_' + id).val();
+    //alert(id+keterangan+ket_lain);
+
+    var values = {
+      'id': id,
+      'ket_lain': ket_lain,
+      'keterangan': keterangan
+    }
+
+    $.ajax({
+      url: "<?= base_url() . 'cek_absen_act/approvement_update' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        new PNotify({
+          // title: 'Success!',
+          text: 'Berhasil Approve Data Absensi.',
+          type: 'success'
+        });
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
+  }
+
+  function reject(id) {
+    //alert(id);
+
+    var values = {
+      'id': id,
+    }
+
+    $.ajax({
+      url: "<?= base_url() . 'cek_absen_act/reject_update' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        new PNotify({
+          // title: 'Success!',
+          text: 'Berhasil Reject Data Absensi.',
+          type: 'success'
+        });
+        
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
   }
 
   function updateDataAbsen(id) {
