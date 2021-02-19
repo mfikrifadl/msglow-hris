@@ -1036,6 +1036,7 @@ class Transaksi_act extends CI_Controller
 				'id_form'                   => $idForm,
 				'status_pengajuan'                => 'on hold',
 				'id_pegawai'                => $this->input->post('cIdPegawai'),
+				'level_admin'                => $this->input->post('level_admin'),
 				'nik'                		=> $this->input->post('cNik'),
 				'nama_pengaju_form'         => $this->input->post('cNama'),
 				'job_career'         		=> $this->input->post('cJob_career'),

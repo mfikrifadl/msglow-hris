@@ -123,7 +123,7 @@ if ($action == "edit") {
                                                         <?php
                                                         }
                                                         ?>
-
+                                                        <input type="hidden" name="level_admin" value="<?= $this->session->userdata('nama') ?>">
 
                                                     </div>
                                                 </div> <!-- /.col-form -->
@@ -270,83 +270,85 @@ if ($action == "edit") {
                 </div>
             </form>
             <!-- End Form -->
-            <?php if ($this->session->userdata('level') == 1) { ?>
-                <div class="row">
-                    <div class="col-12">
+            <?php //if ($this->session->userdata('level') == 1) { 
+            ?>
+            <div class="row">
+                <div class="col-12">
 
-                        <!--begin:: Widgets/Order Statistics-->
-                        <div class="kt-portlet">
+                    <!--begin:: Widgets/Order Statistics-->
+                    <div class="kt-portlet">
 
-                            <!--begin::Accordion-->
+                        <!--begin::Accordion-->
 
-                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionTablePegawai">
-                                <div class="card">
-                                    <div class="card-header" id="headingTablePegawai">
-                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseTablePengajuan" aria-expanded="true" aria-controls="collapseTablePengajuan">
-                                            <strong> Data Table Pengajuan </strong>
-                                        </div>
+                        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionTablePegawai">
+                            <div class="card">
+                                <div class="card-header" id="headingTablePegawai">
+                                    <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseTablePengajuan" aria-expanded="true" aria-controls="collapseTablePengajuan">
+                                        <strong> Data Table Pengajuan </strong>
                                     </div>
-                                    <div id="collapseTablePengajuan" class="collapse show" aria-labelledby="headingTablePegawai" data-parent="#accordionTablePegawai">
-                                        <!-- <div class="card-body"> -->
+                                </div>
+                                <div id="collapseTablePengajuan" class="collapse show" aria-labelledby="headingTablePegawai" data-parent="#accordionTablePegawai">
+                                    <!-- <div class="card-body"> -->
 
-                                        <div class="kt-portlet__body">
-                                            <table class="table table-striped table-bordered" id="DataTable">
-                                                <thead>
-                                                    <tr>
-                                                        <td>No</td>
-                                                        <td>Status Form</td>
-                                                        <td>Nama Pengaju Form</td>
-                                                        <td>Jabatan Unit Kerja</td>
-                                                        <td>Sub Unit Kerja</td>
-                                                        <td>Tambah Pegawai Bagian</td>
-                                                        <td>Sub Unit Kerja</td>
-                                                        <td>Total</td>
-                                                        <td>Action</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php $no = 0;
-                                                    foreach ($row as $key => $vaArea) {
-                                                        if ($vaArea['is_delete'] == 1) {
-                                                        } else { ?>
+                                    <div class="kt-portlet__body">
+                                        <table class="table table-striped table-bordered" id="DataTable">
+                                            <thead>
+                                                <tr>
+                                                    <td>No</td>
+                                                    <td>Status Form</td>
+                                                    <td>Nama Pengaju Form</td>
+                                                    <td>Jabatan Unit Kerja</td>
+                                                    <td>Sub Unit Kerja</td>
+                                                    <td>Tambah Pegawai Bagian</td>
+                                                    <td>Sub Unit Kerja</td>
+                                                    <td>Total</td>
+                                                    <td>Action</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 0;
+                                                foreach ($row as $key => $vaArea) {
+                                                    if ($vaArea['is_delete'] == 1) {
+                                                    } else { ?>
 
-                                                            <tr>
-                                                                <td><?= ++$no; ?></td>
-                                                                <td>
-                                                                    <?php
-                                                                    if ($vaArea['status_pengajuan'] == 'approve') {
-                                                                        $cLabel = 'success';
-                                                                    } else if ($vaArea['status_pengajuan'] == 'unapprove') {
-                                                                        $cLabel = 'danger';
-                                                                    } else  $cLabel = 'info';
-                                                                    ?>
-                                                                    <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
-                                                                        <?= $vaArea['status_pengajuan'] ?>
-                                                                    </span>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $vaArea['nama_pengaju_form'] ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $vaArea['unit_kerja_pengaju_form'] ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $vaArea['sub_unit_kerja_pf'] ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $vaArea['nama_jabatan'] ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $vaArea['nama_sub_unit_kerja'] ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $vaArea['total_man_power'] ?>
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    <?php
+                                                        <tr>
+                                                            <td><?= ++$no; ?></td>
+                                                            <td>
+                                                                <?php
+                                                                if ($vaArea['status_pengajuan'] == 'approve') {
+                                                                    $cLabel = 'success';
+                                                                } else if ($vaArea['status_pengajuan'] == 'unapprove') {
+                                                                    $cLabel = 'danger';
+                                                                } else  $cLabel = 'info';
+                                                                ?>
+                                                                <span class="kt-badge kt-badge--inline kt-badge--pill kt-badge--<?= $cLabel ?>">
+                                                                    <?= $vaArea['status_pengajuan'] ?>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <?= $vaArea['nama_pengaju_form'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $vaArea['unit_kerja_pengaju_form'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $vaArea['sub_unit_kerja_pf'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $vaArea['nama_jabatan'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $vaArea['nama_sub_unit_kerja'] ?>
+                                                            </td>
+                                                            <td>
+                                                                <?= $vaArea['total_man_power'] ?>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <?php
+                                                                if ($this->session->userdata('level') == 1) {
                                                                     if ($vaArea['status_pengajuan'] == 'approve') {
                                                                     } else {
-                                                                    ?>
+                                                                ?>
                                                                         <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
                                                                             <i class="flaticon2-check-mark"></i>
                                                                         </a>
@@ -357,33 +359,47 @@ if ($action == "edit") {
                                                                     <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Reject" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon2-delete"></i>
                                                                     </a>
-                                                                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                    <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon-edit"></i>
-                                                                    </a>
+                                                                    </a> -->
                                                                     <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" href="<?= site_url('transaksi_act/form_pengajuan/delete/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon-delete"></i>
                                                                     </a>
+                                                                <?php
+                                                                } else {
+                                                                    if($vaArea['level_admin'] == $this->session->userdata('nama')){
+                                                                        ?>
+                                                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                            <i class="flaticon-edit"></i>
+                                                                        </a>
+                                                                    <?php
+                                                                    }else{
 
-                                                                </td>
-                                                            <?php } ?>
+                                                                    }
+                                                                
+                                                                }
+                                                                ?>
+
+                                                            </td>
                                                         <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
+                                                    <?php } ?>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <!-- </div> -->
+
                                 </div>
+                                <!-- </div> -->
                             </div>
-
-                            <!--end::Accordion-->
-
-
-                            <!--end:: Widgets/Order Statistics-->
                         </div>
+
+                        <!--end::Accordion-->
+
+
+                        <!--end:: Widgets/Order Statistics-->
                     </div>
                 </div>
-            <?php } ?>
+            </div>
+            <?php// } ?>
             <!--End::Row-->
 
         </section>
