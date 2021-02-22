@@ -119,6 +119,9 @@ class Recruitment extends CI_Controller
 		// 	//$data['ket_data'] = $Id;
 		// }
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/wawancara', $data);
 		$this->load->view('admin/container/footer');
@@ -135,6 +138,9 @@ class Recruitment extends CI_Controller
 		$content 			= $this->cURL_API($Id,'GET','');
 		$data2 				= json_decode($content, true);
 		$data['registrant']	= $data2['data'];
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/view_wawancara', $data);
@@ -217,6 +223,10 @@ class Recruitment extends CI_Controller
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
@@ -233,6 +243,10 @@ class Recruitment extends CI_Controller
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
@@ -253,6 +267,10 @@ class Recruitment extends CI_Controller
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
@@ -273,6 +291,10 @@ class Recruitment extends CI_Controller
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
@@ -289,6 +311,10 @@ class Recruitment extends CI_Controller
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
@@ -307,6 +333,9 @@ class Recruitment extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		//echo "$Aksi - $Id";
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
@@ -321,6 +350,9 @@ class Recruitment extends CI_Controller
 		$data['row']	= $this->model->View('recruitment', 'kode_wawancara');
 		$data['nilai'] = $this->db->query("SELECT *, sum(nilai_psiko_test + nilai_uji_kompetensi + nilai_interview_user_1 + nilai_interview_user_2 + nilai_interview_hrga) AS total_nilai FROM recruitment GROUP BY `id_recruitment` ORDER BY kode_wawancara DESC ")->result_array();
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/monitoring_status', $data);
 		$this->load->view('admin/container/footer');
@@ -332,6 +364,9 @@ class Recruitment extends CI_Controller
 		$data['menu']   = 'Recruitment';
 		$data['file']   = 'Peserta Diterima';
 		$data['row'] = $this->db->query("SELECT *, sum(nilai_psiko_test + nilai_uji_kompetensi + nilai_interview_user_1 + nilai_interview_user_2 + nilai_interview_hrga) AS total_nilai FROM recruitment WHERE `status` = 'lolos' OR `status` = 'Menjadi Pegawai' OR `status` = 'validasi'  GROUP BY `id_recruitment` ORDER BY kode_wawancara DESC ")->result_array();
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/recruitment/peserta_diterima', $data);

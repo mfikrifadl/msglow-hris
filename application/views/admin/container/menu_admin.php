@@ -247,7 +247,7 @@
                   </i>
                   <span class="kt-menu__link-text">Data Pegawai Staff</span>
                 </a>
-              </li>              
+              </li>
 
               <li class="kt-menu__item <?= $this->uri->segment(2) == 'kontrak' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('transaksi/kontrak'); ?>" class="kt-menu__link ">
@@ -346,7 +346,8 @@
               </li>
 
               <!-- <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?php //echo  site_url('transaksi/sp2'); ?>" class="kt-menu__link ">
+                <a href="<?php //echo  site_url('transaksi/sp2'); 
+                          ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -355,7 +356,8 @@
               </li>
 
               <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?php //echo site_url('transaksi/sp3'); ?>" class="kt-menu__link ">
+                <a href="<?php //echo site_url('transaksi/sp3'); 
+                          ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -399,7 +401,7 @@
                 </a>
               </li> -->
 
-              <!-- <li class="kt-menu__item " aria-haspopup="true">
+        <!-- <li class="kt-menu__item " aria-haspopup="true">
                 <a href="<?= site_url('gaji/req_update_absen'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
@@ -412,15 +414,26 @@
                   </span>
                 </a>
               </li> -->
-<!-- 
+        <!-- 
             </ul>
           </div>
         </li> -->
 
-        <li class="kt-menu__item <?= $this->uri->segment(2) == 'absensi_pegawai' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
-          <a href="<?= site_url('gaji/absensi_pegawai'); ?>" class="kt-menu__link ">
+        <li class="kt-menu__item  <?= $this->uri->segment(2) == 'absensi_pegawai' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+          <a href="<?= site_url('gaji/absensi_pegawai'); ?>" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon2-open-text-book"></i>
-            <span class="kt-menu__link-text">Absensi </span>
+            <span class="kt-menu__link-text">
+              Absensi
+            </span>
+            <span class="kt-menu__link-badge">
+              <span class="kt-badge kt-badge--brand" style="color: black;">
+                  <?php
+                  foreach ($notif_absensi as $rowNotif) {
+                    echo $rowNotif['jml_update_temp'];
+                  }
+                  ?>
+              </span>
+            </span>
           </a>
         </li>
 
@@ -501,6 +514,155 @@
 
 <div class="kt-header__topbar">
   <!--begin: User bar -->
+
+  <!--begin: Notifications -->
+  <div class="kt-header__topbar-item dropdown">
+    <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
+      <span class="kt-header__topbar-icon kt-header__topbar-icon--success">
+        <span class="kt-menu__link-badge">
+          <span class="kt-badge " style="color: black;">
+              <?php
+              foreach ($notif_absensi as $rowNotif) {
+                echo $rowNotif['jml_update_temp'];
+              }
+              ?>
+          </span>
+        </span>
+        <i class="flaticon2-bell-alarm-symbol"></i>
+      </span>
+      <span class="kt-hidden kt-badge kt-badge--danger"></span>
+    </div>
+    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+      <form>
+
+        <!--begin: Head -->
+        <div class="kt-head kt-head--skin-dark kt-head--fit-x kt-head--fit-b" style="background-image: url(<?= base_url() ?>assets2/media/misc/bg-1.jpg)">
+          <h3 class="kt-head__title">
+            <?= $this->session->userdata('nama') ?>
+            &nbsp;
+            <span class="btn btn-success btn-sm btn-bold btn-font-md">
+
+              <?php
+              foreach ($notif_absensi as $rowNotif) {
+                echo $rowNotif['jml_update_temp'];
+              }
+              ?>
+
+              new
+            </span>
+          </h3>
+          <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-success kt-notification-item-padding-x" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active show" data-toggle="tab" href="#topbar_notifications_notifications" role="tab" aria-selected="true">Absensi</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#topbar_notifications_events" role="tab" aria-selected="false">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#topbar_notifications_logs" role="tab" aria-selected="false">Logs</a>
+            </li> -->
+          </ul>
+        </div>
+
+        <!--end: Head -->
+        <div class="tab-content">
+          <div class="tab-pane active show" id="topbar_notifications_notifications" role="tabpanel">
+            <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
+
+              <?php
+              foreach ($data_notif_absen as $rowNotif) {
+                //echo $rowNotif['jml_update_temp'];
+              ?>
+                <a href="<?= site_url('gaji/data_notif_absen/'.$rowNotif['id_temp']); ?>" class="kt-notification__item">
+                  <div class="kt-notification__item-icon">
+                    <i class="flaticon2-box-1 kt-font-brand"></i>
+                  </div>
+                  <div class="kt-notification__item-details">
+                    <div class="kt-notification__item-title">
+                      <?php
+                      $notif_nama = "";
+                      if (empty($rowNotif['nama'])) {
+                        $notif_nama = "Unknown";
+                      } else {
+                        $notif_nama = $rowNotif['nama'];
+                      }
+                      ?>
+                      <?= $notif_nama ?>
+                    </div>
+                    <div class="kt-notification__item-time">
+                      <?= $rowNotif['tgl_update_temp'] ?>
+                    </div>
+                  </div>
+                </a>
+              <?php
+              }
+              ?>
+
+
+
+
+
+
+              <!-- CONTOH PESAN JIKA SUDAH TERBACA -->
+
+              <!-- <a href="#" class="kt-notification__item kt-notification__item--read">
+                <div class="kt-notification__item-icon">
+                  <i class="flaticon2-safe kt-font-primary"></i>
+                </div>
+                <div class="kt-notification__item-details">
+                  <div class="kt-notification__item-title">
+                    Company meeting canceled
+                  </div>
+                  <div class="kt-notification__item-time">
+                    19 hrs ago
+                  </div>
+                </div>
+              </a> -->
+
+              <!-- END CONTOH PESAN JIKA SUDAH TERBACA -->
+
+
+
+            </div>
+          </div>
+
+          <!-- <div class="tab-pane" id="topbar_notifications_events" role="tabpanel">
+            <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
+
+              <a href="#" class="kt-notification__item">
+                <div class="kt-notification__item-icon">
+                  <i class="flaticon2-psd kt-font-success"></i>
+                </div>
+                <div class="kt-notification__item-details">
+                  <div class="kt-notification__item-title">
+                    New report has been received
+                  </div>
+                  <div class="kt-notification__item-time">
+                    23 hrs ago
+                  </div>
+                </div>
+              </a> 
+              
+            </div>
+          </div> -->
+
+          <!-- <div class="tab-pane" id="topbar_notifications_logs" role="tabpanel">
+            <div class="kt-grid kt-grid--ver" style="min-height: 200px;">
+              <div class="kt-grid kt-grid--hor kt-grid__item kt-grid__item--fluid kt-grid__item--middle">
+                <div class="kt-grid__item kt-grid__item--middle kt-align-center">
+                  All caught up!
+                  <br>No new notifications.
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!--end: Notifications -->
 
 
   <div class="kt-header__topbar-item kt-header__topbar-item--user">

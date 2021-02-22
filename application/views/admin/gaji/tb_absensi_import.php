@@ -60,6 +60,7 @@
 
                 <td>Keterlambatan</td>
                 <td>Overtime</td>
+                <td>Overtime_Payroll</td>
                 <?php
                 if ($this->session->userdata('level') == 3) {
                 ?>
@@ -143,10 +144,18 @@
                     <!-- </td> -->
                     <?php
                     if ($this->session->userdata('level') == 3) {
+                        $id_ket = "";
+                        if ($vaPegawai['id'] == 0 || empty($vaPegawai['id'])) {
+                            $t_id_ket = date("YmdHis");
+                            $id_ket = $t_id_ket + $no;
+                        } else {
+                            $id_ket = $vaPegawai['id'];
+                        }
                     ?>
                         <td>
+                            <?= $id_ket ?>
                             <div class="form-group">
-                                <select id="ket_<?= $vaPegawai['id']; ?>" onkeyup="update_ket('<?= $vaPegawai['id']; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
+                                <select id="ket_<?= $id_ket; ?>" onkeyup="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
                                     <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan'] == "Shift 2") echo "selected";
                                                                                 ?>>Shift 2</option>
@@ -175,7 +184,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <button type="button" title="Update Data" id="id_<?= $vaPegawai['id']; ?>" onclick="return update_ket('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
+                                <button type="button" title="Update Data" id="id_<?= $id_ket; ?>" onclick="return update_ket('<?= $id_ket; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
                                     <i class="flaticon2-send-1"></i>
                                 </button>
                             </div>
@@ -211,7 +220,7 @@
                     <td>
                         <?php
                         //Menghitung total jam lembur
-                        $set_jam_lembur = "17:30:00";
+                        $set_jam_lembur = "17:49:59";
                         $t_set_jam_lembur = new DateTime($set_jam_lembur);
 
                         $set_jam_pulang_default = "17:00:00";
@@ -219,6 +228,8 @@
 
                         $t_jam_pulang = "20:00:00";
                         $x_jam_pulang = new DateTime($t_jam_pulang);
+
+                        $tot_jam_lembur = "";
                         if ($jam_pulang > $t_set_jam_lembur) {
                             $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
                             $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
@@ -230,18 +241,54 @@
 
                         ?>
                     </td>
+                    <td>
+                        <?php
+                        //Menghitung Payroll total jam lembur  
+                        $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
+                        $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                        $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
+                        $jam = $a_jam_pulang_lembur[0];
+                        $menit = $a_jam_pulang_lembur[1];
+                        $detik = $a_jam_pulang_lembur[2];
+
+                        //echo "$jam-$menit-$detik";
+
+                        $lembur_jam = $jam * 25000;
+                        //echo $hasil;
+                        if (empty($tot_jam_lembur)) {
+                        } else {
+                            if ($menit > 19 && $menit < 50) {
+                                $lembur_half = 13000;
+                                $tot_lembur_today = $lembur_jam + $lembur_half;
+                                echo $tot_lembur_today;
+                            } else {
+                                $lembur_jam = $jam * 25000;
+                                echo $lembur_jam;
+                            }
+                        }
+
+                        ?>
+                    </td>
                     <?php
                     if ($this->session->userdata('level') == 3) {
+                        $id_ket_ll = "";
+                        if ($vaPegawai['id'] == 0 || empty($vaPegawai['id'])) {
+                            $t_id_ket_ll = date("YmdHis");
+                            $id_ket_ll = $t_id_ket_ll + $no;
+                        } else {
+                            $id_ket_ll = $vaPegawai['id'];
+                        }
                     ?>
                         <td>
-                            <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $vaPegawai['id'] ?>" type="text" value="<?= $vaPegawai['ket_lain'] ?>" onkeyup="updateDataAbsen('<?= $vaPegawai['id']; ?>');" autocomplete="off">
-                            <input id="id_<?= $vaPegawai['id']; ?>" type="hidden" name="id" value="<?= $vaPegawai['id'] ?>">
+                            <?= $id_ket_ll ?>
+                            <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket_ll ?>" type="text" value="<?= $vaPegawai['ket_lain'] ?>" onkeyup="updateDataAbsen('<?= $id_ket_ll; ?>');" autocomplete="off">
+                            <input id="id_<?= $id_ket_ll; ?>" type="hidden" name="id" value="<?= $id_ket_ll ?>">
                         </td>
                     <?php
                     } elseif ($this->session->userdata('level') == 1) {
-                        ?>
+                    ?>
                         <td><?= $vaPegawai['ket_lain_temp'] ?></td>
-                        <?php
+                    <?php
                     } else {
                     }
                     ?>

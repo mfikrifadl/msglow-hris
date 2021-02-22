@@ -30,6 +30,9 @@ class Cek_absen extends CI_Controller
         $data['absensi'] = $this->model->View('attlog');
         $data['row']    = $this->relasi->GetDataAbsensi_tabel_new();
 
+        $data['notif_absensi']	= $this->model->notifAbsensi();
+        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
         $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/gaji/absensi', $data);
         $this->load->view('admin/container/footer');
@@ -67,6 +70,9 @@ class Cek_absen extends CI_Controller
                 $data['action'] = $Aksi;
                 $data['id_absen']    =    $Id;
 
+                $data['notif_absensi']	= $this->model->notifAbsensi();
+                $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+                
                 $this->load->view('admin/container/header', $dataHeader);
                 $this->load->view('admin/gaji/absensi', $data);
                 $this->load->view('admin/container/footer');
@@ -77,6 +83,9 @@ class Cek_absen extends CI_Controller
                 $dataHeader['file'] = 'Absensi Pegawai';
                 $data['action'] = $Aksi;
                 $data['id_absen']    =    $Id;
+
+                $data['notif_absensi']	= $this->model->notifAbsensi();
+                $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
                 $this->load->view('admin/container/header', $dataHeader);
                 $this->load->view('admin/gaji/absensi', $data);
@@ -96,8 +105,10 @@ class Cek_absen extends CI_Controller
 
         $data_absensi = $this->model->View('attlog');
         $data_log_absen = array();
+        $no = 0;
         foreach ($data_absensi as $key => $vaArea) {
-            // $c_id = date("YmdHis");
+            $c_id = date("YmdHis");
+            ++$no;
             // $tgl_hari_ini = date('Y-m-d');
 
             $pin = $vaArea['pin'];
@@ -117,6 +128,8 @@ class Cek_absen extends CI_Controller
             //echo"$t_dTgl - $t_dTgl_end - $tgl_attlog <br />";
 
             if ($t_dTgl <= $t_dTgl_end && $t_dTgl_end >= $tgl_attlog) {
+                $id = $c_id +$no;
+                // echo "id : $id <br />";
                 // echo "pin : $pin <br />";
                 // echo "attlog : $attlog <br />";
                 // echo "tanggal cek roll : $tgl <br />";
@@ -126,7 +139,7 @@ class Cek_absen extends CI_Controller
                 // echo "cloud_id : $cloud_id <br /><br />";
 
                 array_push($data_log_absen, array(
-
+                    'id'    => $id,
                     'pin' => $pin,
                     'attlog' => $attlog,
                     'tanggal' => $tgl,

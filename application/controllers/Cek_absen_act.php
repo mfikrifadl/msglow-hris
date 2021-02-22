@@ -29,7 +29,8 @@ class Cek_absen_act extends CI_Controller
 
         $data_temp_insert = array(	
             'id_temp'           => $this->input->post('id'),
-            'ket_lain_temp' => $this->input->post('ket_lain')			
+            'ket_lain_temp' => $this->input->post('ket_lain'),
+            'status_update_temp' => 1			
 		);
 
         $data_temp_update = array(	
@@ -84,17 +85,30 @@ class Cek_absen_act extends CI_Controller
     
     public function update_absen_keterangan(){
         //$keterangan = $this->input->post('ket');
+        date_default_timezone_set('Asia/Jakarta');
+        
         $id = $this->input->post('id');
+        $date_time = date("Y-m-d H:i:s");
 
         $data = array(		
-            'keterangan' => $this->input->post('ket')			
+            'id'           => $this->input->post('id'),
+            'keterangan' => $this->input->post('ket'),
+            'tgl_update' => $date_time,			
 		);
 
         $data_temp = array(	
             'id_temp'           => $this->input->post('id'),
-            'keterangan_temp' => $this->input->post('ket')			
+            'keterangan_temp' => $this->input->post('ket'),
+            'tgl_update_temp' => $date_time,
+            'status_update_temp' => 1			
 		);
 
+        $cViewLogAbsen = $this->db->query("SELECT * FROM log_absen  WHERE id = '" . $id . "' ");
+        if ($cViewLogAbsen->num_rows() > 0) {
+            $this->model->Update('log_absen', 'id', $id, $data);
+        }else{                        
+            $this->model->Insert('log_absen', $data);
+        }
 		//$this->model->Update('log_absen', 'id', $id, $data);
 
         $cView = $this->db->query("SELECT * FROM temp_log_absen  WHERE id_temp = '" . $id . "' ");
