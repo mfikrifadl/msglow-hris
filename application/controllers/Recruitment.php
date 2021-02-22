@@ -97,9 +97,9 @@ class Recruitment extends CI_Controller
 
 	public function wawancara($Aksi = "", $Id = "")
 	{
-		$data['action'] 	= $Aksi;
-		$data['menu']   	= 'Recruitment';
-		$data['file']   	= 'Wawancara';
+		$dataHeader['action'] 	= $Aksi;
+		$dataHeader['menu']   	= 'Recruitment';
+		$dataHeader['file']   	= 'Wawancara';
 		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
 		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
 		$data['data_recruitment']	= $this->model->ViewWhere('recruitment','is_delete', '0');
@@ -119,10 +119,10 @@ class Recruitment extends CI_Controller
 		// 	//$data['ket_data'] = $Id;
 		// }
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/recruitment/wawancara', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -130,19 +130,19 @@ class Recruitment extends CI_Controller
 	public function view_wawancara($Id = "")
 	{
 		$Aksi = "";
-		$data['action'] 	= $Aksi;
-		$data['menu']   	= 'Recruitment';
-		$data['file']   	= 'View Wawancara';
+		$dataHeader['action'] 	= $Aksi;
+		$dataHeader['menu']   	= 'Recruitment';
+		$dataHeader['file']   	= 'View Wawancara';
 		$data['wawancara']	= $this->model->ViewWhere('recruitment', 'kode_wawancara', $Id);
 
 		$content 			= $this->cURL_API($Id,'GET','');
 		$data2 				= json_decode($content, true);
 		$data['registrant']	= $data2['data'];
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/recruitment/view_wawancara', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -213,9 +213,9 @@ class Recruitment extends CI_Controller
 
 	public function psiko_test($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'Recruitment';
-		$data['file']   = 'Psiko Test';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'Recruitment';
+		$dataHeader['file']   = 'Psiko Test';
 		$data['controller_name']   = 'psiko_test';
 		$data['nilai_test'] = 'nilai_psiko_test';
 		$data['date'] = 'tgl_psiko_test';
@@ -224,18 +224,18 @@ class Recruitment extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
 	}
 	public function uji_kompetensi($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'Recruitment';
-		$data['file']   = 'Uji Kompetensi';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'Recruitment';
+		$dataHeader['file']   = 'Uji Kompetensi';
 		$data['controller_name']   = 'uji_kompetensi';
 		$data['nilai_test'] = 'nilai_uji_kompetensi';
 		$data['date'] = 'tgl_uji_kompetensi';
@@ -244,22 +244,22 @@ class Recruitment extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
 	}
 	public function interview_user_1($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'Recruitment';
-		$data['file']   = 'Interview User 1';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'Recruitment';
+		$dataHeader['file']   = 'Interview User 1';
 		$data['nilai_test'] = 'nilai_interview_user_1';
 		$data['controller_name']   = 'interview_user_1';
 		$data['date'] = 'tgl_interview_user_1';
-		if ($this->session->userdata('level') == 1) {
+		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos'])->result_array();
 		} else {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
@@ -268,10 +268,10 @@ class Recruitment extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
 	}

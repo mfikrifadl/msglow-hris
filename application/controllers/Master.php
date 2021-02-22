@@ -113,9 +113,9 @@ class Master extends CI_Controller
 
 	public function index($Aksi = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'Master';
-		$data['file']   = 'Home';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'Master';
+		$dataHeader['file']   = 'Home';
 
 		$query 							= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tanggal_lahir) = MONTH(NOW()) AND DAY(tanggal_lahir) = DAY(NOW())');
 		$total_pegawai					= $this->db->query('SELECT COUNT(nik) AS jml_pegawai FROM tb_pegawai WHERE id_status_mengundurkan_diri < 6 OR id_status_mengundurkan_diri > 11');
@@ -128,88 +128,88 @@ class Master extends CI_Controller
 		$data['jml_pegawai_phl']		= $query_p_phl->result_array();
 		$data['tot_pegawai']			= $total_pegawai->result_array();
 
-		$data['notif_absensi']			= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']			= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 		
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/dashboard', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function operator($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'Master';
-		$data['file']   = 'Operator';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'Master';
+		$dataHeader['file']   = 'Operator';
 		$data['row']	= $this->model->View('operator', 'id_operator');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('operator', 'id_operator', $Id);
 		}
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/operator', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function area_kerja($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; //data header
-		$data['file'] = 'DATA AREA KERJA'; //data header
-		$data['action'] = $Aksi; //data header
+		$dataHeader['menu'] = 'Manajemen HRD'; //data header
+		$dataHeader['file'] = 'DATA AREA KERJA'; //data header
+		$dataHeader['action'] = $Aksi; //data header
 
 		$data['row']	= $this->model->View('tb_area_kerja', 'id_area');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_area_kerja', 'id_area', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/area_kerja', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function bpjs($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; //data header
-		$data['file'] = 'DATA BPJS'; // data header
-		$data['action'] = $Aksi; // data header
+		$dataHeader['menu'] = 'Manajemen HRD'; //data header
+		$dataHeader['file'] = 'DATA BPJS'; // data header
+		$dataHeader['action'] = $Aksi; // data header
 		$data['row']	= $this->model->View('v_bpjs', 'id_pegawai');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_bpjs', 'id_bpjs', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/bpjs', $data);
 		$this->load->view('admin/container/footer');
 	}
 	public function unit_kerja($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; //data header
-		$data['file'] = 'DATA UNIT KERJA'; //data header
-		$data['action'] = $Aksi; //data header
+		$dataHeader['menu'] = 'Manajemen HRD'; //data header
+		$dataHeader['file'] = 'DATA UNIT KERJA'; //data header
+		$dataHeader['action'] = $Aksi; //data header
 
 		$data['row']	= $this->model->View('tb_unit_kerja', 'id_unit_kerja');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_unit_kerja', 'id_unit_kerja', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/unit_kerja', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function sub_unit_kerja($Aksi = "", $Id = "")
 	{
-		$data['menu'] 	= 'Manajemen HRD'; //data header
-		$data['file'] 	= 'DATA SUB UNIT KERJA'; //data header
-		$data['action'] 	=  $Aksi;
+		$dataHeader['menu'] 	= 'Manajemen HRD'; //data header
+		$dataHeader['file'] 	= 'DATA SUB UNIT KERJA'; //data header
+		$dataHeader['action'] 	=  $Aksi;
 		$data['unit_kerja'] 	=  $this->model->View('tb_unit_kerja', 'id_unit_kerja');
 		$data['row']			=  $this->relasi->GetDataSubUnitKerja();
 		if ($Aksi == 'edit') {
@@ -219,16 +219,16 @@ class Master extends CI_Controller
 		$data['notif_absensi']	= $this->model->notifAbsensi();
 		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/sub_unit_kerja', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function ref_jabatan($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; //data header
-		$data['file'] = 'REFERENSI JABATAN'; //data header
-		$data['action'] = $Aksi; //data header
+		$dataHeader['menu'] = 'Manajemen HRD'; //data header
+		$dataHeader['file'] = 'REFERENSI JABATAN'; //data header
+		$dataHeader['action'] = $Aksi; //data header
 
 		$data['row']	= $this->model->View('tb_ref_jabatan', 'id_ref_jabatan');
 		if ($Aksi == 'edit') {
@@ -238,35 +238,35 @@ class Master extends CI_Controller
 		$data['notif_absensi']	= $this->model->notifAbsensi();
 		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/ref_jabatan', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function status_karyawan($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; //data header
-		$data['file'] = 'STATUS KERJA KARYAWAN'; //data header
-		$data['action'] = $Aksi; //data header
+		$dataHeader['menu'] = 'Manajemen HRD'; //data header
+		$dataHeader['file'] = 'STATUS KERJA KARYAWAN'; //data header
+		$dataHeader['action'] = $Aksi; //data header
 
 		$data['row']	= $this->model->View('tb_status_karyawan', 'id_status');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_status_karyawan', 'id_status', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/status_karyawan', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function tingkat_pendidikan($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; // data header
-		$data['file'] = 'TINGKAT PENDIDIKAN'; // data header
-		$data['action'] = $Aksi; // data header
+		$dataHeader['menu'] = 'Manajemen HRD'; // data header
+		$dataHeader['file'] = 'TINGKAT PENDIDIKAN'; // data header
+		$dataHeader['action'] = $Aksi; // data header
 
 		$data['row']	= $this->model->View('tb_pendidikan', 'id_pendidikan');
 		if ($Aksi == 'edit') {
@@ -276,35 +276,35 @@ class Master extends CI_Controller
 		$data['notif_absensi']	= $this->model->notifAbsensi();
 		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/tingkat_pendidikan', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function golongan($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; // data header
-		$data['file'] = 'GOLONGAN'; // data header
-		$data['action'] = $Aksi; // data header
+		$dataHeader['menu'] = 'Manajemen HRD'; // data header
+		$dataHeader['file'] = 'GOLONGAN'; // data header
+		$dataHeader['action'] = $Aksi; // data header
 
 		$data['row']	= $this->model->View('tb_golongan', 'id_golongan');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_golongan', 'id_golongan', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/golongan', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function supervisor($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen PEGAWAI'; // data header
-		$data['file'] = 'SUPERVISOR'; // data header
-		$data['action'] = $Aksi; // data header
+		$dataHeader['menu'] = 'Manajemen PEGAWAI'; // data header
+		$dataHeader['file'] = 'SUPERVISOR'; // data header
+		$dataHeader['action'] = $Aksi; // data header
 
 		$data['row']	= $this->model->ViewASC('tb_spv', 'nama');
 		$data['outlet']	= $this->model->View('tb_outlet', 'id_outlet');
@@ -313,19 +313,19 @@ class Master extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('tb_spv', 'id_spv', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/supervisor', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function outlet($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; // data header
-		$data['file'] = 'OUTLET'; // data header
-		$data['action'] = $Aksi; // data header
+		$dataHeader['menu'] = 'Manajemen HRD'; // data header
+		$dataHeader['file'] = 'OUTLET'; // data header
+		$dataHeader['action'] = $Aksi; // data header
 
 		$data['row']	= $this->relasi->GetDataOutlet();
 		$data['area']	= $this->model->View('tb_area_kerja', 'id_area');
@@ -334,29 +334,29 @@ class Master extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('tb_outlet', 'id_outlet', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/outlet', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function tim_khusus($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen HRD'; // data header
-		$data['file'] = 'TIM KHUSUS'; // data header
-		$data['action'] = $Aksi; // data header
+		$dataHeader['menu'] = 'Manajemen HRD'; // data header
+		$dataHeader['file'] = 'TIM KHUSUS'; // data header
+		$dataHeader['action'] = $Aksi; // data header
 		$data['row']	= $this->relasi->GetDataTimKhusus();
 		$data['tim']	= $this->model->View('tb_kategori_tim_khusus', 'id_kategori_tim_khusus');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_tim_khusus', 'id_tim_khusus', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/tim_khusus', $data);
 		$this->load->view('admin/container/footer');
 	}
