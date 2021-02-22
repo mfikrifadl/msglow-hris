@@ -193,8 +193,8 @@ class Hrd extends CI_Controller
 			$data['view'] 		= $this->relasi->GetDataPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pegawai', $data);
@@ -250,9 +250,9 @@ class Hrd extends CI_Controller
 
 	public function kontrak($Aksi = "", $Id = "")
 	{
-		$data['action'] 	= $Aksi;
-		$data['menu']   	= 'Manajemen Pegawai';
-		$data['file']   	= 'Form Kontrak Pegawai';
+		$dataHeader['action'] 	= $Aksi;
+		$dataHeader['menu']   	= 'Manajemen Pegawai';
+		$dataHeader['file']   	= 'Form Kontrak Pegawai';
 		$data['pegawai'] 	= $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['row']		= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai WHERE t1.is_deleted=0')->result_array();
 		$data['Nolast']		= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
@@ -272,10 +272,10 @@ class Hrd extends CI_Controller
 														tb_pegawai.id_pegawai = tb_jabatan_pegawai.id_pegawai')->result_array();
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kontrak', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -293,8 +293,8 @@ class Hrd extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataKetidakhadiranPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/ketidakhadiran_pegawai', $data);
@@ -314,8 +314,8 @@ class Hrd extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataKesehatanPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kesehatan_pegawai', $data);
@@ -336,8 +336,8 @@ class Hrd extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataPendidikanPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pendidikan_pegawai', $data);
@@ -357,8 +357,8 @@ class Hrd extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataPengalamanPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pengalaman_pegawai', $data);
@@ -379,8 +379,8 @@ class Hrd extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataKuisionerPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kuesioner_pegawai', $data);
@@ -401,8 +401,8 @@ class Hrd extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataPrestasiPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/prestasi_pegawai', $data);
@@ -425,8 +425,8 @@ class Hrd extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataMutasiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/mutasi_pegawai', $data);
@@ -449,8 +449,8 @@ class Hrd extends CI_Controller
 			$data['show_sub_uk']	= $this->relasi->ShowSubUnitKerja();
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
@@ -489,8 +489,8 @@ class Hrd extends CI_Controller
 			//$data['delete'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pengunduran_pegawai', $data);
@@ -528,9 +528,9 @@ class Hrd extends CI_Controller
 
 	public function teguran_lisan($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Teguran Lisan';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Teguran Lisan';
 		$data['row']	= $this->db->query('SELECT * FROM v_teguran_lisan where id_kategori_surat=2 AND is_delete=0')->result_array();
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
@@ -571,10 +571,10 @@ class Hrd extends CI_Controller
 		} else {
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/teguran_lisan', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -582,9 +582,9 @@ class Hrd extends CI_Controller
 	public function surat_teguran($Aksi = "", $Id = "")
 	{
 
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Teguran';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Teguran';
 		$data['row']	= $this->db->query('SELECT * FROM v_teguran_lisan where id_kategori_surat=1 AND is_delete=0')->result_array();
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
@@ -620,19 +620,19 @@ class Hrd extends CI_Controller
 		} else {
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_teguran', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function sp($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Peringatan';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Peringatan';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -653,19 +653,19 @@ class Hrd extends CI_Controller
 			$data['nj_select'] = $nama_jabatan;
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function sp2($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Peringatan II';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Peringatan II';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -686,19 +686,19 @@ class Hrd extends CI_Controller
 			$data['nj_select'] = $nama_jabatan;
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_peringatan_2', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function sp3($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Peringatan III';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Peringatan III';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -719,10 +719,10 @@ class Hrd extends CI_Controller
 			$data['nj_select'] = $nama_jabatan;
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_peringatan_3', $data);
 		$this->load->view('admin/container/footer');
 	}

@@ -72,8 +72,8 @@ class hak_akses_interview extends CI_Controller
         $data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
         $data['row']        = $this->model->ViewASC('v_form_pengajuan', 'nama_pengaju_form');
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        $dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
         $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);

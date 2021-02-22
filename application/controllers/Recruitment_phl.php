@@ -50,9 +50,9 @@ class Recruitment_phl extends CI_Controller
     public function administrasi($Aksi = "", $Id = "")
     {
 
-        $data['action'] 	= $Aksi;
-		$data['menu']   	= 'Recruitment PHL';
-		$data['file']   	= 'Administrasi';
+        $dataHeader['action'] 	= $Aksi;
+		$dataHeader['menu']   	= 'Recruitment PHL';
+		$dataHeader['file']   	= 'Administrasi';
 		$data['row']		= $this->model->ViewWhereNot('recruitment', 'recruitment', 'tidaklolos');
 		$data['tdklolos']	= $this->model->ViewWhere('recruitment', 'recruitment', 'tidaklolos');
         $data['data_recruitment_phl']	= $this->model->GetDataTeLolosAdmPHL();
@@ -69,10 +69,10 @@ class Recruitment_phl extends CI_Controller
 			$data['field']     = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
 		}
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        $dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/recruitment_phl/administrasi', $data);
         $this->load->view('admin/container/footer');
     }
@@ -113,9 +113,9 @@ class Recruitment_phl extends CI_Controller
 
     public function wawancara_hr($Aksi = "", $Id = "")
     {
-        $data['action'] = $Aksi;
-        $data['menu']   = 'Recruitment PHL';
-        $data['file']   = 'Wawancara HR';
+        $dataHeader['action'] = $Aksi;
+        $dataHeader['menu']   = 'Recruitment PHL';
+        $dataHeader['file']   = 'Wawancara HR';
         $data['controller_name']   = 'wawancara_hr';
         $data['nilai_test'] = 'nilai_wawancara_hr';
         $data['date'] = 'tgl_wawancara_hr';
@@ -124,18 +124,18 @@ class Recruitment_phl extends CI_Controller
             $data['field'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
         }
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        $dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-        $this->load->view('admin/container/header', $data);
+        $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/recruitment_phl/recruitment_form', $data);
         $this->load->view('admin/container/footer');
     }
     public function interview_user_1($Aksi = "", $Id = "")
     {
-        $data['action'] = $Aksi;
-        $data['menu']   = 'Recruitment PHL';
-        $data['file']   = 'Interview User 1';
+        $dataHeader['action'] = $Aksi;
+        $dataHeader['menu']   = 'Recruitment PHL';
+        $dataHeader['file']   = 'Interview User 1';
         $data['controller_name']   = 'interview_user_1';
         $data['nilai_test'] = 'nilai_interview_user_1';
         $data['date'] = 'tgl_interview_user_1';
@@ -144,10 +144,10 @@ class Recruitment_phl extends CI_Controller
             $data['field'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
         }
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        $dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-        $this->load->view('admin/container/header', $data);
+        $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/recruitment_phl/recruitment_form', $data);
         $this->load->view('admin/container/footer');
     }
@@ -155,9 +155,9 @@ class Recruitment_phl extends CI_Controller
     public function tes_kesehatan_phl($Aksi = "", $Id = "")
     {
         // echo"$Aksi - $Id";
-        $data['action'] = $Aksi;
-		$data['menu']   = 'Recruitment PHL';
-		$data['file']   = 'Tes Kesehatan';
+        $dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'Recruitment PHL';
+		$dataHeader['file']   = 'Tes Kesehatan';
 		$data['controller_name']   = 'tes_kesehatan_phl';
 		$data['hasil_tes_kesehatan'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
 		$data['date'] = 'tgl_tes_kesehatan_phl';
@@ -166,41 +166,41 @@ class Recruitment_phl extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
 		}
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        $dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/recruitment_phl/recruitment_form', $data);
 		$this->load->view('admin/container/footer');
     }
 
     public function peserta_diterima($Aksi = "", $Id = "")
     {
-        $data['action'] = $Aksi;
-        $data['menu']   = 'Recruitment PHL';
-        $data['file']   = 'Peserta Diterima';
+        $dataHeader['action'] = $Aksi;
+        $dataHeader['menu']   = 'Recruitment PHL';
+        $dataHeader['file']   = 'Peserta Diterima';
         $data['row'] = $this->db->query("SELECT *, sum(nilai_wawancara_hr + nilai_interview_user_1 ) AS total_nilai FROM recruitment_phl WHERE `status` = 'lolos' OR `status` = 'Menjadi Pegawai'  OR `status` = 'validasi' GROUP BY `id_recruitment_phl` ORDER BY kode_wawancara DESC ")->result_array();
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        $dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-        $this->load->view('admin/container/header', $data);
+        $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/recruitment_phl/peserta_diterima', $data);
         $this->load->view('admin/container/footer');
     }
 
     public function monitoring_status($Aksi = "", $Id = "")
     {
-        $data['action'] = $Aksi;
-        $data['menu']   = 'Recruitment PHL';
-        $data['file']   = 'Monitoring Status';
+        $dataHeader['action'] = $Aksi;
+        $dataHeader['menu']   = 'Recruitment PHL';
+        $dataHeader['file']   = 'Monitoring Status';
         $data['row']    = $this->model->View('recruitment_phl', 'kode_wawancara');
         $data['nilai'] = $this->db->query("SELECT *, sum(nilai_wawancara_hr+ nilai_interview_user_1 ) AS total_nilai FROM recruitment_phl GROUP BY `id_recruitment_phl` ORDER BY kode_wawancara DESC ")->result_array();
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        $dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-        $this->load->view('admin/container/header', $data);
+        $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/recruitment_phl/monitoring_status', $data);
         $this->load->view('admin/container/footer');
     }
