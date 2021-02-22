@@ -47,6 +47,26 @@ class Recruitment_phl extends CI_Controller
 		return $response;
 	}
 
+    public function view_wawancara_phl($Id = "")
+	{
+		$Aksi = "";
+		$dataHeader['action'] 	= $Aksi;
+		$dataHeader['menu']   	= 'Recruitment';
+		$dataHeader['file']   	= 'View Wawancara';
+		$data['wawancara']	= $this->model->ViewWhere('recruitment_phl', 'kode_wawancara', $Id);
+
+		$content 			= $this->cURL_API($Id,'GET','');
+		$data2 				= json_decode($content, true);
+		$data['registrant']	= $data2['data'];
+
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
+		$this->load->view('admin/container/header', $dataHeader);
+		$this->load->view('admin/recruitment_phl/view_wawancara_phl', $data);
+		$this->load->view('admin/container/footer');
+	}
+
     public function administrasi($Aksi = "", $Id = "")
     {
 
