@@ -1,4 +1,4 @@
-  <?php
+<?php
   if ($action == "edit") {
     foreach ($field as $column) {
       $cIdJabatan    =  $column['id_jabatan_pegawai'];
@@ -130,12 +130,17 @@
                                 <select class="comboBox form-control" name="cIdPegawai">
                                   <option></option>
                                   <?php foreach ($pegawai as $key => $vaPegawai) {
-                                    if ($vaPegawai['id_status_mengundurkan_diri'] == null || $vaPegawai['id_status_mengundurkan_diri'] < 6) {
-                                  ?>
-                                      <option value="<?= $vaPegawai['id_pegawai'] ?>" <?php if ($vaPegawai['id_pegawai'] == $cIdPegawai) echo "selected"; ?>>
-                                        <?= $vaPegawai['nik'] ?> : <?= $vaPegawai['nama'] ?>
-                                      </option>
-                                  <?php
+                                    if ($vaPegawai['id_status_mengundurkan_diri'] == null || $vaPegawai['id_status_mengundurkan_diri'] < 6 || $vaPegawai['id_status_mengundurkan_diri'] > 11) {
+                                      if(empty($vaPegawai['nama_jabatan'])){
+
+                                      }else{
+                                        ?>
+                                        <option value="<?= $vaPegawai['id_pegawai'] ?>" <?php if ($vaPegawai['id_pegawai'] == $cIdPegawai) echo "selected"; ?>>
+                                          <?= $vaPegawai['nik'] ?> : <?= $vaPegawai['nama'] ?>
+                                        </option>
+                                    <?php
+                                      }
+                                 
                                     } else {
                                     }
                                   }

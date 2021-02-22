@@ -107,6 +107,15 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function NotifikasiPesertaDiterimaStaff()
+	{
+		$Query = $this->db->query("	SELECT COUNT(IF(status = 'lolos', status, NULL ) ) AS jumlah_lolos,
+											COUNT(IF(status = 'validasi', status, NULL ) ) AS jumlah_validasi
+		
+									FROM recruitment");
+		return $Query->result_array();
+	}
+
 	public function ViewNotifAbsensiSelected($WhereValue1)
 	{
 		$Query = $this->db->query("	SELECT
