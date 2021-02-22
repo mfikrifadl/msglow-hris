@@ -216,8 +216,8 @@ class Master extends CI_Controller
 			$data['field'] = $this->model->ViewWhere('tb_sub_unit_kerja', 'id_sub_unit_kerja', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/master/sub_unit_kerja', $data);
