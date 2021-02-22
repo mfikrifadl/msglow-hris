@@ -69,7 +69,7 @@ $tgl_hari_ini = date("d-m-Y");
 
                                                             <hr>
                                                             <div class="col-sm-12 col-md-12">
-                                                                <table class="table table-striped table-bordered text-center" id='DataTable_absensi'>
+                                                                <table class="table table-striped table-bordered text-center" id='DataTable'>
                                                                     <thead>
                                                                         <tr>
                                                                             <td>No </td>
@@ -94,7 +94,7 @@ $tgl_hari_ini = date("d-m-Y");
                                                                             <?php
                                                                             } elseif ($this->session->userdata('level') == 1) {
                                                                             ?>
-                                                                                <td>Keterangan_Permintaan_Update </td>
+                                                                                <td>Ket_Permintaan_Update </td>
                                                                             <?php
                                                                             } else {
                                                                             } ?>
@@ -373,167 +373,7 @@ $tgl_hari_ini = date("d-m-Y");
 </div>
 
 <script type="text/javascript">
-    function showDataAbsen() {
-        $('.loding').show();
-        $.ajax({
-            type: "GET",
-            url: "<?= site_url('transaksi/tb_absensi') ?>",
-            cache: false,
-            beforeSend: function() {
-                $('#show_absen').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
-            },
-            success: function(msg) {
-                $("#show_absen").html(msg);
-            }
-        });
-    }
-
-    function GetDataAbsensi() {
-        var dTgl = $('#dTgl').val();
-        var dTgl_end = $('#dTgl_end').val();
-        // alert(dTgl);
-        if (dTgl == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else if (dTgl_end == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else {
-            $.ajax({
-                type: "POST",
-                data: "dTgl=" + dTgl +
-                    "&dTgl_end=" + dTgl_end,
-                url: "<?= site_url('cek_absen/get_data_absensi') ?>",
-                cache: false,
-                beforeSend: function() {
-                    $('#data_absensi').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
-                },
-                success: function(msg) {
-                    $("#data_absensi").html(msg);
-                }
-            });
-        }
-    }
-
-    function getDataAbsenImport() {
-        var dTgl_cetak = $('#dTgl_cetak').val();
-        var dTgl_cetak_end = $('#dTgl_cetak_end').val();
-        // alert(dTgl);
-        if (dTgl_cetak == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else if (dTgl_cetak_end == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else {
-            $.ajax({
-                type: "POST",
-                data: "dTgl_cetak=" + dTgl_cetak +
-                    "&dTgl_cetak_end=" + dTgl_cetak_end,
-                url: "<?= site_url('cek_absen/get_data_absensi_import') ?>",
-                cache: false,
-                beforeSend: function() {
-                    $('#data_absensi_import').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
-                },
-                success: function(msg) {
-                    $("#data_absensi_import").html(msg);
-                }
-            });
-        }
-    }
-
-    function run() {
-
-        var dTgl = $('#dTgl').val();
-        var dTgl_end = $('#dTgl_end').val();
-        // alert(dTglAbsensi);
-        if (dTgl == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else if (dTgl_end == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else {
-            $.ajax({
-                type: "POST",
-                data: "dTgl=" + dTgl +
-                    "&dTgl_end=" + dTgl_end,
-                url: "<?= site_url('cek_absen/import') ?>",
-                cache: false,
-                beforeSend: function() {
-                    $('#loading').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
-                },
-                success: function(msg) {
-                    new PNotify({
-                        // title: 'Success!',
-                        text: 'Berhasil Compile Data Absensi.',
-                        type: 'success'
-                    });
-                    $('#dTgl').val("");
-                    $('#dTgl').focus()
-                    $('#loading').html("")
-
-                    //window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
-                }
-            });
-        }
-    }
-
-    function update_ket(id) {
-
-        var ket = $('#ket_' + id).val();
-        var idAbs = $('#id_' + id).val();
-        var values = {
-            'id': id,
-            'ket': ket
-        }
-        //alert(id+ket);  
-
-        if (ket == "") {
-            new PNotify({
-                text: 'Pilih Keterangan terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else {
-            $.ajax({
-                url: "<?= base_url() . 'cek_absen_act/update_absen_keterangan' ?>",
-                type: "POST",
-                data: values,
-                success: function(data) {
-                    new PNotify({
-                        // title: 'Success!',
-                        text: 'Berhasil Update Keterangan Data Absensi.',
-                        type: 'success'
-                    });
-                    //option pesan berhasil send data
-                    // alert (tanggal);
-                },
-                error: function(data, status, error) {
-                    alert(data.responseText);
-                }
-            });
-        }
-    }
-
+    
     function approvement(id) {
 
         var keterangan = $('#ket_abs_temp_' + id).val();
@@ -588,72 +428,5 @@ $tgl_hari_ini = date("d-m-Y");
                 alert(data.responseText);
             }
         });
-    }
-
-    function updateDataAbsen(id) {
-
-        var ket_lain = $('#ket_lain_' + id).val();
-        // alert(id+ket_lain);
-
-        var values = {
-            'id': id,
-            'ket_lain': ket_lain
-        }
-
-        $.ajax({
-            url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
-            type: "POST",
-            data: values,
-            success: function(data) {
-                //option pesan berhasil send data
-                // alert (tanggal);
-            },
-            error: function(data, status, error) {
-                alert(data.responseText);
-            }
-        });
-    }
-
-    function cetak_pdf() {
-
-        var dTgl_cetak = $('#dTgl_cetak').val();
-        var dTgl_cetak_end = $('#dTgl_cetak_end').val();
-        //alert(dTgl_cetak + dTgl_cetak_end);
-        if (dTgl_cetak == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else if (dTgl_cetak_end == "") {
-            new PNotify({
-                text: 'Pilih Tanggal Absensi terlebih dahulu!',
-                animation: 'slide',
-                type: 'warning'
-            });
-        } else {
-            $.ajax({
-                type: "POST",
-                data: "dTgl_cetak=" + dTgl_cetak +
-                    "&dTgl_cetak_end=" + dTgl_cetak_end,
-                url: "<?= site_url('cek_absen_act/cetak_absensi') ?>",
-                cache: false,
-                beforeSend: function() {
-                    $('#loading').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
-                },
-                success: function(msg) {
-                    new PNotify({
-                        // title: 'Success!',
-                        text: 'Berhasil Compile Data Absensi.',
-                        type: 'success'
-                    });
-                    $('#dTgl_cetak').val("");
-                    $('#dTgl_cetak').focus()
-                    $('#loading').html("")
-
-                    //window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
-                }
-            });
-        }
     }
 </script>
