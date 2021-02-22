@@ -119,7 +119,13 @@ class Recruitment_phl extends CI_Controller
         $data['controller_name']   = 'wawancara_hr';
         $data['nilai_test'] = 'nilai_wawancara_hr';
         $data['date'] = 'tgl_wawancara_hr';
-        $data['row']    = $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos'])->result_array();
+
+        if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+			$data['row']    = $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos'])->result_array();
+		} else {
+			$data['row']	= $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
+		}
+        
         if ($Aksi == 'edit') {
             $data['field'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
         }
@@ -139,7 +145,13 @@ class Recruitment_phl extends CI_Controller
         $data['controller_name']   = 'interview_user_1';
         $data['nilai_test'] = 'nilai_interview_user_1';
         $data['date'] = 'tgl_interview_user_1';
-        $data['row']    = $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'wawancara_hr' => 'lolos'])->result_array();
+
+        if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 4) {
+			$data['row']    = $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'wawancara_hr' => 'lolos'])->result_array();
+		} else {
+			$data['row']	= $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'wawancara_hr' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
+		}
+        
         if ($Aksi == 'edit') {
             $data['field'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
         }
@@ -161,7 +173,13 @@ class Recruitment_phl extends CI_Controller
 		$data['controller_name']   = 'tes_kesehatan_phl';
 		$data['hasil_tes_kesehatan'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
 		$data['date'] = 'tgl_tes_kesehatan_phl';
-		$data['row']	= $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'wawancara_hr' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
+
+        if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+			$data['row']	= $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'wawancara_hr' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
+		} else {
+			$data['row']	= $this->db->get_where('recruitment_phl', ['administrasi' => 'lolos', 'wawancara_hr' => 'lolos', 'interview_user_1' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
+		}
+		
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('recruitment_phl', 'id_recruitment_phl', $Id);
 		}
