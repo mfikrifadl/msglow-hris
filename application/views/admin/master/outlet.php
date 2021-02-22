@@ -83,7 +83,7 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
-                      <label>Nama Outlet</label>
+                      <label>Nama Office</label>
                       <Input type="text" name="cNama" class="form-control" placeholder="Nama Outlet" value="<?= $cNama ?>">
                     </div>
                   </div>
