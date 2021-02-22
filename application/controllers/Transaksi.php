@@ -230,7 +230,7 @@ class Transaksi extends CI_Controller
 		$data['action'] = $Aksi;
 		$query 				= $this->db->query('select t1.nama, t1.nik, t3.nama_jabatan from tb_pegawai t1 JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan');
 		// $data['pegawai']	= $query->result_array();
-		$data['pegawai']	= $this->model->ViewASC('tb_pegawai', 'nama');
+		$data['pegawai']	= $this->model->ViewASC('v_data_pegawai_jabatan', 'nama');
 		$data['sub_unit']	= $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
 		$data['jabatan']	= $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
 		$data['row']		= $this->relasi->GetDataJabatanPegawai();
