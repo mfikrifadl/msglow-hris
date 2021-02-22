@@ -32,21 +32,26 @@
                 <td>NIK</td>
                 <td>Nama</td>
                 <td>Tgl Masuk Kerja</td>
+                <td>Kontak Akan Habis</td>
                 <td>Telp</td>
               </tr>
             </thead>
             <tbody>
               <?php $no = 0;
-              foreach ($kontrak as $key => $vaArea) { ?>
-                <tr>
-                  <td><?= ++$no; ?></td>
-                  <td><?= $vaArea['nik'] ?></td>
-                  <td><?= $vaArea['nama'] ?></td>
-                  <td><?= $vaArea['tanggal_masuk_kerja'] ?></td>
-                  <?php $age = date_diff(date_create($vaArea['tanggal_masuk_kerja']), date_create('now'))->y; ?>
-                  <td><?= $vaArea['handphone'] ?></td>
-                </tr>
-              <?php } ?>
+              foreach ($kontrak as $key => $vaArea) {
+                if ($vaArea['alert_kontrak_selesai'] > 1 && $vaArea['alert_kontrak_selesai'] < 31) {
+              ?>
+                  <tr>
+                    <td><?= ++$no; ?></td>
+                    <td><?= $vaArea['nik'] ?></td>
+                    <td><?= $vaArea['nama'] ?></td>
+                    <td><?= $vaArea['tanggal_masuk_kerja'] ?></td>
+                    <td>- <?= $vaArea['alert_kontrak_selesai'] ?> Hari</td>
+                    <td><?= $vaArea['handphone'] ?></td>
+                  </tr>
+              <?php
+                }
+              } ?>
             </tbody>
           </table>
         </div>
@@ -107,7 +112,11 @@
                     </h4>
                   </div>
                   <span class="kt-widget24__stats kt-font-brand">
-                    190
+                  <?php
+                    foreach($tot_pegawai as $rowPegawaiPhl){
+                      echo $rowPegawaiPhl['jml_pegawai'];
+                    }
+                    ?>
                   </span>
                 </div>
               </div>
@@ -125,7 +134,11 @@
                     </h4>
                   </div>
                   <span class="kt-widget24__stats kt-font-warning">
-                    130
+                    <?php
+                    foreach($jml_pegawai_kontrak as $rowPegawaiKontrak){
+                      echo $rowPegawaiKontrak['jml_pegawai_kontrak'];
+                    }
+                    ?>
                   </span>
                 </div>
               </div>
@@ -161,7 +174,11 @@
                     </h4>
                   </div>
                   <span class="kt-widget24__stats kt-font-default">
-                    20
+                  <?php
+                    foreach($jml_pegawai_phl as $rowPegawaiPhl){
+                      echo $rowPegawaiPhl['jml_pegawai_phl'];
+                    }
+                    ?>
                   </span>
                 </div>
               </div>
@@ -1189,8 +1206,7 @@
         <!-- end:: Content -->
       </div>
 
-    <?php } else if ($this->session->userdata('level') == 4){ 
-
-    } else { ?>
+    <?php } else if ($this->session->userdata('level') == 4) {
+  } else { ?>
 
     <?php } ?>

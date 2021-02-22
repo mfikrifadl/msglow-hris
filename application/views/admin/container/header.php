@@ -242,7 +242,7 @@ if ($this->session->userdata('id') == '') {
           <!-- begin:: Title -->
           <h3 class="kt-header__title kt-grid__item pull-right">
             <span class="hidden-xs text-secondary">Welcome
-              <span class="hidden-xs text-light"><?= $this->session->userdata('nama') ?><?= $this->session->userdata('level') ?></span>
+              <span class="hidden-xs text-light"><?= $this->session->userdata('nama') ?></span>
             </span>
 
           </h3>

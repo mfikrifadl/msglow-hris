@@ -97,6 +97,9 @@ class Gaji extends CI_Controller
 		// $this->load->view('admin/gaji/absensi', $data);
 		// $this->load->view('admin/container/footer');
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header');
 		$this->load->view('admin/gaji/absensi');
 		$this->load->view('admin/container/footer');
@@ -111,10 +114,30 @@ class Gaji extends CI_Controller
 		$data['absensi'] = $this->model->View('attlog');
 		$data['row']	= $this->relasi->GetDataAbsensi_tabel_new();		
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/gaji/absensi', $data);
 		$this->load->view('admin/container/footer');
 	}
+
+	public function data_notif_absen($id = "")
+	{
+		$dataHeader['menu'] = 'Manajemen Absensi';
+		$dataHeader['file'] = 'Absensi Pegawai Selected';
+
+		//$data['row'] = $this->model->ViewWhere('v_log_data_absen','id',$id);
+		$data['row'] = $this->model->ViewNotifAbsensiSelected($id);		
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
+		$this->load->view('admin/container/header', $dataHeader);
+		$this->load->view('admin/gaji/tb_notif_absensi', $data);
+		$this->load->view('admin/container/footer');
+	}
+
 
 	// public function tb_absensi()
 	// {
@@ -134,6 +157,10 @@ class Gaji extends CI_Controller
 		// echo $this->session->userdata('user');
 		// echo $this->session->userdata('level');
 		// echo $this->session->userdata('id');
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		// $this->load->view('admin/gaji/absensi', $data);
 		$this->load->view('admin/gaji/request_update_absen', $data);
@@ -151,6 +178,9 @@ class Gaji extends CI_Controller
 		$data['id_outlet']	= $id_outlet;
 		$data['id_area']	= $id_area;
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/gaji/detail_gaji', $data);
 		$this->load->view('admin/container/footer');
@@ -164,6 +194,10 @@ class Gaji extends CI_Controller
 		$dataHeader['file'] = 'Cetak Slip Gaji';
 		$dataHeader['action'] = $Aksi;
 		$data['spv']	= $this->model->ViewAsc('tb_spv', 'id_spv');
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/gaji/slip_gaji', $data);
 		$this->load->view('admin/container/footer');
@@ -175,6 +209,10 @@ class Gaji extends CI_Controller
 		$dataHeader['file'] = 'Cetak Rekap Gaji';
 		$dataHeader['action'] = $Aksi;
 		$data['spv']	= $this->model->ViewAsc('tb_spv', 'id_spv');
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/gaji/rekap_gaji', $data);
 		$this->load->view('admin/container/footer');

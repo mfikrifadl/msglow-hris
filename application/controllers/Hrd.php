@@ -193,6 +193,9 @@ class Hrd extends CI_Controller
 			$data['view'] 		= $this->relasi->GetDataPegawaiSearch($Id);
 		}
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -212,6 +215,8 @@ class Hrd extends CI_Controller
 		$data['mutasi']		= $this->relasi->GetDataMutasiPegawaiSearch($Id);
 		$data['tugas']		= $this->relasi->GetDataTugasPegawaiSearch($Id);
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/view.pegawai.php', $data);
@@ -234,6 +239,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] = $this->relasi->GetDataJabatanSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/jabatan_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -262,6 +271,10 @@ class Hrd extends CI_Controller
 														tb_ref_jabatan.id_ref_jabatan = tb_jabatan_pegawai.id_ref_jabatan AND
 														tb_pegawai.id_pegawai = tb_jabatan_pegawai.id_pegawai')->result_array();
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/kontrak', $data);
 		$this->load->view('admin/container/footer');
@@ -279,6 +292,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataKetidakhadiranPegawaiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/ketidakhadiran_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -296,6 +313,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataKesehatanPegawaiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kesehatan_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -314,6 +335,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPendidikanPegawaiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pendidikan_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -331,6 +356,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPengalamanPegawaiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pengalaman_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -349,6 +378,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataKuisionerPegawaiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kuesioner_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -367,6 +400,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPrestasiPegawaiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/prestasi_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -387,6 +424,10 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataMutasiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/mutasi_pegawai', $data);
 		$this->load->view('admin/container/footer');
@@ -407,6 +448,9 @@ class Hrd extends CI_Controller
 			$data['subUnitKerja']	= $this->model->ViewWhere('tb_sub_unit_kerja', 'id_Unit_kerja', $Id);
 			$data['show_sub_uk']	= $this->relasi->ShowSubUnitKerja();
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
@@ -444,6 +488,9 @@ class Hrd extends CI_Controller
 		} elseif ($Aksi == 'delete') {
 			//$data['delete'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pengunduran_pegawai', $data);
@@ -524,6 +571,9 @@ class Hrd extends CI_Controller
 		} else {
 		}
 
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/teguran_lisan', $data);
 		$this->load->view('admin/container/footer');
@@ -569,6 +619,10 @@ class Hrd extends CI_Controller
 			$data['nj_select'] = $nama_jabatan;
 		} else {
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_teguran', $data);
 		$this->load->view('admin/container/footer');
@@ -598,6 +652,10 @@ class Hrd extends CI_Controller
 			$data['nik_select'] = $nik;
 			$data['nj_select'] = $nama_jabatan;
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
 		$this->load->view('admin/container/footer');
@@ -627,6 +685,10 @@ class Hrd extends CI_Controller
 			$data['nik_select'] = $nik;
 			$data['nj_select'] = $nama_jabatan;
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_peringatan_2', $data);
 		$this->load->view('admin/container/footer');
@@ -656,6 +718,10 @@ class Hrd extends CI_Controller
 			$data['nik_select'] = $nik;
 			$data['nj_select'] = $nama_jabatan;
 		}
+
+		$data['notif_absensi']	= $this->model->notifAbsensi();
+		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+
 		$this->load->view('admin/container/header', $data);
 		$this->load->view('admin/transaksi/surat_peringatan_3', $data);
 		$this->load->view('admin/container/footer');

@@ -84,6 +84,12 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function notifAbsensi()
+	{
+		$Query = $this->db->query("SELECT  *, COUNT(id) AS jml_update_temp FROM temp_log_absen");
+		return $Query->result_array();
+	}
+
 	public function ViewBetweenAbsensi($WhereValue1, $WhereValue2)
 	{
 		$Query = $this->db->query("	SELECT B.id, E.id_temp, A.id_pegawai, A.nik, A.nama, D.nama_jabatan, B.tot_jam_kerja, B.tot_jam_lembur, B.keterangan, E.keterangan_temp, B.keterlambatan, B.ket_lain, E.ket_lain_temp, B.attlog, B.tanggal, MIN( B.waktu ) AS jam_datang, MAX( B.waktu ) AS jam_pulang, B.waktu
@@ -97,9 +103,45 @@ class Model extends CI_Model
 									WHERE
 										IFNULL( A.id_status_mengundurkan_diri, 0 ) < 6 OR IFNULL( A.id_status_mengundurkan_diri, 0 ) > 11 
 									GROUP BY
-										A.nik");
+										A.nik, B.tanggal");
 		return $Query->result_array();
 	}
+
+	public function ViewNotifAbsensiSelected($WhereValue1)
+	{
+		$Query = $this->db->query("	SELECT
+									B.id,
+									E.id_temp,
+									A.id_pegawai,
+									A.nik,
+									A.nama,
+									D.nama_jabatan,
+									B.tot_jam_kerja,
+									B.tot_jam_lembur,
+									B.keterangan,
+									E.keterangan_temp,
+									B.keterlambatan,
+									B.ket_lain,
+									E.ket_lain_temp,
+									B.attlog,
+									B.tanggal,
+									MIN( B.waktu ) AS jam_datang,
+									MAX( B.waktu ) AS jam_pulang,
+									B.waktu 
+								FROM
+									tb_pegawai A
+									LEFT JOIN log_absen B ON B.pin = A.nik
+									LEFT JOIN temp_log_absen E ON E.id_temp = B.id
+									LEFT JOIN tb_jabatan_pegawai C ON A.id_kerja = C.id_ref_jabatan
+									LEFT JOIN tb_ref_jabatan D ON D.id_ref_jabatan = C.id_ref_jabatan 
+								WHERE
+									B.id = '".$WhereValue1."'
+								GROUP BY
+									A.nik,
+									B.tanggal");
+		return $Query->result_array();
+	}
+
 	public function CekDataPelamar($Table, $Where, $WhereValue)
 	{
 
