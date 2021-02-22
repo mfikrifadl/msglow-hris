@@ -308,7 +308,7 @@ class Recruitment extends CI_Controller
 		}
 
 		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/recruitment/recruitment_form', $data);
