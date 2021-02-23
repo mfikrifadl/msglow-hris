@@ -246,10 +246,22 @@ class Surat_act extends CI_Controller
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
             );
 
+            $seralizedArrayInsert = serialize($dataInsert);
+            $vaLogInsert = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayInsert,
+                'nama' => $this->session->userdata('nama')
+            );            
+
             if ($Type == 'Insert') {
                 $this->model->Insert('tb_surat_peringatan', $dataInsert);
+                $this->model->Insert('log', $vaLogInsert);
             } elseif ($Type == 'Update') {
                 $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
+                $this->model->Insert('log', $vaLogInsert);
             }
 
             redirect(site_url('hrd/sp'));
@@ -273,10 +285,22 @@ class Surat_act extends CI_Controller
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
             );
 
+            $seralizedArrayInsert = serialize($dataInsert);
+            $vaLogInsert = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayInsert,
+                'nama' => $this->session->userdata('nama')
+            );
+
             if ($Type == 'Insert') {
                 $this->model->Insert('tb_surat_peringatan', $dataInsert);
+                $this->model->Insert('log', $vaLogInsert);
             } elseif ($Type == 'Update') {
                 $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
+                $this->model->Insert('log', $vaLogInsert);
             }
 
             redirect(site_url('hrd/sp2'));
@@ -300,10 +324,22 @@ class Surat_act extends CI_Controller
                 'berlaku_sampai'    =>  $this->input->post('cBerlaku_sampai'),
             );
 
+            $seralizedArrayInsert = serialize($dataInsert);
+            $vaLogInsert = array(
+                'tgl' => $this->Date2String($this->DateStamp()),
+                'waktu' => $this->TimeStamp(),
+                'nama_table' => 'tb_surat_peringatan',
+                'action' => $Type,
+                'query' => $seralizedArrayInsert,
+                'nama' => $this->session->userdata('nama')
+            );
+
             if ($Type == 'Insert') {
                 $this->model->Insert('tb_surat_peringatan', $dataInsert);
+                $this->model->Insert('log', $vaLogInsert);
             } elseif ($Type == 'Update') {
                 $this->model->update('tb_surat_peringatan', 'id', $Id, $dataInsert);
+                $this->model->Insert('log', $vaLogInsert);
             }
 
             redirect(site_url('hrd/sp3'));
@@ -312,7 +348,7 @@ class Surat_act extends CI_Controller
 
     public function cetak_kontrak($id = '')
     {
-        $data['data'] = $this->model->ViewWhere('v_tb_pegawai','id_pegawai', $id);
+        $data['data'] = $this->model->ViewWhere('v_tb_pegawai', 'id_pegawai', $id);
         $mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
         $html = $this->load->view('admin/transaksi/cetak_kontrak', $data, true);
         $mpdf->WriteHTML($html);

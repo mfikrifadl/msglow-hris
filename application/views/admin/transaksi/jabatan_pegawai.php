@@ -1,16 +1,15 @@
 <?php
 if ($action == "edit") {
   foreach ($field as $column) {
-    $cIdJabatan    =  $column['id_jabatan_pegawai'];
     $cIdPegawai    =  $column['id_pegawai'];
+    $cNama    =  $column['nama'];
     $cIdSubUnit    =  $column['id_sub_unit_kerja'];
     $cIdRefJabatan =  $column['id_ref_jabatan'];
     $cIconButton   =   "refresh";
     $cValueButton  =   "Update Data";
   }
-  $cAction = "Update/" . $cIdJabatan . "";
+  $cAction = "Update/" . $cIdPegawai . "";
 } else {
-  $cIdJabatan    =  "";
   $cIdPegawai    =  "";
   $cIdSubUnit    =  "";
   $cIdRefJabatan =  "";
@@ -127,23 +126,33 @@ if ($action == "edit") {
                           <div class="col-sm-12">
                             <div class="form-group">
                               <label>Pilih Pegawai</label>
-                              <select class="comboBox form-control" name="cIdPegawai">
-                                <option></option>
-                                <?php foreach ($pegawai as $key => $vaPegawai) {
-                                  if (empty($vaPegawai['id_status_mengundurkan_diri']) || $vaPegawai['id_status_mengundurkan_diri'] < 6 || $vaPegawai['id_status_mengundurkan_diri'] > 11) {
-                                    if (empty($vaPegawai['nama_jabatan'])) {
+                              <?php
+                              if ($action == "edit") {
                                 ?>
-                                      <option value="<?= $vaPegawai['id_pegawai'] ?>" <?php if ($vaPegawai['id_pegawai'] == $cIdPegawai) echo "selected"; ?>>
-                                        <?= $vaPegawai['nik'] ?> : <?= $vaPegawai['nama'] ?>
-                                      </option>
+                                <input type="text" readonly="true" class="form-control" value="<?= $cNama ?>">
                                 <?php
+                              } else {
+                              ?>
+                                <select class="comboBox form-control" name="cIdPegawai">
+                                  <option></option>
+                                  <?php foreach ($pegawai as $key => $vaPegawai) {
+                                    if (empty($vaPegawai['id_status_mengundurkan_diri']) || $vaPegawai['id_status_mengundurkan_diri'] < 6 || $vaPegawai['id_status_mengundurkan_diri'] > 11) {
+                                      if (empty($vaPegawai['nama_jabatan'])) {
+                                  ?>
+                                        <option value="<?= $vaPegawai['id_pegawai'] ?>" <?php if ($vaPegawai['id_pegawai'] == $cIdPegawai) echo "selected"; ?>>
+                                          <?= $vaPegawai['nik'] ?> : <?= $vaPegawai['nama'] ?>
+                                        </option>
+                                  <?php
+                                      } else {
+                                      }
                                     } else {
                                     }
-                                  } else {
                                   }
-                                }
-                                ?>
-                              </select>
+                                  ?>
+                                </select>
+                              <?php
+                              }
+                              ?>
                             </div>
                           </div>
                           <div class="col-sm-12">
@@ -270,14 +279,14 @@ if ($action == "edit") {
                         <i class="fa fa-eye text-success"></i>
                       </a>
                       |
-                      <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/jabatan_pegawai/edit/' . $vaJabatanPegawai['id_jabatan_pegawai'] . '') ?>">
+                      <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/jabatan_pegawai/edit/' . $vaJabatanPegawai['id_pegawai'] . '') ?>">
                         <i class="fa fa-edit text-info"></i>
                       </a>
-                      |
-                      <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                      
+                      <!-- <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('transaksi_act/jabatan_pegawai/Delete/' . $vaJabatanPegawai['id_jabatan_pegawai'] . '') ?>'}">
                         <i class="fa fa-trash text-danger"></i>
-                      </a>
+                      </a> -->
                     </td>
                   </tr>
                 <?php } ?>

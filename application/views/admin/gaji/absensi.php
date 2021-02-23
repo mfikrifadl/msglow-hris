@@ -391,12 +391,16 @@ if ($action == "edit") {
 
     var keterangan = $('#ket_abs_temp_' + id).val();
     var ket_lain = $('#ket_abs_lain_temp_' + id).val();
-    //alert(id+keterangan+ket_lain);
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var dTgl_cetak_end = $('#dTgl_cetak_end').val();
+    //alert(id+keterangan+ket_lain+dTgl_cetak+dTgl_cetak_end);
 
     var values = {
       'id': id,
       'ket_lain': ket_lain,
-      'keterangan': keterangan
+      'keterangan': keterangan,
+      'dTgl_cetak':dTgl_cetak,
+      'dTgl_cetak_end':dTgl_cetak_end
     }
 
     $.ajax({

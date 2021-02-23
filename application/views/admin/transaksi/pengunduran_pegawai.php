@@ -224,12 +224,12 @@ if ($action == "edit") {
                   <tr>
                     <td>No</td>
                     <td>NIK</td>
-                    <td>Nama Pegawai</td>
-                    <td>Status Kepegawaian</td>
+                    <td>Nama Pegawai</td>                    
                     <td>Status Pegawai</td>
                     <td>Jabatan</td>
                     <td>Sub Unit Kerja</td>
                     <td>Masa Kerja</td>
+                    <td>Tanggal Masuk Kerja</td>
                     <td>Tanggal Resign</td>
                     <td>Status Resign</td>
                     <td>Keterangan</td>
@@ -245,11 +245,11 @@ if ($action == "edit") {
                       <td class="text-center"><?= ++$no; ?></td>
                       <td><?= $vaKetidakhadiran['nik'] ?></td>
                       <td><?= $vaKetidakhadiran['nama'] ?></td>
-                      <td><?= $vaKetidakhadiran['status_kepegawaian'] ?></td>
                       <td><?= $vaKetidakhadiran['status_karyawan'] ?></td>
                       <td><?= $vaKetidakhadiran['nama_jabatan'] ?></td>
                       <td><?= $vaKetidakhadiran['nama_sub_unit_kerja'] ?></td>
                       <td><?= $vaKetidakhadiran['masa_kerja'] ?></td>
+                      <td><?= $vaKetidakhadiran['tanggal_masuk_kerja'] ?></td>
                       <td><?= String2Date($vaKetidakhadiran['tanggal']) ?></td>
                       <?php
                       if ($vaKetidakhadiran['status'] == "0") {
