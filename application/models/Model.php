@@ -107,12 +107,17 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
-	public function NotifikasiPesertaDiterimaStaff()
+	public function DataNotifikasiPesertaDiterimaStaff($WhereValue)
 	{
-		$Query = $this->db->query("	SELECT COUNT(IF(status = 'lolos', status, NULL ) ) AS jumlah_lolos,
-											COUNT(IF(status = 'validasi', status, NULL ) ) AS jumlah_validasi
-		
-									FROM recruitment");
+		$Query = $this->db->query("	SELECT *, 
+									SUM(nilai_psiko_test + nilai_uji_kompetensi + nilai_interview_user_1 + nilai_interview_user_2 + nilai_interview_hrga) AS total_nilai 
+									FROM recruitment WHERE id_recruitment = " . $WhereValue . " ");
+		return $Query->result_array();
+	}
+
+	public function DataNotifikasiPesertaDiterimaPhl($WhereValue)
+	{
+		$Query = $this->db->query("	SELECT *, SUM(nilai_wawancara_hr + nilai_interview_user_1 ) AS total_nilai FROM recruitment_phl WHERE id_recruitment_phl = " . $WhereValue . " ");
 		return $Query->result_array();
 	}
 
@@ -144,7 +149,7 @@ class Model extends CI_Model
 									LEFT JOIN tb_jabatan_pegawai C ON A.id_kerja = C.id_ref_jabatan
 									LEFT JOIN tb_ref_jabatan D ON D.id_ref_jabatan = C.id_ref_jabatan 
 								WHERE
-									B.id = '".$WhereValue1."'
+									B.id = '" . $WhereValue1 . "'
 								GROUP BY
 									A.nik,
 									B.tanggal");
