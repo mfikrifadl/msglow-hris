@@ -425,7 +425,8 @@ class Transaksi_act extends CI_Controller
 
 		$t_masa_kontrak = date('Y-m-d', strtotime('+' . $masa_kontrak . ' month', strtotime($tgl_masuk_kerja))); //tambah tanggal sebanyak 6 bulan
 
-
+		$dataInsert = array();
+		$dataUpdate = array();
 		if ($Type == 'Insert') {
 			$dataInsert = array(
 				'tanggal_masuk_kerja'       =>  $this->input->post('dTglMasukKerja'),
@@ -448,12 +449,35 @@ class Transaksi_act extends CI_Controller
 			);
 		}
 
+		$seralizedArrayUpdate = serialize($dataUpdate);
+		$vaLogUpdate = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'kontrak',
+			'action' => $Type,
+			'query' => $seralizedArrayUpdate,
+			'nama' => $this->session->userdata('nama')
+		);
+
+		$seralizedArrayInsert = serialize($dataInsert);
+		$vaLogInsert = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'kontrak',
+			'action' => $Type,
+			'query' => $seralizedArrayInsert,
+			'nama' => $this->session->userdata('nama')
+		);
+
 		if ($Type == 'Insert') {
 			$this->model->Insert('kontrak', $dataInsert);
+			$this->model->Insert("log", $vaLogInsert);
 		} elseif ($Type == 'Update') {
 			$this->model->Update('kontrak', 'id', $Id, $dataUpdate);
+			$this->model->Insert("log", $vaLogUpdate);
 		} elseif ($Type == 'Delete') {
 			$this->model->Update_Delete('kontrak', 'id', $Id, $dataInsert);
+			$this->model->Insert("log", $vaLogInsert);
 		}
 
 		redirect(site_url('transaksi/kontrak'));
@@ -793,8 +817,6 @@ class Transaksi_act extends CI_Controller
 				$this->model->Insert("log", $vaLog2);
 			}
 
-
-
 			redirect(site_url('transaksi/pengundurandiri_pegawai/U'));
 		} elseif ($Type == "Delete") {
 			$db = $this->model->ViewWhere('tb_pengunduran_diri', 'id_pengunduran_diri', $id);
@@ -1088,8 +1110,59 @@ class Transaksi_act extends CI_Controller
 		$nama_job = $this->input->post('cJob_career');
 		$job_desc = $this->input->post('cJobDesc');
 
+		$seralizedArrayTambah = serialize($data);
+		$vaLogTambah = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'tb_form_pengajuan',
+			'action' => $Aksi,
+			'query' => $seralizedArrayTambah,
+			'nama' => $this->session->userdata('nama')
+		);		
+
+		$seralizedArrayApprove = serialize($data_approve);
+		$vaLogApprove = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'tb_form_pengajuan',
+			'action' => $Aksi,
+			'query' => $seralizedArrayApprove,
+			'nama' => $this->session->userdata('nama')
+		);	
+		
+		$seralizedArrayUpdate = serialize($dataUpdate);
+		$vaLogUpdate = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'tb_form_pengajuan',
+			'action' => $Aksi,
+			'query' => $seralizedArrayUpdate,
+			'nama' => $this->session->userdata('nama')
+		);	
+		
+		$seralizedArrayReject = serialize($data_unapprove);
+		$vaLogReject = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'tb_form_pengajuan',
+			'action' => $Aksi,
+			'query' => $seralizedArrayReject,
+			'nama' => $this->session->userdata('nama')
+		);
+		
+		$seralizedArrayDelete = serialize($data_delete);
+		$vaLogDelete = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'tb_form_pengajuan',
+			'action' => $Aksi,
+			'query' => $seralizedArrayDelete,
+			'nama' => $this->session->userdata('nama')
+		);		
+
 		if ($Aksi == 'tambah') {
 			$this->model->Insert("tb_form_pengajuan", $data);
+			$this->model->Insert("log", $vaLogTambah);
 		} elseif ($Aksi == 'approve') {
 
 			$data = $this->model->ViewWhere('v_form_pengajuan', 'id_form', $Id);
@@ -1108,7 +1181,7 @@ class Transaksi_act extends CI_Controller
 				CURLOPT_FOLLOWLOCATION => true,
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				CURLOPT_CUSTOMREQUEST => 'POST',
-				CURLOPT_POSTFIELDS => 'job_id='.$Id.'
+				CURLOPT_POSTFIELDS => 'job_id=' . $Id . '
 									&job_name=' . $namaJob . '
 									&job_desc=' . $jobDesc . '',
 				CURLOPT_HTTPHEADER => array(
@@ -1123,11 +1196,12 @@ class Transaksi_act extends CI_Controller
 			curl_close($curl);
 
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_approve);
+			$this->model->Insert("log", $vaLogApprove);
 		} elseif ($Aksi == 'Update') {
 
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'http://localhost/msglow-career/api/job/'.$Id,
+				CURLOPT_URL => 'http://localhost/msglow-career/api/job/' . $Id,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
@@ -1148,14 +1222,16 @@ class Transaksi_act extends CI_Controller
 
 			curl_close($curl);
 
-			 $this->model->Update("tb_form_pengajuan", "id_form", $Id, $dataUpdate);
-		} elseif ($Aksi == 'unapprove') {		
+			$this->model->Update("tb_form_pengajuan", "id_form", $Id, $dataUpdate);
+			$this->model->Insert("log", $vaLogUpdate);
+		} elseif ($Aksi == 'unapprove') {
 
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_unapprove);
+			$this->model->Insert("log", $vaLogReject);
 		} elseif ($Aksi == 'delete') {
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'http://localhost/msglow-career/api/job/'.$Id,
+				CURLOPT_URL => 'http://localhost/msglow-career/api/job/' . $Id,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
@@ -1176,6 +1252,7 @@ class Transaksi_act extends CI_Controller
 			curl_close($curl);
 
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_delete);
+			$this->model->Insert("log", $vaLogDelete);
 		}
 
 		redirect(site_url('transaksi/pengajuan_form_karyawan'));

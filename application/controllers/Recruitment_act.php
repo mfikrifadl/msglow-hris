@@ -290,7 +290,7 @@ class Recruitment_act extends CI_Controller
 			'query' 		=> $seralizedArray,
 			'nama' 			=> $this->session->userdata('nama')
 		);
-		$this->model->Insert("log", $vaLog);
+		
 		$cViewDataPelamar 			= $this->model->CekDataPelamar('recruitment', 'kode_wawancara', $code);
 
 		if ($Type == "Insert") {

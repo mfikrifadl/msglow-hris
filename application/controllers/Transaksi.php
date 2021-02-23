@@ -263,7 +263,7 @@ class Transaksi extends CI_Controller
 		$data['jabatan']	= $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
 		$data['row']		= $this->relasi->GetDataJabatanPegawai();
 		if ($Aksi == 'edit') {
-			$data['field'] = $this->model->ViewWhere('tb_jabatan_pegawai', 'id_jabatan_pegawai', $Id);
+			$data['field'] = $this->model->ViewWhere('v_data_pegawai_jabatan', 'id_pegawai', $Id);
 		} elseif ($Aksi == 'view') {
 			$data['view'] = $this->relasi->GetDataJabatanSearch($Id);
 		}
