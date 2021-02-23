@@ -126,6 +126,23 @@ class Gaji extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
+	public function import_data_pegawai($Aksi = "", $Id = "")
+	{
+		// $this->load->view('admin/gaji/view');
+		$dataHeader['menu'] = 'Manajemen Absensi';
+		$dataHeader['file'] = 'Absensi Pegawai';
+		$data['action'] = $Aksi;
+		$data['id_absen']	=	$Id;
+		// echo $this->session->userdata('nama');
+		// echo $this->session->userdata('user');
+		// echo $this->session->userdata('level');
+		// echo $this->session->userdata('id');
+		$this->load->view('admin/container/header', $dataHeader);
+		// $this->load->view('admin/gaji/absensi', $data);
+		$this->load->view('admin/gaji/absensi2', $data);
+		$this->load->view('admin/container/footer');
+	}
+
 	public function data_notif_absen($id = "")
 	{
 		$dataHeader['menu'] = 'Manajemen Absensi';
