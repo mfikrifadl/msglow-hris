@@ -171,9 +171,9 @@ class Transaksi extends CI_Controller
 
 	public function pegawai($Aksi = "", $Id = "")
 	{
-		$data['menu'] 	= 'Manajemen Pegawai';
-		$data['file'] 	= 'DATA PEGAWAI';
-		$data['action'] 	= $Aksi;
+		$dataHeader['menu'] 	= 'Manajemen Pegawai';
+		$dataHeader['file'] 	= 'DATA PEGAWAI';
+		$dataHeader['action'] 	= $Aksi;
 
 		$data['lastno']			= $this->db->query('SELECT MAX(SUBSTR(nik,7,4)) as nik FROM tb_pegawai');
 		$data['kerja']	   		= $this->model->ViewASC('tb_kerja', 'id_kerja');
@@ -196,10 +196,24 @@ class Transaksi extends CI_Controller
 			$data['v_tb_kontrak_pegawai']		= $this->model->ViewWhere('kontrak', 'id_pegawai', $Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pegawai', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -209,14 +223,28 @@ class Transaksi extends CI_Controller
 		$dataHeader['menu'] = 'Manajemen Pegawai';
 		$dataHeader['file'] = 'VIEW PEGAWAI';
 		$dataHeader['action'] = $Aksi;
-		$data['view'] 		= $this->model->ViewWhere('v_tb_pegawai','id_pegawai',$Id);
+		$data['view'] 		= $this->model->ViewWhere('v_tb_pegawai', 'id_pegawai', $Id);
 		$data['peringatan'] = $this->relasi->GetSuratPeringatanPegawaiSearch($Id);
 		//$data['srt_teguran'] = $this->model->ViewWhere($Id);
-		$data['teguran_lisan'] = $this->model->ViewWhere('v_teguran_lisan','id_pegawai',$Id);
-		$data['masa_kerja'] = $this->model->ViewWhere('v_tb_kontrak_pegawai','id_pegawai',$Id);	
+		$data['teguran_lisan'] = $this->model->ViewWhere('v_teguran_lisan', 'id_pegawai', $Id);
+		$data['masa_kerja'] = $this->model->ViewWhere('v_tb_kontrak_pegawai', 'id_pegawai', $Id);
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/view.pegawai.php', $data);
@@ -225,9 +253,9 @@ class Transaksi extends CI_Controller
 
 	public function jabatan_pegawai($Aksi = "", $Id = "")
 	{
-		$data['menu'] = 'Manajemen Pegawai';
-		$data['file'] = 'JABATAN PEGAWAI';
-		$data['action'] = $Aksi;
+		$dataHeader['menu'] = 'Manajemen Pegawai';
+		$dataHeader['file'] = 'JABATAN PEGAWAI';
+		$dataHeader['action'] = $Aksi;
 		$query 				= $this->db->query('select t1.nama, t1.nik, t3.nama_jabatan from tb_pegawai t1 JOIN tb_jabatan_pegawai t2 ON t1.id_pegawai = t2.id_pegawai JOIN tb_ref_jabatan t3 ON t2.id_ref_jabatan = t3.id_ref_jabatan');
 		// $data['pegawai']	= $query->result_array();
 		$data['pegawai']	= $this->model->ViewASC('v_data_pegawai_jabatan', 'nama');
@@ -240,10 +268,24 @@ class Transaksi extends CI_Controller
 			$data['view'] = $this->relasi->GetDataJabatanSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/jabatan_pegawai', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -251,16 +293,16 @@ class Transaksi extends CI_Controller
 	public function kontrak($Aksi = "", $Id = "")
 	{
 		// echo"$Id";
-		$data['action'] 	= $Aksi;
-		$data['menu']   	= 'Manajemen Pegawai';
-		$data['file']   	= 'Form Kontrak Pegawai';
+		$dataHeader['action'] 	= $Aksi;
+		$dataHeader['menu']   	= 'Manajemen Pegawai';
+		$dataHeader['file']   	= 'Form Kontrak Pegawai';
 		$data['pegawai'] 	= $this->model->View('v_tb_pegawai', 'id_pegawai');
 		$data['v_kontrak'] 	= $this->model->ViewDesc('v_kontrak_pegawai', 'id');
 		// $data['row']		= $this->db->query('SELECT * FROM kontrak t1 JOIN tb_pegawai t2 ON t1.id_pegawai=t2.id_pegawai WHERE t1.is_deleted=0')->result_array();
 		$data['Nolast']		= $this->db->query('SELECT SUBSTR(no_surat,4,4) as nomor_surat FROM kontrak');
 		if ($Aksi == 'Update') {
 			$data['kontrak_pegawai'] 	= $this->model->ViewWhere('v_kontrak_pegawai', 'id', $Id);
-			
+
 			$data['field'] 	= $this->db->query('SELECT * FROM
 													kontrak
 													INNER JOIN
@@ -276,10 +318,24 @@ class Transaksi extends CI_Controller
 														tb_pegawai.id_pegawai = tb_jabatan_pegawai.id_pegawai')->result_array();
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kontrak', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -297,8 +353,22 @@ class Transaksi extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataKetidakhadiranPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/ketidakhadiran_pegawai', $data);
@@ -318,8 +388,22 @@ class Transaksi extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataKesehatanPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kesehatan_pegawai', $data);
@@ -340,8 +424,22 @@ class Transaksi extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataPendidikanPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pendidikan_pegawai', $data);
@@ -361,8 +459,22 @@ class Transaksi extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataPengalamanPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pengalaman_pegawai', $data);
@@ -383,8 +495,22 @@ class Transaksi extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataKuisionerPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/kuesioner_pegawai', $data);
@@ -405,8 +531,22 @@ class Transaksi extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataPrestasiPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/prestasi_pegawai', $data);
@@ -429,8 +569,22 @@ class Transaksi extends CI_Controller
 			$data['view'] 	= $this->relasi->GetDataMutasiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
 
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/mutasi_pegawai', $data);
@@ -439,9 +593,9 @@ class Transaksi extends CI_Controller
 
 	public function pengajuan_form_karyawan($Aksi = "", $Id = "")
 	{
-		$data['menu']     = 'Hak Akses Interview';
-		$data['file']     = 'Hak Akses';
-		$data['action']     = $Aksi;
+		$dataHeader['menu']     = 'Hak Akses Interview';
+		$dataHeader['file']     = 'Hak Akses';
+		$dataHeader['action']     = $Aksi;
 
 		$data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan', 'Manager');
 		$data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
@@ -453,11 +607,25 @@ class Transaksi extends CI_Controller
 			$data['subUnitKerja']	= $this->model->ViewWhere('tb_sub_unit_kerja', 'id_Unit_kerja', $Id);
 			$data['show_sub_uk']	= $this->relasi->ShowSubUnitKerja();
 		}
-		
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
+
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/hak_akses_interview/hak_akses_interview', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -478,27 +646,40 @@ class Transaksi extends CI_Controller
 	public function pengundurandiri_pegawai($Aksi = "", $Id = "")
 	{
 		// echo $Id;
-		$data['menu'] = 'Manajemen Pegawai';
-		$data['file'] = 'PENGUNDURAN DIRI PEGAWAI';
-		$data['action'] = $Aksi;
+		$dataHeader['menu'] = 'Manajemen Pegawai';
+		$dataHeader['file'] = 'PENGUNDURAN DIRI PEGAWAI';
+		$dataHeader['action'] = $Aksi;
 
 		$data['pegawai']	= $this->model->ViewASC('tb_pegawai', 'nik');
 		$data['row']		= $this->relasi->GetDataPengundurandiriPegawai();
 		$data['st_karyawan']	= $this->model->ViewAsc('tb_status_karyawan', 'id_status');
 		if ($Aksi == 'edit') {
 			$data['field'] = $this->model->ViewWhere('tb_pengunduran_diri', 'id_pengunduran_diri', $Id);
-			$data['pegawai']	= $this->model->ViewWhere('v_pengunduran_diri', 'id_pengunduran_diri',$Id);
-			
+			$data['pegawai']	= $this->model->ViewWhere('v_pengunduran_diri', 'id_pengunduran_diri', $Id);
 		} elseif ($Aksi == 'view') {
 			$data['view'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		} elseif ($Aksi == 'delete') {
 			//$data['delete'] 	= $this->relasi->GetDataPengundurandiriPegawaiSearch($Id);
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/pengunduran_pegawai', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -534,9 +715,9 @@ class Transaksi extends CI_Controller
 
 	public function teguran_lisan($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Teguran Lisan';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Teguran Lisan';
 		$data['row']	= $this->db->query('SELECT * FROM v_teguran_lisan where id_kategori_surat=2 AND is_delete=0')->result_array();
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
@@ -577,10 +758,24 @@ class Transaksi extends CI_Controller
 		} else {
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/teguran_lisan', $data);
 		$this->load->view('admin/container/footer');
 	}
@@ -588,9 +783,9 @@ class Transaksi extends CI_Controller
 	public function surat_teguran($Aksi = "", $Id = "")
 	{
 
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Teguran';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Teguran';
 		$data['row']	= $this->db->query('SELECT * FROM v_teguran_lisan where id_kategori_surat=1 AND is_delete=0')->result_array();
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		// $data['pegawai'] = $this->model->View('v_data_sp', 'id_pegawai');
@@ -626,19 +821,33 @@ class Transaksi extends CI_Controller
 		} else {
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_teguran', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function sp($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Peringatan';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Peringatan';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -659,19 +868,33 @@ class Transaksi extends CI_Controller
 			$data['nj_select'] = $nama_jabatan;
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_peringatan_1', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function sp2($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Peringatan II';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Peringatan II';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -692,19 +915,33 @@ class Transaksi extends CI_Controller
 			$data['nj_select'] = $nama_jabatan;
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_peringatan_2', $data);
 		$this->load->view('admin/container/footer');
 	}
 
 	public function sp3($Aksi = "", $Id = "")
 	{
-		$data['action'] = $Aksi;
-		$data['menu']   = 'HRD';
-		$data['file']   = 'Surat Peringatan III';
+		$dataHeader['action'] = $Aksi;
+		$dataHeader['menu']   = 'HRD';
+		$dataHeader['file']   = 'Surat Peringatan III';
 		$data['row']	= $this->model->View('v_pegawai_pelanggaran_sp', 'tanggal');
 		$data['pegawai'] = $this->model->View('tb_pegawai', 'id_pegawai');
 		$data['Nolast']	= $this->db->query('SELECT SUBSTR(nomor_surat,4,4) as nomor_surat FROM v_pegawai_pelanggaran_sp');
@@ -725,10 +962,24 @@ class Transaksi extends CI_Controller
 			$data['nj_select'] = $nama_jabatan;
 		}
 
-		$data['notif_absensi']	= $this->model->notifAbsensi();
-		$data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+		//======================NOTIFIKASI===============================================================
+		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
+		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');
 
-		$this->load->view('admin/container/header', $data);
+		$total_peserta_diterima_staff				= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+		$dataHeader['jml_notif_psrt_diterima_staff']		= $total_peserta_diterima_staff->result_array();
+
+		$total_peserta_diterima_phl					= $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+		$dataHeader['jml_notif_psrt_diterima_phl']		= $total_peserta_diterima_phl->result_array();
+
+		$data_notif_psrt_staff						= $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_staff']	= $data_notif_psrt_staff->result_array();
+
+		$data_notif_psrt_phl						= $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+		$dataHeader['data_notif_recruitment_phl']	= $data_notif_psrt_phl->result_array();
+		//======================NOTIFIKASI===============================================================
+
+		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/transaksi/surat_peringatan_3', $data);
 		$this->load->view('admin/container/footer');
 	}

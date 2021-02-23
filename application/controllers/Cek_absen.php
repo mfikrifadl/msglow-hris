@@ -30,8 +30,22 @@ class Cek_absen extends CI_Controller
         $data['absensi'] = $this->model->View('attlog');
         $data['row']    = $this->relasi->GetDataAbsensi_tabel_new();
 
-        $data['notif_absensi']	= $this->model->notifAbsensi();
-        $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+        //======================NOTIFIKASI===============================================================
+        $dataHeader['notif_absensi']                = $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']                = $this->model->View('v_data_notif_absen');
+
+        $total_peserta_diterima_staff                = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+        $dataHeader['jml_notif_psrt_diterima_staff']        = $total_peserta_diterima_staff->result_array();
+
+        $total_peserta_diterima_phl                    = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+        $dataHeader['jml_notif_psrt_diterima_phl']        = $total_peserta_diterima_phl->result_array();
+
+        $data_notif_psrt_staff                        = $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+        $dataHeader['data_notif_recruitment_staff']    = $data_notif_psrt_staff->result_array();
+
+        $data_notif_psrt_phl                        = $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+        $dataHeader['data_notif_recruitment_phl']    = $data_notif_psrt_phl->result_array();
+        //======================NOTIFIKASI===============================================================
 
         $this->load->view('admin/container/header', $dataHeader);
         $this->load->view('admin/gaji/absensi', $data);
@@ -70,9 +84,23 @@ class Cek_absen extends CI_Controller
                 $data['action'] = $Aksi;
                 $data['id_absen']    =    $Id;
 
-                $data['notif_absensi']	= $this->model->notifAbsensi();
-                $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
-                
+                //======================NOTIFIKASI===============================================================
+                $dataHeader['notif_absensi']                = $this->model->notifAbsensi();
+                $dataHeader['data_notif_absen']                = $this->model->View('v_data_notif_absen');
+
+                $total_peserta_diterima_staff                = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+                $dataHeader['jml_notif_psrt_diterima_staff']        = $total_peserta_diterima_staff->result_array();
+
+                $total_peserta_diterima_phl                    = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+                $dataHeader['jml_notif_psrt_diterima_phl']        = $total_peserta_diterima_phl->result_array();
+
+                $data_notif_psrt_staff                        = $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+                $dataHeader['data_notif_recruitment_staff']    = $data_notif_psrt_staff->result_array();
+
+                $data_notif_psrt_phl                        = $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+                $dataHeader['data_notif_recruitment_phl']    = $data_notif_psrt_phl->result_array();
+                //======================NOTIFIKASI===============================================================
+
                 $this->load->view('admin/container/header', $dataHeader);
                 $this->load->view('admin/gaji/absensi', $data);
                 $this->load->view('admin/container/footer');
@@ -84,8 +112,22 @@ class Cek_absen extends CI_Controller
                 $data['action'] = $Aksi;
                 $data['id_absen']    =    $Id;
 
-                $data['notif_absensi']	= $this->model->notifAbsensi();
-                $data['data_notif_absen']		= $this->model->View('v_data_notif_absen');
+                //======================NOTIFIKASI===============================================================
+                $dataHeader['notif_absensi']                = $this->model->notifAbsensi();
+                $dataHeader['data_notif_absen']                = $this->model->View('v_data_notif_absen');
+
+                $total_peserta_diterima_staff                = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+                $dataHeader['jml_notif_psrt_diterima_staff']        = $total_peserta_diterima_staff->result_array();
+
+                $total_peserta_diterima_phl                    = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+                $dataHeader['jml_notif_psrt_diterima_phl']        = $total_peserta_diterima_phl->result_array();
+
+                $data_notif_psrt_staff                        = $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+                $dataHeader['data_notif_recruitment_staff']    = $data_notif_psrt_staff->result_array();
+
+                $data_notif_psrt_phl                        = $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+                $dataHeader['data_notif_recruitment_phl']    = $data_notif_psrt_phl->result_array();
+                //======================NOTIFIKASI===============================================================
 
                 $this->load->view('admin/container/header', $dataHeader);
                 $this->load->view('admin/gaji/absensi', $data);
@@ -128,7 +170,7 @@ class Cek_absen extends CI_Controller
             //echo"$t_dTgl - $t_dTgl_end - $tgl_attlog <br />";
 
             if ($t_dTgl <= $t_dTgl_end && $t_dTgl_end >= $tgl_attlog) {
-                $id = $c_id +$no;
+                $id = $c_id + $no;
                 // echo "id : $id <br />";
                 // echo "pin : $pin <br />";
                 // echo "attlog : $attlog <br />";
