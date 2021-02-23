@@ -8,10 +8,6 @@ class Cek_absen2 extends CI_Controller
     {
         parent::__construct();
         $this->load->library('session');
-
-        $this->load->helper('url');
-		$this->load->helper('form');
-		$this->load->helper('download');
         
         $this->load->model('AbsensiModel');
         $this->load->model('model');
@@ -114,18 +110,37 @@ class Cek_absen2 extends CI_Controller
             // Jadi dilewat saja, tidak usah diimport
             if ($numrow > 1 && $numrow < $looping) {
 
-                $c_id = date("YmdHis");
-                $id = "$c_id" . $numrow . "";
-
-                $pin = $row['A'];
-                $attlog = $row['B'];
-                $verify = $row['C'];
-                $status_scan = $row['D'];
-                $cloud_id = $row['E'];
-
-                $a_attlog = explode(" ", $attlog);
-                $tgl = $a_attlog[0];
-                $waktu = $a_attlog[1];
+                $nik = $row['A']; // Ambil data NIS
+                $nama = $row['B']; // Ambil data nama
+                $statusK = $row['C']; // Ambil data jenis kelamin
+                $tgl_mulai_kerja = $row['D']; // Ambil data alamat
+                $status_kepegawaian = $row['E']; // Ambil data NIS
+                $jk = $row['F']; // Ambil data nama
+                $agama = $row['G']; // Ambil data jenis kelamin
+                $tmpt_lahir = $row['H']; // Ambil data alamat
+                $tgl_lahir = $row['I']; // Ambil data alamat
+                $pendidikan = $row['J']; // Ambil data alamat
+                $jurusan = $row['K']; // Ambil data alamat
+                $gol_dar = $row['L']; // Ambil data alamat
+                $status_kawin = $row['M'];
+                $istri_suami = $row['N'];
+                $tgl_lahir_pas = $row['O'];
+                $anak1 = $row['P'];
+                $tgl_lahir_a1 = $row['Q'];
+                $anak2 = $row['R'];
+                $tgl_lahir_a2 = $row['S'];
+                $anak3 = $row['T'];
+                $tgl_lahir_a3 = $row['U'];
+                $ktp = $row['V'];
+                $alamat_asal = $row['W'];
+                $alamat = $row['X'];
+                $npwp = $row['Y'];
+                $hp = $row['Z'];
+                $atas_nama = $row['AA'];
+                $no_rek = $row['AB'];
+                $bank = $row['AC'];
+                $cabang = $row['AD'];
+                $email = $row['AE'];
 
 
                 // echo "pin : $pin <br />";
@@ -137,25 +152,50 @@ class Cek_absen2 extends CI_Controller
                 // echo "cloud_id : $cloud_id <br /><br />";
 
                 array_push($data_log_absen, array(
-                    'id' => $id,
-                    'pin' => $row['A'],
-                    'attlog' => $row['B'],
-                    'tanggal' => $tgl,
-                    'waktu' => $waktu,
-                    'verify' => $row['C'],
-                    'status_scan' => $row['D'],
-                    'cloud_id' => $row['E']
+                    'kode_wawancara' => $nik,
+                    'nik' => $row['A'],
+                    'nama' => $row['B'],
+                    'id_area' => $row['C'],
+                    'id_status' => $row['D'],
+                    'tanggal_masuk_kerja' => $row['E'],
+                    'id_kerja' => $row['F'],
+                    'jk' => $row['G'],
+                    'agama' => $row['H'],
+                    'tempat_lahir' => $row['I'],
+                    'tanggal_lahir' => $row['J'],
+                    'pendidikan' => $row['K'],
+                    'jurusan' => $row['L'],
+                    'gol_darah' => $row['M'],
+                    'istri_suami' => $row['N'],
+                    'tgl_lahir_istri' => $row['O'],
+                    'anak_1' => $row['P'],
+                    'tgl_lahir_anak_1' => $row['Q'],
+                    'anak_2' => $row['R'],
+                    'tgl_lahir_anak_2' => $row['S'],
+                    'anak_3' => $row['T'],
+                    'tgl_lahir_anak_3' => $row['U'],
+                    'no_ktp' => $row['V'],
+                    'alamat_asal' => $row['W'],
+                    'alamat' => $row['X'],
+                    'no_npwp' => $row['Y'],
+                    'handphone' => $row['Z'],
+                    'atas_nama' => $row['AA'],
+                    'no_rekening' => $row['AB'],
+                    'jenis_pembayaran' => $row['AC'],
+                    'cabang_bank' => $row['AD'],
+                    'email' => $row['AE']
+
                 ));
 
 
 
-                $CekPin = $this->db->query("SELECT pin FROM master_pegawai WHERE pin = '$pin' ");
-                if ($CekPin->num_rows() > 0) {
-                    //    echo "sudah ada di database <br />";
-                } else {
-                    $this->db->query("INSERT INTO master_pegawai (pin) VALUES ('$pin') ");
-                    // echo "belum ada di database <br />";
-                }
+                // $CekPin = $this->db->query("SELECT pin FROM master_pegawai WHERE pin = '$pin' ");
+                // if ($CekPin->num_rows() > 0) {
+                //     //    echo "sudah ada di database <br />";
+                // } else {
+                //     $this->db->query("INSERT INTO master_pegawai (pin) VALUES ('$pin') ");
+                //     // echo "belum ada di database <br />";
+                // }
             }
 
             $numrow++; // Tambah 1 setiap kali looping
@@ -176,11 +216,11 @@ class Cek_absen2 extends CI_Controller
         // }  
 
 ?>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             alert("DATA TELAH BERHASIL DI SIMPAN");
             window.location.href = "<?= site_url('cek_absen2') ?>";
-        </script>
+        </script> -->
 <?php
-        redirect("cek_absen2"); // Redirect ke halaman awal (ke controller siswa fungsi index)
+        // redirect("cek_absen2"); // Redirect ke halaman awal (ke controller siswa fungsi index)
     }
 }

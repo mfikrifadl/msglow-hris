@@ -125,11 +125,37 @@ if ($action == "edit") {
                             echo "<table class='table table-striped table-bordered' id='DataTable'>
                             <thead>
                                     <tr>
-                                    <th>PIN</th>
-                                    <th>Attlog</th>
-                                    <th>Verify</th>
-                                    <th>Status_Scan</th>
-                                    <th>Cloud_id</th>                                    
+                                    <th>NIK</th>
+                                    <th>nama</th>
+                                    <th>status karyawan</th>
+                                    <th>tgl_mulai_kerja</th>
+                                    <th>status_kepegawaian</th>
+                                    <th> jk </th>
+                                    <th>  agama</th>
+                                    <th>  tmpt lahir</th>
+                                    <th>  tgl lahir</th>
+                                    <th>  pendidikan</th>
+                                    <th>  jurusan</th>
+                                    <th>  gol dar</th>
+                                    <th>  status kawin</th>
+                                    <th>  istri/suami</th>
+                                    <th>  tgl lahir</th>
+                                    <th>  anak 1</th>
+                                    <th>  tgl lahir</th>
+                                    <th>  anak 2</th>
+                                    <th>  tgl lahir</th>
+                                    <th>  anak 3</th>
+                                    <th>  tgl lahir</th>
+                                    <th>  ktp</th>
+                                    <th>  alamat asal</th>
+                                    <th>  alamat sekarang</th>
+                                    <th>  npwp</th>
+                                    <th>  hp</th>
+                                    <th>  atas nama</th>
+                                    <th>  no rek</th>
+                                    <th>  bank</th>
+                                    <th>  cabang</th>
+                                    <th>  email</th>                   
                                     </tr>
                                     </thead>
                                     <tbody>";
@@ -161,19 +187,37 @@ if ($action == "edit") {
                             // $sheet adalah variabel yang dikirim dari controller
                             foreach ($sheet as $row) {
                               // Ambil data pada excel sesuai Kolom
-                              $pin = $row['A']; // Ambil data NIS
-                              $attlog = $row['B']; // Ambil data nama
-                              $verify = $row['C']; // Ambil data jenis kelamin
-                              $status_scan = $row['D']; // Ambil data alamat
-                              $cloud_id = $row['E']; // Ambil data NIS
-                              //   $kantor = $row['F']; // Ambil data nama
-                              //   $tanggal = $row['G']; // Ambil data jenis kelamin
-                              //   $scan_1 = $row['H']; // Ambil data alamat
-                              //   $scan_2 = $row['I']; // Ambil data alamat
-                              //   $scan_3 = $row['J']; // Ambil data alamat
-                              //   $scan_4 = $row['K']; // Ambil data alamat
-                              //   $scan_5 = $row['L']; // Ambil data alamat
-
+                              $nik = $row['A']; // Ambil data NIS
+                              $nama = $row['B']; // Ambil data nama
+                              $statusK = $row['C']; // Ambil data jenis kelamin
+                              $tgl_mulai_kerja = $row['D']; // Ambil data alamat
+                              $status_kepegawaian = $row['E']; // Ambil data NIS
+                              $jk = $row['F']; // Ambil data nama
+                              $agama = $row['G']; // Ambil data jenis kelamin
+                              $tmpt_lahir = $row['H']; // Ambil data alamat
+                              $tgl_lahir = $row['I']; // Ambil data alamat
+                              $pendidikan = $row['J']; // Ambil data alamat
+                              $jurusan = $row['K']; // Ambil data alamat
+                              $gol_dar = $row['L']; // Ambil data alamat
+                              $status_kawin = $row['M'];
+                              $istri_suami = $row['N'];
+                              $tgl_lahir_pas = $row['O'];
+                              $anak1 = $row['P'];
+                              $tgl_lahir_a1 = $row['Q'];
+                              $anak2 = $row['R'];
+                              $tgl_lahir_a2 = $row['S'];
+                              $anak3 = $row['T'];
+                              $tgl_lahir_a3 = $row['U'];
+                              $ktp = $row['V'];
+                              $alamat_asal = $row['W'];
+                              $alamat = $row['X'];
+                              $npwp = $row['Y'];
+                              $hp = $row['Z'];
+                              $atas_nama = $row['AA'];
+                              $no_rek = $row['AB'];
+                              $bank = $row['AC'];
+                              $cabang = $row['AD'];
+                              $email = $row['AE'];
                               // $keterangan = $row['G']; // Ambil data nama
                               // $tanggal = $row['H']; // Ambil data jenis kelamin
                               // $scan_1 = $row['I']; // Ambil data alamat
@@ -183,7 +227,7 @@ if ($action == "edit") {
                               // $scan_5 = $row['M']; // Ambil data alamat
 
                               // Cek jika semua data tidak diisi
-                              if ($pin == "" && $attlog == "" && $verify == "" && $status_scan == "" && $cloud_id == "")
+                              if ($nik == "" )
                                 // if ($pin == "" && $nip == "" && $nama == "" && $jabatan == "" && $departemen == "" && $kantor == "" && $keterangan == "" && $tanggal == "" && $scan_1 == "" && $scan_2 == "" && $scan_3 == "" && $scan_4 == "" && $scan_5 == "")
                                 continue; // Lewat data pada baris ini (masuk ke looping selanjutnya / baris selanjutnya)
 
@@ -192,28 +236,55 @@ if ($action == "edit") {
                               // Jadi dilewat saja, tidak usah diimport
                               if ($numrow > 1) {
                                 // Validasi apakah semua data telah diisi
-                                $pin_td = (!empty($pin)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
+                                // $pin_td = (!empty($pin)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
                                 // $nip_td = (!empty($nip)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
-                                $attlog_td = (!empty($attlog)) ? "" : " style='background: #E07171;'"; // Jika Nama kosong, beri warna merah
-                                $verify_td = (!empty($verify)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
+                                // $attlog_td = (!empty($attlog)) ? "" : " style='background: #E07171;'"; // Jika Nama kosong, beri warna merah
+                                // $verify_td = (!empty($verify)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
                                 // $departemen_td = (!empty($departemen)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
                                 // $kantor_td = (!empty($kantor)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
                                 // $keterangan_td = (!empty($keterangan)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
-                                $status_scan_td = (!empty($status_scan)) ? "" : " style='background: #E07171;'"; // Jika Jenis Kelamin kosong, beri warna merah
-                                $cloud_id_td = (!empty($cloud_id)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
+                                // $status_scan_td = (!empty($status_scan)) ? "" : " style='background: #E07171;'"; // Jika Jenis Kelamin kosong, beri warna merah
+                                // $cloud_id_td = (!empty($cloud_id)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
                                 // $scan_2_td = (!empty($scan_2)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
 
                                 // Jika salah satu data ada yang kosong
-                                if ($pin == "" or $attlog == "" or $verify == "" or $cloud_id == "") {
+                                if ($nik == "") {
                                   $kosong++; // Tambah 1 variabel $kosong
                                 }
 
                                 echo "<tr>";
-                                echo "<td" . $pin_td . ">" . $pin . "</td>";
-                                echo "<td" . $attlog_td . ">" . $attlog . "</td>";
-                                echo "<td" . $verify_td . ">" . $verify . "</td>";
-                                echo "<td>" . $status_scan . "</td>";
-                                echo "<td" . $cloud_id_td . ">" . $cloud_id . "</td>";
+                                echo "<td>" . $nik . "</td>";
+                                echo "<td>" . $nama . "</td>";
+                                echo "<td>" . $statusK . "</td>";
+                                echo "<td>" . $tgl_mulai_kerja . "</td>";
+                                echo "<td>" . $status_kepegawaian . "</td>";
+                                echo "<td>" . $jk . "</td>";
+                                echo "<td>" . $agama . "</td>";
+                                echo "<td>" . $tmpt_lahir . "</td>";
+                                echo "<td>" . $tgl_lahir . "</td>";
+                                echo "<td>" . $pendidikan . "</td>";
+                                echo "<td>" . $jurusan . "</td>";
+                                echo "<td>" . $gol_dar . "</td>";
+                                echo "<td>" . $status_kawin . "</td>";
+                                echo "<td>" . $istri_suami . "</td>";
+                                echo "<td>" . $tgl_lahir_pas . "</td>";
+                                echo "<td>" . $anak1 . "</td>";
+                                echo "<td>" . $tgl_lahir_a1 . "</td>";
+                                echo "<td>" . $anak2 . "</td>";
+                                echo "<td>" . $tgl_lahir_a2 . "</td>";
+                                echo "<td>" . $anak3 . "</td>";
+                                echo "<td>" . $tgl_lahir_a3 . "</td>";
+                                echo "<td>" . $ktp . "</td>";
+                                echo "<td>" . $alamat_asal . "</td>";
+                                echo "<td>" . $alamat . "</td>";
+                                echo "<td>" . $npwp . "</td>";
+                                echo "<td>" . $hp . "</td>";
+                                echo "<td>" . $atas_nama . "</td>";
+                                echo "<td>" . $no_rek . "</td>";
+                                echo "<td>" . $bank . "</td>";
+                                echo "<td>" . $cabang . "</td>";
+                                echo "<td>" . $email . "</td>";
+
 
                                 echo "</tr>";
 
@@ -321,7 +392,7 @@ if ($action == "edit") {
 
                         <div class="tab-content ">
                           <div class="row">
-                            
+
                             <div class="col-sm-12">
                               <button type="button" onclick="return showDataAbsen();" class="btn btn-success btn-flat">Show Data Absen</button>
                             </div>
@@ -356,7 +427,7 @@ if ($action == "edit") {
 
     <div class="row">
 
-      
+
 
     </div>
 
