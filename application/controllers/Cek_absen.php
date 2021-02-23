@@ -226,8 +226,8 @@ class Cek_absen extends CI_Controller
 
     public function get_data_absensi_import()
     {
-        $dTgl_cetak = $this->input->post('dTgl_cetak');
-        $dTgl_cetak_end = $this->input->post('dTgl_cetak_end');
+        $dTgl_cetak = $this->input->get('dTgl_cetak');
+        $dTgl_cetak_end = $this->input->get('dTgl_cetak_end');
 
         $data = array(
             'dTgl_cetak' => $dTgl_cetak,

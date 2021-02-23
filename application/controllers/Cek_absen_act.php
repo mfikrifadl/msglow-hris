@@ -78,7 +78,7 @@ class Cek_absen_act extends CI_Controller
         $html = $this->load->view('admin/gaji/cetak_absensi', $data, true);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
-        die();
+        //die();
         redirect(site_url('gaji/absensi_pegawai'));
 
     }
@@ -128,6 +128,8 @@ class Cek_absen_act extends CI_Controller
     
     public function approvement_update(){
         $id = $this->input->post('id');
+        $dTgl_cetak = $this->input->post('dTgl_cetak');
+        $dTgl_cetak_end = $this->input->post('dTgl_cetak_end');
 
         $data = array(		
             'keterangan' => $this->input->post('keterangan'),

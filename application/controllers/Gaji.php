@@ -117,6 +117,10 @@ class Gaji extends CI_Controller
 		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
 		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
 
+		if($Aksi == "Update"){
+
+		}
+
 		$this->load->view('admin/container/header', $dataHeader);
 		$this->load->view('admin/gaji/absensi', $data);
 		$this->load->view('admin/container/footer');

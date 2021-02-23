@@ -54,7 +54,7 @@
                   </div>
                   <div class="form-group">
                     <label><b>Office:</b></label>
-                    <p class="form-control-static"><?= (!empty($vaView['OutletFix'])) ? $vaView['OutletFix'] : "-" ?></p>
+                    <p class="form-control-static"><?= (!empty($vaView['Area'])) ? $vaView['Area'] : "-" ?></p>
                   </div>
                   <div class="form-group">
                     <label><b>Tanggal Masuk Kerja:</b></label>
