@@ -153,7 +153,7 @@
                         }
                     ?>
                         <td>
-                            <?= $id_ket ?>
+                            
                             <div class="form-group">
                                 <select id="ket_<?= $id_ket; ?>" onkeyup="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
