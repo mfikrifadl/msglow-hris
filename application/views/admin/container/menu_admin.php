@@ -475,20 +475,6 @@
           </a>
         </li>
 
-        <li class="kt-menu__item  <?= $this->uri->segment(2) == 'absensi_pegawai' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
-          <a href="<?= site_url('gaji/import_data_pegawai'); ?>" class="kt-menu__link kt-menu__toggle">
-            <i class="kt-menu__link-icon flaticon2-open-text-book"></i>
-            <span class="kt-menu__link-text">
-              Import Data Pegawai
-            </span>
-            <span class="kt-menu__link-badge">
-              <span class="kt-badge kt-badge--warning" style="color: black;">
-                <?= $jml_notif_absen ?>
-              </span>
-            </span>
-          </a>
-        </li>
-
         <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'master' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon2-layers"></i>
