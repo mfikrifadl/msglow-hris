@@ -153,7 +153,7 @@
                         }
                     ?>
                         <td>
-                            
+
                             <div class="form-group">
                                 <select id="ket_<?= $id_ket; ?>" onkeyup="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
@@ -209,8 +209,10 @@
                             $hit_jam_masuk_kerja =  $set_jam_datang_pegawai->diff($t_jam_mulai);
                             $hasil_hitungan = $hit_jam_masuk_kerja->format('%H:%I:%S');
                             $tot_jam_keterlambatan = (string)$hasil_hitungan;
-
-                            echo "$tot_jam_keterlambatan";
+                            if (empty($vaPegawai['jam_datang'])) {
+                            } else {
+                                echo "$tot_jam_keterlambatan";
+                            }
                         } else {
                         }
 
