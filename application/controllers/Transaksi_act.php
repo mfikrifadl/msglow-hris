@@ -964,6 +964,11 @@ class Transaksi_act extends CI_Controller
 		$data['row']	= $this->relasi->GetSubUnitKerja($id);
 		$this->load->view('admin/hak_akses_interview/tb_sub_unit_kerja', $data);
 	}
+	public function get_sub_unit_kerja_jabatan_pegawai($id)
+	{
+		$data['row']	= $this->relasi->GetSubUnitKerja($id);
+		$this->load->view('admin/transaksi/data/tb_sub_unit_kerja_jabatan', $data);
+	}
 
 	public function form_pengajuan($Aksi = "", $Id = "")
 	{

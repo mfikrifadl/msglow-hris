@@ -54,6 +54,7 @@
                 } elseif ($this->session->userdata('level') == 1) {
                 ?>
                     <td>Keterangan_Permintaan_Update </td>
+                    <td>Keterangan </td>
                 <?php
                 } else {
                 } ?>
@@ -69,6 +70,7 @@
                 } elseif ($this->session->userdata('level') == 1) {
                 ?>
                     <td>KLL_Permintaan_Update</td>
+                    <td>Keterangan_Lain_Lain</td>
                 <?php
                 } else {
                 } ?>
@@ -114,6 +116,14 @@
                     ?>
                     <td><?= $vaPegawai['nama'] ?></td>
                     <td><?= $vaPegawai['nama_jabatan'] ?></td>
+
+                    <?php 
+                    // if(empty($vaPegawai['tanggal'])){
+                        ?>
+                        <!-- <input type="hidden" > -->
+                        <?php
+                    // }
+                    ?>
                     <td><?= $vaPegawai['tanggal'] ?></td>
                     <td><?= $vaPegawai['jam_datang'] ?></td>
                     <td><?= $vaPegawai['jam_pulang'] ?></td>
@@ -153,7 +163,8 @@
                         }
                     ?>
                         <td>
-
+                        <?php echo"-".$vaPegawai['nik']."-".$id_ket; ?>
+                            
                             <div class="form-group">
                                 <select id="ket_<?= $id_ket; ?>" onkeyup="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
@@ -188,11 +199,13 @@
                                     <i class="flaticon2-send-1"></i>
                                 </button>
                             </div>
+                            <input type="hidden" id="nik_ket_update_<?= $id_ket; ?>" value="<?= $vaPegawai['nik'] ?>">
                         </td>
                     <?php
                     } elseif ($this->session->userdata('level') == 1) {
                     ?>
                         <td><?= $vaPegawai['keterangan_temp'] ?></td>
+                        <td><?= $vaPegawai['keterangan'] ?></td>
                     <?php
                     } else {
                     } ?>
@@ -282,7 +295,7 @@
                         }
                     ?>
                         <td>
-                            <?= $id_ket_ll ?>
+                            
                             <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket_ll ?>" type="text" value="<?= $vaPegawai['ket_lain'] ?>" onkeyup="updateDataAbsen('<?= $id_ket_ll; ?>');" autocomplete="off">
                             <input id="id_<?= $id_ket_ll; ?>" type="hidden" name="id" value="<?= $id_ket_ll ?>">
                         </td>
@@ -290,6 +303,7 @@
                     } elseif ($this->session->userdata('level') == 1) {
                     ?>
                         <td><?= $vaPegawai['ket_lain_temp'] ?></td>
+                        <td><?= $vaPegawai['ket_lain'] ?></td>
                     <?php
                     } else {
                     }
