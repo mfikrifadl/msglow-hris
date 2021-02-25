@@ -454,7 +454,7 @@ if ($action == "edit") {
   function updateDataAbsen(id) {
 
     var ket_lain = $('#ket_lain_' + id).val();
-    var dTgl_cetak = $('#dTgl_cetak' + id).val();
+    var dTgl_cetak = $('#dTgl_cetak').val();
     var nik_ket_update = $('#nik_ket_update_' + id).val();
      //alert(id+"-"+ket_lain+"-"+dTgl_cetak+"-"+nik_ket_update);
 
@@ -491,7 +491,7 @@ if ($action == "edit") {
       'nik_ket_update': nik_ket_update,
       'ket': ket
     }
-    //alert(id+"-"+ket+"-"+dTgl_cetak+"-"+nik_ket_update);  
+    // alert(id+"-"+ket+"-"+dTgl_cetak+"-"+nik_ket_update);  
 
     if (ket == "") {
       new PNotify({
