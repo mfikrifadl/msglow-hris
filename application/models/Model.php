@@ -380,4 +380,15 @@ class Model extends CI_Model
 			FROM tb_status_karyawan a");
 		return $Query->result_array();
 	}
+
+	public function ViewAttlogAPI($table, $where_col = null, $id = null)
+	{
+		if ($where_col == null && $id == null) {
+			$query = $this->db->get($table);
+		} else {
+			$query = $this->db->get_where($table, [$where_col => $id]);
+		}
+		return $query->result_array();
+	}
+
 }
