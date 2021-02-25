@@ -163,34 +163,34 @@
                         }
                     ?>
                         <td>
-                        <?php echo"-".$vaPegawai['nik']."-".$id_ket; ?>
+                        <?php //echo"-".$vaPegawai['nik']."-".$id_ket; ?>
                             
                             <div class="form-group">
                                 <select id="ket_<?= $id_ket; ?>" onkeyup="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
-                                    <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan'] == "Shift 2") echo "selected";
+                                    <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan_temp'] == "Shift 2") echo "selected";
                                                                                 ?>>Shift 2</option>
-                                    <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan'] == "Tugas Kantor") echo "selected";
+                                    <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan_temp'] == "Tugas Kantor") echo "selected";
                                                                                     ?>>Tugas Kantor</option>
-                                    <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan'] == "Penyesuaian Finger") echo "selected";
+                                    <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan_temp'] == "Penyesuaian Finger") echo "selected";
                                                                                             ?>>Penyesuaian Finger</option>
-                                    <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan'] == "Kirim Luar kota") echo "selected";
+                                    <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan_temp'] == "Kirim Luar kota") echo "selected";
                                                                                         ?>>Kirim Luar kota</option>
-                                    <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan'] == "Pengiriman Bali") echo "selected";
+                                    <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pengiriman Bali") echo "selected";
                                                                                         ?>>Pengiriman Bali</option>
-                                    <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan'] == "Berangkat Kirim Bali") echo "selected";
+                                    <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan_temp'] == "Berangkat Kirim Bali") echo "selected";
                                                                                             ?>>Berangkat Kirim Bali</option>
-                                    <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan'] == "Pulang Dari Bali") echo "selected";
+                                    <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pulang Dari Bali") echo "selected";
                                                                                         ?>>Pulang Dari Bali </option>
-                                    <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan'] == "Ijin Durasi") echo "selected";
+                                    <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Durasi") echo "selected";
                                                                                     ?>>Ijin Durasi</option>
-                                    <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan'] == "Ijin Keperluan Pribadi") echo "selected";
+                                    <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Keperluan Pribadi") echo "selected";
                                                                                                 ?>>Ijin Keperluan Pribadi</option>
-                                    <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan'] == "STSD") echo "selected";
+                                    <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan_temp'] == "STSD") echo "selected";
                                                                             ?>>STSD</option>
-                                    <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan'] == "SSD") echo "selected";
+                                    <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan_temp'] == "SSD") echo "selected";
                                                                             ?>>SSD</option>
-                                    <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan'] == "Tanpa Keterangan") echo "selected";
+                                    <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan_temp'] == "Tanpa Keterangan") echo "selected";
                                                                                         ?>>Tanpa Keterangan</option>
                                 </select>
                             </div>
@@ -296,7 +296,7 @@
                     ?>
                         <td>
                             
-                            <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket_ll ?>" type="text" value="<?= $vaPegawai['ket_lain'] ?>" onkeyup="updateDataAbsen('<?= $id_ket_ll; ?>');" autocomplete="off">
+                            <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket_ll ?>" type="text" value="<?= $vaPegawai['ket_lain_temp'] ?>" onkeyup="updateDataAbsen('<?= $id_ket_ll; ?>');" autocomplete="off">
                             <input id="id_<?= $id_ket_ll; ?>" type="hidden" name="id" value="<?= $id_ket_ll ?>">
                         </td>
                     <?php
