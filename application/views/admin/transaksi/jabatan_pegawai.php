@@ -158,7 +158,7 @@ if ($action == "edit") {
                           <div class="col-sm-12">
                             <div class="form-group">
                               <label>Jabatan</label>
-                              <select class="comboBox form-control" name="cIdRefJabatan">
+                              <select class="comboBox form-control" id="cIdRefJabatan" onchange="cek_sub_unit_kerja(this.value)" name="cIdRefJabatan">
                                 <option></option>
                                 <?php foreach ($jabatan as $key => $vaJabatan) { ?>
                                   <option value="<?= $vaJabatan['id_ref_jabatan'] ?>" <?php if ($vaJabatan['id_ref_jabatan'] == $cIdRefJabatan) echo "selected"; ?>>
@@ -171,14 +171,15 @@ if ($action == "edit") {
                           <div class="col-sm-12">
                             <div class="form-group">
                               <label>Pilih Sub Unit Kerja</label>
-                              <select class="comboBox form-control" name="cIdSubUnitKerja">
+                              <div id="data_sub_unit_kerja"></div>
+                              <!-- <select class="comboBox form-control" name="cIdSubUnitKerja">
                                 <option></option>
-                                <?php foreach ($sub_unit as $key => $vaSubUnit) { ?>
-                                  <option value="<?= $vaSubUnit['id_sub_unit_kerja'] ?>" <?php if ($vaSubUnit['id_sub_unit_kerja'] == $cIdSubUnit) echo "selected"; ?>>
+                                <?php // foreach ($sub_unit as $key => $vaSubUnit) { ?>
+                                  <option value="<?= $vaSubUnit['id_sub_unit_kerja'] ?>" <?php //if ($vaSubUnit['id_sub_unit_kerja'] == $cIdSubUnit) echo "selected"; ?>>
                                     <?= $vaSubUnit['nama_sub_unit_kerja'] ?>
                                   </option>
-                                <?php } ?>
-                              </select>
+                                <?php //} ?>
+                              </select> -->
                             </div>
                           </div>
                         </div><br />
@@ -307,3 +308,23 @@ if ($action == "edit") {
 
   <!-- end:: Content -->
 </div>
+
+<script type="text/javascript">
+
+    function cek_sub_unit_kerja(data) {
+
+        var cUnit_k = $('#cIdRefJabatan').val();
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url() ?>transaksi_act/get_sub_unit_kerja_jabatan_pegawai/" + cUnit_k,
+            cache: false,
+            beforeSend: function() {
+                $('#data_sub_unit_kerja').html("Cek Data Ke Sistem .. ");
+            },
+            success: function(msg) {
+                $("#data_sub_unit_kerja").html(msg);
+            }
+        });
+
+    }
+</script>
