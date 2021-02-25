@@ -113,7 +113,7 @@ class Model extends CI_Model
 		FROM
 			tb_pegawai A
 			LEFT JOIN log_absen B ON B.pin = A.nik 
-			AND b.tanggal = '".$WhereValue."'
+			AND B.tanggal = '".$WhereValue."'
 			LEFT JOIN temp_log_absen E ON E.id_temp = B.id
 			LEFT JOIN tb_jabatan_pegawai C ON A.id_kerja = C.id_ref_jabatan
 			LEFT JOIN tb_ref_jabatan D ON D.id_ref_jabatan = C.id_ref_jabatan 
