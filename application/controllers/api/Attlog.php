@@ -3,6 +3,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . '/libraries/RestController.php';
+require APPPATH . '/libraries/Format.php';
 
 use chriskacerguis\RestServer\RestController;
 
@@ -21,7 +22,7 @@ class Attlog extends RestController
         if ($id === null) {
             $result = $this->model->ViewAttlogAPI('attlog');
         } else {
-            $result = $this->model->ViewAttlogAPI('attlog', 'attlog', $id);
+            $result = $this->model->ViewAttlogAPI('attlog', 'pin', $id);
         }
 
         if ($result) {
@@ -63,8 +64,25 @@ class Attlog extends RestController
 
     //insert job
     function index_post(){
-        $trim_job_id = trim($this->post(''));
-        $data = [  ];        
+        $data = [
+            'pin'        => $this->post('pin'),
+            'attlog'        => $this->post('attlog'),
+            'verify'      => $this->post('verify'),
+            'status_scan'      => $this->post('status_scan'),
+            'cloud_id'     => $this->post('cloud_id')           
+        ];
+        $data_filter = array_filter($data, 'strlen');
+        if ($this->model->insert_('attlog', $data_filter) > 0){
+            $this->response([
+                'status' => true,
+                'message' => 'new data has been created'
+            ], RestController::HTTP_CREATED);
+        } else{
+            $this->response([
+                'status' => false,
+                'message' => 'failed to create new data'
+            ], RestController::HTTP_BAD_REQUEST);
+        }       
         
     }
 
