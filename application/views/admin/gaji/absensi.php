@@ -140,7 +140,7 @@ if ($action == "edit") {
                             </div>
 
                             <br />
-                            <div id="data_absensi"></div>
+                             <div id="data_absensi"></div>                             
                             <br />
 
                           </div>
@@ -384,7 +384,7 @@ if ($action == "edit") {
   }
 
   function getDataAbsenImportPerHari() {
-    var dTgl_cetak = $('#dTgl_cetak').val();   
+    var dTgl_cetak = $('#dTgl_cetak').val();
     // alert(dTgl);
     if (dTgl_cetak == "") {
       new PNotify({
@@ -456,7 +456,7 @@ if ($action == "edit") {
     var ket_lain = $('#ket_lain_' + id).val();
     var dTgl_cetak = $('#dTgl_cetak').val();
     var nik_ket_update = $('#nik_ket_update_' + id).val();
-     //alert(id+"-"+ket_lain+"-"+dTgl_cetak+"-"+nik_ket_update);
+    //alert(id+"-"+ket_lain+"-"+dTgl_cetak+"-"+nik_ket_update);
 
     var values = {
       'id': id,
@@ -480,7 +480,7 @@ if ($action == "edit") {
   }
 
   function update_ket(id) {
-    
+
     var ket = $('#ket_' + id).val();
     var idAbs = $('#id_' + id).val();
     var dTgl_cetak = $('#dTgl_cetak').val();

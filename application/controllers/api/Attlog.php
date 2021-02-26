@@ -17,12 +17,12 @@ class Attlog extends RestController
     }
 
     //view job
-    function index_get($id=null)
+    function index_get($dTgl=null)
     {
-        if ($id === null) {
+        if ($dTgl === null) {
             $result = $this->model->ViewAttlogAPI('attlog');
         } else {
-            $result = $this->model->ViewAttlogAPI('attlog', 'pin', $id);
+            $result = $this->model->ViewAttlogAPI('attlog', 'attlog', $dTgl);
         }
 
         if ($result) {
