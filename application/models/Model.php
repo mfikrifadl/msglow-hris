@@ -381,6 +381,12 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function insert_($table, $data){
+		$this->db->insert($table, $data);
+		
+		return $this->db->affected_rows();
+	}
+
 	public function ViewAttlogAPI($table, $where_col = null, $id = null)
 	{
 		if ($where_col == null && $id == null) {
