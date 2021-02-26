@@ -105,67 +105,6 @@ class Gaji extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-	function cURL_API($id = "", $method = "", $data)
-	{
-		$curl = curl_init();
-
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://103.157.96.97/msglow-hris/api/attlog/' . $id,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => $method,
-			CURLOPT_HTTPHEADER => array(
-				'token: YOZq0ltM8i',
-				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU='
-			),
-		));
-
-		$response = curl_exec($curl);
-
-		curl_close($curl);
-
-		return $response;
-	}
-
-	public function coba_update($id = "")
-	{
-		$curl = curl_init();
-		//$delete_date = null;
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/msglow-hris/api/attlog/' . $id,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS => 'is_delete=0
-								&delete_date=null',
-			CURLOPT_HTTPHEADER => array(
-				'token: YOZq0ltM8i',
-				'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
-				'Content-Type: application/x-www-form-urlencoded'
-			),
-		));
-
-		$response = curl_exec($curl);
-
-		curl_close($curl);
-		//redirect(site_url('recruitment/wawancara'));		
-	}
-
-	public function attlog_id($Id = "")
-	{
-		$content = $this->cURL_API($Id, 'GET', '');
-
-		echo $content;
-	}
-
 	public function absensi_pegawai($Aksi = "", $Id = "")
 	{
 		$dataHeader['menu'] = 'Manajemen Absensi';
@@ -177,11 +116,6 @@ class Gaji extends CI_Controller
 
 		$dataHeader['notif_absensi']	= $this->model->notifAbsensi();
 		$dataHeader['data_notif_absen']		= $this->model->View('v_data_notif_absen');
-
-		$response 			= $this->cURL_API('', 'GET', '');
-		$data2 				= json_decode($response, true);
-		$data['attlog']	= $data2['data'];
-
 
 		if($Aksi == "Update"){
 

@@ -16,7 +16,7 @@
     <table class='table table-striped table-bordered' id='DataTableAbsensi'>
         <thead>
             <tr>
-                <td>No </td>
+                <td>No <?= $this->session->userdata('level') ?></td>
                 <td>PIN</td>
                 <td>Attlog</td>
                 <td>Verify</td>
@@ -28,30 +28,41 @@
         <tbody>
             <?php $no = 0;
 
-            foreach ($data_absensi as $key => $vaArea) {
+            foreach ($attlog as $key => $vaArea) {
+
+                $tgl_attlog = $vaArea['attlog'];
+
+                $a_attlog = explode(" ", $tgl_attlog);
+                $tgl = $a_attlog[0];
+                $waktu = $a_attlog[1];
+
+                if ($dTgl != $tgl) {
+                } else {
             ?>
-                <tr>
-                    <td><?= ++$no; ?></td>
-                    <td>
-                        <?= $vaArea['pin'] ?>
-                    </td>
-                    <td>
-                        <?= $vaArea['attlog'] ?>
-                    </td>
-                    <td>
-                        <?= $vaArea['verify'] ?>
-                    </td>
-                    <td>
-                        <?= $vaArea['status_scan'] ?>
-                    </td>
-                    <td>
-                        <?= $vaArea['cloud_id'] ?>
-                    </td>
-                </tr>
-            <?php } ?>
+                    <tr>
+                        <td><?= ++$no; ?></td>
+                        <td>
+                            <?= $vaArea['pin'] ?>
+                        </td>
+                        <td>
+                            <?= $vaArea['attlog'] ?>
+                        </td>
+                        <td>
+                            <?= $vaArea['verify'] ?>
+                        </td>
+                        <td>
+                            <?= $vaArea['status_scan'] ?>
+                        </td>
+                        <td>
+                            <?= $vaArea['cloud_id'] ?>
+                        </td>
+                    </tr>
+            <?php
+                }
+            } ?>
         </tbody>
     </table>
-    <?php if (empty($data_absensi)) {
+    <?php if (empty($attlog)) {
     } else {
         if ($this->session->userdata('level') == 3) {
     ?>

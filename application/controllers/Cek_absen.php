@@ -143,15 +143,18 @@ class Cek_absen extends CI_Controller
     {
         //=================================ALGORITMA ABSENSI PER HARI ===========================================
         $dTgl = $this->input->post('dTgl');
-        
+
         //echo "$dTgl - $dTgl_end <br />";
 
         $data_absensi = $this->model->View('attlog');
         $data_log_absen = array();
         $no = 0;
 
+        $response 			= $this->cURL_API('', 'GET', '');
+		$data2 				= json_decode($response, true);
+		$dataAttlog	= $data2['data'];
 
-        foreach ($data_absensi as $key => $vaArea) {
+        foreach ($dataAttlog as $key => $vaArea) {            
             $c_id = date("YmdHis");
             ++$no;
             // $tgl_hari_ini = date('Y-m-d');
@@ -167,7 +170,7 @@ class Cek_absen extends CI_Controller
             $waktu = $a_attlog[1];
 
             $t_dTgl = new DateTime($dTgl);
-            
+
             $tgl_attlog = new DateTime($tgl);
 
             if ($t_dTgl == $tgl_attlog) {
@@ -192,7 +195,6 @@ class Cek_absen extends CI_Controller
                     'cloud_id' => $cloud_id
                 ));
             } else {
-                
             }
 
             //=================================END ALGORITMA ABSENSI PER HARI ===========================================
@@ -228,6 +230,39 @@ class Cek_absen extends CI_Controller
         $this->load->view('admin/container/footer_dataTable');
     }
 
+    function cURL_API($dTgl = "", $method = "")
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://103.157.96.97/msglow-hris/api/attlog/' . $dTgl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HTTPHEADER => array(
+                'token: YOZq0ltM8i',
+                'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU='
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return $response;
+    }    
+
+    public function attlog_id($Id = "")
+    {
+        $content = $this->cURL_API($Id, 'GET', '');
+
+        echo $content;
+    }
+
     public function get_data_absensi_per_hari()
     {
         $dTgl = $this->input->post('dTgl');
@@ -243,6 +278,10 @@ class Cek_absen extends CI_Controller
         $data = array(
             'dTgl' => $dTgl
         );
+
+        $response 			= $this->cURL_API('', 'GET', '');
+		$data2 				= json_decode($response, true);
+		$data['attlog']	= $data2['data'];
 
         //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
         $data['data_absensi'] = $this->model->ViewBetween('attlog', 'attlog', $x, $y);
@@ -278,5 +317,4 @@ class Cek_absen extends CI_Controller
         $this->load->view('admin/gaji/tb_absensi_import', $data);
         $this->load->view('admin/container/footer_dataTable');
     }
-
 }
