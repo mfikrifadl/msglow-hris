@@ -398,15 +398,16 @@ class Transaksi_act extends CI_Controller
 			$GetNik = $this->db->query("SELECT nik FROM tb_pegawai 
 			WHERE nik = '" . $this->input->post('cNik') . "' ");
 			if ($GetNik->num_rows() > 0 and $this->input->post('cNik') != "") {
+				//echo "tes 1";
 				redirect(site_url('transaksi/pegawai/error'));
 			} elseif ($GetNik->num_rows() > 0 and $this->input->post('cNik') == "") {
-				$this->model->Insert("log", $vaLog);
-				$this->model->Insert('tb_pegawai', $data);
-				redirect(site_url('transaksi/pegawai/I'));
+				redirect(site_url('transaksi/pegawai/error'));
+				//echo "tes 2";
 			} else {
 				$this->model->Insert("log", $vaLog);
 				$this->model->Insert('tb_pegawai', $data);
 				redirect(site_url('transaksi/pegawai/I'));
+				//echo "tes 3";
 			}
 		} elseif ($Type == "Update") {
 			$this->model->Insert("log", $vaLog);

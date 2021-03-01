@@ -14,16 +14,33 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <?php
+    $c = "";
+
     if (empty($row)) {
     } else {
-    ?>
-        <div class='row'>
+        foreach ($cek_tanggal as $cek) {
+            if ($cek['tanggal'] == $dTgl_cetak) {
+    
+            } else {
+                ?>
+                <div class='row'>
+                    <div class='col-sm-12 text-right'>
+                        <button class='btn btn-success' name="submit" type='submit'>
+                            <i class="flaticon2-google-drive-file"></i>Cetak PDF
+                        </button>
+                    </div>
+                </div>
+        <?php
+            }
+        }
+        ?>
+        <!-- <div class='row'>
             <div class='col-sm-12 text-right'>
                 <button class='btn btn-success' name="submit" type='submit'>
                     <i class="flaticon2-google-drive-file"></i>Cetak PDF
                 </button>
             </div>
-        </div>
+        </div> -->
     <?php
     }
     ?>
@@ -114,14 +131,14 @@
                     } else {
                     }
                     ?>
-                    <td><?= $vaPegawai['nama'] ?></td>
+                    <td><?= $vaPegawai['nama'] ?> </td>
                     <td><?= $vaPegawai['nama_jabatan'] ?></td>
 
-                    <?php 
+                    <?php
                     // if(empty($vaPegawai['tanggal'])){
-                        ?>
-                        <!-- <input type="hidden" > -->
-                        <?php
+                    ?>
+                    <!-- <input type="hidden" > -->
+                    <?php
                     // }
                     ?>
                     <td><?= $vaPegawai['tanggal'] ?></td>
@@ -163,8 +180,9 @@
                         }
                     ?>
                         <td>
-                        <?php //echo"-".$vaPegawai['nik']."-".$id_ket; ?>
-                            
+                            <?php //echo"-".$vaPegawai['nik']."-".$id_ket; 
+                            ?>
+
                             <div class="form-group">
                                 <select id="ket_<?= $id_ket; ?>" onkeyup="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
@@ -286,18 +304,18 @@
                     </td>
                     <?php
                     if ($this->session->userdata('level') == 3) {
-                        $id_ket_ll = "";
-                        if ($vaPegawai['id'] == 0 || empty($vaPegawai['id'])) {
-                            $t_id_ket_ll = date("YmdHis");
-                            $id_ket_ll = $t_id_ket_ll + $no;
-                        } else {
-                            $id_ket_ll = $vaPegawai['id'];
-                        }
+                        // $id_ket_ll = "";
+                        // if ($vaPegawai['id'] == 0 || empty($vaPegawai['id'])) {
+                        //     $t_id_ket_ll = date("YmdHis");
+                        //     $id_ket_ll = $t_id_ket_ll + $no;
+                        // } else {
+                        //     $id_ket_ll = $vaPegawai['id'];
+                        // }
                     ?>
                         <td>
-                            
-                            <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket_ll ?>" type="text" value="<?= $vaPegawai['ket_lain_temp'] ?>" onkeyup="updateDataAbsen('<?= $id_ket_ll; ?>');" autocomplete="off">
-                            <input id="id_<?= $id_ket_ll; ?>" type="hidden" name="id" value="<?= $id_ket_ll ?>">
+
+                            <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket ?>" type="text" value="<?= $vaPegawai['ket_lain_temp'] ?>" onkeyup="updateDataAbsen('<?= $id_ket ?>');" autocomplete="off">
+                            <input id="id_<?= $id_ket ?>" type="hidden" name="id" value="<?= $id_ket ?>">
                         </td>
                     <?php
                     } elseif ($this->session->userdata('level') == 1) {

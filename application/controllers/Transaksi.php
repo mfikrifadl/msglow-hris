@@ -194,6 +194,8 @@ class Transaksi extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 		= $this->relasi->GetDataPegawaiSearch($Id);
 			$data['v_tb_kontrak_pegawai']		= $this->model->ViewWhere('kontrak', 'id_pegawai', $Id);
+		}elseif($Aksi == 'error'){
+			$data['error'] = "NIK Sudah Terdaftar";
 		}
 
 		//======================NOTIFIKASI===============================================================
