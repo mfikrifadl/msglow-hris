@@ -1080,6 +1080,29 @@ if ($action == "edit") {
 
                           <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
                             <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
+
+                              <?php
+
+                              if ($action == "error") {
+                                if ($error == "NIK Sudah Terdaftar") {
+                              ?>
+                                  <div class="alert alert-danger fade show" role="alert">
+                                    <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                    <div class="alert-text">NIK Sudah Terdaftar !!!</div>
+                                    <div class="alert-close">
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true"><i class="la la-close"></i></span>
+                                      </button>
+                                    </div>
+                                  </div>
+
+                              <?php
+                                } else {
+                                }
+                              } else {
+                              }
+                              ?>
+
                               <div class="form-group">
                                 <label>Area Kerja</label>
                                 <select class="form-control kt-selectpicker" data-live-search="true" name="cIdArea" required>
@@ -1096,7 +1119,7 @@ if ($action == "edit") {
                                 <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" onchange="hideshow(this.value)" required>
                                   <option></option>
                                   <?php foreach ($status as $key => $vaStatus) {
-                                    if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4) { ?>
+                                    if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4 || $vaStatus['id_status'] == 5) { ?>
 
                                       <option value="<?= $vaStatus['id_status'] ?>" <?php if ($vaStatus['id_status'] == $cIdStatus) echo "selected"; ?>>
                                         <?= $vaStatus['status'] ?>
@@ -1171,7 +1194,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Pembayaran Gaji <?= $cJenisBayar ?></label>
                                 <div class="input-group">
-                                  <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true" required>
+                                  <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true">
                                     <option></option>
                                     <?php foreach ($bayar as $key => $vaBayar) { ?>
                                       <option value="<?= $vaBayar['id_pembayaran'] ?>" <?php if ($vaBayar['id_pembayaran'] == $cJenisBayar) echo "selected"; ?>>
@@ -1190,7 +1213,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Cabang Bank</label>
                                 <div class="input-group">
-                                  <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank" required>
+                                  <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success flaticon2-map"></i>
@@ -1201,7 +1224,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Nomor Rekening</label>
                                 <div class="input-group">
-                                  <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening" required>
+                                  <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success fa fa-credit-card"></i>
@@ -1212,7 +1235,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Atas Nama</label>
                                 <div class="input-group">
-                                  <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama" required>
+                                  <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success fa fa-user"></i>
@@ -1296,7 +1319,7 @@ if ($action == "edit") {
                             <div class="form-group">
                               <label>Nik</label>
                               <div class="input-group">
-                                <input type="text" readonly="true" name="cNik" id="cNik" class="form-control" placeholder="Nik Pegawai" value="<?= $cNik ?>">
+                                <input type="text" name="cNik" id="cNik" class="form-control" placeholder="Nik Pegawai">
                                 <div class="input-group-append">
                                   <span class="input-group-text" id="basic-addon2">
                                     <i class="kt-font-success fa fa-credit-card"></i>

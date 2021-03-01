@@ -143,7 +143,7 @@ class Cek_absen extends CI_Controller
     {
         //=================================ALGORITMA ABSENSI PER HARI ===========================================
         $dTgl = $this->input->post('dTgl');
-
+        
         //echo "$dTgl - $dTgl_end <br />";
 
         $data_absensi = $this->model->View('attlog');
@@ -154,7 +154,7 @@ class Cek_absen extends CI_Controller
 		$data2 				= json_decode($response, true);
 		$dataAttlog	= $data2['data'];
 
-        foreach ($dataAttlog as $key => $vaArea) {            
+        foreach ($dataAttlog as $key => $vaArea) {
             $c_id = date("YmdHis");
             ++$no;
             // $tgl_hari_ini = date('Y-m-d');
@@ -170,7 +170,7 @@ class Cek_absen extends CI_Controller
             $waktu = $a_attlog[1];
 
             $t_dTgl = new DateTime($dTgl);
-
+            
             $tgl_attlog = new DateTime($tgl);
 
             if ($t_dTgl == $tgl_attlog) {
@@ -195,6 +195,7 @@ class Cek_absen extends CI_Controller
                     'cloud_id' => $cloud_id
                 ));
             } else {
+                
             }
 
             //=================================END ALGORITMA ABSENSI PER HARI ===========================================
@@ -314,7 +315,9 @@ class Cek_absen extends CI_Controller
         );
 
         $data['row'] = $this->model->ViewAbsensiPerHari($dTgl_cetak);
+        $data['cek_tanggal'] = $this->model->ViewWhere('v_tanggal_log_absen','tanggal',$dTgl_cetak);
         $this->load->view('admin/gaji/tb_absensi_import', $data);
         $this->load->view('admin/container/footer_dataTable');
     }
+
 }

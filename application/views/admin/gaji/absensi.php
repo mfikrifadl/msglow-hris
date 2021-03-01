@@ -140,7 +140,7 @@ if ($action == "edit") {
                             </div>
 
                             <br />
-                             <div id="data_absensi"></div>                             
+                            <div id="data_absensi"></div>
                             <br />
 
                           </div>
@@ -161,7 +161,8 @@ if ($action == "edit") {
           <!--end::Accordion-->
 
         </div>
-      </div>
+      </div>      
+
     </div>
 
     <div class=" row">
@@ -193,7 +194,7 @@ if ($action == "edit") {
 
                             <div class="row">
                               <?php
-                              if ($this->session->userdata('level') == 3) {
+                              if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 1) {
                               ?>
                                 <div class="form-group row">
                                   <label class="col-form-label col-lg-6 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
@@ -208,9 +209,11 @@ if ($action == "edit") {
                                   </div>
                                 </div>
                               <?php
-                              } elseif ($this->session->userdata('level') == 1) {
+                              } else {
+                              }
+                              //elseif ($this->session->userdata('level') == 1) {
                               ?>
-                                <div class="form-group row">
+                              <!-- <div class="form-group row">
                                   <label class="col-form-label col-lg-4 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
                                   <div class="col-lg-8 col-md-12 col-sm-12">
                                     <div class="input-daterange input-group">
@@ -228,10 +231,10 @@ if ($action == "edit") {
                                     </div>
                                     <span class="form-text text-muted">date range selection</span>
                                   </div>
-                                </div>
+                                </div> -->
                               <?php
-                              } else {
-                              }
+                              // } 
+
                               ?>
 
 
@@ -491,7 +494,7 @@ if ($action == "edit") {
       'nik_ket_update': nik_ket_update,
       'ket': ket
     }
-    // alert(id+"-"+ket+"-"+dTgl_cetak+"-"+nik_ket_update);  
+    //alert(id+"-"+ket+"-"+dTgl_cetak+"-"+nik_ket_update);  
 
     if (ket == "") {
       new PNotify({
