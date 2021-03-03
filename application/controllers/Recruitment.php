@@ -109,7 +109,7 @@ class Recruitment extends CI_Controller
 		$data2 				= json_decode($response, true);
 		$data['registrant']	= $data2['data'];
 
-		$data['levels']	= $this->model->view('level', 'id_level');
+		$data['levels']	= $this->model->view('v_interviewer', 'nama');
 
 
 		if ($Aksi == 'edit') {
