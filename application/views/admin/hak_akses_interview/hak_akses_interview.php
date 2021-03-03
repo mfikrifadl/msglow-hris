@@ -351,6 +351,7 @@ if ($action == "edit") {
                                                                         <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
                                                                             <i class="flaticon2-check-mark"></i>
                                                                         </a>
+                                                                         
                                                                     <?php
                                                                     }
                                                                     ?>
@@ -358,12 +359,15 @@ if ($action == "edit") {
                                                                     <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Reject" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon2-delete"></i>
                                                                     </a>
-                                                                    <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
-                                                                        <i class="flaticon-edit"></i>
-                                                                    </a> -->
+                                                                    
                                                                     <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" href="<?= site_url('transaksi_act/form_pengajuan/delete/' . $vaArea['id_form'] . '') ?>">
                                                                         <i class="flaticon-delete"></i>
                                                                     </a>
+                                                                    
+                                                                    <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                        <i class="flaticon-edit"></i>
+                                                                    </a> -->
+                                                                    
                                                                 <?php
                                                                 } else {
                                                                     if($vaArea['level_admin'] == $this->session->userdata('nama')){

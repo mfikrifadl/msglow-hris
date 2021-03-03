@@ -80,6 +80,7 @@
               </tr>
             </thead>
             <tbody>
+            <input type="hidden" id="coba" value="selamat ulang tahun">
               <?php $no = 0;
               foreach ($ultah as $key => $vaArea) {
                 $age = date_diff(date_create($vaArea['tanggal_lahir']), date_create('now'))->y; ?>
@@ -94,6 +95,33 @@
               <?php } ?>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="kt-portlet">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <!--begin::Portlet-->
+            <div class="kt-portlet" id="kt_portlet">
+              <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                  <span class="kt-portlet__head-icon">
+                    <i class="flaticon-map-location"></i>
+                  </span>
+                  <h3 class="kt-portlet__head-title">
+                    Basic Calendar
+                  </h3>
+                </div>
+                
+              </div>
+              <div class="kt-portlet__body">
+                <div id="kt_calendar"></div>
+              </div>
+            </div>
+
+            <!--end::Portlet-->
+          </div>
         </div>
       </div>
 
@@ -112,8 +140,8 @@
                     </h4>
                   </div>
                   <span class="kt-widget24__stats kt-font-brand">
-                  <?php
-                    foreach($tot_pegawai as $rowPegawaiPhl){
+                    <?php
+                    foreach ($tot_pegawai as $rowPegawaiPhl) {
                       echo $rowPegawaiPhl['jml_pegawai'];
                     }
                     ?>
@@ -135,7 +163,7 @@
                   </div>
                   <span class="kt-widget24__stats kt-font-warning">
                     <?php
-                    foreach($jml_pegawai_kontrak as $rowPegawaiKontrak){
+                    foreach ($jml_pegawai_kontrak as $rowPegawaiKontrak) {
                       echo $rowPegawaiKontrak['jml_pegawai_kontrak'];
                     }
                     ?>
@@ -174,8 +202,8 @@
                     </h4>
                   </div>
                   <span class="kt-widget24__stats kt-font-default">
-                  <?php
-                    foreach($jml_pegawai_phl as $rowPegawaiPhl){
+                    <?php
+                    foreach ($jml_pegawai_phl as $rowPegawaiPhl) {
                       echo $rowPegawaiPhl['jml_pegawai_phl'];
                     }
                     ?>

@@ -153,8 +153,11 @@
 <script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/advanced-search.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets2/js/pages/crud/forms/widgets/summernote.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/column-search.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets2/js/pages/components/calendar/basic.js" type="text/javascript"></script>
 
 <script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/column-search.js" type="text/javascript"></script>
+
+<script src="<?= base_url() ?>assets2/js/pages/components/calendar/basic.js" type="text/javascript"></script>
 <!-- ================================= CSS BAWAAN =================================================== -->
 <!-- jQuery 2.1.3 -->
 <!-- <script src="<?= base_url() ?>assets/plugins/jQuery/jQuery-2.1.3.min.js"></script> -->

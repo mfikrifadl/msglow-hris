@@ -185,7 +185,14 @@ if ($action == "edit") {
                           <li class="active text-dark">
                             <!-- <a href="#" class="btn btn-label-facebook"><i class="socicon-facebook"></i> Facebook</a>&nbsp; -->
                             <button type="button" onclick="return GetDataOperator();" class="btn btn-label-facebook">
-                              Data Pegawai Ms Glow
+                              Data Pegawai Staff Ms Glow
+                            </button>
+                            <!-- <a href="#tab_1" onclick="" data-toggle="tab">Data Pegawai Operator</a> -->
+                          </li>
+                          <li class="active text-dark">
+                            <!-- <a href="#" class="btn btn-label-facebook"><i class="socicon-facebook"></i> Facebook</a>&nbsp; -->
+                            <button type="button" onclick="return GetDataOperatorEksternal();" class="btn btn-label-facebook">
+                              Data Pegawai Eksternal Ms Glow
                             </button>
                             <!-- <a href="#tab_1" onclick="" data-toggle="tab">Data Pegawai Operator</a> -->
                           </li>
@@ -2323,6 +2330,21 @@ if ($action == "edit") {
     $.ajax({
       type: "GET",
       url: "<?= site_url('transaksi/tb_operator') ?>",
+      cache: false,
+      beforeSend: function() {
+        $('#data_operator').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+      },
+      success: function(msg) {
+        $("#data_operator").html(msg);
+      }
+    });
+  }
+
+  function GetDataOperatorEksternal() {
+    $('.loding').show();
+    $.ajax({
+      type: "GET",
+      url: "<?= site_url('transaksi/tb_operator_eksternal') ?>",
       cache: false,
       beforeSend: function() {
         $('#data_operator').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");

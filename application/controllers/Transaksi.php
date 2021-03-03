@@ -78,6 +78,13 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/transaksi/data/tb_operator', $data);
 	}
 
+	public function tb_operator_eksternal()
+	{
+
+		$data['row']	= $this->relasi->GetDataPegawaiEksternal();
+		$this->load->view('admin/transaksi/data/tb_operator', $data);
+	}
+
 	public function tb_operator_phl()
 	{
 

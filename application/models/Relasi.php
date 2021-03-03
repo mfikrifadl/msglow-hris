@@ -70,6 +70,24 @@ class Relasi extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function GetDataPegawaiEksternal()
+	{
+		$Query = $this->db->query(
+			"SELECT * ,(SELECT a.nama_area FROM tb_area_kerja a WHERE a.id_area = p.id_area) AS Area,
+		(SELECT k.status FROM tb_status_karyawan k WHERE k.id_status = p.id_status) AS Status ,
+		(SELECT kk.kerja FROM tb_kerja kk WHERE kk.id_kerja = p.id_kerja) AS Kerja ,
+		(SELECT j.jenis_pembayaran FROM tb_jenis_bayar j WHERE j.id_pembayaran = p.jenis_pembayaran) AS Pembayaran,
+		(SELECT pk.nama_pendidikan FROM tb_pendidikan pk WHERE pk.id_pendidikan = p.pendidikan) AS PendidikanPegawai,
+		(SELECT nama  FROM tb_outlet o WHERE o.id_outlet = p.outlet) AS OutletFix,
+		12 * (YEAR('" . date('Y-m-d') . "') - YEAR (p.tanggal_masuk_kerja)) + 
+			 (MONTH('" . date('Y-m-d') . "') - MONTH (p.tanggal_masuk_kerja)) +
+			 (SIGN(DAY('" . date('Y-m-d') . "') / DAY (p.tanggal_masuk_kerja)) - 1) AS MasaKerja
+
+		FROM tb_pegawai p WHERE p.id_status = 5 ORDER BY p.nik,p.nama ASC"
+		);
+		return $Query->result_array();
+	}
+
 	public function GetDataPegawaiPhl()
 	{
 		$Query = $this->db->query(
