@@ -267,8 +267,12 @@
                             $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
                             $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
                             $tot_jam_lembur = (string)$jumlah2;
+                            if(empty($jam_datang) && empty($jam_pulang)){
 
-                            echo "$tot_jam_lembur";
+                            }else{
+                                echo "$tot_jam_lembur";
+                            }
+                            
                         } else {
                         }
 
