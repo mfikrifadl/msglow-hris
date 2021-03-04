@@ -80,7 +80,7 @@
 <script src="<?php echo base_url(); ?>assets2/plugins/general/dual-listbox/dist/dual-listbox.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/general/raphael/raphael.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/general/morris.js/morris.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/general/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>
+<!-- <script src="<?php echo base_url(); ?>assets2/plugins/general/chart.js/dist/Chart.bundle.js" type="text/javascript"></script> -->
 <script src="<?php echo base_url(); ?>assets2/plugins/general/plugins/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/general/plugins/jquery-idletimer/idle-timer.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/general/waypoints/lib/jquery.waypoints.js" type="text/javascript"></script>
@@ -157,7 +157,7 @@
 
 <script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/column-search.js" type="text/javascript"></script>
 
-<script src="<?= base_url() ?>assets2/js/pages/components/calendar/basic.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets2/js/chartjs/Chart.bundle.js" type="text/javascript"></script>
 <!-- ================================= CSS BAWAAN =================================================== -->
 <!-- jQuery 2.1.3 -->
 <!-- <script src="<?= base_url() ?>assets/plugins/jQuery/jQuery-2.1.3.min.js"></script> -->
