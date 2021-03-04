@@ -75,6 +75,8 @@ if ($this->session->userdata('id') == '') {
 
   <link rel="icon" href="<?= base_url() ?>assets2/media/logos/title-ikon-msglow2.png" type="image/gif" sizes="16x16" />
 
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets2/js/chartjs/Chart.js"></script>
+
   <!--end:: Vendor Plugins for custom pages -->
 
 

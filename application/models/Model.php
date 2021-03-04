@@ -107,13 +107,32 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
+	public function ViewOvertimePerWeek($WhereValue1, $WhereValue2)
+	{
+		$Query = $this->db->query("	SELECT A.id_pegawai, A.nik,	A.nama,	B.attlog, B.tanggal, MIN( B.waktu ) AS jam_datang, MAX( B.waktu ) AS jam_pulang, B.waktu 
+									FROM
+										tb_pegawai A
+										LEFT JOIN log_absen B ON B.pin = A.nik 
+										AND (
+											REPLACE ( B.tanggal, '-', '' ) BETWEEN REPLACE ( '2021-02-13', '-', '' ) 
+										AND REPLACE ( '2021-02-28', '-', '' ))	 
+									WHERE
+										IFNULL( A.id_status_mengundurkan_diri, 0 ) < 6 OR IFNULL( A.id_status_mengundurkan_diri, 0 ) > 11 
+									GROUP BY
+										A.nik,
+										B.tanggal ");
+		return $Query->result_array();
+	}
+
+
+
 	public function ViewBetweenAbsensiPerHari($WhereValue1)
 	{
 		$Query = $this->db->query("	SELECT B.id, E.id_temp, A.id_pegawai, A.nik, A.nama, D.nama_jabatan, B.tot_jam_kerja, B.tot_jam_lembur, B.keterangan, E.keterangan_temp, B.keterlambatan, B.ket_lain, E.ket_lain_temp, B.attlog, B.tanggal, MIN( B.waktu ) AS jam_datang, MAX( B.waktu ) AS jam_pulang, B.waktu
 									FROM
 										tb_pegawai A
 										LEFT JOIN log_absen B ON B.pin = A.nik 
-											AND B.tanggal = '".$WhereValue1."'
+											AND B.tanggal = '" . $WhereValue1 . "'
 										LEFT JOIN temp_log_absen E ON E.id_temp = B.id
 										LEFT JOIN tb_jabatan_pegawai C ON A.id_kerja = C.id_ref_jabatan
 										LEFT JOIN tb_ref_jabatan D ON D.id_ref_jabatan = C.id_ref_jabatan 
@@ -130,7 +149,7 @@ class Model extends CI_Model
 		FROM
 			tb_pegawai A
 			LEFT JOIN log_absen B ON B.pin = A.nik 
-			AND B.tanggal = '".$WhereValue."'
+			AND B.tanggal = '" . $WhereValue . "'
 			LEFT JOIN temp_log_absen E ON E.id_temp = B.id
 			LEFT JOIN tb_jabatan_pegawai C ON A.id_kerja = C.id_ref_jabatan
 			LEFT JOIN tb_ref_jabatan D ON D.id_ref_jabatan = C.id_ref_jabatan 
@@ -147,7 +166,7 @@ class Model extends CI_Model
 		FROM
 			tb_pegawai A
 			LEFT JOIN log_absen B ON B.pin = A.nik 
-			AND B.tanggal = '".$WhereValue."'
+			AND B.tanggal = '" . $WhereValue . "'
 			LEFT JOIN temp_log_absen E ON E.id_temp = B.id
 			LEFT JOIN tb_jabatan_pegawai C ON A.id_kerja = C.id_ref_jabatan
 			LEFT JOIN tb_ref_jabatan D ON D.id_ref_jabatan = C.id_ref_jabatan 
@@ -415,9 +434,10 @@ class Model extends CI_Model
 		return $Query->result_array();
 	}
 
-	public function insert_($table, $data){
+	public function insert_($table, $data)
+	{
 		$this->db->insert($table, $data);
-		
+
 		return $this->db->affected_rows();
 	}
 
@@ -434,37 +454,33 @@ class Model extends CI_Model
 	// Buat sebuah fungsi untuk melakukan insert lebih dari 1 data
 	public function update_data_temp_log_absen($data_temp_log_absen_update, $id_absen)
 	{
-		if($data_temp_log_absen_update == null){
+		if ($data_temp_log_absen_update == null) {
 			// echo "tidak masuk database if insert_time_payroll <br />";
-		}else{
+		} else {
 			// echo "masuk else insert_time_payroll <br />";
 			$this->db->update_batch('temp_log_absen', $data_temp_log_absen_update, $id_absen);
 		}
-		 
 	}
 
 	// Buat sebuah fungsi untuk melakukan insert lebih dari 1 data
 	public function insert_data_temp_log_absen($data_temp_log_absen)
 	{
-		if($data_temp_log_absen == null){
+		if ($data_temp_log_absen == null) {
 			// echo "tidak masuk database if insert_time_payroll <br />";
-		}else{
+		} else {
 			// echo "masuk else insert_time_payroll <br />";
 			$this->db->insert_batch('temp_log_absen', $data_temp_log_absen);
 		}
-		 
 	}
 
 	// Buat sebuah fungsi untuk melakukan insert lebih dari 1 data
 	public function insert_data_log_absen($data_log_absen)
 	{
-		if($data_log_absen == null){
+		if ($data_log_absen == null) {
 			// echo "tidak masuk database if insert_time_payroll <br />";
-		}else{
+		} else {
 			// echo "masuk else insert_time_payroll <br />";
 			$this->db->insert_batch('log_absen', $data_log_absen);
 		}
-		 
 	}
-
 }

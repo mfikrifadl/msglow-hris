@@ -652,7 +652,7 @@ var KTDashboard = function() {
             element: 'kt_chart_revenue_change',
             data: [{
                     label: "New York",
-                    value: 10
+                    value: 27
                 },
                 {
                     label: "London",
