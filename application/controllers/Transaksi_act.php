@@ -207,18 +207,15 @@ class Transaksi_act extends CI_Controller
 		// echo "md5 : $cPassword <br />";
 
 		$cUser 	   = ($this->input->post('username'));
-/*		$nRow = $this->model->LoginAdmin($cUser, $doubleHash);*/
-		$this->db->where("username",$cUser) ; 
-			$this->db->where("password_hash", $doubleHash) ; 
-			$this->db->select("*") ; 
-			$db = $this->db->get("v_username");
-			if($Row = $db->row_array()){
+		$nRow = $this->model->LoginAdmin($cUser, $doubleHash);
+		if ($nRow->num_rows() > 0) {
+			foreach ($nRow->result_array() as $Row) {
 				$Nama		= $Row['nama'];
 				$Level 		= $Row['status'];
 				$User		= $Row['username'];
 				$Id			= $Row['id'];
 				$is_interview			= $Row['is_interview'];
-			
+			}
 			// $this->load->library('session');
 			$this->session->set_userdata('nama', $Nama);
 			$this->session->set_userdata('user', $User);

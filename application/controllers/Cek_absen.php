@@ -315,6 +315,7 @@ class Cek_absen extends CI_Controller
         );
 
         $data['row'] = $this->model->ViewAbsensiPerHari($dTgl_cetak);
+        $data['cek_tanggal'] = $this->model->ViewWhere('v_tanggal_log_absen','tanggal',$dTgl_cetak);
         $this->load->view('admin/gaji/tb_absensi_import', $data);
         $this->load->view('admin/container/footer_dataTable');
     }

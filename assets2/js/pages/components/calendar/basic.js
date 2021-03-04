@@ -43,7 +43,7 @@ var KTCalendarBasic = function() {
                 navLinks: true,
                 events: [
                     {
-                        title: 'All Day Event',
+                        title: 'All Day Event asd',
                         start: YM + '-01',
                         description: 'Toto lorem ipsum dolor sit incid idunt ut',
                         className: "fc-event-danger fc-event-solid-warning"  

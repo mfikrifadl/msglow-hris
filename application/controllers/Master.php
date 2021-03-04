@@ -117,16 +117,37 @@ class Master extends CI_Controller
 		$dataHeader['menu']   = 'Master';
 		$dataHeader['file']   = 'Home';
 
+		date_default_timezone_set('Asia/Jakarta');
+		$tgl_now = date('Y-m-d H:i:s');
+		$tgl_week = date('Y-m-d H:i:s', time() - (60 * 60 * 24 * 7));
+
+		$a_tgl_now = explode(" ", $tgl_now);
+		$t_tgl_now = $a_tgl_now[0];
+
+		$a_tgl_week = explode(" ", $tgl_week);
+		$t_tgl_week = $a_tgl_week[0];
+
 		$query 							= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tanggal_lahir) = MONTH(NOW()) AND DAY(tanggal_lahir) = DAY(NOW())');
-		$total_pegawai					= $this->db->query('SELECT COUNT(nik) AS jml_pegawai FROM tb_pegawai WHERE id_status_mengundurkan_diri < 6 OR id_status_mengundurkan_diri > 11');
-		$query_p_kontrak 				= $this->db->query('SELECT COUNT(id_status) AS jml_pegawai_kontrak FROM tb_pegawai	WHERE id_status = 4');
-		$query_p_phl 					= $this->db->query('SELECT COUNT(id_status) AS jml_pegawai_phl FROM tb_pegawai	WHERE id_status = 3');
+		$total_pegawai					= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai FROM tb_pegawai WHERE id_status = 3 OR id_status = 4 OR id_status = 5 OR id_status_mengundurkan_diri < 6 OR id_status_mengundurkan_diri > 11');
+		$query_p_kontrak 				= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai_kontrak FROM tb_pegawai	WHERE id_status = 4 OR id_status_mengundurkan_diri = 4');
+		$query_p_phl 					= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai_phl FROM tb_pegawai	WHERE id_status = 3 OR id_status_mengundurkan_diri = 3');
+		$query_p_eksternal 				= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai_eksternal FROM tb_pegawai WHERE id_status = 5 OR id_status_mengundurkan_diri = 5');
+		$total_pegawai_pria				= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai_pria FROM tb_pegawai WHERE jk = 1 OR id_status_mengundurkan_diri < 6 OR id_status_mengundurkan_diri > 11');
+		$total_pegawai_wanita			= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai_wanita FROM tb_pegawai WHERE jk = 2 OR id_status_mengundurkan_diri < 6 OR id_status_mengundurkan_diri > 11');
 
 		$data['kontrak']				= $this->model->View('v_tb_pegawai');
+		$data['log_absen']				= $this->model->ViewOvertimePerWeek($t_tgl_week, $t_tgl_now);
+		$data['ultah']					= $query->result_array();
+		$data['jml_pegawai_pria']		= $total_pegawai_pria->result_array();
+		$data['jml_pegawai_wanita']		= $total_pegawai_wanita->result_array();
 		$data['ultah']					= $query->result_array();
 		$data['jml_pegawai_kontrak']	= $query_p_kontrak->result_array();
+		$data['jml_pegawai_eksternal']	= $query_p_eksternal->result_array();
 		$data['jml_pegawai_phl']		= $query_p_phl->result_array();
 		$data['tot_pegawai']			= $total_pegawai->result_array();
+		$data['harlah']					= $this->model->View('v_tb_ultah');
+		$data['tgl_sekarang']			= $tgl_now;
+		$data['tgl_7_hari_sebelum']		= $tgl_week;
 		//======================NOTIFIKASI===============================================================
 		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();
 		$dataHeader['data_notif_absen']				= $this->model->View('v_data_notif_absen');

@@ -1126,7 +1126,7 @@ if ($action == "edit") {
                                 <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatus" onchange="hideshow(this.value)" required>
                                   <option></option>
                                   <?php foreach ($status as $key => $vaStatus) {
-                                    if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4) { ?>
+                                    if ($vaStatus['id_status'] == 3 || $vaStatus['id_status'] == 4 || $vaStatus['id_status'] == 5) { ?>
 
                                       <option value="<?= $vaStatus['id_status'] ?>" <?php if ($vaStatus['id_status'] == $cIdStatus) echo "selected"; ?>>
                                         <?= $vaStatus['status'] ?>
@@ -1201,7 +1201,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Pembayaran Gaji <?= $cJenisBayar ?></label>
                                 <div class="input-group">
-                                  <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true" required>
+                                  <select name="cJenisBayar" class="form-control kt-selectpicker" data-live-search="true">
                                     <option></option>
                                     <?php foreach ($bayar as $key => $vaBayar) { ?>
                                       <option value="<?= $vaBayar['id_pembayaran'] ?>" <?php if ($vaBayar['id_pembayaran'] == $cJenisBayar) echo "selected"; ?>>
@@ -1220,7 +1220,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Cabang Bank</label>
                                 <div class="input-group">
-                                  <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank" required>
+                                  <input type="text" name="cCabangBank" class="form-control" value="<?= $cCabangBank ?>" placeholder="Cabang Bank">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success flaticon2-map"></i>
@@ -1231,7 +1231,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Nomor Rekening</label>
                                 <div class="input-group">
-                                  <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening" required>
+                                  <input type="text" name="nRekening" class="form-control" value="<?= $cNoRekening ?>" placeholder="Nomor Rekening">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success fa fa-credit-card"></i>
@@ -1242,7 +1242,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Atas Nama</label>
                                 <div class="input-group">
-                                  <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama" required>
+                                  <input type="text" name="cAtasNama" class="form-control" value="<?= $cAtasNama ?>" placeholder="Atas Nama">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-success fa fa-user"></i>
@@ -1326,7 +1326,7 @@ if ($action == "edit") {
                             <div class="form-group">
                               <label>Nik</label>
                               <div class="input-group">
-                                <input type="text" name="cNik" class="form-control" placeholder="Nik Pegawai" required>
+                                <input type="text" name="cNik" id="cNik" class="form-control" placeholder="Nik Pegawai">
                                 <div class="input-group-append">
                                   <span class="input-group-text" id="basic-addon2">
                                     <i class="kt-font-success fa fa-credit-card"></i>
