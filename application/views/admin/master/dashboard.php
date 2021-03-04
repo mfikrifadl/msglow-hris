@@ -102,10 +102,10 @@
 
       <div class="kt-portlet">
 
-        <div class="kt-portlet__head btn btn-danger">
+        <div class="kt-portlet__head btn btn-primary">
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title text-light">
-              Pegawai MS GLOW Malang
+              Visualisasi Data Pegawai MS GLOW Malang
             </h3>
           </div>
         </div>
