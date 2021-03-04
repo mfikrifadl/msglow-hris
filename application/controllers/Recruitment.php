@@ -75,7 +75,7 @@ class Recruitment extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/' . $id,
+			CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -190,7 +190,7 @@ class Recruitment extends CI_Controller
 		$delete_date = date("Y-m_d");
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/' . $id,
+			CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -218,7 +218,7 @@ class Recruitment extends CI_Controller
 		$curl = curl_init();
 		//$delete_date = null;
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://localhost/msglow-career/api/registrant/' . $id,
+			CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,

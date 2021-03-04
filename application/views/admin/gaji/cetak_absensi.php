@@ -47,6 +47,7 @@
                 <td style="border: 1px solid #999; padding: 8px 20px;">Keterangan</td>
                 <td style="border: 1px solid #999; padding: 8px 20px;">Keterlambatan</td>
                 <td style="border: 1px solid #999; padding: 8px 20px;">Overtime</td>
+                <td style="border: 1px solid #999; padding: 8px 20px;">Payroll_Overtime</td>
                 <td style="border: 1px solid #999; padding: 8px 20px;">Keterangan_Lain-Lain</td>
             </tr>
         </thead>
@@ -78,8 +79,10 @@
                             $hit_jam_masuk_kerja =  $set_jam_datang_pegawai->diff($t_jam_mulai);
                             $hasil_hitungan = $hit_jam_masuk_kerja->format('%H:%I:%S');
                             $tot_jam_keterlambatan = (string)$hasil_hitungan;
-
-                            echo "$tot_jam_keterlambatan";
+                            if (empty($vaAbsensi['jam_datang'])) {
+                            } else {
+                                echo "$tot_jam_keterlambatan";
+                            }
                         } else {
                         }
 
@@ -96,6 +99,7 @@
 
                         $t_jam_pulang = "20:00:00";
                         $x_jam_pulang = new DateTime($t_jam_pulang);
+                        $tot_jam_lembur = "";
                         if ($jam_pulang > $t_set_jam_lembur) {
                             $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
                             $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
@@ -103,6 +107,34 @@
 
                             echo "$tot_jam_lembur";
                         } else {
+                        }
+
+                        ?>
+                    </td>
+                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px;">
+                        <?php
+                        //Menghitung Payroll total jam lembur  
+                        $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
+                        $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                        $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
+                        $jam = $a_jam_pulang_lembur[0];
+                        $menit = $a_jam_pulang_lembur[1];
+                        $detik = $a_jam_pulang_lembur[2];
+
+                        //echo "$jam-$menit-$detik";
+
+                        $lembur_jam = $jam * 25000;
+                        //echo $hasil;
+                        if (empty($tot_jam_lembur)) {
+                        } else {
+                            if ($menit > 19 && $menit < 50) {
+                                $lembur_half = 13000;
+                                $tot_lembur_today = $lembur_jam + $lembur_half;
+                                echo $tot_lembur_today;
+                            } else {
+                                $lembur_jam = $jam * 25000;
+                                echo $lembur_jam;
+                            }
                         }
 
                         ?>

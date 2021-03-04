@@ -70,27 +70,55 @@ if ($action == "edit") {
                           <div class="form-group">
 
                             <div class="row">
-                              <div class="col-sm-8 col-md-8">
-                                <div class="form-group row">
-                                  <label class="col-form-label col-lg-4 col-sm-12">Input Tanggal Absensi</label>
-                                  <div class="col-lg-8 col-md-9 col-sm-12">
-                                    <div class="input-daterange input-group">
-                                      <input type="date" name="dTgl" id="dTgl" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
-                                      <div class="input-group-append">
-                                        <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
+
+                              <?php
+                              if ($this->session->userdata('level') == 3) {
+                              ?>
+                                <div class="col-sm-8 col-md-8">
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-lg-4 col-sm-12">Input Tanggal Absensi</label>
+                                    <div class="col-lg-8 col-md-9 col-sm-12">
+                                      <div class="input-daterange input-group">
+                                        <input type="date" name="dTgl" id="dTgl" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
+
+                                        <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="GetDataAbsensiPerHari();" value="Search">
+                                          <i class="flaticon2-refresh"></i>
+                                        </button>
                                       </div>
-                                      <input type="date" name="dTgl_end" id="dTgl_end" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
-                                      <div class="input-group-append">
-                                        <span class="input-group-text"></span>
-                                      </div>
-                                      <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="GetDataAbsensi();" value="Search">
-                                        <i class="flaticon2-refresh"></i>
-                                      </button>
+                                      <span class="form-text text-muted">date selection</span>
                                     </div>
-                                    <span class="form-text text-muted">date range selection</span>
                                   </div>
                                 </div>
-                              </div>
+                              <?php
+                              } elseif ($this->session->userdata('level') == 1) {
+                              ?>
+                                <!-- <div class="col-sm-8 col-md-8">
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-lg-4 col-sm-12">Input Tanggal Absensi</label>
+                                    <div class="col-lg-8 col-md-9 col-sm-12">
+                                      <div class="input-daterange input-group">
+                                        <input type="date" name="dTgl" id="dTgl" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
+                                        <div class="input-group-append">
+                                          <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
+                                        </div>
+                                        <input type="date" name="dTgl_end" id="dTgl_end" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
+                                        <div class="input-group-append">
+                                          <span class="input-group-text"></span>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="GetDataAbsensi();" value="Search">
+                                          <i class="flaticon2-refresh"></i>
+                                        </button>
+                                      </div>
+                                      <span class="form-text text-muted">date range selection</span>
+                                    </div>
+                                  </div>
+                                </div> -->
+                              <?php
+                              } else {
+                              }
+                              ?>
+
+
 
                               <div class="col-sm-2 col-md-2">
                                 <div class="form-group pull-right">
@@ -133,7 +161,8 @@ if ($action == "edit") {
           <!--end::Accordion-->
 
         </div>
-      </div>
+      </div>      
+
     </div>
 
     <div class=" row">
@@ -164,26 +193,51 @@ if ($action == "edit") {
                           <form method="post" enctype="multipart/form-data" target="blank" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
 
                             <div class="row">
-
-                              <div class="form-group row">
-                                <label class="col-form-label col-lg-4 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
-                                <div class="col-lg-8 col-md-12 col-sm-12">
-                                  <div class="input-daterange input-group">
-                                    <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
-                                    <div class="input-group-append">
-                                      <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
+                              <?php
+                              if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 1) {
+                              ?>
+                                <div class="form-group row">
+                                  <label class="col-form-label col-lg-6 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
+                                  <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <div class="input-daterange input-group">
+                                      <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
+                                      <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="getDataAbsenImportPerHari();" value="Search">
+                                        <i class="flaticon2-refresh"></i>
+                                      </button>
                                     </div>
-                                    <input type="date" name="dTgl_cetak_end" id="dTgl_cetak_end" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
-                                    <div class="input-group-append">
-                                      <span class="input-group-text"></span>
-                                    </div>
-                                    <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="getDataAbsenImport();" value="Search">
-                                      <i class="flaticon2-refresh"></i>
-                                    </button>
+                                    <span class="form-text text-muted">date selection</span>
                                   </div>
-                                  <span class="form-text text-muted">date range selection</span>
                                 </div>
-                              </div>
+                              <?php
+                              } else {
+                              }
+                              //elseif ($this->session->userdata('level') == 1) {
+                              ?>
+                              <!-- <div class="form-group row">
+                                  <label class="col-form-label col-lg-4 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
+                                  <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <div class="input-daterange input-group">
+                                      <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
+                                      <div class="input-group-append">
+                                        <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
+                                      </div>
+                                      <input type="date" name="dTgl_cetak_end" id="dTgl_cetak_end" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
+                                      <div class="input-group-append">
+                                        <span class="input-group-text"></span>
+                                      </div>
+                                      <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="getDataAbsenImport();" value="Search">
+                                        <i class="flaticon2-refresh"></i>
+                                      </button>
+                                    </div>
+                                    <span class="form-text text-muted">date range selection</span>
+                                  </div>
+                                </div> -->
+                              <?php
+                              // } 
+
+                              ?>
+
+
                             </div>
 
                             <br />
@@ -274,6 +328,31 @@ if ($action == "edit") {
     }
   }
 
+  function GetDataAbsensiPerHari() {
+    var dTgl = $('#dTgl').val();
+    // alert(dTgl);
+    if (dTgl == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl=" + dTgl,
+        url: "<?= site_url('cek_absen/get_data_absensi_per_hari') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#data_absensi').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          $("#data_absensi").html(msg);
+        }
+      });
+    }
+  }
+
   function getDataAbsenImport() {
     var dTgl_cetak = $('#dTgl_cetak').val();
     var dTgl_cetak_end = $('#dTgl_cetak_end').val();
@@ -296,6 +375,31 @@ if ($action == "edit") {
         data: "dTgl_cetak=" + dTgl_cetak +
           "&dTgl_cetak_end=" + dTgl_cetak_end,
         url: "<?= site_url('cek_absen/get_data_absensi_import') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#data_absensi_import').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          $("#data_absensi_import").html(msg);
+        }
+      });
+    }
+  }
+
+  function getDataAbsenImportPerHari() {
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    // alert(dTgl);
+    if (dTgl_cetak == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl_cetak=" + dTgl_cetak,
+        url: "<?= site_url('cek_absen/get_data_absensi_import_per_hari') ?>",
         cache: false,
         beforeSend: function() {
           $('#data_absensi_import').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
@@ -350,15 +454,47 @@ if ($action == "edit") {
     }
   }
 
+  function updateDataAbsen(id) {
+
+    var ket_lain = $('#ket_lain_' + id).val();
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var nik_ket_update = $('#nik_ket_update_' + id).val();
+    //alert(id+"-"+ket_lain+"-"+dTgl_cetak+"-"+nik_ket_update);
+
+    var values = {
+      'id': id,
+      'dTgl_cetak': dTgl_cetak,
+      'nik_ket_update': nik_ket_update,
+      'ket_lain': ket_lain
+    }
+
+    $.ajax({
+      url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        // alert (tanggal);
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
+  }
+
   function update_ket(id) {
 
     var ket = $('#ket_' + id).val();
     var idAbs = $('#id_' + id).val();
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var nik_ket_update = $('#nik_ket_update_' + id).val();
     var values = {
       'id': id,
+      'dTgl_cetak': dTgl_cetak,
+      'nik_ket_update': nik_ket_update,
       'ket': ket
     }
-    //alert(id+ket);  
+    //alert(id+"-"+ket+"-"+dTgl_cetak+"-"+nik_ket_update);  
 
     if (ket == "") {
       new PNotify({
@@ -399,8 +535,8 @@ if ($action == "edit") {
       'id': id,
       'ket_lain': ket_lain,
       'keterangan': keterangan,
-      'dTgl_cetak':dTgl_cetak,
-      'dTgl_cetak_end':dTgl_cetak_end
+      'dTgl_cetak': dTgl_cetak,
+      'dTgl_cetak_end': dTgl_cetak_end
     }
 
     $.ajax({
@@ -439,31 +575,7 @@ if ($action == "edit") {
           text: 'Berhasil Reject Data Absensi.',
           type: 'success'
         });
-        
-      },
-      error: function(data, status, error) {
-        alert(data.responseText);
-      }
-    });
-  }
 
-  function updateDataAbsen(id) {
-
-    var ket_lain = $('#ket_lain_' + id).val();
-    // alert(id+ket_lain);
-
-    var values = {
-      'id': id,
-      'ket_lain': ket_lain
-    }
-
-    $.ajax({
-      url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
-      type: "POST",
-      data: values,
-      success: function(data) {
-        //option pesan berhasil send data
-        // alert (tanggal);
       },
       error: function(data, status, error) {
         alert(data.responseText);

@@ -78,6 +78,13 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/transaksi/data/tb_operator', $data);
 	}
 
+	public function tb_operator_eksternal()
+	{
+
+		$data['row']	= $this->relasi->GetDataPegawaiEksternal();
+		$this->load->view('admin/transaksi/data/tb_operator', $data);
+	}
+
 	public function tb_operator_phl()
 	{
 
@@ -194,6 +201,8 @@ class Transaksi extends CI_Controller
 		} elseif ($Aksi == 'view') {
 			$data['view'] 		= $this->relasi->GetDataPegawaiSearch($Id);
 			$data['v_tb_kontrak_pegawai']		= $this->model->ViewWhere('kontrak', 'id_pegawai', $Id);
+		}elseif($Aksi == 'error'){
+			$data['error'] = "NIK Sudah Terdaftar";
 		}
 
 		//======================NOTIFIKASI===============================================================

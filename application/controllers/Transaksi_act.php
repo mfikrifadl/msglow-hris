@@ -207,15 +207,18 @@ class Transaksi_act extends CI_Controller
 		// echo "md5 : $cPassword <br />";
 
 		$cUser 	   = ($this->input->post('username'));
-		$nRow = $this->model->LoginAdmin($cUser, $doubleHash);
-		if ($nRow->num_rows() > 0) {
-			foreach ($nRow->result_array() as $Row) {
+/*		$nRow = $this->model->LoginAdmin($cUser, $doubleHash);*/
+		$this->db->where("username",$cUser) ; 
+			$this->db->where("password_hash", $doubleHash) ; 
+			$this->db->select("*") ; 
+			$db = $this->db->get("v_username");
+			if($Row = $db->row_array()){
 				$Nama		= $Row['nama'];
 				$Level 		= $Row['status'];
 				$User		= $Row['username'];
 				$Id			= $Row['id'];
 				$is_interview			= $Row['is_interview'];
-			}
+			
 			// $this->load->library('session');
 			$this->session->set_userdata('nama', $Nama);
 			$this->session->set_userdata('user', $User);
@@ -398,15 +401,16 @@ class Transaksi_act extends CI_Controller
 			$GetNik = $this->db->query("SELECT nik FROM tb_pegawai 
 			WHERE nik = '" . $this->input->post('cNik') . "' ");
 			if ($GetNik->num_rows() > 0 and $this->input->post('cNik') != "") {
+				//echo "tes 1";
 				redirect(site_url('transaksi/pegawai/error'));
 			} elseif ($GetNik->num_rows() > 0 and $this->input->post('cNik') == "") {
-				$this->model->Insert("log", $vaLog);
-				$this->model->Insert('tb_pegawai', $data);
-				redirect(site_url('transaksi/pegawai/I'));
+				redirect(site_url('transaksi/pegawai/error'));
+				//echo "tes 2";
 			} else {
 				$this->model->Insert("log", $vaLog);
 				$this->model->Insert('tb_pegawai', $data);
 				redirect(site_url('transaksi/pegawai/I'));
+				//echo "tes 3";
 			}
 		} elseif ($Type == "Update") {
 			$this->model->Insert("log", $vaLog);
@@ -963,6 +967,11 @@ class Transaksi_act extends CI_Controller
 	{
 		$data['row']	= $this->relasi->GetSubUnitKerja($id);
 		$this->load->view('admin/hak_akses_interview/tb_sub_unit_kerja', $data);
+	}
+	public function get_sub_unit_kerja_jabatan_pegawai($id)
+	{
+		$data['row']	= $this->relasi->GetSubUnitKerja($id);
+		$this->load->view('admin/transaksi/data/tb_sub_unit_kerja_jabatan', $data);
 	}
 
 	public function form_pengajuan($Aksi = "", $Id = "")
