@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://hrd.msglow.work';
+$config['base_url'] = 'http://103.157.96.97/msglow-hris/';
 
 /*
 |--------------------------------------------------------------------------
