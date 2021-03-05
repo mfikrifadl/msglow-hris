@@ -99,7 +99,7 @@
         <tbody>
             <tr>
                 <?php $no = 0;
-                foreach ($row as $key => $vaPegawai) {
+                foreach ($dataDecode as $key => $vaPegawai) {
                     // Jam Datang Karyawan
                     $jam_datang = new DateTime($vaPegawai['jam_datang']);
                     $jam_pulang = new DateTime($vaPegawai['jam_pulang']);

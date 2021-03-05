@@ -315,6 +315,36 @@ class Cek_absen extends CI_Controller
         );
 
         $data['row'] = $this->model->ViewAbsensiPerHari($dTgl_cetak);
+        $dataRecordAbsen = $this->model->ViewAbsensiPerHari($dTgl_cetak);
+        $response = array();
+        foreach ($dataRecordAbsen as $x) {
+
+            $h['id'] = $x['id'];
+            $h['id_temp'] = $x['id_temp'];
+            $h['id_pegawai'] = $x['id_pegawai'];
+            $h['nik'] = $x['nik'];
+            $h['nama'] = $x['nama'];
+            $h['nama_jabatan'] = $x['nama_jabatan'];
+            $h['tot_jam_kerja'] = $x['tot_jam_kerja'];
+            $h['tot_jam_lembur'] = $x['tot_jam_lembur'];
+            $h['keterangan'] = $x['keterangan'];
+            $h['keterangan_temp'] = $x['keterangan_temp'];
+            $h['keterlambatan'] = $x['keterlambatan'];
+            $h['ket_lain'] = $x['ket_lain'];
+            $h['ket_lain_temp'] = $x['ket_lain_temp'];
+            $h['attlog'] = $x['attlog'];
+            $h['tanggal'] = $x['tanggal'];
+            $h['jam_datang'] = $x['jam_datang'];
+            $h['jam_pulang'] = $x['jam_pulang'];
+            $h['waktu'] = $x['waktu'];
+
+            array_push($response, $h);
+        }
+
+        $dataJson_view = json_encode($response, JSON_PRETTY_PRINT);
+
+        $data['dataDecode'] = json_decode($dataJson_view, true);
+
         $data['cek_tanggal'] = $this->model->ViewWhere('v_tanggal_log_absen','tanggal',$dTgl_cetak);
         $this->load->view('admin/gaji/tb_absensi_import', $data);
         $this->load->view('admin/container/footer_dataTable');
