@@ -314,7 +314,7 @@ class Cek_absen extends CI_Controller
             'dTgl_cetak' => $dTgl_cetak
         );
 
-        $data['row'] = $this->model->ViewAbsensiPerHari($dTgl_cetak);
+        //$data['row'] = $this->model->ViewAbsensiPerHari($dTgl_cetak);
         $dataRecordAbsen = $this->model->ViewAbsensiPerHari($dTgl_cetak);
         $response = array();
         foreach ($dataRecordAbsen as $x) {
@@ -341,9 +341,11 @@ class Cek_absen extends CI_Controller
             array_push($response, $h);
         }
 
-        $dataJson_view = json_encode($response, JSON_PRETTY_PRINT);
-
-        $data['dataDecode'] = json_decode($dataJson_view, true);
+        // $dataJson_view = json_encode($response, JSON_PRETTY_PRINT);
+        $data['dataDecode'] = json_encode($response, JSON_PRETTY_PRINT);
+        // $data['dataDecode'] = json_decode($dataJson_view, true);
+        // print_r($dataJson_view);
+        // die;
 
         $data['cek_tanggal'] = $this->model->ViewWhere('v_tanggal_log_absen','tanggal',$dTgl_cetak);
         $this->load->view('admin/gaji/tb_absensi_import', $data);

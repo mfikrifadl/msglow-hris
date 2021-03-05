@@ -99,7 +99,8 @@
         <tbody>
             <tr>
                 <?php $no = 0;
-                foreach ($dataDecode as $key => $vaPegawai) {
+                $JsonDecode = json_decode($dataDecode, true);
+                foreach ($JsonDecode as $key => $vaPegawai) {
                     // Jam Datang Karyawan
                     $jam_datang = new DateTime($vaPegawai['jam_datang']);
                     $jam_pulang = new DateTime($vaPegawai['jam_pulang']);
