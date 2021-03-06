@@ -388,7 +388,7 @@ if ($action == "edit") {
 
   function getDataAbsenImportPerHari() {
     var dTgl_cetak = $('#dTgl_cetak').val();
-     alert(dTgl_cetak);
+     //alert(dTgl_cetak);
     if (dTgl_cetak == "") {
       new PNotify({
         text: 'Pilih Tanggal Absensi terlebih dahulu!',
