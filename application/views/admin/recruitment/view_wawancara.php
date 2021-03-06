@@ -72,7 +72,10 @@
                                                                             <input type="text" class="form-control" placeholder="<?php echo $row['reg_tlp']; ?>" style="background-color:#fff;" disabled>
                                                                         </div>
 
-
+                                                                        <div class="form-group">
+                                                                            <label>Alamat Pendaftar</label>
+                                                                            <input type="text" class="form-control" placeholder="<?php echo $row['reg_address']; ?>" style="background-color:#fff;" disabled>
+                                                                        </div>
 
                                                                     </div>
 
@@ -89,7 +92,7 @@
                                                                         </div>
 
                                                                         <div class="form-group">
-                                                                            <label>Graduates</label>
+                                                                            <label>Pendidikan Terakhir</label>
                                                                             <input type="text" class="form-control" placeholder="<?php echo $row['graduate']; ?>" style="background-color:#fff;" disabled>
                                                                         </div>
 
@@ -105,11 +108,11 @@
                                                                         <div class="form-group">
                                                                             <label>Mendaftar Sebagai</label>
                                                                             <input type="text" class="form-control" placeholder="<?php echo $row['job_name']; ?>" style="background-color:#fff;" disabled>
-                                                                        </div>
+                                                                        </div>                                                                        
 
                                                                         <div class="form-group">
-                                                                            <label>Alamat Pendaftar</label>
-                                                                            <input type="text" class="form-control" placeholder="<?php echo $row['reg_address']; ?>" style="background-color:#fff;" disabled>
+                                                                            <label>Jurusan</label>
+                                                                            <input type="text" class="form-control" placeholder="<?php echo $row['jurusan']; ?>" style="background-color:#fff;" disabled>
                                                                         </div>
 
                                                                     </div>
