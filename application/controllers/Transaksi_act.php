@@ -1179,7 +1179,7 @@ class Transaksi_act extends CI_Controller
 
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'http://localhost/msglow-career/api/job/',
+				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/',
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
@@ -1207,7 +1207,7 @@ class Transaksi_act extends CI_Controller
 
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'http://localhost/msglow-career/api/job/' . $Id,
+				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/' . $Id,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
@@ -1237,7 +1237,7 @@ class Transaksi_act extends CI_Controller
 		} elseif ($Aksi == 'delete') {
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'http://localhost/msglow-career/api/job/' . $Id,
+				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/' . $Id,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,

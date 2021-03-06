@@ -14,11 +14,13 @@ if ($action == "edit") {
             $nNilaiTes      =   $column['nilai_wawancara_hr'];
         } elseif ($controller_name == "interview_user_1") {
             $nNilaiTes      =   $column['nilai_interview_user_1'];
+            $cWaktuTes      = $column['waktu_interview_user_1'];
         } else {
         }
 
         $cStatus        =   $column[$controller_name];
         $dTglWawancara  =   $column[$date];
+        $cWaktuTes      = $column['waktu_' . $controller_name];
         $cIconButton   =   "refresh";
         $cValueButton  =   "Update Data";
     }
@@ -113,12 +115,26 @@ $whois_date = date('d-m-Y H:i:s');
                             </div>
 
                             <?php
+
+                            if ($controller_name == "interview_user_1") {
+                                if ($cStatus_tes == "lolos") {
+                                } else {
+                            ?>
+                                    <div class="form-group">
+                                        <label>Jam Test</label>
+                                        <input type="time" name="cTimeWawancara" id="timeW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $cWaktuTes ?>" required>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                            }
+
                             if ($controller_name == "tes_kesehatan_phl") {
                                 foreach ($hasil_tes_kesehatan as $key => $value) {
 
                                     if ($value['hasil_tes_kesehatan_phl'] == null && $value['tes_kesehatan_phl'] == 'pemanggilan') {
 
-                            ?>
+                                    ?>
                                         <div class="form-group">
 
                                             <label> Upload Hasil Tes Kesehatan : </label>
@@ -306,7 +322,7 @@ $whois_date = date('d-m-Y H:i:s');
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group" aria-label="First group">
-                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment_phl/' . $controller_name . '/edit' .'/'. $vaArea['id_recruitment_phl'] . '') ?>">
+                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment_phl/' . $controller_name . '/edit' . '/' . $vaArea['id_recruitment_phl'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
                                                 </a>
                                                 <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email_phl/' . $controller_name . '/' . $vaArea['id_recruitment_phl'] . '') ?>">

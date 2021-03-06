@@ -20,16 +20,20 @@ if ($action == "edit") {
         } elseif ($controller_name == "interview_user_1") {
             $cStatus_tes = $column['interview_user_1'];
             $nNilaiTes      =   $column['nilai_interview_user_1'];
+            $cWaktuTes      = $column['waktu_interview_user_1'];
         } elseif ($controller_name == "interview_user_2") {
             $cStatus_tes = $column['interview_user_2'];
             $nNilaiTes      =   $column['nilai_interview_user_2'];
+            $cWaktuTes      = $column['waktu_interview_user_2'];
         } elseif ($controller_name == "interview_hrga") {
             $cStatus_tes = $column['interview_hrga'];
             $nNilaiTes      =   $column['nilai_interview_hrga'];
+            $cWaktuTes      = $column['waktu_interview_hrga'];
         } else {
         }
 
         $cStatus        =   $column[$controller_name];
+        $cWaktuTes      = $column['waktu_'.$controller_name];
         $dTglWawancara  =   $column[$date];
         $cIconButton   =   "refresh";
         $cValueButton  =   "Update Data";
@@ -41,6 +45,7 @@ if ($action == "edit") {
     $cKodeWawancara  =   "";
     $nNilaiTes     =   "";
     $cStatus        =   "";
+    $cWaktuTes      = "";
     $dTglWawancara = "";
     $cIconButton  = "save";
     $cValueButton = "Save Data";
@@ -130,14 +135,26 @@ $whois_date = date('d-m-Y H:i:s');
                                 <input type="hidden" name="whois_date" value="<?= $whois_date ?>">
                                 <input type="hidden" name="cKW" value="<?= $cKodeWawancara ?>">
                             </div>
-
                             <?php
+                            if ($controller_name == "interview_user_1" || $controller_name == "interview_user_2" || $controller_name == "interview_hrga") {
+                                if ($cStatus_tes == "lolos") {
+                                } else {
+                            ?>
+                                    <div class="form-group">
+                                        <label>Jam Test</label>
+                                        <input type="time" name="cTimeWawancara" id="timeW" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Test" value="<?= $cWaktuTes ?>" required>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                            }
+
                             if ($controller_name == "tes_kesehatan") {
                                 foreach ($hasil_tes_kesehatan as $key => $value) {
 
                                     if ($value['hasil_tes_kesehatan'] == null && $value['tes_kesehatan'] == 'pemanggilan') {
 
-                            ?>
+                                    ?>
                                         <div class="form-group">
 
                                             <label> Upload Hasil Tes Kesehatan : </label>
@@ -356,7 +373,7 @@ $whois_date = date('d-m-Y H:i:s');
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group" aria-label="First group">
-                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' .'/'.$vaArea['id_recruitment'] . '') ?>">
+                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' . '/' . $vaArea['id_recruitment'] . '') ?>">
                                                     <i class="flaticon-edit"></i>
                                                 </a>
                                                 <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
