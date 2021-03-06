@@ -90,7 +90,7 @@ if ($action == "edit") {
                                 <option></option>
                                 <?php foreach ($levels as $key => $level) { ?>
                                     <option value="<?= $level['id_level'] ?>" <?php if ($cLevel == $level['id_level']) echo "selected"; ?>>
-                                        <?= $level['level'] ?>
+                                        <?= $level['nama'] ?>
                                     </option>
                                 <?php } ?>
                             </select>

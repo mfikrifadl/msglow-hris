@@ -166,17 +166,17 @@
                             $hasil_peg_phl = $jml_peg_phl / $jml_pegawai * 100;
                             $hasil_peg_eksternal = $jml_peg_eksternal / $jml_pegawai * 100;
                             ?>
-                            <?= $hasil_peg_kontrak ?>% Pegawai Kontrak
+                            <?= round($hasil_peg_kontrak, 2) ?>% Pegawai Kontrak
                           </span>
 
                           <span class="kt-widget14__bullet kt-bg-brand"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_peg_eksternal ?>% Pegawai Eksternal
+                            <?= round($hasil_peg_eksternal, 2) ?>% Pegawai Eksternal
                           </span>
 
                           <span class="kt-widget14__bullet kt-bg-warning"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_peg_phl ?>% Pegawai PHL
+                            <?= round($hasil_peg_phl, 2) ?>% Pegawai PHL
                           </span>
 
                         </div>
@@ -272,7 +272,7 @@
                           ?>
                           <span class="kt-widget14__bullet kt-bg-danger"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_peg_pria ?>% Pegawai Pria
+                            <?= round($hasil_peg_pria, 2) ?>% Pegawai Pria
                           </span>
 
                           <span class="kt-widget14__bullet "></span>
@@ -280,7 +280,7 @@
 
                           <span class="kt-widget14__bullet kt-bg-brand"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_peg_wanita ?>% Pegawai Wanita
+                            <?= round($hasil_peg_wanita, 2) ?>% Pegawai Wanita
                           </span>
 
                         </div>
@@ -364,16 +364,19 @@
                           $jml_usia_antara_41_50 = 0;
                           $jml_usia_diatas_50 = 0;
                           foreach ($harlah as $rowPegawaiUsia) {
-                            if ($rowPegawaiUsia['age'] < 20) {
-                              ++$jml_usia_under_20;
-                            } elseif ($rowPegawaiUsia['age'] >= 20 && $rowPegawaiUsia['age'] <= 30) {
-                              ++$jml_usia_antara_20_30;
-                            } elseif ($rowPegawaiUsia['age'] >= 31 && $rowPegawaiUsia['age'] <= 40) {
-                              ++$jml_usia_antara_31_40;
-                            } elseif ($rowPegawaiUsia['age'] >= 41 && $rowPegawaiUsia['age'] <= 50) {
-                              ++$jml_usia_antara_41_50;
-                            } elseif ($rowPegawaiUsia['age'] > 50) {
-                              ++$jml_usia_diatas_50;
+                            if (empty($rowPegawaiUsia['age'])) {
+                            } else {
+                              if ($rowPegawaiUsia['age'] < 20) {
+                                ++$jml_usia_under_20;
+                              } elseif ($rowPegawaiUsia['age'] >= 20 && $rowPegawaiUsia['age'] <= 30) {
+                                ++$jml_usia_antara_20_30;
+                              } elseif ($rowPegawaiUsia['age'] >= 31 && $rowPegawaiUsia['age'] <= 40) {
+                                ++$jml_usia_antara_31_40;
+                              } elseif ($rowPegawaiUsia['age'] >= 41 && $rowPegawaiUsia['age'] <= 50) {
+                                ++$jml_usia_antara_41_50;
+                              } elseif ($rowPegawaiUsia['age'] > 50) {
+                                ++$jml_usia_diatas_50;
+                              }
                             }
                           }
 
@@ -385,27 +388,27 @@
                           ?>
                           <span class="kt-widget14__bullet kt-bg-danger"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_under_20 ?>%
+                            <?= round($hasil_under_20, 2) ?>%
                           </span>
 
                           <span class="kt-widget14__bullet kt-bg-brand"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_usia_antara_20_30 ?>%
+                            <?= round($hasil_usia_antara_20_30, 2) ?>%
                           </span>
 
                           <span class="kt-widget14__bullet kt-bg-warning"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_usia_antara_31_40 ?>%
+                            <?= round($hasil_usia_antara_31_40, 2) ?>%
                           </span>
 
                           <span class="kt-widget14__bullet kt-bg-success"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_usia_antara_41_50 ?>%
+                            <?= round($hasil_usia_antara_41_50, 2) ?>%
                           </span>
 
                           <span class="kt-widget14__bullet kt-bg-primary"></span>
                           <span class="kt-widget14__stats">
-                            <?= $hasil_usia_diatas_50 ?>%
+                            <?= round($hasil_usia_diatas_50, 2) ?>%
                           </span>
 
                         </div>

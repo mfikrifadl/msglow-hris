@@ -128,7 +128,7 @@ class Recruitment_phl extends CI_Controller
         $data2                 = json_decode($response, true);
 
         $data['registrant']    = $data2['data'];
-        $data['levels']    = $this->model->view('level', 'id_level');
+        $data['levels']	= $this->model->view('v_interviewer', 'nama');
         $data['lokasis']    = $this->model->view('kategori_phl', 'lokasi');
 
         if ($Aksi == 'edit') {
