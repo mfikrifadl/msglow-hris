@@ -678,9 +678,6 @@ class Hrd extends CI_Controller
 		$this->load->view('admin/container/footer');
 	}
 
-
-
-
 	public function error($Aksi = "")
 	{
 		$data['menu'] = 'other';
