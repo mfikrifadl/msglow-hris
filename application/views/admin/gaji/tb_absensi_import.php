@@ -20,9 +20,8 @@
     } else {
         foreach ($cek_tanggal as $cek) {
             if ($cek['tanggal'] == $dTgl_cetak) {
-    
             } else {
-                ?>
+    ?>
                 <div class='row'>
                     <div class='col-sm-12 text-right'>
                         <button class='btn btn-success' name="submit" type='submit'>
@@ -268,12 +267,10 @@
                             $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
                             $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
                             $tot_jam_lembur = (string)$jumlah2;
-                            if(empty($jam_datang) && empty($jam_pulang)){
-
-                            }else{
+                            if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                            } else {
                                 echo "$tot_jam_lembur";
                             }
-                            
                         } else {
                         }
 
@@ -295,13 +292,16 @@
                         //echo $hasil;
                         if (empty($tot_jam_lembur)) {
                         } else {
-                            if ($menit > 19 && $menit < 50) {
-                                $lembur_half = 13000;
-                                $tot_lembur_today = $lembur_jam + $lembur_half;
-                                echo $tot_lembur_today;
+                            if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
                             } else {
-                                $lembur_jam = $jam * 25000;
-                                echo $lembur_jam;
+                                if ($menit > 19 && $menit < 50) {
+                                    $lembur_half = 13000;
+                                    $tot_lembur_today = $lembur_jam + $lembur_half;
+                                    echo $tot_lembur_today;
+                                } else {
+                                    $lembur_jam = $jam * 25000;
+                                    echo $lembur_jam;
+                                }
                             }
                         }
 
