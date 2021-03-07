@@ -332,8 +332,6 @@ class Send_email_act extends CI_Controller
                                     Sehubungan dengan proses Seleksi Recruitment Kandidat Pegawai Baru Di MS Glow Office dengan Posisi Sebagai $posisi. <br />
                                     maka kepada Saudara <b>$nama_R</b> bahwa anda telah dinyatakan <b>$next_test</b>. <br /><br />
 
-                                    Kepada Saudara <b>$nama_R</b> dapat masuk kerja mulai tanggal <b>$tgl_test</b> <br />
-
                                     Demikian atas perhatian Bapak/Ibu/Sdr. kami sampaikan terimakasih. <br /><br />
 
                                     Hormat kami,<br /> <br /> <br />
@@ -867,8 +865,6 @@ class Send_email_act extends CI_Controller
 
                                     Sehubungan dengan proses Seleksi Recruitment Kandidat Pegawai Baru Di MS Glow Office dengan Posisi Sebagai $posisi. <br />
                                     maka kepada Saudara <b>$nama_R</b> bahwa anda telah dinyatakan <b>$next_test</b>. <br /><br />
-
-                                    Kepada Saudara <b>$nama_R</b> dapat masuk kerja mulai tanggal <b>$tgl_test</b> <br />
 
                                     Demikian atas perhatian Bapak/Ibu/Sdr. kami sampaikan terimakasih. <br /><br />
 
