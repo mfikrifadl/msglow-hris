@@ -126,7 +126,7 @@ class Master extends CI_Controller
 
 		$a_tgl_week = explode(" ", $tgl_week);
 		$t_tgl_week = $a_tgl_week[0];
-
+		
 		$query 							= $this->db->query('SELECT * FROM tb_pegawai WHERE MONTH(tanggal_lahir) = MONTH(NOW()) AND DAY(tanggal_lahir) = DAY(NOW())');
 		$total_pegawai					= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai FROM tb_pegawai WHERE id_status = 3 OR id_status = 4 OR id_status = 5 OR id_status_mengundurkan_diri < 6 OR id_status_mengundurkan_diri > 11');
 		$query_p_kontrak 				= $this->db->query('SELECT COUNT(id_pegawai) AS jml_pegawai_kontrak FROM tb_pegawai	WHERE id_status = 4 OR id_status_mengundurkan_diri = 4');

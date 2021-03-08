@@ -114,8 +114,8 @@ class Model extends CI_Model
 										tb_pegawai A
 										LEFT JOIN log_absen B ON B.pin = A.nik 
 										AND (
-											REPLACE ( B.tanggal, '-', '' ) BETWEEN REPLACE ( '2021-02-13', '-', '' ) 
-										AND REPLACE ( '2021-02-28', '-', '' ))	 
+											REPLACE ( B.tanggal, '-', '' ) BETWEEN REPLACE ( '".$WhereValue1."', '-', '' ) 
+										AND REPLACE ( '".$WhereValue2."', '-', '' ))	 
 									WHERE
 										IFNULL( A.id_status_mengundurkan_diri, 0 ) < 6 OR IFNULL( A.id_status_mengundurkan_diri, 0 ) > 11 
 									GROUP BY
