@@ -39,7 +39,7 @@
           <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
               <h3 class="kt-portlet__head-title">
-                Input Data Outlet
+                Input Data Office
               </h3>
             </div>
           </div>
@@ -54,7 +54,7 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label>Kode</label>
-                      <Input type="text" name="cKode" class="form-control" placeholder="Kode Outlet" value="<?= $cKodeOutlet ?>">
+                      <Input type="text" name="cKode" class="form-control" placeholder="Kode Office" value="<?= $cKodeOutlet ?>">
                     </div>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
-                      <label>Area Outlet</label>
+                      <label>Area Office</label>
                       <select class="comboBox form-control" name="cIdArea">
                         <option></option>
                         <?php foreach ($area as $key => $vaArea) {
@@ -84,7 +84,7 @@
                   <div class="col-12">
                     <div class="form-group">
                       <label>Nama Office</label>
-                      <Input type="text" name="cNama" class="form-control" placeholder="Nama Outlet" value="<?= $cNama ?>">
+                      <Input type="text" name="cNama" class="form-control" placeholder="Nama Office" value="<?= $cNama ?>">
                     </div>
                   </div>
                 </div>
