@@ -20,7 +20,12 @@ if ($action == "edit") {
 
         $cStatus        =   $column[$controller_name];
         $dTglWawancara  =   $column[$date];
-        $cWaktuTes      = $column['waktu_' . $controller_name];
+        $cStatus        =   $column[$controller_name];
+        if ($controller_name == "interview_user_1") {
+            $cWaktuTes      = $column['waktu_' . $controller_name];
+        } else {
+            $cWaktuTes = "";
+        }
         $cIconButton   =   "refresh";
         $cValueButton  =   "Update Data";
     }
