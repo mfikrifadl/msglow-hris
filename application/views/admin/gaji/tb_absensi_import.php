@@ -16,32 +16,18 @@
     <?php
     $c = "";
 
-    if (empty($row)) {
-    } else {
-        foreach ($cek_tanggal as $cek) {
-            if ($cek['tanggal'] == $dTgl_cetak) {
-            } else {
+    // if (empty($row)) {
+    // } else {
     ?>
-                <div class='row'>
-                    <div class='col-sm-12 text-right'>
-                        <button class='btn btn-success' name="submit" type='submit'>
-                            <i class="flaticon2-google-drive-file"></i>Cetak PDF
-                        </button>
-                    </div>
-                </div>
-        <?php
-            }
-        }
-        ?>
-        <!-- <div class='row'>
+        <div class='row'>
             <div class='col-sm-12 text-right'>
                 <button class='btn btn-success' name="submit" type='submit'>
                     <i class="flaticon2-google-drive-file"></i>Cetak PDF
                 </button>
             </div>
-        </div> -->
+        </div>
     <?php
-    }
+    //}
     ?>
     <hr>
     <table class="table table-striped table-bordered text-center" id='DataTable_absensi'>

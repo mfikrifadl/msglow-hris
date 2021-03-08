@@ -492,6 +492,11 @@ class Transaksi_act extends CI_Controller
 			'id_ref_jabatan'	=> $this->input->post('cIdRefJabatan')
 		);
 
+		$dataUpdate = array(
+			'id_sub_unit_kerja'	=> $this->input->post('cIdSubUnitKerja'),
+			'id_ref_jabatan'	=> $this->input->post('cIdRefJabatan')
+		);
+
 		$dataDelete = array(
 			'id_jabatan_pegawai'		=> $id,
 			'is_deleted'		=> 1
@@ -499,6 +504,16 @@ class Transaksi_act extends CI_Controller
 
 		$seralizedArray = serialize($data);
 		$vaLog = array(
+			'tgl' => $this->Date2String($this->DateStamp()),
+			'waktu' => $this->TimeStamp(),
+			'nama_table' => 'tb_jabatan_pegawai',
+			'action' => $Type,
+			'query' => $seralizedArray,
+			'nama' => $this->session->userdata('nama')
+		);
+
+		$seralizedArray = serialize($dataUpdate);
+		$vaLog3 = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
 			'waktu' => $this->TimeStamp(),
 			'nama_table' => 'tb_jabatan_pegawai',
@@ -522,8 +537,8 @@ class Transaksi_act extends CI_Controller
 			$this->model->Insert('tb_jabatan_pegawai', $data);
 			redirect(site_url('transaksi/jabatan_pegawai/I'));
 		} elseif ($Type == "Update") {
-			$this->model->Insert("log", $vaLog);
-			$this->model->Update('tb_jabatan_pegawai', 'id_jabatan_pegawai', $id, $data);
+			$this->model->Insert("log", $vaLog3);
+			$this->model->Update('tb_jabatan_pegawai', 'id_pegawai', $id, $dataUpdate);
 			redirect(site_url('transaksi/jabatan_pegawai/U'));
 		} elseif ($Type == "Delete") {
 			$this->model->Insert("log", $vaLog2);
