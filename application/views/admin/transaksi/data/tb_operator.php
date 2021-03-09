@@ -29,7 +29,7 @@
           foreach ($row as $key => $vaPegawai) { ?>
             <?php //include 'detail.pegawai.php'; 
 
-            if ($vaPegawai['id_status_mengundurkan_diri'] == null || $vaPegawai['id_status_mengundurkan_diri'] < 6) {
+            if ($vaPegawai['id_status_mengundurkan_diri'] == null || $vaPegawai['id_status_mengundurkan_diri'] < 6 || $vaPegawai['id_status_mengundurkan_diri'] > 11) {
             ?>
               <td><?= ++$no ?></td>
               <td><?= $vaPegawai['id_pegawai'] ?></td>

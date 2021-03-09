@@ -199,15 +199,18 @@ class Transaksi_act extends CI_Controller
 
 	public function LoginAdmin()
 	{
-		$cPassword = md5($this->input->post('password'));
-		$doubleHash = hash('sha256',$cPassword);
-		// $pass = $this->input->post('password');
-		// echo "$doubleHash <br />";
-		 //die;
-		// echo "md5 + sha1 : $doubleHash <br />";
-		// echo "md5 : $cPassword <br />";
-
 		$cUser 	   = ($this->input->post('username'));
+		if(isset($_POST['portal'])){
+			$doubleHash = $this->input->post('password');
+		}else{
+			$cPassword = md5($this->input->post('password'));
+			$doubleHash = hash('sha256',$cPassword);
+			// $pass = $this->input->post('password');
+			// echo "$doubleHash <br />";
+			 //die;
+			// echo "md5 + sha1 : $doubleHash <br />";
+			// echo "md5 : $cPassword <br />";
+		}
 		$nRow = $this->model->LoginAdmin($cUser, $doubleHash);
 		if ($nRow->num_rows() > 0) {
 			foreach ($nRow->result_array() as $Row) {

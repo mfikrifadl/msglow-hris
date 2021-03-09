@@ -1015,4 +1015,10 @@ class Transaksi extends CI_Controller
 		// $this->model->Update('import', 'no', $id, $data);
 		$this->model->Update('log_absen', 'id', $id, $data);
 	}
+
+	public function get_all_pegawai()
+	{
+		$data['row']	= $this->model->ViewAsc('v_tb_pegawai','nik');
+		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
+	}
 }
