@@ -504,7 +504,6 @@ if ($action == "edit") {
   }
 
   function update_ket(id) {
-
     var ket = $('#ket_' + id).val();
     var idAbs = $('#id_' + id).val();
     var dTgl_cetak = $('#dTgl_cetak').val();
@@ -514,9 +513,15 @@ if ($action == "edit") {
       'dTgl_cetak': dTgl_cetak,
       'nik_ket_update': nik_ket_update,
       'ket': ket
-    }
+    };
     //alert(id+"-"+ket+"-"+dTgl_cetak+"-"+nik_ket_update);  
-
+    if (ket == "Revisi Approval" || ket == "Revisi Approval Manager") {
+      $('#rev_manager_' + id).attr('style', 'background-color: red');
+      $('#rev_manager1_' + id).attr('style', 'background-color: red');
+    } else {
+      $('#rev_manager_' + id).attr('style', 'background-color: none');
+      $('#rev_manager1_' + id).attr('style', 'background-color: none');
+    }
     if (ket == "") {
       new PNotify({
         text: 'Pilih Keterangan terlebih dahulu!',

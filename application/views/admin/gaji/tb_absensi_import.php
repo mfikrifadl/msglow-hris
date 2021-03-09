@@ -19,7 +19,7 @@
     // if (empty($row)) {
     // } else {
     ?>
-        
+
     <?php
     //}
     ?>
@@ -164,7 +164,7 @@
                             ?>
 
                             <div class="form-group">
-                                <select id="ket_<?= $id_ket; ?>" onkeyup="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
+                                <select id="ket_<?= $id_ket; ?>" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
                                     <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan_temp'] == "Shift 2") echo "selected";
                                                                                 ?>>Shift 2</option>
@@ -190,6 +190,10 @@
                                                                             ?>>SSD</option>
                                     <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan_temp'] == "Tanpa Keterangan") echo "selected";
                                                                                         ?>>Tanpa Keterangan</option>
+                                    <option data-name="name13" value="Revisi Approval Manager" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo "selected";
+                                                                                                ?>>Revisi Approval Manager</option>
+                                    <option data-name="name14" value="Revisi Approval" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval") echo "selected";
+                                                                                        ?>>Revisi Approval</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -230,7 +234,7 @@
                         ?>
                     </td>
 
-                    <td>
+                    <td id="rev_manager_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
                         <?php
                         //Menghitung total jam lembur
                         $set_jam_lembur = "17:49:59";
@@ -256,7 +260,7 @@
 
                         ?>
                     </td>
-                    <td>
+                    <td id="rev_manager1_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
                         <?php
                         //Menghitung Payroll total jam lembur  
                         $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
