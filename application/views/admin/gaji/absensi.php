@@ -161,7 +161,7 @@ if ($action == "edit") {
           <!--end::Accordion-->
 
         </div>
-      </div>      
+      </div>
 
     </div>
 
@@ -190,30 +190,51 @@ if ($action == "edit") {
                     <div class="kt-portlet kt-portlet--height-fluid">
                       <div class="kt-portlet">
                         <div class="kt-portlet__body">
-                          <form method="post" enctype="multipart/form-data" target="blank" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
 
-                            <div class="row">
-                              <?php
-                              if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 1) {
-                              ?>
-                                <div class="form-group row">
-                                  <label class="col-form-label col-lg-6 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
-                                  <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <div class="input-daterange input-group">
-                                      <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
-                                      <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="getDataAbsenImportPerHari();" value="Search">
-                                        <i class="flaticon2-refresh"></i>
-                                      </button>
+
+
+                          <?php
+                          if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 1) {
+                          ?>
+                            <form method="post" enctype="multipart/form-data" target="blank" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
+                              <div class="row">
+                                <div class="col-6">
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-lg-6 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                      <div class="input-daterange input-group">
+                                        <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
+                                        <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="getDataAbsenImportPerHari();" value="Search">
+                                          <i class="flaticon2-refresh"></i>
+                                        </button>
+                                      </div>
+                                      <span class="form-text text-muted">date selection</span>
                                     </div>
-                                    <span class="form-text text-muted">date selection</span>
                                   </div>
                                 </div>
-                              <?php
-                              } else {
-                              }
-                              //elseif ($this->session->userdata('level') == 1) {
-                              ?>
-                              <!-- <div class="form-group row">
+                              </div>
+                              <div class='row'>
+                                <div class="col-6">
+                                  <div class='col-sm-12 text-right'>
+
+                                    <button class='btn btn-success' name="submit" type='submit' value="PDF">
+                                      <i class="flaticon2-google-drive-file"></i>Cetak PDF
+                                    </button>
+
+                                    <button class='btn btn-brand' name="submit" type='submit' value="EXCEL">
+                                      <i class="fa fa-file-export"></i>Export Excel
+                                    </button>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          <?php
+                          } else {
+                          }
+                          //elseif ($this->session->userdata('level') == 1) {
+                          ?>
+                          <!-- <div class="form-group row">
                                   <label class="col-form-label col-lg-4 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
                                   <div class="col-lg-8 col-md-12 col-sm-12">
                                     <div class="input-daterange input-group">
@@ -232,19 +253,19 @@ if ($action == "edit") {
                                     <span class="form-text text-muted">date range selection</span>
                                   </div>
                                 </div> -->
-                              <?php
-                              // } 
+                          <?php
+                          // } 
 
-                              ?>
+                          ?>
 
 
-                            </div>
 
-                            <br />
-                            <div id="data_absensi_import"></div>
-                            <br />
 
-                          </form>
+                          <br />
+                          <div id="data_absensi_import"></div>
+                          <br />
+
+
                         </div>
                       </div>
                     </div>
@@ -388,7 +409,7 @@ if ($action == "edit") {
 
   function getDataAbsenImportPerHari() {
     var dTgl_cetak = $('#dTgl_cetak').val();
-     //alert(dTgl_cetak);
+    //alert(dTgl_cetak);
     if (dTgl_cetak == "") {
       new PNotify({
         text: 'Pilih Tanggal Absensi terlebih dahulu!',

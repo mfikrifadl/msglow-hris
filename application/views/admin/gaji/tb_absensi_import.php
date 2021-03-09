@@ -19,13 +19,7 @@
     // if (empty($row)) {
     // } else {
     ?>
-        <div class='row'>
-            <div class='col-sm-12 text-right'>
-                <button class='btn btn-success' name="submit" type='submit'>
-                    <i class="flaticon2-google-drive-file"></i>Cetak PDF
-                </button>
-            </div>
-        </div>
+        
     <?php
     //}
     ?>
