@@ -217,11 +217,11 @@ if ($action == "edit") {
                                 <div class="col-6">
                                   <div class='col-sm-12 text-right'>
 
-                                    <button class='btn btn-success' name="submit" type='submit' value="PDF">
+                                    <button class='btn btn-success' name="PDF" type='submit' value="PDF">
                                       <i class="flaticon2-google-drive-file"></i>Cetak PDF
                                     </button>
 
-                                    <button class='btn btn-brand' name="submit" type='submit' value="EXCEL">
+                                    <button class='btn btn-brand' name="EXCEL" type='submit' value="EXCEL">
                                       <i class="fa fa-file-export"></i>Export Excel
                                     </button>
 
