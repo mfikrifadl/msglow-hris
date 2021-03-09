@@ -164,7 +164,7 @@
                             ?>
 
                             <div class="form-group">
-                                <select id="ket_<?= $id_ket; ?>" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
+                                <select id="ket_<?= $id_ket; ?>" onchange="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
                                     <option></option>
                                     <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan_temp'] == "Shift 2") echo "selected";
                                                                                 ?>>Shift 2</option>
