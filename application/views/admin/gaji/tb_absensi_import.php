@@ -203,9 +203,9 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <button type="button" title="Update Data" id="id_<?= $id_ket; ?>" onclick="return update_ket('<?= $id_ket; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
+                                    <!-- <button type="button" title="Update Data" id="id_<?= $id_ket; ?>" onclick="return update_ket('<?= $id_ket; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
                                         <i class="flaticon2-send-1"></i>
-                                    </button>
+                                    </button> -->
                                 </div>
                                 <input type="hidden" id="nik_ket_update_<?= $id_ket; ?>" value="<?= $vaPegawai['nik'] ?>">
                             </td>
@@ -240,7 +240,9 @@
 
                         ?>
                     </td>
-
+                    <?php
+                    
+                    ?>
                     <td id="rev_manager_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
                         <?php
                         //Menghitung total jam lembur
