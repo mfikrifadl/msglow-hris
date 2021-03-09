@@ -99,7 +99,15 @@
 
                         ?>
                     </td>
-                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px;">
+                    <?php
+                    $style = "";
+                    if ($vaAbsensi['keterangan'] == "Revisi Approval Manager" || $vaAbsensi['keterangan'] == "Revisi Approval") {
+                        $style = "background-color:red;";
+                    } else {
+                        $style = "background-color:none";
+                    }
+                    ?>
+                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px; <?= $style ?>">
                         <?php
                         //Menghitung total jam lembur
                         $set_jam_lembur = "17:30:00";
@@ -122,7 +130,7 @@
 
                         ?>
                     </td>
-                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px;">
+                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px; <?= $style ?>">
                         <?php
                         //Menghitung Payroll total jam lembur  
                         $t_tot_jam_lembur = new DateTime($tot_jam_lembur);

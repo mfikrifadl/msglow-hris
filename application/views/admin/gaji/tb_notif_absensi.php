@@ -222,6 +222,10 @@ $tgl_hari_ini = date("d-m-Y");
                                                                                                                                         ?>>SSD</option>
                                                                                                 <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan'] == "Tanpa Keterangan") echo "selected";
                                                                                                                                                     ?>>Tanpa Keterangan</option>
+                                                                                                <option data-name="name13" value="Revisi Approval Manager" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo "selected";
+                                                                                                                                                            ?>>Revisi Approval Manager</option>
+                                                                                                <option data-name="name14" value="Revisi Approval" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval") echo "selected";
+                                                                                                                                                    ?>>Revisi Approval</option>
                                                                                             </select>
                                                                                         </div>
                                                                                         <div class="form-group">
@@ -257,8 +261,15 @@ $tgl_hari_ini = date("d-m-Y");
 
                                                                                     ?>
                                                                                 </td>
-
-                                                                                <td>
+                                                                                <?php
+                                                                                $style = "";
+                                                                                if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager" || $vaPegawai['keterangan_temp'] == "Revisi Approval") {
+                                                                                    $style = "style ='background-color:red'";
+                                                                                }else{
+                                                                                    $style = "style ='background-color:none'";
+                                                                                }
+                                                                                ?>
+                                                                                <td <?= $style ?>>
                                                                                     <?php
                                                                                     //Menghitung total jam lembur
                                                                                     $set_jam_lembur = "17:49:59";
@@ -282,7 +293,7 @@ $tgl_hari_ini = date("d-m-Y");
 
                                                                                     ?>
                                                                                 </td>
-                                                                                <td>
+                                                                                <td <?= $style ?>>
                                                                                     <?php
                                                                                     //Menghitung Payroll total jam lembur  
                                                                                     $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
@@ -373,7 +384,6 @@ $tgl_hari_ini = date("d-m-Y");
 </div>
 
 <script type="text/javascript">
-    
     function approvement(id) {
 
         var keterangan = $('#ket_abs_temp_' + id).val();
@@ -397,6 +407,7 @@ $tgl_hari_ini = date("d-m-Y");
                     text: 'Berhasil Approve Data Absensi.',
                     type: 'success'
                 });
+                window.location.href = "<?= site_url('gaji/data_notif_absen/' . $id_temp_c) ?>";
             },
             error: function(data, status, error) {
                 alert(data.responseText);
@@ -422,7 +433,7 @@ $tgl_hari_ini = date("d-m-Y");
                     text: 'Berhasil Reject Data Absensi.',
                     type: 'success'
                 });
-
+                window.location.href = "<?= site_url('gaji/data_notif_absen/' . $id_temp_c) ?>";
             },
             error: function(data, status, error) {
                 alert(data.responseText);
