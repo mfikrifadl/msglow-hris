@@ -150,8 +150,9 @@
                     ?>
                     <!-- </td> -->
                     <?php
+                    $id_ket = "";
                     if ($this->session->userdata('level') == 3) {
-                        $id_ket = "";
+                        
                         if ($vaPegawai['id'] == 0 || empty($vaPegawai['id'])) {
                             $t_id_ket = date("YmdHis");
                             $id_ket = $t_id_ket + $no;
