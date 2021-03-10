@@ -218,13 +218,20 @@ if ($action == "edit") {
         <div class="kt-portlet__body">
 
           <div class="row">
-            <div class="col-12 pull-right">
-              <a href="<?= site_url('transaksi/get_pegawai_resign/') ?>" target="blank" class="btn btn-success pull-right">
+            <div class="col-6 pull-right">
+              <a href="<?= site_url('transaksi/cetakExcel_pegawai_resign/') ?>" target="blank" class="btn btn-success pull-right">
                 <i class="fa fa-file-export"></i>
                 Export to Excel
               </a>&nbsp;
             </div>
+            <div class="col-6 pull-left">
+              <a href="<?= site_url('transaksi/cetakPDF_pegawai_resign/') ?>" target="blank" class="btn btn-info pull-left">
+                <i class="fa fa-file-pdf"></i>
+                Export to PDF
+              </a>&nbsp;
+            </div>
           </div>
+
           <hr>
           <div class="row">
             <div class="col-sm-12">

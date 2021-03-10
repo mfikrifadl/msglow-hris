@@ -17,21 +17,34 @@
       <?php
       if ($status_eksternal == "Eksternal") {
       ?>
-        <div class="col-12 pull-right">
-          <a href="<?= site_url('transaksi/get_eksternal_pegawai/') ?>" target="blank" class="btn btn-success pull-left">
+        <div class="col-6 pull-right">
+          <a href="<?= site_url('transaksi/cetakExcel_eksternal_pegawai/') ?>" target="blank" class="btn btn-success pull-left">
             <i class="fa fa-file-export"></i>
             Export Excel Pegawai Eksternal
           </a>&nbsp;
         </div>
+        <!-- <div class="col-6 pull-left">
+          <a href="<?= site_url('transaksi/cetakPDF_eksternal_pegawai/') ?>" target="blank" class="btn btn-info pull-left">
+            <i class="fa fa-file-export"></i>
+            Export PDF Pegawai Eksternal
+          </a>&nbsp;
+        </div> -->
+
       <?php
       } else {
       ?>
-        <div class="col-12 pull-right">
-          <a href="<?= site_url('transaksi/get_kontrak_pegawai/') ?>" target="blank" class="btn btn-success pull-left">
+        <div class="col-6 pull-right">
+          <a href="<?= site_url('transaksi/cetakExcel_kontrak_pegawai/') ?>" target="blank" class="btn btn-success pull-left">
             <i class="fa fa-file-export"></i>
             Export Excel Pegawai Kontrak
           </a>&nbsp;
         </div>
+        <!-- <div class="col-6 pull-left">
+          <a href="<?= site_url('transaksi/cetakPDF_kontrak_pegawai/') ?>" target="blank" class="btn btn-info pull-left">
+            <i class="fa fa-file-export"></i>
+            Export PDF Pegawai Kontrak
+          </a>&nbsp;
+        </div> -->
       <?php
       }
       ?>

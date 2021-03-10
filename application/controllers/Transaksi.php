@@ -1022,7 +1022,7 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
 	}
 
-	public function get_kontrak_pegawai()
+	public function cetakExcel_kontrak_pegawai()
 	{
 		$status = "Karyawan Kontrak";
 		$data['row']	= $this->model->ViewWhere('v_tb_pegawai','STATUS',$status);
@@ -1036,19 +1036,70 @@ class Transaksi extends CI_Controller
 		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
 	}
 
-	public function get_eksternal_pegawai()
+	public function cetakExcel_eksternal_pegawai()
 	{
 		$status = "Karyawan Eksternal";
 		$data['row']	= $this->model->ViewWhere('v_tb_pegawai','STATUS',$status);
 		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
 	}
 
-	public function get_pegawai_resign()
+	public function cetakExcel_pegawai_resign()
 	{
-		$data['row']		= $this->relasi->GetDataPengundurandiriPegawai();
+		$dataResign		= $this->relasi->GetDataPengundurandiriPegawai();
 
-		// print_r($data);
-		// die;
+		$response = array();
+        foreach ($dataResign as $x) {
+
+            $h['nik'] = $x['nik'];
+            $h['nama'] = $x['nama'];
+            $h['status_karyawan'] = $x['status_karyawan'];
+            $h['nama_jabatan'] = $x['nama_jabatan'];
+            $h['nama_sub_unit_kerja'] = $x['nama_sub_unit_kerja'];
+            $h['masa_kerja'] = $x['masa_kerja'];
+            $h['tanggal_masuk_kerja'] = $x['tanggal_masuk_kerja'];
+            $h['tanggal'] = $x['tanggal'];
+            $h['status'] = $x['status'];
+            $h['keterangan'] = $x['keterangan'];
+
+            array_push($response, $h);
+        }
+
+        $dataJson_view = json_encode($response, JSON_PRETTY_PRINT);
+        $data['row'] = json_decode($dataJson_view, true);
+        // print_r($dataJson_view);
+        // die;
 		$this->load->view('admin/transaksi/data/cetakExcel_resign', $data);
+	}
+
+	public function cetakPDF_pegawai_resign()
+	{
+		$dataResign		= $this->relasi->GetDataPengundurandiriPegawai();
+
+		$response = array();
+        foreach ($dataResign as $x) {
+
+            $h['nik'] = $x['nik'];
+            $h['nama'] = $x['nama'];
+            $h['status_karyawan'] = $x['status_karyawan'];
+            $h['nama_jabatan'] = $x['nama_jabatan'];
+            $h['nama_sub_unit_kerja'] = $x['nama_sub_unit_kerja'];
+            $h['masa_kerja'] = $x['masa_kerja'];
+            $h['tanggal_masuk_kerja'] = $x['tanggal_masuk_kerja'];
+            $h['tanggal'] = $x['tanggal'];
+            $h['status'] = $x['status'];
+            $h['keterangan'] = $x['keterangan'];
+
+            array_push($response, $h);
+        }
+
+        $dataJson_view = json_encode($response, JSON_PRETTY_PRINT);
+        $data['row'] = json_decode($dataJson_view, true);
+        // print_r($dataJson_view);
+        // die;
+
+		$mpdf = new \Mpdf\Mpdf(['autoPageBreak' => true]);
+		$html = $this->load->view('admin/transaksi/data/cetakPDF_resign', $data, true);
+		$mpdf->WriteHTML($html);
+		$mpdf->Output();
 	}
 }
