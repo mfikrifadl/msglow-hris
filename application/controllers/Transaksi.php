@@ -1042,4 +1042,13 @@ class Transaksi extends CI_Controller
 		$data['row']	= $this->model->ViewWhere('v_tb_pegawai','STATUS',$status);
 		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
 	}
+
+	public function get_pegawai_resign()
+	{
+		$data['row']		= $this->relasi->GetDataPengundurandiriPegawai();
+
+		// print_r($data);
+		// die;
+		$this->load->view('admin/transaksi/data/cetakExcel_resign', $data);
+	}
 }

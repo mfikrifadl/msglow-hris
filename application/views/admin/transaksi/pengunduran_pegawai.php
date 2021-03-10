@@ -127,12 +127,14 @@ if ($action == "edit") {
 
                       <!-- <select class="form-control kt-selectpicker" data-live-search="true" name="cIdStatusPegawai" required>
                         <option></option> -->
-                        <?php
-                        // foreach ($st_karyawan as $key => $vaKaryawan) { ?>
-                          <!-- <option value="<?= $vaKaryawan['id_status'] ?>" <?php if ($vaKaryawan['id_status'] == $cStatus_karyawan) echo "selected"; ?>>
+                      <?php
+                      // foreach ($st_karyawan as $key => $vaKaryawan) { 
+                      ?>
+                      <!-- <option value="<?= $vaKaryawan['id_status'] ?>" <?php if ($vaKaryawan['id_status'] == $cStatus_karyawan) echo "selected"; ?>>
                             <?= $vaKaryawan['status'] ?>
                           </option> -->
-                        <?php //} ?>
+                      <?php //} 
+                      ?>
                       <!-- </select> -->
                     <?php
                     } else {
@@ -216,7 +218,15 @@ if ($action == "edit") {
         <div class="kt-portlet__body">
 
           <div class="row">
-
+            <div class="col-12 pull-right">
+              <a href="<?= site_url('transaksi/get_pegawai_resign/') ?>" target="blank" class="btn btn-success pull-right">
+                <i class="fa fa-file-export"></i>
+                Export to Excel
+              </a>&nbsp;
+            </div>
+          </div>
+          <hr>
+          <div class="row">
             <div class="col-sm-12">
 
               <table class="table table-striped table-bordered DataTablePegawaiJos" id="DataTable" style="width: 100%">
@@ -224,7 +234,7 @@ if ($action == "edit") {
                   <tr>
                     <td>No</td>
                     <td>NIK</td>
-                    <td>Nama Pegawai</td>                    
+                    <td>Nama Pegawai</td>
                     <td>Status Pegawai</td>
                     <td>Jabatan</td>
                     <td>Sub Unit Kerja</td>
