@@ -50,11 +50,15 @@
                   </div>
                   <div class="form-group">
                     <label><b>Status Kerja:</b></label>
-                    <p class="form-control-static"><?= (!empty($vaView['Status'])) ? $vaView['Status'] : "-" ?></p>
+                    <p class="form-control-static"><?= (!empty($vaView['STATUS'])) ? $vaView['STATUS'] : "-" ?></p>
                   </div>
                   <div class="form-group">
                     <label><b>Office:</b></label>
-                    <p class="form-control-static"><?= (!empty($vaView['Area'])) ? $vaView['Area'] : "-" ?></p>
+                    <p class="form-control-static"><?= (!empty($vaView['OutletFix'])) ? $vaView['OutletFix'] : "-" ?></p>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Jabatan:</b></label>
+                    <p class="form-control-static"><?= (!empty($vaView['jabatan'])) ? $vaView['jabatan'] ." / ". $vaView['nama_sub_unit_kerja'] : "-" ?></p>
                   </div>
                   <div class="form-group">
                     <label><b>Tanggal Masuk Kerja:</b></label>
