@@ -79,32 +79,6 @@ if ($this->session->userdata('id') == '') {
 
   <!--end:: Vendor Plugins for custom pages -->
 
-
-
-  <!-- <link href="<?= base_url() ?>upload/nitrogen.png" type="image/x-icon" rel="icon" /> -->
-  <!-- Bootstrap 3.3.2 -->
-  <!-- <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
-  <!-- FontAwesome 4.3.0 -->
-  <!-- <link href="<?= base_url() ?>assets/plugins/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <link href="<?= base_url() ?>assets/dist/font/font.css" rel="stylesheet" type="text/css" /> -->
-  <!-- Ionicons 2.0.0 -->
-  <!-- <link href="<?= base_url() ?>assets/bootstrap/css/ionicons.min.css" rel="stylesheet" type="text/css" /> -->
-  <!-- Theme style -->
-  <!-- <link href="<?= base_url() ?>assets/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-  <link href="<?= base_url() ?>assets/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" /> -->
-  <!-- Select2 -->
-  <!-- <link href="<?= base_url() ?>assets/plugins/select2/select2.css" rel="stylesheet" type="text/css" /> -->
-  <!-- PopUp -->
-  <!-- <link href="<?= base_url() ?>assets/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
-  <link href="<?= base_url() ?>assets/plugins/pnotify/pnotify.custom.css" rel="stylesheet"> -->
-  <!-- DATA TABLES -->
-  <!-- <link href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" /> -->
-  <!-- Bootstrap datetime Picker -->
-  <!-- <link href="<?= base_url() ?>assets/plugins/datepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"> -->
-  <!-- iCheck for checkboxes and radio inputs -->
-  <!-- <link href="<?= base_url() ?>assets/plugins/iCheck/all.css" rel="stylesheet" type="text/css" /> -->
-  <!-- Summernotes -->
-  <!-- <link href="<?= base_url() ?>assets/plugins/summernote/summernote.css" rel="stylesheet" type="text/css" /> -->
   <?php
   function String2Date($dTgl)
   {
@@ -162,43 +136,7 @@ if ($this->session->userdata('id') == '') {
     return $cReturn;
   }
   ?>
-  <!-- <style type="text/css">
-    .dropdown-submenu {
-      position: relative;
-    }
-
-    .dropdown-submenu>.dropdown-menu {
-      top: 0;
-      right: 100%;
-      margin-top: -6px;
-      margin-left: -1px;
-      -webkit-border-radius: 0 6px 6px 6px;
-      -moz-border-radius: 0 6px 6px;
-      border-radius: 0 6px 6px 6px;
-    }
-
-    .dropdown-submenu:hover>.dropdown-menu {
-      display: block;
-    }
-
-    .dropdown-submenu>a:after {
-      display: block;
-      content: " ";
-      float: right;
-      width: 0;
-      height: 0;
-      border-color: transparent;
-      border-style: solid;
-      border-width: 5px 0 5px 5px;
-      border-left-color: #ccc;
-      margin-top: 5px;
-      margin-right: -10px;
-    }
-
-    .dropdown-submenu:hover>a:after {
-      border-left-color: #fff;
-    }
-  </style> -->
+  
 </head>
 
 <!-- <body class="skin-red layout-top-nav" onload="onLoad();">

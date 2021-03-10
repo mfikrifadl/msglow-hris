@@ -1,4 +1,4 @@
-<?php if ($this->session->userdata('level') == 1) {
+<?php if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 3) {
 ?>
 
   <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
@@ -689,7 +689,7 @@
   <!-- end:: Content -->
 
 
-<?php } else if ($this->session->userdata('level') == 2) { ?>
+<?php } else if ($this->session->userdata('level') == 12) { ?>
   <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
     <!-- begin:: Content -->
     <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
@@ -1022,7 +1022,7 @@
       <!-- end:: Content -->
     </div>
 
-  <?php } else if ($this->session->userdata('level') == 3) { ?>
+  <?php } else if ($this->session->userdata('level') == 13) { ?>
 
     <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
       <!-- begin:: Content -->

@@ -146,7 +146,9 @@ class Gaji extends CI_Controller
 		$dataHeader['file'] = 'Absensi Pegawai Selected';
 
 		//$data['row'] = $this->model->ViewWhere('v_log_data_absen','id',$id);
-		$data['row'] = $this->model->ViewNotifAbsensiSelected($id);		
+		$data['row'] = $this->model->ViewNotifAbsensiSelected($id);
+
+		$data['id_temp_c'] = $id;
 
 		//======================NOTIFIKASI===============================================================
 		$dataHeader['notif_absensi']				= $this->model->notifAbsensi();

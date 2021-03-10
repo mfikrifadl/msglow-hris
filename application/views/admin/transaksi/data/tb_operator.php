@@ -12,49 +12,76 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-rowreorder-bs4/css/rowReorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <table class="table table-striped table-bordered DataTablePegawaiJos" style="width: 100%">
-      <thead>
-        <tr>
-          <td>No</td>
-          <td>Id</td>
-          <td>Nama</td>
-          <td>Nik</td>
-          <td>Office</td>
-          <td>Action</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <?php $no = 0;
-          foreach ($row as $key => $vaPegawai) { ?>
-            <?php //include 'detail.pegawai.php'; 
 
-            if ($vaPegawai['id_status_mengundurkan_diri'] == null || $vaPegawai['id_status_mengundurkan_diri'] < 6 || $vaPegawai['id_status_mengundurkan_diri'] > 11) {
-            ?>
-              <td><?= ++$no ?></td>
-              <td><?= $vaPegawai['id_pegawai'] ?></td>
-              <td><?= $vaPegawai['nama'] ?></td>
-              <td><?= $vaPegawai['nik'] ?></td>
-              <td><?= $vaPegawai['OutletFix'] ?></td>
-              <td>
+    <div class="row">
+      <?php
+      if ($status_eksternal == "Eksternal") {
+      ?>
+        <div class="col-12 pull-right">
+          <a href="<?= site_url('transaksi/get_eksternal_pegawai/') ?>" target="blank" class="btn btn-success pull-left">
+            <i class="fa fa-file-export"></i>
+            Export Excel Pegawai Eksternal
+          </a>&nbsp;
+        </div>
+      <?php
+      } else {
+      ?>
+        <div class="col-12 pull-right">
+          <a href="<?= site_url('transaksi/get_kontrak_pegawai/') ?>" target="blank" class="btn btn-success pull-left">
+            <i class="fa fa-file-export"></i>
+            Export Excel Pegawai Kontrak
+          </a>&nbsp;
+        </div>
+      <?php
+      }
+      ?>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-striped table-bordered DataTablePegawaiJos" style="width: 100%">
+          <thead>
+            <tr>
+              <td>No</td>
+              <td>Id</td>
+              <td>Nama</td>
+              <td>Nik</td>
+              <td>Office</td>
+              <td>Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <?php $no = 0;
+              foreach ($row as $key => $vaPegawai) { ?>
+                <?php //include 'detail.pegawai.php'; 
 
-                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="View Data" href="<?= site_url('transaksi/view_pegawai/' . $vaPegawai['id_pegawai'] . '') ?>">
-                  <i class="flaticon-eye"></i>
-                </a>
-                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" onclick="GetDataModal(<?= $vaPegawai['id_pegawai'] ?>);" data-id="<?= $vaPegawai['id_pegawai'] ?>">
-                  <i class="flaticon-edit"></i>
-                </a>
+                if ($vaPegawai['id_status_mengundurkan_diri'] == null || $vaPegawai['id_status_mengundurkan_diri'] < 6 || $vaPegawai['id_status_mengundurkan_diri'] > 11) {
+                ?>
+                  <td><?= ++$no ?></td>
+                  <td><?= $vaPegawai['id_pegawai'] ?></td>
+                  <td><?= $vaPegawai['nama'] ?></td>
+                  <td><?= $vaPegawai['nik'] ?></td>
+                  <td><?= $vaPegawai['OutletFix'] ?></td>
+                  <td>
 
-              </td>
-        </tr>
-    <?php
-            } else {
-              
-            }
-          } ?>
-      </tbody>
-    </table>
+                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="View Data" href="<?= site_url('transaksi/view_pegawai/' . $vaPegawai['id_pegawai'] . '') ?>">
+                      <i class="flaticon-eye"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" onclick="GetDataModal(<?= $vaPegawai['id_pegawai'] ?>);" data-id="<?= $vaPegawai['id_pegawai'] ?>">
+                      <i class="flaticon-edit"></i>
+                    </a>
 
+                  </td>
+            </tr>
+        <?php
+                } else {
+                }
+              } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <!--begin::Modal-->
     <div class="modal fade" id="operator" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">

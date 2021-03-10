@@ -104,7 +104,6 @@
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/@fullcalendar/interaction/main.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/@fullcalendar/list/main.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/@fullcalendar/timegrid/main.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/gmaps/gmaps.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/flot/dist/es5/jquery.flot.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/flot/source/jquery.flot.resize.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/flot/source/jquery.flot.categories.js" type="text/javascript"></script>
@@ -118,7 +117,7 @@
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-autofill/js/dataTables.autoFill.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-autofill-bs4/js/autoFill.bootstrap4.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/jszip/dist/jszip.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/pdfmake/build/pdfmake.min.js" type="text/javascript"></script>
+
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/pdfmake/build/vfs_fonts.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-buttons/js/dataTables.buttons.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js" type="text/javascript"></script>
@@ -137,12 +136,6 @@
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller/js/dataTables.scroller.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select/js/dataTables.select.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/jstree/dist/jstree.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/jqvmap/dist/jquery.vmap.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/jqvmap/dist/maps/jquery.vmap.world.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/jqvmap/dist/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/jqvmap/dist/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/jqvmap/dist/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets2/plugins/custom/jqvmap/dist/maps/jquery.vmap.europe.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/plugins/custom/uppy/dist/uppy.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/js/pages/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets2/js/pages/crud/datatables/extensions/colreorder.js" type="text/javascript"></script>
@@ -158,49 +151,7 @@
 <script src="<?= base_url() ?>assets2/js/pages/crud/datatables/search-options/column-search.js" type="text/javascript"></script>
 
 <script src="<?php echo base_url(); ?>assets2/js/chartjs/Chart.bundle.js" type="text/javascript"></script>
-<!-- ================================= CSS BAWAAN =================================================== -->
-<!-- jQuery 2.1.3 -->
-<!-- <script src="<?= base_url() ?>assets/plugins/jQuery/jQuery-2.1.3.min.js"></script> -->
-<!-- jQuery UI 1.11.2 -->
-<!-- <script src="<?= base_url() ?>assets/plugins/jQueryUI/jquery-ui.min.js" type="text/javascript"></script> -->
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<!-- <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script> -->
-<!-- Bootstrap 3.3.2 JS -->
-<!-- <script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>   -->
-<!-- Sparkline -->
-<!-- <script src="<?= base_url() ?>assets/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>   -->
-<!-- Select2 -->
-<!-- <script src="<?= base_url() ?>assets/plugins/select2/select2.js" type="text/javascript"></script> -->
-<!-- MaskInput -->
-<!-- <script src="<?= base_url() ?>assets/plugins/mask-input/jquery.maskedinput.js" type="text/javascript"></script> -->
-<!-- DATA TABES SCRIPT -->
-<!-- <script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script> -->
-<!-- bootstrap DateTime picker -->
-<!-- <script type="text/javascript" src="<?= base_url() ?>assets/plugins/datepicker/js/moment.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>assets/plugins/datepicker/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>assets/plugins/datepicker/js/bootstrap-datetimepicker.id.js"></script> -->
-<!-- iCheck -->
-<!-- <script src="<?= base_url() ?>assets/plugins/iCheck/icheck.min.js" type="text/javascript"></script> -->
-<!-- Summernote -->
-<!-- <script src="<?= base_url() ?>assets/plugins/summernote/summernote.js"></script>
-    <script src="<?= base_url() ?>assets/plugins/bootstrap-maxlength/bootstrap-maxlength.js"></script> -->
-<!-- Po-up -->
-<!-- <script src="<?= base_url() ?>assets/plugins/magnific-popup/magnific-popup.js"></script>
-    <script src="<?= base_url() ?>assets/plugins/pnotify/pnotify.custom.js"></script> -->
 
-<!-- Slimscroll -->
-<!-- <script src="<?= base_url() ?>assets/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script> -->
-<!-- AdminLTE App -->
-<!-- <script src="<?= base_url() ?>assets/dist/js/app.min.js" type="text/javascript"></script> -->
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!-- <script src="<?= base_url() ?>assets/dist/js/pages/dashboard.js" type="text/javascript"></script> -->
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="<?= base_url() ?>assets/dist/js/demo.js" type="text/javascript"></script> -->
-<!-- page script -->
-<!-- ===================================== END CSS BAWAAN ====================================================================== -->
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function() {
     var elements = document.getElementsByTagName("INPUT");

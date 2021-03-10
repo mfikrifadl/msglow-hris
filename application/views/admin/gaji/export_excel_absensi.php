@@ -65,6 +65,7 @@
         <tbody>
 
             <?php $no = 0;
+            $log_absen = json_decode($dataDecode, true);
             foreach ($log_absen as $key => $vaAbsensi) {
                 $jam_datang = new DateTime($vaAbsensi['jam_datang']);
                 $jam_pulang = new DateTime($vaAbsensi['jam_pulang']);
@@ -99,31 +100,36 @@
 
                         ?>
                     </td>
-                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px;">
-                        <?php
+                    <?php
+                    $style = "";
+                    if ($vaAbsensi['keterangan'] == "Revisi Approval Manager" || $vaAbsensi['keterangan'] == "Revisi Approval") {
+                        $style = "background-color:red;";
+                    } else {
+                        $style = "background-color:none";
+                    }
+                    ?>
+                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px; <?= $style ?>">
+                    <?php
                         //Menghitung total jam lembur
-                        $set_jam_lembur = "17:30:00";
-                        $t_set_jam_lembur = new DateTime($set_jam_lembur);
+                        $set_jam_lembur = "17:49:59";
+                        $t_set_jam_lembur = new DateTime($set_jam_lembur);                       
 
-                        $set_jam_pulang_default = "17:00:00";
-                        $t_set_jam_pulang_default = new DateTime($set_jam_pulang_default);
-
-                        $t_jam_pulang = "20:00:00";
-                        $x_jam_pulang = new DateTime($t_jam_pulang);
                         $tot_jam_lembur = "";
                         if ($jam_pulang > $t_set_jam_lembur) {
-                            $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
+                            $hit_jam_lembur =  $t_set_jam_lembur->diff($jam_pulang);
                             $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
                             $tot_jam_lembur = (string)$jumlah2;
-
-                            echo "$tot_jam_lembur";
+                            if (empty($vaAbsensi['jam_datang']) && empty($vaAbsensi['jam_pulang'])) {
+                            } else {
+                                echo "$tot_jam_lembur";
+                            }
                         } else {
                         }
 
                         ?>
                     </td>
-                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px;">
-                        <?php
+                    <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px; <?= $style ?>">
+                    <?php
                         //Menghitung Payroll total jam lembur  
                         $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
                         $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
@@ -138,13 +144,16 @@
                         //echo $hasil;
                         if (empty($tot_jam_lembur)) {
                         } else {
-                            if ($menit > 19 && $menit < 50) {
-                                $lembur_half = 13000;
-                                $tot_lembur_today = $lembur_jam + $lembur_half;
-                                echo $tot_lembur_today;
+                            if (empty($vaAbsensi['jam_datang']) && empty($vaAbsensi['jam_pulang'])) {
                             } else {
-                                $lembur_jam = $jam * 25000;
-                                echo $lembur_jam;
+                                if ($menit > 19 && $menit < 50) {
+                                    $lembur_half = 13000;
+                                    $tot_lembur_today = $lembur_jam + $lembur_half;
+                                    echo $tot_lembur_today;
+                                } else {
+                                    $lembur_jam = $jam * 25000;
+                                    echo $lembur_jam;
+                                }
                             }
                         }
 

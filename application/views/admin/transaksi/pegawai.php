@@ -180,13 +180,14 @@ if ($action == "edit") {
 
                   <div class="kt-portlet__body">
                     <div class="col-md-12">
+                      <a href="<?= site_url('transaksi/get_all_pegawai/') ?>" target="blank" class="btn btn-brand pull-right">
+                        <i class="fa fa-file-export"></i>
+                        Export Excel Semua Pegawai
+                      </a>&nbsp;
+                    </div>
+
+                    <div class="col-md-12">
                       <div class="nav-tabs-custom">
-
-                        <a href="<?= site_url('transaksi/get_all_pegawai/') ?>" target="blank" class="btn btn-brand pull-right">
-                          <i class="fa fa-file-export"></i>
-                          Export to Excel
-                        </a>&nbsp;
-
                         <ul class="nav nav-tabs" id="myTabs">
                           <li class="active text-dark">
                             <!-- <a href="#" class="btn btn-label-facebook"><i class="socicon-facebook"></i> Facebook</a>&nbsp; -->

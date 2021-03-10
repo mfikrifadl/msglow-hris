@@ -73,14 +73,14 @@ class Transaksi extends CI_Controller
 
 	public function tb_operator()
 	{
-
+		$data['status_eksternal'] = "Kontrak";
 		$data['row']	= $this->relasi->GetDataPegawai();
 		$this->load->view('admin/transaksi/data/tb_operator', $data);
 	}
 
 	public function tb_operator_eksternal()
 	{
-
+		$data['status_eksternal'] = "Eksternal";
 		$data['row']	= $this->relasi->GetDataPegawaiEksternal();
 		$this->load->view('admin/transaksi/data/tb_operator', $data);
 	}
@@ -1019,6 +1019,27 @@ class Transaksi extends CI_Controller
 	public function get_all_pegawai()
 	{
 		$data['row']	= $this->model->ViewAsc('v_tb_pegawai','nik');
+		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
+	}
+
+	public function get_kontrak_pegawai()
+	{
+		$status = "Karyawan Kontrak";
+		$data['row']	= $this->model->ViewWhere('v_tb_pegawai','STATUS',$status);
+		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
+	}
+
+	public function get_phl_pegawai()
+	{
+		$status = "Karyawan PHL";
+		$data['row']	= $this->model->ViewWhere('v_tb_pegawai','STATUS',$status);
+		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
+	}
+
+	public function get_eksternal_pegawai()
+	{
+		$status = "Karyawan Eksternal";
+		$data['row']	= $this->model->ViewWhere('v_tb_pegawai','STATUS',$status);
 		$this->load->view('admin/transaksi/data/tb_export_excel_pegawai', $data);
 	}
 }
