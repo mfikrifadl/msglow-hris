@@ -110,20 +110,31 @@
                     ?>
                     <td style="white-space:wrap; border: 1px solid #999; padding: 8px 20px; <?= $style ?>">
                     <?php
-                        //Menghitung total jam lembur
-                        $set_jam_lembur = "17:49:59";
-                        $t_set_jam_lembur = new DateTime($set_jam_lembur);                       
+                        //Menghitung Payroll total jam lembur  
+                        $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
+                        $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                        $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
+                        $jam = $a_jam_pulang_lembur[0];
+                        $menit = $a_jam_pulang_lembur[1];
+                        $detik = $a_jam_pulang_lembur[2];
 
-                        $tot_jam_lembur = "";
-                        if ($jam_pulang > $t_set_jam_lembur) {
-                            $hit_jam_lembur =  $t_set_jam_lembur->diff($jam_pulang);
-                            $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
-                            $tot_jam_lembur = (string)$jumlah2;
+                        //echo "$jam-$menit-$detik";
+
+                        $lembur_jam = $jam * 25000;
+                        //echo $hasil;
+                        if (empty($tot_jam_lembur)) {
+                        } else {
                             if (empty($vaAbsensi['jam_datang']) && empty($vaAbsensi['jam_pulang'])) {
                             } else {
-                                echo "$tot_jam_lembur";
+                                if ($menit > 19 && $menit < 50) {
+                                    $lembur_half = 13000;
+                                    $tot_lembur_today = $lembur_jam + $lembur_half;
+                                    echo $tot_lembur_today;
+                                } else {
+                                    $lembur_jam = $jam * 25000;
+                                    echo $lembur_jam;
+                                }
                             }
-                        } else {
                         }
 
                         ?>

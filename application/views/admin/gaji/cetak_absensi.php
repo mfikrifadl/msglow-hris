@@ -103,9 +103,15 @@
                         $set_jam_lembur = "17:49:59";
                         $t_set_jam_lembur = new DateTime($set_jam_lembur);
 
+                        $set_jam_pulang_default = "17:00:00";
+                        $t_set_jam_pulang_default = new DateTime($set_jam_pulang_default);
+
+                        $t_jam_pulang = "20:00:00";
+                        $x_jam_pulang = new DateTime($t_jam_pulang);
+
                         $tot_jam_lembur = "";
                         if ($jam_pulang > $t_set_jam_lembur) {
-                            $hit_jam_lembur =  $t_set_jam_lembur->diff($jam_pulang);
+                            $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
                             $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
                             $tot_jam_lembur = (string)$jumlah2;
                             if (empty($vaAbsensi['jam_datang']) && empty($vaAbsensi['jam_pulang'])) {
