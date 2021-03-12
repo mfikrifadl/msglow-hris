@@ -247,7 +247,7 @@
                     <?php
 
                     ?>
-                    <td id="rev_manager_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
+                    <td id="rev_manager_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager" || $vaPegawai['keterangan'] == "Revisi Approval" || $vaPegawai['keterangan'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
                         <?php
                         //Menghitung total jam lembur
                         $set_jam_lembur = "17:49:59";
