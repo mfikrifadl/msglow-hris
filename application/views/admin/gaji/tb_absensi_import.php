@@ -273,7 +273,7 @@
 
                         ?>
                     </td>
-                    <td id="rev_manager1_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
+                    <td id="rev_manager1_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager" || $vaPegawai['keterangan'] == "Revisi Approval" || $vaPegawai['keterangan'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
                         <?php
                         //Menghitung Payroll total jam lembur  
                         $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
