@@ -13,7 +13,7 @@
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets2/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
-    <table class='table table-striped table-bordered' id='DataTableAbsensi'>
+    <table class='table table-striped table-bordered' id='DataTable_absensi_mesin'>
         <thead>
             <tr>
                 <td>No <?= $this->session->userdata('level') ?></td>
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             <?php $no = 0;
-
+            $kosong = "";
             foreach ($attlog as $key => $vaArea) {
 
                 $tgl_attlog = $vaArea['attlog'];
@@ -38,6 +38,7 @@
 
                 if ($dTgl != $tgl) {
                 } else {
+                    $kosong = "ada";
             ?>
                     <tr>
                         <td><?= ++$no; ?></td>
@@ -62,20 +63,25 @@
             } ?>
         </tbody>
     </table>
-    <?php if (empty($attlog)) {
+    <?php if ($kosong != "ada") {
     } else {
+        date_default_timezone_set("Asia/Jakarta");
+        $date = date("Y-m-d");
         if ($this->session->userdata('level') == 3) {
+            if ($dTgl == $date) {
+            } else {
     ?>
-            <div class='row'>
-                <div class='col-sm-6 text-right'>
-                    <!-- <button class='btn btn-success' onclick="return run();" type='button'>Import</button> -->
-                    <button class='btn btn-success' name="submit" type='submit'>Import</button>
+                <div class='row'>
+                    <div class='col-sm-6 text-right'>
+                        <!-- <button class='btn btn-success' onclick="return run();" type='button'>Import</button> -->
+                        <button class='btn btn-success' name="submit" type='submit'>Import</button>
+                    </div>
+                    <div class='col-sm-6 text-left'>
+                        <a class='btn btn-danger' href="<?= base_url('cek_absen') ?>">Cancel</a>
+                    </div>
                 </div>
-                <div class='col-sm-6 text-left'>
-                    <a class='btn btn-danger' href="<?= base_url('cek_absen') ?>">Cancel</a>
-                </div>
-            </div>
     <?php
+            }
         } else {
         }
     } ?>

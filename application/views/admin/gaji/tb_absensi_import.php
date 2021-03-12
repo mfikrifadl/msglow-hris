@@ -197,9 +197,9 @@
                                         <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan_temp'] == "Tanpa Keterangan") echo "selected";
                                                                                             ?>>Tanpa Keterangan</option>
                                         <option data-name="name13" value="Lupa Check Lock Masuk" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Masuk") echo "selected";
-                                                                                            ?>>Tanpa Keterangan</option>
+                                                                                            ?>>Lupa Check Lock Masuk</option>
                                         <option data-name="name14" value="Lupa Check Lock Pulang" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Pulang") echo "selected";
-                                                                                            ?>>Tanpa Keterangan</option>
+                                                                                            ?>>Lupa Check Lock Pulang</option>
                                         <option data-name="name15" value="Revisi Approval Manager" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo "selected";
                                                                                                     ?>>Revisi Approval Manager</option>
                                         <option data-name="name16" value="Revisi Approval" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval") echo "selected";

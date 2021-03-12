@@ -14,6 +14,7 @@ if ($action == "edit") {
     $cEmail         =   $column['email'];
     $cStatus        =   $column['status'];
     $cLevel        =   $column['level_id'];
+    $cLevel2        =   $column['level_id_2'];
     $cJob       =   $column['job'];
     $cJob_id          =   $column['job_id'];
     // $cTahap         =   $column['tahap'];
@@ -33,6 +34,7 @@ if ($action == "edit") {
   $cEmail         =   "";
   $cStatus        =   "";
   $cLevel        =   "";
+  $cLevel2        =   "";
   $cTahap         =   "";
   $cJob         =   "";
   $cJob_id          =  "";
@@ -94,11 +96,22 @@ if ($action == "edit") {
               <input type="hidden" name="cJob_id" id="cJob_id" value="<?= $cJob_id ?>">
             </div>
             <div class="form-group">
-              <label>Interviewer</label>
+              <label>Interviewer 1</label>
               <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel" name="cLevel" required>
                 <option></option>
                 <?php foreach ($levels as $key => $level) { ?>
-                  <option value="<?= $level['id_level'] ?>" <?php if ($cLevel == $level['id_level']) echo "selected"; ?>>
+                  <option value="<?= $level['level'] ?>" <?php if ($cLevel == $level['level']) echo "selected"; ?>>
+                    <?= $level['nama'] ?>
+                  </option>
+                <?php } ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Interviewer 2</label>
+              <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel2" name="cLevel2" required>
+                <option></option>
+                <?php foreach ($levels as $key => $level) { ?>
+                  <option value="<?= $level['level'] ?>" <?php if ($cLevel2 == $level['level']) echo "selected"; ?>>
                     <?= $level['nama'] ?>
                   </option>
                 <?php } ?>

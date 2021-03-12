@@ -243,160 +243,312 @@ $whois_date = date('d-m-Y H:i:s');
                             foreach ($row as $key => $vaArea) {
                                 if ($vaArea['is_delete'] == 1 || $vaArea['status'] == "Menjadi Pegawai") {
                                 } else {
+                                    if ($this->session->userdata("level") == 4) {
+                                        if ($vaArea['level_id'] == $this->session->userdata("id")) {
                             ?>
+                                            <tr>
+                                                <td><?= ++$no; ?></td>
+                                                <td>
+                                                    <?= $vaArea['kode_wawancara'] ?>
+                                                </td>
+                                                <td style="font-size: 11px;">
+                                                    <strong>
+                                                        Nama : <?= $vaArea['nama'] ?> <br />
+                                                        No : Telepon <?= $vaArea['nomor_telepon'] ?> <br />
+                                                        Email : <?= $vaArea['email'] ?> <br />
+                                                    </strong>
 
-                                    <tr>
-                                        <td><?= ++$no; ?></td>
-                                        <td>
-                                            <?= $vaArea['kode_wawancara'] ?>
-                                        </td>
-                                        <td style="font-size: 11px;">
-                                            <strong>
-                                                Nama : <?= $vaArea['nama'] ?> <br />
-                                                No : Telepon <?= $vaArea['nomor_telepon'] ?> <br />
-                                                Email : <?= $vaArea['email'] ?> <br />
-                                            </strong>
+                                                </td>
+                                                <td>
 
-                                        </td>
-                                        <td>
-
-                                            <?php
-                                            if ($controller_name == "tes_kesehatan") {
-                                                //echo $vaArea['hasil_tes_kesehatan'];
-                                                if ($vaArea['hasil_tes_kesehatan'] == NULL) {
-                                                } else {
-                                            ?>
-                                                    <button type="button" class="btn btn-bold btn-label-info btn-outline-info btn-sm" data-toggle="modal" data-target="#kt_modal_3<?= $vaArea['id_recruitment'] ?>"> Preview </button>
-
-                                                    <!--begin::Modal-->
                                                     <?php
-                                                    $no = 0;
-                                                    foreach ($row as $key => $vaAreaModal) {
-                                                        ++$no;
+                                                    if ($controller_name == "tes_kesehatan") {
+                                                        //echo $vaArea['hasil_tes_kesehatan'];
+                                                        if ($vaArea['hasil_tes_kesehatan'] == NULL) {
+                                                        } else {
                                                     ?>
-                                                        <div class="modal fade" id="kt_modal_3<?= $vaAreaModal['id_recruitment'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content">
+                                                            <button type="button" class="btn btn-bold btn-label-info btn-outline-info btn-sm" data-toggle="modal" data-target="#kt_modal_3<?= $vaArea['id_recruitment'] ?>"> Preview </button>
 
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Hasil Tes Kesehatan <?= $vaAreaModal['nama'] ?></h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form>
-                                                                            <div class="form-group">
-                                                                                <img src="<?= base_url() ?><?= $vaAreaModal['hasil_tes_kesehatan'] ?>" style="width:500%;max-width:700px" />
+                                                            <!--begin::Modal-->
+                                                            <?php
+                                                            $no = 0;
+                                                            foreach ($row as $key => $vaAreaModal) {
+                                                                ++$no;
+                                                            ?>
+                                                                <div class="modal fade" id="kt_modal_3<?= $vaAreaModal['id_recruitment'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Hasil Tes Kesehatan <?= $vaAreaModal['nama'] ?></h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                </button>
                                                                             </div>
-                                                                        </form>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    </div>
+                                                                            <div class="modal-body">
+                                                                                <form>
+                                                                                    <div class="form-group">
+                                                                                        <img src="<?= base_url() ?><?= $vaAreaModal['hasil_tes_kesehatan'] ?>" style="width:500%;max-width:700px" />
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            </div>
 
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                            <?php
+                                                            } ?>
+                                                            <!--end::Modal-->
+
                                                     <?php
-                                                    } ?>
-                                                    <!--end::Modal-->
+                                                        }
+                                                    } else {
+                                                        echo $vaArea[$nilai_test];
+                                                    }
+                                                    ?>
 
-                                            <?php
-                                                }
-                                            } else {
-                                                echo $vaArea[$nilai_test];
-                                            }
-                                            ?>
-
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($vaArea[$controller_name] == 'pemanggilan') {
-                                                $cLabel = 'info';
-                                            } else if ($vaArea[$controller_name] == 'lolos') {
-                                                $cLabel = 'success';
-                                            } else if ($vaArea[$controller_name] == 'tidaklolos') {
-                                                $cLabel = 'danger';
-                                            } else {
-                                                $cLabel = 'warning';
-                                            }
-                                            ?>
-                                            <span class="btn btn-sm btn-<?= $cLabel ?>"><?= ($vaArea[$controller_name]) ?></span>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($controller_name == "psiko_test") {
-                                                if ($vaArea['status_email_p'] == NULL) {
-                                                    echo "Belum Kirim Email";
-                                                } elseif ($vaArea['psiko_test'] == "tidaklolos") {
-                                                    echo "$vaArea[status_email_tidaklolos]";
-                                                } else {
-                                                    echo "$vaArea[status_email_p]";
-                                                }
-                                            } elseif ($controller_name == "uji_kompetensi") {
-                                                if ($vaArea['status_email_uk'] == NULL) {
-                                                    echo "Belum Kirim Email";
-                                                } elseif ($vaArea['uji_kompetensi'] == "tidaklolos") {
-                                                    echo "$vaArea[status_email_tidaklolos]";
-                                                } else {
-                                                    echo "$vaArea[status_email_uk]";
-                                                }
-                                            } elseif ($controller_name == "interview_user_1") {
-                                                if ($vaArea['status_email_u1'] == NULL) {
-                                                    echo "Belum Kirim Email";
-                                                } elseif ($vaArea['interview_user_1'] == "tidaklolos") {
-                                                    echo "$vaArea[status_email_tidaklolos]";
-                                                } else {
-                                                    echo "$vaArea[status_email_u1]";
-                                                }
-                                            } elseif ($controller_name == "interview_user_2") {
-                                                if ($vaArea['status_email_u2'] == NULL) {
-                                                    echo "Belum Kirim Email";
-                                                } elseif ($vaArea['interview_user_2'] == "tidaklolos") {
-                                                    echo "$vaArea[status_email_tidaklolos]";
-                                                } else {
-                                                    echo "$vaArea[status_email_u2]";
-                                                }
-                                            } elseif ($controller_name == "interview_hrga") {
-                                                if ($vaArea['status_email_hrga'] == NULL) {
-                                                    echo "Belum Kirim Email";
-                                                } elseif ($vaArea['interview_hrga'] == "tidaklolos") {
-                                                    echo "$vaArea[status_email_tidaklolos]";
-                                                } else {
-                                                    echo "$vaArea[status_email_hrga]";
-                                                }
-                                            } elseif ($controller_name == "tes_kesehatan") {
-                                                if ($vaArea['status_email_tes_kesehatan'] == NULL) {
-                                                    echo "Belum Kirim Email";
-                                                } elseif ($vaArea['tes_kesehatan'] == "tidaklolos") {
-                                                    echo "$vaArea[status_email_tidaklolos]";
-                                                } else {
-                                                    echo "$vaArea[status_email_tes_kesehatan]";
-                                                }
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="btn-group" role="group" aria-label="First group">
-                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' . '/' . $vaArea['id_recruitment'] . '') ?>">
-                                                    <i class="flaticon-edit"></i>
-                                                </a>
-                                                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
-                                                    <i class="flaticon-mail"></i>
-                                                </a>
-                                                <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    if ($vaArea[$controller_name] == 'pemanggilan') {
+                                                        $cLabel = 'info';
+                                                    } else if ($vaArea[$controller_name] == 'lolos') {
+                                                        $cLabel = 'success';
+                                                    } else if ($vaArea[$controller_name] == 'tidaklolos') {
+                                                        $cLabel = 'danger';
+                                                    } else {
+                                                        $cLabel = 'warning';
+                                                    }
+                                                    ?>
+                                                    <span class="btn btn-sm btn-<?= $cLabel ?>"><?= ($vaArea[$controller_name]) ?></span>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    if ($controller_name == "psiko_test") {
+                                                        if ($vaArea['status_email_p'] == NULL) {
+                                                            echo "Belum Kirim Email";
+                                                        } elseif ($vaArea['psiko_test'] == "tidaklolos") {
+                                                            echo "$vaArea[status_email_tidaklolos]";
+                                                        } else {
+                                                            echo "$vaArea[status_email_p]";
+                                                        }
+                                                    } elseif ($controller_name == "uji_kompetensi") {
+                                                        if ($vaArea['status_email_uk'] == NULL) {
+                                                            echo "Belum Kirim Email";
+                                                        } elseif ($vaArea['uji_kompetensi'] == "tidaklolos") {
+                                                            echo "$vaArea[status_email_tidaklolos]";
+                                                        } else {
+                                                            echo "$vaArea[status_email_uk]";
+                                                        }
+                                                    } elseif ($controller_name == "interview_user_1") {
+                                                        if ($vaArea['status_email_u1'] == NULL) {
+                                                            echo "Belum Kirim Email";
+                                                        } elseif ($vaArea['interview_user_1'] == "tidaklolos") {
+                                                            echo "$vaArea[status_email_tidaklolos]";
+                                                        } else {
+                                                            echo "$vaArea[status_email_u1]";
+                                                        }
+                                                    } elseif ($controller_name == "interview_user_2") {
+                                                        if ($vaArea['status_email_u2'] == NULL) {
+                                                            echo "Belum Kirim Email";
+                                                        } elseif ($vaArea['interview_user_2'] == "tidaklolos") {
+                                                            echo "$vaArea[status_email_tidaklolos]";
+                                                        } else {
+                                                            echo "$vaArea[status_email_u2]";
+                                                        }
+                                                    } elseif ($controller_name == "interview_hrga") {
+                                                        if ($vaArea['status_email_hrga'] == NULL) {
+                                                            echo "Belum Kirim Email";
+                                                        } elseif ($vaArea['interview_hrga'] == "tidaklolos") {
+                                                            echo "$vaArea[status_email_tidaklolos]";
+                                                        } else {
+                                                            echo "$vaArea[status_email_hrga]";
+                                                        }
+                                                    } elseif ($controller_name == "tes_kesehatan") {
+                                                        if ($vaArea['status_email_tes_kesehatan'] == NULL) {
+                                                            echo "Belum Kirim Email";
+                                                        } elseif ($vaArea['tes_kesehatan'] == "tidaklolos") {
+                                                            echo "$vaArea[status_email_tidaklolos]";
+                                                        } else {
+                                                            echo "$vaArea[status_email_tes_kesehatan]";
+                                                        }
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group" role="group" aria-label="First group">
+                                                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' . '/' . $vaArea['id_recruitment'] . '') ?>">
+                                                            <i class="flaticon-edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
+                                                            <i class="flaticon-mail"></i>
+                                                        </a>
+                                                        <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                                                     <i class="flaticon-delete"></i>
                                                 </a> -->
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        } else {
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td><?= ++$no; ?></td>
+                                            <td>
+                                                <?= $vaArea['kode_wawancara'] ?>
+                                            </td>
+                                            <td style="font-size: 11px;">
+                                                <strong>
+                                                    Nama : <?= $vaArea['nama'] ?> <br />
+                                                    No : Telepon <?= $vaArea['nomor_telepon'] ?> <br />
+                                                    Email : <?= $vaArea['email'] ?> <br />
+                                                </strong>
 
-                                <?php
+                                            </td>
+                                            <td>
+
+                                                <?php
+                                                if ($controller_name == "tes_kesehatan") {
+                                                    //echo $vaArea['hasil_tes_kesehatan'];
+                                                    if ($vaArea['hasil_tes_kesehatan'] == NULL) {
+                                                    } else {
+                                                ?>
+                                                        <button type="button" class="btn btn-bold btn-label-info btn-outline-info btn-sm" data-toggle="modal" data-target="#kt_modal_3<?= $vaArea['id_recruitment'] ?>"> Preview </button>
+
+                                                        <!--begin::Modal-->
+                                                        <?php
+                                                        $no = 0;
+                                                        foreach ($row as $key => $vaAreaModal) {
+                                                            ++$no;
+                                                        ?>
+                                                            <div class="modal fade" id="kt_modal_3<?= $vaAreaModal['id_recruitment'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Hasil Tes Kesehatan <?= $vaAreaModal['nama'] ?></h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form>
+                                                                                <div class="form-group">
+                                                                                    <img src="<?= base_url() ?><?= $vaAreaModal['hasil_tes_kesehatan'] ?>" style="width:500%;max-width:700px" />
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                        } ?>
+                                                        <!--end::Modal-->
+
+                                                <?php
+                                                    }
+                                                } else {
+                                                    echo $vaArea[$nilai_test];
+                                                }
+                                                ?>
+
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($vaArea[$controller_name] == 'pemanggilan') {
+                                                    $cLabel = 'info';
+                                                } else if ($vaArea[$controller_name] == 'lolos') {
+                                                    $cLabel = 'success';
+                                                } else if ($vaArea[$controller_name] == 'tidaklolos') {
+                                                    $cLabel = 'danger';
+                                                } else {
+                                                    $cLabel = 'warning';
+                                                }
+                                                ?>
+                                                <span class="btn btn-sm btn-<?= $cLabel ?>"><?= ($vaArea[$controller_name]) ?></span>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($controller_name == "psiko_test") {
+                                                    if ($vaArea['status_email_p'] == NULL) {
+                                                        echo "Belum Kirim Email";
+                                                    } elseif ($vaArea['psiko_test'] == "tidaklolos") {
+                                                        echo "$vaArea[status_email_tidaklolos]";
+                                                    } else {
+                                                        echo "$vaArea[status_email_p]";
+                                                    }
+                                                } elseif ($controller_name == "uji_kompetensi") {
+                                                    if ($vaArea['status_email_uk'] == NULL) {
+                                                        echo "Belum Kirim Email";
+                                                    } elseif ($vaArea['uji_kompetensi'] == "tidaklolos") {
+                                                        echo "$vaArea[status_email_tidaklolos]";
+                                                    } else {
+                                                        echo "$vaArea[status_email_uk]";
+                                                    }
+                                                } elseif ($controller_name == "interview_user_1") {
+                                                    if ($vaArea['status_email_u1'] == NULL) {
+                                                        echo "Belum Kirim Email";
+                                                    } elseif ($vaArea['interview_user_1'] == "tidaklolos") {
+                                                        echo "$vaArea[status_email_tidaklolos]";
+                                                    } else {
+                                                        echo "$vaArea[status_email_u1]";
+                                                    }
+                                                } elseif ($controller_name == "interview_user_2") {
+                                                    if ($vaArea['status_email_u2'] == NULL) {
+                                                        echo "Belum Kirim Email";
+                                                    } elseif ($vaArea['interview_user_2'] == "tidaklolos") {
+                                                        echo "$vaArea[status_email_tidaklolos]";
+                                                    } else {
+                                                        echo "$vaArea[status_email_u2]";
+                                                    }
+                                                } elseif ($controller_name == "interview_hrga") {
+                                                    if ($vaArea['status_email_hrga'] == NULL) {
+                                                        echo "Belum Kirim Email";
+                                                    } elseif ($vaArea['interview_hrga'] == "tidaklolos") {
+                                                        echo "$vaArea[status_email_tidaklolos]";
+                                                    } else {
+                                                        echo "$vaArea[status_email_hrga]";
+                                                    }
+                                                } elseif ($controller_name == "tes_kesehatan") {
+                                                    if ($vaArea['status_email_tes_kesehatan'] == NULL) {
+                                                        echo "Belum Kirim Email";
+                                                    } elseif ($vaArea['tes_kesehatan'] == "tidaklolos") {
+                                                        echo "$vaArea[status_email_tidaklolos]";
+                                                    } else {
+                                                        echo "$vaArea[status_email_tes_kesehatan]";
+                                                    }
+                                                }
+                                                ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group" role="group" aria-label="First group">
+                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' . '/' . $vaArea['id_recruitment'] . '') ?>">
+                                                        <i class="flaticon-edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
+                                                        <i class="flaticon-mail"></i>
+                                                    </a>
+                                                    <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
+                                                    <i class="flaticon-delete"></i>
+                                                </a> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                            <?php
+                                    }
                                 }
-                                ?>
-
-                            <?php } ?>
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
