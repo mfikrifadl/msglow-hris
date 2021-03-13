@@ -726,7 +726,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Foto </label>
                                 <div class="input-group">
-                                  <input type="file" name="foto" class="form-control" required>
+                                  <input type="file" name="foto" class="form-control">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-info fa fa-camera"></i>
@@ -764,11 +764,17 @@ if ($action == "edit") {
                         <!--begin::Form-->
                         <div class="kt-portlet__body">
 
-
                           <?php
-                          if ($cStatusKawin == 0 && !empty($cStatusKawin)) {
+                          if ($cStatusKawin == 0) {
                           ?>
                             <div class="row">
+
+                              <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                  <label>Nama Ibu Kandung</label>
+                                  <input type="text" name="cOrtu" class="form-control" placeholder="Nama Ibu Kandung" value="<?= $cOrtu ?>">
+                                </div>
+                              </div>
 
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -782,8 +788,6 @@ if ($action == "edit") {
 
                                 </div>
                               </div> <!-- /.col-form -->
-
-
 
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -924,8 +928,8 @@ if ($action == "edit") {
 
                               <div class="col-sm-4 col-md-4">
                                 <div class="form-group">
-                                  <label>Jumlah Anak</label>
-                                  <input type="text" name="nJumlahAnak" class="form-control" placeholder="Jumlah Anak" value="<?= $nJumlahAnak ?>">
+                                  <label>Jumlah Tanggungan</label>
+                                  <input type="text" name="nJumlahAnak" class="form-control" placeholder="Jumlah Tanggungan" value="<?= $nJumlahAnak ?>">
 
                                 </div>
                               </div>
@@ -935,6 +939,14 @@ if ($action == "edit") {
                           } elseif ($cStatusKawin == 1) {
                           ?>
                             <div class="row">
+
+                              <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                  <label>Nama Ibu Kandung</label>
+                                  <input type="text" name="cOrtu" class="form-control" placeholder="Nama Ibu Kandung" value="<?= $cOrtu ?>">
+                                </div>
+                              </div>
+
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                   <label>Input Status Perkawinan </label>
@@ -952,6 +964,14 @@ if ($action == "edit") {
                           } elseif ($cStatusKawin == "") {
                           ?>
                             <div class="row">
+
+                              <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                  <label>Nama Ibu Kandung</label>
+                                  <input type="text" name="cOrtu" class="form-control" placeholder="Nama Ibu Kandung" value="<?= $cOrtu ?>">
+                                </div>
+                              </div>
+
                               <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                   <label>Input Status Perkawinan</label>
@@ -1569,7 +1589,7 @@ if ($action == "edit") {
                               <div class="form-group">
                                 <label>Foto </label>
                                 <div class="input-group">
-                                  <input type="file" name="foto" class="form-control" required>
+                                  <input type="file" name="foto" class="form-control">
                                   <div class="input-group-append">
                                     <span class="input-group-text" id="basic-addon2">
                                       <i class="kt-font-info fa fa-camera"></i>
@@ -1608,6 +1628,13 @@ if ($action == "edit") {
                         <div class="kt-portlet__body">
 
                           <div class="row">
+
+                            <div class="col-sm-12 col-md-12">
+                              <div class="form-group">
+                                <label>Nama Ibu Kandung</label>
+                                <input type="text" name="cOrtu" class="form-control" placeholder="Nama Ibu Kandung" value="<?= $cOrtu ?>">
+                              </div>
+                            </div>
 
                             <div class="col-sm-6 col-md-6">
                               <div class="form-group">
@@ -1763,8 +1790,8 @@ if ($action == "edit") {
 
                             <div class="col-sm-4 col-md-4">
                               <div class="form-group">
-                                <label>Jumlah Anak</label>
-                                <input type="text" name="nJumlahAnak" class="form-control" placeholder="Jumlah Anak" value="<?= $nJumlahAnak ?>">
+                                <label>Jumlah Tanggungan</label>
+                                <input type="text" name="nJumlahAnak" class="form-control" placeholder="Jumlah Tanggungan" value="<?= $nJumlahAnak ?>">
 
                               </div>
                             </div>

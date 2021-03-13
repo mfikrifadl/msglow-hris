@@ -44,6 +44,7 @@
                 <td rowspan="2" style="background-color:aqua">UMUR</td>
                 <td colspan="2" style="background-color:aqua">PENDIDIKAN TERAKHIR</td>
                 <td rowspan="2" style="background-color:aqua">GOLONGAN DARAH</td>
+                <td rowspan="2" style="background-color:aqua">STATUS TANGGUNGAN</td>
                 <td rowspan="2" style="background-color:aqua">STATUS PERKAWINAN</td>
                 <td colspan="2" style="background-color:aqua">ISTRI/SUAMI</td>
                 <td colspan="3" style="background-color:aqua">ANAK I</td>
@@ -228,6 +229,7 @@
                         <td> <?= $dataPegawai['PendidikanPegawai'] ?> </td>
                         <td> <?= $dataPegawai['jurusan'] ?> </td>
                         <td> <?= $dataPegawai['gol_darah'] ?> </td>
+                        <td> <?= $dataPegawai['jumlah_anak'] ?> </td>
                         <td>
                             <?php
                             if ($dataPegawai['status_kawin'] == 0) {
