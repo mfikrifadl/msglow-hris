@@ -296,7 +296,7 @@ class Recruitment_act extends CI_Controller
 			'query' 		=> $seralizedArray,
 			'nama' 			=> $this->session->userdata('nama')
 		);
-		
+
 		$cViewDataPelamar 			= $this->model->CekDataPelamar('recruitment', 'kode_wawancara', $code);
 
 		if ($Type == "Insert") {
@@ -311,7 +311,7 @@ class Recruitment_act extends CI_Controller
 				$curl = curl_init();
 				$delete_date = date("Y-m_d");
 				curl_setopt_array($curl, array(
-					CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/'.$code,
+					CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $code,
 					CURLOPT_RETURNTRANSFER => true,
 					CURLOPT_ENCODING => '',
 					CURLOPT_MAXREDIRS => 10,
@@ -320,16 +320,16 @@ class Recruitment_act extends CI_Controller
 					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 					CURLOPT_CUSTOMREQUEST => 'PUT',
 					CURLOPT_POSTFIELDS => 'is_delete=2
-										&delete_date='.$delete_date.'',
+										&delete_date=' . $delete_date . '',
 					CURLOPT_HTTPHEADER => array(
 						'token: YOZq0ltM8i',
 						'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
 						'Content-Type: application/x-www-form-urlencoded'
 					),
 				));
-		
+
 				$response = curl_exec($curl);
-				
+
 				curl_close($curl);
 
 				$this->model->Insert('recruitment', $data_create);
@@ -345,7 +345,7 @@ class Recruitment_act extends CI_Controller
 			$curl = curl_init();
 			$delete_date = date("Y-m_d");
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/'.$code,
+				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $code,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
@@ -354,16 +354,16 @@ class Recruitment_act extends CI_Controller
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				CURLOPT_CUSTOMREQUEST => 'PUT',
 				CURLOPT_POSTFIELDS => 'is_delete=3
-									&delete_date='.$delete_date.'',
+									&delete_date=' . $delete_date . '',
 				CURLOPT_HTTPHEADER => array(
 					'token: YOZq0ltM8i',
 					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
 					'Content-Type: application/x-www-form-urlencoded'
 				),
 			));
-	
+
 			$response = curl_exec($curl);
-			
+
 			curl_close($curl);
 
 			$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
@@ -371,11 +371,12 @@ class Recruitment_act extends CI_Controller
 		}
 	}
 
-	public function reborn_delete_data_registrant($id=""){
+	public function reborn_delete_data_registrant($id = "")
+	{
 		$curl = curl_init();
 		//$delete_date = null;
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/'.$id,
+			CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $id,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -393,7 +394,7 @@ class Recruitment_act extends CI_Controller
 		));
 
 		$response = curl_exec($curl);
-		
+
 		curl_close($curl);
 		$this->model->Delete('recruitment', 'kode_wawancara', $id);
 		//redirect(site_url('recruitment/wawancara/'));
@@ -656,7 +657,7 @@ class Recruitment_act extends CI_Controller
 		if ($status_tes == "tidaklolos") {
 			$data_update = array(
 				'update_by'	=> $this->input->post('whois'),
-				'update_date'	=> $this->input->post('whois_date'),				
+				'update_date'	=> $this->input->post('whois_date'),
 				'nilai_interview_user_1'	=> $this->input->post('nNilaiTes'),
 				'interview_user_1'	=> $this->input->post('cStatus'),
 				'tgl_interview_user_1'	=> $this->input->post('dTglWawancara'),
@@ -835,7 +836,7 @@ class Recruitment_act extends CI_Controller
 				'update_date'	=> $this->input->post('whois_date'),
 				'nilai_interview_hrga'	=> $this->input->post('nNilaiTes'),
 				'interview_hrga'	=> $this->input->post('cStatus'),
-				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),				
+				'tgl_interview_hrga'	=> $this->input->post('dTglWawancara'),
 				'tahap_r'	=> 'Interview HRGA',
 				'status_email_hrga'	=> 'Belum Kirim Email',
 				'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -1055,7 +1056,10 @@ class Recruitment_act extends CI_Controller
 			$cNama 			= $vaKode['nama'];
 			$cNomorTelepon	= $vaKode['nomor_telepon'];
 			$cEmail 	    = $vaKode['email'];
+			$cJob_id		= $vaKode['job_id'];
 		}
+
+
 
 		$dbPegawai = $this->model->ViewLimit('tb_pegawai', 'nik', 1);
 		$cNik = "";
@@ -1100,7 +1104,7 @@ class Recruitment_act extends CI_Controller
 		$this->model->Insert("log", $vaLog);
 
 		$seralizedArray = serialize($dataStatus);
-		$vaLog = array(
+		$vaLog2 = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
 			'waktu' => $this->TimeStamp(),
 			'nama_table' => 'recruitment',
@@ -1108,11 +1112,82 @@ class Recruitment_act extends CI_Controller
 			'query' => $seralizedArray,
 			'nama' => $this->session->userdata('nama')
 		);
-		$this->model->Insert("log", $vaLog);
+		$this->model->Insert("log", $vaLog2);
 
-		$this->model->Insert('tb_pegawai', $data);
-		$this->model->Update('recruitment', 'id_recruitment', $id, $dataStatus);
-		redirect(site_url('recruitment/peserta_diterima/I'));
+
+
+		$getMaxReg = $this->model->ViewWhere('v_man_power_diterima', 'job_id', $cJob_id);
+
+		foreach ($getMaxReg as $vaGetMaxReg) {
+			if ($vaGetMaxReg['pegawai_lolos'] == $vaGetMaxReg['total_man_power']) {
+				//echo "PASSED";
+				$dataUpdateForm = array(
+					'status_recruitment' => 'PASSED'
+				);
+
+				$this->model->Update('tb_form_pengajuan', 'id_form', $cJob_id, $dataUpdateForm);
+
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+					CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/' . $cJob_id,
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'PUT',
+					CURLOPT_POSTFIELDS => 'status_recruitment=PASSED',
+					CURLOPT_HTTPHEADER => array(
+						'token: YOZq0ltM8i',
+						'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+						'Content-Type: application/x-www-form-urlencoded'
+					),
+				));
+
+				$response = curl_exec($curl);
+
+				curl_close($curl);
+?>
+				<script type="text/javascript">
+					alert("KUOTA DIVISI TELAH TERISI PENUH");
+					window.location.href = "<?= site_url('recruitment/peserta_diterima/I') ?>";
+				</script>
+<?php
+				//redirect(site_url('recruitment/peserta_diterima/I'));
+			} elseif ($vaGetMaxReg['pegawai_lolos'] < $vaGetMaxReg['total_man_power']) {
+				echo "ON PROGRESS";
+				$text = "ON PROGRESS";
+				$dataUpdateForm = array(
+					'status_recruitment' => 'ON PROGRESS'
+				);
+
+				$this->model->Insert('tb_pegawai', $data);
+				$this->model->Update('recruitment', 'id_recruitment', $id, $dataStatus);
+				$this->model->Update('tb_form_pengajuan', 'id_form', $cJob_id, $dataUpdateForm);
+
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+					CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/' . $cJob_id,
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'PUT',
+					CURLOPT_POSTFIELDS => 'status_recruitment=' . $text . '',
+					CURLOPT_HTTPHEADER => array(
+						'token: YOZq0ltM8i',
+						'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
+						'Content-Type: application/x-www-form-urlencoded'
+					),
+				));
+
+				curl_close($curl);
+				redirect(site_url('recruitment/peserta_diterima/I'));
+			}
+		}
 	}
 
 	public function send_email($id = "")

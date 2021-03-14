@@ -70,11 +70,13 @@
                       <td>
                         <?php
                         if ($vaArea['status'] == 'pemanggilan') {
+                          $cLabel = 'primary';
+                        } elseif ($vaArea['status'] == 'lolos') {
                           $cLabel = 'info';
-                        } else if ($vaArea['status'] == 'lolos') {
-                          $cLabel = 'success';
-                        } else if ($vaArea['status'] == 'tidaklolos') {
+                        } elseif ($vaArea['status'] == 'tidaklolos') {
                           $cLabel = 'danger';
+                        } elseif ($vaArea['status'] == 'Menjadi Pegawai') {
+                          $cLabel = 'success';
                         } else {
                           $cLabel = 'warning';
                         }
@@ -84,59 +86,62 @@
 
                       </td>
                       <td class="text-center">
-                        <?php
-                        if ($vaArea['status'] == "Menjadi Pegawai") {
-                        ?>
+                        <div class="btn-group" role="group" aria-label="First group">
+                          <?php
+                          if ($vaArea['status'] == "Menjadi Pegawai") {
+                          ?>
 
-                          <span class="btn btn-secondary btn-sm btn-icon" disabled title="Telah Menjadi Pegawai"> <i class="fa fa-user-check"></i> </span>
+                            <span class="btn btn-secondary btn-sm btn-icon" disabled title="Telah Menjadi Pegawai"> <i class="fa fa-user-check"></i> </span>
 
-                        <?php
-                        } elseif ($vaArea['status'] == "lolos") {
-                        ?>
-                          <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Masukkan Ke Data Pegawai" href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
+                          <?php
+                          } elseif ($vaArea['status'] == "lolos") {
+                          ?>
+                            <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Masukkan Ke Data Pegawai" href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
 
-                            <i class="fa fa-sign-in-alt"></i>
+                              <i class="fa fa-sign-in-alt"></i>
 
-                          </a>
-                          <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email/peserta_diterima/' . $vaArea['id_recruitment'] . '') ?>">
+                            </a>
+                            <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email/peserta_diterima/' . $vaArea['id_recruitment'] . '') ?>">
                           <i class="flaticon-mail"></i>
                         </a> -->
-                        <?php
-                        } else {
+                          <?php
+                          } else {
 
-                        ?>
+                          ?>
 
-                          <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_act/aksi/lolos/' . $vaArea['id_recruitment'] . '') ?>">
-                            <i class="flaticon2-check-mark"></i>
-                          </a>
-                          <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment'] ?>">
-                            <i class="flaticon2-cross"></i>
-                          </a>
+                            <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_act/aksi/lolos/' . $vaArea['id_recruitment'] . '') ?>">
+                              <i class="flaticon2-check-mark"></i>
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment'] ?>">
+                              <i class="flaticon2-cross"></i>
+                            </a>
+                          <?php } ?>
+                        </div>
 
-                          <!-- Modal edit category -->
-                          <div id="id-<?= $vaArea['id_recruitment'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alasanTidakLolos" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title" id="alasanTidakLolos">Edit Kategori</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi-close"></i></button>
-                                </div>
-                                <form action="<?= site_url('recruitment_act/aksi/tidaklolos/' . $vaArea['id_recruitment'] . '') ?>" method="POST" class="d-inline-block" enctype="multipart/form-data">
-                                  <div class="modal-body">
-                                    <div class="form-group">
-                                      <label for="alasanTidakLolos" class="control-label col-form-label">Alasan Tidak diterima</label>
-                                      <input type="text" class="form-control" name="alasanTidakLolos" id="alasanTidakLolos" value="" required>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="submit" name="submit" class="btn btn-primary waves-effect">Simpan</button>
-                                  </div>
-                                </form>
+                        <!-- Modal edit category -->
+                        <div id="id-<?= $vaArea['id_recruitment'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alasanTidakLolos" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="alasanTidakLolos">Edit Kategori</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi-close"></i></button>
                               </div>
+                              <form action="<?= site_url('recruitment_act/aksi/tidaklolos/' . $vaArea['id_recruitment'] . '') ?>" method="POST" class="d-inline-block" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                  <div class="form-group">
+                                    <label for="alasanTidakLolos" class="control-label col-form-label">Alasan Tidak diterima</label>
+                                    <input type="text" class="form-control" name="alasanTidakLolos" id="alasanTidakLolos" value="" required>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" name="submit" class="btn btn-primary waves-effect">Simpan</button>
+                                </div>
+                              </form>
                             </div>
                           </div>
-                          <!-- End modal add category -->
-                        <?php } ?>
+                        </div>
+                        <!-- End modal add category -->
+
                       </td>
                     </tr>
 
