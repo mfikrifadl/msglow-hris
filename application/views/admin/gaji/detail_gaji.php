@@ -167,12 +167,12 @@
                       <td>Tunjangan Laporan</td>
                       <td>Uang Kesehatan</td>
                     </tr>
-                    <tr style="background:;color:black">
+                    <tr style="background:none;color:black">
                       <td align="center">Rp  <?=number_format(30000)?> x <?=TotalSebulan($id_pegawai,$bulan,$tahun)?> Hari </td>
                       <td align="center">Rp  <?=number_format(50000)?></td>
                       <td align="center">Rp  <?=number_format(100000)?></td>
                     </tr>
-                    <tr style="background:;color:black">
+                    <tr style="background:none;color:black">
                       <td align="center"><strong>Rp  <?=number_format(TotalSebulan($id_pegawai,$bulan,$tahun)*30000)?>  </strong> </td>
                       <td align="center"><strong>Rp  <?=number_format(50000)?></strong></td>
                       <td align="center"><strong>Rp  <?=number_format(100000)?></strong></td>

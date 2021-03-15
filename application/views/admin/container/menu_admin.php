@@ -498,6 +498,17 @@
               </li>
 
               <li class="kt-menu__item <?= $this->uri->segment(2) == 'sub_unit_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
+                <a href="<?= site_url('master/unit_kerja'); ?>" class="kt-menu__link ">
+                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
+                    <span></span>
+                  </i>
+                  <span class="kt-menu__link-text">
+                    Data Unit Kerja
+                  </span>
+                </a>
+              </li>
+
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'sub_unit_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
                 <a href="<?= site_url('master/sub_unit_kerja'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>

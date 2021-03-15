@@ -130,18 +130,36 @@ class Action extends CI_Controller
 
 	public function unit_kerja($Type = "", $id = "")
 	{
+		$lastNo = $this->model->ViewLimit('tb_ref_jabatan', 'id_ref_jabatan', 1);
+		$getNumb = "";
+		foreach($lastNo as $row){
+			$getNumb = $row['id_ref_jabatan'];
+		}
+
+		$setNumb = $getNumb + 1;
+
 		$data = array(
-			'nama_unit_kerja' => $this->input->post('cNamaUnitKerja')
+			'id_unit_kerja' => $setNumb,
+			'nama_unit_kerja' => $this->input->post('cNamaUnitKerja'),
+			'created_by' => $this->session->userdata('nama')
 		);
+		$data2 = array(
+			'id_ref_jabatan' => $setNumb,
+			'nama_jabatan' => $this->input->post('cNamaUnitKerja'),
+			'created_by' => $this->session->userdata('nama')
+		);		
 
 		if ($Type == "Insert") {
 			$this->model->Insert('tb_unit_kerja', $data);
+			$this->model->Insert('tb_ref_jabatan', $data2);
 			redirect(site_url('master/unit_kerja/I'));
 		} elseif ($Type == "Update") {
 			$this->model->Update('tb_unit_kerja', 'id_unit_kerja', $id, $data);
+			$this->model->Insert('tb_ref_jabatan', 'id_ref_jabatan', $id, $data2);
 			redirect(site_url('master/unit_kerja/U'));
 		} elseif ($Type == "Delete") {
 			$this->model->Delete('tb_unit_kerja', 'id_unit_kerja', $id);
+			$this->model->Delete('tb_ref_jabatan', 'id_ref_jabatan', $id);
 			redirect(site_url('master/unit_kerja/D'));
 		}
 	}
