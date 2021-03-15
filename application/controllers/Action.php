@@ -115,16 +115,16 @@ class Action extends CI_Controller
 		if ($Type == "Insert") {
 			$this->model->Insert('tb_area_kerja', $data);
 			$this->model->Insert("log", $vaLog);
-			redirect(site_url('master/area_kerja/I'));
+			redirect(site_url('master_data/area_kerja/I'));
 		} elseif ($Type == "Update") {
 			$this->model->Update('tb_area_kerja', 'id_area', $id, $data);
 			$this->model->Insert("log", $vaLog);
-			redirect(site_url('master/area_kerja/U'));
+			redirect(site_url('master_data/area_kerja/U'));
 		} elseif ($Type == "Delete") {
 
 			$this->model->Update_Delete('tb_area_kerja', 'id_area', $id, $dataDelete);
 			$this->model->Insert("log", $vaLog2);
-			redirect(site_url('master/area_kerja/D'));
+			redirect(site_url('master_data/area_kerja/D'));
 		}
 	}
 
@@ -152,7 +152,7 @@ class Action extends CI_Controller
 		if ($Type == "Insert") {
 			$this->model->Insert('tb_unit_kerja', $data);
 			$this->model->Insert('tb_ref_jabatan', $data2);
-			redirect(site_url('master/unit_kerja/I'));
+			redirect(site_url('master_data/unit_kerja/I'));
 		} elseif ($Type == "Update") {
 			$this->model->Update('tb_unit_kerja', 'id_unit_kerja', $id, $data);
 			$this->model->Insert('tb_ref_jabatan', 'id_ref_jabatan', $id, $data2);
@@ -160,7 +160,7 @@ class Action extends CI_Controller
 		} elseif ($Type == "Delete") {
 			$this->model->Delete('tb_unit_kerja', 'id_unit_kerja', $id);
 			$this->model->Delete('tb_ref_jabatan', 'id_ref_jabatan', $id);
-			redirect(site_url('master/unit_kerja/D'));
+			redirect(site_url('master_data/unit_kerja/D'));
 		}
 	}
 
@@ -198,15 +198,15 @@ class Action extends CI_Controller
 		if ($Type == "Insert") {
 			$this->model->Insert('tb_sub_unit_kerja', $data);
 			$this->model->Insert("log", $vaLog);
-			redirect(site_url('master/sub_unit_kerja/I'));
+			redirect(site_url('master_data/sub_unit_kerja/I'));
 		} elseif ($Type == "Update") {
 			$this->model->Update('tb_sub_unit_kerja', 'id_sub_unit_kerja', $id, $data);
 			$this->model->Insert("log", $vaLog);
-			redirect(site_url('master/sub_unit_kerja/U'));
+			redirect(site_url('master_data/sub_unit_kerja/U'));
 		} elseif ($Type == "Delete") {
 			$this->model->Update_Delete('tb_sub_unit_kerja', 'id_sub_unit_kerja', $id, $dataDelete);
 			$this->model->Insert("log", $vaLog2);
-			redirect(site_url('master/sub_unit_kerja/D'));
+			redirect(site_url('master_data/sub_unit_kerja/D'));
 		}
 	}
 
@@ -218,13 +218,13 @@ class Action extends CI_Controller
 
 		if ($Type == "Insert") {
 			$this->model->Insert('tb_ref_jabatan', $data);
-			redirect(site_url('master/ref_jabatan/I'));
+			redirect(site_url('master_data/ref_jabatan/I'));
 		} elseif ($Type == "Update") {
 			$this->model->Update('tb_ref_jabatan', 'id_ref_jabatan', $id, $data);
-			redirect(site_url('master/ref_jabatan/U'));
+			redirect(site_url('master_data/ref_jabatan/U'));
 		} elseif ($Type == "Delete") {
 			$this->model->Delete('tb_ref_jabatan', 'id_ref_jabatan', $id);
-			redirect(site_url('master/ref_jabatan/D'));
+			redirect(site_url('master_data/ref_jabatan/D'));
 		}
 	}
 
@@ -363,15 +363,15 @@ class Action extends CI_Controller
 		if ($Type == "Insert") {
 			$this->model->Insert('tb_outlet', $data);
 			$this->model->Insert("log", $vaLog);
-			redirect(site_url('master/outlet/I'));
+			redirect(site_url('master_data/outlet/I'));
 		} elseif ($Type == "Update") {
 			$this->model->Update('tb_outlet', 'id_outlet', $id, $data);
 			$this->model->Insert("log", $vaLog);
-			redirect(site_url('master/outlet/U'));
+			redirect(site_url('master_data/outlet/U'));
 		} elseif ($Type == "Delete") {
 			$this->model->Update_Delete('tb_outlet', 'id_outlet', $id, $dataDelete);
 			$this->model->Insert("log", $vaLog2);
-			redirect(site_url('master/outlet/D'));
+			redirect(site_url('master_data/outlet/D'));
 		}
 	}
 

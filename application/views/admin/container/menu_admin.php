@@ -475,7 +475,7 @@
           </a>
         </li>
 
-        <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'master' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+        <li class="kt-menu__item  kt-menu__item--submenu <?= $this->uri->segment(1) == 'master_data' ? 'kt-menu__item--open' : '' ?>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon flaticon2-layers"></i>
             <span class="kt-menu__link-text">
@@ -487,7 +487,7 @@
             <ul class="kt-menu__subnav">
 
               <li class="kt-menu__item <?= $this->uri->segment(2) == 'area_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
-                <a href="<?= site_url('master/area_kerja'); ?>" class="kt-menu__link ">
+                <a href="<?= site_url('master_data/area_kerja'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -497,8 +497,8 @@
                 </a>
               </li>
 
-              <li class="kt-menu__item <?= $this->uri->segment(2) == 'sub_unit_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
-                <a href="<?= site_url('master/unit_kerja'); ?>" class="kt-menu__link ">
+              <li class="kt-menu__item <?= $this->uri->segment(2) == 'unit_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
+                <a href="<?= site_url('master_data/unit_kerja'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -509,7 +509,7 @@
               </li>
 
               <li class="kt-menu__item <?= $this->uri->segment(2) == 'sub_unit_kerja' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
-                <a href="<?= site_url('master/sub_unit_kerja'); ?>" class="kt-menu__link ">
+                <a href="<?= site_url('master_data/sub_unit_kerja'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
@@ -519,19 +519,8 @@
                 </a>
               </li>
 
-              <!-- <li class="kt-menu__item " aria-haspopup="true">
-                <a href="<?= site_url('master/supervisor'); ?>" class="kt-menu__link ">
-                  <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
-                    <span></span>
-                  </i>
-                  <span class="kt-menu__link-text">
-                    Data Supervisor
-                  </span>
-                </a>
-              </li> -->
-
               <li class="kt-menu__item <?= $this->uri->segment(2) == 'outlet' ? 'kt-menu__item--active' : '' ?>" aria-haspopup="true">
-                <a href="<?= site_url('master/outlet'); ?>" class="kt-menu__link ">
+                <a href="<?= site_url('master_data/outlet'); ?>" class="kt-menu__link ">
                   <i class="kt-menu__link-bullet kt-menu__link-bullet--dot">
                     <span></span>
                   </i>
