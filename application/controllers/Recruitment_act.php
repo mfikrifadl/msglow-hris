@@ -229,7 +229,6 @@ class Recruitment_act extends CI_Controller
 			);
 		}
 
-
 		$data_delete = array(
 			'status_email_adm'	=> 'Belum Kirim Email',
 			'status_email_tidaklolos'	=> 'Belum Kirim Email',
@@ -304,7 +303,7 @@ class Recruitment_act extends CI_Controller
 
 				//$msg = 1;
 				//return $msg;
-				//redirect(site_url('recruitment/wawancara/'));
+				redirect(site_url('recruitment/wawancara/'));
 			} else {
 				//$msg = 0;
 
@@ -331,6 +330,9 @@ class Recruitment_act extends CI_Controller
 				$response = curl_exec($curl);
 
 				curl_close($curl);
+
+				// print_r($data_create);
+				// die;
 
 				$this->model->Insert('recruitment', $data_create);
 				$this->model->Insert("log", $vaLog);
