@@ -110,6 +110,7 @@ class Recruitment extends CI_Controller
 		$data['registrant']	= $data2['data'];
 
 		$data['levels']	= $this->model->view('v_interviewer', 'nama');
+		$data['levels_intv_2']	= $this->model->view('v_interviewer', 'nama');
 
 
 		if ($Aksi == 'edit') {

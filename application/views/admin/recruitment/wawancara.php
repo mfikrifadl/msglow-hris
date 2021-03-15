@@ -110,9 +110,9 @@ if ($action == "edit") {
               <label>Interviewer 2</label>
               <select class="form-control kt-selectpicker" data-live-search="true" id="cLevel2" name="cLevel2" required>
                 <option></option>
-                <?php foreach ($levels as $key => $level) { ?>
-                  <option value="<?= $level['level'] ?>" <?php if ($cLevel2 == $level['level']) echo "selected"; ?>>
-                    <?= $level['nama'] ?>
+                <?php foreach ($levels_intv_2 as $key => $vaLevel_intv_2) { ?>
+                  <option value="<?= $vaLevel_intv_2['level'] ?>" <?php if ($cLevel2 == $vaLevel_intv_2['level']) echo "selected"; ?>>
+                    <?= $vaLevel_intv_2['nama'] ?>
                   </option>
                 <?php } ?>
               </select>
@@ -487,8 +487,9 @@ if ($action == "edit") {
     var cJob_id = $('#cJob_id').val();
     var cStatus = $('#cStatus').val();
     var cLevel = $('#cLevel').val();
+    var cLevel2 = $('#cLevel2').val();
     var whois = $('#whois').val();
-    // alert(dTglWawancara);
+    //alert(dTglWawancara);
     if (cKodeWawancara == "") {
       new PNotify({
         text: 'Pilih data pendaftar terlebih dahulu!',
@@ -502,6 +503,12 @@ if ($action == "edit") {
         type: 'warning'
       });
     } else if (cLevel == "") {
+      new PNotify({
+        text: 'Interviewer belum diisi!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else if (cLevel2 == "") {
       new PNotify({
         text: 'Interviewer belum diisi!',
         animation: 'slide',
@@ -525,6 +532,7 @@ if ($action == "edit") {
           "&cJob=" + cJob +
           "&cJob_id=" + cJob_id +
           "&cLevel=" + cLevel +
+          "&cLevel2=" + cLevel2 +
           "&cEmail=" + cEmail,
         url: "<?= site_url('recruitment_act/wawancara/Insert') ?>",
         cache: false,

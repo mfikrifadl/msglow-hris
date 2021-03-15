@@ -300,6 +300,7 @@ class Recruitment_act extends CI_Controller
 
 		if ($Type == "Insert") {
 			if ($cViewDataPelamar->num_rows() > 0) {
+				echo "tes";
 
 				//$msg = 1;
 				//return $msg;
@@ -308,7 +309,7 @@ class Recruitment_act extends CI_Controller
 				//$msg = 0;
 
 				$curl = curl_init();
-				$delete_date = date("Y-m_d");
+				$delete_date = date("Y-m-d");
 				curl_setopt_array($curl, array(
 					CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $code,
 					CURLOPT_RETURNTRANSFER => true,
@@ -331,9 +332,6 @@ class Recruitment_act extends CI_Controller
 
 				curl_close($curl);
 
-				// print_r($data_create);
-				// die;
-
 				$this->model->Insert('recruitment', $data_create);
 				$this->model->Insert("log", $vaLog);
 				redirect(site_url('recruitment/wawancara/'));
@@ -345,7 +343,7 @@ class Recruitment_act extends CI_Controller
 		} elseif ($Type == "Delete") {
 
 			$curl = curl_init();
-			$delete_date = date("Y-m_d");
+			$delete_date = date("Y-m-d");
 			curl_setopt_array($curl, array(
 				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/registrant/' . $code,
 				CURLOPT_RETURNTRANSFER => true,
@@ -368,8 +366,8 @@ class Recruitment_act extends CI_Controller
 
 			curl_close($curl);
 
-			$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
-			redirect(site_url('recruitment/wawancara/'));
+		redirect(site_url('recruitment/wawancara/'));
+				$this->model->Update_Delete('recruitment', 'id_recruitment', $id, $data_delete);
 		}
 	}
 
