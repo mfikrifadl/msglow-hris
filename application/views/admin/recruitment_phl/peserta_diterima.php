@@ -9,7 +9,7 @@
         </div>
     </div>
     <?php
-    if ($this->session->userdata('level') == 1) {
+    if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
     ?>
         <div class="row">
             <div class="col-12">

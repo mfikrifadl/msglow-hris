@@ -324,6 +324,7 @@ class Cek_absen extends CI_Controller
             $h['id_pegawai'] = $x['id_pegawai'];
             $h['nik'] = $x['nik'];
             $h['nama'] = $x['nama'];
+            $h['id_status'] = $x['id_status'];
             $h['nama_jabatan'] = $x['nama_jabatan'];
             $h['tot_jam_kerja'] = $x['tot_jam_kerja'];
             $h['tot_jam_lembur'] = $x['tot_jam_lembur'];

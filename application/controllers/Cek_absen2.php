@@ -14,24 +14,24 @@ class Cek_absen2 extends CI_Controller
         $this->load->model('relasi');
     }
 
-    public function index($Aksi = "", $Id = "")
-    {
-        $data['siswa'] = $this->AbsensiModel->view();
-        $dataHeader['menu'] = 'Manajemen Gaji';
-        $dataHeader['file'] = 'Absensi Pegawai';
-        $data['action']     = $Aksi;
-        $data['id_absen']    =    $Id;
-        $this->load->view('admin/container/header', $dataHeader);
-        $this->load->view('admin/gaji/absensi2', $data);
-        $this->load->view('admin/container/footer');
-    }
+    // public function index($Aksi = "", $Id = "")
+    // {
+    //     $data['siswa'] = $this->AbsensiModel->view();
+    //     $dataHeader['menu'] = 'Manajemen Gaji';
+    //     $dataHeader['file'] = 'Absensi Pegawai';
+    //     $data['action']     = $Aksi;
+    //     $data['id_absen']    =    $Id;
+    //     $this->load->view('admin/container/header', $dataHeader);
+    //     $this->load->view('admin/gaji/absensi2', $data);
+    //     $this->load->view('admin/container/footer');
+    // }
 
     public function form($Aksi = "", $Id = "")
     {
 
         $data = array(); // Buat variabel $data sebagai array
 
-        $dataHeader['menu'] = 'Manajemen Gaji';
+        $dataHeader['menu'] = 'Absensi';
         $dataHeader['file'] = 'Absensi Pegawai';
         $data['action'] = $Aksi;
         $data['id_absen']    =    $Id;
@@ -40,6 +40,9 @@ class Cek_absen2 extends CI_Controller
             // lakukan upload file dengan memanggil function upload yang ada di AbsensiModel.php
 
             $upload = $this->AbsensiModel->upload_file($this->filename);
+
+            // echo $this->filename;
+            // die;
 
             if ($upload['result'] == "success") { // Jika proses upload sukses
                 // Load plugin PHPExcel nya
@@ -52,31 +55,33 @@ class Cek_absen2 extends CI_Controller
                 // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke file form.php
                 // Variabel $sheet tersebut berisi data-data yang sudah diinput di dalam excel yang sudha di upload sebelumnya
                 $data['sheet'] = $sheet;
-
-                $dataHeader['menu'] = 'Manajemen Absensi';
-                $dataHeader['file'] = 'Absensi Pegawai';
-                $data['action'] = $Aksi;
-                $data['id_absen']    =    $Id;
-
-                $this->load->view('admin/container/header', $dataHeader);
-                $this->load->view('admin/gaji/absensi2', $data);
-                $this->load->view('admin/container/footer');
+               
             } else { // Jika proses upload gagal
                 $data['upload_error'] = $upload['error']; // Ambil pesan error uploadnya untuk dikirim ke file form dan ditampilkan		
 
-                $dataHeader['menu'] = 'Manajemen Gaji';
-                $dataHeader['file'] = 'Absensi Pegawai';
-                $data['action'] = $Aksi;
-                $data['id_absen']    =    $Id;
-
-                $this->load->view('admin/container/header', $dataHeader);
-                $this->load->view('admin/gaji/absensi2', $data);
-                $this->load->view('admin/container/footer');
             }
         }
 
+        //======================NOTIFIKASI===============================================================
+        $dataHeader['notif_absensi']                = $this->model->notifAbsensi();
+        $dataHeader['data_notif_absen']                = $this->model->View('v_data_notif_absen');
 
-        // $this->load->view('admin/gaji/absensi', $data);
+        $total_peserta_diterima_staff                = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment");
+        $dataHeader['jml_notif_psrt_diterima_staff']        = $total_peserta_diterima_staff->result_array();
+
+        $total_peserta_diterima_phl                    = $this->db->query("SELECT COUNT(IF(status='lolos', status, NULL)) AS jml_lolos, COUNT(IF(status='validasi', status, NULL)) AS jml_validasi	FROM recruitment_phl");
+        $dataHeader['jml_notif_psrt_diterima_phl']        = $total_peserta_diterima_phl->result_array();
+
+        $data_notif_psrt_staff                        = $this->db->query("SELECT * FROM recruitment WHERE status='lolos' OR status='validasi'");
+        $dataHeader['data_notif_recruitment_staff']    = $data_notif_psrt_staff->result_array();
+
+        $data_notif_psrt_phl                        = $this->db->query("SELECT * FROM recruitment_phl WHERE status='lolos' OR status='validasi'");
+        $dataHeader['data_notif_recruitment_phl']    = $data_notif_psrt_phl->result_array();
+        //======================NOTIFIKASI===============================================================
+        
+        $this->load->view('admin/container/header', $dataHeader);
+        $this->load->view('admin/gaji/absensi2', $data);
+        $this->load->view('admin/container/footer');
     }
 
     public function import()
@@ -92,135 +97,56 @@ class Cek_absen2 extends CI_Controller
        
         $data_log_absen = array();
 
-        $pin = "";
-        $attlog = "";
-        $verify = "";
-        $status_scan = "";
         $cloud_id = "";
-        $tgl = "";
-        $waktu = "";
+        $pin = "";
+        $nama_karyawan = "";
+        $tgl_scan = "";
+        $jam_scan = "";
+        $verifikasi = "";
+        $tipe_scan = "";
 
         $looping = $this->input->post('numrow');
 
-        $numrow = 1;
+        $numrow = 0;
 
         foreach ($sheet as $row) {
+            $c_id = date("YmdHis");
+
             // Cek $numrow apakah lebih dari 1
             // Artinya karena baris pertama adalah nama-nama kolom
             // Jadi dilewat saja, tidak usah diimport
-            if ($numrow > 1 && $numrow < $looping) {
+            if ($numrow > 0 && $numrow <= $looping) {
+                $id = $c_id + $numrow;
 
-                $nik = $row['A']; // Ambil data NIS
-                $nama = $row['B']; // Ambil data nama
-                $statusK = $row['C']; // Ambil data jenis kelamin
-                $tgl_mulai_kerja = $row['D']; // Ambil data alamat
-                $status_kepegawaian = $row['E']; // Ambil data NIS
-                $jk = $row['F']; // Ambil data nama
-                $agama = $row['G']; // Ambil data jenis kelamin
-                $tmpt_lahir = $row['H']; // Ambil data alamat
-                $tgl_lahir = $row['I']; // Ambil data alamat
-                $pendidikan = $row['J']; // Ambil data alamat
-                $jurusan = $row['K']; // Ambil data alamat
-                $gol_dar = $row['L']; // Ambil data alamat
-                $status_kawin = $row['M'];
-                $istri_suami = $row['N'];
-                $tgl_lahir_pas = $row['O'];
-                $anak1 = $row['P'];
-                $tgl_lahir_a1 = $row['Q'];
-                $anak2 = $row['R'];
-                $tgl_lahir_a2 = $row['S'];
-                $anak3 = $row['T'];
-                $tgl_lahir_a3 = $row['U'];
-                $ktp = $row['V'];
-                $alamat_asal = $row['W'];
-                $alamat = $row['X'];
-                $npwp = $row['Y'];
-                $hp = $row['Z'];
-                $atas_nama = $row['AA'];
-                $no_rek = $row['AB'];
-                $bank = $row['AC'];
-                $cabang = $row['AD'];
-                $email = $row['AE'];
+                $cloud_id = $row['A']; // Ambil data NIS
+                $pin = $row['B']; // Ambil data nama
+                $nama_karyawan = $row['C']; // Ambil data jenis kelamin
+                $tgl_scan = $row['D']; // Ambil data alamat
+                $jam_scan = $row['E']; // Ambil data NIS
+                $verifikasi = $row['F']; // Ambil data nama
+                $tipe_scan = $row['G']; // Ambil data jenis kelamin
 
-
-                // echo "pin : $pin <br />";
-                // echo "attlog : $attlog <br />";
-                // echo "tanggal cek roll : $tgl <br />";
-                // echo "waktu cek roll : $waktu <br />";
-                // echo "verify : $verify <br />";
-                // echo "status_scan : $status_scan <br />";
-                // echo "cloud_id : $cloud_id <br /><br />";
+                date_default_timezone_set("Asia/Jakarta");
+                $attlog = date("$tgl_scan $jam_scan");                
 
                 array_push($data_log_absen, array(
-                    'kode_wawancara' => $nik,
-                    'nik' => $row['A'],
-                    'nama' => $row['B'],
-                    'id_area' => $row['C'],
-                    'id_status' => $row['D'],
-                    'tanggal_masuk_kerja' => $row['E'],
-                    'id_kerja' => $row['F'],
-                    'jk' => $row['G'],
-                    'agama' => $row['H'],
-                    'tempat_lahir' => $row['I'],
-                    'tanggal_lahir' => $row['J'],
-                    'pendidikan' => $row['K'],
-                    'jurusan' => $row['L'],
-                    'gol_darah' => $row['M'],
-                    'istri_suami' => $row['N'],
-                    'tgl_lahir_istri' => $row['O'],
-                    'anak_1' => $row['P'],
-                    'tgl_lahir_anak_1' => $row['Q'],
-                    'anak_2' => $row['R'],
-                    'tgl_lahir_anak_2' => $row['S'],
-                    'anak_3' => $row['T'],
-                    'tgl_lahir_anak_3' => $row['U'],
-                    'no_ktp' => $row['V'],
-                    'alamat_asal' => $row['W'],
-                    'alamat' => $row['X'],
-                    'no_npwp' => $row['Y'],
-                    'handphone' => $row['Z'],
-                    'atas_nama' => $row['AA'],
-                    'no_rekening' => $row['AB'],
-                    'jenis_pembayaran' => $row['AC'],
-                    'cabang_bank' => $row['AD'],
-                    'email' => $row['AE']
-
-                ));
-
-
-
-                // $CekPin = $this->db->query("SELECT pin FROM master_pegawai WHERE pin = '$pin' ");
-                // if ($CekPin->num_rows() > 0) {
-                //     //    echo "sudah ada di database <br />";
-                // } else {
-                //     $this->db->query("INSERT INTO master_pegawai (pin) VALUES ('$pin') ");
-                //     // echo "belum ada di database <br />";
-                // }
+                    'id'    => $id,
+                    'pin' => $pin,
+                    'attlog' => $attlog,
+                    'tanggal' => $tgl_scan,
+                    'waktu' => $jam_scan,
+                    'verify' => $verifikasi,
+                    'status_scan' => $tipe_scan,
+                    'cloud_id' => $cloud_id
+                ));              
             }
 
             $numrow++; // Tambah 1 setiap kali looping
         }
-       
+        print_r($data_log_absen);
+        die;
         $this->AbsensiModel->insert_data_log_absen($data_log_absen);  
-
-        // $data['row']		= $this->relasi->GetDataLogAbsensi($tgl);
-
-        // $Query = $this->db->query("SELECT * FROM v_log_absen WHERE tanggal = '$tgl' ");
-        // $result = $mysqli->query($Query);
-        // $followingdata = $result->fetch_array(MYSQLI_ASSOC);
-        // foreach ($row as $key => $Row) {
-        //    $jam_datang = $Row['jam_datang'];
-        //    $jam_pulang = $Row['jam_pulang'];
-
-        //    echo "jam datang : $jam_datang <br /> jam pulang : $jam_pulang <br /><br />";
-        // }  
-
-?>
-        <!-- <script type="text/javascript">
-            alert("DATA TELAH BERHASIL DI SIMPAN");
-            window.location.href = "<?= site_url('cek_absen2') ?>";
-        </script> -->
-<?php
-        // redirect("cek_absen2"); // Redirect ke halaman awal (ke controller siswa fungsi index)
+        
+        //redirect(site_url('gaji/absensi_pegawai/'));
     }
 }

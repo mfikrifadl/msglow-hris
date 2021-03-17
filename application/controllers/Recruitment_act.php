@@ -1091,6 +1091,11 @@ class Recruitment_act extends CI_Controller
 			'update_by' => $whois,
 			'update_date'	=> $whois_date,
 		);
+		$dataStatus2 = array(
+			'status' => 'validasi',
+			'update_by' => $whois,
+			'update_date'	=> $whois_date,
+		);
 
 		$seralizedArray = serialize($data);
 		$vaLog = array(
@@ -1113,13 +1118,12 @@ class Recruitment_act extends CI_Controller
 			'nama' => $this->session->userdata('nama')
 		);
 		$this->model->Insert("log", $vaLog2);
-
-
-
+		$this->model->Insert('tb_pegawai', $data);
+		$this->model->Update('recruitment', 'id_recruitment', $id, $dataStatus);
 		$getMaxReg = $this->model->ViewWhere('v_man_power_diterima', 'job_id', $cJob_id);
 
 		foreach ($getMaxReg as $vaGetMaxReg) {
-			if ($vaGetMaxReg['pegawai_lolos'] == $vaGetMaxReg['total_man_power']) {
+			if ($vaGetMaxReg['pegawai_lolos'] > $vaGetMaxReg['total_man_power']) {
 				//echo "PASSED";
 				$dataUpdateForm = array(
 					'status_recruitment' => 'PASSED'
@@ -1148,6 +1152,9 @@ class Recruitment_act extends CI_Controller
 				$response = curl_exec($curl);
 
 				curl_close($curl);
+
+				$this->model->Delete('tb_pegawai', 'nik', $setNik);
+				$this->model->Update('recruitment', 'id_recruitment', $id, $dataStatus2);
 ?>
 				<script type="text/javascript">
 					alert("KUOTA DIVISI TELAH TERISI PENUH");
@@ -1155,15 +1162,13 @@ class Recruitment_act extends CI_Controller
 				</script>
 <?php
 				//redirect(site_url('recruitment/peserta_diterima/I'));
-			} elseif ($vaGetMaxReg['pegawai_lolos'] < $vaGetMaxReg['total_man_power']) {
-				echo "ON PROGRESS";
+			} elseif ($vaGetMaxReg['pegawai_lolos'] <= $vaGetMaxReg['total_man_power'] || $vaGetMaxReg['pegawai_lolos'] == $vaGetMaxReg['total_man_power'] ) {
+			//	echo "ON PROGRESS";
 				$text = "ON PROGRESS";
 				$dataUpdateForm = array(
 					'status_recruitment' => 'ON PROGRESS'
-				);
-
-				$this->model->Insert('tb_pegawai', $data);
-				$this->model->Update('recruitment', 'id_recruitment', $id, $dataStatus);
+				);				
+				
 				$this->model->Update('tb_form_pengajuan', 'id_form', $cJob_id, $dataUpdateForm);
 
 				$curl = curl_init();

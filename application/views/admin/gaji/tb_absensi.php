@@ -16,7 +16,7 @@
     <table class='table table-striped table-bordered' id='DataTable_absensi_mesin'>
         <thead>
             <tr>
-                <td>No <?= $this->session->userdata('level') ?></td>
+                <td>No </td>
                 <td>PIN</td>
                 <td>Attlog</td>
                 <td>Verify</td>

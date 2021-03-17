@@ -197,9 +197,9 @@
                                         <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan_temp'] == "Tanpa Keterangan") echo "selected";
                                                                                             ?>>Tanpa Keterangan</option>
                                         <option data-name="name13" value="Lupa Check Lock Masuk" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Masuk") echo "selected";
-                                                                                            ?>>Lupa Check Lock Masuk</option>
+                                                                                                    ?>>Lupa Check Lock Masuk</option>
                                         <option data-name="name14" value="Lupa Check Lock Pulang" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Pulang") echo "selected";
-                                                                                            ?>>Lupa Check Lock Pulang</option>
+                                                                                                    ?>>Lupa Check Lock Pulang</option>
                                         <option data-name="name15" value="Revisi Approval Manager" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo "selected";
                                                                                                     ?>>Revisi Approval Manager</option>
                                         <option data-name="name16" value="Revisi Approval" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval") echo "selected";
@@ -226,21 +226,43 @@
                     <td>
                         <?php
                         //Menghitung Keterlambatan kerja
-                        $set_jam_mulai = "08:10:59";
-                        $t_jam_mulai = new DateTime($set_jam_mulai);
+                        if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
+                            $jam_shift_2 = "12:10:59";
+                            $t_jam_shift_2 = new DateTime($jam_shift_2);
 
-                        $set_jam_datang_pegawai = $jam_datang;
+                            $set_jam_datang_shift2 = $jam_datang;
 
-                        if ($set_jam_datang_pegawai > $t_jam_mulai) {
-                            $hit_jam_masuk_kerja =  $set_jam_datang_pegawai->diff($t_jam_mulai);
-                            $hasil_hitungan = $hit_jam_masuk_kerja->format('%H:%I:%S');
-                            $tot_jam_keterlambatan = (string)$hasil_hitungan;
-                            if (empty($vaPegawai['jam_datang'])) {
+                            if ($set_jam_datang_shift2 > $t_jam_shift_2) {
+                                $hit_jam_masuk_kerja_shift2 =  $set_jam_datang_shift2->diff($t_jam_shift_2);
+                                $hasil_hitungan_shift2 = $hit_jam_masuk_kerja_shift2->format('%H:%I:%S');
+                                $tot_jam_keterlambatan_shift2 = (string)$hasil_hitungan_shift2;
+                                if (empty($vaPegawai['jam_datang'])) {
+                                } else {
+                                    echo "$tot_jam_keterlambatan_shift2";
+                                }
                             } else {
-                                echo "$tot_jam_keterlambatan";
                             }
                         } else {
+                            $set_jam_mulai = "08:10:59";
+                            $t_jam_mulai = new DateTime($set_jam_mulai);
+
+                            $set_jam_datang_pegawai = $jam_datang;
+
+                            if ($set_jam_datang_pegawai > $t_jam_mulai) {
+                                $hit_jam_masuk_kerja =  $set_jam_datang_pegawai->diff($t_jam_mulai);
+                                $hasil_hitungan = $hit_jam_masuk_kerja->format('%H:%I:%S');
+                                $tot_jam_keterlambatan = (string)$hasil_hitungan;
+                                if (empty($vaPegawai['jam_datang'])) {
+                                } else {
+                        ?>
+                                    <b class="text-danger"> <?= $tot_jam_keterlambatan ?></b>
+                        <?php
+
+                                }
+                            } else {
+                            }
                         }
+
 
                         ?>
                     </td>
@@ -250,58 +272,177 @@
                     <td id="rev_manager_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager" || $vaPegawai['keterangan'] == "Revisi Approval" || $vaPegawai['keterangan'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
                         <?php
                         //Menghitung total jam lembur
-                        $set_jam_lembur = "17:49:59";
-                        $t_set_jam_lembur = new DateTime($set_jam_lembur);
-
-                        $set_jam_pulang_default = "17:00:00";
-                        $t_set_jam_pulang_default = new DateTime($set_jam_pulang_default);
-
-                        $t_jam_pulang = "20:00:00";
-                        $x_jam_pulang = new DateTime($t_jam_pulang);
-
+                        $tot_jam_lembur_shift2 = "";
                         $tot_jam_lembur = "";
-                        if ($jam_pulang > $t_set_jam_lembur) {
-                            $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
-                            $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
-                            $tot_jam_lembur = (string)$jumlah2;
-                            if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                        if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
+                            $set_jam_lembur_shift2 = "21:49:59";
+                            $t_set_jam_lembur_shift2 = new DateTime($set_jam_lembur_shift2);
+
+                            $set_jam_pulang_default_shift2 = "21:00:00";
+                            $t_set_jam_pulang_default_shift2 = new DateTime($set_jam_pulang_default_shift2);
+
+
+                            if ($jam_pulang > $t_set_jam_lembur_shift2) {
+                                $hit_jam_lembur_shift2 =  $t_set_jam_pulang_default_shift2->diff($jam_pulang);
+                                $jumlah2_shift2 = $hit_jam_lembur_shift2->format('%H:%I:%S');
+                                $tot_jam_lembur_shift2 = (string)$jumlah2_shift2;
+                                if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                                } else {
+                                    echo "$tot_jam_lembur_shift2";
+                                }
                             } else {
-                                echo "$tot_jam_lembur";
                             }
                         } else {
+                            $set_jam_lembur = "17:49:59";
+                            $t_set_jam_lembur = new DateTime($set_jam_lembur);
+
+                            $set_jam_pulang_default = "17:00:00";
+                            $t_set_jam_pulang_default = new DateTime($set_jam_pulang_default);
+
+                            $t_jam_pulang = "20:00:00";
+                            $x_jam_pulang = new DateTime($t_jam_pulang);
+
+
+                            if ($jam_pulang > $t_set_jam_lembur) {
+                                $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
+                                $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
+                                $tot_jam_lembur = (string)$jumlah2;
+                                if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                                } else {
+                                    echo "$tot_jam_lembur";
+                                }
+                            } else {
+                            }
                         }
+
 
                         ?>
                     </td>
                     <td id="rev_manager1_<?= $id_ket ?>" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval" || $vaPegawai['keterangan_temp'] == "Revisi Approval Manager" || $vaPegawai['keterangan'] == "Revisi Approval" || $vaPegawai['keterangan'] == "Revisi Approval Manager") echo 'style = "background-color:red"'; ?>>
                         <?php
                         //Menghitung Payroll total jam lembur  
-                        $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
-                        $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
-                        $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
-                        $jam = $a_jam_pulang_lembur[0];
-                        $menit = $a_jam_pulang_lembur[1];
-                        $detik = $a_jam_pulang_lembur[2];
+                        if ($vaPegawai['id_status'] == 3) {
+                            if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
+                                $t_tot_jam_lembur = new DateTime($tot_jam_lembur_shift2);
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
+                                $jam = $a_jam_pulang_lembur[0];
+                                $menit = $a_jam_pulang_lembur[1];
+                                $detik = $a_jam_pulang_lembur[2];
 
-                        //echo "$jam-$menit-$detik";
+                                //echo "$jam-$menit-$detik";
 
-                        $lembur_jam = $jam * 25000;
-                        //echo $hasil;
-                        if (empty($tot_jam_lembur)) {
-                        } else {
-                            if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
-                            } else {
-                                if ($menit > 19 && $menit < 50) {
-                                    $lembur_half = 13000;
-                                    $tot_lembur_today = $lembur_jam + $lembur_half;
-                                    echo $tot_lembur_today;
+                                $lembur_jam = $jam * 13000;
+                                //echo $hasil;
+                                if (empty($tot_jam_lembur_shift2)) {
                                 } else {
-                                    $lembur_jam = $jam * 25000;
-                                    echo $lembur_jam;
+                                    if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                                    } else {
+                                        if ($menit > 19 && $menit < 50) {
+                                            $lembur_half = 7500;
+                                            $tot_lembur_today = $lembur_jam + $lembur_half;
+                                            echo $tot_lembur_today;
+                                        } elseif ($menit > 50 || $jam == 00) {
+                                            $lembur_jam = 13000;
+                                            echo $lembur_jam;
+                                        } else {
+                                            $lembur_jam = $jam * 13000;
+                                            echo $lembur_jam;
+                                        }
+                                    }
+                                }
+                            } else {
+                                $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
+                                $jam = $a_jam_pulang_lembur[0];
+                                $menit = $a_jam_pulang_lembur[1];
+                                $detik = $a_jam_pulang_lembur[2];
+
+                                //echo "$jam-$menit-$detik";
+
+                                $lembur_jam = $jam * 13000;
+                                //echo $hasil;
+                                if (empty($tot_jam_lembur)) {
+                                } else {
+                                    if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                                    } else {
+                                        if ($menit > 19 && $menit < 50) {
+                                            $lembur_half = 7500;
+                                            $tot_lembur_today = $lembur_jam + $lembur_half;
+                                            echo $tot_lembur_today;
+                                        } elseif ($menit > 50 || $jam == 00) {
+                                            $lembur_jam = 13000;
+                                            echo $lembur_jam;
+                                        } else {
+                                            $lembur_jam = $jam * 13000;
+                                            echo $lembur_jam;
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        } elseif ($vaPegawai['id_status'] == 4) {
+                            if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
+                                $t_tot_jam_lembur = new DateTime($tot_jam_lembur_shift2);
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
+                                $jam = $a_jam_pulang_lembur[0];
+                                $menit = $a_jam_pulang_lembur[1];
+                                $detik = $a_jam_pulang_lembur[2];
 
+                                //echo "$jam-$menit-$detik";
+
+                                $lembur_jam = $jam * 25000;
+                                //echo $hasil;
+                                if (empty($tot_jam_lembur_shift2)) {
+                                } else {
+                                    if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                                    } else {
+                                        if ($menit > 19 && $menit < 50) {
+                                            $lembur_half = 13000;
+                                            $tot_lembur_today = $lembur_jam + $lembur_half;
+                                            echo $tot_lembur_today;
+                                        } elseif ($menit > 50 || $jam == 00) {
+                                            $lembur_jam = 25000;
+                                            echo $lembur_jam;
+                                        } else {
+                                            $lembur_jam = $jam * 25000;
+                                            echo $lembur_jam;
+                                        }
+                                    }
+                                }
+                            } else {
+                                $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
+                                $jam = $a_jam_pulang_lembur[0];
+                                $menit = $a_jam_pulang_lembur[1];
+                                $detik = $a_jam_pulang_lembur[2];
+
+                                //echo "$jam-$menit-$detik";
+
+                                $lembur_jam = $jam * 25000;
+                                //echo $hasil;
+                                if (empty($tot_jam_lembur)) {
+                                } else {
+                                    if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
+                                    } else {
+                                        if ($menit > 19 && $menit < 50) {
+                                            $lembur_half = 13000;
+                                            $tot_lembur_today = $lembur_jam + $lembur_half;
+                                            echo $tot_lembur_today;
+                                        } elseif ($menit > 50 || $jam == 00) {
+                                            $lembur_jam = 25000;
+                                            echo $lembur_jam;
+                                        } else {
+                                            $lembur_jam = $jam * 25000;
+                                            echo $lembur_jam;
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                        }
                         ?>
                     </td>
                     <?php

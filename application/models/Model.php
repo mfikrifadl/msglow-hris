@@ -145,7 +145,7 @@ class Model extends CI_Model
 
 	public function ViewAbsensiPerHari($WhereValue)
 	{
-		$Query = $this->db->query("	SELECT B.id, E.id_temp, A.id_pegawai, A.nik, A.nama, D.nama_jabatan, B.tot_jam_kerja, B.tot_jam_lembur, B.keterangan, E.keterangan_temp, B.keterlambatan, B.ket_lain, E.ket_lain_temp, B.attlog, B.tanggal, MIN( B.waktu ) AS jam_datang, MAX( B.waktu ) AS jam_pulang, B.waktu
+		$Query = $this->db->query("	SELECT B.id, E.id_temp, A.id_pegawai, A.nik, A.nama, A.id_status, D.nama_jabatan, B.tot_jam_kerja, B.tot_jam_lembur, B.keterangan, E.keterangan_temp, B.keterlambatan, B.ket_lain, E.ket_lain_temp, B.attlog, B.tanggal, MIN( B.waktu ) AS jam_datang, MAX( B.waktu ) AS jam_pulang, B.waktu
 		FROM
 			tb_pegawai A
 			LEFT JOIN log_absen B ON B.pin = A.nik 

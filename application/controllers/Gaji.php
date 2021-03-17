@@ -136,7 +136,7 @@ class Gaji extends CI_Controller
 		}
 
 		$this->load->view('admin/container/header', $dataHeader);
-		$this->load->view('admin/gaji/absensi', $data);
+		$this->load->view('admin/gaji/absensi', $data); //SEMENTARA PAKAI ALTERNATIF IMPORT EXCEL DI FILE ABSENSI2.PHP
 		$this->load->view('admin/container/footer');
 	}
 

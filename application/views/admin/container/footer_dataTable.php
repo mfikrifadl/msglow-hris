@@ -40,7 +40,7 @@
   });
 
   $("#DataTable_absensi_mesin").dataTable({
-    //  scrollY: '50vh',
+    scrollY: '50vh',
     scrollX: 'true',
     scrollCollapse: true,
     "oLanguage": {

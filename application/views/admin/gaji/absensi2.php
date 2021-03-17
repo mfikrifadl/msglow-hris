@@ -125,191 +125,75 @@ if ($action == "edit") {
                             echo "<table class='table table-striped table-bordered' id='DataTable'>
                             <thead>
                                     <tr>
-                                    <th>NIK</th>
-                                    <th>nama</th>
-                                    <th>status karyawan</th>
-                                    <th>tgl_mulai_kerja</th>
-                                    <th>status_kepegawaian</th>
-                                    <th> jk </th>
-                                    <th>  agama</th>
-                                    <th>  tmpt lahir</th>
-                                    <th>  tgl lahir</th>
-                                    <th>  pendidikan</th>
-                                    <th>  jurusan</th>
-                                    <th>  gol dar</th>
-                                    <th>  status kawin</th>
-                                    <th>  istri/suami</th>
-                                    <th>  tgl lahir</th>
-                                    <th>  anak 1</th>
-                                    <th>  tgl lahir</th>
-                                    <th>  anak 2</th>
-                                    <th>  tgl lahir</th>
-                                    <th>  anak 3</th>
-                                    <th>  tgl lahir</th>
-                                    <th>  ktp</th>
-                                    <th>  alamat asal</th>
-                                    <th>  alamat sekarang</th>
-                                    <th>  npwp</th>
-                                    <th>  hp</th>
-                                    <th>  atas nama</th>
-                                    <th>  no rek</th>
-                                    <th>  bank</th>
-                                    <th>  cabang</th>
-                                    <th>  email</th>                   
+                                    <th>No</th>
+                                    <th>Cloud_ID</th>
+                                    <th>PIN</th>
+                                    <th>Nama_Karyawan</th>
+                                    <th>Tanggal_Scan</th>
+                                    <th>Jam_Scan</th>
+                                    <th>Verifikasi</th>
+                                    <th>Tipe_Scan</th>
                                     </tr>
                                     </thead>
-                                    <tbody>";
+                                    <tbody>";                            
 
-                            // echo "<table class='table table-striped table-bordered' id='DataTable'>
-                            //               <thead>
-                            //                       <tr>
-                            //                       <th>PIN</th>
-                            //                       <th>NIP</th>
-                            //                       <th>Nama</th>
-                            //                       <th>Jabatan</th>
-                            //                       <th>Departemen</th>
-                            //                       <th>Kantor</th>
-                            //                       <th>Keterangan</th>
-                            //                       <th>Tanggal</th>
-                            //                       <th>Scan 1</th>
-                            //                       <th>Scan 2</th>
-                            //                       <th>Scan 3</th>
-                            //                       <th>Scan 4</th>
-                            //                       <th>Scan 5</th>
-                            //                       </tr>
-                            //                       </thead>
-                            //                       <tbody>";
-
-                            $numrow = 1;
+                            $numrow = 0;
                             $kosong = 0;
 
                             // Lakukan perulangan dari data yang ada di excel
                             // $sheet adalah variabel yang dikirim dari controller
                             foreach ($sheet as $row) {
                               // Ambil data pada excel sesuai Kolom
-                              $nik = $row['A']; // Ambil data NIS
-                              $nama = $row['B']; // Ambil data nama
-                              $statusK = $row['C']; // Ambil data jenis kelamin
-                              $tgl_mulai_kerja = $row['D']; // Ambil data alamat
-                              $status_kepegawaian = $row['E']; // Ambil data NIS
-                              $jk = $row['F']; // Ambil data nama
-                              $agama = $row['G']; // Ambil data jenis kelamin
-                              $tmpt_lahir = $row['H']; // Ambil data alamat
-                              $tgl_lahir = $row['I']; // Ambil data alamat
-                              $pendidikan = $row['J']; // Ambil data alamat
-                              $jurusan = $row['K']; // Ambil data alamat
-                              $gol_dar = $row['L']; // Ambil data alamat
-                              $status_kawin = $row['M'];
-                              $istri_suami = $row['N'];
-                              $tgl_lahir_pas = $row['O'];
-                              $anak1 = $row['P'];
-                              $tgl_lahir_a1 = $row['Q'];
-                              $anak2 = $row['R'];
-                              $tgl_lahir_a2 = $row['S'];
-                              $anak3 = $row['T'];
-                              $tgl_lahir_a3 = $row['U'];
-                              $ktp = $row['V'];
-                              $alamat_asal = $row['W'];
-                              $alamat = $row['X'];
-                              $npwp = $row['Y'];
-                              $hp = $row['Z'];
-                              $atas_nama = $row['AA'];
-                              $no_rek = $row['AB'];
-                              $bank = $row['AC'];
-                              $cabang = $row['AD'];
-                              $email = $row['AE'];
-                              // $keterangan = $row['G']; // Ambil data nama
-                              // $tanggal = $row['H']; // Ambil data jenis kelamin
-                              // $scan_1 = $row['I']; // Ambil data alamat
-                              // $scan_2 = $row['J']; // Ambil data alamat
-                              // $scan_3 = $row['K']; // Ambil data alamat
-                              // $scan_4 = $row['L']; // Ambil data alamat
-                              // $scan_5 = $row['M']; // Ambil data alamat
+                              $cloud_id = $row['A']; // Ambil data NIS
+                              $pin = $row['B']; // Ambil data nama
+                              $nama_karyawan = $row['C']; // Ambil data jenis kelamin
+                              $tgl_scan = $row['D']; // Ambil data alamat
+                              $jam_scan = $row['E']; // Ambil data NIS
+                              $verifikasi = $row['F']; // Ambil data nama
+                              $tipe_scan = $row['G']; // Ambil data jenis kelamin
 
                               // Cek jika semua data tidak diisi
-                              if ($nik == "" )
-                                // if ($pin == "" && $nip == "" && $nama == "" && $jabatan == "" && $departemen == "" && $kantor == "" && $keterangan == "" && $tanggal == "" && $scan_1 == "" && $scan_2 == "" && $scan_3 == "" && $scan_4 == "" && $scan_5 == "")
+                              if ($pin == "" )
+                                if ($cloud_id == "" && $pin == "" && $nama_karyawan == "" && $tgl_scan == "" && $jam_scan == "" && $verifikasi == "" && $tipe_scan == "")
                                 continue; // Lewat data pada baris ini (masuk ke looping selanjutnya / baris selanjutnya)
 
                               // Cek $numrow apakah lebih dari 1
                               // Artinya karena baris pertama adalah nama-nama kolom
                               // Jadi dilewat saja, tidak usah diimport
-                              if ($numrow > 1) {
-                                // Validasi apakah semua data telah diisi
-                                // $pin_td = (!empty($pin)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
-                                // $nip_td = (!empty($nip)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
-                                // $attlog_td = (!empty($attlog)) ? "" : " style='background: #E07171;'"; // Jika Nama kosong, beri warna merah
-                                // $verify_td = (!empty($verify)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
-                                // $departemen_td = (!empty($departemen)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
-                                // $kantor_td = (!empty($kantor)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
-                                // $keterangan_td = (!empty($keterangan)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
-                                // $status_scan_td = (!empty($status_scan)) ? "" : " style='background: #E07171;'"; // Jika Jenis Kelamin kosong, beri warna merah
-                                // $cloud_id_td = (!empty($cloud_id)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
-                                // $scan_2_td = (!empty($scan_2)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
+                              if ($numrow > 0) {
+                                //Validasi apakah semua data telah diisi
+                                $cloud_id_td = (!empty($cloud_id)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
+                                $pin_td = (!empty($pin)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
+                                $nama_karyawan_td = (!empty($nama_karyawan)) ? "" : " style='background: #E07171;'"; // Jika Nama kosong, beri warna merah
+                                $tgl_scan_td = (!empty($tgl_scan)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
+                                $jam_scan_td = (!empty($jam_scan)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
+                                $verifikasi_td = (!empty($verifikasi)) ? "" : " style='background: #E07171;'"; // Jika NIS kosong, beri warna merah
+                                $tipe_scan_td = (!empty($tipe_scan)) ? "" : " style='background: #E07171;'"; // Jika Alamat kosong, beri warna merah
 
                                 // Jika salah satu data ada yang kosong
-                                if ($nik == "") {
+                                if ($cloud_id == "" || $pin == "" || $nama_karyawan == "" || $tgl_scan == "" || $jam_scan == "" || $verifikasi == "" || $tipe_scan == "") {
                                   $kosong++; // Tambah 1 variabel $kosong
                                 }
 
                                 echo "<tr>";
-                                echo "<td>" . $nik . "</td>";
-                                echo "<td>" . $nama . "</td>";
-                                echo "<td>" . $statusK . "</td>";
-                                echo "<td>" . $tgl_mulai_kerja . "</td>";
-                                echo "<td>" . $status_kepegawaian . "</td>";
-                                echo "<td>" . $jk . "</td>";
-                                echo "<td>" . $agama . "</td>";
-                                echo "<td>" . $tmpt_lahir . "</td>";
-                                echo "<td>" . $tgl_lahir . "</td>";
-                                echo "<td>" . $pendidikan . "</td>";
-                                echo "<td>" . $jurusan . "</td>";
-                                echo "<td>" . $gol_dar . "</td>";
-                                echo "<td>" . $status_kawin . "</td>";
-                                echo "<td>" . $istri_suami . "</td>";
-                                echo "<td>" . $tgl_lahir_pas . "</td>";
-                                echo "<td>" . $anak1 . "</td>";
-                                echo "<td>" . $tgl_lahir_a1 . "</td>";
-                                echo "<td>" . $anak2 . "</td>";
-                                echo "<td>" . $tgl_lahir_a2 . "</td>";
-                                echo "<td>" . $anak3 . "</td>";
-                                echo "<td>" . $tgl_lahir_a3 . "</td>";
-                                echo "<td>" . $ktp . "</td>";
-                                echo "<td>" . $alamat_asal . "</td>";
-                                echo "<td>" . $alamat . "</td>";
-                                echo "<td>" . $npwp . "</td>";
-                                echo "<td>" . $hp . "</td>";
-                                echo "<td>" . $atas_nama . "</td>";
-                                echo "<td>" . $no_rek . "</td>";
-                                echo "<td>" . $bank . "</td>";
-                                echo "<td>" . $cabang . "</td>";
-                                echo "<td>" . $email . "</td>";
-
-
-                                echo "</tr>";
-
-                                // echo "<tr>";
-                                // echo "<td" . $pin_td . ">" . $pin . "</td>";
-                                // echo "<td>" . $nip . "</td>";
-                                // echo "<td" . $nama_td . ">" . $nama . "</td>";
-                                // echo "<td" . $jabatan_td . ">" . $jabatan . "</td>";
-                                // echo "<td>" . $departemen . "</td>";
-                                // echo "<td>" . $kantor . "</td>";
-                                // echo "<td>" . $keterangan . "</td>";
-                                // echo "<td" . $tanggal_td . ">" . $tanggal . "</td>";
-                                // echo "<td>" . $scan_1 . "</td>";
-                                // echo "<td>" . $scan_2 . "</td>";
-                                // echo "<td>" . $scan_3 . "</td>";
-                                // echo "<td>" . $scan_4 . "</td>";
-                                // echo "<td>" . $scan_5 . "</td>";
-                                // echo "</tr>";
+                                echo "<td>" . $numrow . "</td>";
+                                echo "<td>" . $cloud_id . "</td>";
+                                echo "<td>" . $pin . "</td>";
+                                echo "<td>" . $nama_karyawan . "</td>";
+                                echo "<td>" . $tgl_scan . "</td>";
+                                echo "<td>" . $jam_scan . "</td>";
+                                echo "<td>" . $verifikasi . "</td>";
+                                echo "<td>" . $tipe_scan . "</td>"; 
+                                echo "</tr>";                                
                               }
 
                               $numrow++; // Tambah 1 setiap kali looping
 
                             }
-                            echo "<input type='number' name='numrow' value='$numrow' hidden>";
 
+                            $numLoop = $numrow - 1;
+                            echo "<input type='number' name='numrow' value='$numLoop' hidden>";
+                           // echo $numLoop;
                             echo "</tbody></table>";
 
                             // Cek apakah variabel kosong lebih dari 0
@@ -367,7 +251,7 @@ if ($action == "edit") {
       </div>
     </div>
 
-    <div class="row">
+    <div class=" row">
       <div class="col-12">
 
         <!--begin:: Widgets/Order Statistics-->
@@ -379,37 +263,104 @@ if ($action == "edit") {
             <div class="card">
               <div class="card-header" id="headingTableAbsensi">
                 <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseTableAbsensi" aria-expanded="true" aria-controls="collapseTableAbsensi">
-                  <strong> Data Table Absensi </strong>
+                  <strong> Data Rekap Absensi </strong>
                 </div>
               </div>
               <div id="collapseTableAbsensi" class="collapse show" aria-labelledby="headingTableAbsensi" data-parent="#accordionTableAbsensi">
                 <!-- <div class="card-body"> -->
 
-                <div class="kt-portlet__body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="nav-tabs-custom">
+                <div class="row">
+                  <div class="col-xl-12">
+                    <!-- <div id="show_absen"></div> -->
 
-                        <div class="tab-content ">
-                          <div class="row">
+                    <div class="kt-portlet kt-portlet--height-fluid">
+                      <div class="kt-portlet">
+                        <div class="kt-portlet__body">
 
-                            <div class="col-sm-12">
-                              <button type="button" onclick="return showDataAbsen();" class="btn btn-success btn-flat">Show Data Absen</button>
-                            </div>
 
-                          </div>
+
+                          <?php
+                          if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 1) {
+                          ?>
+                            <form method="post" enctype="multipart/form-data" target="blank" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
+                              <div class="row">
+                                <div class="col-6">
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-lg-6 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                      <div class="input-daterange input-group">
+                                        <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
+                                        <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="getDataAbsenImportPerHari();" value="Search">
+                                          <i class="flaticon2-refresh"></i>
+                                        </button>
+                                      </div>
+                                      <span class="form-text text-muted">date selection</span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-6">
+                                  <div class='col-sm-12 text-right'>
+
+                                    <button class='btn btn-success' name="PDF" type='submit' value="PDF">
+                                      <i class="flaticon2-google-drive-file"></i>Cetak PDF
+                                    </button>
+
+                                    <button class='btn btn-brand' name="EXCEL" type='submit' value="EXCEL">
+                                      <i class="fa fa-file-export"></i>Export Excel
+                                    </button>
+
+                                  </div>
+                                </div>
+
+                              </div>
+                            </form>
+                          <?php
+                          } else {
+                          }
+                          //elseif ($this->session->userdata('level') == 1) {
+                          ?>
+                          <!-- <div class="form-group row">
+                                  <label class="col-form-label col-lg-4 col-sm-12">Tanggal Absensi Yang Di Cetak</label>
+                                  <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <div class="input-daterange input-group">
+                                      <input type="date" name="dTgl_cetak" id="dTgl_cetak" class="form-control" data-date-format="dd-mm-yyyy" required>
+                                      <div class="input-group-append">
+                                        <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
+                                      </div>
+                                      <input type="date" name="dTgl_cetak_end" id="dTgl_cetak_end" class="form-control" data-date-format="dd-mm-yyyy" placeholder="Tanggal Absensi" required>
+                                      <div class="input-group-append">
+                                        <span class="input-group-text"></span>
+                                      </div>
+                                      <button type="button" class="btn btn-outline-success btn-md btn-icon btn-icon-md" onclick="getDataAbsenImport();" value="Search">
+                                        <i class="flaticon2-refresh"></i>
+                                      </button>
+                                    </div>
+                                    <span class="form-text text-muted">date range selection</span>
+                                  </div>
+                                </div> -->
+                          <?php
+                          // } 
+
+                          ?>
+
+
+
+
                           <br />
-                          <div class="row">
-                            <div class="col-xl-12 text-center">
-                              <div id="show_absen"></div>
-                            </div>
-                          </div>
+                          <div id="data_absensi_import"></div>
+                          <br />
+
 
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
+
+
+
 
               </div>
               <!-- </div> -->
@@ -449,6 +400,341 @@ if ($action == "edit") {
         $("#show_absen").html(msg);
       }
     });
+  }
 
+  function GetDataAbsensi() {
+    var dTgl = $('#dTgl').val();
+    var dTgl_end = $('#dTgl_end').val();
+    // alert(dTgl);
+    if (dTgl == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else if (dTgl_end == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl=" + dTgl +
+          "&dTgl_end=" + dTgl_end,
+        url: "<?= site_url('cek_absen/get_data_absensi') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#data_absensi').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          $("#data_absensi").html(msg);
+        }
+      });
+    }
+  }
+
+  function GetDataAbsensiPerHari() {
+    var dTgl = $('#dTgl').val();
+    // alert(dTgl);
+    if (dTgl == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl=" + dTgl,
+        url: "<?= site_url('cek_absen/get_data_absensi_per_hari') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#data_absensi').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          $("#data_absensi").html(msg);
+        }
+      });
+    }
+  }
+
+  function getDataAbsenImport() {
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var dTgl_cetak_end = $('#dTgl_cetak_end').val();
+    // alert(dTgl);
+    if (dTgl_cetak == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else if (dTgl_cetak_end == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl_cetak=" + dTgl_cetak +
+          "&dTgl_cetak_end=" + dTgl_cetak_end,
+        url: "<?= site_url('cek_absen/get_data_absensi_import') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#data_absensi_import').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          $("#data_absensi_import").html(msg);
+        }
+      });
+    }
+  }
+
+  function getDataAbsenImportPerHari() {
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    //alert(dTgl_cetak);
+    if (dTgl_cetak == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl_cetak=" + dTgl_cetak,
+        url: "<?= site_url('cek_absen/get_data_absensi_import_per_hari') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#data_absensi_import').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          $("#data_absensi_import").html(msg);
+        }
+      });
+    }
+  }
+
+  function run() {
+
+    var dTgl = $('#dTgl').val();
+    var dTgl_end = $('#dTgl_end').val();
+    // alert(dTglAbsensi);
+    if (dTgl == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else if (dTgl_end == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl=" + dTgl +
+          "&dTgl_end=" + dTgl_end,
+        url: "<?= site_url('cek_absen/import') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#loading').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          new PNotify({
+            // title: 'Success!',
+            text: 'Berhasil Compile Data Absensi.',
+            type: 'success'
+          });
+          $('#dTgl').val("");
+          $('#dTgl').focus()
+          $('#loading').html("")
+
+          //window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
+        }
+      });
+    }
+  }
+
+  function updateDataAbsen(id) {
+
+    var ket_lain = $('#ket_lain_' + id).val();
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var nik_ket_update = $('#nik_ket_update_' + id).val();
+    //alert(id+"-"+ket_lain+"-"+dTgl_cetak+"-"+nik_ket_update);
+
+    var values = {
+      'id': id,
+      'dTgl_cetak': dTgl_cetak,
+      'nik_ket_update': nik_ket_update,
+      'ket_lain': ket_lain
+    }
+
+    $.ajax({
+      url: "<?php echo base_url() . 'cek_absen_act/update_absen' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        // alert (tanggal);
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
+  }
+
+  function update_ket(id) {
+    var ket = $('#ket_' + id).val();
+    var idAbs = $('#id_' + id).val();
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var nik_ket_update = $('#nik_ket_update_' + id).val();
+    var values = {
+      'id': id,
+      'dTgl_cetak': dTgl_cetak,
+      'nik_ket_update': nik_ket_update,
+      'ket': ket
+    };
+    //alert(id+"-"+ket+"-"+dTgl_cetak+"-"+nik_ket_update);  
+    if (ket == "Revisi Approval" || ket == "Revisi Approval Manager") {
+      $('#rev_manager_' + id).attr('style', 'background-color: red');
+      $('#rev_manager1_' + id).attr('style', 'background-color: red');
+    } else {
+      $('#rev_manager_' + id).attr('style', 'background-color: none');
+      $('#rev_manager1_' + id).attr('style', 'background-color: none');
+    }
+    if (ket == "") {
+      new PNotify({
+        text: 'Pilih Keterangan terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        url: "<?= base_url() . 'cek_absen_act/update_absen_keterangan' ?>",
+        type: "POST",
+        data: values,
+        success: function(data) {
+          new PNotify({
+            // title: 'Success!',
+            text: 'Berhasil Update Keterangan Data Absensi.',
+            type: 'success'
+          });
+          //option pesan berhasil send data
+          // alert (tanggal);
+        },
+        error: function(data, status, error) {
+          alert(data.responseText);
+        }
+      });
+    }
+  }
+
+  function approvement(id) {
+
+    var keterangan = $('#ket_abs_temp_' + id).val();
+    var ket_lain = $('#ket_abs_lain_temp_' + id).val();
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var dTgl_cetak_end = $('#dTgl_cetak_end').val();
+    //alert(id+keterangan+ket_lain+dTgl_cetak+dTgl_cetak_end);
+
+    var values = {
+      'id': id,
+      'ket_lain': ket_lain,
+      'keterangan': keterangan,
+      'dTgl_cetak': dTgl_cetak,
+      'dTgl_cetak_end': dTgl_cetak_end
+    }
+
+    $.ajax({
+      url: "<?= base_url() . 'cek_absen_act/approvement_update' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        new PNotify({
+          // title: 'Success!',
+          text: 'Berhasil Approve Data Absensi.',
+          type: 'success'
+        });
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
+  }
+
+  function reject(id) {
+    //alert(id);
+
+    var values = {
+      'id': id,
+    }
+
+    $.ajax({
+      url: "<?= base_url() . 'cek_absen_act/reject_update' ?>",
+      type: "POST",
+      data: values,
+      success: function(data) {
+        //option pesan berhasil send data
+        new PNotify({
+          // title: 'Success!',
+          text: 'Berhasil Reject Data Absensi.',
+          type: 'success'
+        });
+
+      },
+      error: function(data, status, error) {
+        alert(data.responseText);
+      }
+    });
+  }
+
+  function cetak_pdf() {
+
+    var dTgl_cetak = $('#dTgl_cetak').val();
+    var dTgl_cetak_end = $('#dTgl_cetak_end').val();
+    //alert(dTgl_cetak + dTgl_cetak_end);
+    if (dTgl_cetak == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else if (dTgl_cetak_end == "") {
+      new PNotify({
+        text: 'Pilih Tanggal Absensi terlebih dahulu!',
+        animation: 'slide',
+        type: 'warning'
+      });
+    } else {
+      $.ajax({
+        type: "POST",
+        data: "dTgl_cetak=" + dTgl_cetak +
+          "&dTgl_cetak_end=" + dTgl_cetak_end,
+        url: "<?= site_url('cek_absen_act/cetak_absensi') ?>",
+        cache: false,
+        beforeSend: function() {
+          $('#loading').html("<div align='center'><img  width='200' height='200' src='<?= base_url() ?>assets/dist/img/loading5.gif' /></div> ");
+        },
+        success: function(msg) {
+          new PNotify({
+            // title: 'Success!',
+            text: 'Berhasil Compile Data Absensi.',
+            type: 'success'
+          });
+          $('#dTgl_cetak').val("");
+          $('#dTgl_cetak').focus()
+          $('#loading').html("")
+
+          //window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
+        }
+      });
+    }
   }
 </script>
