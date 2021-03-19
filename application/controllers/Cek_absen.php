@@ -143,18 +143,52 @@ class Cek_absen extends CI_Controller
     {
         //=================================ALGORITMA ABSENSI PER HARI ===========================================
         $dTgl = $this->input->post('dTgl');
-        
+
         //echo "$dTgl - $dTgl_end <br />";
 
-        $data_absensi = $this->model->View('attlog');
+        //========================OFFICE=============================================================
+        $cloud_id = "C26978429312312E";
+        $attendance_upload = $dTgl;
+        $current_time = date("YmdHis");
+        $api_key = "85DGI47CBTMIZY8R";
+        $var = $cloud_id . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth = md5($var);
+        //echo $auth . "<br />";
+        //echo $current_time;
+
+        $dataAttlogJson = array();
+
+        $t_data = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C26978429312312E/" . $attendance_upload . "/15/date_time/asc/json/" . $auth . "/" . $current_time);
+        $json = json_decode($t_data, TRUE);
+        $data_json = $json['data'];
+
+        foreach ($data_json as $keyJson => $vaDataJson) {
+            array_push($dataAttlogJson, array(
+                'pin' => $vaDataJson['PIN'],
+                'nik' => $vaDataJson['NIK'],
+                'nama' => $vaDataJson['Name'],
+                'lokasi' => $vaDataJson['Location'],
+                'cloud_id' => $vaDataJson['Cloud ID'],
+                'attlog' => $vaDataJson['Date Time'],
+                'type' => $vaDataJson['Type'],
+                'status_scan' => $vaDataJson['Status'],
+                'verify' => $vaDataJson['Verify']
+            ));
+        }
+        // $this->model->EventScheduler($dataAttlog);
+        // print_r($data_json);
+        // die;
+        //======================END OFFICE=============================================================
+        //================================= ZAMAN PUSH SERVER ==================================================
+        // $data_absensi = $this->model->View('attlog');
         $data_log_absen = array();
         $no = 0;
 
-        $response 			= $this->cURL_API('', 'GET', '');
-		$data2 				= json_decode($response, true);
-		$dataAttlog	= $data2['data'];
-
-        foreach ($dataAttlog as $key => $vaArea) {
+        // $response             = $this->cURL_API('', 'GET', '');
+        // $data2                 = json_decode($response, true);
+        // $dataAttlog    = $data2['data'];
+        //================================= END ZAMAN PUSH SERVER ==================================================
+        foreach ($dataAttlogJson as $vaArea) {
             $c_id = date("YmdHis");
             ++$no;
             // $tgl_hari_ini = date('Y-m-d');
@@ -170,7 +204,7 @@ class Cek_absen extends CI_Controller
             $waktu = $a_attlog[1];
 
             $t_dTgl = new DateTime($dTgl);
-            
+
             $tgl_attlog = new DateTime($tgl);
 
             if ($t_dTgl == $tgl_attlog) {
@@ -195,7 +229,6 @@ class Cek_absen extends CI_Controller
                     'cloud_id' => $cloud_id
                 ));
             } else {
-                
             }
 
             //=================================END ALGORITMA ABSENSI PER HARI ===========================================
@@ -255,7 +288,7 @@ class Cek_absen extends CI_Controller
         curl_close($curl);
 
         return $response;
-    }    
+    }
 
     public function attlog_id($Id = "")
     {
@@ -265,6 +298,60 @@ class Cek_absen extends CI_Controller
     }
 
     public function get_data_absensi_per_hari()
+    {
+        $dTgl = $this->input->post('dTgl');
+        //==========================VARIABLE URL API SDK==========================================
+        $cloud_id = "C26978429312312E";
+        $attendance_upload = $dTgl;
+        $current_time = date("YmdHis");
+        $api_key = "85DGI47CBTMIZY8R";
+        $var = $cloud_id . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth = md5($var);
+        //==========================END VARIABLE URL==============================================
+
+
+        $time_a = date('H:i:s', mktime(0, 0, 0));
+        $time_b = date('H:i:s', mktime(23, 59, 59));
+
+        $x = $dTgl . " " . $time_a;
+        $y = $dTgl . " " . $time_b;
+        //echo "$y";
+
+        $data = array(
+            'dTgl' => $dTgl
+        );
+        //============================= ZAMAN PUSH SERVER =====================================
+        // $response             = $this->cURL_API('', 'GET', '');
+        // $data2                 = json_decode($response, true);
+        // $data['attlog']    = $data2['data'];
+        //==============================END ZAMAN PUSH SERVER==================================
+        $t_data = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C26978429312312E/" . $attendance_upload . "/15/date_time/asc/json/" . $auth . "/" . $current_time);
+        $json = json_decode($t_data, TRUE);
+        $data_json = $json['data'];
+
+        $data['attlog'] = array();
+        foreach ($data_json as $keyJson => $vaDataJson) {
+            array_push($data['attlog'], array(
+                'pin' => $vaDataJson['PIN'],
+                'nik' => $vaDataJson['NIK'],
+                'nama' => $vaDataJson['Name'],
+                'lokasi' => $vaDataJson['Location'],
+                'cloud_id' => $vaDataJson['Cloud ID'],
+                'attlog' => $vaDataJson['Date Time'],
+                'type' => $vaDataJson['Type'],
+                'status_scan' => $vaDataJson['Status'],
+                'verify' => $vaDataJson['Verify']
+            ));
+        }
+
+        //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
+        $data['data_absensi'] = $this->model->ViewBetween('attlog', 'attlog', $x, $y);
+
+        $this->load->view('admin/gaji/tb_absensi', $data);
+        $this->load->view('admin/container/footer_dataTable');
+    }
+
+    public function get_data_absensi_per_hari_sdk_fingerspot()
     {
         $dTgl = $this->input->post('dTgl');
 
@@ -280,9 +367,9 @@ class Cek_absen extends CI_Controller
             'dTgl' => $dTgl
         );
 
-        $response 			= $this->cURL_API('', 'GET', '');
-		$data2 				= json_decode($response, true);
-		$data['attlog']	= $data2['data'];
+        $response             = $this->cURL_API('', 'GET', '');
+        $data2                 = json_decode($response, true);
+        $data['attlog']    = $data2['data'];
 
         //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
         $data['data_absensi'] = $this->model->ViewBetween('attlog', 'attlog', $x, $y);
@@ -348,9 +435,8 @@ class Cek_absen extends CI_Controller
         // print_r($dataJson_view);
         // die;
 
-        $data['cek_tanggal'] = $this->model->ViewWhere('v_tanggal_log_absen','tanggal',$dTgl_cetak);
+        $data['cek_tanggal'] = $this->model->ViewWhere('v_tanggal_log_absen', 'tanggal', $dTgl_cetak);
         $this->load->view('admin/gaji/tb_absensi_import', $data);
         $this->load->view('admin/container/footer_dataTable');
     }
-
 }

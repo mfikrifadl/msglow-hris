@@ -114,8 +114,8 @@ class Model extends CI_Model
 										tb_pegawai A
 										LEFT JOIN log_absen B ON B.pin = A.nik 
 										AND (
-											REPLACE ( B.tanggal, '-', '' ) BETWEEN REPLACE ( '".$WhereValue1."', '-', '' ) 
-										AND REPLACE ( '".$WhereValue2."', '-', '' ))	 
+											REPLACE ( B.tanggal, '-', '' ) BETWEEN REPLACE ( '" . $WhereValue1 . "', '-', '' ) 
+										AND REPLACE ( '" . $WhereValue2 . "', '-', '' ))	 
 									WHERE
 										IFNULL( A.id_status_mengundurkan_diri, 0 ) < 6 OR IFNULL( A.id_status_mengundurkan_diri, 0 ) > 11 
 									GROUP BY
@@ -482,5 +482,27 @@ class Model extends CI_Model
 			// echo "masuk else insert_time_payroll <br />";
 			$this->db->insert_batch('log_absen', $data_log_absen);
 		}
+	}
+
+	public function EventScheduler($data)
+	{
+		// $insert = array();
+		// foreach($data as $index => $value){
+		// 	$insert[$index] = "('$value[pin]', '$value[nik]', '$value[nama]', '$value[lokasi]', '$value[attlog]', '$value[cloud_id]', '$value[type]', '$value[status_scan]', '$value[verify]' )";
+		// }
+		// $arrinsert = join(', ', $insert);
+		//echo $arrinsert;
+		
+		//$this->db->query("DROP EVENT schedule_attendance");
+		//  $this->db->query("CREATE EVENT schedule_attendance ON SCHEDULE 
+		//  					EVERY 1 MINUTE
+		//  					STARTS CURRENT_TIMESTAMP
+		//  					ENDS CURRENT_TIMESTAMP + INTERVAL 1 HOUR
+		//  					DO
+		//  					INSERT INTO attlog (pin, nik, nama, lokasi, attlog, cloud_id, type, status_scan, verify)
+		// 					VALUES $arrinsert 
+		// 					ON DUPLICATE KEY UPDATE attlog = attlog");
+		$Query = $this->db->insert_batch("attlog", $data);
+		return $Query->result_array();
 	}
 }

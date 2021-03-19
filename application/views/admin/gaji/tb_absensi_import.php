@@ -238,7 +238,9 @@
                                 $tot_jam_keterlambatan_shift2 = (string)$hasil_hitungan_shift2;
                                 if (empty($vaPegawai['jam_datang'])) {
                                 } else {
-                                    echo "$tot_jam_keterlambatan_shift2";
+                        ?>
+                                    <b style="color:red;"> <?= $tot_jam_keterlambatan_shift2 ?></b>
+                                <?php
                                 }
                             } else {
                             }
@@ -254,8 +256,8 @@
                                 $tot_jam_keterlambatan = (string)$hasil_hitungan;
                                 if (empty($vaPegawai['jam_datang'])) {
                                 } else {
-                        ?>
-                                    <b class="text-danger"> <?= $tot_jam_keterlambatan ?></b>
+                                ?>
+                                    <b style="color:red;"> <?= $tot_jam_keterlambatan ?></b>
                         <?php
 
                                 }

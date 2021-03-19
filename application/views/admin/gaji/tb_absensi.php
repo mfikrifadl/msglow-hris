@@ -28,7 +28,9 @@
         <tbody>
             <?php $no = 0;
             $kosong = "";
-            foreach ($attlog as $key => $vaArea) {
+            // print_r($attlog);
+            // die;
+            foreach ($attlog as $vaArea) {
 
                 $tgl_attlog = $vaArea['attlog'];
 
