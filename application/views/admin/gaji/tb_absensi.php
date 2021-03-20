@@ -65,12 +65,13 @@
             } ?>
         </tbody>
     </table>
+    
     <?php if ($kosong != "ada") {
     } else {
         date_default_timezone_set("Asia/Jakarta");
         $date = date("Y-m-d");
         if ($this->session->userdata('level') == 3) {
-            if ($dTgl == $date) {
+            if ($dTgl > $date) {
             } else {
     ?>
                 <div class='row'>

@@ -236,7 +236,7 @@ class Cek_absen extends CI_Controller
         }
 
         $this->AbsensiModel->insert_data_log_absen($data_log_absen);
-        redirect(site_url('gaji/absensi_pegawai/'));
+        //redirect(site_url('gaji/absensi_pegawai/'));
     }
 
     public function get_data_absensi()

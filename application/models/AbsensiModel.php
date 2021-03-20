@@ -45,34 +45,37 @@ class AbsensiModel extends CI_Model
 			$tgl_attlog = $a_attlog[0];
 			$waktu_attlog = $a_attlog[1];
 
-			$cView = $this->db->query("SELECT * FROM log_absen WHERE tanggal = '" . $tgl_attlog . "' " );
-			if ($cView->num_rows() > 0) {
+			//$cView = $this->db->query("SELECT * FROM log_absen WHERE tanggal = '" . $tgl_attlog . "' " );
+			//if ($cView->num_rows() > 0) {
 				//echo "tidak masuk database";
-			} else {
+			//} else {
 				//echo "masuk database";
+				
+				
 				$this->db->insert_on_duplicate_update_batch('log_absen', $data_log_absen);
-
+				
 				$dataAbsen = $this->model->ViewAbsensiPerHari($tgl_attlog);
 
 				$t_newId = date("YmdHis");
 				$no = 1;
-				$log_absen_not_recorded = array();
+				// $log_absen_not_recorded = array();
 				foreach($dataAbsen as $row){
 					if(empty($row['id']) && empty($row['tanggal'])){
 						$newId = $t_newId."-".$no;
 
-						array_push($log_absen_not_recorded, array(
+						$log_absen_not_recorded = array(
 							'id'    => $newId,
 							'pin'	=> $row['nik'],
 							'tanggal' => $tgl_attlog
-						));
-						
+						);
+						$this->model->Insert('log_absen', $log_absen_not_recorded);
 						$no++;
+						
 					}else{
 						//echo "sudah ada <br />";
 					}
-				}
-				$this->db->insert_on_duplicate_update_batch('log_absen', $log_absen_not_recorded);				
+			//	}
+				// $this->db->insert_on_duplicate_update_batch('log_absen', $log_absen_not_recorded);				
 			}
 		}
 	}
