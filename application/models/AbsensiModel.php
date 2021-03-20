@@ -50,7 +50,7 @@ class AbsensiModel extends CI_Model
 				//echo "tidak masuk database";
 			} else {
 				//echo "masuk database";
-				$this->db->insert_batch('log_absen', $data_log_absen);
+				$this->db->insert_on_duplicate_update_batch('log_absen', $data_log_absen);
 
 				$dataAbsen = $this->model->ViewAbsensiPerHari($tgl_attlog);
 
@@ -72,7 +72,7 @@ class AbsensiModel extends CI_Model
 						//echo "sudah ada <br />";
 					}
 				}
-				$this->db->insert_batch('log_absen', $log_absen_not_recorded);				
+				$this->db->insert_on_duplicate_update_batch('log_absen', $log_absen_not_recorded);				
 			}
 		}
 	}
