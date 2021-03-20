@@ -74,9 +74,13 @@
             } else {
     ?>
                 <div class='row'>
+                    <div class='col-sm-12'>
+                        <div id="loading"></div>
+                    </div>
+
                     <div class='col-sm-6 text-right'>
-                        <!-- <button class='btn btn-success' onclick="return run();" type='button'>Import</button> -->
-                        <button class='btn btn-success' name="submit" type='submit'>Import</button>
+                        <button class='btn btn-success' id="button_import" onclick="return run();" type='button'>Import</button>
+                        <!-- <button class='btn btn-success' name="submit" type='submit'>Import</button> -->
                     </div>
                     <div class='col-sm-6 text-left'>
                         <a class='btn btn-danger' href="<?= base_url('cek_absen') ?>">Cancel</a>

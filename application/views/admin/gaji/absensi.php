@@ -469,7 +469,7 @@ if ($action == "edit") {
           $('#dTgl').focus()
           $('#loading').html("")
 
-          //window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
+          window.location.href = "<?= site_url('gaji/absensi_pegawai') ?>";
         }
       });
     }
