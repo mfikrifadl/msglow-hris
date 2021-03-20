@@ -196,20 +196,20 @@
                             label: 'Pegawai MS GlOW Malang ',
                             data: [<?= $jml_peg_kontrak ?>, <?= $jml_peg_eksternal ?>, <?= $jml_peg_phl ?>],
                             backgroundColor: [
-                              'rgba(255, 99, 132, 0.2)',
-                              'rgba(54, 162, 235, 0.2)',
-                              'rgba(255, 206, 86, 0.2)',
-                              'rgba(75, 192, 192, 0.2)',
-                              'rgba(153, 102, 255, 0.2)',
-                              'rgba(255, 159, 64, 0.2)'
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 206, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(153, 102, 255)',
+                              'rgb(255, 159, 64)'
                             ],
                             borderColor: [
-                              'rgba(255,99,132,1)',
-                              'rgba(54, 162, 235, 1)',
-                              'rgba(255, 206, 86, 1)',
-                              'rgba(75, 192, 192, 1)',
-                              'rgba(153, 102, 255, 1)',
-                              'rgba(255, 159, 64, 1)'
+                              'rgb(255,99,132,1)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 206, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(153, 102, 255)',
+                              'rgb(255, 159, 64)'
                             ],
                             borderWidth: 1
                           }]
@@ -218,11 +218,7 @@
                         // Configuration options go here
                         options: {
                           scales: {
-                            yAxes: [{
-                              ticks: {
-                                beginAtZero: true
-                              }
-                            }]
+                            
                           }
                         }
                       });
@@ -300,20 +296,20 @@
                             label: 'Klasifikasi Pegawai Chart ',
                             data: [<?= $jml_peg_pria ?>, <?= $jml_peg_wanita ?>],
                             backgroundColor: [
-                              'rgba(255, 99, 132, 0.2)',
-                              'rgba(54, 162, 235, 0.2)',
-                              'rgba(255, 206, 86, 0.2)',
-                              'rgba(75, 192, 192, 0.2)',
-                              'rgba(153, 102, 255, 0.2)',
-                              'rgba(255, 159, 64, 0.2)'
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 206, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(153, 102, 255)',
+                              'rgb(255, 159, 64)'
                             ],
                             borderColor: [
-                              'rgba(255,99,132,1)',
-                              'rgba(54, 162, 235, 1)',
-                              'rgba(255, 206, 86, 1)',
-                              'rgba(75, 192, 192, 1)',
-                              'rgba(153, 102, 255, 1)',
-                              'rgba(255, 159, 64, 1)'
+                              'rgb(255,99,132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 206, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(153, 102, 255)',
+                              'rgb(255, 159, 64)'
                             ],
                             borderWidth: 1
                           }]
@@ -322,11 +318,7 @@
                         // Configuration options go here
                         options: {
                           scales: {
-                            yAxes: [{
-                              ticks: {
-                                beginAtZero: true
-                              }
-                            }]
+                            
                           }
                         }
                       });
@@ -428,20 +420,20 @@
                             label: 'Usia Pegawai MS GLOW Malang Chart ',
                             data: [<?= $jml_usia_under_20 ?>, <?= $jml_usia_antara_20_30 ?>, <?= $jml_usia_antara_31_40 ?>, <?= $jml_usia_antara_41_50 ?>, <?= $jml_usia_diatas_50 ?>],
                             backgroundColor: [
-                              'rgba(255, 99, 132, 0.2)',
-                              'rgba(54, 162, 235, 0.2)',
-                              'rgba(255, 206, 86, 0.2)',
-                              'rgba(75, 192, 192, 0.2)',
-                              'rgba(153, 102, 255, 0.2)',
-                              'rgba(255, 159, 64, 0.2)'
+                              'rgb(255, 99, 132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 206, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(153, 102, 255)',
+                              'rgb(255, 159, 64)'
                             ],
                             borderColor: [
-                              'rgba(255,99,132,1)',
-                              'rgba(54, 162, 235, 1)',
-                              'rgba(255, 206, 86, 1)',
-                              'rgba(75, 192, 192, 1)',
-                              'rgba(153, 102, 255, 1)',
-                              'rgba(255, 159, 64, 1)'
+                              'rgb(255,99,132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 206, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(153, 102, 255)',
+                              'rgb(255, 159, 64)'
                             ],
                             borderWidth: 1
                           }]
@@ -633,20 +625,15 @@
                             label: 'Overtime Mingguan ',
                             data: ['<?= $tot_peg_lembur6 ?>', '<?= $tot_peg_lembur5 ?>', '<?= $tot_peg_lembur4 ?>', '<?= $tot_peg_lembur3 ?>', '<?= $tot_peg_lembur2 ?>', '<?= $tot_peg_lembur1 ?>'],
                             backgroundColor: [
-                              'rgba(255, 99, 132, 0.2)',
-                              'rgba(54, 162, 235, 0.2)',
-                              'rgba(255, 206, 86, 0.2)',
-                              'rgba(75, 192, 192, 0.2)',
-                              'rgba(153, 102, 255, 0.2)',
-                              'rgba(255, 159, 64, 0.2)'
+                              'rgb(255, 99, 132)'
                             ],
                             borderColor: [
-                              'rgba(255,99,132,1)',
-                              'rgba(54, 162, 235, 1)',
-                              'rgba(255, 206, 86, 1)',
-                              'rgba(75, 192, 192, 1)',
-                              'rgba(153, 102, 255, 1)',
-                              'rgba(255, 159, 64, 1)'
+                              'rgb(255,99,132)',
+                              'rgb(54, 162, 235)',
+                              'rgb(255, 206, 86)',
+                              'rgb(75, 192, 192)',
+                              'rgb(153, 102, 255)',
+                              'rgb(255, 159, 64)'
                             ],
                             borderWidth: 1
                           }]
