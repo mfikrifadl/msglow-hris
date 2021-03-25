@@ -160,6 +160,91 @@ if ($action == "edit") {
         </div>
       </div>
 
+      <!-- Modal -->
+      <div id="modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div style="padding-left: 480px; padding-top: 10px; float: right; width: 10%;">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div>
+              <div style="padding-right: 30px; padding-left: 210px; padding-top: 30px;float: center; width: 30%;">
+                <img src="<?= base_url() ?>assets2/media/error/envelope-error.svg" width="70">
+              </div>
+              <div style="padding-right: 30px; padding-left: 130px; float: center; width: 100%;">
+                <p>
+                <h3 style="color:#FF656E">NIK telah digunakan</h3>
+                </p>
+              </div>
+              <div style="padding-right: 30px; padding-left: 50px; padding-top: 10px; float: center; width: 100%;">
+                <p class="text-muted para-desc mx-auto mb-1">NIK yang telah Anda masukkan telah terdaftar pada sistem.</p>
+              </div>
+              <div style="padding-right: 30px; padding-left: 150px; padding-bottom: 30px; float: center; width: 100%;">
+                <p class="text-muted para-desc mx-auto mb-1">Mohon gunakan NIK yang lain.</p>
+              </div>
+            </div>
+            <div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <?php
+
+      if ($action == "error") {
+        if ($error == "NIK Sudah Terdaftar") {
+      ?>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+          <script src="<?= base_url() ?>assets2/plugins/general/bootstrap/dist/js/bootstrap.min.js"></script>
+          <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+          <script>
+            $('#modal').modal('show');
+          </script>
+          <script>
+            $('#modal').on('shown.bs.modal', function() {
+              $('#myInput').focus()
+            })
+            $('#modal').on('hidden.bs.modal', function() {
+              document.location.reload();
+              history.go(-1);
+            })
+          </script>
+          <!-- <div class="alert alert-danger fade show" role="alert">
+                                    <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                    <div class="alert-text">NIK Sudah Terdaftar !!!</div>
+                                    <div class="alert-close">
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true"><i class="la la-close"></i></span>
+                                      </button>
+                                    </div>
+                                  </div> -->
+      <?php
+        } else {
+        }
+      } else {
+      }
+      ?>
+
       <div class="row">
         <div class="col-12">
 
@@ -1114,28 +1199,6 @@ if ($action == "edit") {
 
                           <div class="col-xl-4 col-lg-4 order-lg-1 order-xl-1">
                             <div class="kt-portlet kt-portlet--height-fluid kt-iconbox">
-
-                              <?php
-
-                              if ($action == "error") {
-                                if ($error == "NIK Sudah Terdaftar") {
-                              ?>
-                                  <div class="alert alert-danger fade show" role="alert">
-                                    <div class="alert-icon"><i class="flaticon-warning"></i></div>
-                                    <div class="alert-text">NIK Sudah Terdaftar !!!</div>
-                                    <div class="alert-close">
-                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true"><i class="la la-close"></i></span>
-                                      </button>
-                                    </div>
-                                  </div>
-
-                              <?php
-                                } else {
-                                }
-                              } else {
-                              }
-                              ?>
 
                               <div class="form-group">
                                 <label>Area Kerja</label>
