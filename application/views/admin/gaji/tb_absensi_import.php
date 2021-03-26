@@ -123,7 +123,15 @@
                     ?>
                     <td><?= $vaPegawai['tanggal'] ?></td>
                     <td><?= $vaPegawai['jam_datang'] ?></td>
-                    <td><?= $vaPegawai['jam_pulang'] ?></td>
+                    <td>
+                        <?php
+                        if ($vaPegawai['jam_datang'] == $vaPegawai['jam_pulang']) {
+                        } else {
+                            echo $vaPegawai['jam_pulang'];
+                        }
+                        ?>
+                        <!-- <?= $vaPegawai['jam_pulang'] ?> -->
+                    </td>
                     <!-- <td> -->
                     <?php
                     //Menghitung total jam kerja
@@ -227,14 +235,16 @@
                         <?php
                         //Menghitung Keterlambatan kerja
                         if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
-                            $jam_shift_2 = "12:10:59";
+                            // $jam_shift_2 = "12:10:59";
+                            $jam_shift_2 = "12:10";
                             $t_jam_shift_2 = new DateTime($jam_shift_2);
 
                             $set_jam_datang_shift2 = $jam_datang;
 
                             if ($set_jam_datang_shift2 > $t_jam_shift_2) {
                                 $hit_jam_masuk_kerja_shift2 =  $set_jam_datang_shift2->diff($t_jam_shift_2);
-                                $hasil_hitungan_shift2 = $hit_jam_masuk_kerja_shift2->format('%H:%I:%S');
+                                //$hasil_hitungan_shift2 = $hit_jam_masuk_kerja_shift2->format('%H:%I:%S');
+                                $hasil_hitungan_shift2 = $hit_jam_masuk_kerja_shift2->format('%H:%I');
                                 $tot_jam_keterlambatan_shift2 = (string)$hasil_hitungan_shift2;
                                 if (empty($vaPegawai['jam_datang'])) {
                                 } else {
@@ -245,14 +255,16 @@
                             } else {
                             }
                         } else {
-                            $set_jam_mulai = "08:10:59";
+                            // $set_jam_mulai = "08:10:59";
+                            $set_jam_mulai = "08:10";
                             $t_jam_mulai = new DateTime($set_jam_mulai);
 
                             $set_jam_datang_pegawai = $jam_datang;
 
                             if ($set_jam_datang_pegawai > $t_jam_mulai) {
                                 $hit_jam_masuk_kerja =  $set_jam_datang_pegawai->diff($t_jam_mulai);
-                                $hasil_hitungan = $hit_jam_masuk_kerja->format('%H:%I:%S');
+                                //  
+                                $hasil_hitungan = $hit_jam_masuk_kerja->format('%H:%I');
                                 $tot_jam_keterlambatan = (string)$hasil_hitungan;
                                 if (empty($vaPegawai['jam_datang'])) {
                                 } else {
@@ -277,16 +289,19 @@
                         $tot_jam_lembur_shift2 = "";
                         $tot_jam_lembur = "";
                         if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
-                            $set_jam_lembur_shift2 = "21:49:59";
+                            // $set_jam_lembur_shift2 = "21:49:59";
+                            $set_jam_lembur_shift2 = "21:49";
                             $t_set_jam_lembur_shift2 = new DateTime($set_jam_lembur_shift2);
 
-                            $set_jam_pulang_default_shift2 = "21:00:00";
+                            // $set_jam_pulang_default_shift2 = "21:00:00";
+                            $set_jam_pulang_default_shift2 = "21:00";
                             $t_set_jam_pulang_default_shift2 = new DateTime($set_jam_pulang_default_shift2);
 
 
                             if ($jam_pulang > $t_set_jam_lembur_shift2) {
                                 $hit_jam_lembur_shift2 =  $t_set_jam_pulang_default_shift2->diff($jam_pulang);
-                                $jumlah2_shift2 = $hit_jam_lembur_shift2->format('%H:%I:%S');
+                                // $jumlah2_shift2 = $hit_jam_lembur_shift2->format('%H:%I:%S');
+                                $jumlah2_shift2 = $hit_jam_lembur_shift2->format('%H:%I');
                                 $tot_jam_lembur_shift2 = (string)$jumlah2_shift2;
                                 if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
                                 } else {
@@ -295,19 +310,18 @@
                             } else {
                             }
                         } else {
-                            $set_jam_lembur = "17:49:59";
+                            // $set_jam_lembur = "17:49:59";
+                            $set_jam_lembur = "17:49";
                             $t_set_jam_lembur = new DateTime($set_jam_lembur);
 
-                            $set_jam_pulang_default = "17:00:00";
+                            // $set_jam_pulang_default = "17:00:00";
+                            $set_jam_pulang_default = "17:00";
                             $t_set_jam_pulang_default = new DateTime($set_jam_pulang_default);
-
-                            $t_jam_pulang = "20:00:00";
-                            $x_jam_pulang = new DateTime($t_jam_pulang);
-
 
                             if ($jam_pulang > $t_set_jam_lembur) {
                                 $hit_jam_lembur =  $t_set_jam_pulang_default->diff($jam_pulang);
-                                $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
+                                // $jumlah2 = $hit_jam_lembur->format('%H:%I:%S');
+                                $jumlah2 = $hit_jam_lembur->format('%H:%I');
                                 $tot_jam_lembur = (string)$jumlah2;
                                 if (empty($vaPegawai['jam_datang']) && empty($vaPegawai['jam_pulang'])) {
                                 } else {
@@ -326,11 +340,12 @@
                         if ($vaPegawai['id_status'] == 3) {
                             if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
                                 $t_tot_jam_lembur = new DateTime($tot_jam_lembur_shift2);
-                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                // $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i');
                                 $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
                                 $jam = $a_jam_pulang_lembur[0];
                                 $menit = $a_jam_pulang_lembur[1];
-                                $detik = $a_jam_pulang_lembur[2];
+                                // $detik = $a_jam_pulang_lembur[2];
 
                                 //echo "$jam-$menit-$detik";
 
@@ -355,11 +370,12 @@
                                 }
                             } else {
                                 $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
-                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                // $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i');
                                 $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
                                 $jam = $a_jam_pulang_lembur[0];
                                 $menit = $a_jam_pulang_lembur[1];
-                                $detik = $a_jam_pulang_lembur[2];
+                                // $detik = $a_jam_pulang_lembur[2];
 
                                 //echo "$jam-$menit-$detik";
 
@@ -386,11 +402,12 @@
                         } elseif ($vaPegawai['id_status'] == 4) {
                             if ($vaPegawai['keterangan_temp'] == "Shift 2" || $vaPegawai['keterangan'] == "Shift 2") {
                                 $t_tot_jam_lembur = new DateTime($tot_jam_lembur_shift2);
-                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                // $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i');
                                 $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
                                 $jam = $a_jam_pulang_lembur[0];
                                 $menit = $a_jam_pulang_lembur[1];
-                                $detik = $a_jam_pulang_lembur[2];
+                                // $detik = $a_jam_pulang_lembur[2];
 
                                 //echo "$jam-$menit-$detik";
 
@@ -415,11 +432,12 @@
                                 }
                             } else {
                                 $t_tot_jam_lembur = new DateTime($tot_jam_lembur);
-                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                // $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i:s');
+                                $f_jam_pulang_lembur = $t_tot_jam_lembur->format('H:i');
                                 $a_jam_pulang_lembur = explode(":", $f_jam_pulang_lembur);
                                 $jam = $a_jam_pulang_lembur[0];
                                 $menit = $a_jam_pulang_lembur[1];
-                                $detik = $a_jam_pulang_lembur[2];
+                                // $detik = $a_jam_pulang_lembur[2];
 
                                 //echo "$jam-$menit-$detik";
 
