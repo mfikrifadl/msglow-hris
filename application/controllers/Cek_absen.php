@@ -146,39 +146,92 @@ class Cek_absen extends CI_Controller
 
         //echo "$dTgl - $dTgl_end <br />";
 
-        //========================OFFICE=============================================================
-        $cloud_id = "C26978429312312E";
+        //========================VARIABLE=============================================================
         $attendance_upload = $dTgl;
         $current_time = date("YmdHis");
         $api_key = "85DGI47CBTMIZY8R";
-        $var = $cloud_id . "" . $attendance_upload . "" . $current_time . "" . $api_key;
-        $auth = md5($var);
-        //echo $auth . "<br />";
-        //echo $current_time;
+        //========================END VARIABLE=============================================================
+        //========================OFFICE=============================================================
+        $cloud_id_office = "C26978429312312E";
+        $var_office = $cloud_id_office . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_office = md5($var_office);
+
+        $t_data_office = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C26978429312312E/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_office . "/" . $current_time);
+        $json[$cloud_id_office] = json_decode($t_data_office, TRUE);
+        //$data_json = $json['data'];
+        //========================END OFFICE=============================================================
+        //========================GUDANG ARAYA=============================================================
+        $cloud_id_araya = "C269248053311630";
+        $var_araya = $cloud_id_araya . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_araya = md5($var_araya);
+
+        $t_data_araya = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C269248053311630/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_araya . "/" . $current_time);
+        $json[$cloud_id_araya] = json_decode($t_data_araya, TRUE);
+        //$data_json = $json['data'];
+        //========================END GUDANG ARAYA=============================================================
+        //========================GUDANG BARANG JADI DAN KEMASAN=============================================================
+        $cloud_id_bk = "C269248053231530";
+        $var_bk = $cloud_id_bk . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_bk = md5($var_bk);
+
+        $t_data_bk = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C269248053231530/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_bk . "/" . $current_time);
+        $json[$cloud_id_bk] = json_decode($t_data_bk, TRUE);
+        //$data_json = $json['data'];
+        //========================END BARANG JADI DAN KEMASAN=============================================================
+        //========================GUDANG TONER=============================================================
+        $cloud_id_tnr = "C2692463DF0D2135";
+        $var_tnr = $cloud_id_tnr . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_tnr = md5($var_tnr);
+
+        $t_data_tnr = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C2692463DF0D2135/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_tnr . "/" . $current_time);
+        $json[$cloud_id_tnr] = json_decode($t_data_tnr, TRUE);
+        //$data_json = $json['data'];
+        //========================END BARANG JADI DAN KEMASAN=============================================================
+        //========================GUDANG TONER=============================================================
+        $cloud_id_wrny = "C2692463DF291C39";
+        $var_wrny = $cloud_id_wrny . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_wrny = md5($var_wrny);
+
+        $t_data_wrny = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C2692463DF291C39/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_wrny . "/" . $current_time);
+        $json[$cloud_id_wrny] = json_decode($t_data_wrny, TRUE);
+        //$data_json = $json['data'];
+        //========================END BARANG JADI DAN KEMASAN=============================================================
 
         $dataAttlogJson = array();
-
-        $t_data = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C26978429312312E/" . $attendance_upload . "/15/date_time/asc/json/" . $auth . "/" . $current_time);
-        $json = json_decode($t_data, TRUE);
-        $data_json = $json['data'];
-
-        foreach ($data_json as $keyJson => $vaDataJson) {
-            array_push($dataAttlogJson, array(
-                'pin' => $vaDataJson['PIN'],
-                'nik' => $vaDataJson['NIK'],
-                'nama' => $vaDataJson['Name'],
-                'lokasi' => $vaDataJson['Location'],
-                'cloud_id' => $vaDataJson['Cloud ID'],
-                'attlog' => $vaDataJson['Date Time'],
-                'type' => $vaDataJson['Type'],
-                'status_scan' => $vaDataJson['Status'],
-                'verify' => $vaDataJson['Verify']
-            ));
+        foreach($json as $key => $value){
+       
+            foreach($value['data'] as $index => $vaDataJson){
+                $dataAttlogJson[$key.'|'.$index] = array(
+                    'pin' => $vaDataJson['PIN'],
+                    'nik' => $vaDataJson['NIK'],
+                    'nama' => $vaDataJson['Name'],
+                    'lokasi' => $vaDataJson['Location'],
+                    'cloud_id' => $vaDataJson['Cloud ID'],
+                    'attlog' => $vaDataJson['Date Time'],
+                    'type' => $vaDataJson['Type'],
+                    'status_scan' => $vaDataJson['Status'],
+                    'verify' => $vaDataJson['Verify']
+                );
+            }
         }
+
+        //==========================YANG DULU PERNAH ADA===================================
+        // foreach ($data_json as $keyJson => $vaDataJson) {
+        //     array_push($dataAttlogJson, array(
+        //         'pin' => $vaDataJson['PIN'],
+        //         'nik' => $vaDataJson['NIK'],
+        //         'nama' => $vaDataJson['Name'],
+        //         'lokasi' => $vaDataJson['Location'],
+        //         'cloud_id' => $vaDataJson['Cloud ID'],
+        //         'attlog' => $vaDataJson['Date Time'],
+        //         'type' => $vaDataJson['Type'],
+        //         'status_scan' => $vaDataJson['Status'],
+        //         'verify' => $vaDataJson['Verify']
+        //     ));
+        // }
         // $this->model->EventScheduler($dataAttlog);
-        // print_r($data_json);
-        // die;
-        //======================END OFFICE=============================================================
+        //==========================END YANG DULU PERNAH ADA===================================
+        
         //================================= ZAMAN PUSH SERVER ==================================================
         // $data_absensi = $this->model->View('attlog');
         $data_log_absen = array();
@@ -300,15 +353,6 @@ class Cek_absen extends CI_Controller
     public function get_data_absensi_per_hari()
     {
         $dTgl = $this->input->post('dTgl');
-        //==========================VARIABLE URL API SDK==========================================
-        $cloud_id = "C26978429312312E";
-        $attendance_upload = $dTgl;
-        $current_time = date("YmdHis");
-        $api_key = "85DGI47CBTMIZY8R";
-        $var = $cloud_id . "" . $attendance_upload . "" . $current_time . "" . $api_key;
-        $auth = md5($var);
-        //==========================END VARIABLE URL==============================================
-
 
         $time_a = date('H:i:s', mktime(0, 0, 0));
         $time_b = date('H:i:s', mktime(23, 59, 59));
@@ -320,29 +364,77 @@ class Cek_absen extends CI_Controller
         $data = array(
             'dTgl' => $dTgl
         );
-        //============================= ZAMAN PUSH SERVER =====================================
-        // $response             = $this->cURL_API('', 'GET', '');
-        // $data2                 = json_decode($response, true);
-        // $data['attlog']    = $data2['data'];
-        //==============================END ZAMAN PUSH SERVER==================================
-        $t_data = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C26978429312312E/" . $attendance_upload . "/15/date_time/asc/json/" . $auth . "/" . $current_time);
-        $json = json_decode($t_data, TRUE);
-        $data_json = $json['data'];
 
-        $data['attlog'] = array();
-        foreach ($data_json as $keyJson => $vaDataJson) {
-            array_push($data['attlog'], array(
-                'pin' => $vaDataJson['PIN'],
-                'nik' => $vaDataJson['NIK'],
-                'nama' => $vaDataJson['Name'],
-                'lokasi' => $vaDataJson['Location'],
-                'cloud_id' => $vaDataJson['Cloud ID'],
-                'attlog' => $vaDataJson['Date Time'],
-                'type' => $vaDataJson['Type'],
-                'status_scan' => $vaDataJson['Status'],
-                'verify' => $vaDataJson['Verify']
-            ));
+        //========================VARIABLE=============================================================
+        $attendance_upload = $dTgl;
+        $current_time = date("YmdHis");
+        $api_key = "85DGI47CBTMIZY8R";
+        //========================END VARIABLE=============================================================
+        //========================OFFICE=============================================================
+        $cloud_id_office = "C26978429312312E";
+        $var_office = $cloud_id_office . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_office = md5($var_office);
+
+        $t_data_office = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C26978429312312E/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_office . "/" . $current_time);
+        $json[$cloud_id_office] = json_decode($t_data_office, TRUE);
+        //$data_json = $json['data'];
+        //========================END OFFICE=============================================================
+        //========================GUDANG ARAYA=============================================================
+        $cloud_id_araya = "C269248053311630";
+        $var_araya = $cloud_id_araya . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_araya = md5($var_araya);
+
+        $t_data_araya = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C269248053311630/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_araya . "/" . $current_time);
+        $json[$cloud_id_araya] = json_decode($t_data_araya, TRUE);
+        //$data_json = $json['data'];
+        //========================END GUDANG ARAYA=============================================================
+        //========================GUDANG BARANG JADI DAN KEMASAN=============================================================
+        $cloud_id_bk = "C269248053231530";
+        $var_bk = $cloud_id_bk . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_bk = md5($var_bk);
+
+        $t_data_bk = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C269248053231530/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_bk . "/" . $current_time);
+        $json[$cloud_id_bk] = json_decode($t_data_bk, TRUE);
+        //$data_json = $json['data'];
+        //========================END BARANG JADI DAN KEMASAN=============================================================
+        //========================GUDANG TONER=============================================================
+        $cloud_id_tnr = "C2692463DF0D2135";
+        $var_tnr = $cloud_id_tnr . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_tnr = md5($var_tnr);
+
+        $t_data_tnr = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C2692463DF0D2135/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_tnr . "/" . $current_time);
+        $json[$cloud_id_tnr] = json_decode($t_data_tnr, TRUE);
+        //$data_json = $json['data'];
+        //========================END BARANG JADI DAN KEMASAN=============================================================
+        //========================GUDANG TONER=============================================================
+        $cloud_id_wrny = "C2692463DF291C39";
+        $var_wrny = $cloud_id_wrny . "" . $attendance_upload . "" . $current_time . "" . $api_key;
+        $auth_wrny = md5($var_wrny);
+
+        $t_data_wrny = file_get_contents("http://api.fingerspot.io/api/download/attendance_log/C2692463DF291C39/" . $attendance_upload . "/15/date_time/asc/json/" . $auth_wrny . "/" . $current_time);
+        $json[$cloud_id_wrny] = json_decode($t_data_wrny, TRUE);
+        //$data_json = $json['data'];
+        //========================END BARANG JADI DAN KEMASAN=============================================================
+
+        $dataAttlogJson = array();
+        foreach($json as $key => $value){
+       
+            foreach($value['data'] as $index => $vaDataJson){
+                $dataAttlogJson[$key.'|'.$index] = array(
+                    'pin' => $vaDataJson['PIN'],
+                    'nik' => $vaDataJson['NIK'],
+                    'nama' => $vaDataJson['Name'],
+                    'lokasi' => $vaDataJson['Location'],
+                    'cloud_id' => $vaDataJson['Cloud ID'],
+                    'attlog' => $vaDataJson['Date Time'],
+                    'type' => $vaDataJson['Type'],
+                    'status_scan' => $vaDataJson['Status'],
+                    'verify' => $vaDataJson['Verify']
+                );
+            }
         }
+
+        $data['attlog'] = $dataAttlogJson;
 
         //$data['data_absensi'] = $this->model->ViewWhereLikeOr('attlog','attlog',$dTgl,'attlog',$dTgl_end);
         $data['data_absensi'] = $this->model->ViewBetween('attlog', 'attlog', $x, $y);
