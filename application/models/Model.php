@@ -484,6 +484,23 @@ class Model extends CI_Model
 		}
 	}
 
+	public function insert_data_batch($table, $dataValue)
+	{
+		if ($dataValue == null) {
+			// echo "tidak masuk database if insert_time_payroll <br />";
+		} else {
+			// echo "masuk else insert_time_payroll <br />";
+			$this->db->insert_batch($table, $dataValue);
+		}
+	}
+
+	public function Update_tb_absensi($Table, $Where, $WhereValue, $Where2, $WhereValue2, $Value)
+	{
+		$this->db->where($Where, $WhereValue);
+		$this->db->where($Where2, $WhereValue2);
+		$this->db->update($Table, $Value);
+	}
+
 	public function EventScheduler($data)
 	{
 		// $insert = array();

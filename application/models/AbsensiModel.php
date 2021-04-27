@@ -47,39 +47,81 @@ class AbsensiModel extends CI_Model
 
 			//$cView = $this->db->query("SELECT * FROM log_absen WHERE tanggal = '" . $tgl_attlog . "' " );
 			//if ($cView->num_rows() > 0) {
-				//echo "tidak masuk database";
+			//echo "tidak masuk database";
 			//} else {
-				//echo "masuk database";
-				
-				
-				$this->db->insert_on_duplicate_update_batch('log_absen', $data_log_absen);
-				
-				$dataAbsen = $this->model->ViewAbsensiPerHari($tgl_attlog);
+			//echo "masuk database";
 
-				$t_newId = date("YmdHis");
-				$no = 1;
-				// $log_absen_not_recorded = array();
-				foreach($dataAbsen as $row){
-					if(empty($row['id']) && empty($row['tanggal'])){
-						$newId = $t_newId."-".$no;
 
-						$log_absen_not_recorded = array(
-							'id'    => $newId,
-							'pin'	=> $row['nik'],
-							'tanggal' => $tgl_attlog
-						);
-						$this->model->Insert('log_absen', $log_absen_not_recorded);
-						$no++;
-						
-					}else{
-						//echo "sudah ada <br />";
-					}
-			//	}
+			$this->db->insert_on_duplicate_update_batch('log_absen', $data_log_absen);
+
+			$dataAbsen = $this->model->ViewAbsensiPerHari($tgl_attlog);
+
+			$t_newId = date("YmdHis");
+			$no = 1;
+			// $log_absen_not_recorded = array();
+			foreach ($dataAbsen as $row) {
+				if (empty($row['id']) && empty($row['tanggal'])) {
+					$newId = $t_newId . "-" . $no;
+
+					$log_absen_not_recorded = array(
+						'id'    => $newId,
+						'pin'	=> $row['nik'],
+						'tanggal' => $tgl_attlog
+					);
+					$this->model->Insert('log_absen', $log_absen_not_recorded);
+					$no++;
+				} else {
+					//echo "sudah ada <br />";
+				}
+				//	}
 				// $this->db->insert_on_duplicate_update_batch('log_absen', $log_absen_not_recorded);				
 			}
 		}
 	}
-
+ //====================================BELUM SEMPURNA =====================================================
+	public function cekUpadate_tb_absensi($tanggal, $dataRecordAbsen)
+	{
+		$getData_tb_absensi = $this->model->ViewAbsensiPerHari($tanggal);
+		$dataInsert = array();
+		foreach ($getData_tb_absensi as $vaGetData) {
+			$getNik = $vaGetData['nik'];
+			
+			foreach ($dataRecordAbsen as $vaData) {
+				if($vaData['nik'] == $getNik && $vaData['tanggal'] == $tanggal ){
+					$dataUpdate = array(
+						'jam_pulang' => $vaData['jam_pulang']
+					);
+					echo "masuk update";
+					//$this->model->Update_tb_absensi('tb_absensi',$vaData['nik'], $getNik, $vaData['tanggal'], $tanggal, $dataUpdate);
+				}else{
+					array_push($dataInsert, array(
+						'id' => $vaData['id'],
+						'id_temp' => $vaData['id_temp'],
+						'id_pegawai' => $vaData['id_pegawai'],
+						'nik' => $vaData['nik'],
+						'nama' => $vaData['nama'],
+						'id_status' => $vaData['id_status'],
+						'nama_jabatan' => $vaData['nama_jabatan'],
+						'tot_jam_kerja' => $vaData['tot_jam_kerja'],
+						'tot_jam_lembur' => $vaData['tot_jam_lembur'],
+						'keterangan' => $vaData['keterangan'],
+						'keterangan_temp' => $vaData['keterangan_temp'],
+						'keterlambatan' => $vaData['keterlambatan'],
+						'ket_lain' => $vaData['ket_lain'],
+						'ket_lain_temp' => $vaData['ket_lain_temp'],
+						'attlog' => $vaData['attlog'],
+						'tanggal' => $vaData['tanggal'],
+						'jam_datang' => $vaData['jam_datang'],
+						'jam_pulang' => $vaData['jam_pulang'],
+						'waktu' => $vaData['waktu']
+					));
+				}
+			}
+		}
+		$this->model->insert_data_batch('tb_absensi', $dataInsert);
+		
+	}
+//====================================END BELUM SEMPURNA =====================================================
 	public function insert_data_master_pegawai($data_master_pegawai)
 	{
 		if ($data_master_pegawai == null) {

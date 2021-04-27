@@ -1229,7 +1229,7 @@ if ($action == "edit") {
                               </div>
                               <div class="form-group" id="golker">
                                 <label>Golongan Kerja</label>
-                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja" required>
+                                <select class="form-control kt-selectpicker" data-live-search="true" name="cIdKerja">
                                   <option></option>
                                   <?php foreach ($kerja as $key => $vaKerja) { ?>
                                     <option value="<?= $vaKerja['id_kerja'] ?>" <?php if ($vaKerja['id_kerja'] == $cIdKerja) echo "selected"; ?>>

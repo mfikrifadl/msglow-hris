@@ -289,6 +289,13 @@ class Cek_absen extends CI_Controller
         }
 
         $this->AbsensiModel->insert_data_log_absen($data_log_absen);
+        //================================INSERT DATA KE TB ABSENSI========================================
+        // $dataRecordAbsen = $this->model->ViewAbsensiPerHari($dTgl);
+        // $this->model->insert_data_batch('tb_absensi',$dataRecordAbsen);
+        // $cek_update = $this->model->ViewWhere('tb_absensi','tanggal', $dTgl);
+        // $this->AbsensiModel->cekUpadate_tb_absensi($dTgl, $cek_update);
+        // die;
+        //================================END INSERT DATA KE TB ABSENSI========================================
         //redirect(site_url('gaji/absensi_pegawai/'));
     }
 
@@ -495,6 +502,7 @@ class Cek_absen extends CI_Controller
 
         //$data['row'] = $this->model->ViewAbsensiPerHari($dTgl_cetak);
         $dataRecordAbsen = $this->model->ViewAbsensiPerHari($dTgl_cetak);
+        
         $response = array();
         foreach ($dataRecordAbsen as $x) {
 
