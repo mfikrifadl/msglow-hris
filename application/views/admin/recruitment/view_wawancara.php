@@ -340,6 +340,78 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-6 kt-align-center">
+                                        <div class="kt-portlet">
+
+                                            <!--begin::Accordion-->
+
+                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionCL">
+                                                <div class="card">
+                                                    <div class="card-header" id="headingCL">
+                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
+                                                            <strong> Cover Letter </strong>
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapseDataCV" class="collapse show" aria-labelledby="headingCL" data-parent="#accordionCL">
+                                                        <div class="card-body">
+                                                            <!--begin::Form-->
+                                                            <div class="kt-portlet__body">
+                                                                <div class="row">
+                                                                    <?php
+                                                                    if ($row['reg_cover_letter'] != null) { ?>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_cover_letter']  ?>" style="width:100%; border:none;"></iframe>
+                                                                        <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_cv'] . "/" . $row['reg_judul']; 
+                                                                                                                        ?>" style="width:100%; border:none;"></iframe> -->
+                                                                    <?php } else {
+                                                                    }
+                                                                    ?>
+                                                                </div><!-- /.row -->
+                                                            </div>
+                                                            <!--end::Portlet Data Kontak-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Accordion-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 kt-align-center">
+                                        <div class="kt-portlet">
+
+                                            <!--begin::Accordion-->
+
+                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionPortofolio">
+                                                <div class="card">
+                                                    <div class="card-header" id="headingPortofolio">
+                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
+                                                            <strong> Portfolio </strong>
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapseDataCV" class="collapse show" aria-labelledby="headingPortofolio" data-parent="#accordionPortofolio">
+                                                        <div class="card-body">
+                                                            <!--begin::Form-->
+                                                            <div class="kt-portlet__body">
+                                                                <div class="row">
+                                                                    <?php
+                                                                    if ($row['reg_portofolio'] != null) { ?>
+                                                                        <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_portofolio']  ?>" style="width:100%; border:none;"></iframe>
+                                                                        <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_cv'] . "/" . $row['reg_judul']; 
+                                                                                                                        ?>" style="width:100%; border:none;"></iframe> -->
+                                                                    <?php } else {
+                                                                    }
+                                                                    ?>
+                                                                </div><!-- /.row -->
+                                                            </div>
+                                                            <!--end::Portlet Data Kontak-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Accordion-->
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>

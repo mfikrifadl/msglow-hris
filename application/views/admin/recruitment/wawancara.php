@@ -136,15 +136,34 @@ if ($action == "edit") {
             <div class="kt-form__actions">
               <?php
               if ($action == 'edit') {
+                if ($this->session->userdata('level') == 100) {
               ?>
-                <button type="submit" class="btn btn-flat btn-primary">
-                  <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                </button>
-              <?php } else { ?>
-                <button type="button" onclick="return save();" class="btn btn-flat btn-primary">
-                  <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                </button>
-              <?php } ?>
+                  <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+                <?php
+                } else {
+                ?>
+                  <button type="submit" class="btn btn-flat btn-primary">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+                <?php
+                }
+              } else {
+                if ($this->session->userdata('level') == 100) {
+                ?>
+                  <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+                <?php
+                } else {
+                ?>
+                  <button type="button" onclick="return save();" class="btn btn-flat btn-primary">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+              <?php
+                }
+              } ?>
               <!-- <button type="button" onclick="return selesai();" class="btn btn-flat btn-success">
                   <i class="fa fa-arrow-right"></i> Selesai
                 </button> -->
@@ -283,9 +302,21 @@ if ($action == "edit") {
                     </td>
                     <td> <?= ($vaArea['status_email_adm']) ?> </td>
                     <td>
-                      <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/wawancara/' . $vaArea['id_recruitment'] . '') ?>">
-                        <i class="flaticon-mail"></i>
-                      </a>
+                      <?php
+                      if ($this->session->userdata('level') == 100) {
+                      ?>
+                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                          <i class="flaticon-mail"></i>
+                        </a>
+                      <?php
+                      } else {
+                      ?>
+                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/wawancara/' . $vaArea['id_recruitment'] . '') ?>">
+                          <i class="flaticon-mail"></i>
+                        </a>
+                      <?php
+                      }
+                      ?>
                       <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                         <i class="flaticon-edit"></i>
                       </a>
@@ -353,22 +384,49 @@ if ($action == "edit") {
                     <?= ($vaArea['status_email_tidaklolos']) ?>
                   </td>
                   <td>
-                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/wawancara/' . $vaArea['id_recruitment'] . '') ?>">
-                      <i class="flaticon-mail"></i>
-                    </a>
+                    <?php
+                    if ($this->session->userdata('level') == 100) {
+                    ?>
+                      <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                        <i class="flaticon-mail"></i>
+                      </a>
+                    <?php
+                    } else {
+                    ?>
+                      <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/wawancara/' . $vaArea['id_recruitment'] . '') ?>">
+                        <i class="flaticon-mail"></i>
+                      </a>
+                    <?php
+                    }
+                    ?>
                     <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Edit Data" href="<?= site_url('recruitment/wawancara/edit/' . $vaArea['kode_wawancara'] . '') ?>">
                       <i class="flaticon-edit"></i>
                     </a>
                     <a class="btn btn-sm btn-outline-primary btn-elevate btn-icon" title="View Data" href="<?= site_url('recruitment/view_wawancara/' . $vaArea['kode_wawancara'] . '') ?>">
                       <i class="la la-search"></i>
                     </a>
-                    <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaArea['kode_wawancara']) ?>)" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
-                      <i class="flaticon-reply"></i>
-                    </button>
-                    <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                    <?php
+                    if ($this->session->userdata('level') == 100) {
+                    ?>
+                      <button type="button" title="Return Registrant Data" class="btn btn-sm btn-outline-warning btn-elevate btn-icon" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                        <i class="flaticon-reply"></i>
+                      </button>
+                      <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                        <i class="flaticon-delete"></i>
+                      </a>
+                    <?php
+                    } else {
+                    ?>
+                      <button type="button" title="Return Registrant Data" onclick="reborn_data_reg(<?= ($vaArea['kode_wawancara']) ?>)" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
+                        <i class="flaticon-reply"></i>
+                      </button>
+                      <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_act/wawancara/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
-                      <i class="flaticon-delete"></i>
-                    </a>
+                        <i class="flaticon-delete"></i>
+                      </a>
+                    <?php
+                    }
+                    ?>
                   </td>
                 </tr>
               <?php } ?>
@@ -381,7 +439,7 @@ if ($action == "edit") {
 
       <!--end::Portlet-->
     </div>
-  </div> 
+  </div>
 
 </div>
 

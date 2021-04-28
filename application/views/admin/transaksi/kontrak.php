@@ -261,7 +261,18 @@ if ($action == "Update") {
                                 </div>
                             </div> -->
                             <div class="form-group">
-                                <button type="submit" class="btn btn-flat btn-primary"><?= $cValueButton ?></button>
+                                <?php
+                                if ($this->session->userdata('level') == 100) {
+                                ?>
+                                    <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')"><?= $cValueButton ?></button>
+                                <?php
+                                } else {
+                                ?>
+                                    <button type="submit" class="btn btn-flat btn-primary"><?= $cValueButton ?></button>
+                                <?php
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </form>
@@ -292,10 +303,9 @@ if ($action == "Update") {
                             <tbody>
                                 <?php $no = 0;
                                 foreach ($v_kontrak as $key => $vaPeringatan) {
-                                    if($vaPeringatan['is_deleted'] == 1){
-
-                                    }else{
-                                        ?>
+                                    if ($vaPeringatan['is_deleted'] == 1) {
+                                    } else {
+                                ?>
                                         <tr>
                                             <td><?= ++$no; ?></td>
                                             <td><?= $vaPeringatan['tanggal_masuk_kerja'] ?></td>
@@ -314,9 +324,9 @@ if ($action == "Update") {
                                                 </a> -->
                                             </td>
                                         </tr>
-                                    <?php
+                                <?php
                                     }
-                                 } ?>
+                                } ?>
                             </tbody>
                         </table>
                     </div>

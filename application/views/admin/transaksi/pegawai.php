@@ -1149,6 +1149,12 @@ if ($action == "edit") {
                                     <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
                                   </button>
                                 </div>
+                              <?php } elseif ($action != 'edit' && $this->session->userdata('level') == 100) { ?>
+                                <div class="col-sm-12">
+                                  <button type="button" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-flat btn-primary">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                  </button>
+                                </div>
                               <?php } else { ?>
                                 <div class="col-sm-12">
                                   <button type="submit" class="btn btn-flat btn-primary">
@@ -1922,9 +1928,22 @@ if ($action == "edit") {
                               <br />
                               <br />
                               <div class="col-sm-12">
-                                <button type="submit" class="btn btn-flat btn-primary">
-                                  <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                                </button>
+                                <?php
+                                if ($this->session->userdata('level') == 100) {
+                                ?>
+                                  <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                  </button>
+                                <?php
+                                } else {
+                                ?>
+                                  <button type="submit" class="btn btn-flat btn-primary">
+                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                  </button>
+                                <?php
+                                }
+                                ?>
+
                               </div>
 
                             </div>

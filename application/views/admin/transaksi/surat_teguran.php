@@ -384,9 +384,22 @@ if ($action == "edit") {
                                                         <input type="hidden" name="idSurat" value="1">
 
                                                         <div class="form-group">
-                                                            <button type="submit" class="btn btn-flat btn-danger">
-                                                                <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                                                            </button>
+                                                            <?php
+                                                            if ($this->session->userdata('level') == 100) {
+                                                            ?>
+                                                                <button type="button" class="btn btn-flat btn-danger" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                                                </button>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <button type="submit" class="btn btn-flat btn-danger">
+                                                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                                                </button>
+                                                            <?php
+                                                            }
+                                                            ?>
+
                                                         </div>
 
 
@@ -463,7 +476,7 @@ if ($action == "edit") {
                                                                 <a class="btn-link" title="Edit Data" href="<?= site_url('hrd/surat_teguran/edit/' . $vaPeringatan['id'] . '') ?>">
                                                                     <i class="fa fa-pen text-info"></i>
                                                                 </a>
-                                                                
+
                                                                 <!-- <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                                                     { window.location.href='<?= site_url('surat_act/surat_teguran/Delete/' . $vaPeringatan['id'] . '') ?>'}">
                                                                     <i class="fa fa-trash text-danger"></i>

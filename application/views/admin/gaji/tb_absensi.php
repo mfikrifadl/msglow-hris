@@ -65,12 +65,12 @@
             } ?>
         </tbody>
     </table>
-    
+
     <?php if ($kosong != "ada") {
     } else {
         date_default_timezone_set("Asia/Jakarta");
         $date = date("Y-m-d");
-        if ($this->session->userdata('level') == 3) {
+        if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 100 || $this->session->userdata('level') == 1) {
             if ($dTgl > $date) {
             } else {
     ?>
@@ -80,8 +80,19 @@
                     </div>
 
                     <div class='col-sm-6 text-right'>
-                        <button class='btn btn-success' id="button_import" onclick="return run();" type='button'>Import</button>
-                        <!-- <button class='btn btn-success' name="submit" type='submit'>Import</button> -->
+                        <?php
+                        if ($this->session->userdata('level') == 100 || $this->session->userdata('level') == 1) {
+                        ?>
+                            <button class='btn btn-success' type='button' onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">Import</button>
+                            <!-- <button class='btn btn-success' name="submit" type='submit'>Import</button> -->
+                        <?php
+                        } else {
+                        ?>
+                            <button class='btn btn-success' id="button_import" onclick="return run();" type='button'>Import</button>
+                            <!-- <button class='btn btn-success' name="submit" type='submit'>Import</button> -->
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class='col-sm-6 text-left'>
                         <a class='btn btn-danger' href="<?= base_url('cek_absen') ?>">Cancel</a>

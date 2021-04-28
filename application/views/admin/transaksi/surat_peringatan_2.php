@@ -289,9 +289,22 @@ if ($action == "edit") {
               </div>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-flat btn-danger">
-                <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-              </button>
+              <?php
+              if ($this->session->userdata('level') == 100) {
+              ?>
+                <button type="button" class="btn btn-flat btn-danger" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                  <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                </button>
+              <?php
+              } else {
+              ?>
+                <button type="submit" class="btn btn-flat btn-danger">
+                  <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                </button>
+              <?php
+              }
+              ?>
+
             </div>
           </div>
         </div>

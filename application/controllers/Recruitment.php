@@ -252,7 +252,7 @@ class Recruitment extends CI_Controller
 		$data['nilai_test'] = 'nilai_psiko_test';
 		$data['date'] = 'tgl_psiko_test';
 
-		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 100) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos'])->result_array();
 		} else {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
@@ -293,7 +293,7 @@ class Recruitment extends CI_Controller
 		$data['nilai_test'] = 'nilai_uji_kompetensi';
 		$data['date'] = 'tgl_uji_kompetensi';
 
-		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 100) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos'])->result_array();
 		} else {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
@@ -333,7 +333,7 @@ class Recruitment extends CI_Controller
 		$data['controller_name']   = 'interview_user_1';
 		$data['date'] = 'tgl_interview_user_1';
 
-		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 4) {
+		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 4 || $this->session->userdata('level') == 100) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos'])->result_array();
 		} else {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
@@ -372,7 +372,7 @@ class Recruitment extends CI_Controller
 		$data['controller_name']   = 'interview_user_2';
 		$data['nilai_test']   = 'nilai_interview_user_2';
 		$data['date'] = 'tgl_interview_user_2';
-		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 4) {
+		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 4 || $this->session->userdata('level') == 100) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos'])->result_array();
 		} else {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
@@ -411,7 +411,7 @@ class Recruitment extends CI_Controller
 		$data['nilai_test']   = 'nilai_interview_hrga';
 		$data['date'] = 'tgl_interview_hrga';
 
-		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 100) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos'])->result_array();
 		} else {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();
@@ -452,7 +452,7 @@ class Recruitment extends CI_Controller
 		$data['hasil_tes_kesehatan'] = $this->model->ViewWhere('recruitment', 'id_recruitment', $Id);
 		$data['date'] = 'tgl_tes_kesehatan';
 
-		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+		if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 100) {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos', 'interview_hrga' => 'lolos'])->result_array();
 		} else {
 			$data['row']	= $this->db->get_where('recruitment', ['recruitment' => 'lolos', 'psiko_test' => 'lolos', 'uji_kompetensi' => 'lolos', 'interview_user_1' => 'lolos', 'interview_user_2' => 'lolos', 'interview_hrga' => 'lolos', 'level_id' => $this->session->userdata('level')])->result_array();

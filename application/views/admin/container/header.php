@@ -136,7 +136,7 @@ if ($this->session->userdata('id') == '') {
     return $cReturn;
   }
   ?>
-  
+
 </head>
 
 <!-- <body class="skin-red layout-top-nav" onload="onLoad();">
@@ -202,6 +202,8 @@ if ($this->session->userdata('id') == '') {
             $cMenu  = 'menu_kepegawaian.php';
           } elseif ($this->session->userdata('level') == 4) {
             $cMenu  = 'menu_manager.php';
+          } elseif ($this->session->userdata('level') == 100) {
+            $cMenu  = 'menu_demo.php';
           } else {
             $cMenu  = 'login.php';
           }

@@ -253,9 +253,22 @@ if ($action == "edit") {
                                             <!-- /.col-form -->
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-flat btn-primary">
-                                                        <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                                                    </button>
+                                                    <?php
+                                                    if ($this->session->userdata('level') == 100) {
+                                                    ?>
+                                                        <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                            <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                                        </button>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <button type="submit" class="btn btn-flat btn-primary">
+                                                            <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                                        </button>
+                                                    <?php
+                                                    }
+                                                    ?>
+
                                                 </div>
                                             </div>
                                         </div><!-- /.row -->
@@ -345,41 +358,91 @@ if ($action == "edit") {
                                                             <td class="text-center">
                                                                 <div class="btn-group" role="group" aria-label="First group">
                                                                     <?php
-                                                                    if ($this->session->userdata('level') == 1) {
+                                                                    if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) {
                                                                         if ($vaArea['status_recruitment'] == 'PASSED') {
+                                                                            if ($this->session->userdata('level') == 100) {
                                                                     ?>
-                                                                            <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" href="<?= site_url('transaksi_act/form_pengajuan/delete/' . $vaArea['id_form'] . '') ?>">
-                                                                                <i class="flaticon-delete"></i>
-                                                                            </a>
+                                                                                <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                                                    <i class="flaticon-delete"></i>
+                                                                                </a>
+                                                                            <?php
+                                                                            } else {
+                                                                            ?>
+                                                                                <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" href="<?= site_url('transaksi_act/form_pengajuan/delete/' . $vaArea['id_form'] . '') ?>">
+                                                                                    <i class="flaticon-delete"></i>
+                                                                                </a>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+
                                                                             <?php
                                                                         } else {
-
                                                                             if ($vaArea['status_pengajuan'] == 'approve') {
                                                                             } else {
+                                                                                if ($this->session->userdata('level') == 100) {
                                                                             ?>
-                                                                                <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
-                                                                                    <i class="flaticon2-check-mark"></i>
-                                                                                </a>
+                                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                                                        <i class="flaticon2-check-mark"></i>
+                                                                                    </a>
+                                                                                <?php
+                                                                                } else {
+                                                                                ?>
+                                                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon" title="Approve" href="<?= site_url('transaksi_act/form_pengajuan/approve/' . $vaArea['id_form'] . '') ?>">
+                                                                                        <i class="flaticon2-check-mark"></i>
+                                                                                    </a>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
 
-                                                                            <?php
+
+                                                                                <?php
                                                                             }
-                                                                            if ($vaArea['level_admin'] == $this->session->userdata('nama')) {
-                                                                            ?>
-                                                                                <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
-                                                                                    <i class="flaticon-edit"></i>
-                                                                                </a>
+                                                                            if ($vaArea['level_admin'] == $this->session->userdata('nama') || $this->session->userdata('level') == 100) {
+                                                                                if ($this->session->userdata('level') == 100) {
+                                                                                ?>
+                                                                                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                                        <i class="flaticon-edit"></i>
+                                                                                    </a>
+                                                                                <?php
+                                                                                } else {
+                                                                                ?>
+                                                                                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
+                                                                                        <i class="flaticon-edit"></i>
+                                                                                    </a>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+
                                                                             <?php
                                                                             } else {
                                                                             }
                                                                             ?>
 
-                                                                            <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Reject" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
-                                                                                <i class="flaticon2-delete"></i>
-                                                                            </a>
+                                                                            <?php
+                                                                            if ($this->session->userdata('level') == 100) {
+                                                                            ?>
+                                                                                <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Reject" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                                                    <i class="flaticon2-delete"></i>
+                                                                                </a>
 
-                                                                            <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" href="<?= site_url('transaksi_act/form_pengajuan/delete/' . $vaArea['id_form'] . '') ?>">
-                                                                                <i class="flaticon-delete"></i>
-                                                                            </a>
+                                                                                <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                                                    <i class="flaticon-delete"></i>
+                                                                                </a>
+                                                                            <?php
+                                                                            } else {
+                                                                            ?>
+                                                                                <a class="btn btn-sm btn-outline-warning btn-elevate btn-icon" title="Reject" href="<?= site_url('transaksi_act/form_pengajuan/unapprove/' . $vaArea['id_form'] . '') ?>">
+                                                                                    <i class="flaticon2-delete"></i>
+                                                                                </a>
+
+                                                                                <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" href="<?= site_url('transaksi_act/form_pengajuan/delete/' . $vaArea['id_form'] . '') ?>">
+                                                                                    <i class="flaticon-delete"></i>
+                                                                                </a>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+
+
 
                                                                             <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Edit Data" href="<?= site_url('transaksi/pengajuan_form_karyawan/edit/' . $vaArea['id_form'] . '') ?>">
                                                                             <i class="flaticon-edit"></i>

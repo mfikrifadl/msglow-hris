@@ -249,9 +249,22 @@ else {
                             <input type="hidden" name="idSurat" value="2">
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-flat btn-danger">
-                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                                </button>
+                                <?php
+                                if ($this->session->userdata('level') == 100) {
+                                ?>
+                                    <button type="button" class="btn btn-flat btn-danger" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                        <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                    </button>
+                                <?php
+                                } else {
+                                ?>
+                                    <button type="submit" class="btn btn-flat btn-danger">
+                                        <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                    </button>
+                                <?php
+                                }
+                                ?>
+
                             </div>
 
                         <?php
@@ -312,10 +325,23 @@ else {
                                             <i class="fa fa-edit text-info"></i>
                                         </a>
                                         |
-                                        <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
-                                { window.location.href='<?= site_url('surat_act/teguran_lisan/Delete/' . $vaPeringatan['id'] . '') ?>'}">
-                                            <i class="fa fa-trash text-danger"></i>
-                                        </a>
+                                        <?php
+                                        if ($this->session->userdata('level') == 100) {
+                                        ?>
+                                            <a class="btn-link" title="Hapus Data" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                                        { window.location.href='<?= site_url('surat_act/teguran_lisan/Delete/' . $vaPeringatan['id'] . '') ?>'}">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+                                        <?php
+                                        }
+                                        ?>
+
                                     </td>
                                 </tr>
                             <?php } ?>

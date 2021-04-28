@@ -1196,6 +1196,7 @@ class Transaksi_act extends CI_Controller
 				$jobDesc = $row['job_desc'];
 			}
 
+
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
 				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/',

@@ -190,9 +190,22 @@ if ($action == "edit") {
 
             <div class="row">
               <div class="col-sm-12">
-                <button type="submit" class="btn btn-flat btn-primary">
-                  <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                </button>
+                <?php
+                if ($this->session->userdata('level') == 100) {
+                ?>
+                  <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+                <?php
+                } else {
+                ?>
+                  <button type="submit" class="btn btn-flat btn-primary">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+                <?php
+                }
+                ?>
+
               </div>
             </div>
           </form>

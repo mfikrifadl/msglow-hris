@@ -9,7 +9,7 @@
         </div>
     </div>
     <?php
-    if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+    if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 100) {
     ?>
         <div class="row">
             <div class="col-12">
@@ -94,18 +94,49 @@
                                                 <?php
                                                 } elseif ($vaArea['status'] == "lolos") {
                                                 ?>
-                                                    <a href="<?= site_url('recruitment_phl_act/to_pegawai_phl/' . $vaArea['id_recruitment_phl'] . '') ?>">
-                                                        <button class="btn btn-info btn-sm" style="font-size: 10px;"> <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai </button>
-                                                    </a>
+                                                    <?php
+                                                    if ($this->session->userdata('level') == 100) {
+                                                    ?>
+
+                                                        <button class="btn btn-info btn-sm" style="font-size: 10px;" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                            <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai
+                                                        </button>
+
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a href="<?= site_url('recruitment_phl_act/to_pegawai_phl/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                                            <button class="btn btn-info btn-sm" style="font-size: 10px;"> <i class="fa fa-sign-in-alt"></i> Masukkan Ke Data Pegawai </button>
+                                                        </a>
+                                                    <?php
+                                                    }
+                                                    ?>
+
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_phl_act/aksi/lolos/' . $vaArea['id_recruitment_phl'] . '') ?>">
-                                                        <i class="flaticon2-check-mark"></i>
-                                                    </a>
-                                                    <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment_phl'] ?>">
-                                                        <i class="flaticon2-cross"></i>
-                                                    </a>
+                                                    <?php
+                                                    if ($this->session->userdata('level') == 100) {
+                                                    ?>
+                                                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" href="#">
+                                                            <i class="flaticon2-check-mark"></i>
+                                                        </a>
+                                                        <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                                            <i class="flaticon2-cross"></i>
+                                                        </a>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_phl_act/aksi/lolos/' . $vaArea['id_recruitment_phl'] . '') ?>">
+                                                            <i class="flaticon2-check-mark"></i>
+                                                        </a>
+                                                        <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment_phl'] ?>">
+                                                            <i class="flaticon2-cross"></i>
+                                                        </a>
+                                                    <?php
+                                                    }
+                                                    ?>
+
 
                                                     <!-- Modal edit category -->
                                                     <div id="id-<?= $vaArea['id_recruitment_phl'] ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alasanTidakLolos" aria-hidden="true">

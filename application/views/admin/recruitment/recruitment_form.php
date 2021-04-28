@@ -193,9 +193,22 @@ $whois_date = date('d-m-Y H:i:s');
                         </div>
                         <div class="kt-portlet__foot">
                             <div class="kt-form__actions">
-                                <button type="submit" id="button" class="btn btn-primary">
-                                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                                </button>
+                                <?php
+                                if ($this->session->userdata('level') == 100) {
+                                ?>
+                                    <button type="button" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-primary">
+                                        <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                    </button>
+                                <?php
+                                } else {
+                                ?>
+                                    <button type="submit" id="button" class="btn btn-primary">
+                                        <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                                    </button>
+                                <?php
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </form>
@@ -382,9 +395,22 @@ $whois_date = date('d-m-Y H:i:s');
                                                         <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' . '/' . $vaArea['id_recruitment'] . '') ?>">
                                                             <i class="flaticon-edit"></i>
                                                         </a>
-                                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
-                                                            <i class="flaticon-mail"></i>
-                                                        </a>
+                                                        <?php
+                                                        if ($this->session->userdata('level') == 100) {
+                                                        ?>
+                                                            <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" href="#">
+                                                                <i class="flaticon-mail"></i>
+                                                            </a>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
+                                                                <i class="flaticon-mail"></i>
+                                                            </a>
+                                                        <?php
+                                                        }
+                                                        ?>
+
                                                         <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                                                     <i class="flaticon-delete"></i>
@@ -533,9 +559,22 @@ $whois_date = date('d-m-Y H:i:s');
                                                     <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Edit Data" href="<?= site_url('recruitment/' . $controller_name . '/edit' . '/' . $vaArea['id_recruitment'] . '') ?>">
                                                         <i class="flaticon-edit"></i>
                                                     </a>
-                                                    <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
-                                                        <i class="flaticon-mail"></i>
-                                                    </a>
+                                                    <?php
+                                                    if ($this->session->userdata('level') == 100) {
+                                                    ?>
+                                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" href="#">
+                                                            <i class="flaticon-mail"></i>
+                                                        </a>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Send Email" href="<?= site_url('send_email_act/send_email/' . $controller_name . '/' . $vaArea['id_recruitment'] . '') ?>">
+                                                            <i class="flaticon-mail"></i>
+                                                        </a>
+                                                    <?php
+                                                    }
+                                                    ?>
+
                                                     <!-- <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('recruitment_act/' . $controller_name . '/Delete/' . $vaArea['id_recruitment'] . '') ?>'}">
                                                     <i class="flaticon-delete"></i>

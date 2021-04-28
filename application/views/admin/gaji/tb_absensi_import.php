@@ -29,7 +29,7 @@
             <tr>
                 <td>No </td>
                 <?php
-                if ($this->session->userdata('level') == 1) {
+                if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) {
                 ?>
                     <td>Action</td>
                 <?php
@@ -43,11 +43,11 @@
                 <td>Jam_Pulang</td>
                 <!-- <td>Total_Jam_Kerja</td> -->
                 <?php
-                if ($this->session->userdata('level') == 3) {
+                if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 100) {
                 ?>
                     <td>Keterangan_Absensi</td>
                 <?php
-                } elseif ($this->session->userdata('level') == 1) {
+                } elseif ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) {
                 ?>
                     <td>Keterangan_Permintaan_Update </td>
                     <td>Keterangan </td>
@@ -59,11 +59,11 @@
                 <td>Overtime</td>
                 <td>Overtime_Payroll</td>
                 <?php
-                if ($this->session->userdata('level') == 3) {
+                if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 100) {
                 ?>
                     <td>Keterangan_Lain_Lain</td>
                 <?php
-                } elseif ($this->session->userdata('level') == 1) {
+                } elseif ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) {
                 ?>
                     <td>KLL_Permintaan_Update</td>
                     <td>Keterangan_Lain_Lain</td>
@@ -87,22 +87,34 @@
                 ?>
                     <td><?= ++$no; ?></td>
                     <?php
-                    if ($this->session->userdata('level') == 1) { ?>
+                    if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) { ?>
                         <td>
                             <?php
                             if (empty($vaPegawai['id_temp']) || $vaPegawai['id_temp'] == null || $vaPegawai['id_temp'] == "") {
                             } else { ?>
-
-
-                                <button type="button" title="Approve" id="approve_<?= $vaPegawai['id']; ?>" onclick="return approvement('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
-                                    <i class="fa fa-check"></i>
-                                </button>
-                                <button type="button" title="Reject" id="reject_<?= $vaPegawai['id']; ?>" onclick="return reject('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-danger btn-elevate btn-icon">
-                                    <i class="flaticon2-delete"></i>
-                                </button>
-                                <input type="hidden" id="ket_abs_temp_<?= $vaPegawai['id']; ?>" value="<?= $vaPegawai['keterangan_temp']; ?>">
-                                <input type="hidden" id="ket_abs_lain_temp_<?= $vaPegawai['id']; ?>" value="<?= $vaPegawai['ket_lain_temp']; ?>">
-
+                                <?php
+                                if ($this->session->userdata('level') == 100) {
+                                ?>
+                                    <button type="button" title="Approve" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <button type="button" title="Reject" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-sm btn-outline-danger btn-elevate btn-icon">
+                                        <i class="flaticon2-delete"></i>
+                                    </button>
+                                <?php
+                                } else {
+                                ?>
+                                    <button type="button" title="Approve" id="approve_<?= $vaPegawai['id']; ?>" onclick="return approvement('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-warning btn-elevate btn-icon">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <button type="button" title="Reject" id="reject_<?= $vaPegawai['id']; ?>" onclick="return reject('<?= $vaPegawai['id']; ?>');" class="btn btn-sm btn-outline-danger btn-elevate btn-icon">
+                                        <i class="flaticon2-delete"></i>
+                                    </button>
+                                    <input type="hidden" id="ket_abs_temp_<?= $vaPegawai['id']; ?>" value="<?= $vaPegawai['keterangan_temp']; ?>">
+                                    <input type="hidden" id="ket_abs_lain_temp_<?= $vaPegawai['id']; ?>" value="<?= $vaPegawai['ket_lain_temp']; ?>">
+                                <?php
+                                }
+                                ?>
                             <?php
                             }
                             ?>
@@ -159,7 +171,7 @@
                     <!-- </td> -->
                     <?php
                     $id_ket = "";
-                    if ($this->session->userdata('level') == 3) {
+                    if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 100) {
 
                         if ($vaPegawai['id'] == 0 || empty($vaPegawai['id'])) {
                             $t_id_ket = date("YmdHis");
@@ -178,41 +190,86 @@
                         ?>
                             <td>
                                 <div class="form-group">
-                                    <select id="ket_<?= $id_ket; ?>" onchange="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
-                                        <option></option>
-                                        <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan_temp'] == "Shift 2") echo "selected";
-                                                                                    ?>>Shift 2</option>
-                                        <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan_temp'] == "Tugas Kantor") echo "selected";
-                                                                                        ?>>Tugas Kantor</option>
-                                        <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan_temp'] == "Penyesuaian Finger") echo "selected";
-                                                                                                ?>>Penyesuaian Finger</option>
-                                        <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan_temp'] == "Kirim Luar kota") echo "selected";
-                                                                                            ?>>Kirim Luar kota</option>
-                                        <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pengiriman Bali") echo "selected";
-                                                                                            ?>>Pengiriman Bali</option>
-                                        <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan_temp'] == "Berangkat Kirim Bali") echo "selected";
-                                                                                                ?>>Berangkat Kirim Bali</option>
-                                        <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pulang Dari Bali") echo "selected";
-                                                                                            ?>>Pulang Dari Bali </option>
-                                        <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Durasi") echo "selected";
-                                                                                        ?>>Ijin Durasi</option>
-                                        <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Keperluan Pribadi") echo "selected";
-                                                                                                    ?>>Ijin Keperluan Pribadi</option>
-                                        <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan_temp'] == "STSD") echo "selected";
-                                                                                ?>>STSD</option>
-                                        <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan_temp'] == "SSD") echo "selected";
-                                                                                ?>>SSD</option>
-                                        <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan_temp'] == "Tanpa Keterangan") echo "selected";
-                                                                                            ?>>Tanpa Keterangan</option>
-                                        <option data-name="name13" value="Lupa Check Lock Masuk" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Masuk") echo "selected";
-                                                                                                    ?>>Lupa Check Lock Masuk</option>
-                                        <option data-name="name14" value="Lupa Check Lock Pulang" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Pulang") echo "selected";
-                                                                                                    ?>>Lupa Check Lock Pulang</option>
-                                        <option data-name="name15" value="Revisi Approval Manager" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo "selected";
-                                                                                                    ?>>Revisi Approval Manager</option>
-                                        <option data-name="name16" value="Revisi Approval" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval") echo "selected";
-                                                                                            ?>>Revisi Approval</option>
-                                    </select>
+                                    <?php
+                                    if ($this->session->userdata('level') == 100) {
+                                    ?>
+                                        <select class="form-control form-control-sm form-filter kt-input" data-live-search="true">
+                                            <option></option>
+                                            <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan_temp'] == "Shift 2") echo "selected";
+                                                                                        ?>>Shift 2</option>
+                                            <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan_temp'] == "Tugas Kantor") echo "selected";
+                                                                                            ?>>Tugas Kantor</option>
+                                            <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan_temp'] == "Penyesuaian Finger") echo "selected";
+                                                                                                    ?>>Penyesuaian Finger</option>
+                                            <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan_temp'] == "Kirim Luar kota") echo "selected";
+                                                                                                ?>>Kirim Luar kota</option>
+                                            <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pengiriman Bali") echo "selected";
+                                                                                                ?>>Pengiriman Bali</option>
+                                            <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan_temp'] == "Berangkat Kirim Bali") echo "selected";
+                                                                                                    ?>>Berangkat Kirim Bali</option>
+                                            <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pulang Dari Bali") echo "selected";
+                                                                                                ?>>Pulang Dari Bali </option>
+                                            <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Durasi") echo "selected";
+                                                                                            ?>>Ijin Durasi</option>
+                                            <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Keperluan Pribadi") echo "selected";
+                                                                                                        ?>>Ijin Keperluan Pribadi</option>
+                                            <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan_temp'] == "STSD") echo "selected";
+                                                                                    ?>>STSD</option>
+                                            <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan_temp'] == "SSD") echo "selected";
+                                                                                    ?>>SSD</option>
+                                            <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan_temp'] == "Tanpa Keterangan") echo "selected";
+                                                                                                ?>>Tanpa Keterangan</option>
+                                            <option data-name="name13" value="Lupa Check Lock Masuk" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Masuk") echo "selected";
+                                                                                                        ?>>Lupa Check Lock Masuk</option>
+                                            <option data-name="name14" value="Lupa Check Lock Pulang" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Pulang") echo "selected";
+                                                                                                        ?>>Lupa Check Lock Pulang</option>
+                                            <option data-name="name15" value="Revisi Approval Manager" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo "selected";
+                                                                                                        ?>>Revisi Approval Manager</option>
+                                            <option data-name="name16" value="Revisi Approval" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval") echo "selected";
+                                                                                                ?>>Revisi Approval</option>
+                                        </select>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <select id="ket_<?= $id_ket; ?>" onchange="update_ket('<?= $id_ket; ?>');" class="form-control form-control-sm form-filter kt-input" data-live-search="true">
+                                            <option></option>
+                                            <option data-name="name1" value="Shift 2" <?php if ($vaPegawai['keterangan_temp'] == "Shift 2") echo "selected";
+                                                                                        ?>>Shift 2</option>
+                                            <option data-name="name2" value="Tugas Kantor" <?php if ($vaPegawai['keterangan_temp'] == "Tugas Kantor") echo "selected";
+                                                                                            ?>>Tugas Kantor</option>
+                                            <option data-name="name3" value="Penyesuaian Finger" <?php if ($vaPegawai['keterangan_temp'] == "Penyesuaian Finger") echo "selected";
+                                                                                                    ?>>Penyesuaian Finger</option>
+                                            <option data-name="name4" value="Kirim Luar kota" <?php if ($vaPegawai['keterangan_temp'] == "Kirim Luar kota") echo "selected";
+                                                                                                ?>>Kirim Luar kota</option>
+                                            <option data-name="name5" value="Pengiriman Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pengiriman Bali") echo "selected";
+                                                                                                ?>>Pengiriman Bali</option>
+                                            <option data-name="name6" value="Berangkat Kirim Bali" <?php if ($vaPegawai['keterangan_temp'] == "Berangkat Kirim Bali") echo "selected";
+                                                                                                    ?>>Berangkat Kirim Bali</option>
+                                            <option data-name="name7" value="Pulang Dari Bali" <?php if ($vaPegawai['keterangan_temp'] == "Pulang Dari Bali") echo "selected";
+                                                                                                ?>>Pulang Dari Bali </option>
+                                            <option data-name="name8" value="Ijin Durasi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Durasi") echo "selected";
+                                                                                            ?>>Ijin Durasi</option>
+                                            <option data-name="name9" value="Ijin Keperluan Pribadi" <?php if ($vaPegawai['keterangan_temp'] == "Ijin Keperluan Pribadi") echo "selected";
+                                                                                                        ?>>Ijin Keperluan Pribadi</option>
+                                            <option data-name="name10" value="STSD" <?php if ($vaPegawai['keterangan_temp'] == "STSD") echo "selected";
+                                                                                    ?>>STSD</option>
+                                            <option data-name="name11" value="SSD" <?php if ($vaPegawai['keterangan_temp'] == "SSD") echo "selected";
+                                                                                    ?>>SSD</option>
+                                            <option data-name="name12" value="Tanpa Keterangan" <?php if ($vaPegawai['keterangan_temp'] == "Tanpa Keterangan") echo "selected";
+                                                                                                ?>>Tanpa Keterangan</option>
+                                            <option data-name="name13" value="Lupa Check Lock Masuk" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Masuk") echo "selected";
+                                                                                                        ?>>Lupa Check Lock Masuk</option>
+                                            <option data-name="name14" value="Lupa Check Lock Pulang" <?php if ($vaPegawai['keterangan_temp'] == "Lupa Check Lock Pulang") echo "selected";
+                                                                                                        ?>>Lupa Check Lock Pulang</option>
+                                            <option data-name="name15" value="Revisi Approval Manager" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval Manager") echo "selected";
+                                                                                                        ?>>Revisi Approval Manager</option>
+                                            <option data-name="name16" value="Revisi Approval" <?php if ($vaPegawai['keterangan_temp'] == "Revisi Approval") echo "selected";
+                                                                                                ?>>Revisi Approval</option>
+                                        </select>
+                                    <?php
+                                    }
+                                    ?>
+
                                 </div>
                                 <div class="form-group">
                                     <!-- <button type="button" title="Update Data" id="id_<?= $id_ket; ?>" onclick="return update_ket('<?= $id_ket; ?>');" class="btn btn-sm btn-outline-primary btn-elevate btn-icon">
@@ -223,7 +280,7 @@
                             </td>
                         <?php
                         }
-                    } elseif ($this->session->userdata('level') == 1) {
+                    } elseif ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) {
                         ?>
                         <td><?= $vaPegawai['keterangan_temp'] ?></td>
                         <td><?= $vaPegawai['keterangan'] ?></td>
@@ -466,7 +523,7 @@
                         ?>
                     </td>
                     <?php
-                    if ($this->session->userdata('level') == 3) {
+                    if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 100) {
                         // $id_ket_ll = "";
                         // if ($vaPegawai['id'] == 0 || empty($vaPegawai['id'])) {
                         //     $t_id_ket_ll = date("YmdHis");
@@ -481,13 +538,23 @@
                         } else {
                         ?>
                             <td>
+                                <?php
+                                if ($this->session->userdata('level') == 100) {
+                                ?>
+                                    <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket ?>" type="text" value="<?= $vaPegawai['ket_lain_temp'] ?>" autocomplete="off">
+                                <?php
+                                } else {
+                                ?>
+                                    <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket ?>" type="text" value="<?= $vaPegawai['ket_lain_temp'] ?>" onkeyup="updateDataAbsen('<?= $id_ket ?>');" autocomplete="off">
+                                    <input id="id_<?= $id_ket ?>" type="hidden" name="id" value="<?= $id_ket ?>">
+                                <?php
+                                }
+                                ?>
 
-                                <input class="form-control form-control-sm form-filter kt-input" id="ket_lain_<?= $id_ket ?>" type="text" value="<?= $vaPegawai['ket_lain_temp'] ?>" onkeyup="updateDataAbsen('<?= $id_ket ?>');" autocomplete="off">
-                                <input id="id_<?= $id_ket ?>" type="hidden" name="id" value="<?= $id_ket ?>">
                             </td>
                         <?php
                         }
-                    } elseif ($this->session->userdata('level') == 1) {
+                    } elseif ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) {
                         ?>
                         <td><?= $vaPegawai['ket_lain_temp'] ?></td>
                         <td><?= $vaPegawai['ket_lain'] ?></td>

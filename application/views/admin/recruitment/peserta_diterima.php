@@ -8,7 +8,7 @@
       </ul>
     </div>
   </div>
-  <?php if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2) {
+  <?php if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 2 || $this->session->userdata('level') == 100) {
   ?>
     <div class="row">
       <div class="col-12">
@@ -96,11 +96,22 @@
                           <?php
                           } elseif ($vaArea['status'] == "lolos") {
                           ?>
-                            <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Masukkan Ke Data Pegawai" href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
+                            <?php
+                            if ($this->session->userdata('level') == 100) {
+                            ?>
+                              <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Masukkan Ke Data Pegawai" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                <i class="fa fa-sign-in-alt"></i>
+                              </a>
+                            <?php
+                            } else {
+                            ?>
+                              <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Masukkan Ke Data Pegawai" href="<?= site_url('recruitment_act/to_pegawai/' . $vaArea['id_recruitment'] . '') ?>">
+                                <i class="fa fa-sign-in-alt"></i>
+                              </a>
+                            <?php
+                            }
+                            ?>
 
-                              <i class="fa fa-sign-in-alt"></i>
-
-                            </a>
                             <!-- <a class="btn btn-sm btn-outline-info btn-elevate btn-icon" title="Email Calon" href="<?= site_url('send_email_act/send_email/peserta_diterima/' . $vaArea['id_recruitment'] . '') ?>">
                           <i class="flaticon-mail"></i>
                         </a> -->
@@ -108,13 +119,29 @@
                           } else {
 
                           ?>
+                            <?php
+                            if ($this->session->userdata('level') == 100) {
+                            ?>
+                              <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" href="#">
+                                <i class="flaticon2-check-mark"></i>
+                              </a>
+                              <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                <i class="flaticon2-cross"></i>
+                              </a>
+                            <?php
+                            } else {
+                            ?>
+                              <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_act/aksi/lolos/' . $vaArea['id_recruitment'] . '') ?>">
+                                <i class="flaticon2-check-mark"></i>
+                              </a>
+                              <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment'] ?>">
+                                <i class="flaticon2-cross"></i>
+                              </a>
+                            <?php
+                            }
+                            ?>
 
-                            <a class="btn btn-sm btn-outline-success btn-elevate btn-icon mr-2" title="Lolos" href="<?= site_url('recruitment_act/aksi/lolos/' . $vaArea['id_recruitment'] . '') ?>">
-                              <i class="flaticon2-check-mark"></i>
-                            </a>
-                            <a class="btn btn-sm btn-outline-danger btn-elevate btn-icon" title="Tidak Lolos" data-toggle="modal" data-target="#id-<?= $vaArea['id_recruitment'] ?>">
-                              <i class="flaticon2-cross"></i>
-                            </a>
+
                           <?php } ?>
                         </div>
 
@@ -134,7 +161,18 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="submit" name="submit" class="btn btn-primary waves-effect">Simpan</button>
+                                  <?php
+                                  if ($this->session->userdata('level') == 100) {
+                                  ?>
+                                    <button type="button" name="submit" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')" class="btn btn-primary waves-effect">Simpan</button>
+                                  <?php
+                                  } else {
+                                  ?>
+                                    <button type="submit" name="submit" class="btn btn-primary waves-effect">Simpan</button>
+                                  <?php
+                                  }
+                                  ?>
+
                                 </div>
                               </form>
                             </div>

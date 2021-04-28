@@ -115,9 +115,9 @@
              </div>
            </div>
            <?php
-           $show = "collapse show";
-           $collapse = "collapse";
-           ?>
+            $show = "collapse show";
+            $collapse = "collapse";
+            ?>
            <div id="collapseSuratPeringatan" class="<?= $action == "edit" ? $show : $collapse ?>" aria-labelledby="headingSuratPeringatan" data-parent="#accordionSuratPeringatan">
              <div class="card-body">
                <!--begin::Form-->
@@ -150,7 +150,7 @@
                          </div>
                        </div>
                        <div style="text-align: center;">
-                         <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>                         
+                         <h4 style="text-decoration: underline;">SURAT PERINGATAN</h4>
                          <div style="justify-content: center;display: flex;">
                            <input readonly="true" name="nNomorSurat" class="form-control text-center" style="width:30%" placeholder="Nomor Surat" value="<?= $cNomorSuratFix ?>">
 
@@ -270,9 +270,22 @@
                          </div>
                        </div>
                        <div class="form-group">
-                         <button type="submit" class="btn btn-flat btn-danger">
-                           <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                         </button>
+                         <?php
+                          if ($this->session->userdata('level') == 100) {
+                          ?>
+                           <button type="button" class="btn btn-flat btn-danger" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                             <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                           </button>
+                         <?php
+                          } else {
+                          ?>
+                           <button type="submit" class="btn btn-flat btn-danger">
+                             <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                           </button>
+                         <?php
+                          }
+                          ?>
+
                        </div>
                      </form>
 

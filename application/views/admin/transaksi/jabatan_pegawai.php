@@ -128,9 +128,9 @@ if ($action == "edit") {
                               <label>Pilih Pegawai</label>
                               <?php
                               if ($action == "edit") {
-                                ?>
+                              ?>
                                 <input type="text" readonly="true" class="form-control" value="<?= $cNama ?>">
-                                <?php
+                              <?php
                               } else {
                               ?>
                                 <select class="comboBox form-control" name="cIdPegawai">
@@ -174,20 +174,36 @@ if ($action == "edit") {
                               <div id="data_sub_unit_kerja"></div>
                               <!-- <select class="comboBox form-control" name="cIdSubUnitKerja">
                                 <option></option>
-                                <?php // foreach ($sub_unit as $key => $vaSubUnit) { ?>
-                                  <option value="<?= $vaSubUnit['id_sub_unit_kerja'] ?>" <?php //if ($vaSubUnit['id_sub_unit_kerja'] == $cIdSubUnit) echo "selected"; ?>>
+                                <?php // foreach ($sub_unit as $key => $vaSubUnit) { 
+                                ?>
+                                  <option value="<?= $vaSubUnit['id_sub_unit_kerja'] ?>" <?php //if ($vaSubUnit['id_sub_unit_kerja'] == $cIdSubUnit) echo "selected"; 
+                                                                                          ?>>
                                     <?= $vaSubUnit['nama_sub_unit_kerja'] ?>
                                   </option>
-                                <?php //} ?>
+                                <?php //} 
+                                ?>
                               </select> -->
                             </div>
                           </div>
                         </div><br />
                         <div class="row">
                           <div class="col-sm-12">
-                            <button type="submit" class="btn btn-flat btn-primary">
-                              <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                            </button>
+                            <?php
+                            if ($this->session->userdata('level') == 100) {
+                            ?>
+                              <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                                <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                              </button>
+                            <?php
+                            } else {
+                            ?>
+                              <button type="submit" class="btn btn-flat btn-primary">
+                                <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                              </button>
+                            <?php
+                            }
+                            ?>
+
                             <?php if ($action == 'edit') { ?>
                               <a href="<?= site_url('transaksi/jabatan_pegawai') ?>" class="btn btn-primary">
                                 <i class="fa fa-hand-point-left" aria-hidden="true"></i> Kembali
@@ -234,11 +250,13 @@ if ($action == "edit") {
                           ?> : <?php // $vaPegawai['nama'] 
                                 ?>
                         </option>
-                      <?php// } ?>
+                      <? php // } 
+                      ?>
                     </select>
                   </div>
                   <div class="input-group-append">
-                    <button type="button" onclick="window.location.href='<?php// base_url() ?>transaksi/jabatan_pegawai/view/'+document.getElementById('cIdPegawai').value" class="btn btn-danger btn-sm btn-icon btn-brand btn-icon-md">
+                    <button type="button" onclick="window.location.href='<? php // base_url() 
+                                                                          ?>transaksi/jabatan_pegawai/view/'+document.getElementById('cIdPegawai').value" class="btn btn-danger btn-sm btn-icon btn-brand btn-icon-md">
                       <i class="fa fa-search"></i>
                     </button>
                   </div>
@@ -283,7 +301,7 @@ if ($action == "edit") {
                       <a class="btn-link" title="Edit Data" href="<?= site_url('transaksi/jabatan_pegawai/edit/' . $vaJabatanPegawai['id_pegawai'] . '') ?>">
                         <i class="fa fa-edit text-info"></i>
                       </a>
-                      
+
                       <!-- <a class="btn-link" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                                 { window.location.href='<?= site_url('transaksi_act/jabatan_pegawai/Delete/' . $vaJabatanPegawai['id_jabatan_pegawai'] . '') ?>'}">
                         <i class="fa fa-trash text-danger"></i>
@@ -310,21 +328,20 @@ if ($action == "edit") {
 </div>
 
 <script type="text/javascript">
+  function cek_sub_unit_kerja(data) {
 
-    function cek_sub_unit_kerja(data) {
+    var cUnit_k = $('#cIdRefJabatan').val();
+    $.ajax({
+      type: "POST",
+      url: "<?= base_url() ?>transaksi_act/get_sub_unit_kerja_jabatan_pegawai/" + cUnit_k,
+      cache: false,
+      beforeSend: function() {
+        $('#data_sub_unit_kerja').html("Cek Data Ke Sistem .. ");
+      },
+      success: function(msg) {
+        $("#data_sub_unit_kerja").html(msg);
+      }
+    });
 
-        var cUnit_k = $('#cIdRefJabatan').val();
-        $.ajax({
-            type: "POST",
-            url: "<?= base_url() ?>transaksi_act/get_sub_unit_kerja_jabatan_pegawai/" + cUnit_k,
-            cache: false,
-            beforeSend: function() {
-                $('#data_sub_unit_kerja').html("Cek Data Ke Sistem .. ");
-            },
-            success: function(msg) {
-                $("#data_sub_unit_kerja").html(msg);
-            }
-        });
-
-    }
+  }
 </script>

@@ -59,9 +59,22 @@
             </div>
             <div class="kt-portlet__foot">
               <div class="kt-form__actions">
-                <button type="submit" class="btn btn-flat btn-primary">
-                  <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
-                </button>
+                <?php
+                if ($this->session->userdata('level') == 100) {
+                ?>
+                  <button type="button" class="btn btn-flat btn-primary" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+                <?php
+                } else {
+                ?>
+                  <button type="submit" class="btn btn-flat btn-primary">
+                    <i class="fa fa-<?= $cIconButton ?>"></i> <?= $cValueButton ?>
+                  </button>
+                <?php
+                }
+                ?>
+
               </div>
             </div>
           </form>
@@ -106,10 +119,22 @@
                         <a class="btn btn-outline-success btn-sm btn-icon  btn-icon-md" title="Edit Data" href="<?= site_url('master/area_kerja/edit/' . $vaArea['id_area'] . '') ?>">
                           <i class="flaticon-edit"></i>
                         </a>
-                        <a class="btn btn-outline-danger btn-sm btn-icon  btn-icon-md" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
+                        <?php
+                        if ($this->session->userdata('level') == 100) {
+                        ?>
+                          <a class="btn btn-outline-danger btn-sm btn-icon  btn-icon-md" title="Hapus Data" onclick="window.alert('Maaf Anda Tidak Mempunyai Kewenangan')">
+                            <i class="flaticon-delete"></i>
+                          </a>
+                        <?php
+                        } else {
+                        ?>
+                          <a class="btn btn-outline-danger btn-sm btn-icon  btn-icon-md" title="Hapus Data" onclick="if(confirm('Apakah anda yakin akah menghapus data?'))
                           { window.location.href='<?= site_url('action/area_kerja/Delete/' . $vaArea['id_area'] . '') ?>'}">
-                          <i class="flaticon-delete"></i>
-                        </a>
+                            <i class="flaticon-delete"></i>
+                          </a>
+                        <?php
+                        }
+                        ?>
 
                       </td>
                     </tr>

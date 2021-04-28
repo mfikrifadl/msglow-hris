@@ -72,7 +72,7 @@ if ($action == "edit") {
                             <div class="row">
 
                               <?php
-                              if ($this->session->userdata('level') == 3) {
+                              if ($this->session->userdata('level') == 1 || $this->session->userdata('level') == 3 || $this->session->userdata('level') == 100) {
                               ?>
                                 <div class="col-sm-8 col-md-8">
                                   <div class="form-group row">
@@ -194,7 +194,7 @@ if ($action == "edit") {
 
 
                           <?php
-                          if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 1) {
+                          if ($this->session->userdata('level') == 3 || $this->session->userdata('level') == 1 || $this->session->userdata('level') == 100) {
                           ?>
                             <form method="post" enctype="multipart/form-data" target="blank" action="<?= site_url('Cek_absen_act/cetak_absensi/') ?>">
                               <div class="row">
