@@ -255,7 +255,7 @@ class Model extends CI_Model
 
 	public function ViewDesc($Table, $Order)
 	{
-		$Query = $this->db->query("SELECT * FROM " . $Table . " ORDER BY " . $Order . " DESC");
+		$Query = $this->db->query("SELECT * FROM " . $Table . " WHERE is_delete = 0 ORDER BY " . $Order . " DESC");
 		return $Query->result_array();
 	}
 

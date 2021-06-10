@@ -609,7 +609,7 @@ class Transaksi extends CI_Controller
 		$data['pegawai']        = $this->model->ViewWhere('v_data_pegawai_jabatan', 'nama_jabatan', 'Manager');
 		$data['unit_kerja']     = $this->model->ViewASC('tb_ref_jabatan', 'nama_jabatan');
 		$data['sub_unit_kerja']     = $this->model->ViewASC('tb_sub_unit_kerja', 'nama_sub_unit_kerja');
-		$data['row']        = $this->model->ViewASC('v_form_pengajuan', 'nama_pengaju_form');
+		$data['row']        = $this->model->ViewDesc('v_form_pengajuan', 'id_form');
 		$data['data_man_power_diterima']        = $this->model->ViewASC('v_man_power_diterima', 'nama_pengaju_form');
 
 		if ($Aksi == "edit") {

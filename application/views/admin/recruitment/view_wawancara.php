@@ -108,7 +108,7 @@
                                                                         <div class="form-group">
                                                                             <label>Mendaftar Sebagai</label>
                                                                             <input type="text" class="form-control" placeholder="<?php echo $row['job_name']; ?>" style="background-color:#fff;" disabled>
-                                                                        </div>                                                                        
+                                                                        </div>
 
                                                                         <div class="form-group">
                                                                             <label>Jurusan</label>
@@ -131,286 +131,308 @@
                                 </div>
 
                                 <div class="row">
+                                    <?php
+                                    if (empty($row['reg_ktp'])) {
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
+                                                <!--begin::Accordion-->
 
-                                            <!--begin::Accordion-->
-
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionKTP">
-                                                <div class="card">
-                                                    <div class="card-header" id="heading1">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKTP" aria-expanded="true" aria-controls="collapseDataKTP">
-                                                            <strong> Kartu Tanda Penduduk </strong>
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionKTP">
+                                                    <div class="card">
+                                                        <div class="card-header" id="heading1">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKTP" aria-expanded="true" aria-controls="collapseDataKTP">
+                                                                <strong> Kartu Tanda Penduduk </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataKTP" class="collapse show" aria-labelledby="heading1" data-parent="#accordionKTP">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_ktp'] != null) { ?>
+                                                        <div id="collapseDataKTP" class="collapse show" aria-labelledby="heading1" data-parent="#accordionKTP">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
+
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_ktp']; ?>" style="width:100%; border:none;"></iframe>
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
+                                    <?php
+                                    if (empty($row['reg_kk'])) {
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                            <!--begin::Accordion-->
+                                                <!--begin::Accordion-->
 
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionKK">
-                                                <div class="card">
-                                                    <div class="card-header" id="headingKK">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKK" aria-expanded="true" aria-controls="collapseDataKK">
-                                                            <strong> Kartu Keluarga </strong>
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionKK">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingKK">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataKK" aria-expanded="true" aria-controls="collapseDataKK">
+                                                                <strong> Kartu Keluarga </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataKK" class="collapse show" aria-labelledby="headingKK" data-parent="#accordionKK">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_kk'] != null) { ?>
+                                                        <div id="collapseDataKK" class="collapse show" aria-labelledby="headingKK" data-parent="#accordionKK">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_kk']; ?>" style="width:100%; border:none;"></iframe>
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
+                                    <?php
+                                    if (empty($row['reg_ijazah'])) {
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                            <!--begin::Accordion-->
+                                                <!--begin::Accordion-->
 
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionIJAZAH">
-                                                <div class="card">
-                                                    <div class="card-header" id="headingIJAZAH">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataIJAZAH" aria-expanded="true" aria-controls="collapseDataIJAZAH">
-                                                            <strong> Ijazah Terakhir </strong>
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionIJAZAH">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingIJAZAH">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataIJAZAH" aria-expanded="true" aria-controls="collapseDataIJAZAH">
+                                                                <strong> Ijazah Terakhir </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataIJAZAH" class="collapse show" aria-labelledby="headingIJAZAH" data-parent="#accordionIJAZAH">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_ijazah'] != null) { ?>
+                                                        <div id="collapseDataIJAZAH" class="collapse show" aria-labelledby="headingIJAZAH" data-parent="#accordionIJAZAH">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_ijazah']; ?>" style="width:100%; border:none;"></iframe>
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
+                                    <?php
+                                    if (empty($row['reg_transkrip_nilai'])) {
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                            <!--begin::Accordion-->
+                                                <!--begin::Accordion-->
 
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionTN">
-                                                <div class="card">
-                                                    <div class="card-header" id="headingTN">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataTN" aria-expanded="true" aria-controls="collapseDataTN">
-                                                            <strong> Transkrip Nilai </strong>
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionTN">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingTN">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataTN" aria-expanded="true" aria-controls="collapseDataTN">
+                                                                <strong> Transkrip Nilai </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataTN" class="collapse show" aria-labelledby="headingTN" data-parent="#accordionTN">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_transkrip_nilai'] != null) { ?>
+                                                        <div id="collapseDataTN" class="collapse show" aria-labelledby="headingTN" data-parent="#accordionTN">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_transkrip_nilai']; ?>" style="width:100%; border:none;"></iframe>
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
+                                    <?php
+                                    if (empty($row['reg_skck'])) {
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                            <!--begin::Accordion-->
+                                                <!--begin::Accordion-->
 
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionSKCK">
-                                                <div class="card">
-                                                    <div class="card-header" id="headingSKCK">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataSKCK" aria-expanded="true" aria-controls="collapseDataSKCK">
-                                                            <strong> SKCK </strong>
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionSKCK">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingSKCK">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataSKCK" aria-expanded="true" aria-controls="collapseDataSKCK">
+                                                                <strong> SKCK </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataSKCK" class="collapse show" aria-labelledby="headingSKCK" data-parent="#accordionSKCK">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_skck'] != null) { ?>
-                                                                        <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_skck']; 
-                                                                                                                        ?>" style="width:100%; border:none;"></iframe> -->
+                                                        <div id="collapseDataSKCK" class="collapse show" aria-labelledby="headingSKCK" data-parent="#accordionSKCK">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_skck']; ?>" style="width:100%; border:none;"></iframe>
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
+                                    <?php
+                                    if (empty($row['reg_cv'])) {
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                            <!--begin::Accordion-->
+                                                <!--begin::Accordion-->
 
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionCV">
-                                                <div class="card">
-                                                    <div class="card-header" id="headingCV">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
-                                                            <strong> Curiculum Vitae </strong>
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionCV">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingCV">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
+                                                                <strong> Curiculum Vitae </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataCV" class="collapse show" aria-labelledby="headingCV" data-parent="#accordionCV">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_cv'] != null) { ?>
+                                                        <div id="collapseDataCV" class="collapse show" aria-labelledby="headingCV" data-parent="#accordionCV">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_cv']  ?>" style="width:100%; border:none;"></iframe>
-                                                                        <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_cv'] . "/" . $row['reg_judul']; 
-                                                                                                                        ?>" style="width:100%; border:none;"></iframe> -->
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
 
-                                            <!--begin::Accordion-->
+                                    <?php
+                                    if (empty($row['reg_cover_letter'])) {
+                                    ?>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionCL">
-                                                <div class="card">
-                                                    <div class="card-header" id="headingCL">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
-                                                            <strong> Cover Letter </strong>
+                                                <!--begin::Accordion-->
+
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionCL">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingCL">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
+                                                                <strong> Cover Letter </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataCV" class="collapse show" aria-labelledby="headingCL" data-parent="#accordionCL">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_cover_letter'] != null) { ?>
+                                                        <div id="collapseDataCV" class="collapse show" aria-labelledby="headingCL" data-parent="#accordionCL">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
+
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_cover_letter']  ?>" style="width:100%; border:none;"></iframe>
                                                                         <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_cv'] . "/" . $row['reg_judul']; 
                                                                                                                         ?>" style="width:100%; border:none;"></iframe> -->
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <?php
+                                    if (empty($row['reg_portofolio'])) {
+                                    } else {
+                                    ?>
+                                        <div class="col-md-6 kt-align-center">
+                                            <div class="kt-portlet">
 
-                                    <div class="col-md-6 kt-align-center">
-                                        <div class="kt-portlet">
+                                                <!--begin::Accordion-->
 
-                                            <!--begin::Accordion-->
-
-                                            <div class="accordion accordion-solid accordion-toggle-plus" id="accordionPortofolio">
-                                                <div class="card">
-                                                    <div class="card-header" id="headingPortofolio">
-                                                        <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
-                                                            <strong> Portfolio </strong>
+                                                <div class="accordion accordion-solid accordion-toggle-plus" id="accordionPortofolio">
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingPortofolio">
+                                                            <div class="card-title btn btn-primary text-info" data-toggle="collapse" data-target="#collapseDataCV" aria-expanded="true" aria-controls="collapseDataCV">
+                                                                <strong> Portfolio </strong>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="collapseDataCV" class="collapse show" aria-labelledby="headingPortofolio" data-parent="#accordionPortofolio">
-                                                        <div class="card-body">
-                                                            <!--begin::Form-->
-                                                            <div class="kt-portlet__body">
-                                                                <div class="row">
-                                                                    <?php
-                                                                    if ($row['reg_portofolio'] != null) { ?>
+                                                        <div id="collapseDataCV" class="collapse show" aria-labelledby="headingPortofolio" data-parent="#accordionPortofolio">
+                                                            <div class="card-body">
+                                                                <!--begin::Form-->
+                                                                <div class="kt-portlet__body">
+                                                                    <div class="row">
+
                                                                         <iframe height="400px" width="100%" src="<?= "http://103.157.96.97/msglow-career/" . $row['reg_portofolio']  ?>" style="width:100%; border:none;"></iframe>
                                                                         <!-- <iframe height="400px" width="100%" src="<?php //echo base_url() . $row['reg_cv'] . "/" . $row['reg_judul']; 
                                                                                                                         ?>" style="width:100%; border:none;"></iframe> -->
-                                                                    <?php } else {
-                                                                    }
-                                                                    ?>
-                                                                </div><!-- /.row -->
+
+                                                                    </div><!-- /.row -->
+                                                                </div>
+                                                                <!--end::Portlet Data Kontak-->
                                                             </div>
-                                                            <!--end::Portlet Data Kontak-->
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--end::Accordion-->
                                             </div>
-                                            <!--end::Accordion-->
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
+
+
 
                                 </div>
 

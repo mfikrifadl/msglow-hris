@@ -10,9 +10,12 @@ if ($action == "edit") {
         $nNilaiTes = "";
         if ($controller_name == "tes_kesehatan_phl") {
             $nNilaiTes     =   "";
+            $cStatus_tes = $column['tes_kesehatan_phl'];
         } elseif ($controller_name == "wawancara_hr") {
             $nNilaiTes      =   $column['nilai_wawancara_hr'];
+            $cStatus_tes = $column['wawancara_hr'];
         } elseif ($controller_name == "interview_user_1") {
+            $cStatus_tes = $column['interview_user_1'];
             $nNilaiTes      =   $column['nilai_interview_user_1'];
             $cWaktuTes      = $column['waktu_interview_user_1'];
         } else {

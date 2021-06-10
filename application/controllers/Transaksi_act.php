@@ -200,14 +200,14 @@ class Transaksi_act extends CI_Controller
 	public function LoginAdmin()
 	{
 		$cUser 	   = ($this->input->post('username'));
-		if(isset($_POST['portal'])){
+		if (isset($_POST['portal'])) {
 			$doubleHash = $this->input->post('password');
-		}else{
+		} else {
 			$cPassword = md5($this->input->post('password'));
-			$doubleHash = hash('sha256',$cPassword);
+			$doubleHash = hash('sha256', $cPassword);
 			// $pass = $this->input->post('password');
 			// echo "$doubleHash <br />";
-			 //die;
+			//die;
 			// echo "md5 + sha1 : $doubleHash <br />";
 			// echo "md5 : $cPassword <br />";
 		}
@@ -1143,7 +1143,7 @@ class Transaksi_act extends CI_Controller
 			'action' => $Aksi,
 			'query' => $seralizedArrayTambah,
 			'nama' => $this->session->userdata('nama')
-		);		
+		);
 
 		$seralizedArrayApprove = serialize($data_approve);
 		$vaLogApprove = array(
@@ -1153,8 +1153,8 @@ class Transaksi_act extends CI_Controller
 			'action' => $Aksi,
 			'query' => $seralizedArrayApprove,
 			'nama' => $this->session->userdata('nama')
-		);	
-		
+		);
+
 		$seralizedArrayUpdate = serialize($dataUpdate);
 		$vaLogUpdate = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
@@ -1163,8 +1163,8 @@ class Transaksi_act extends CI_Controller
 			'action' => $Aksi,
 			'query' => $seralizedArrayUpdate,
 			'nama' => $this->session->userdata('nama')
-		);	
-		
+		);
+
 		$seralizedArrayReject = serialize($data_unapprove);
 		$vaLogReject = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
@@ -1174,7 +1174,7 @@ class Transaksi_act extends CI_Controller
 			'query' => $seralizedArrayReject,
 			'nama' => $this->session->userdata('nama')
 		);
-		
+
 		$seralizedArrayDelete = serialize($data_delete);
 		$vaLogDelete = array(
 			'tgl' => $this->Date2String($this->DateStamp()),
@@ -1183,7 +1183,7 @@ class Transaksi_act extends CI_Controller
 			'action' => $Aksi,
 			'query' => $seralizedArrayDelete,
 			'nama' => $this->session->userdata('nama')
-		);		
+		);
 
 		if ($Aksi == 'tambah') {
 			$this->model->Insert("tb_form_pengajuan", $data);
@@ -1195,8 +1195,8 @@ class Transaksi_act extends CI_Controller
 				$namaJob = $row['job_career'];
 				$jobDesc = $row['job_desc'];
 			}
-
-
+			$convert_jobName = str_replace('&', '1928qwerty', $namaJob);
+			$convert_jobDesc = str_replace('&', '1928qwerty', $jobDesc);
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
 				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/',
@@ -1208,8 +1208,8 @@ class Transaksi_act extends CI_Controller
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				CURLOPT_CUSTOMREQUEST => 'POST',
 				CURLOPT_POSTFIELDS => 'job_id=' . $Id . '
-									&job_name=' . $namaJob . '
-									&job_desc=' . $jobDesc . '',
+									&job_name=' . $convert_jobName . ' 
+									&job_desc=' . $convert_jobDesc . '',
 				CURLOPT_HTTPHEADER => array(
 					'token: YOZq0ltM8i',
 					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU=',
@@ -1218,8 +1218,8 @@ class Transaksi_act extends CI_Controller
 			));
 
 			$response = curl_exec($curl);
-
 			curl_close($curl);
+
 
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_approve);
 			$this->model->Insert("log", $vaLogApprove);
@@ -1251,6 +1251,26 @@ class Transaksi_act extends CI_Controller
 			$this->model->Update("tb_form_pengajuan", "id_form", $Id, $dataUpdate);
 			$this->model->Insert("log", $vaLogUpdate);
 		} elseif ($Aksi == 'unapprove') {
+
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'http://103.157.96.97/msglow-career/api/job/' . $Id,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'DELETE',
+				CURLOPT_HTTPHEADER => array(
+					'token: YOZq0ltM8i',
+					'Authorization: Basic YWNjZXNzdG86Y2FyZWVyMTIzNDU='
+				),
+			));
+
+			$response = curl_exec($curl);
+
+			curl_close($curl);
 
 			$this->model->Update('tb_form_pengajuan', "id_form", $Id, $data_unapprove);
 			$this->model->Insert("log", $vaLogReject);

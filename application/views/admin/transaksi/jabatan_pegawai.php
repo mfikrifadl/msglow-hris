@@ -250,12 +250,12 @@ if ($action == "edit") {
                           ?> : <?php // $vaPegawai['nama'] 
                                 ?>
                         </option>
-                      <? php // } 
+                      <?php // } 
                       ?>
                     </select>
                   </div>
                   <div class="input-group-append">
-                    <button type="button" onclick="window.location.href='<? php // base_url() 
+                    <button type="button" onclick="window.location.href='<?php // base_url() 
                                                                           ?>transaksi/jabatan_pegawai/view/'+document.getElementById('cIdPegawai').value" class="btn btn-danger btn-sm btn-icon btn-brand btn-icon-md">
                       <i class="fa fa-search"></i>
                     </button>
